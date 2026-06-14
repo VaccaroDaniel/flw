@@ -1,0 +1,63 @@
+<div id="{{containerid}}" class="flwvrroom" data-region="flwvrroom">
+  <div class="flwvrroom-topbar">
+    <div>
+      <h3>{{title}}</h3>
+      <p>Mission: Explore the café, listen to the waiter, and choose the correct polite sentence.</p>
+      <p class="flwvrroom-meta">CEFR: <strong>{{cefrlevel}}</strong> · Scenario: <strong>{{scenario}}</strong> · Passing grade: <strong>{{passinggrade}}</strong></p>
+    </div>
+    <div class="flwvrroom-scorebox">
+      <span data-region="score">0</span><span>/100</span>
+    </div>
+  </div>
+
+  <div class="flwvrroom-layout">
+    <section class="flwvrroom-stage-wrap" aria-label="3D VR-style café room">
+      <canvas data-region="canvas" width="1280" height="720"></canvas>
+      <div class="flwvrroom-hud flwvrroom-hud-top-left">
+        <strong>Controls</strong><br>
+        Drag / touch: look around<br>
+        Click objects: learn<br>
+        ← → keys: rotate view
+      </div>
+      <div class="flwvrroom-hud flwvrroom-hud-bottom-left" data-region="targethint">Click the waiter first.</div>
+    </section>
+
+    <aside class="flwvrroom-panel">
+      <section class="flwvrroom-card">
+        <h4>Learning message</h4>
+        <p data-region="message">Welcome to FLW Café. Click the waiter, menu, cup, table, and cashier.</p>
+      </section>
+
+      <section class="flwvrroom-card">
+        <h4>Knowledge points</h4>
+        <ul>
+          {{#knowledgepoints}}
+          <li>{{code}}</li>
+          {{/knowledgepoints}}
+        </ul>
+      </section>
+
+      <section class="flwvrroom-card flwvrroom-quiz-card">
+        <h4>Mission quiz</h4>
+        <p>Choose the best polite café sentence.</p>
+        <button class="flwvrroom-answer" type="button" data-answer="correct">A. I’d like a coffee, please.</button>
+        <button class="flwvrroom-answer" type="button" data-answer="wrong">B. I am coffee.</button>
+        <button class="flwvrroom-answer" type="button" data-answer="wrong">C. Coffee I like yesterday.</button>
+      </section>
+
+      <section class="flwvrroom-card">
+        <h4>Progress</h4>
+        <div class="flwvrroom-progress-grid">
+          <span data-progress="waiter">Waiter: ✗</span>
+          <span data-progress="menu">Menu: ✗</span>
+          <span data-progress="cup">Cup: ✗</span>
+          <span data-progress="table">Table: ✗</span>
+          <span data-progress="cashier">Cashier: ✗</span>
+          <span data-progress="quiz">Quiz: ✗</span>
+        </div>
+        <button type="button" data-action="reset" class="btn btn-secondary">Reset attempt</button>
+        <p class="flwvrroom-save-status" data-region="savestatus">Attempt not saved yet.</p>
+      </section>
+    </aside>
+  </div>
+</div>

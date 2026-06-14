@@ -1,0 +1,72 @@
+{{!
+    Template for the FLW VR Room learner view.
+}}
+<div id="{{uniqid}}" class="flwvrroom" data-region="flwvrroom">
+    <section class="flwvrroom-header">
+        <div>
+            <h2>{{name}}</h2>
+            <p class="flwvrroom-meta">
+                <span>{{cefrlevel}}</span>
+                <span>{{scenario}}</span>
+                <span>{{#str}}passlabel, flwvrroom{{/str}} {{passinggrade}}</span>
+            </p>
+        </div>
+        <div class="flwvrroom-score">
+            <span>{{#str}}bestscore, flwvrroom{{/str}}</span>
+            <strong data-region="best-score">{{bestscore}}</strong>
+        </div>
+    </section>
+
+    {{{intro}}}
+
+    <section class="flwvrroom-grid">
+        <div class="flwvrroom-stage flwvrroom-stage-{{scenariokey}}" aria-label="{{roomaria}}" data-region="panorama-stage" tabindex="0">
+            <div class="flwvrroom-panorama" data-region="panorama">
+                <div class="flwvrroom-panorama-track" data-region="panorama-track">
+                    <div class="flwvrroom-panorama-panel" style="background-image: url('{{backgroundurl}}');"></div>
+                    <div class="flwvrroom-panorama-panel" style="background-image: url('{{backgroundurl}}');"></div>
+                    <div class="flwvrroom-panorama-panel" style="background-image: url('{{backgroundurl}}');"></div>
+                </div>
+                {{#hotspots}}
+                    <button class="flwvrroom-hotspot" type="button" data-hotspot="{{key}}" data-score="{{score}}" data-world-x="{{x}}" data-world-y="{{y}}">
+                        <span>{{label}}</span>
+                    </button>
+                {{/hotspots}}
+            </div>
+            <div class="flwvrroom-pan-controls" aria-label="{{#str}}pancontrols, flwvrroom{{/str}}">
+                <button type="button" class="btn btn-secondary" data-action="pan-left" title="{{#str}}panleft, flwvrroom{{/str}}">&lt;</button>
+                <button type="button" class="btn btn-secondary" data-action="pan-right" title="{{#str}}panright, flwvrroom{{/str}}">&gt;</button>
+            </div>
+        </div>
+
+        <aside class="flwvrroom-panel">
+            <h3>{{missiontitle}}</h3>
+            <p>{{missiontext}}</p>
+
+            <div class="flwvrroom-progress">
+                <span>{{#str}}roomscore, flwvrroom{{/str}}</span>
+                <strong data-region="score">0</strong>
+            </div>
+
+            <div class="flwvrroom-quiz">
+                <p>{{quizquestion}}</p>
+                {{#answers}}
+                    <label><input type="radio" name="{{uniqid}}-answer" value="{{score}}"> {{text}}</label>
+                {{/answers}}
+            </div>
+
+            <button type="button" class="btn btn-primary" data-action="save-attempt">
+                {{#str}}saveattempt, flwvrroom{{/str}}
+            </button>
+            <p class="flwvrroom-status" data-region="status" aria-live="polite"></p>
+
+            <div class="flwvrroom-kps">
+                <h4>{{#str}}knowledgepoints, flwvrroom{{/str}}</h4>
+                <ul>
+                    {{#kpcodes}}<li>{{code}}</li>{{/kpcodes}}
+                    {{^kpcodes}}<li>{{#str}}nokpcodes, flwvrroom{{/str}}</li>{{/kpcodes}}
+                </ul>
+            </div>
+        </aside>
+    </section>
+</div>

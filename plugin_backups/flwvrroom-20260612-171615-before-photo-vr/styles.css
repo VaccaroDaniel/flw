@@ -1,0 +1,273 @@
+.flwvrroom {
+    color: #1f2933;
+}
+
+.flwvrroom-header {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 0 0 1rem;
+}
+
+.flwvrroom-header h2 {
+    margin: 0 0 .35rem;
+}
+
+.flwvrroom-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin: 0;
+}
+
+.flwvrroom-meta span,
+.flwvrroom-score,
+.flwvrroom-kps li {
+    background: #edf2f7;
+    border: 1px solid #d8e0e8;
+    border-radius: 6px;
+    padding: .25rem .55rem;
+}
+
+.flwvrroom-score {
+    min-width: 8rem;
+    text-align: center;
+}
+
+.flwvrroom-score span {
+    display: block;
+    font-size: .78rem;
+}
+
+.flwvrroom-score strong {
+    display: block;
+    font-size: 1.5rem;
+}
+
+.flwvrroom-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+}
+
+.flwvrroom-stage {
+    background: #a8d8ea;
+    border: 1px solid #aebdcc;
+    border-radius: 8px;
+    min-height: 34rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.flwvrroom-backwall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.2) 0 1px, transparent 1px 7rem),
+        linear-gradient(#f7c873, #e6a85a);
+    height: 58%;
+    position: relative;
+}
+
+.flwvrroom-backwall::before {
+    background: linear-gradient(#334e68, #243b53);
+    border: .45rem solid #f0f4f8;
+    content: "";
+    height: 42%;
+    left: 8%;
+    position: absolute;
+    top: 13%;
+    width: 28%;
+}
+
+.flwvrroom-floor {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.28) 0 12%, transparent 12% 50%) 0 0 / 4rem 4rem,
+        linear-gradient(#b7791f, #8d5524);
+    height: 42%;
+    position: relative;
+}
+
+.flwvrroom-stage-classroom .flwvrroom-backwall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.16) 0 1px, transparent 1px 6rem),
+        linear-gradient(#d8e2dc, #a7c4bc);
+}
+
+.flwvrroom-stage-classroom .flwvrroom-backwall::before {
+    background: #2f5d50;
+    border-color: #f7fafc;
+    height: 38%;
+    left: 14%;
+    top: 17%;
+    width: 42%;
+}
+
+.flwvrroom-stage-classroom .flwvrroom-floor {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.22) 0 12%, transparent 12% 50%) 0 0 / 4rem 4rem,
+        linear-gradient(#c6a15b, #8c6d3f);
+}
+
+.flwvrroom-stage-hotel .flwvrroom-backwall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, transparent 1px 8rem),
+        linear-gradient(#e9d8a6, #d6a75a);
+}
+
+.flwvrroom-stage-hotel .flwvrroom-backwall::before {
+    background: linear-gradient(#6b4f3f, #3f2f26);
+    border-color: #fff8dc;
+    height: 46%;
+    left: 9%;
+    top: 18%;
+    width: 18%;
+}
+
+.flwvrroom-stage-hotel .flwvrroom-floor {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.2) 0 12%, transparent 12% 50%) 0 0 / 4rem 4rem,
+        linear-gradient(#9f7aea, #553c9a);
+}
+
+.flwvrroom-stage-airport .flwvrroom-backwall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.23) 0 1px, transparent 1px 9rem),
+        linear-gradient(#bee3f8, #63b3ed);
+}
+
+.flwvrroom-stage-airport .flwvrroom-backwall::before {
+    background: linear-gradient(#1a365d, #2a4365);
+    border-color: #edf2f7;
+    height: 26%;
+    left: 28%;
+    top: 14%;
+    width: 36%;
+}
+
+.flwvrroom-stage-airport .flwvrroom-floor {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.24) 0 10%, transparent 10% 50%) 0 0 / 5rem 5rem,
+        linear-gradient(#718096, #4a5568);
+}
+
+.flwvrroom-stage-supermarket .flwvrroom-backwall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,.16) 0 1px, transparent 1px 5rem),
+        linear-gradient(#c6f6d5, #68d391);
+}
+
+.flwvrroom-stage-supermarket .flwvrroom-backwall::before {
+    background: linear-gradient(#975a16, #744210);
+    border-color: #fefcbf;
+    height: 45%;
+    left: 9%;
+    top: 18%;
+    width: 24%;
+}
+
+.flwvrroom-stage-supermarket .flwvrroom-floor {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.24) 0 12%, transparent 12% 50%) 0 0 / 4rem 4rem,
+        linear-gradient(#f6ad55, #c05621);
+}
+
+.flwvrroom-hotspot {
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #2f855a;
+    border-radius: 999px;
+    box-shadow: 0 .5rem 1.5rem rgba(15, 23, 42, .22);
+    color: #1a202c;
+    cursor: pointer;
+    display: flex;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 3rem;
+    min-width: 6rem;
+    padding: .5rem .8rem;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    z-index: 2;
+}
+
+.flwvrroom-hotspot:hover,
+.flwvrroom-hotspot:focus {
+    transform: translate(-50%, calc(-50% - 2px));
+}
+
+.flwvrroom-hotspot.is-complete {
+    background: #c6f6d5;
+    border-color: #22543d;
+}
+
+.flwvrroom-panel {
+    border: 1px solid #d8e0e8;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.flwvrroom-panel h3 {
+    margin-top: 0;
+}
+
+.flwvrroom-progress {
+    align-items: center;
+    background: #fffaf0;
+    border: 1px solid #f6ad55;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    padding: .75rem;
+}
+
+.flwvrroom-progress strong {
+    font-size: 1.5rem;
+}
+
+.flwvrroom-quiz {
+    display: grid;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.flwvrroom-quiz label {
+    border: 1px solid #d8e0e8;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: .55rem;
+}
+
+.flwvrroom-status {
+    min-height: 1.5rem;
+}
+
+.flwvrroom-kps ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.flwvrroom.is-passed .flwvrroom-progress {
+    background: #f0fff4;
+    border-color: #68d391;
+}
+
+@media (max-width: 900px) {
+    .flwvrroom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flwvrroom-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .flwvrroom-stage {
+        min-height: 28rem;
+    }
+}

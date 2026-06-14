@@ -1,0 +1,75 @@
+define(['jquery', 'core/log','core/modal_save_cancel','core/str','core/modal_events'], function($, log,ModalSaveCancel, str, ModalEvents) {
+  "use strict"; // jshint ;_;
+
+  /*
+  This file is to manage the quiz stage
+   */
+
+  log.debug('Poodll Solo Post attempt buttons page: initialising');
+
+  return {
+
+    strings: {},
+
+    //for making multiple instances
+      clone: function () {
+          return $.extend(true, {}, this);
+     },
+
+    init: function() {
+        this.init_strings();
+        this.register_events();
+
+    },
+
+    register_events(){
+        var that = this;
+        $('body').on('click','.solo_reattempt_btn',function(e) {
+
+            e.preventDefault();
+            var buttonhref= $(this).data('href');
+
+            //if its not a reattempt ... proceed
+            if($(this).data('action')!=='reattempt') {
+                window.location.href = buttonhref;
+                return;
+            }
+
+            //if it's a reattempt, confirm and proceed
+            ModalSaveCancel.create({
+                title: that.strings.reattempttitle,
+                body: that.strings.reattemptbody
+            })
+            .then(function(modal) {
+                //old and odd Moodles may not have this function
+                if(modal.setSaveButtonText) {
+                    log.debug('setting reattempt button text');
+                    modal.setSaveButtonText(that.strings.reattempt);
+                }
+                var root = modal.getRoot();
+                root.on(ModalEvents.save, function() {
+                    window.location.href = buttonhref;
+                });
+                modal.show();
+            });
+      }
+        );
+    },
+
+    init_strings: function(){
+        var that = this;
+        // set up strings
+        str.get_strings([
+            {"key": "reattempttitle",       "component": 'mod_solo'},
+            {"key": "reattemptbody",           "component": 'mod_solo'},
+            {"key": "reattempt",           "component": 'mod_solo'}
+
+        ]).done(function(s) {
+            var i = 0;
+            that.strings.reattempttitle = s[i++];
+            that.strings.reattemptbody = s[i++];
+            that.strings.reattempt = s[i++];
+        });
+    }
+  }
+});

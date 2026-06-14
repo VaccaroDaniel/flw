@@ -1,0 +1,92 @@
+<div>
+    <div class='mod_solo_summarystats'>
+      <section class='mod_solo_main_stats'>
+        <table class="mod_solo_words_table">
+          <thead>
+            <tr><th>{{#str}}stats_words_title, mod_solo{{/str}}</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>{{#str}}stats_words, mod_solo{{/str}}</td><td>{{s.words}}</td> </tr>
+              <tr><td>{{#str}}stats_uniquewords, mod_solo{{/str}}</td><td>{{s.uniquewords}}</td> </tr>
+              <tr><td>{{#str}}stats_longwords, mod_solo{{/str}}</td><td>{{s.longwords}}</td> </tr>
+          </tbody>
+        </table>
+
+        <table class="mod_solo_turns_table">
+          <thead>
+            <tr><th>{{#str}}stats_turns_title, mod_solo{{/str}}</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>{{#str}}stats_turns, mod_solo{{/str}}</td><td>{{s.turns}}</td></tr>
+              <tr><td>{{#str}}stats_avturn, mod_solo{{/str}}</td><td>{{s.avturn}}</td></tr>
+              <tr><td>{{#str}}stats_longestturn, mod_solo{{/str}}</td><td>{{s.longestturn}}</td></tr>
+          </tbody>
+        </table>
+    </section>
+
+    <section class='mod_solo_visual_stats'>
+        {{>mod_solo/summarystatstargetwords}}
+        {{#selftranscribe}}
+            {{^textonlysubmission}}
+                {{>mod_solo/summarystatsspeakingclarity}}
+            {{/textonlysubmission}}
+        {{/selftranscribe}}
+    </section>
+    <section>
+        <h5>{{#str}}more_stats, mod_solo{{/str}}</h5>
+        <div class="section justify-content-center mod_solo_result_squaretiles">
+          {{#s.cefrlevel}}
+          <div class="card mod_solo_result_squaretile ">
+              <div class="card-header">{{#str}}stats_cefrlevel, mod_solo{{/str}}</div>
+              <div class="card-body">
+                  <h4 class="card-title">{{s.cefrlevel}}</h4>
+                  <p class="card-text">({{#str}}estimated, mod_solo{{/str}})</p>
+              </div>
+          </div>
+            {{/s.cefrlevel}}
+            {{#s.ieltslevel}}
+          <div class="card mod_solo_result_squaretile ">
+              <div class="card-header">{{#str}}stats_ieltslevel, mod_solo{{/str}}</div>
+              <div class="card-body">
+                    <h4 class="card-title">{{s.ieltslevel}}</h4>
+                    <p class="card-text">({{#str}}estimated, mod_solo{{/str}})</p>
+              </div>
+          </div>
+            {{/s.ieltslevel}}
+            {{#s.toefllevel}}
+          <div class="card mod_solo_result_squaretile ">
+              <div class="card-header">{{#str}}stats_toefllevel, mod_solo{{/str}}</div>
+              <div class="card-body">
+                    <h4 class="card-title">{{s.toefllevel}}</h4>
+                    <p class="card-text">({{#str}}estimated, mod_solo{{/str}})</p>
+              </div>
+          </div>
+            {{/s.toefllevel}}
+            {{#s.genericlevel}}
+            <div class="card mod_solo_result_squaretile ">
+                <div class="card-header">{{#str}}stats_genericlevel, mod_solo{{/str}}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{s.genericlevel}}</h4>
+                    <p class="card-text">({{#str}}estimated, mod_solo{{/str}})</p>
+                </div>
+            </div>
+            {{/s.genericlevel}}
+          <div class="card mod_solo_result_squaretile">
+              <div class="card-header">{{#str}}stats_relevance, mod_solo{{/str}}</div>
+              <div class="card-body">
+                  <h4 class="card-title">{{s.relevance}}%</h4>
+                  <p class="card-text">({{#str}}estimated, mod_solo{{/str}})</p>
+              </div>
+          </div>
+            {{^textonlysubmission}}
+              <div class="card mod_solo_result_squaretile">
+                  <div class="card-header">{{#str}}stats_wpm, mod_solo{{/str}}</div>
+                  <div class="card-body">
+                      <h4 class="card-title">{{s.wpm}}</h4>
+                  </div>
+              </div>
+            {{/textonlysubmission}}
+        </div>
+      </section>
+    </div>
+</div>

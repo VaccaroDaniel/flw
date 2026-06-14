@@ -1,0 +1,33 @@
+.local-mldict-actions {
+    margin: 0 0 1rem 0;
+}
+.local-mldict-search {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+.local-mldict-search input[type="text"] {
+    min-width: 18rem;
+}
+.local-mldict-entry {
+    max-width: 58rem;
+}
+.local-mldict-meta,
+.local-mldict-pronunciation {
+    color: #555;
+    margin-bottom: .5rem;
+}
+.local-mldict-example-translation {
+    color: #555;
+    margin-top: .25rem;
+}
+.local-mldict-autolink {
+    border-bottom: 1px dotted currentColor;
+    text-decoration: none;
+}
+.block_mldict .mldict-block-form input[type="text"] {
+    width: 100%;
+    margin-bottom: .5rem;
+}

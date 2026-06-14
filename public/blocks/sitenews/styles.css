@@ -1,0 +1,13 @@
+#region-main #block-site-news .forumpost img.userpicture {
+    width: auto; /* override */
+    height: auto; /* override */
+}
+
+#region-main #block-site-news .forumpost .header {
+    width: auto; /* override */
+}
+
+#region-post #block-site-news, #region-pre #block-site-news {
+    /* do not display posts when not in main area */
+    display: none;
+}

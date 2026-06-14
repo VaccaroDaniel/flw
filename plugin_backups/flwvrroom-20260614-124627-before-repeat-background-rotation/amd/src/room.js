@@ -1,0 +1,197 @@
+define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
+    var started = Date.now();
+
+    var clamp = function(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+    };
+
+    var wrap = function(value) {
+        return ((value % 100) + 100) % 100;
+    };
+
+    var signedDelta = function(value) {
+        var delta = wrap(value);
+        return delta > 50 ? delta - 100 : delta;
+    };
+
+    var updateScore = function(root, passinggrade, maxgrade) {
+        var score = 0;
+        var completed = [];
+
+        root.querySelectorAll('[data-hotspot].is-complete').forEach(function(button) {
+            score += parseInt(button.getAttribute('data-score'), 10) || 0;
+            completed.push(button.getAttribute('data-hotspot'));
+        });
+
+        var answer = root.querySelector('input[type=radio]:checked');
+        if (answer) {
+            score += parseInt(answer.value, 10) || 0;
+        }
+
+        score = clamp(score, 0, maxgrade);
+        root.querySelector('[data-region="score"]').textContent = score;
+        root.classList.toggle('is-passed', score >= passinggrade);
+
+        return {
+            score: score,
+            completed: completed
+        };
+    };
+
+    var init = function(config) {
+        var root = document.getElementById(config.rootid);
+        if (!root) {
+            return;
+        }
+
+        var stage = root.querySelector('[data-region="panorama-stage"]');
+        var panoramaTrack = root.querySelector('[data-region="panorama-track"]');
+        if (stage) {
+            var rotation = 50;
+            var visibleSpan = 50;
+            var hotspots = root.querySelectorAll('[data-hotspot]');
+
+            var renderRotation = function() {
+                if (panoramaTrack) {
+                    panoramaTrack.style.transform = 'translateX(' + (-33.333333 - rotation / 6) + '%)';
+                }
+
+                hotspots.forEach(function(button) {
+                    var worldX = parseFloat(button.getAttribute('data-world-x'));
+                    var worldY = parseFloat(button.getAttribute('data-world-y'));
+                    if (isNaN(worldX) || isNaN(worldY)) {
+                        return;
+                    }
+
+                    var delta = signedDelta(worldX - rotation);
+                    var visible = Math.abs(delta) <= visibleSpan / 2;
+                    var screenX = 50 + (delta / (visibleSpan / 2)) * 50;
+
+                    button.style.left = screenX + '%';
+                    button.style.top = worldY + '%';
+                    button.classList.toggle('is-out-of-view', !visible);
+                    button.setAttribute('aria-hidden', visible ? 'false' : 'true');
+                    button.tabIndex = visible ? 0 : -1;
+                });
+            };
+
+            var rotateBy = function(amount) {
+                rotation = wrap(rotation + amount);
+                renderRotation();
+            };
+
+            renderRotation();
+
+            root.querySelectorAll('[data-action="pan-left"]').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    rotateBy(15);
+                });
+            });
+            root.querySelectorAll('[data-action="pan-right"]').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    rotateBy(-15);
+                });
+            });
+
+            var dragging = false;
+            var lastX = 0;
+
+            stage.addEventListener('pointerdown', function(event) {
+                if (event.target.closest('button')) {
+                    return;
+                }
+                dragging = true;
+                lastX = event.clientX;
+                stage.classList.add('is-dragging');
+                if (stage.setPointerCapture) {
+                    stage.setPointerCapture(event.pointerId);
+                }
+            });
+
+            stage.addEventListener('pointermove', function(event) {
+                if (!dragging) {
+                    return;
+                }
+                var delta = lastX - event.clientX;
+                lastX = event.clientX;
+                rotateBy(delta * 0.08);
+                event.preventDefault();
+            });
+
+            var stopDragging = function(event) {
+                dragging = false;
+                stage.classList.remove('is-dragging');
+                if (event && stage.releasePointerCapture) {
+                    try {
+                        stage.releasePointerCapture(event.pointerId);
+                    } catch (error) {
+                        // Pointer capture can already be released by the browser.
+                    }
+                }
+            };
+
+            stage.addEventListener('pointerup', stopDragging);
+            stage.addEventListener('pointercancel', stopDragging);
+            stage.addEventListener('lostpointercapture', stopDragging);
+
+            stage.addEventListener('keydown', function(event) {
+                if (event.key === 'ArrowLeft') {
+                    rotateBy(15);
+                    event.preventDefault();
+                }
+                if (event.key === 'ArrowRight') {
+                    rotateBy(-15);
+                    event.preventDefault();
+                }
+            });
+        }
+
+        root.querySelectorAll('[data-hotspot]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                button.classList.add('is-complete');
+                button.setAttribute('aria-pressed', 'true');
+                updateScore(root, config.passinggrade, config.maxgrade);
+            });
+        });
+
+        root.querySelectorAll('input[type=radio]').forEach(function(input) {
+            input.addEventListener('change', function() {
+                updateScore(root, config.passinggrade, config.maxgrade);
+            });
+        });
+
+        var save = root.querySelector('[data-action="save-attempt"]');
+        var status = root.querySelector('[data-region="status"]');
+
+        save.addEventListener('click', function() {
+            var result = updateScore(root, config.passinggrade, config.maxgrade);
+            save.disabled = true;
+            status.textContent = 'Saving...';
+
+            Ajax.call([{
+                methodname: 'mod_flwvrroom_submit_attempt',
+                args: {
+                    cmid: config.cmid,
+                    score: result.score,
+                    completedobjects: result.completed.join(','),
+                    taskcomplete: result.score >= config.passinggrade,
+                    durationseconds: Math.round((Date.now() - started) / 1000)
+                }
+            }])[0].then(function(response) {
+                var bestScore = root.querySelector('[data-region="best-score"]');
+                bestScore.textContent = Math.max(parseInt(bestScore.textContent, 10) || 0, response.score);
+                status.textContent = config.strings.saved + ' Score: ' + response.score + (response.passed ? ' / Passed' : ' / Try again');
+                return response;
+            }).catch(function(error) {
+                status.textContent = config.strings.savefailed;
+                Notification.exception(error);
+            }).then(function() {
+                save.disabled = false;
+            });
+        });
+    };
+
+    return {
+        init: init
+    };
+});

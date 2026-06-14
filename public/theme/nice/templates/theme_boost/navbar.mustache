@@ -1,0 +1,216 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+
+{{!
+    @template theme_nice/navbar
+
+    Navigation bar layout template for theme_nice.
+
+    Renders:
+    - Site logo or site name
+    - Responsive collapsible menu for mobile
+    - Homepage and dashboard links
+    - User menu for profile/logout
+    - Optional search icon
+    - Admin settings link (if user has permission)
+    - Primary custom menu items
+    - Responsive layout switching between desktop and mobile
+
+    Context variables required for this template:
+    * config.wwwroot - The Moodle site root URL.
+    * config.homeurl - The Moodle dashboard URL.
+    * sitehomeurl - The URL to the site homepage.
+    * sitename - The site name text.
+    * navbar_logo - The URL to the navbar logo image.
+    * navbar_logo_width - Width of the navbar logo.
+    * hasnavbarlogo - Boolean if navbar logo exists.
+    * home_string - Text label for homepage link.
+    * dashboard_string - Text label for dashboard link.
+    * homepage_link_visibility - Boolean for showing the homepage link.
+    * dashboard_link_visibility - Boolean for showing the dashboard link.
+    * is_dashboard - Boolean indicating if the page is the dashboard.
+    * isloggedin - Whether the user is logged in.
+    * isguest - Whether the user is a guest user.
+    * canaccessadmin - Boolean if user has site admin permissions.
+    * primarymoremenu - Data structure for the primary navigation menu.
+    * usermenu - Data structure for the user menu.
+    * output - Contains:
+        * output.navbar_plugin_output - HTML for plugin nav items.
+        * output.search_box - Boolean to show search icon.
+        * output.custom_menu - HTML for the custom menu.
+        * output.edit_switch - HTML for the editing on/off switch.
+    * searchurl - The URL to the search page.
+
+    Partial templates used:
+    * core/user_menu
+    * theme_boost/primary-drawer-mobile
+
+    Example context (JSON):
+    {
+        "config": {
+            "wwwroot": "https://mymoodlesite.org",
+            "homeurl": "https://mymoodlesite.org/my/"
+        },
+        "sitehomeurl": "https://mymoodlesite.org/",
+        "sitename": "Nice Learning",
+        "navbar_logo": "https://mymoodlesite.org/theme/image.php/theme_nice/theme/1700000000/navbarlogo",
+        "navbar_logo_width": "180",
+        "hasnavbarlogo": true,
+        "home_string": "Home",
+        "dashboard_string": "Dashboard",
+        "homepage_link_visibility": true,
+        "dashboard_link_visibility": true,
+        "is_dashboard": false,
+        "isloggedin": true,
+        "isguest": false,
+        "canaccessadmin": true,
+        "primarymoremenu": "<ul>...</ul>",
+        "usermenu": "<div>user menu</div>",
+        "output": {
+            "navbar_plugin_output": "<div>plugins</div>",
+            "search_box": true,
+            "custom_menu": "<ul><li>Custom</li></ul>",
+            "edit_switch": "<a>Edit mode</a>"
+        },
+        "searchurl": "https://mymoodlesite.org/search/index.php"
+    }
+}}
+
+<div class="nice-navbar-container">
+   <div class="container">
+      <nav class="navbar navbar-expand-lg" style="padding:0">
+
+         {{! ======================================================= }}
+         {{! BRAND LOGO / SITE NAME                                   }}
+         {{! ======================================================= }}
+         {{#is_dashboard}}
+         <a href="{{{ config.homeurl }}}" class="navbar-brand d-md-flex align-items-center m-0 me-4 p-0">
+         {{/is_dashboard}}
+         {{^is_dashboard}}
+         <a href="{{{ sitehomeurl }}}" class="navbar-brand d-md-flex align-items-center m-0 me-4 p-0">
+         {{/is_dashboard}}
+            {{#hasnavbarlogo}}
+            <img src="{{navbar_logo}}" class="logo me-1 nice-navbar-logo" alt="{{sitename}}" width="{{navbar_logo_width}}">
+            {{/hasnavbarlogo}}
+            {{^hasnavbarlogo}}
+            {{{ sitename }}}
+            {{/hasnavbarlogo}}
+         </a>
+
+         {{! ======================================================= }}
+         {{! COLLAPSIBLE NAV LINKS                                    }}
+         {{! ======================================================= }}
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{#primarymoremenu}}
+            <div class="navbar-primary-navigation">
+               <ul class="navbar-nav me-auto">
+                  {{#homepage_link_visibility}}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{{sitehomeurl}}">
+                     {{home_string}}
+                     </a>
+                  </li>
+                  {{/homepage_link_visibility}}
+                  {{#isloggedin}}
+                  {{#dashboard_link_visibility}}
+                  <li class="nav-item">
+                     <a class="nav-link" href="{{{ config.homeurl }}}">
+                     {{dashboard_string}}
+                     </a>
+                  </li>
+                  {{/dashboard_link_visibility}}
+                  {{/isloggedin}}
+                  {{{ output.custom_menu }}}
+               </ul>
+            </div>
+            {{/primarymoremenu}}
+         </div>
+         {{! ======================================================= }}
+         {{! END COLLAPSIBLE NAV LINKS                                }}
+         {{! ======================================================= }}
+
+         <div class="d-flex align-items-center ms-auto me-2 nice-nav-utils"
+              id="usernavigation"
+              data-nice-type="user-navigation">
+
+            {{! Search icon }}
+            {{# output.search_box }}
+            {{#isloggedin}}
+            {{^isguest}}
+            <div class="nice-search-container">
+               <a href="{{searchurl}}" aria-label="Search" data-nice-is-guest="{{isguest}}">
+               <i class="fa-solid fa-magnifying-glass"></i>
+               </a>
+            </div>
+            {{/isguest}}
+            {{/isloggedin}}
+            {{/ output.search_box }}
+
+            {{! --------------------------------------------------- }}
+            {{! Notification bell — ONLY place in the entire         }}
+            {{! template where output.navbar_plugin_output is output. }}
+            {{! --------------------------------------------------- }}
+            {{{ output.navbar_plugin_output }}}
+
+            {{! User menu }}
+            <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+               {{#usermenu}}
+               {{> core/user_menu }}
+               {{/usermenu}}
+            </div>
+
+            {{! Admin gear icon (site admins only) }}
+            {{#primarymoremenu}}
+            {{#isloggedin}}
+            {{#canaccessadmin}}
+            <div class="nice-settings-container">
+               <a class="nice-settings"
+                  href="{{{ config.wwwroot }}}/admin/search.php"
+                  aria-label="Settings">
+               <i class="fa-solid fa-gear"></i>
+               </a>
+            </div>
+            {{/canaccessadmin}}
+            {{/isloggedin}}
+            {{/primarymoremenu}}
+
+            {{! Edit mode switch }}
+            {{{ output.edit_switch }}}
+
+         </div>
+         {{! ======================================================= }}
+         {{! END UTILITY ITEMS                                        }}
+         {{! ======================================================= }}
+
+         {{! ======================================================= }}
+         {{! HAMBURGER TOGGLE (hidden on desktop via Bootstrap)       }}
+         {{! ======================================================= }}
+         <button class="navbar-toggler ms-2"
+                 type="button"
+                 data-bs-toggle="collapse"
+                 data-bs-target="#navbarSupportedContent"
+                 aria-controls="navbarSupportedContent"
+                 aria-expanded="false"
+                 aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+         </button>
+
+      </nav>
+   </div>
+</div>
+
+{{> theme_boost/primary-drawer-mobile }}

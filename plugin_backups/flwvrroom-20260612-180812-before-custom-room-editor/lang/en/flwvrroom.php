@@ -1,0 +1,58 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+
+defined('MOODLE_INTERNAL') || die();
+
+$string['pluginname'] = 'FLW VR Room';
+$string['modulename'] = 'FLW VR Room';
+$string['modulenameplural'] = 'FLW VR Rooms';
+$string['pluginadministration'] = 'FLW VR Room administration';
+$string['flwvrroom:addinstance'] = 'Add a new FLW VR Room';
+$string['flwvrroom:view'] = 'View FLW VR Room';
+$string['flwvrroom:submit'] = 'Submit FLW VR Room attempt';
+$string['flwvrroom:viewreports'] = 'View FLW VR Room reports';
+$string['flwvrroomname'] = 'FLW VR Room name';
+$string['intro'] = 'Introduction';
+$string['flwsettings'] = 'FLW settings';
+$string['cefrlevel'] = 'CEFR level';
+$string['scenario'] = 'Scenario';
+$string['scenario_cafe'] = 'At the Cafe';
+$string['scenario_classroom'] = 'In the Classroom';
+$string['scenario_hotel'] = 'At the Hotel';
+$string['scenario_airport'] = 'At the Airport';
+$string['scenario_supermarket'] = 'At the Supermarket';
+$string['kpcodes'] = 'Knowledge point codes';
+$string['kpcodes_help'] = 'Enter one FLW knowledge point code per line. These codes are shown to learners and saved with the activity settings.';
+$string['passinggrade'] = 'Passing grade';
+$string['maximumgrade'] = 'Maximum grade';
+$string['passlabel'] = 'Pass:';
+$string['bestscore'] = 'Best score';
+$string['roomscore'] = 'Room score';
+$string['roomaria'] = 'Interactive cafe practice room';
+$string['pancontrols'] = 'Panorama controls';
+$string['panleft'] = 'Pan left';
+$string['panright'] = 'Pan right';
+$string['missiontitle'] = 'Cafe mission';
+$string['missiontext'] = 'Find the important cafe objects, listen to the situation, and choose the best reply to the waiter.';
+$string['hotspot_waiter'] = 'Waiter';
+$string['hotspot_menu'] = 'Menu';
+$string['hotspot_cup'] = 'Cup';
+$string['hotspot_table'] = 'Table';
+$string['hotspot_cashier'] = 'Cashier';
+$string['quizquestion'] = 'The waiter asks: "Good morning. What would you like?"';
+$string['quizwrongone'] = 'I am twelve years old.';
+$string['quizcorrect'] = 'I would like a coffee, please.';
+$string['quizwrongtwo'] = 'The station is on the left.';
+$string['saveattempt'] = 'Save attempt';
+$string['attemptsaved'] = 'Attempt saved.';
+$string['savefailed'] = 'The attempt could not be saved.';
+$string['knowledgepoints'] = 'Knowledge points';
+$string['nokpcodes'] = 'No knowledge point codes have been added yet.';
+$string['noinstances'] = 'No FLW VR Room activities have been created in this course.';
+$string['privacy:metadata:attempts'] = 'FLW VR Room stores learner attempts for scoring, completion, and teacher review.';
+$string['privacy:metadata:attempts:userid'] = 'The user who completed the attempt.';
+$string['privacy:metadata:attempts:score'] = 'The score awarded for the attempt.';
+$string['privacy:metadata:attempts:completedobjects'] = 'The room objects clicked by the learner.';
+$string['privacy:metadata:attempts:taskcomplete'] = 'Whether the mission was completed.';
+$string['privacy:metadata:attempts:durationseconds'] = 'The number of seconds spent in the attempt.';
+$string['privacy:metadata:attempts:timecreated'] = 'The time the attempt was saved.';

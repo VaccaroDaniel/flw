@@ -1,0 +1,284 @@
+1.0.75 (Build 2026042000)
+- Updates for Moodle 5.2 (now requires Moodle 4.3)
+- Removed Modal_factory
+
+1.0.74 (Build 2025100800)
+- Improvements for new activity chooser (Moodle 5.1)
+
+1.0.73 (Build 2025100723)
+- bug fix for completion conditions
+
+1.0.72 (Build 2025100722)
+- bug fix for duplicate attempt stats records
+
+1.0.71 (Build 2025100721)
+- support for lang server in Ningxia
+- added index on attempt stats table
+
+1.0.70 (Build 2025100715)
+    - Added Ningxia region (requires Poodll China subscription)
+
+1.0.69 (Build 2025100714)
+ - Support for Moodle 5.0 and PHP 8.4
+ - Support for custom Cloud Poodll server
+
+1.0.68 (Build 2025100713)
+- Added the option to record video
+- Better handling when activity has no target words
+- Fixed for target words not working when step_prepare not present in activity
+
+1.0.67 (Build 2025100711)
+- added rubric results template
+
+1.0.66 (Build 2025100711)
+- Added proper justification for R2L languages as feedback
+- Better title for Generic level
+- Fix for broken rubric grading (when P-Chat not installed)
+
+1.0.65 (Build 2025100710)
+- Added native language setting for AI graded feedback
+
+1.0.64 (Build 2025100709)
+- Fixed issue with activity step sequence setting not backing up / restoring properly
+
+1.0.63 (Build 2025100708)
+- Added options for display of results to student (star rating, cefr level etc)
+
+1.0.62 (Build 2025100706)
+- Added Mobile App Support
+
+1.0.61 (Build 2025100705)
+- Added a "Record->model(if set)" mode, ie no prepare step
+
+1.0.60 (Build 2025100704)
+ - Rebuilt js and denamed the AMD so pre M3.9 can use it
+ 
+1.0.59 (Build 2025100703)
+- Added text option to media elements (topic and model)
+- Fixed a bug that would break add/edit solo activities on edit form load
+- Fixed a bug with multibyte characters garbling in the displayed transcript
+
+1.0.58 (Build 2025100701)
+- Improvements to privacy Impl.
+
+1.0.57 (Build 2025100700)
+- Support for PHP 8.2 and 8.3
+
+1.0.56 (Build 2024092500)
+- Messed up version number ... no going back now..
+- Added Vietnamese Language Support
+- Changed the display of the Attempt No. to show the attempt number(ie 1, 2, 3) instead of the attempt id
+- Small hack to skip "Confirm New Attempt" dialog on non-compliant Moodle versions
+
+1.0.55 (Build 2024082600)
+- Fix for layout(display of introduction) issue on Adaptable theme
+
+1.0.54 (Build 2024073100)
+- Fixed bug which would kill text processing on PHP7.x
+
+Version 1.0.53 (Build 2024072800)
+- Added TTS read aloud button for pre-preparing self transcript
+- Added more Indian languages for AI feedback
+- Improved the display of the suggestions corrections
+
+Version 1.0.51 (Build 2024071700)
+- Addition of Prepare -> Text -> Model mode (ie text only)
+- Addition of Vimeo media prompt in addition to YouTube clip in the activity media prompts
+- Addied ideacount to the bonus grade options
+
+Version 1.0.50 (Build 2024071100)
+- New AI grading feature
+- settings tidy up
+- improvements to results page
+- Better corrections markup
+- added an autograde log
+- removed manual transcript entry
+
+Version 1.0.49 (Build 2024070300)
+- fixed wrong trim function
+- fixed wrong dialect labels for Arabic voices:  Arabic (modern standard) / Arabic (gulf)
+
+Version 1.0.48 (Build 2024051601)
+- Fixed an unclosed tag issue which could break pages with a TTS player on them
+
+Version 1.0.47 (Build 2024051600)
+- Fixes for external API calls on pre M40 sites
+
+Version 1.0.46 (Build 2024051200)
+- Tweaks to format functions for PHP8.2
+
+Version 1.0.45 (Build 2024032400)
+- Better display of language options in settings
+- Bug fix for TTS passage voice selection
+
+Version 1.0.44 (Build 2024021500)
+- Improved highlighting of target words in transcript that have been auto suggested/corrected
+
+Version 1.0.43 (Build 2024020600)
+ - Fixed bug introduced in last release which could break JS on students attempt summary page
+
+Version 1.0.42 (Build 2024020500)
+-Fixed an issue with mode : prepare -> record -> model -> transcript
+-Tweaks to results page
+- Added date to grades report
+- Added better display for corrections feedback
+
+Version 1.0.41 (Build 2024011500)
+- Fixed issue where no speech was transcribed, causing students to get stuck waiting for processing
+- Added an incomplete attempts report allowing teachers to delete attempts that get stuck
+- publish an expected completion date
+
+Version 1.0.40 (Build 2023111800)
+- fixed poor field declaration (preloadtranscript) on new installs
+
+Version 1.0.39 (Build 2023110900)
+- Fixed an issue with deprecated call to add_to_log on index page
+- Fixed an issue with a trailing comma in function decl. that PHP 7.4 did not like
+
+Version 1.0.38 (Build 2023103000)
+- Added a "back to edit" button for transcribe ->record workflow
+- Fixed an issue where transcript text could break transcript page
+- Fixed broken manual grading
+
+Version 1.0.37 (Build 2023101200)
+- Fixed issue with locked text area when editing existing transcript prior to recording
+- Added CEFR level to report
+- Fixed issue with miscalc. of total steps affecting gradingui and completion
+- Added gradingsperpage setting 
+
+Version 1.0.36 (Build 2023092700)
+- add speed fields for TTS
+- added a separate Model Answer field for relevance
+- added ability to hide and show grammar/spelling check
+- added text analysis features for more languages
+
+Version 1.0.35 (Build 2023092600)
+- fix for incorrect language-locale for Norwegian
+
+Version 1.0.34 (Build 2023072402)
+- fix for activity description on < M4.0 versions Moodle
+
+Version 1.0.33 (Build 2023072401)
+- bug fix for events restoring
+
+Version 1.0.32 (Build 2023072400)
+- added attempt submitted and step submitted events
+
+Version 1.0.31 (Build 2023061402)
+ - fixed issue when duplicate target words were used
+ - preserve case and punctuation in text sent for spellcheck
+
+Version 1.0.30 (Build 2023061401)
+ - targetwords now separated by commas or new lines
+
+Version 1.0.29 (Build 2023061400)
+ - tweaks to  model audio (Slowed it down)
+ - failsafes for when audio or transcript is submitted empty
+ - stopped lower casing passage before sent for spell check
+ - moved audio recorder below prompt
+
+Version 1.0.28 (Build 2023060800)
+ - New UI 
+
+Version 1.0.27 (Build 2023051300)
+ -fixed no null definitions that could break restore for certain DB fields
+ - added WPM field
+ - added preload transcript feature
+ - internal refactoring
+
+Version 1.0.23 (Build 2022122000)
+- added ideacount and cefr level and relevance and Grammar Suggestions to grading attributes
+- added no pasting option for preventing students pasting in a transcript
+- cleaned up target words so it uses new lines AND commas and ignored blanks
+- Set default report view size to 50
+
+Version 1.0.23 (Build 2022100900)
+- added localposturl support for using moodle server as proxy for cloud poodll (only for very special cases)
+
+Version 1.0.22 (Build 2022100700)
+- removed unneeded lang strings
+
+Version 1.0.21 (Build 2022072100)
+- Fixed issue introduced in 1.0.20 if cron successfully retrieved the auto transcript before the self transcript was complete.
+
+Version 1.0.20 (Build 2022071100)
+- Fixed an issue that caused an error if the student did not enter a transcript (ie submitted an empty string)
+
+Version 1.0.19 (Build 2022061001)
+- Added different activity sequences ( ... that's big)
+- Added non-English suggestions and AJAX suggestions
+- added TTS / Suggestions / Gallery settings (not implemented)
+
+Version 1.0.18 (Build 2022060500)
+- fixed broken delete attempt
+- added defaults to vide start and view end
+- added a better free trial link and rebuild js for < M3.8
+
+Version 1.0.39(Build 2022041800)
+- Removed JQuery UI which was breaking Moodle 4.0 dock
+- Fixed issue with activity being closed if open date set, but close data not set
+
+1.0.17 (Build 2022032000)
+- fixed issue in get_course_moduleinfo that could kill backup and restore
+- tweaked polly stuff
+- added modelmedia to back up and restore
+
+1.0.16 (Build 2022021400)
+- added suggested grammar corrections
+
+1.0.15 (Build 2022020500)
+- added model answer and ytclip
+-  Added open and close dates
+
+1.0.14 (Build 2022011700)
+- added ajax forms instead of mforms
+
+1.0.13 (Build 2021122200)
+- added credential fetching
+
+1.0.12 (Build 2021111000)
+- Made self-transcript required
+
+1.0.10 (Build 2021081600)
+- fixed rubric grading
+
+1.0.10 (Build 2021081600)
+- fixed issue with array_key_exists on php 8
+- fixed some bad instructions and missing description text
+
+1.0.9 (Build 2021061400)
+- Fixed issue with Group grading
+- Added view attempt button to grades page
+- Added options to how many students to show on grading page
+
+1.0.8 (Build 2021053100)
+- Internal flag for iframe use
+
+1.0.7 (Build 2021053500)
+- Added ability to view reports by group
+
+1.0.6 (Build 2021041100)
+- Fixed a bug in the teacher eval section of reports (thanks Hideto)
+
+1.0.5 (Build 2021030600)
+-Improved layout of form and added an optional setup tab
+-added string for capability 'grade'
+
+1.0.4 (Build 2021022200)
+-Add options for TTS prompt and better display of media prompt items on form
+
+1.0.3 (Build 2021021800)
+- Improved layout of results and added better stuff to prevent a user prematurely leaving the recording page.
+
+1.0.2 (Build 2021021200)
+- Simplified placeholder screen
+- Made target word count visible to students
+
+1.0.1 (Build 2021020600)
+- Improved differencing
+- Improved Unicode processing in diff
+- Language string updates
+- Improved final results page1
+
+1.0.0 (Build 2021011000)
+-Added simple grading method
