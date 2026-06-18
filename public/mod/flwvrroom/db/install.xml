@@ -12,6 +12,7 @@
         <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="cefrlevel" TYPE="char" LENGTH="2" NOTNULL="true" DEFAULT="A1"/>
         <FIELD NAME="scenario" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="At the Cafe"/>
+        <FIELD NAME="roommode" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="panorama"/>
         <FIELD NAME="kpcodes" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="customsceneenabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="custombackgroundurl" TYPE="char" LENGTH="1333" NOTNULL="false"/>
@@ -20,6 +21,7 @@
         <FIELD NAME="customquizquestion" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="customanswers" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="customhotspots" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="speakingscoringurl" TYPE="char" LENGTH="1333" NOTNULL="false"/>
         <FIELD NAME="passinggrade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="70"/>
         <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
@@ -37,6 +39,9 @@
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="score" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="completedobjects" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="kpcodes" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="speakingtext" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="aifeedback" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="taskcomplete" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="durationseconds" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>

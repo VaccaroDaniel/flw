@@ -25,11 +25,27 @@ class mod_flwaispeaking_mod_form extends moodleform_mod {
 
         $mform->addElement('header', 'flwsettings', get_string('flwsettings', 'flwaispeaking'));
 
+        $tasktypes = [
+            'topic' => get_string('tasktype_topic', 'flwaispeaking'),
+            'readaloud' => get_string('tasktype_readaloud', 'flwaispeaking'),
+        ];
+        $mform->addElement('select', 'tasktype', get_string('tasktype', 'flwaispeaking'), $tasktypes);
+        $mform->setDefault('tasktype', 'topic');
+        $mform->addHelpButton('tasktype', 'tasktype', 'flwaispeaking');
+
         $mform->addElement('textarea', 'prompttext', get_string('prompttext', 'flwaispeaking'), ['rows' => 4, 'cols' => 80]);
         $mform->setType('prompttext', PARAM_TEXT);
-        $mform->setDefault('prompttext', get_string('defaultprompt', 'flwaispeaking'));
-        $mform->addRule('prompttext', null, 'required', null, 'client');
         $mform->addHelpButton('prompttext', 'prompttext', 'flwaispeaking');
+
+        $mform->addElement('textarea', 'targettext', get_string('targettext', 'flwaispeaking'), ['rows' => 5, 'cols' => 80]);
+        $mform->setType('targettext', PARAM_TEXT);
+        $mform->addHelpButton('targettext', 'targettext', 'flwaispeaking');
+        $mform->hideIf('targettext', 'tasktype', 'neq', 'readaloud');
+
+        $mform->addElement('text', 'referenceaudiourl', get_string('referenceaudiourl', 'flwaispeaking'), ['size' => '80']);
+        $mform->setType('referenceaudiourl', PARAM_URL);
+        $mform->addHelpButton('referenceaudiourl', 'referenceaudiourl', 'flwaispeaking');
+        $mform->hideIf('referenceaudiourl', 'tasktype', 'neq', 'readaloud');
 
         $levels = [
             'A1' => 'A1',

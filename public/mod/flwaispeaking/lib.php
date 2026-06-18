@@ -164,6 +164,94 @@ function flwaispeaking_count_user_attempts($flwaispeakingid, $userid): int {
 }
 
 /**
+ * Return the next attempt number for a user without reusing deleted attempts.
+ *
+ * @param int $flwaispeakingid Activity id.
+ * @param int $userid User id.
+ * @return int
+ */
+function flwaispeaking_get_next_attempt_number(int $flwaispeakingid, int $userid): int {
+    global $DB;
+
+    $record = $DB->get_record_sql(
+        'SELECT MAX(attemptnumber) AS maxattempt
+           FROM {flwaispeaking_submissions}
+          WHERE flwaispeakingid = :flwaispeakingid
+            AND userid = :userid',
+        [
+            'flwaispeakingid' => $flwaispeakingid,
+            'userid' => $userid,
+        ]
+    );
+
+    return ((int) ($record->maxattempt ?? 0)) + 1;
+}
+
+/**
+ * Build the scoring prompt sent to the local AI assessment server.
+ *
+ * @param stdClass $flwaispeaking Activity instance.
+ * @return string
+ */
+function flwaispeaking_build_ai_prompt($flwaispeaking): string {
+    $tasktype = $flwaispeaking->tasktype ?? 'topic';
+    $lines = [
+        'FLW speaking task type: ' . ($tasktype === 'readaloud' ? 'read-aloud' : 'open-topic'),
+        'Target CEFR level: ' . ($flwaispeaking->cefrlevel ?? ''),
+        '',
+        'Teacher prompt:',
+        trim((string) ($flwaispeaking->prompttext ?? '')),
+    ];
+
+    if ($tasktype === 'readaloud') {
+        $lines[] = '';
+        $lines[] = 'Read-aloud target text:';
+        $lines[] = trim((string) ($flwaispeaking->targettext ?? ''));
+        $lines[] = '';
+        $lines[] = 'Scoring focus: compare the learner transcript with the target text; score pronunciation from omissions, substitutions, unclear words, and rhythm/word-boundary evidence; also score grammar only where the learner output changes the target or adds language.';
+    } else {
+        $lines[] = '';
+        $lines[] = 'Scoring focus: score semantic relevance to the topic, grammar accuracy, vocabulary, fluency, and pronunciation evidence from the transcript.';
+    }
+
+    if (!empty($flwaispeaking->kpcodes)) {
+        $lines[] = '';
+        $lines[] = 'FLW knowledge point codes:';
+        $lines[] = trim((string) $flwaispeaking->kpcodes);
+    }
+
+    return trim(implode("\n", $lines));
+}
+
+/**
+ * Delete one submission and its linked unconfirmed AI result.
+ *
+ * @param stdClass $flwaispeaking Activity instance.
+ * @param int $submissionid Submission id.
+ * @param int $userid User id.
+ */
+function flwaispeaking_delete_submission($flwaispeaking, int $submissionid, int $userid): void {
+    global $DB;
+
+    $submission = $DB->get_record('flwaispeaking_submissions', [
+        'id' => $submissionid,
+        'flwaispeakingid' => $flwaispeaking->id,
+        'userid' => $userid,
+    ], '*', MUST_EXIST);
+
+    if (!empty($submission->assessmentid)) {
+        $assessment = $DB->get_record('local_flwai_results', ['id' => $submission->assessmentid]);
+        if ($assessment && !empty($assessment->teacherconfirmed)) {
+            throw new moodle_exception('cannotdeleteconfirmed', 'flwaispeaking');
+        }
+        $DB->delete_records('local_flwai_results', ['id' => $submission->assessmentid]);
+    }
+
+    $DB->delete_records('flwaispeaking_submissions', ['id' => $submission->id]);
+    flwaispeaking_update_user_grade($flwaispeaking, $userid);
+}
+
+/**
  * Create an AI assessment and local submission record.
  *
  * @param stdClass $flwaispeaking Activity instance.
@@ -177,7 +265,7 @@ function flwaispeaking_count_user_attempts($flwaispeakingid, $userid): int {
 function flwaispeaking_submit_transcript($flwaispeaking, $cm, int $userid, string $transcript, string $submissiontype = 'transcript', array $audioinfo = []): int {
     global $DB;
 
-    $attemptnumber = flwaispeaking_count_user_attempts($flwaispeaking->id, $userid) + 1;
+    $attemptnumber = flwaispeaking_get_next_attempt_number((int) $flwaispeaking->id, $userid);
     $now = time();
 
     $assessmentid = \local_flwaiassessment\service\result_repository::create_pending([
@@ -189,7 +277,7 @@ function flwaispeaking_submit_transcript($flwaispeaking, $cm, int $userid, strin
         'submissionid' => 0,
         'skilltype' => 'speaking',
         'transcript' => $transcript,
-        'prompttext' => $flwaispeaking->prompttext,
+        'prompttext' => flwaispeaking_build_ai_prompt($flwaispeaking),
     ]);
 
     $submissionid = $DB->insert_record('flwaispeaking_submissions', (object) [
@@ -234,7 +322,7 @@ function flwaispeaking_transcribe_audio_dataurl(string $dataurl): array {
 
     require_once($CFG->libdir . '/filelib.php');
 
-    if (!preg_match('/^data:(audio\/[a-z0-9.+-]+);base64,(.+)$/i', $dataurl, $matches)) {
+    if (!preg_match('/^data:(audio\/[a-z0-9.+-]+)(?:;[^,]+)*;base64,(.+)$/i', $dataurl, $matches)) {
         throw new moodle_exception('recordingnotready', 'flwaispeaking');
     }
 
@@ -351,7 +439,11 @@ function flwaispeaking_sync_activity_submissions($flwaispeaking): void {
  */
 function flwaispeaking_update_user_grade($flwaispeaking, int $userid): void {
     $grade = flwaispeaking_get_user_grade($flwaispeaking, $userid);
-    if ($grade) {
-        flwaispeaking_grade_item_update($flwaispeaking, $grade);
+    if (!$grade) {
+        $grade = (object) [
+            'userid' => $userid,
+            'rawgrade' => null,
+        ];
     }
+    flwaispeaking_grade_item_update($flwaispeaking, $grade);
 }

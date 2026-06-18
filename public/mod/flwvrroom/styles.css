@@ -45,17 +45,23 @@
     font-size: 1.5rem;
 }
 
+.flwvrroom-report-link {
+    margin-top: .45rem;
+}
+
 .flwvrroom-grid {
+    align-items: stretch;
     display: grid;
     gap: 1rem;
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
 }
 
 .flwvrroom-stage {
-    background: #111827;
+    background: #dfe7ed;
     border: 1px solid #aebdcc;
     border-radius: 8px;
     cursor: grab;
+    display: flex;
     min-height: 30rem;
     overflow: hidden;
     position: relative;
@@ -76,10 +82,39 @@
     background-position: 0 center;
     background-repeat: repeat-x;
     background-size: auto 100%;
-    height: 30rem;
+    flex: 1;
+    min-height: 30rem;
     overflow: hidden;
     position: relative;
     width: 100%;
+}
+
+.flwvrroom-stage-3d .flwvrroom-panorama {
+    background: #dfe7ed;
+}
+
+.flwvrroom-three,
+.flwvrroom-three canvas {
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.flwvrroom-three {
+    z-index: 0;
+}
+
+.flwvrroom-three canvas {
+    display: block;
+}
+
+.flwvrroom-stage-3d .flwvrroom-three {
+    z-index: 1;
+}
+
+.flwvrroom-stage-3d .flwvrroom-panorama::before {
+    display: none;
 }
 
 .flwvrroom-panorama::before {
@@ -112,6 +147,28 @@
     z-index: 2;
 }
 
+.flwvrroom-stage-3d .flwvrroom-hotspot {
+    border-color: #2563eb;
+    box-shadow: 0 .45rem 1.35rem rgba(15, 23, 42, .35);
+    z-index: 3;
+}
+
+.flwvrroom-viewer-message {
+    background: rgba(255, 255, 255, .94);
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #334155;
+    font-weight: 600;
+    left: 50%;
+    max-width: 24rem;
+    padding: .8rem 1rem;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
 .flwvrroom-hotspot:hover,
 .flwvrroom-hotspot:focus {
     transform: translate(-50%, calc(-50% - 2px));
@@ -130,8 +187,9 @@
 
 .flwvrroom-pan-controls {
     bottom: .75rem;
-    display: flex;
+    display: grid;
     gap: .5rem;
+    grid-template-columns: repeat(4, 2.8rem);
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
@@ -153,6 +211,83 @@
     line-height: 1;
     min-width: 2.8rem;
     padding: 0;
+}
+
+.flwvrroom-author-tools {
+    align-items: center;
+    background: rgba(255, 255, 255, .94);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    display: flex;
+    gap: .5rem;
+    left: .75rem;
+    max-width: calc(100% - 1.5rem);
+    padding: .4rem .55rem;
+    position: absolute;
+    top: .75rem;
+    z-index: 4;
+}
+
+.flwvrroom-author-tools span {
+    color: #334155;
+    font-size: .82rem;
+}
+
+.flwvrroom-hotspot-card {
+    background: rgba(255, 255, 255, .96);
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-shadow: 0 .75rem 2rem rgba(15, 23, 42, .28);
+    left: .75rem;
+    max-width: min(26rem, calc(100% - 1.5rem));
+    padding: .85rem 1rem;
+    position: absolute;
+    right: .75rem;
+    top: 4rem;
+    z-index: 5;
+}
+
+.flwvrroom-hotspot-card h4 {
+    color: #1f2933;
+    font-size: 1rem;
+    margin: 0 2rem .35rem 0;
+}
+
+.flwvrroom-hotspot-card p {
+    color: #334155;
+    font-size: .92rem;
+    margin: 0 0 .65rem;
+}
+
+.flwvrroom-hotspot-card audio {
+    display: block;
+    width: 100%;
+}
+
+.flwvrroom-hotspot-card-close {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: #475569;
+    display: inline-flex;
+    font-size: 1.35rem;
+    height: 2rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    position: absolute;
+    right: .45rem;
+    top: .35rem;
+    width: 2rem;
+}
+
+.flwvrroom-hotspot-card-close:hover,
+.flwvrroom-hotspot-card-close:focus {
+    color: #0f172a;
+}
+
+.flwvrroom.is-position-helper-active .flwvrroom-stage {
+    cursor: crosshair;
 }
 
 .flwvrroom-panel {
@@ -193,6 +328,29 @@
     padding: .55rem;
 }
 
+.flwvrroom-speaking {
+    border-top: 1px solid #e2e8f0;
+    display: grid;
+    gap: .45rem;
+    margin: .75rem 0 1rem;
+    padding-top: .75rem;
+}
+
+.flwvrroom-speaking p {
+    margin: 0;
+}
+
+.flwvrroom-speaking [data-region="speaking-transcript"] {
+    color: #334155;
+    font-size: .9rem;
+}
+
+.flwvrroom-speaking [data-region="speaking-feedback"] {
+    color: #22543d;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
 .flwvrroom-status {
     min-height: 1.5rem;
 }
@@ -211,6 +369,68 @@
     border-color: #68d391;
 }
 
+.flwvrroom-report-heading {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.flwvrroom-report-heading h2 {
+    margin: 0;
+}
+
+.flwvrroom-report-cards {
+    display: grid;
+    gap: .75rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    margin: 0 0 1.25rem;
+}
+
+.flwvrroom-report-card {
+    background: #f8fafc;
+    border: 1px solid #d8e0e8;
+    border-radius: 8px;
+    padding: .75rem;
+}
+
+.flwvrroom-report-card span {
+    color: #52616f;
+    display: block;
+    font-size: .82rem;
+}
+
+.flwvrroom-report-card strong {
+    color: #1f2933;
+    display: block;
+    font-size: 1.45rem;
+    margin-top: .2rem;
+}
+
+.flwvrroom-report-table {
+    margin-bottom: 1.5rem;
+}
+
+.flwvrroom-attempt-table details {
+    max-width: 28rem;
+}
+
+.flwvrroom-attempt-table summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.flwvrroom-report-text {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin: .25rem 0 .65rem;
+    padding: .45rem .55rem;
+    white-space: normal;
+}
+
 @media (max-width: 900px) {
     .flwvrroom-grid {
         grid-template-columns: 1fr;
@@ -226,6 +446,6 @@
     }
 
     .flwvrroom-panorama {
-        height: 24rem;
+        min-height: 24rem;
     }
 }

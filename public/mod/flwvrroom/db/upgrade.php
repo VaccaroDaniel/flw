@@ -36,5 +36,111 @@ function xmldb_flwvrroom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026061203, 'flwvrroom');
     }
 
+    if ($oldversion < 2026061210) {
+        $table = new xmldb_table('flwvrroom');
+        $field = new xmldb_field('roommode', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'panorama', 'scenario');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_mod_savepoint(true, 2026061210, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061211) {
+        upgrade_mod_savepoint(true, 2026061211, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061212) {
+        upgrade_mod_savepoint(true, 2026061212, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061213) {
+        upgrade_mod_savepoint(true, 2026061213, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061214) {
+        upgrade_mod_savepoint(true, 2026061214, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061215) {
+        upgrade_mod_savepoint(true, 2026061215, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061216) {
+        $roomtable = new xmldb_table('flwvrroom');
+        $urlfield = new xmldb_field('speakingscoringurl', XMLDB_TYPE_CHAR, '1333', null, null, null, null, 'customhotspots');
+        if (!$dbman->field_exists($roomtable, $urlfield)) {
+            $dbman->add_field($roomtable, $urlfield);
+        }
+
+        $table = new xmldb_table('flwvrroom_attempts');
+        $fields = [
+            new xmldb_field('kpcodes', XMLDB_TYPE_TEXT, null, null, null, null, null, 'completedobjects'),
+            new xmldb_field('speakingtext', XMLDB_TYPE_TEXT, null, null, null, null, null, 'kpcodes'),
+            new xmldb_field('aifeedback', XMLDB_TYPE_TEXT, null, null, null, null, null, 'speakingtext'),
+        ];
+
+        foreach ($fields as $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026061216, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061217) {
+        $table = new xmldb_table('flwvrroom_attempts');
+        $fields = [
+            new xmldb_field('taskcomplete', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'aifeedback'),
+            new xmldb_field('durationseconds', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'taskcomplete'),
+            new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'durationseconds'),
+        ];
+
+        foreach ($fields as $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        $columns = $DB->get_columns('flwvrroom_attempts');
+        $attempts = $DB->get_records('flwvrroom_attempts');
+        foreach ($attempts as $attempt) {
+            $changed = false;
+
+            if (empty($attempt->timecreated)) {
+                $attempt->timecreated = 0;
+                foreach (['timemodified', 'timefinished', 'timestarted'] as $fieldname) {
+                    if (isset($columns[$fieldname]) && !empty($attempt->{$fieldname})) {
+                        $attempt->timecreated = (int) $attempt->{$fieldname};
+                        break;
+                    }
+                }
+                $changed = true;
+            }
+
+            if (empty($attempt->durationseconds) && isset($columns['timestarted']) && isset($columns['timefinished'])) {
+                $start = (int) ($attempt->timestarted ?? 0);
+                $finish = (int) ($attempt->timefinished ?? 0);
+                if ($start > 0 && $finish > $start) {
+                    $attempt->durationseconds = $finish - $start;
+                    $changed = true;
+                }
+            }
+
+            if (isset($columns['completed']) && empty($attempt->taskcomplete)) {
+                $attempt->taskcomplete = !empty($attempt->completed) ? 1 : 0;
+                $changed = true;
+            }
+
+            if ($changed) {
+                $DB->update_record('flwvrroom_attempts', $attempt);
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026061217, 'flwvrroom');
+    }
+
     return true;
 }

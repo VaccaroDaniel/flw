@@ -35,6 +35,18 @@ $PAGE->set_heading(get_string('assessmentresult', 'local_flwaiassessment'));
 $output = $PAGE->get_renderer('core');
 echo $output->header();
 
+$returntocourseurl = !empty($result->courseid) && (int) $result->courseid !== SITEID
+    ? new moodle_url('/course/view.php', ['id' => $result->courseid])
+    : null;
+if ($returntocourseurl) {
+    echo html_writer::div(
+        html_writer::link($returntocourseurl, get_string('returntocourse', 'local_flwaiassessment'), [
+            'class' => 'btn btn-secondary',
+        ]),
+        'mb-3'
+    );
+}
+
 $user = $result->userid ? core_user::get_user($result->userid, '*', IGNORE_MISSING) : null;
 $student = $user ? fullname($user) : get_string('unknownuser', 'local_flwaiassessment');
 

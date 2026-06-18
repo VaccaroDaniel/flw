@@ -16,6 +16,20 @@ Each preset changes the room style, hotspot labels, mission prompt, answer choic
 
 Each preset also uses a photographic 360-style panorama background. Learners can rotate left and right in the scene, then click the floating object labels.
 
+## Room modes
+
+FLW VR Room now has three room modes:
+
+- **360 panorama**: the original photographic room image with rotating navigation.
+- **3D built-in room**: a simple Three.js room made from built-in objects. The first version is designed for the A1 cafe scenario and includes clickable 3D cafe objects such as the waiter, menu, cup, table, and cashier.
+- **Uploaded 3D model**: a teacher-uploaded `.glb` or `.gltf` model is loaded into the Three.js room surface.
+
+Both modes use the same mission, quiz, score, CEFR, KP, gradebook, and completion behavior.
+
+For uploaded models, upload one `.glb` file when possible. If you use `.gltf`, also upload its related `.bin` and texture files in the same file area. The first `.glb` or `.gltf` file is used as the room model.
+
+In this first uploaded-model version, the 3D model is loaded, centered, and scaled automatically. Hotspot scoring still uses the activity hotspot labels. Precise object-to-hotspot mapping for uploaded GLB/GLTF models belongs to the next visual editing step.
+
 ## Learner task
 
 In each scenario, the learner should:

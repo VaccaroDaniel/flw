@@ -14,11 +14,14 @@
 
 ## Phase 2: Teacher-editable rooms
 
+- Built-in 3D cafe room mode using simple Three.js geometry.
+- Uploaded GLB/GLTF room model mode.
 - Upload background room image.
 - Add, move, and label hotspots with a visual editor.
 - Add text, audio, and image prompts.
 - Configure object scores.
 - Create reusable room presets: cafe, classroom, hotel, airport, supermarket.
+- Later support object placement and object-to-hotspot mapping for uploaded GLB/GLTF models.
 
 ## Phase 3: FLW learning analytics
 

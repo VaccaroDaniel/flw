@@ -49,6 +49,7 @@ $string['teacherconfirmed'] = 'Teacher confirmed';
 $string['timecreated'] = 'Created';
 $string['viewresult'] = 'View result';
 $string['assessmentresult'] = 'Assessment result';
+$string['returntocourse'] = 'Return to course';
 $string['rawtext'] = 'Learner writing';
 $string['transcript'] = 'Transcript';
 $string['prompttext'] = 'Prompt';

@@ -12,4 +12,12 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'mod/flwvrroom:submit',
     ],
+    'mod_flwvrroom_score_speaking' => [
+        'classname' => 'mod_flwvrroom\external\score_speaking',
+        'methodname' => 'execute',
+        'description' => 'Score an FLW VR Room speaking recording with the local FLW AI service.',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'mod/flwvrroom:submit',
+    ],
 ];

@@ -2,35 +2,62 @@
     Template for the FLW VR Room learner view.
 }}
 <div id="{{uniqid}}" class="flwvrroom" data-region="flwvrroom">
+    <script type="application/json" data-region="flwvrroom-config">{{{configjson}}}</script>
     <section class="flwvrroom-header">
         <div>
             <h2>{{name}}</h2>
             <p class="flwvrroom-meta">
                 <span>{{cefrlevel}}</span>
                 <span>{{scenario}}</span>
+                <span>{{roommodelabel}}</span>
                 <span>{{#str}}passlabel, flwvrroom{{/str}} {{passinggrade}}</span>
             </p>
         </div>
         <div class="flwvrroom-score">
             <span>{{#str}}bestscore, flwvrroom{{/str}}</span>
             <strong data-region="best-score">{{bestscore}}</strong>
+            {{#canviewreports}}
+                <a class="btn btn-secondary btn-sm flwvrroom-report-link" href="{{reporturl}}">
+                    {{#str}}viewreport, flwvrroom{{/str}}
+                </a>
+            {{/canviewreports}}
         </div>
     </section>
 
     {{{intro}}}
 
     <section class="flwvrroom-grid">
-        <div class="flwvrroom-stage flwvrroom-stage-{{scenariokey}}" aria-label="{{roomaria}}" data-region="panorama-stage" tabindex="0">
-            <div class="flwvrroom-panorama" data-region="panorama" style="background-image: url('{{backgroundurl}}');">
+        <div class="flwvrroom-stage flwvrroom-stage-{{scenariokey}} {{#is3d}}flwvrroom-stage-3d{{/is3d}}" aria-label="{{roomaria}}" data-region="panorama-stage" data-room-mode="{{roommode}}" tabindex="0">
+            <div class="flwvrroom-panorama" data-region="panorama" {{^is3d}}data-background-url="{{backgroundurl}}" style="background-image: url('{{backgroundurl}}');"{{/is3d}}>
+                <div class="flwvrroom-three" data-region="three-viewer"></div>
                 {{#hotspots}}
-                    <button class="flwvrroom-hotspot" type="button" data-hotspot="{{key}}" data-score="{{score}}" data-world-x="{{x}}" data-world-y="{{y}}">
+                    <button class="flwvrroom-hotspot" type="button" data-hotspot="{{key}}" data-score="{{score}}" data-world-x="{{x}}" data-world-y="{{y}}" data-object-x="{{posx}}" data-object-y="{{posy}}" data-object-z="{{posz}}" data-hotspot-label="{{label}}" data-hotspot-description="{{description}}" data-hotspot-audio="{{audiourl}}">
                         <span>{{label}}</span>
                     </button>
                 {{/hotspots}}
+                {{#model3dmissing}}
+                    <div class="flwvrroom-viewer-message">{{#str}}model3dmissing, flwvrroom{{/str}}</div>
+                {{/model3dmissing}}
             </div>
             <div class="flwvrroom-pan-controls" aria-label="{{#str}}pancontrols, flwvrroom{{/str}}">
+                <button type="button" class="btn btn-secondary" data-action="move-forward" title="{{#str}}moveforward, flwvrroom{{/str}}">^</button>
                 <button type="button" class="btn btn-secondary" data-action="pan-left" title="{{#str}}panleft, flwvrroom{{/str}}">&lt;</button>
                 <button type="button" class="btn btn-secondary" data-action="pan-right" title="{{#str}}panright, flwvrroom{{/str}}">&gt;</button>
+                <button type="button" class="btn btn-secondary" data-action="move-back" title="{{#str}}moveback, flwvrroom{{/str}}">v</button>
+            </div>
+            {{#caneditroom}}
+                <div class="flwvrroom-author-tools">
+                    <button type="button" class="btn btn-secondary btn-sm" data-action="toggle-position-helper">
+                        {{#str}}positionhelper, flwvrroom{{/str}}
+                    </button>
+                    <span data-region="position-helper-status">{{#str}}positionhelperidle, flwvrroom{{/str}}</span>
+                </div>
+            {{/caneditroom}}
+            <div class="flwvrroom-hotspot-card" data-region="hotspot-card" hidden>
+                <button type="button" class="flwvrroom-hotspot-card-close" data-action="close-hotspot-card" aria-label="{{#str}}closehotspot, flwvrroom{{/str}}">&times;</button>
+                <h4 data-region="hotspot-title"></h4>
+                <p data-region="hotspot-description"></p>
+                <audio controls data-region="hotspot-audio" hidden></audio>
             </div>
         </div>
 
@@ -46,8 +73,16 @@
             <div class="flwvrroom-quiz">
                 <p>{{quizquestion}}</p>
                 {{#answers}}
-                    <label><input type="radio" name="{{uniqid}}-answer" value="{{score}}"> {{text}}</label>
+                    <label><input type="radio" name="{{uniqid}}-answer" value="{{score}}" data-answer-text="{{text}}"> {{text}}</label>
                 {{/answers}}
+            </div>
+
+            <div class="flwvrroom-speaking">
+                <button type="button" class="btn btn-secondary" data-action="record-speaking">
+                    {{#str}}recordspeaking, flwvrroom{{/str}}
+                </button>
+                <p data-region="speaking-transcript">{{#str}}speakingempty, flwvrroom{{/str}}</p>
+                <p data-region="speaking-feedback"></p>
             </div>
 
             <button type="button" class="btn btn-primary" data-action="save-attempt">

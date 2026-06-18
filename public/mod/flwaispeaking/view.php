@@ -44,7 +44,16 @@ if (data_submitted() && confirm_sesskey()) {
     $audioinfo = [];
 
     if (trim($audiodata) !== '') {
-        $transcription = flwaispeaking_transcribe_audio_dataurl($audiodata);
+        try {
+            $transcription = flwaispeaking_transcribe_audio_dataurl($audiodata);
+        } catch (moodle_exception $exception) {
+            redirect(
+                new moodle_url('/mod/flwaispeaking/view.php', ['id' => $cm->id]),
+                get_string('recordingprocessingfailed', 'flwaispeaking'),
+                null,
+                \core\output\notification::NOTIFY_ERROR
+            );
+        }
         $transcript = $transcription['transcript'];
         $submissiontype = 'audio';
         $audioinfo = [
@@ -73,11 +82,47 @@ echo $output->header();
 
 echo $output->heading(format_string($flwaispeaking->name), 2);
 
-if (trim((string) $flwaispeaking->intro) !== '') {
+$tasktype = $flwaispeaking->tasktype ?? 'topic';
+$prompt = trim((string) ($flwaispeaking->prompttext ?? ''));
+$targettext = trim((string) ($flwaispeaking->targettext ?? ''));
+$referenceaudiourl = trim((string) ($flwaispeaking->referenceaudiourl ?? ''));
+
+if ($tasktype !== 'readaloud' && flwaispeaking_has_visible_intro($flwaispeaking)) {
     echo format_module_intro('flwaispeaking', $flwaispeaking, $cm->id);
 }
 
-echo html_writer::tag('div', format_text($flwaispeaking->prompttext, FORMAT_PLAIN), ['class' => 'alert alert-info']);
+if ($tasktype === 'readaloud') {
+    echo html_writer::start_div('alert alert-info');
+    echo html_writer::tag('strong', get_string('tasktype_readaloud', 'flwaispeaking'));
+    if ($prompt !== '') {
+        echo html_writer::tag('p', format_text($prompt, FORMAT_PLAIN), ['class' => 'mt-2 mb-2']);
+    }
+    if ($targettext !== '') {
+        echo html_writer::tag('div', format_text($targettext, FORMAT_PLAIN), [
+            'class' => 'p-3 bg-white border rounded',
+            'id' => 'flwaispeaking-target-text',
+        ]);
+        echo html_writer::tag('button', get_string('listentotarget', 'flwaispeaking'), [
+            'type' => 'button',
+            'id' => 'flwaispeaking-listen-target',
+            'class' => 'btn btn-secondary mt-2 d-none',
+        ]);
+    }
+    if ($referenceaudiourl !== '') {
+        echo html_writer::tag('div',
+            html_writer::tag('audio', '', [
+                'controls' => 'controls',
+                'src' => s($referenceaudiourl),
+                'class' => 'mt-2',
+            ]),
+            ['class' => 'mt-2']
+        );
+    }
+    echo html_writer::end_div();
+    echo flwaispeaking_listen_target_script();
+} else {
+    echo html_writer::tag('div', format_text($prompt, FORMAT_PLAIN), ['class' => 'alert alert-info']);
+}
 
 if (has_capability('mod/flwaispeaking:viewreports', $context)) {
     echo html_writer::div(
@@ -95,7 +140,7 @@ if (has_capability('mod/flwaispeaking:submit', $context)) {
     }
 
     if ($attemptsremaining === null || $attemptsremaining > 0) {
-        echo html_writer::start_tag('form', ['method' => 'post', 'action' => $PAGE->url->out(false)]);
+        echo html_writer::start_tag('form', ['method' => 'post', 'action' => $PAGE->url->out(false), 'id' => 'flwaispeaking-form']);
         echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
         echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'audiodata', 'id' => 'flwaispeaking-audiodata', 'value' => '']);
 
@@ -152,7 +197,7 @@ $submissions = $DB->get_records('flwaispeaking_submissions', [
 ], 'timecreated DESC');
 
 echo $output->heading(get_string('yoursubmissions', 'flwaispeaking'), 3);
-flwaispeaking_print_submissions_table($submissions);
+flwaispeaking_print_submissions_table($submissions, (int) $cm->id);
 
 echo $output->footer();
 
@@ -161,8 +206,8 @@ echo $output->footer();
  *
  * @param array $submissions Submission records.
  */
-function flwaispeaking_print_submissions_table(array $submissions): void {
-    global $PAGE;
+function flwaispeaking_print_submissions_table(array $submissions, int $cmid): void {
+    global $PAGE, $USER;
 
     if (!$submissions) {
         echo html_writer::div(get_string('nosubmissions', 'flwaispeaking'), 'alert alert-info');
@@ -186,6 +231,17 @@ function flwaispeaking_print_submissions_table(array $submissions): void {
             ? html_writer::link(new moodle_url('/local/flwaiassessment/view.php', ['id' => $submission->assessmentid]), get_string('viewairesult', 'flwaispeaking'))
             : get_string('notavailable', 'flwaispeaking');
 
+        $actions = [$link];
+        if ((int) $submission->userid === (int) $USER->id) {
+            $actions[] = html_writer::link(
+                new moodle_url('/mod/flwaispeaking/delete.php', [
+                    'id' => $cmid,
+                    'submissionid' => $submission->id,
+                ]),
+                get_string('deletesubmission', 'flwaispeaking')
+            );
+        }
+
         $table->data[] = [
             (int) $submission->attemptnumber,
             s($submission->submissiontype ?? 'transcript'),
@@ -193,11 +249,57 @@ function flwaispeaking_print_submissions_table(array $submissions): void {
             s($submission->cefrlevel),
             format_float($submission->totalscore, 2),
             userdate($submission->timecreated),
-            $link,
+            implode(' | ', $actions),
         ];
     }
 
     echo html_writer::table($table);
+}
+
+/**
+ * Check whether the activity description has visible content.
+ *
+ * @param stdClass $flwaispeaking Activity instance.
+ * @return bool
+ */
+function flwaispeaking_has_visible_intro(stdClass $flwaispeaking): bool {
+    $intro = trim((string) ($flwaispeaking->intro ?? ''));
+    if ($intro === '') {
+        return false;
+    }
+
+    $text = html_entity_decode(strip_tags($intro), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $text = str_replace("\xC2\xA0", ' ', $text);
+    $text = trim((string) preg_replace('/\s+/', ' ', $text));
+    if ($text !== '') {
+        return true;
+    }
+
+    return preg_match('/<(img|audio|video|iframe|object|embed)\b/i', $intro) === 1;
+}
+
+/**
+ * Return browser text-to-speech script for read-aloud target text.
+ *
+ * @return string
+ */
+function flwaispeaking_listen_target_script(): string {
+    return html_writer::script("
+(function() {
+    var button = document.getElementById('flwaispeaking-listen-target');
+    var target = document.getElementById('flwaispeaking-target-text');
+    if (!button || !target || !window.speechSynthesis) {
+        return;
+    }
+
+    button.addEventListener('click', function() {
+        window.speechSynthesis.cancel();
+        var utterance = new SpeechSynthesisUtterance(target.textContent || '');
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+    });
+}());
+");
 }
 
 /**
@@ -208,6 +310,7 @@ function flwaispeaking_print_submissions_table(array $submissions): void {
 function flwaispeaking_recording_script(): string {
     $recordingready = json_encode(get_string('recordingready', 'flwaispeaking'));
     $recordingnotready = json_encode(get_string('recordingnotready', 'flwaispeaking'));
+    $recordingtooshort = json_encode(get_string('recordingtooshort', 'flwaispeaking'));
 
     return html_writer::script("
 (function() {
@@ -216,12 +319,15 @@ function flwaispeaking_recording_script(): string {
     var status = document.getElementById('flwaispeaking-recording-status');
     var audioData = document.getElementById('flwaispeaking-audiodata');
     var playback = document.getElementById('flwaispeaking-playback');
+    var form = document.getElementById('flwaispeaking-form');
     if (!recordButton || !stopButton || !status || !audioData || !playback) {
         return;
     }
 
     var recorder = null;
     var chunks = [];
+    var startedAt = 0;
+    var minimumRecordingMs = 3000;
 
     recordButton.addEventListener('click', function() {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -239,10 +345,17 @@ function flwaispeaking_recording_script(): string {
                 }
             });
             recorder.addEventListener('stop', function() {
+                var duration = Date.now() - startedAt;
                 var blob = new Blob(chunks, {type: recorder.mimeType || 'audio/webm'});
                 stream.getTracks().forEach(function(track) {
                     track.stop();
                 });
+                if (duration < minimumRecordingMs || blob.size < 1000) {
+                    audioData.value = '';
+                    playback.style.display = 'none';
+                    status.textContent = " . $recordingtooshort . ";
+                    return;
+                }
                 playback.src = URL.createObjectURL(blob);
                 playback.style.display = 'block';
                 var reader = new FileReader();
@@ -252,6 +365,7 @@ function flwaispeaking_recording_script(): string {
                 };
                 reader.readAsDataURL(blob);
             });
+            startedAt = Date.now();
             recorder.start();
             recordButton.disabled = true;
             stopButton.disabled = false;
@@ -268,6 +382,18 @@ function flwaispeaking_recording_script(): string {
         recordButton.disabled = false;
         stopButton.disabled = true;
     });
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            var transcript = document.getElementById('transcript');
+            var hasTranscript = transcript && transcript.value.trim() !== '';
+            var hasAudio = audioData.value.trim() !== '';
+            if (!hasTranscript && !hasAudio) {
+                event.preventDefault();
+                status.textContent = " . $recordingnotready . ";
+            }
+        });
+    }
 }());
 ");
 }

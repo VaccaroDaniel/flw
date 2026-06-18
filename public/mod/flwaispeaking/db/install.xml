@@ -10,7 +10,10 @@
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
         <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="tasktype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="topic"/>
         <FIELD NAME="prompttext" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="targettext" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="referenceaudiourl" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="A1"/>
         <FIELD NAME="kpcodes" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="submissionmode" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="transcript"/>
@@ -52,6 +55,7 @@
       </KEYS>
       <INDEXES>
         <INDEX NAME="activity-user" UNIQUE="false" FIELDS="flwaispeakingid, userid"/>
+        <INDEX NAME="activity-user-attempt" UNIQUE="true" FIELDS="flwaispeakingid, userid, attemptnumber"/>
         <INDEX NAME="assessmentid" UNIQUE="false" FIELDS="assessmentid"/>
       </INDEXES>
     </TABLE>
