@@ -50,7 +50,7 @@
 }
 
 .flwvrroom-grid {
-    align-items: stretch;
+    align-items: start;
     display: grid;
     gap: 1rem;
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
@@ -62,7 +62,8 @@
     border-radius: 8px;
     cursor: grab;
     display: flex;
-    min-height: 30rem;
+    height: clamp(22rem, 56vh, 30rem);
+    min-height: 0;
     overflow: hidden;
     position: relative;
     touch-action: none;
@@ -83,7 +84,7 @@
     background-repeat: repeat-x;
     background-size: auto 100%;
     flex: 1;
-    min-height: 30rem;
+    min-height: 0;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -153,6 +154,47 @@
     z-index: 3;
 }
 
+.flwvrroom-stage-3d .flwvrroom-role-character {
+    bottom: auto;
+}
+
+.flwvrroom-role-character {
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #7c3aed;
+    border-radius: 999px;
+    bottom: 4.25rem;
+    box-shadow: 0 .55rem 1.5rem rgba(15, 23, 42, .36);
+    color: #2d1b69;
+    cursor: pointer;
+    display: inline-flex;
+    font-weight: 700;
+    gap: .45rem;
+    left: 50%;
+    min-height: 3.25rem;
+    padding: .45rem .9rem .45rem .55rem;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: 4;
+}
+
+.flwvrroom-role-character.is-out-of-view {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(.86);
+}
+
+.flwvrroom-role-avatar {
+    background:
+        radial-gradient(circle at 50% 30%, #f1c9a5 0 32%, transparent 34%),
+        linear-gradient(180deg, transparent 0 44%, #2563eb 45% 100%);
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    display: inline-block;
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
 .flwvrroom-viewer-message {
     background: rgba(255, 255, 255, .94);
     border: 1px solid #cbd5e1;
@@ -219,6 +261,7 @@
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     display: flex;
+    flex-wrap: wrap;
     gap: .5rem;
     left: .75rem;
     max-width: calc(100% - 1.5rem);
@@ -233,6 +276,33 @@
     font-size: .82rem;
 }
 
+.flwvrroom-author-tools select,
+.flwvrroom-author-tools input {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    color: #1f2933;
+    font-size: .82rem;
+    min-height: 2rem;
+    padding: .2rem .4rem;
+}
+
+.flwvrroom-author-tools [data-region="position-helper-hotspot-key"] {
+    width: 7.5rem;
+}
+
+.flwvrroom-author-tools [data-region="position-helper-hotspot-label"] {
+    width: 9.5rem;
+}
+
+.flwvrroom-author-tools [data-region="position-helper-hotspot-score"] {
+    width: 4.5rem;
+}
+
+.flwvrroom-author-tools [data-region="position-helper-output"] {
+    min-width: min(24rem, 100%);
+    width: 24rem;
+}
+
 .flwvrroom-hotspot-card {
     background: rgba(255, 255, 255, .96);
     border: 1px solid #cbd5e1;
@@ -245,6 +315,108 @@
     right: .75rem;
     top: 4rem;
     z-index: 5;
+}
+
+.flwvrroom-role-card {
+    background: rgba(255, 255, 255, .97);
+    border: 1px solid #c4b5fd;
+    border-radius: 8px;
+    box-shadow: 0 .75rem 2rem rgba(15, 23, 42, .3);
+    left: .75rem;
+    max-width: min(28rem, calc(100% - 1.5rem));
+    padding: .9rem 1rem;
+    position: absolute;
+    right: .75rem;
+    top: 4rem;
+    z-index: 6;
+}
+
+.flwvrroom-role-card h4 {
+    color: #2d1b69;
+    font-size: 1.05rem;
+    margin: 0 2rem .4rem 0;
+}
+
+.flwvrroom-role-eyebrow {
+    color: #6d28d9;
+    font-size: .78rem;
+    font-weight: 700;
+    margin: 0 0 .15rem;
+    text-transform: uppercase;
+}
+
+.flwvrroom-role-line {
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 6px;
+    color: #312e81;
+    margin: 0 0 .75rem;
+    padding: .55rem .65rem;
+}
+
+.flwvrroom-role-dialogue {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin: 0 0 .75rem;
+    max-height: 14rem;
+    overflow: auto;
+    padding: .55rem;
+}
+
+.flwvrroom-role-dialogue h5,
+.flwvrroom-turn-builder h5 {
+    color: #334155;
+    font-size: .86rem;
+    margin: 0 0 .45rem;
+}
+
+.flwvrroom-role-dialogue-item {
+    display: grid;
+    gap: .15rem;
+    margin: 0 0 .45rem;
+}
+
+.flwvrroom-role-dialogue-item strong {
+    color: #475569;
+    font-size: .76rem;
+}
+
+.flwvrroom-role-dialogue-item span {
+    border-radius: 6px;
+    display: inline-block;
+    padding: .42rem .55rem;
+}
+
+.flwvrroom-role-dialogue-character span {
+    background: #eef2ff;
+    color: #312e81;
+}
+
+.flwvrroom-role-dialogue-learner span {
+    background: #ecfdf5;
+    color: #14532d;
+}
+
+.flwvrroom-role-dialogue-feedback span {
+    background: #fff7ed;
+    color: #7c2d12;
+}
+
+.flwvrroom-role-turn {
+    color: #6d28d9;
+    font-size: .8rem;
+    font-weight: 700;
+    margin: 0 0 .35rem;
+}
+
+.flwvrroom-role-card [data-region="role-transcript"],
+.flwvrroom-role-card [data-region="role-feedback"] {
+    margin: .55rem 0 0;
+}
+
+.flwvrroom-role-card [data-region="role-feedback"] {
+    color: #22543d;
+    font-weight: 600;
 }
 
 .flwvrroom-hotspot-card h4 {
@@ -298,6 +470,57 @@
 
 .flwvrroom-panel h3 {
     margin-top: 0;
+}
+
+.flwvrroom-editor-panel {
+    border-top: 1px solid #d8e0e8;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.flwvrroom-editor-panel label {
+    color: #334155;
+    display: block;
+    font-size: .84rem;
+    font-weight: 700;
+    margin: 0 0 .65rem;
+}
+
+.flwvrroom-editor-panel .flwvrroom-editor-check {
+    align-items: center;
+    display: flex;
+    gap: .45rem;
+}
+
+.flwvrroom-editor-panel .flwvrroom-editor-check input {
+    margin: 0;
+    width: auto;
+}
+
+.flwvrroom-editor-panel input,
+.flwvrroom-editor-panel textarea {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    display: block;
+    font-size: .86rem;
+    font-weight: 400;
+    margin-top: .25rem;
+    padding: .35rem .45rem;
+    width: 100%;
+}
+
+.flwvrroom-turn-builder {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin: 0 0 .75rem;
+    padding: .65rem;
+}
+
+.flwvrroom-editor-status {
+    color: #22543d;
+    font-weight: 700;
+    margin: .65rem 0 0;
 }
 
 .flwvrroom-progress {
@@ -431,6 +654,15 @@
     white-space: normal;
 }
 
+.flwvrroom-report-recommendation {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 6px;
+    color: #7c2d12;
+    margin: .25rem 0 .65rem;
+    padding: .45rem .55rem;
+}
+
 @media (max-width: 900px) {
     .flwvrroom-grid {
         grid-template-columns: 1fr;
@@ -442,10 +674,10 @@
     }
 
     .flwvrroom-stage {
-        min-height: 24rem;
+        height: clamp(19rem, 52vh, 24rem);
     }
 
     .flwvrroom-panorama {
-        min-height: 24rem;
+        min-height: 0;
     }
 }

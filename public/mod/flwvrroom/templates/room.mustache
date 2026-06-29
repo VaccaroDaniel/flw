@@ -38,6 +38,12 @@
                 {{#model3dmissing}}
                     <div class="flwvrroom-viewer-message">{{#str}}model3dmissing, flwvrroom{{/str}}</div>
                 {{/model3dmissing}}
+                {{#rolecharacterenabled}}
+                    <button class="flwvrroom-role-character" type="button" data-action="open-role-character" data-role-score="{{rolescore}}" data-object-x="{{roleposx}}" data-object-y="{{roleposy}}" data-object-z="{{roleposz}}" aria-label="{{rolecharacterspeaklabel}}">
+                        <span class="flwvrroom-role-avatar" aria-hidden="true"></span>
+                        <span>{{rolecharactername}}</span>
+                    </button>
+                {{/rolecharacterenabled}}
             </div>
             <div class="flwvrroom-pan-controls" aria-label="{{#str}}pancontrols, flwvrroom{{/str}}">
                 <button type="button" class="btn btn-secondary" data-action="move-forward" title="{{#str}}moveforward, flwvrroom{{/str}}">^</button>
@@ -50,6 +56,15 @@
                     <button type="button" class="btn btn-secondary btn-sm" data-action="toggle-position-helper">
                         {{#str}}positionhelper, flwvrroom{{/str}}
                     </button>
+                    <select data-region="position-helper-target" aria-label="{{#str}}positionhelpertarget, flwvrroom{{/str}}">
+                        <option value="raw">{{#str}}positionhelperraw, flwvrroom{{/str}}</option>
+                        <option value="role">{{#str}}positionhelperrole, flwvrroom{{/str}}</option>
+                        <option value="hotspot">{{#str}}positionhelperhotspot, flwvrroom{{/str}}</option>
+                    </select>
+                    <input type="text" data-region="position-helper-hotspot-key" value="newhotspot" aria-label="{{#str}}hotspotkey, flwvrroom{{/str}}">
+                    <input type="text" data-region="position-helper-hotspot-label" value="New hotspot" aria-label="{{#str}}hotspotlabel, flwvrroom{{/str}}">
+                    <input type="number" data-region="position-helper-hotspot-score" value="10" min="0" max="100" aria-label="{{#str}}hotspotscore, flwvrroom{{/str}}">
+                    <input type="text" data-region="position-helper-output" readonly aria-label="{{#str}}positionhelperoutput, flwvrroom{{/str}}">
                     <span data-region="position-helper-status">{{#str}}positionhelperidle, flwvrroom{{/str}}</span>
                 </div>
             {{/caneditroom}}
@@ -59,6 +74,24 @@
                 <p data-region="hotspot-description"></p>
                 <audio controls data-region="hotspot-audio" hidden></audio>
             </div>
+            {{#rolecharacterenabled}}
+                <div class="flwvrroom-role-card" data-region="role-card" hidden>
+                    <button type="button" class="flwvrroom-hotspot-card-close" data-action="close-role-card" aria-label="{{#str}}closeroleplay, flwvrroom{{/str}}">&times;</button>
+                    <p class="flwvrroom-role-eyebrow">{{rolecharacterrole}}</p>
+                    <h4>{{rolecharactername}}</h4>
+                    <p class="flwvrroom-role-turn" data-region="role-turn-progress"></p>
+                    <p class="flwvrroom-role-line"><strong>{{rolecharacterlinelabel}}</strong><br><span data-region="role-line">{{rolecharacterline}}</span></p>
+                    <div class="flwvrroom-role-dialogue" data-region="role-dialogue" aria-live="polite">
+                        <h5>{{#str}}roleconversation, flwvrroom{{/str}}</h5>
+                        <div data-region="role-dialogue-list"></div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-action="record-role-speaking">
+                        {{#str}}recordrolereply, flwvrroom{{/str}}
+                    </button>
+                    <p data-region="role-transcript">{{#str}}speakingempty, flwvrroom{{/str}}</p>
+                    <p data-region="role-feedback"></p>
+                </div>
+            {{/rolecharacterenabled}}
         </div>
 
         <aside class="flwvrroom-panel">
@@ -97,6 +130,35 @@
                     {{^kpcodes}}<li>{{#str}}nokpcodes, flwvrroom{{/str}}</li>{{/kpcodes}}
                 </ul>
             </div>
+
+            {{#caneditroom}}
+                <div class="flwvrroom-editor-panel" data-region="room-editor">
+                    <h4>{{#str}}roomeditor, flwvrroom{{/str}}</h4>
+                    <label>{{#str}}custommissiontitle, flwvrroom{{/str}}<input type="text" data-editor-field="custommissiontitle" value="{{editorcustommissiontitle}}"></label>
+                    <label>{{#str}}custommissiontext, flwvrroom{{/str}}<textarea data-editor-field="custommissiontext" rows="3">{{editorcustommissiontext}}</textarea></label>
+                    <label>{{#str}}customquizquestion, flwvrroom{{/str}}<textarea data-editor-field="customquizquestion" rows="3">{{editorcustomquizquestion}}</textarea></label>
+                    <label>{{#str}}customanswers, flwvrroom{{/str}}<textarea data-editor-field="customanswers" rows="4">{{editorcustomanswers}}</textarea></label>
+                    <label>{{#str}}customhotspots, flwvrroom{{/str}}<textarea data-editor-field="customhotspots" rows="7">{{editorcustomhotspots}}</textarea></label>
+                    <label>{{#str}}rolecharacterposition, flwvrroom{{/str}}<input type="text" data-editor-field="rolecharacterposition" value="{{editorroleposition}}"></label>
+                    <label>{{#str}}rolecharacterline, flwvrroom{{/str}}<textarea data-editor-field="rolecharacterline" rows="2">{{editorroleline}}</textarea></label>
+                    <label>{{#str}}roleexpectedanswer, flwvrroom{{/str}}<textarea data-editor-field="roleexpectedanswer" rows="2">{{editorroleexpectedanswer}}</textarea></label>
+                    <label>{{#str}}rolekpcodes, flwvrroom{{/str}}<textarea data-editor-field="rolekpcodes" rows="3">{{editorrolekpcodes}}</textarea></label>
+                    <label>{{#str}}rolescore, flwvrroom{{/str}}<input type="number" data-editor-field="rolescore" value="{{editorrolescore}}" min="0" max="100"></label>
+                    <div class="flwvrroom-turn-builder" data-region="role-turn-builder">
+                        <h5>{{#str}}roleturnbuilder, flwvrroom{{/str}}</h5>
+                        <label>{{#str}}rolecharacterline, flwvrroom{{/str}}<textarea data-builder-field="line" rows="2"></textarea></label>
+                        <label>{{#str}}roleexpectedanswer, flwvrroom{{/str}}<textarea data-builder-field="answer" rows="2"></textarea></label>
+                        <label>{{#str}}rolescore, flwvrroom{{/str}}<input type="number" data-builder-field="score" value="{{editorrolescore}}" min="0" max="100"></label>
+                        <label>{{#str}}rolekpcodes, flwvrroom{{/str}}<textarea data-builder-field="kpcodes" rows="2">{{editorrolekpcodes}}</textarea></label>
+                        <button type="button" class="btn btn-secondary btn-sm" data-action="append-role-turn">{{#str}}appendroleturn, flwvrroom{{/str}}</button>
+                    </div>
+                    <label>{{#str}}roleturns, flwvrroom{{/str}}<textarea data-editor-field="roleturns" rows="5">{{editorroleturns}}</textarea></label>
+                    <label class="flwvrroom-editor-check"><input type="checkbox" data-editor-field="roleaienabled" value="1" {{#editorroleaienabled}}checked{{/editorroleaienabled}}> {{#str}}roleaienabled, flwvrroom{{/str}}</label>
+                    <label>{{#str}}roleaiturns, flwvrroom{{/str}}<input type="number" data-editor-field="roleaiturns" value="{{editorroleaiturns}}" min="1" max="10"></label>
+                    <button type="button" class="btn btn-secondary" data-action="save-room-editor">{{#str}}saveroomeditor, flwvrroom{{/str}}</button>
+                    <p class="flwvrroom-editor-status" data-region="room-editor-status" aria-live="polite"></p>
+                </div>
+            {{/caneditroom}}
         </aside>
     </section>
 </div>

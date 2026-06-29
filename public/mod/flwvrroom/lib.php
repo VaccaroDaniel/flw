@@ -41,35 +41,66 @@ function flwvrroom_model3d_filemanager_options($course = null) {
 }
 
 /**
- * Save uploaded 3D model files from a form draft area.
+ * File manager options for uploaded role character 3D models.
+ *
+ * @param stdClass|null $course
+ * @return array
+ */
+function flwvrroom_rolecharacter_filemanager_options($course = null) {
+    return flwvrroom_model3d_filemanager_options($course);
+}
+
+/**
+ * Save uploaded files from a form draft area.
  *
  * @param stdClass $data
+ * @param string $formfield
+ * @param string $filearea
  */
-function flwvrroom_save_model3d_files(stdClass $data) {
-    if (!isset($data->model3dfiles) || empty($data->coursemodule)) {
+function flwvrroom_save_filearea_files(stdClass $data, $formfield, $filearea) {
+    if (!isset($data->{$formfield}) || empty($data->coursemodule)) {
         return;
     }
 
     $context = context_module::instance($data->coursemodule);
     file_save_draft_area_files(
-        $data->model3dfiles,
+        $data->{$formfield},
         $context->id,
         'mod_flwvrroom',
-        'model3d',
+        $filearea,
         0,
         flwvrroom_model3d_filemanager_options()
     );
 }
 
 /**
- * Return the first uploaded GLB/GLTF model URL for the room.
+ * Save uploaded 3D model files from a form draft area.
+ *
+ * @param stdClass $data
+ */
+function flwvrroom_save_model3d_files(stdClass $data) {
+    flwvrroom_save_filearea_files($data, 'model3dfiles', 'model3d');
+}
+
+/**
+ * Save uploaded role character 3D model files from a form draft area.
+ *
+ * @param stdClass $data
+ */
+function flwvrroom_save_rolecharacter_files(stdClass $data) {
+    flwvrroom_save_filearea_files($data, 'rolecharacterfiles', 'rolecharacter3d');
+}
+
+/**
+ * Return the first uploaded GLB/GLTF model URL for a file area.
  *
  * @param context_module $context
+ * @param string $filearea
  * @return moodle_url|null
  */
-function flwvrroom_get_model3d_url(context_module $context) {
+function flwvrroom_get_filearea_model_url(context_module $context, $filearea) {
     $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, 'mod_flwvrroom', 'model3d', 0, 'filepath, filename', false);
+    $files = $fs->get_area_files($context->id, 'mod_flwvrroom', $filearea, 0, 'filepath, filename', false);
 
     foreach ($files as $file) {
         $filename = $file->get_filename();
@@ -80,7 +111,7 @@ function flwvrroom_get_model3d_url(context_module $context) {
         return moodle_url::make_pluginfile_url(
             $context->id,
             'mod_flwvrroom',
-            'model3d',
+            $filearea,
             0,
             $file->get_filepath(),
             $filename
@@ -88,6 +119,26 @@ function flwvrroom_get_model3d_url(context_module $context) {
     }
 
     return null;
+}
+
+/**
+ * Return the first uploaded GLB/GLTF model URL for the room.
+ *
+ * @param context_module $context
+ * @return moodle_url|null
+ */
+function flwvrroom_get_model3d_url(context_module $context) {
+    return flwvrroom_get_filearea_model_url($context, 'model3d');
+}
+
+/**
+ * Return the first uploaded GLB/GLTF model URL for the role character.
+ *
+ * @param context_module $context
+ * @return moodle_url|null
+ */
+function flwvrroom_get_rolecharacter_model_url(context_module $context) {
+    return flwvrroom_get_filearea_model_url($context, 'rolecharacter3d');
 }
 
 /**
@@ -104,6 +155,7 @@ function flwvrroom_add_instance($data, $mform = null) {
     $data->timemodified = $data->timecreated;
     $data->id = $DB->insert_record('flwvrroom', $data);
     flwvrroom_save_model3d_files($data);
+    flwvrroom_save_rolecharacter_files($data);
 
     flwvrroom_grade_item_update($data);
 
@@ -125,6 +177,7 @@ function flwvrroom_update_instance($data, $mform = null) {
 
     $DB->update_record('flwvrroom', $data);
     flwvrroom_save_model3d_files($data);
+    flwvrroom_save_rolecharacter_files($data);
     flwvrroom_grade_item_update($data);
 
     return true;
@@ -146,7 +199,9 @@ function flwvrroom_delete_instance($id) {
     $cm = get_coursemodule_from_instance('flwvrroom', $flwvrroom->id, 0, false, IGNORE_MISSING);
     if ($cm) {
         $fs = get_file_storage();
-        $fs->delete_area_files(context_module::instance($cm->id)->id, 'mod_flwvrroom', 'model3d');
+        $context = context_module::instance($cm->id);
+        $fs->delete_area_files($context->id, 'mod_flwvrroom', 'model3d');
+        $fs->delete_area_files($context->id, 'mod_flwvrroom', 'rolecharacter3d');
     }
 
     $DB->delete_records('flwvrroom_attempts', ['flwvrroomid' => $flwvrroom->id]);
@@ -178,13 +233,13 @@ function flwvrroom_pluginfile($course, $cm, $context, $filearea, $args, $forcedo
         return false;
     }
 
-    if ($filearea !== 'model3d') {
+    if (!in_array($filearea, ['model3d', 'rolecharacter3d'], true)) {
         return false;
     }
 
     $itemid = array_shift($args);
     $relativepath = implode('/', $args);
-    $fullpath = "/{$context->id}/mod_flwvrroom/model3d/{$itemid}/{$relativepath}";
+    $fullpath = "/{$context->id}/mod_flwvrroom/{$filearea}/{$itemid}/{$relativepath}";
 
     $fs = get_file_storage();
     $file = $fs->get_file_by_hash(sha1($fullpath));
@@ -292,8 +347,8 @@ function flwvrroom_get_scenario_presets() {
     return [
         'At the Cafe' => [
             'key' => 'cafe',
-            'title' => 'Cafe mission',
-            'mission' => 'Find the important cafe objects, listen to the waiter, and choose the best reply.',
+            'title' => 'AI Waiter Cafe Mission',
+            'mission' => 'Order a drink from the waiter, answer follow-up questions, and use polite cafe language.',
             'aria' => 'Interactive cafe practice room',
             'prompt' => 'The waiter asks: "Good morning. What would you like?"',
             'answers' => [
@@ -313,6 +368,21 @@ function flwvrroom_get_scenario_presets() {
                 'A1-FUNC-ORDER-001',
                 'A1-LIS-QUESTION-001',
                 'A1-SPK-REPLY-001',
+            ],
+            'rolecharacter' => [
+                'name' => 'Mina',
+                'role' => 'Cafe waiter',
+                'line' => 'Good morning. Welcome to FLW Cafe. What would you like?',
+                'expectedanswer' => 'I would like a coffee, please.',
+                'score' => 20,
+                'position' => '-2.20|0.00|-2.60',
+                'aiturns' => 4,
+                'turns' => [
+                    'Good morning. Welcome to FLW Cafe. What would you like?|I would like a coffee, please.|20|A1-FUNC-ORDER-001,A1-SPK-REPLY-001',
+                    'Sure. Would you like it hot or iced?|Hot, please.|20|A1-LIS-QUESTION-001,A1-SPK-POLITE-REPLY-001',
+                    'Would you like milk or sugar?|Milk, please.|20|A1-VOC-FOOD-001,A1-SPK-POLITE-REPLY-001',
+                    'That is three dollars. Anything else?|No, thank you.|20|A1-FUNC-CHECKOUT-001,A1-SPK-POLITE-REPLY-001',
+                ],
             ],
         ],
         'In the Classroom' => [
@@ -559,6 +629,65 @@ function flwvrroom_parse_custom_hotspots($text) {
     }
 
     return $hotspots;
+}
+
+/**
+ * Parse teacher-entered role-play turns.
+ *
+ * Format: character line|expected learner answer|score|KP codes
+ *
+ * @param string $text
+ * @param string $fallbackline
+ * @param string $fallbackanswer
+ * @param int $fallbackscore
+ * @param array $fallbackkpcodes
+ * @return array
+ */
+function flwvrroom_parse_role_turns($text, $fallbackline, $fallbackanswer, $fallbackscore, array $fallbackkpcodes) {
+    $turns = [];
+    $lines = preg_split('/\R+/', trim((string) $text));
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '') {
+            continue;
+        }
+
+        $parts = array_map('trim', explode('|', $line));
+        $characterline = $parts[0] ?? '';
+        if ($characterline === '') {
+            continue;
+        }
+
+        $expectedanswer = $parts[1] ?? $fallbackanswer;
+        $score = isset($parts[2]) && is_numeric($parts[2]) ? (int) $parts[2] : $fallbackscore;
+        $kpcodes = [];
+        if (!empty($parts[3])) {
+            $kpcodes = preg_split('/\s*,\s*/', $parts[3]);
+            $kpcodes = array_values(array_filter(array_map('trim', $kpcodes)));
+        }
+        if (empty($kpcodes)) {
+            $kpcodes = $fallbackkpcodes;
+        }
+
+        $turns[] = [
+            'line' => $characterline,
+            'expectedanswer' => $expectedanswer,
+            'score' => max(0, $score),
+            'kpcodes' => $kpcodes,
+        ];
+    }
+
+    if (empty($turns)) {
+        $turns[] = [
+            'line' => $fallbackline,
+            'expectedanswer' => $fallbackanswer,
+            'score' => max(0, $fallbackscore),
+            'kpcodes' => $fallbackkpcodes,
+        ];
+    }
+
+    return $turns;
 }
 
 /**

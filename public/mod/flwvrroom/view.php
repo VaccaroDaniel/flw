@@ -30,6 +30,7 @@ $roommode = in_array(($flwvrroom->roommode ?? 'panorama'), ['panorama', 'builtin
     ? $flwvrroom->roommode
     : 'panorama';
 $model3durl = flwvrroom_get_model3d_url($context);
+$rolecharactermodelurl = flwvrroom_get_rolecharacter_model_url($context);
 
 $kpcodetext = trim((string) ($flwvrroom->kpcodes ?? ''));
 $kpcodes = preg_split('/\R+/', $kpcodetext);
@@ -37,6 +38,45 @@ $kpcodes = array_values(array_filter(array_map('trim', $kpcodes)));
 if (empty($kpcodes)) {
     $kpcodes = $preset['kpcodes'] ?? [];
 }
+
+$rolekpcodetext = trim((string) ($flwvrroom->rolekpcodes ?? ''));
+$rolekpcodes = preg_split('/\R+/', $rolekpcodetext);
+$rolekpcodes = array_values(array_filter(array_map('trim', $rolekpcodes)));
+if (empty($rolekpcodes)) {
+    $rolekpcodes = ['A1-FUNC-ORDER-001'];
+}
+$presetrole = $preset['rolecharacter'] ?? [];
+$rolecharactername = trim((string) ($flwvrroom->rolecharactername ?? '')) ?: ($presetrole['name'] ?? 'Waiter');
+$rolecharacterrole = trim((string) ($flwvrroom->rolecharacterrole ?? '')) ?: ($presetrole['role'] ?? 'Cafe waiter');
+$rolecharacterline = trim((string) ($flwvrroom->rolecharacterline ?? '')) ?: ($presetrole['line'] ?? 'Good morning. What would you like?');
+$roleexpectedanswer = trim((string) ($flwvrroom->roleexpectedanswer ?? '')) ?: ($presetrole['expectedanswer'] ?? 'I would like a coffee, please.');
+$rolecharacterenabled = !empty($flwvrroom->rolecharacterenabled);
+$rolepositiontext = trim((string) ($flwvrroom->rolecharacterposition ?? ''));
+if ($rolepositiontext === '' && !empty($presetrole['position'])) {
+    $rolepositiontext = $presetrole['position'];
+}
+$roleposition = [
+    'x' => -2.2,
+    'y' => 0.0,
+    'z' => -2.6,
+];
+if ($rolepositiontext !== '') {
+    $roleparts = array_map('trim', explode('|', $rolepositiontext));
+    if (count($roleparts) >= 3 && is_numeric($roleparts[0]) && is_numeric($roleparts[1]) && is_numeric($roleparts[2])) {
+        $roleposition = [
+            'x' => (float) $roleparts[0],
+            'y' => (float) $roleparts[1],
+            'z' => (float) $roleparts[2],
+        ];
+    }
+}
+$roleturns = flwvrroom_parse_role_turns(
+    trim((string) ($flwvrroom->roleturns ?? '')) !== '' ? $flwvrroom->roleturns : implode("\n", $presetrole['turns'] ?? []),
+    $rolecharacterline,
+    $roleexpectedanswer,
+    max(0, (int) ($flwvrroom->rolescore ?? ($presetrole['score'] ?? 20))),
+    $rolekpcodes
+);
 
 $answers = [];
 foreach ($preset['answers'] as $index => $answer) {
@@ -93,6 +133,29 @@ $templatecontext = [
     'caneditroom' => has_capability('moodle/course:manageactivities', $context),
     'canviewreports' => has_capability('mod/flwvrroom:viewreports', $context),
     'reporturl' => (new moodle_url('/mod/flwvrroom/report.php', ['id' => $cm->id]))->out(false),
+    'rolecharacterenabled' => $rolecharacterenabled,
+    'rolecharactername' => s($rolecharactername),
+    'rolecharacterrole' => s($rolecharacterrole),
+    'rolecharacterline' => s($rolecharacterline),
+    'rolescore' => max(0, (int) ($flwvrroom->rolescore ?? ($presetrole['score'] ?? 20))),
+    'roleposx' => $roleposition['x'],
+    'roleposy' => $roleposition['y'],
+    'roleposz' => $roleposition['z'],
+    'editorcustomhotspots' => (string) ($flwvrroom->customhotspots ?? ''),
+    'editorcustommissiontitle' => (string) ($flwvrroom->custommissiontitle ?? $preset['title']),
+    'editorcustommissiontext' => (string) ($flwvrroom->custommissiontext ?? $preset['mission']),
+    'editorcustomquizquestion' => (string) ($flwvrroom->customquizquestion ?? $preset['prompt']),
+    'editorcustomanswers' => (string) ($flwvrroom->customanswers ?? ''),
+    'editorroleposition' => $roleposition['x'] . '|' . $roleposition['y'] . '|' . $roleposition['z'],
+    'editorroleline' => (string) ($flwvrroom->rolecharacterline ?? $rolecharacterline),
+    'editorroleexpectedanswer' => (string) ($flwvrroom->roleexpectedanswer ?? $roleexpectedanswer),
+    'editorrolekpcodes' => (string) ($flwvrroom->rolekpcodes ?? implode("\n", $rolekpcodes)),
+    'editorrolescore' => max(0, (int) ($flwvrroom->rolescore ?? ($presetrole['score'] ?? 20))),
+    'editorroleturns' => trim((string) ($flwvrroom->roleturns ?? '')) !== '' ? (string) $flwvrroom->roleturns : implode("\n", $presetrole['turns'] ?? []),
+    'editorroleaienabled' => !empty($flwvrroom->roleaienabled),
+    'editorroleaiturns' => max(1, (int) ($flwvrroom->roleaiturns ?? ($presetrole['aiturns'] ?? 3))),
+    'rolecharacterspeaklabel' => get_string('speakwithcharacter', 'flwvrroom', s($rolecharactername)),
+    'rolecharacterlinelabel' => get_string('characterline', 'flwvrroom', s($rolecharactername)),
     'scenariokey' => $preset['key'],
     'missiontitle' => $preset['title'],
     'missiontext' => $preset['mission'],
@@ -114,8 +177,24 @@ $config = [
     'maxgrade' => (int) $flwvrroom->grade,
     'rootid' => $templatecontext['uniqid'],
     'roommode' => $roommode,
+    'scenario' => $flwvrroom->scenario,
+    'cefrlevel' => $flwvrroom->cefrlevel,
     'kpcodes' => $kpcodes,
     'quizquestion' => $preset['prompt'],
+    'rolecharacter' => [
+        'enabled' => $rolecharacterenabled,
+        'name' => $rolecharactername,
+        'role' => $rolecharacterrole,
+        'line' => $rolecharacterline,
+        'expectedanswer' => $roleexpectedanswer,
+        'kpcodes' => $rolekpcodes,
+        'score' => max(0, (int) ($flwvrroom->rolescore ?? ($presetrole['score'] ?? 20))),
+        'position' => $roleposition,
+        'modelurl' => $rolecharactermodelurl ? $rolecharactermodelurl->out(false) : '',
+        'turns' => $roleturns,
+        'aienabled' => !empty($flwvrroom->roleaienabled),
+        'aiturns' => max(1, (int) ($flwvrroom->roleaiturns ?? ($presetrole['aiturns'] ?? 3))),
+    ],
     'speakingscoringurl' => trim((string) ($flwvrroom->speakingscoringurl ?? '')) ?: 'http://127.0.0.1:8000',
     'threeurl' => (new moodle_url('/mod/flwvrroom/js/three.module.min.js'))->out(false),
     'gltfloaderurl' => (new moodle_url('/mod/flwvrroom/js/GLTFLoader.js'))->out(false),
@@ -123,12 +202,25 @@ $config = [
     'strings' => [
         'saved' => get_string('attemptsaved', 'flwvrroom'),
         'savefailed' => get_string('savefailed', 'flwvrroom'),
+        'roomeditorsaved' => get_string('roomeditorsaved', 'flwvrroom'),
+        'roomeditorsavefailed' => get_string('roomeditorsavefailed', 'flwvrroom'),
+        'roomeditorsaving' => get_string('roomeditorsaving', 'flwvrroom'),
+        'roleturnprogress' => get_string('roleturnprogress', 'flwvrroom', '{$a}'),
+        'roleturncomplete' => get_string('roleturncomplete', 'flwvrroom'),
+        'aiwaiterthinking' => get_string('aiwaiterthinking', 'flwvrroom'),
+        'aiwaiterfailed' => get_string('aiwaiterfailed', 'flwvrroom'),
+        'aifeedback' => get_string('aifeedback', 'flwvrroom'),
         'positionhelperidle' => get_string('positionhelperidle', 'flwvrroom'),
         'positionhelperactive' => get_string('positionhelperactive', 'flwvrroom'),
         'positionhelpercopied' => get_string('positionhelpercopied', 'flwvrroom', '{$a}'),
         'positionhelpercopied3d' => get_string('positionhelpercopied3d', 'flwvrroom', '{$a}'),
+        'positionhelpercopiedrole' => get_string('positionhelpercopiedrole', 'flwvrroom', '{$a}'),
+        'positionhelpercopiedhotspot' => get_string('positionhelpercopiedhotspot', 'flwvrroom', '{$a}'),
+        'positionhelperroleneeds3d' => get_string('positionhelperroleneeds3d', 'flwvrroom'),
         'recordspeaking' => get_string('recordspeaking', 'flwvrroom'),
         'stopspeaking' => get_string('stopspeaking', 'flwvrroom'),
+        'recordrolereply' => get_string('recordrolereply', 'flwvrroom'),
+        'stoprolereply' => get_string('stoprolereply', 'flwvrroom'),
         'speakingempty' => get_string('speakingempty', 'flwvrroom'),
         'speakingrecording' => get_string('speakingrecording', 'flwvrroom'),
         'speakingscoring' => get_string('speakingscoring', 'flwvrroom'),

@@ -1,0 +1,98 @@
+{{!
+    @template theme_flwacademy/flw_language_panel
+
+    Floating FLW learning-language selector.
+}}
+{{#haslearninglanguages}}
+<aside class="flw-language-panel" aria-label="Learning language">
+    <p class="flw-language-panel-title">Learning language</p>
+    <div class="flw-language-options" role="listbox" aria-label="Choose learning language">
+        {{#learninglanguages}}
+            <button type="button"
+                    class="flw-language-choice{{#isdefault}} is-active{{/isdefault}}"
+                    data-flw-language-choice
+                    data-language-code="{{code}}"
+                    data-language-label="{{label}}"
+                    data-category-url="{{categoryurl}}"
+                    aria-pressed="{{#isdefault}}true{{/isdefault}}{{^isdefault}}false{{/isdefault}}">
+                {{label}}
+            </button>
+        {{/learninglanguages}}
+    </div>
+</aside>
+<style>
+    .flw-language-panel{position:fixed;top:92px;right:16px;z-index:1020;width:166px;padding:10px;border:1px solid var(--flw-line,#d8e3df);border-radius:8px;background:rgba(255,255,255,.96);box-shadow:0 12px 30px rgba(23,36,42,.09);backdrop-filter:blur(16px)}
+    .flw-language-panel-title{margin:0 0 8px;color:var(--flw-muted,#5d6b72)!important;font-size:12px;font-weight:700;line-height:1.2}
+    .flw-language-options{display:grid;gap:4px}
+    .flw-language-choice{min-height:31px;width:100%;display:inline-flex;align-items:center;justify-content:flex-start;padding:5px 8px;border:0;border-radius:6px;background:transparent;color:var(--flw-muted,#5d6b72);font-size:13px;font-weight:700;line-height:1.2;text-align:left;white-space:nowrap}
+    .flw-language-choice:hover,.flw-language-choice:focus{background:#f0f6f4;color:#075a64;outline:0}
+    .flw-language-choice.is-active{background:#087f8c;color:#fff;box-shadow:inset 0 0 0 1px rgba(7,90,100,.18)}
+    @media(max-width:1320px){.flw-language-panel{position:static;width:min(1180px,calc(100% - 32px));margin:16px auto 0}.flw-language-options{display:flex;flex-wrap:wrap;gap:6px}.flw-language-choice{width:auto;justify-content:center}}
+</style>
+{{#js}}
+(function() {
+    var storageKey = 'flw.learningLanguage';
+    var cookieKey = 'flw_learning_language';
+    var choices = Array.prototype.slice.call(document.querySelectorAll('[data-flw-language-choice]'));
+
+    if (!choices.length) {
+        return;
+    }
+
+    function readCookie(name) {
+        var match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    function writeCookie(name, value) {
+        document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; max-age=31536000; SameSite=Lax';
+    }
+
+    function findChoice(code) {
+        return choices.find(function(choice) {
+            return choice.getAttribute('data-language-code') === code;
+        });
+    }
+
+    function applyLanguage(code) {
+        var active = findChoice(code) || choices[0];
+        var activeCode = active.getAttribute('data-language-code');
+        var activeLabel = active.getAttribute('data-language-label');
+        var activeUrl = active.getAttribute('data-category-url');
+
+        try {
+            window.localStorage.setItem(storageKey, activeCode);
+        } catch (error) {
+            // The cookie keeps the selection when local storage is unavailable.
+        }
+        writeCookie(cookieKey, activeCode);
+
+        choices.forEach(function(choice) {
+            var selected = choice === active;
+            choice.classList.toggle('is-active', selected);
+            choice.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
+
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-category-link]')).forEach(function(link) {
+            link.setAttribute('href', activeUrl);
+            link.setAttribute('data-selected-language', activeCode);
+            link.setAttribute('title', activeLabel + ' course category');
+        });
+    }
+
+    choices.forEach(function(choice) {
+        choice.addEventListener('click', function() {
+            applyLanguage(choice.getAttribute('data-language-code'));
+        });
+    });
+
+    var saved = '';
+    try {
+        saved = window.localStorage.getItem(storageKey) || '';
+    } catch (error) {
+        saved = '';
+    }
+    applyLanguage(saved || readCookie(cookieKey) || choices[0].getAttribute('data-language-code'));
+})();
+{{/js}}
+{{/haslearninglanguages}}

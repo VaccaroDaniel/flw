@@ -142,5 +142,72 @@ function xmldb_flwvrroom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026061217, 'flwvrroom');
     }
 
+    if ($oldversion < 2026061218) {
+        $table = new xmldb_table('flwvrroom');
+        $fields = [
+            new xmldb_field('rolecharacterenabled', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'speakingscoringurl'),
+            new xmldb_field('rolecharactername', XMLDB_TYPE_CHAR, '100', null, null, null, null, 'rolecharacterenabled'),
+            new xmldb_field('rolecharacterrole', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'rolecharactername'),
+            new xmldb_field('rolecharacterline', XMLDB_TYPE_TEXT, null, null, null, null, null, 'rolecharacterrole'),
+            new xmldb_field('roleexpectedanswer', XMLDB_TYPE_TEXT, null, null, null, null, null, 'rolecharacterline'),
+            new xmldb_field('rolekpcodes', XMLDB_TYPE_TEXT, null, null, null, null, null, 'roleexpectedanswer'),
+            new xmldb_field('rolescore', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '20', 'rolekpcodes'),
+        ];
+
+        foreach ($fields as $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026061218, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061219) {
+        $table = new xmldb_table('flwvrroom');
+        $field = new xmldb_field('rolecharacterposition', XMLDB_TYPE_CHAR, '100', null, null, null, null, 'rolescore');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_mod_savepoint(true, 2026061219, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061220) {
+        upgrade_mod_savepoint(true, 2026061220, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061221) {
+        upgrade_mod_savepoint(true, 2026061221, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061222) {
+        $table = new xmldb_table('flwvrroom');
+        $field = new xmldb_field('roleturns', XMLDB_TYPE_TEXT, null, null, null, null, null, 'rolecharacterposition');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_mod_savepoint(true, 2026061222, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026061223) {
+        $table = new xmldb_table('flwvrroom');
+        $fields = [
+            new xmldb_field('roleaienabled', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'roleturns'),
+            new xmldb_field('roleaiturns', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '3', 'roleaienabled'),
+        ];
+
+        foreach ($fields as $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026061223, 'flwvrroom');
+    }
+
     return true;
 }

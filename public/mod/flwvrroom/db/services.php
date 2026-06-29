@@ -20,4 +20,20 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'mod/flwvrroom:submit',
     ],
+    'mod_flwvrroom_save_room_editor' => [
+        'classname' => 'mod_flwvrroom\external\save_room_editor',
+        'methodname' => 'execute',
+        'description' => 'Save teacher edits for an FLW VR Room.',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'moodle/course:manageactivities',
+    ],
+    'mod_flwvrroom_role_waiter' => [
+        'classname' => 'mod_flwvrroom\external\role_waiter',
+        'methodname' => 'execute',
+        'description' => 'Generate the next AI role-character line with the local FLW AI service.',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'mod/flwvrroom:submit',
+    ],
 ];

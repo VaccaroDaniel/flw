@@ -22,6 +22,17 @@
         <FIELD NAME="customanswers" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="customhotspots" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="speakingscoringurl" TYPE="char" LENGTH="1333" NOTNULL="false"/>
+        <FIELD NAME="rolecharacterenabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="rolecharactername" TYPE="char" LENGTH="100" NOTNULL="false"/>
+        <FIELD NAME="rolecharacterrole" TYPE="char" LENGTH="255" NOTNULL="false"/>
+        <FIELD NAME="rolecharacterline" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="roleexpectedanswer" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="rolekpcodes" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="rolescore" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="20"/>
+        <FIELD NAME="rolecharacterposition" TYPE="char" LENGTH="100" NOTNULL="false"/>
+        <FIELD NAME="roleturns" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="roleaienabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="roleaiturns" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="3"/>
         <FIELD NAME="passinggrade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="70"/>
         <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
