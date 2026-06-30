@@ -17,7 +17,7 @@ $THEME->layouts = [
     'base' => ['file' => 'drawers.php', 'regions' => []],
     'standard' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
     'course' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre', 'options' => ['langmenu' => true]],
-    'coursecategory' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
+    'coursecategory' => ['file' => 'school_category_flw.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
     'incourse' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
     'frontpage' => ['file' => 'frontpage_flw.php', 'regions' => [], 'options' => ['nonavbar' => true]],
     'admin' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
@@ -40,3 +40,4 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->requiredblocks = '';
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;
 $THEME->haseditswitch = true;
+$THEME->favicon = $CFG->wwwroot . '/theme/flwacademy/pix/favicon.ico';

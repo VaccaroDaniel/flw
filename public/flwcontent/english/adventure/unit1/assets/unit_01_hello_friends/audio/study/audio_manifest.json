@@ -1,0 +1,449 @@
+{
+  "unit": "Adventure World Unit 1",
+  "baseUrl": "file:///D:/flw_media/english/adventure_world/unit_01_hello_friends/audio/study/",
+  "pace": "Pre-A1 slow Mia-only",
+  "audioPolicy": "Adventure spoken model and classroom language audio uses Mia only.",
+  "items": [
+    {
+      "text": "Hello",
+      "file": "mia-hello.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Hi",
+      "file": "mia-hi.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "wave",
+      "file": "mia-wave.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Rainbow Gate",
+      "file": "mia-rainbow-gate.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Wave and say hello.",
+      "file": "mia-wave-and-say-hello.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Look at Rainbow Gate.",
+      "file": "mia-look-at-rainbow-gate.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Hello! I'm Leo.",
+      "file": "mia-hello-i-m-leo.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Listen and point.",
+      "file": "mia-listen-and-point.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Say it again.",
+      "file": "mia-say-it-again.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Great! One more time.",
+      "file": "mia-great-one-more-time.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "What's your name?",
+      "file": "mia-what-s-your-name.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "I'm Leo.",
+      "file": "mia-i-m-leo.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "name",
+      "file": "mia-name.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "your turn",
+      "file": "mia-your-turn.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Ask your friend.",
+      "file": "mia-ask-your-friend.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Match the name card.",
+      "file": "mia-match-the-name-card.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Your turn. What's your name?",
+      "file": "mia-your-turn-what-s-your-name.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Good speaking!",
+      "file": "mia-good-speaking.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "This is Leo.",
+      "file": "mia-this-is-leo.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "This is Mia.",
+      "file": "mia-this-is-mia.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "This is Emma.",
+      "file": "mia-this-is-emma.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "friend",
+      "file": "mia-friend.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "This is my friend.",
+      "file": "mia-this-is-my-friend.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Point and say the name.",
+      "file": "mia-point-and-say-the-name.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Match the friend card.",
+      "file": "mia-match-the-friend-card.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Point to Toto.",
+      "file": "mia-point-to-toto.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "goodbye",
+      "file": "mia-goodbye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "bye",
+      "file": "mia-bye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "clap",
+      "file": "mia-clap.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Hello, hello, hi!",
+      "file": "mia-hello-hello-hi.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Goodbye, goodbye, bye!",
+      "file": "mia-goodbye-goodbye-bye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Sing and clap.",
+      "file": "mia-sing-and-clap.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Goodbye! Bye!",
+      "file": "mia-goodbye-bye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Wave hello. Wave goodbye.",
+      "file": "mia-wave-hello-wave-goodbye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Clap and say hello.",
+      "file": "mia-clap-and-say-hello.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Sing with me.",
+      "file": "mia-sing-with-me.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Wave goodbye.",
+      "file": "mia-wave-goodbye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Again, please.",
+      "file": "mia-again-please.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Wonderful singing!",
+      "file": "mia-wonderful-singing.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "badge",
+      "file": "mia-badge.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "mission",
+      "file": "mia-mission.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "I can say hello.",
+      "file": "mia-i-can-say-hello.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Choose Hello or Goodbye.",
+      "file": "mia-choose-hello-or-goodbye.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Hello! I'm ____.",
+      "file": "mia-hello-i-m.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "You did it!",
+      "file": "mia-you-did-it.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Are you ready?",
+      "file": "mia-are-you-ready.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Choose the greeting.",
+      "file": "mia-choose-the-greeting.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Say your name.",
+      "file": "mia-say-your-name.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Introduce yourself.",
+      "file": "mia-introduce-yourself.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    }
+  ]
+}

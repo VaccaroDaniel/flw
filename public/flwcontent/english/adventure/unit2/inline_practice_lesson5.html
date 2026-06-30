@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inline Practice - Lesson 5</title>
+<style>
+html,body{overflow:hidden;}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:transparent;color:#172033;}
+.wrap{padding:0;width:100%;max-width:none;margin:0;box-sizing:border-box;}
+h1{font-size:22px;line-height:1.25;margin:0 0 6px;font-weight:700;}
+.hint{margin:0 0 14px;color:#5b6472;font-size:14px;}
+.lesson-practice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start;}
+.lesson-practice > h1,.lesson-practice > .hint{grid-column:1/-1;}
+.activity{background:#f7f8ff;border:3px solid #e1dcff;border-radius:20px;padding:14px;margin:0;}
+.activity:last-child{margin-bottom:0;}
+.activity h4{font-size:17px;line-height:1.3;margin:0 0 8px;color:#0d47a1;font-weight:700;}
+.activity p{margin:0 0 10px;}
+.answers{display:flex;flex-wrap:wrap;gap:10px;}
+.answer-btn,.check-fill,.check-match,.save-speaking{border:3px solid #ddd;border-radius:14px;background:#fff;color:#0d47a1;padding:12px 16px;margin:0;font:inherit;font-size:16px;font-weight:700;cursor:pointer;}
+.answer-btn:hover,.check-fill:hover,.check-match:hover,.save-speaking:hover{background:#e3f2fd;transform:translateY(-1px);}
+.answer-btn.correct{background:#c8e6c9;color:#1b5e20;border-color:#43a047;}
+.answer-btn.wrong{background:#ffcdd2;color:#b71c1c;border-color:#e53935;}
+input,textarea,select{border:2px solid #bbdefb;border-radius:10px;padding:10px;font:inherit;background:#fff;}
+input{min-width:280px;font-size:17px;} textarea{width:100%;min-height:85px;box-sizing:border-box;border-radius:12px;}
+.fillrow,.matchrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;}
+.matchrow label{min-width:84px;font-weight:700;} .matchrow select{padding:8px;border-radius:8px;border:1px solid #90caf9;}
+.feedback{display:none;margin-top:10px;font-weight:700;}
+.feedback.ok,.feedback.bad,.feedback.neutral{display:block;min-height:20px;}
+.feedback.ok{color:#1b5e20}.feedback.bad{color:#b71c1c}.feedback.neutral{color:#1565c0}
+@media(max-width:980px){.lesson-practice{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:640px){.lesson-practice{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<main class="wrap lesson-practice">
+<h1>Inline Practice - Lesson 5</h1>
+<p class="hint">Answer here on the course page. These quick checks give instant feedback; use the Moodle Quiz for graded attempts.</p>
+<section class="activity" data-type="choice">
+<h4>13. Final check</h4>
+<p>Which color is the frog?</p>
+<div class="answers">
+<button type="button" class="answer-btn" data-correct="1">Green</button>
+<button type="button" class="answer-btn" data-correct="0">Red</button>
+<button type="button" class="answer-btn" data-correct="0">Blue</button>
+</div>
+<p class="feedback" aria-live="polite"></p>
+</section>
+<section class="activity" data-type="choice">
+<h4>14. True or False</h4>
+<p>Hello is a color.</p>
+<div class="answers">
+<button type="button" class="answer-btn" data-correct="0">True</button>
+<button type="button" class="answer-btn" data-correct="1">False</button>
+</div>
+<p class="feedback" aria-live="polite"></p>
+</section>
+<section class="activity speaking" data-type="speaking">
+<h4>15. Speaking mission</h4>
+<p>Record or say five colors: red, blue, yellow, green, purple.</p>
+<textarea placeholder="Type a short teacher note here, or use the Moodle quiz/assignment for a recorded attempt."></textarea>
+<div class="fillrow"><button type="button" class="save-speaking">Check note</button></div>
+<p class="feedback" aria-live="polite"></p>
+</section>
+</main>
+<script>
+const normalizeAnswer = (text) => text.trim().toLowerCase().replace(/['']/g, '').replace(/[.!?]/g, '').replace(/\s+/g, ' ');
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  const box = button.closest('.activity');
+  if (!box) return;
+  const feedback = box.querySelector('.feedback');
+  if (button.classList.contains('answer-btn')) {
+    box.querySelectorAll('.answer-btn').forEach((item) => item.classList.remove('correct', 'wrong'));
+    const ok = button.dataset.correct === '1';
+    button.classList.add(ok ? 'correct' : 'wrong');
+    feedback.textContent = ok ? 'Correct. Good job!' : 'Try again. Look at the lesson and choose once more.';
+    feedback.className = 'feedback ' + (ok ? 'ok' : 'bad');
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  } else if (button.classList.contains('check-fill')) {
+    const input = box.querySelector('input[data-answers]');
+    const answers = JSON.parse(input.dataset.answers);
+    const ok = answers.some((answer) => normalizeAnswer(answer) === normalizeAnswer(input.value));
+    feedback.textContent = ok ? 'Correct. Good job!' : 'Try again. Check the words and punctuation.';
+    feedback.className = 'feedback ' + (ok ? 'ok' : 'bad');
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  } else if (button.classList.contains('check-match')) {
+    const ok = Array.from(box.querySelectorAll('select')).every((select) => select.value === select.dataset.correct);
+    feedback.textContent = ok ? 'Correct. All matches are right.' : 'Try again. Match each name carefully.';
+    feedback.className = 'feedback ' + (ok ? 'ok' : 'bad');
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  } else if (button.classList.contains('save-speaking')) {
+    const note = box.querySelector('textarea').value.trim();
+    feedback.textContent = note ? 'Saved on this page for practice. Use the Moodle Quiz for teacher review.' : 'Say the sentence first, then type a short note.';
+    feedback.className = 'feedback ' + (note ? 'ok' : 'neutral');
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  }
+});
+</script>
+<script>
+(() => {
+  const resize = () => {
+    const frame = window.frameElement;
+    if (!frame) return;
+    const body = document.body;
+    const html = document.documentElement;
+    let bottom = 0;
+    Array.from(body.children).forEach((element) => {
+      if (element.tagName === 'SCRIPT') return;
+      const rect = element.getBoundingClientRect();
+      const styles = window.getComputedStyle(element);
+      bottom = Math.max(bottom, rect.bottom + window.scrollY + parseFloat(styles.marginBottom || '0'));
+    });
+    const height = Math.ceil(bottom);
+    frame.style.height = `${Math.max(160, height + 8)}px`;
+  };
+  window.addEventListener('load', resize);
+  window.addEventListener('resize', resize);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(document.querySelector('main') || document.body);
+  }
+  setTimeout(resize, 100);
+  setTimeout(resize, 600);
+  setTimeout(resize, 1500);
+  setTimeout(resize, 3000);
+  document.querySelectorAll('img,video').forEach((media) => {
+    media.addEventListener('load', resize);
+    media.addEventListener('loadedmetadata', resize);
+  });
+})();
+</script>
+</body>
+</html>

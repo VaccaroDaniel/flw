@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview &amp; Unit Map</title>
+<link href="style.css" rel="stylesheet">
+<link href="assets/shared/unit-audio-continuous.css" rel="stylesheet">
+<style>
+html,body{overflow:hidden;}
+body{margin:0;background:transparent;min-height:0!important;}
+body::after{display:none!important;height:0!important;}
+.container{width:100%;max-width:none;margin:0;padding:0;}
+.card,.lesson,.pronunciation-section{width:100%;max-width:none;margin-left:0!important;margin-right:0!important;box-sizing:border-box;}
+.lesson{scroll-margin-top:0;}
+.watch-layout{grid-template-columns:1fr!important;}
+.watch-video-frame{width:100%;}
+.watch-video,.main-video.watch-video{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9!important;object-fit:cover!important;}
+.nav,.hero,.flw-unit-topbar,.footer{display:none!important;}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="card" id="overview"><h2>Unit Mission</h2><p>Welcome to Rainbow Gate. Meet Leo, Mia, Toto, and Emma. Learn to say <strong>Hello</strong>, <strong>Hi</strong>, <strong>Goodbye</strong>, <strong>Bye</strong>, <strong>I'm ___</strong>, and <strong>This is ___</strong>.</p><img alt="Unit cover" src="assets/unit_01_hello_friends/images/cover.jpg" style="width:100%;border-radius:18px"></section>
+<section class="card unit-map-panel" id="unit-map"><h2>Unit Map: Hello, Friends!</h2><p class="goal">Move through five playful steps: open Rainbow Gate, ask names, meet friends, sing hello and goodbye, then complete the Hello Badge Mission.</p><div class="unit-map-grid"><a class="unit-map-card" href="#lesson1"><span>L1</span><strong>Hello, Rainbow Gate!</strong><em>I can say Hello and Hi with a waving gesture.</em></a><a class="unit-map-card" href="#lesson2"><span>L2</span><strong>What's Your Name?</strong><em>I can ask and answer names.</em></a><a class="unit-map-card" href="#lesson3"><span>L3</span><strong>Meet My Friends</strong><em>I can introduce Leo, Mia, Toto, and Emma.</em></a><a class="unit-map-card" href="#lesson4"><span>L4</span><strong>Hello Song</strong><em>I can say hello and goodbye in a chant.</em></a><a class="unit-map-card" href="#lesson5"><span>L5</span><strong>Hello Badge Mission</strong><em>I can finish the greeting mission.</em></a><a class="unit-map-card pronunciation-map-card" href="#pronunciation"><span>P</span><strong>Pronunciation</strong><em>Hello, Friends!: listen, repeat, and practise the key sounds.</em></a><a class="unit-map-card watch-map-card" href="#watch-lesson"><span>W</span><strong>Watch Lesson</strong><em>I can watch, understand, and answer a short video quiz.</em></a></div></section>
+</main>
+<script src="script.js"></script>
+<script src="assets/shared/unit-audio-continuous.js"></script>
+<script>
+(() => {
+  const resize = () => {
+    const frame = window.frameElement;
+    if (!frame) return;
+    const body = document.body;
+    const html = document.documentElement;
+    let bottom = 0;
+    Array.from(body.children).forEach((element) => {
+      if (element.tagName === 'SCRIPT') return;
+      const rect = element.getBoundingClientRect();
+      const styles = window.getComputedStyle(element);
+      bottom = Math.max(bottom, rect.bottom + window.scrollY + parseFloat(styles.marginBottom || '0'));
+    });
+    const height = Math.ceil(bottom);
+    frame.style.height = `${Math.max(160, height + 8)}px`;
+  };
+  window.addEventListener('load', resize);
+  window.addEventListener('resize', resize);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(document.querySelector('main') || document.body);
+  }
+  setTimeout(resize, 100);
+  setTimeout(resize, 600);
+  setTimeout(resize, 1500);
+  setTimeout(resize, 3000);
+  document.querySelectorAll('img,video').forEach((media) => {
+    media.addEventListener('load', resize);
+    media.addEventListener('loadedmetadata', resize);
+  });
+})();
+</script>
+</body>
+</html>

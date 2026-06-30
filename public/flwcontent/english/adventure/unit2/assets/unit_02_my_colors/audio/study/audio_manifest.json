@@ -1,0 +1,404 @@
+{
+  "unit": "Adventure World Unit 2",
+  "baseUrl": "file:///D:/flw_media/english/adventure_world/unit_02_my_colors/audio/study/",
+  "pace": "Pre-A1 slow Mia-only",
+  "audioPolicy": "Adventure spoken model audio uses Mia only. Real World Study First audio uses Sofia only; other Real World model lines use Daniel or Sofia by main character, with the Unit 1 Lesson 2 spelling-card sentence explicitly voiced by Lucas.",
+  "items": [
+    {
+      "text": "red",
+      "file": "mia-red.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "blue",
+      "file": "mia-blue.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "yellow",
+      "file": "mia-yellow.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "green",
+      "file": "mia-green.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "purple",
+      "file": "mia-purple.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "What color is it?",
+      "file": "mia-what-color-is-it.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's red.",
+      "file": "mia-it-s-red.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "I can say five colors.",
+      "file": "mia-i-can-say-five-colors.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Red, blue, yellow, green, purple.",
+      "file": "mia-red-blue-yellow-green-purple.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Leo sees red and blue.",
+      "file": "mia-leo-sees-red-and-blue.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Mia sees yellow and green.",
+      "file": "mia-mia-sees-yellow-and-green.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Toto has colorful toys.",
+      "file": "mia-toto-has-colorful-toys.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's blue.",
+      "file": "mia-it-s-blue.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's yellow.",
+      "file": "mia-it-s-yellow.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's green.",
+      "file": "mia-it-s-green.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's purple.",
+      "file": "mia-it-s-purple.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "It's a purple flower.",
+      "file": "mia-it-s-a-purple-flower.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "find",
+      "file": "mia-find.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "point",
+      "file": "mia-point.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "match",
+      "file": "mia-match.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "red ball",
+      "file": "mia-red-ball.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "blue bag",
+      "file": "mia-blue-bag.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Find the red ball.",
+      "file": "mia-find-the-red-ball.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Point to the blue bag.",
+      "file": "mia-point-to-the-blue-bag.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Match the color.",
+      "file": "mia-match-the-color.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Find something red.",
+      "file": "mia-find-something-red.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Point to something green.",
+      "file": "mia-point-to-something-green.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "sing",
+      "file": "mia-sing.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "clap",
+      "file": "mia-clap.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "play",
+      "file": "mia-play.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "color train",
+      "file": "mia-color-train.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Sing the color song.",
+      "file": "mia-sing-the-color-song.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Play the color game.",
+      "file": "mia-play-the-color-game.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Red goes first.",
+      "file": "mia-red-goes-first.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Toto asks: What color is it?",
+      "file": "mia-toto-asks-what-color-is-it.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "color badge",
+      "file": "mia-color-badge.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "basket",
+      "file": "mia-basket.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "favorite color",
+      "file": "mia-favorite-color.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "mission",
+      "file": "mia-mission.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "My favorite color is blue.",
+      "file": "mia-my-favorite-color-is-blue.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Put the apple in the red basket.",
+      "file": "mia-put-the-apple-in-the-red-basket.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "I can say colors.",
+      "file": "mia-i-can-say-colors.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "Put each object in the basket.",
+      "file": "mia-put-each-object-in-the-basket.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    },
+    {
+      "text": "You win the Color Badge!",
+      "file": "mia-you-win-the-color-badge.mp3",
+      "character": "Mia",
+      "characterId": "mia",
+      "voice": "en-US-AnaNeural",
+      "rate": "-20%",
+      "pitch": "+0Hz"
+    }
+  ]
+}

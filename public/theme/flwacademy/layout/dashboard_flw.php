@@ -30,13 +30,16 @@ $primarylinks = [
         'url' => (new moodle_url('/my/courses.php'))->out(false),
         'isactive' => false,
     ],
-    [
+];
+$systemcontext = context_system::instance();
+if (is_siteadmin() || has_capability('moodle/site:config', $systemcontext)) {
+    $primarylinks[] = [
         'key' => 'administrationsite',
         'text' => get_string('administrationsite'),
         'url' => (new moodle_url('/admin/search.php'))->out(false),
         'isactive' => false,
-    ],
-];
+    ];
+}
 foreach ($primarylinks as $link) {
     $primarymoremenu['nodearray'][] = [
         'key' => $link['key'],
@@ -55,6 +58,23 @@ echo $OUTPUT->main_content();
 $maincontent = ob_get_clean();
 $learninglanguages = theme_flwacademy_export_learning_languages();
 $defaultlanguageurl = $learninglanguages[0]['categoryurl'] ?? (new moodle_url('/course/index.php'))->out(false);
+$defaultschoolurl = $learninglanguages[0]['schoolcategoryurl'] ?? $defaultlanguageurl;
+$defaultselfstudyurl = $learninglanguages[0]['selfstudycategoryurl'] ?? $defaultlanguageurl;
+$defaultpracticeurl = $learninglanguages[0]['practicecategoryurl'] ?? $defaultlanguageurl;
+$defaultexamurl = $learninglanguages[0]['examcategoryurl'] ?? $defaultlanguageurl;
+$defaultpracticewatchurl = $learninglanguages[0]['practicewatchurl'] ?? $defaultpracticeurl;
+$defaultpracticelistenurl = $learninglanguages[0]['practicelistenurl'] ?? $defaultpracticeurl;
+$defaultpracticespeakurl = $learninglanguages[0]['practicespeakurl'] ?? $defaultpracticeurl;
+$defaultpracticereadurl = $learninglanguages[0]['practicereadurl'] ?? $defaultpracticeurl;
+$defaultpracticedictateurl = $learninglanguages[0]['practicedictateurl'] ?? $defaultpracticeurl;
+$defaultexamlinks = [];
+for ($i = 1; $i <= 6; $i++) {
+    $defaultexamlinks[] = [
+        'index' => $i,
+        'label' => $learninglanguages[0]['exam' . $i . 'label'] ?? '',
+        'url' => $learninglanguages[0]['exam' . $i . 'url'] ?? $defaultexamurl,
+    ];
+}
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, [
@@ -69,6 +89,16 @@ $templatecontext = [
     'haslearninglanguages' => !empty($learninglanguages),
     'learninglanguages' => $learninglanguages,
     'defaultlanguageurl' => $defaultlanguageurl,
+    'defaultschoolurl' => $defaultschoolurl,
+    'defaultselfstudyurl' => $defaultselfstudyurl,
+    'defaultpracticeurl' => $defaultpracticeurl,
+    'defaultexamurl' => $defaultexamurl,
+    'defaultpracticewatchurl' => $defaultpracticewatchurl,
+    'defaultpracticelistenurl' => $defaultpracticelistenurl,
+    'defaultpracticespeakurl' => $defaultpracticespeakurl,
+    'defaultpracticereadurl' => $defaultpracticereadurl,
+    'defaultpracticedictateurl' => $defaultpracticedictateurl,
+    'defaultexamlinks' => $defaultexamlinks,
     'heroimageurl' => $OUTPUT->image_url('dashboard/home', 'theme_flwacademy')->out(false),
     'maincontent' => $maincontent,
 ];

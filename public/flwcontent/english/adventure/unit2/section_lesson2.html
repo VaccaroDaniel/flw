@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 - Color Worlds</title>
+<link href="style.css" rel="stylesheet">
+<link href="assets/shared/unit-audio-continuous.css" rel="stylesheet">
+<style>
+html,body{overflow:hidden;}
+body{margin:0;background:transparent;min-height:0!important;}
+body::after{display:none!important;height:0!important;}
+.container{width:100%;max-width:none;margin:0;padding:0;}
+.card,.lesson,.pronunciation-section{width:100%;max-width:none;margin-left:0!important;margin-right:0!important;box-sizing:border-box;}
+.lesson{scroll-margin-top:0;}
+.watch-layout{grid-template-columns:1fr!important;}
+.watch-video-frame{width:100%;}
+.watch-video,.main-video.watch-video{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9!important;object-fit:cover!important;}
+.nav,.flw-unit-topbar,.footer{display:none!important;}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="lesson" id="lesson2"><h2>Lesson 2: Color Worlds</h2><p class="goal">I can say: It's red / blue / yellow / green / purple.</p>
+<div class="study-feature"><img alt="Red scene" class="study-hero" src="assets/unit_02_my_colors/images/red_scene.jpg"><div class="study-panel"><p class="study-kicker">Study first</p><h3>Color Worlds</h3><div class="study-chip-row"><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-red.mp3" data-audio-text="It's red.">It's red.</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-blue.mp3" data-audio-text="It's blue.">It's blue.</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-yellow.mp3" data-audio-text="It's yellow.">It's yellow.</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-green.mp3" data-audio-text="It's green.">It's green.</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-purple.mp3" data-audio-text="It's purple.">It's purple.</span></div><ul class="study-lines"><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-what-color-is-it.mp3" data-audio-text="What color is it?">What color is it?</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-blue.mp3" data-audio-text="It's blue.">It's blue.</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-a-purple-flower.mp3" data-audio-text="It's a purple flower.">It's a purple flower.</li></ul><p class="study-note">Move from single color words to short color sentences with It's plus color.</p></div></div><div class="study-card-grid"><article class="study-card"><img alt="Blue scene" class="study-thumb" src="assets/unit_02_my_colors/images/blue_scene.jpg"><div class="study-mini"><h4>Blue world</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-blue.mp3" data-audio-text="It's blue.">It's blue.</p><p><strong>Focus:</strong> color sentence</p></div></article><article class="study-card"><img alt="Yellow scene" class="study-thumb" src="assets/unit_02_my_colors/images/yellow_scene.jpg"><div class="study-mini"><h4>Yellow world</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-yellow.mp3" data-audio-text="It's yellow.">It's yellow.</p><p><strong>Focus:</strong> color sentence</p></div></article><article class="study-card"><img alt="Green scene" class="study-thumb" src="assets/unit_02_my_colors/images/green_scene.jpg"><div class="study-mini"><h4>Green world</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-green.mp3" data-audio-text="It's green.">It's green.</p><p><strong>Focus:</strong> color sentence</p></div></article><article class="study-card"><img alt="Purple scene" class="study-thumb" src="assets/unit_02_my_colors/images/purple_scene.jpg"><div class="study-mini"><h4>Purple world</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-purple.mp3" data-audio-text="It's purple.">It's purple.</p><p><strong>Focus:</strong> color sentence</p></div></article></div>
+<div class="quiz" data-qid="what-color-is-it-1"><h3>What color is it?</h3><p class="readline">The duck is...</p><div class="options"><button class="option" data-correct="true">Yellow</button><button class="option" data-correct="false">Purple</button><button class="option" data-correct="false">Red</button></div><div class="feedback" id="fb-what-color-is-it-1"></div></div>
+<div class="quiz" data-qid="choose-the-answer-2"><h3>Choose the answer</h3><p class="readline">What color is a green leaf?</p><div class="options"><button class="option" data-correct="true">Green</button><button class="option" data-correct="false">Blue</button><button class="option" data-correct="false">Yellow</button></div><div class="feedback" id="fb-choose-the-answer-2"></div></div>
+<div class="quiz" data-qid="true-or-false-3"><h3>True or False</h3><p class="readline">A purple flower is purple.</p><div class="options"><button class="option" data-correct="true">True</button><button class="option" data-correct="false">False</button></div><div class="feedback" id="fb-true-or-false-3"></div></div>
+<div class="quiz" data-answers='["red"]' data-qid="complete-the-sentence-4"><h3>Complete the sentence</h3><p class="readline">It's _____. (red ball)</p><input placeholder="Type the color." type="text"><button class="check-btn" onclick="checkFill('complete-the-sentence-4')">Check</button><div class="feedback" id="fb-complete-the-sentence-4"></div></div>
+<div class="quiz"><h3>Speaking assignment</h3><p>Record your voice. Say five colors: <b>red, blue, yellow, green, purple</b>.</p><p class="small">In Moodle, use Assignment or PoodLL/recording plugin for this activity.</p></div>
+</section>
+</main>
+<script src="script.js"></script>
+<script src="assets/shared/unit-audio-continuous.js"></script>
+<script>
+(() => {
+  const resize = () => {
+    const frame = window.frameElement;
+    if (!frame) return;
+    const body = document.body;
+    const html = document.documentElement;
+    let bottom = 0;
+    Array.from(body.children).forEach((element) => {
+      if (element.tagName === 'SCRIPT') return;
+      const rect = element.getBoundingClientRect();
+      const styles = window.getComputedStyle(element);
+      bottom = Math.max(bottom, rect.bottom + window.scrollY + parseFloat(styles.marginBottom || '0'));
+    });
+    const height = Math.ceil(bottom);
+    frame.style.height = `${Math.max(160, height + 8)}px`;
+  };
+  window.addEventListener('load', resize);
+  window.addEventListener('resize', resize);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(document.querySelector('main') || document.body);
+  }
+  setTimeout(resize, 100);
+  setTimeout(resize, 600);
+  setTimeout(resize, 1500);
+  setTimeout(resize, 3000);
+  document.querySelectorAll('img,video').forEach((media) => {
+    media.addEventListener('load', resize);
+    media.addEventListener('loadedmetadata', resize);
+  });
+})();
+</script>
+</body>
+</html>

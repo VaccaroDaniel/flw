@@ -1,0 +1,137 @@
+body > .flw-unit-topbar,
+body > .topbar,
+body > header,
+body > nav:not(.flw-unit-topbar),
+body > main,
+body > section,
+body > footer,
+body > .flw,
+body > .page,
+body > .wrap,
+body > .wrapper,
+body > .container,
+body > .aw-wrap,
+body > .u25,
+body > .rw-page,
+body > .flw-unit,
+body > [id^="flw-"] {
+  width: min(100%, 1180px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+details.flw-folding-lesson {
+  margin: 18px 0;
+  border: 1px solid rgba(25, 58, 92, 0.16);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 10px 26px rgba(20, 38, 66, 0.08);
+}
+
+details.flw-folding-lesson.section,
+details.flw-folding-lesson.lesson,
+details.flw-folding-lesson.story,
+details.flw-folding-lesson.watch,
+details.flw-folding-lesson.project {
+  padding: 0;
+}
+
+details.flw-folding-lesson > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 13px 16px;
+  cursor: pointer;
+  list-style: none;
+  color: #13263f;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.96)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(12, 71, 132, 0.06));
+  border-bottom: 1px solid rgba(25, 58, 92, 0.12);
+  font-family: inherit;
+  font-weight: 800;
+}
+
+details.flw-folding-lesson > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.flw-folding-lesson > summary::after {
+  content: "+";
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  border-radius: 999px;
+  color: #fff;
+  background: #12355b;
+  font-size: 20px;
+  line-height: 1;
+}
+
+details.flw-folding-lesson[open] > summary::after {
+  content: "-";
+}
+
+.flw-folding-index {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: #fff;
+  background: #0b6b83;
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
+.flw-folding-title {
+  min-width: 0;
+  font-size: clamp(1rem, 1.45vw, 1.24rem);
+  line-height: 1.25;
+}
+
+.flw-folding-subtitle {
+  color: #5a6678;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.flw-folding-content {
+  padding: 16px;
+}
+
+.flw-folding-content > :first-child {
+  margin-top: 0;
+}
+
+.flw-folded-title {
+  display: none !important;
+}
+
+details.flw-folding-lesson:target,
+details.flw-folding-lesson.flw-hash-open {
+  box-shadow: 0 0 0 4px rgba(25, 125, 180, 0.18), 0 12px 28px rgba(20, 38, 66, 0.10);
+}
+
+@media (max-width: 720px) {
+  details.flw-folding-lesson > summary {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .flw-folding-index {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .flw-folding-content {
+    padding: 12px;
+  }
+}

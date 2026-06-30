@@ -1,0 +1,7 @@
+Audio script - Unit 1 Hello, Friends!
+Leo: Hello! I'm Leo.
+Mia: Hi! What's your name?
+Leo: I'm Leo.
+Toto: This is Leo. This is Mia. This is Emma.
+All: Hello! Hi! Goodbye! Bye!
+Mission prompt: Hello! I'm _____.

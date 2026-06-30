@@ -14,6 +14,34 @@
                     data-language-code="{{code}}"
                     data-language-label="{{label}}"
                     data-category-url="{{categoryurl}}"
+                    data-school-category-url="{{schoolcategoryurl}}"
+                    data-selfstudy-category-url="{{selfstudycategoryurl}}"
+                    data-practice-category-url="{{practicecategoryurl}}"
+                    data-exam-category-url="{{examcategoryurl}}"
+                    data-practice-watch-url="{{practicewatchurl}}"
+                    data-practice-listen-url="{{practicelistenurl}}"
+                    data-practice-speak-url="{{practicespeakurl}}"
+                    data-practice-read-url="{{practicereadurl}}"
+                    data-practice-dictate-url="{{practicedictateurl}}"
+                    data-exam-1-label="{{exam1label}}"
+                    data-exam-1-url="{{exam1url}}"
+                    data-exam-2-label="{{exam2label}}"
+                    data-exam-2-url="{{exam2url}}"
+                    data-exam-3-label="{{exam3label}}"
+                    data-exam-3-url="{{exam3url}}"
+                    data-exam-4-label="{{exam4label}}"
+                    data-exam-4-url="{{exam4url}}"
+                    data-exam-5-label="{{exam5label}}"
+                    data-exam-5-url="{{exam5url}}"
+                    data-exam-6-label="{{exam6label}}"
+                    data-exam-6-url="{{exam6url}}"
+                    data-nav-school="{{navschool}}"
+                    data-nav-selfstudy="{{navselfstudy}}"
+                    data-nav-practice="{{navpractice}}"
+                    data-nav-dictionary="{{navdictionary}}"
+                    data-nav-exam="{{navexam}}"
+                    data-nav-teacher="{{navteacher}}"
+                    data-nav-collaboration="{{navcollaboration}}"
                     aria-pressed="{{#isdefault}}true{{/isdefault}}{{^isdefault}}false{{/isdefault}}">
                 {{label}}
             </button>
@@ -59,6 +87,35 @@
         var activeCode = active.getAttribute('data-language-code');
         var activeLabel = active.getAttribute('data-language-label');
         var activeUrl = active.getAttribute('data-category-url');
+        var categoryUrls = {
+            school: active.getAttribute('data-school-category-url') || activeUrl,
+            selfstudy: active.getAttribute('data-selfstudy-category-url') || activeUrl,
+            practice: active.getAttribute('data-practice-category-url') || activeUrl,
+            exam: active.getAttribute('data-exam-category-url') || activeUrl
+        };
+        var practiceUrls = {
+            watch: active.getAttribute('data-practice-watch-url') || categoryUrls.practice,
+            listen: active.getAttribute('data-practice-listen-url') || categoryUrls.practice,
+            speak: active.getAttribute('data-practice-speak-url') || categoryUrls.practice,
+            read: active.getAttribute('data-practice-read-url') || categoryUrls.practice,
+            dictate: active.getAttribute('data-practice-dictate-url') || categoryUrls.practice
+        };
+        var examLinks = [];
+        for (var i = 1; i <= 6; i++) {
+            examLinks.push({
+                label: active.getAttribute('data-exam-' + i + '-label') || '',
+                url: active.getAttribute('data-exam-' + i + '-url') || categoryUrls.exam
+            });
+        }
+        var navLabels = {
+            school: active.getAttribute('data-nav-school') || 'School',
+            selfstudy: active.getAttribute('data-nav-selfstudy') || 'Self Study',
+            practice: active.getAttribute('data-nav-practice') || 'Practice',
+            dictionary: active.getAttribute('data-nav-dictionary') || 'Dictionary',
+            exam: active.getAttribute('data-nav-exam') || 'Exam',
+            teacher: active.getAttribute('data-nav-teacher') || 'Teacher',
+            collaboration: active.getAttribute('data-nav-collaboration') || 'Collaboration'
+        };
 
         try {
             window.localStorage.setItem(storageKey, activeCode);
@@ -74,9 +131,37 @@
         });
 
         Array.prototype.slice.call(document.querySelectorAll('[data-flw-category-link]')).forEach(function(link) {
-            link.setAttribute('href', activeUrl);
+            var linkType = link.getAttribute('data-flw-category-link');
+            var targetUrl = categoryUrls[linkType] || activeUrl;
+            link.setAttribute('href', targetUrl);
             link.setAttribute('data-selected-language', activeCode);
-            link.setAttribute('title', activeLabel + ' course category');
+            if (navLabels[linkType]) {
+                link.textContent = navLabels[linkType];
+            }
+            link.setAttribute('title', activeLabel + ' ' + link.textContent.trim() + ' course category');
+        });
+
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-nav-label]')).forEach(function(link) {
+            var labelType = link.getAttribute('data-flw-nav-label');
+            if (navLabels[labelType]) {
+                link.textContent = navLabels[labelType];
+                link.setAttribute('title', activeLabel + ' ' + navLabels[labelType]);
+            }
+        });
+
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-practice-submenu-link]')).forEach(function(link) {
+            var key = link.getAttribute('data-flw-practice-submenu-link');
+            link.setAttribute('href', practiceUrls[key] || categoryUrls.practice);
+            link.setAttribute('title', activeLabel + ' ' + link.textContent.trim() + ' practice');
+        });
+
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-exam-submenu-link]')).forEach(function(link) {
+            var index = parseInt(link.getAttribute('data-flw-exam-submenu-link'), 10) - 1;
+            var examLink = examLinks[index] || {};
+            link.textContent = examLink.label || '';
+            link.setAttribute('href', examLink.url || categoryUrls.exam);
+            link.setAttribute('title', activeLabel + ' ' + (examLink.label || navLabels.exam));
+            link.hidden = !examLink.label;
         });
     }
 

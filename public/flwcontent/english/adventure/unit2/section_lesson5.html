@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 - Color Badge Mission</title>
+<link href="style.css" rel="stylesheet">
+<link href="assets/shared/unit-audio-continuous.css" rel="stylesheet">
+<style>
+html,body{overflow:hidden;}
+body{margin:0;background:transparent;min-height:0!important;}
+body::after{display:none!important;height:0!important;}
+.container{width:100%;max-width:none;margin:0;padding:0;}
+.card,.lesson,.pronunciation-section{width:100%;max-width:none;margin-left:0!important;margin-right:0!important;box-sizing:border-box;}
+.lesson{scroll-margin-top:0;}
+.watch-layout{grid-template-columns:1fr!important;}
+.watch-video-frame{width:100%;}
+.watch-video,.main-video.watch-video{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9!important;object-fit:cover!important;}
+.nav,.flw-unit-topbar,.footer{display:none!important;}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="lesson" id="lesson5"><h2>Lesson 5: Color Badge Mission</h2><p class="goal">I can complete the Color Badge Mission.</p>
+<div class="study-feature"><img alt="Color Badge Mission" class="study-hero" src="assets/unit_02_my_colors/images/badge_mission.jpg"><div class="study-panel"><p class="study-kicker">Study first</p><h3>Color Badge Mission</h3><div class="study-chip-row"><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-color-badge.mp3" data-audio-text="color badge">color badge</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-basket.mp3" data-audio-text="basket">basket</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-favorite-color.mp3" data-audio-text="favorite color">favorite color</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-mission.mp3" data-audio-text="mission">mission</span></div><ul class="study-lines"><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-my-favorite-color-is-blue.mp3" data-audio-text="My favorite color is blue.">My favorite color is blue.</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-put-the-apple-in-the-red-basket.mp3" data-audio-text="Put the apple in the red basket.">Put the apple in the red basket.</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-i-can-say-colors.mp3" data-audio-text="I can say colors.">I can say colors.</li></ul><p class="study-note">The badge mission brings color words, object matching, and a short personal sentence together.</p></div></div><div class="study-card-grid"><article class="study-card"><img alt="Basket game" class="study-thumb" src="assets/unit_02_my_colors/images/basket_game.jpg"><div class="study-mini"><h4>Color baskets</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-put-each-object-in-the-basket.mp3" data-audio-text="Put each object in the basket.">Put each object in the basket.</p><p><strong>Focus:</strong> matching game</p></div></article><article class="study-card"><img alt="Badge reward" class="study-thumb" src="assets/unit_02_my_colors/images/badge_reward.jpg"><div class="study-mini"><h4>Badge reward</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-you-win-the-color-badge.mp3" data-audio-text="You win the Color Badge!">You win the Color Badge!</p><p><strong>Focus:</strong> finish the mission</p></div></article></div>
+<div class="quiz" data-qid="color-basket-game-1"><h3>Color Basket Game</h3><p>Drag each object to the matching color basket.</p><div><span class="dragitem" data-value="red" draggable="true" ondragstart="drag(event)">apple</span><span class="dragitem" data-value="blue" draggable="true" ondragstart="drag(event)">bag</span><span class="dragitem" data-value="yellow" draggable="true" ondragstart="drag(event)">duck</span><span class="dragitem" data-value="green" draggable="true" ondragstart="drag(event)">frog</span><span class="dragitem" data-value="purple" draggable="true" ondragstart="drag(event)">flower</span><span class="dragitem" data-value="purple" draggable="true" ondragstart="drag(event)">crayon</span><span class="dragitem" data-value="yellow" draggable="true" ondragstart="drag(event)">star</span><span class="dragitem" data-value="green" draggable="true" ondragstart="drag(event)">leaf</span></div><div class="basket-row"><div class="basket"><h4 class="red">Red</h4><div class="dropzone" data-accept="red" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="basket"><h4 class="blue">Blue</h4><div class="dropzone" data-accept="blue" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="basket"><h4 class="yellow">Yellow</h4><div class="dropzone" data-accept="yellow" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="basket"><h4 class="green">Green</h4><div class="dropzone" data-accept="green" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="basket"><h4 class="purple">Purple</h4><div class="dropzone" data-accept="purple" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div></div><div class="feedback" id="fb-color-basket-game-1"></div></div>
+<div class="quiz" data-qid="final-check-2"><h3>Final check</h3><p class="readline">Which color is the frog?</p><div class="options"><button class="option" data-correct="true">Green</button><button class="option" data-correct="false">Red</button><button class="option" data-correct="false">Blue</button></div><div class="feedback" id="fb-final-check-2"></div></div>
+<div class="quiz" data-qid="true-or-false-3"><h3>True or False</h3><p class="readline">Hello is a color.</p><div class="options"><button class="option" data-correct="false">True</button><button class="option" data-correct="true">False</button></div><div class="feedback" id="fb-true-or-false-3"></div></div>
+<div class="quiz" data-answers='["red", "blue", "yellow", "green", "purple"]' data-qid="my-favorite-color-4"><h3>My favorite color</h3><p class="readline">My favorite color is _____.</p><input placeholder="Type one color word from Unit 2." type="text"><button class="check-btn" onclick="checkFill('my-favorite-color-4')">Check</button><div class="feedback" id="fb-my-favorite-color-4"></div></div>
+<div class="quiz"><h3>Speaking assignment</h3><p>Record your voice. Say five colors: <b>red, blue, yellow, green, purple</b>.</p><p class="small">In Moodle, use Assignment or PoodLL/recording plugin for this activity.</p></div>
+</section>
+</main>
+<script src="script.js"></script>
+<script src="assets/shared/unit-audio-continuous.js"></script>
+<script>
+(() => {
+  const resize = () => {
+    const frame = window.frameElement;
+    if (!frame) return;
+    const body = document.body;
+    const html = document.documentElement;
+    let bottom = 0;
+    Array.from(body.children).forEach((element) => {
+      if (element.tagName === 'SCRIPT') return;
+      const rect = element.getBoundingClientRect();
+      const styles = window.getComputedStyle(element);
+      bottom = Math.max(bottom, rect.bottom + window.scrollY + parseFloat(styles.marginBottom || '0'));
+    });
+    const height = Math.ceil(bottom);
+    frame.style.height = `${Math.max(160, height + 8)}px`;
+  };
+  window.addEventListener('load', resize);
+  window.addEventListener('resize', resize);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(document.querySelector('main') || document.body);
+  }
+  setTimeout(resize, 100);
+  setTimeout(resize, 600);
+  setTimeout(resize, 1500);
+  setTimeout(resize, 3000);
+  document.querySelectorAll('img,video').forEach((media) => {
+    media.addEventListener('load', resize);
+    media.addEventListener('loadedmetadata', resize);
+  });
+})();
+</script>
+</body>
+</html>

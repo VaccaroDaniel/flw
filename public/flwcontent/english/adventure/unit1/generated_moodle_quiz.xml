@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="multichoice">
+<name><text><![CDATA[U1Q1 Choose the greeting]]></text></name>
+<questiontext format="html"><text><![CDATA[Leo waves. What can he say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q2 True or False]]></text></name>
+<questiontext format="html"><text><![CDATA[Hello is a greeting.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q3 Listen and choose]]></text></name>
+<questiontext format="html"><text><![CDATA[Mia says "Hi!" Choose the correct word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hi]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Bye]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="shortanswer">
+<name><text><![CDATA[U1Q4 Fill in the blank]]></text></name>
+<questiontext format="html"><text><![CDATA[I'm ____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<usecase>0</usecase>
+<answer fraction="100" format="moodle"><text><![CDATA[leo]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[mia]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[toto]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[emma]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[my name]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+</question>
+<question type="shortanswer">
+<name><text><![CDATA[U1Q5 Put in order]]></text></name>
+<questiontext format="html"><text><![CDATA[Put the words in order: name / your / What's]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<usecase>0</usecase>
+<answer fraction="100" format="moodle"><text><![CDATA[What's your name]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[What is your name]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[whats your name]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+</question>
+<question type="matching">
+<name><text><![CDATA[U1Q6 Match names]]></text></name>
+<questiontext format="html"><text><![CDATA[Match each name with the correct description.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<shuffleanswers>true</shuffleanswers>
+<subquestion format="html"><text><![CDATA[Leo]]></text><answer><text><![CDATA[boy]]></text></answer></subquestion>
+<subquestion format="html"><text><![CDATA[Mia]]></text><answer><text><![CDATA[girl]]></text></answer></subquestion>
+<subquestion format="html"><text><![CDATA[Toto]]></text><answer><text><![CDATA[puppy]]></text></answer></subquestion>
+<subquestion format="html"><text><![CDATA[Emma]]></text><answer><text><![CDATA[girl with glasses]]></text></answer></subquestion>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q7 This is...]]></text></name>
+<questiontext format="html"><text><![CDATA[Toto points to Mia. What does Toto say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is Mia.]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is Leo.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="shortanswer">
+<name><text><![CDATA[U1Q8 Complete the sentence]]></text></name>
+<questiontext format="html"><text><![CDATA[This is ____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<usecase>0</usecase>
+<answer fraction="100" format="moodle"><text><![CDATA[leo]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[mia]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[toto]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="100" format="moodle"><text><![CDATA[emma]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q9 True or False]]></text></name>
+<questiontext format="html"><text><![CDATA[Goodbye is a leaving word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q10 Choose the leaving word]]></text></name>
+<questiontext format="html"><text><![CDATA[Class is finished. What can you say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[What's your name?]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q11 Final review]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the correct self-introduction.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello! I'm Leo.]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello! This is red.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye! What color?]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="essay">
+<name><text><![CDATA[U1Q12 Speaking mission]]></text></name>
+<questiontext format="html"><text><![CDATA[Speaking mission: record or write yourself saying: Hello! I'm ____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<responseformat>editor</responseformat><responserequired>1</responserequired><responsefieldlines>5</responsefieldlines>
+<attachments>0</attachments><attachmentsrequired>0</attachmentsrequired>
+<graderinfo format="html"><text><![CDATA[Accept clear production of the target self-introduction.]]></text></graderinfo>
+<responsetemplate format="html"><text><![CDATA[Hello! I'm ____.]]></text></responsetemplate>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q13 Watch question 1]]></text></name>
+<questiontext format="html"><text><![CDATA[What should you do first?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Watch the video.]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Skip the lesson.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Close the unit.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q14 Watch question 2]]></text></name>
+<questiontext format="html"><text><![CDATA[After watching, what should you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Answer the quiz.]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Forget the words.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stop learning.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U1Q15 Watch question 3]]></text></name>
+<questiontext format="html"><text><![CDATA[A good learner watches, listens, and...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the Unit 1 lesson content and try again if needed.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[speaks.]]></text><feedback format="html"><text><![CDATA[Correct]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sleeps.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hides.]]></text><feedback format="html"><text><![CDATA[Try again]]></text></feedback></answer>
+</question>
+</quiz>

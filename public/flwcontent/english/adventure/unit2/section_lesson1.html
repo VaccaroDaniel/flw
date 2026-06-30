@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 - Color Discovery</title>
+<link href="style.css" rel="stylesheet">
+<link href="assets/shared/unit-audio-continuous.css" rel="stylesheet">
+<style>
+html,body{overflow:hidden;}
+body{margin:0;background:transparent;min-height:0!important;}
+body::after{display:none!important;height:0!important;}
+.container{width:100%;max-width:none;margin:0;padding:0;}
+.card,.lesson,.pronunciation-section{width:100%;max-width:none;margin-left:0!important;margin-right:0!important;box-sizing:border-box;}
+.lesson{scroll-margin-top:0;}
+.watch-layout{grid-template-columns:1fr!important;}
+.watch-video-frame{width:100%;}
+.watch-video,.main-video.watch-video{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9!important;object-fit:cover!important;}
+.nav,.flw-unit-topbar,.footer{display:none!important;}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="lesson" id="lesson1"><h2>Lesson 1: Color Discovery</h2><p class="goal">I can say five colors.</p>
+<div class="study-feature"><img alt="Unit 2 colors cover" class="study-hero" src="assets/unit_02_my_colors/images/u2_cover.jpg"><div class="study-panel"><p class="study-kicker">Study first</p><h3>Color Discovery</h3><div class="study-chip-row"><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-red.mp3" data-audio-text="red">red</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-blue.mp3" data-audio-text="blue">blue</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-yellow.mp3" data-audio-text="yellow">yellow</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-green.mp3" data-audio-text="green">green</span><span data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-purple.mp3" data-audio-text="purple">purple</span></div><ul class="study-lines"><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-what-color-is-it.mp3" data-audio-text="What color is it?">What color is it?</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-it-s-red.mp3" data-audio-text="It's red.">It's red.</li><li data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-i-can-say-five-colors.mp3" data-audio-text="I can say five colors.">I can say five colors.</li></ul><p class="study-note">Children first hear and say the five color words, then point to colors in the pictures.</p></div></div><div class="study-card-grid"><article class="study-card"><img alt="Color chart" class="study-thumb" src="assets/unit_02_my_colors/images/color_chart.jpg"><div class="study-mini"><h4>Color chart</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-red-blue-yellow-green-purple.mp3" data-audio-text="Red, blue, yellow, green, purple.">Red, blue, yellow, green, purple.</p><p><strong>Focus:</strong> five color words</p></div></article><article class="study-card"><img alt="Leo colors" class="study-thumb" src="assets/unit_02_my_colors/images/leo_colors.jpg"><div class="study-mini"><h4>Leo's colors</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-leo-sees-red-and-blue.mp3" data-audio-text="Leo sees red and blue.">Leo sees red and blue.</p><p><strong>Focus:</strong> listen and point</p></div></article><article class="study-card"><img alt="Mia colors" class="study-thumb" src="assets/unit_02_my_colors/images/mia_colors.jpg"><div class="study-mini"><h4>Mia's colors</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-mia-sees-yellow-and-green.mp3" data-audio-text="Mia sees yellow and green.">Mia sees yellow and green.</p><p><strong>Focus:</strong> listen and point</p></div></article><article class="study-card"><img alt="Toto toys" class="study-thumb" src="assets/unit_02_my_colors/images/toto_toys.jpg"><div class="study-mini"><h4>Toto's toys</h4><p data-audio-character="Mia" data-audio-src="assets/unit_02_my_colors/audio/study/mia-toto-has-colorful-toys.mp3" data-audio-text="Toto has colorful toys.">Toto has colorful toys.</p><p><strong>Focus:</strong> colors in objects</p></div></article></div>
+<div class="quiz" data-qid="choose-the-color-1"><h3>Choose the color</h3><p class="readline">Which word means the color of a red apple?</p><div class="options"><button class="option" data-correct="true">Red</button><button class="option" data-correct="false">Blue</button><button class="option" data-correct="false">Green</button></div><div class="feedback" id="fb-choose-the-color-1"></div></div>
+<div class="quiz" data-qid="true-or-false-2"><h3>True or False</h3><p class="readline">Blue is a color.</p><div class="options"><button class="option" data-correct="true">True</button><button class="option" data-correct="false">False</button></div><div class="feedback" id="fb-true-or-false-2"></div></div>
+<div class="quiz" data-answers='["red", "blue", "yellow", "green", "purple"]' data-qid="fill-in-the-blank-3"><h3>Fill in the blank</h3><p class="readline">It is _____.</p><input placeholder="Type one color word." type="text"><button class="check-btn" onclick="checkFill('fill-in-the-blank-3')">Check</button><div class="feedback" id="fb-fill-in-the-blank-3"></div></div>
+<div class="quiz" data-qid="match-colors-4"><h3>Match colors</h3><p>Drag each object to the correct color.</p><div><span class="dragitem" data-value="apple" draggable="true" ondragstart="drag(event)">apple</span><span class="dragitem" data-value="bag" draggable="true" ondragstart="drag(event)">bag</span><span class="dragitem" data-value="duck" draggable="true" ondragstart="drag(event)">duck</span><span class="dragitem" data-value="leaf" draggable="true" ondragstart="drag(event)">leaf</span><span class="dragitem" data-value="flower" draggable="true" ondragstart="drag(event)">flower</span></div><div class="grid"><div class="card"><span class="chip red">red</span><div class="dropzone" data-accept="apple" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="card"><span class="chip blue">blue</span><div class="dropzone" data-accept="bag" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="card"><span class="chip yellow">yellow</span><div class="dropzone" data-accept="duck" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="card"><span class="chip green">green</span><div class="dropzone" data-accept="leaf" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div><div class="card"><span class="chip purple">purple</span><div class="dropzone" data-accept="flower" ondragover="allowDrop(event)" ondrop="drop(event)"></div></div></div><div class="feedback" id="fb-match-colors-4"></div></div>
+<div class="quiz"><h3>Speaking assignment</h3><p>Record your voice. Say five colors: <b>red, blue, yellow, green, purple</b>.</p><p class="small">In Moodle, use Assignment or PoodLL/recording plugin for this activity.</p></div>
+</section>
+</main>
+<script src="script.js"></script>
+<script src="assets/shared/unit-audio-continuous.js"></script>
+<script>
+(() => {
+  const resize = () => {
+    const frame = window.frameElement;
+    if (!frame) return;
+    const body = document.body;
+    const html = document.documentElement;
+    let bottom = 0;
+    Array.from(body.children).forEach((element) => {
+      if (element.tagName === 'SCRIPT') return;
+      const rect = element.getBoundingClientRect();
+      const styles = window.getComputedStyle(element);
+      bottom = Math.max(bottom, rect.bottom + window.scrollY + parseFloat(styles.marginBottom || '0'));
+    });
+    const height = Math.ceil(bottom);
+    frame.style.height = `${Math.max(160, height + 8)}px`;
+  };
+  window.addEventListener('load', resize);
+  window.addEventListener('resize', resize);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(resize).observe(document.querySelector('main') || document.body);
+  }
+  setTimeout(resize, 100);
+  setTimeout(resize, 600);
+  setTimeout(resize, 1500);
+  setTimeout(resize, 3000);
+  document.querySelectorAll('img,video').forEach((media) => {
+    media.addEventListener('load', resize);
+    media.addEventListener('loadedmetadata', resize);
+  });
+})();
+</script>
+</body>
+</html>

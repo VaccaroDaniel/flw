@@ -1,0 +1,21 @@
+lesson,activity,type,answer_key,note
+Lesson 1: Color Discovery,Choose the color,mc,"[[""Red"", true], [""Blue"", false], [""Green"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 1: Color Discovery,True or False,tf,true,Option-level data-correct flags or normalized accepted answers used.
+Lesson 1: Color Discovery,Fill in the blank,fill,"[""red"", ""blue"", ""yellow"", ""green"", ""purple""]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 1: Color Discovery,Match colors,match,"[[""red"", ""apple""], [""blue"", ""bag""], [""yellow"", ""duck""], [""green"", ""leaf""], [""purple"", ""flower""]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 2: Color Worlds,What color is it?,mc,"[[""Yellow"", true], [""Purple"", false], [""Red"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 2: Color Worlds,Choose the answer,mc,"[[""Green"", true], [""Blue"", false], [""Yellow"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 2: Color Worlds,True or False,tf,true,Option-level data-correct flags or normalized accepted answers used.
+Lesson 2: Color Worlds,Complete the sentence,fill_exact,"[""red""]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 3: Find the Colors,Find the red ball,mc,"[[""Red ball"", true], [""Blue bag"", false], [""Yellow duck"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 3: Find the Colors,Point to the blue bag,mc,"[[""Blue bag"", true], [""Red bag"", false], [""Green bag"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 3: Find the Colors,Object matching,match,"[[""red"", ""ball""], [""blue"", ""bag""], [""yellow"", ""duck""], [""green"", ""frog""], [""purple"", ""flower""]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 3: Find the Colors,True or False,tf,true,Option-level data-correct flags or normalized accepted answers used.
+Lesson 4: Color Song and Games,Color chant order,order,"[""red"", ""blue"", ""yellow"", ""green"", ""purple""]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 4: Color Song and Games,Toto asks,mc,"[[""Blue"", true], [""Green"", false], [""Purple"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 4: Color Song and Games,True or False,tf,true,Option-level data-correct flags or normalized accepted answers used.
+Lesson 4: Color Song and Games,Sing and type,fill,"[""purple""]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 5: Color Badge Mission,Color Basket Game,basket,"[[""apple"", ""red""], [""bag"", ""blue""], [""duck"", ""yellow""], [""frog"", ""green""], [""flower"", ""purple""], [""crayon"", ""purple""], [""star"", ""yellow""], [""leaf"", ""green""]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 5: Color Badge Mission,Final check,mc,"[[""Green"", true], [""Red"", false], [""Blue"", false]]",Option-level data-correct flags or normalized accepted answers used.
+Lesson 5: Color Badge Mission,True or False,tf,false,Option-level data-correct flags or normalized accepted answers used.
+Lesson 5: Color Badge Mission,My favorite color,fill,"[""red"", ""blue"", ""yellow"", ""green"", ""purple""]",Option-level data-correct flags or normalized accepted answers used.
