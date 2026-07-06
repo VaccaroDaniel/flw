@@ -88,6 +88,11 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
         return strpos($currentpath, '/admin/') === 0 || $currentpath === '/admin/index.php';
     }
 
+    if ($key === 'flw-dictionary') {
+        return strpos($currentpath, '/local/mldict/') === 0
+            || $currentpath === '/local/mldict/index.php';
+    }
+
     if ($key === 'flw-selfstudy' && strpos($currentpath, '/local/flwplacement/') === 0) {
         return true;
     }

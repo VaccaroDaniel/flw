@@ -414,6 +414,14 @@ if ($PAGE->has_secondary_navigation()) {
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
+$learninglanguages = theme_flwacademy_export_learning_languages();
+$currentlanguagecode = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
+if ($currentlanguagecode !== '') {
+    $learninglanguages = array_map(static function(array $language) use ($currentlanguagecode): array {
+        $language['isdefault'] = $language['code'] === $currentlanguagecode;
+        return $language;
+    }, $learninglanguages);
+}
 $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
@@ -440,6 +448,17 @@ $templatecontext = [
     'overflow' => $overflow,
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
+    'haslearninglanguages' => !empty($learninglanguages),
+    'learninglanguages' => $learninglanguages,
+    'currentlanguagecode' => $currentlanguagecode,
+    'currentcategorytype' => '',
 ];
 
-echo $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
+$pagehtml = $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
+$languagepanel = $OUTPUT->render_from_template('theme_flwacademy/flw_language_panel', $templatecontext);
+if ($languagepanel !== '' && strpos($pagehtml, '</body>') !== false) {
+    $pagehtml = str_replace('</body>', $languagepanel . "\n</body>", $pagehtml);
+} else {
+    $pagehtml .= $languagepanel;
+}
+echo $pagehtml;

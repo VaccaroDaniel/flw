@@ -3,6 +3,7 @@
 :root {
   --flw-font-body: Inter, "Segoe UI", Arial, sans-serif;
   --flw-font-heading: Inter, "Segoe UI", Arial, sans-serif;
+  --flw-font-nav: "Aptos Display", "Segoe UI Variable Text", Inter, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
   --flw-font-serif: Georgia, "Times New Roman", "Noto Serif", "Noto Serif CJK SC", "Noto Serif CJK JP", "Noto Serif CJK KR", serif;
   --flw-emerald: #087f8c;
   --flw-emerald-dark: #075a64;
@@ -52,6 +53,181 @@ h6,
 
 body {
   background: #f7faf8;
+}
+
+/* FLW clean primary navigation. */
+.navbar.fixed-top {
+  min-height: 58px;
+  padding: .42rem .85rem !important;
+  background: rgba(255, 255, 255, .96) !important;
+  border-bottom: 1px solid rgba(216, 227, 223, .9) !important;
+  box-shadow: 0 10px 28px rgba(23, 36, 42, .07) !important;
+  backdrop-filter: saturate(1.18) blur(14px);
+  font-family: var(--flw-font-nav) !important;
+}
+
+.navbar.fixed-top .navbar-brand {
+  color: #10252d !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
+  margin-right: .95rem !important;
+  padding: .3rem .1rem !important;
+  font-family: var(--flw-font-nav) !important;
+}
+
+.navbar.fixed-top .primary-navigation,
+.navbar.fixed-top .moremenu {
+  min-height: 0 !important;
+}
+
+@media (min-width: 992px) {
+  .navbar.fixed-top {
+    position: fixed;
+  }
+
+  .navbar.fixed-top .primary-navigation {
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+  }
+
+  .navbar.fixed-top .navbar-brand,
+  .navbar.fixed-top #usernavigation {
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.navbar.fixed-top .primary-navigation .navigation,
+.navbar.fixed-top .moremenu .nav {
+  gap: .18rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar.fixed-top .primary-navigation .nav-link,
+.navbar.fixed-top .moremenu .nav-link {
+  position: relative;
+  min-height: 38px !important;
+  margin: 0 .02rem !important;
+  padding: .48rem .72rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: #24383f !important;
+  font-size: .9rem !important;
+  font-weight: 430 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
+  font-family: var(--flw-font-nav) !important;
+  transition: color .16s ease, background-color .16s ease, box-shadow .16s ease;
+}
+
+.navbar.fixed-top .primary-navigation .nav-link:hover,
+.navbar.fixed-top .primary-navigation .nav-link:focus,
+.navbar.fixed-top .moremenu .nav-link:hover,
+.navbar.fixed-top .moremenu .nav-link:focus {
+  background: rgba(8, 127, 140, .08) !important;
+  color: var(--flw-emerald-dark) !important;
+  box-shadow: none !important;
+}
+
+.navbar.fixed-top .primary-navigation .nav-link.active,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"],
+.navbar.fixed-top .moremenu .nav-link.active,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"] {
+  background: rgba(8, 127, 140, .11) !important;
+  color: var(--flw-emerald-dark) !important;
+  font-weight: 560 !important;
+  box-shadow: inset 0 0 0 1px rgba(8, 127, 140, .12) !important;
+}
+
+.navbar.fixed-top .primary-navigation .nav-link.active::after,
+.navbar.fixed-top .primary-navigation .nav-link[aria-current="true"]::after,
+.navbar.fixed-top .moremenu .nav-link.active::after,
+.navbar.fixed-top .moremenu .nav-link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: .25rem;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--flw-emerald);
+  transform: translateX(-50%);
+}
+
+.navbar.fixed-top #usernavigation {
+  gap: .35rem;
+}
+
+.navbar.fixed-top #usernavigation .btn,
+.navbar.fixed-top #usernavigation .nav-link,
+.navbar.fixed-top #usernavigation .dropdown-toggle {
+  min-height: 36px;
+  border-radius: 999px !important;
+  color: #344054 !important;
+  box-shadow: none !important;
+  font-family: var(--flw-font-nav) !important;
+}
+
+.navbar.fixed-top #usernavigation .btn:hover,
+.navbar.fixed-top #usernavigation .btn:focus,
+.navbar.fixed-top #usernavigation .nav-link:hover,
+.navbar.fixed-top #usernavigation .nav-link:focus,
+.navbar.fixed-top #usernavigation .dropdown-toggle:hover,
+.navbar.fixed-top #usernavigation .dropdown-toggle:focus {
+  background: rgba(8, 127, 140, .08) !important;
+}
+
+.navbar.fixed-top #usernavigation .userinitials {
+  width: 36px !important;
+  height: 36px !important;
+  background: #edf3f2 !important;
+  color: #26444a !important;
+  font-size: .86rem !important;
+  font-weight: 560 !important;
+}
+
+.navbar.fixed-top .dropdown-menu {
+  border: 1px solid rgba(216, 227, 223, .95) !important;
+  border-radius: .5rem !important;
+  box-shadow: 0 18px 42px rgba(23, 36, 42, .12) !important;
+  font-family: var(--flw-font-nav) !important;
+}
+
+.navbar.fixed-top .dropdown-item {
+  color: #24383f !important;
+  font-size: .9rem !important;
+  font-weight: 420 !important;
+  font-family: var(--flw-font-nav) !important;
+}
+
+.navbar.fixed-top .dropdown-item:hover,
+.navbar.fixed-top .dropdown-item:focus {
+  background: rgba(8, 127, 140, .08) !important;
+  color: var(--flw-emerald-dark) !important;
+}
+
+@media (max-width: 767.98px) {
+  .navbar.fixed-top {
+    min-height: 54px;
+    padding: .36rem .6rem !important;
+  }
+
+  .navbar.fixed-top .navbar-brand {
+    margin-right: .35rem !important;
+  }
+
+  .navbar.fixed-top .primary-navigation .nav-link,
+  .navbar.fixed-top .moremenu .nav-link {
+    min-height: 34px !important;
+    padding: .42rem .58rem !important;
+    font-size: .86rem !important;
+  }
 }
 
 .page-header-headings h1, #page-header h1, .course-content .sectionname, .course-content .course-section-header h3 {
@@ -1037,47 +1213,6 @@ a:hover { color: var(--flw-emerald); }
 
 #page {
   margin-top: 0px;
-}
-
-/* Match Moodle's native Boost navbar on converted course pages. */
-body.path-course-view .navbar.fixed-top .navbar-brand,
-body.path-course-view .navbar.fixed-top .primary-navigation .nav-link,
-body.path-course-view .navbar.fixed-top .moremenu .nav-link,
-body.path-course-view .navbar.fixed-top .editmode-switch-form,
-body.path-course-view .navbar.fixed-top .editmode-switch-form label {
-  font-size: .875rem !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
-}
-
-/* Keep the account menu surface identical to Boost; only the initials badge should draw its own circle. */
-body.path-course-view .navbar.fixed-top #usernavigation,
-body.path-course-view .navbar.fixed-top #usernavigation .usermenu,
-body.path-course-view .navbar.fixed-top #usernavigation .dropdown,
-body.path-course-view .navbar.fixed-top #usernavigation .userbutton,
-body.path-course-view .navbar.fixed-top #usernavigation .btn,
-body.path-course-view .navbar.fixed-top #usernavigation .nav-link,
-body.path-course-view .navbar.fixed-top #usernavigation .nav-link.active,
-body.path-course-view .navbar.fixed-top #usernavigation .nav-link:active,
-body.path-course-view .navbar.fixed-top #usernavigation .nav-link:focus,
-body.path-course-view .navbar.fixed-top #usernavigation .nav-link:hover,
-body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle,
-body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:active,
-body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:focus,
-body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:hover,
-body.path-course-view .navbar.fixed-top #user-menu-toggle,
-body.path-course-view .navbar.fixed-top #user-menu-toggle:active,
-body.path-course-view .navbar.fixed-top #user-menu-toggle:focus,
-body.path-course-view .navbar.fixed-top #user-menu-toggle:hover,
-body.path-course-view .navbar.fixed-top #user-menu-toggle[aria-expanded="true"] {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-body.path-course-view .navbar.fixed-top #usernavigation .userinitials {
-  background-color: #e9ecef !important;
-  color: #344054 !important;
 }
 
 /* Converted FLW native units: remove Moodle's outer frames around embedded prototype cards. */

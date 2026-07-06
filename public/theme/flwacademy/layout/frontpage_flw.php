@@ -403,6 +403,14 @@ $languages = [
         'url' => $courseindexurl->out(false),
     ],
 ];
+$learninglanguages = theme_flwacademy_export_learning_languages();
+$currentlanguagecode = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
+if ($currentlanguagecode !== '') {
+    $learninglanguages = array_map(static function(array $language) use ($currentlanguagecode): array {
+        $language['isdefault'] = $language['code'] === $currentlanguagecode;
+        return $language;
+    }, $learninglanguages);
+}
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, [
@@ -422,6 +430,10 @@ $templatecontext = [
     'frontpageurl' => $frontpageurl->out(false),
     'maincontent' => $maincontent,
     'languages' => $languages,
+    'haslearninglanguages' => !empty($learninglanguages),
+    'learninglanguages' => $learninglanguages,
+    'currentlanguagecode' => $currentlanguagecode,
+    'currentcategorytype' => '',
     'copy' => $copy,
 ];
 
