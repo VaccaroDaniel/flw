@@ -1,0 +1,326 @@
+{
+  "package_name": "adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive",
+  "unit": "Adventure English World V2 Unit 1 — Hello Adventure",
+  "revision": "v2_interactive_practice_video_folding",
+  "created_utc": "2026-06-30T02:45:16.366443+00:00",
+  "checks": {
+    "practice_items": 108,
+    "practice_blocks": 9,
+    "folding_lessons": 7,
+    "video_sources": 1,
+    "node_syntax_ok": true,
+    "node_syntax_output": ""
+  },
+  "files": [
+    {
+      "path": "README.txt",
+      "bytes": 2333,
+      "sha256": "7e2fccebe0c4d120b1a389c6ceeda4ef7217ea1b84532b29eabd790f78133d29"
+    },
+    {
+      "path": "ai_checker_profile.csv",
+      "bytes": 1540,
+      "sha256": "6dd79b859630b4712b4bd3672e5fb2467e4edc7d63e82d3e0d8070fb375c753d"
+    },
+    {
+      "path": "allowed_review_blocked_kp.csv",
+      "bytes": 541,
+      "sha256": "d91e078e988b3e2b6d1c8ef353f18d582c7330032b0e9e65b0794510bde5a45a"
+    },
+    {
+      "path": "assets/audio/README_AUDIO_PLACEHOLDERS.txt",
+      "bytes": 99,
+      "sha256": "454c0cea9f702c634ddf04aa735e51a678ec32b851c4b958a24b499dd2f9236a"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-001.png",
+      "bytes": 2293251,
+      "sha256": "5f93aa219f182f04a941d90a49142e4a8177b2c2dbacd07c1dea645105cfe0c1"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-002.png",
+      "bytes": 2332521,
+      "sha256": "5f8993a401324a3ca21a643083b62b7233a9a9654f39be8ae88a87f57f331886"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-003.png",
+      "bytes": 2115867,
+      "sha256": "d3b53f097881e299eff70cbcc0ec8af622a065c2a8229d538b5363055d82051f"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-004.png",
+      "bytes": 2152112,
+      "sha256": "96eb77d3caab3b24df62d5f5a7fef33191227f188fab94de303275193863e222"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-005.png",
+      "bytes": 1927010,
+      "sha256": "cf807983d7dd211c455db408abe1198ac253d1f7746edc9f839df9146cf4c6b9"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-006.png",
+      "bytes": 1980104,
+      "sha256": "75422d058ea0994a1653e32e662916d6fee1b7295c51fa078ff392658dcb3ee4"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-007.png",
+      "bytes": 2159537,
+      "sha256": "00d1433bf96eb48b06586d11e3f3b952954276e7a3197fd90f62d00043ff1979"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-008.png",
+      "bytes": 1842517,
+      "sha256": "c860c538db3175daa9208d11e77ed63a7a3236200b6b6602f7d5060754e9ce5d"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-009.png",
+      "bytes": 2328999,
+      "sha256": "750b9234a743d02de9e50939fdc46d6ff975f21cfa2a4380e8ddb52c17f1980a"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-010.png",
+      "bytes": 2286167,
+      "sha256": "9a4e4d66e32e378abd0dd4b581bd8c5889b88b3e30ca0f3e259660f5b9e2cb15"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-011.png",
+      "bytes": 2391340,
+      "sha256": "a5d224ee4bab747725891802974466505603c95b647ed70181b4c2cda6e07bef"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-012.png",
+      "bytes": 2338975,
+      "sha256": "b79862606c21d5bde31220a8c541c74b60071dca0580c8abe502d3892e62847d"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-013.png",
+      "bytes": 1544774,
+      "sha256": "1f1cd0148458c8376884a06f22f8d418cb13668f859d0bd553e41ed26dcf8152"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-014.png",
+      "bytes": 2048077,
+      "sha256": "355cd7dd663d114d8e184812c0429f3d446a0d73e6321116104395be85fa6909"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-015.png",
+      "bytes": 2066508,
+      "sha256": "dcf5ab3440e1411d3dff2fa2b16b5fc176bc8e63c778acbf62436a86ed0515c0"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-016.png",
+      "bytes": 1948506,
+      "sha256": "bb7b6100f7e4ea07fe74da69e394de956a11515eb7590234b223d4982e2c3a89"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-017.png",
+      "bytes": 2185220,
+      "sha256": "147194fbe64f0f5c88949157a10bb0fb5217172fc7bbb1f97cc8a0e58602055c"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-018.png",
+      "bytes": 2329627,
+      "sha256": "1baede53bfad38d6accebf3ec1aefd2c769e34bd05794c2784f0b1293d4cc6e3"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-019.png",
+      "bytes": 1774970,
+      "sha256": "90c7599aa04f9985fc3237257e8b5c460d4ef8cf718bdb7ac8a5480b582d780d"
+    },
+    {
+      "path": "assets/images/AEW2-U001-IMG-020.png",
+      "bytes": 1804172,
+      "sha256": "c2f761ae2a2c921164c69453896a992baace6fd388d65d9d05333a7fe1451082"
+    },
+    {
+      "path": "assets/video/AEW2-U001-WATCH-001.mp4",
+      "bytes": 1079057,
+      "sha256": "3798f36f78f5600813c384e769f43d84311562a67a57966f3562f438c1516f27"
+    },
+    {
+      "path": "assets/video/README_WATCH_PLACEHOLDER.txt",
+      "bytes": 112,
+      "sha256": "383883de91c86f722cedc0e85c8e872150a3b3f8a6b89b7b70a65fff1f78d582"
+    },
+    {
+      "path": "audio_manifest.csv",
+      "bytes": 7488,
+      "sha256": "ea40d8ff94381116fae90ed492dabe493edf3a68f04e67eb190c9a39a87c9106"
+    },
+    {
+      "path": "cefr_kp_map.csv",
+      "bytes": 1543,
+      "sha256": "5304bb5da041be273ff76e67d4804b1aee03172b0cddfdd4e72121fbd2246219"
+    },
+    {
+      "path": "difficulty_audit.csv",
+      "bytes": 537,
+      "sha256": "b508569dc1a6022decba90e64abdd3e4917d3e59096627dd5cf2e5fe9a185bde"
+    },
+    {
+      "path": "flw_media_asset_catalog.csv",
+      "bytes": 17556,
+      "sha256": "6ada08b8ba29bc4a6f44146e032c95531242a7ae744b52eb12f3b42f6b502c04"
+    },
+    {
+      "path": "image_hotspot_manifest.csv",
+      "bytes": 1263,
+      "sha256": "7d0db43f5422fee4537a067d83b3b4ad7e772b7e5322c45a5ecce3d6e52e13c5"
+    },
+    {
+      "path": "image_manifest.csv",
+      "bytes": 6673,
+      "sha256": "81e301bc6a099a1f7ee86911ff60200745972858af4f587c278fc032206e44dc"
+    },
+    {
+      "path": "image_prompts.txt",
+      "bytes": 5912,
+      "sha256": "70fb29a72bf0ddcba8da361124274e15de689527c6426747ccf7e031ed807aa9"
+    },
+    {
+      "path": "index.html",
+      "bytes": 114269,
+      "sha256": "594ed506c99b2a581c73242880a9ad7a1ae0483bd56dee238005feeab03bb5e8"
+    },
+    {
+      "path": "interactive_revision_audit.csv",
+      "bytes": 519,
+      "sha256": "6c9293e978d57c7d8cd51e877771cba584fa903f2e3c5f3c294682a9a2e37f11"
+    },
+    {
+      "path": "lesson_blueprint.csv",
+      "bytes": 1638,
+      "sha256": "c5155b9c598900a0167ba06a8829273ea5619e176fab961e16639d15de25c757"
+    },
+    {
+      "path": "lexical_map.csv",
+      "bytes": 2020,
+      "sha256": "83275aabcc0287f6e59857c9b5ea2f7016bc748ee76c779f9be97bb8f6f3f3d4"
+    },
+    {
+      "path": "package_integrity.json",
+      "bytes": 9341,
+      "sha256": "b641275b8810cb415382f23e93e58da7564cd26b05023711ce10b287169e4bf2"
+    },
+    {
+      "path": "portfolio_evidence_map.csv",
+      "bytes": 708,
+      "sha256": "b8f518446c14c27f45ee1cb0b15a265c08d6b8c1946bb7812359567225074f76"
+    },
+    {
+      "path": "project_plan.csv",
+      "bytes": 413,
+      "sha256": "a7ae29cd672dced08f61f69786e34bb1bdc66aec8c186b8846ce00a7283c76ce"
+    },
+    {
+      "path": "project_readiness_items.csv",
+      "bytes": 959,
+      "sha256": "9472b24ebf1f6068bf4f86a43d0d680ef51af9a52adf9c1349e7a30c8449139f"
+    },
+    {
+      "path": "question_bank.csv",
+      "bytes": 31216,
+      "sha256": "4a186609652472c2730c136a6b4b80ae75fafbfec222061db2ef4d54eb2e8d9a"
+    },
+    {
+      "path": "question_bank_gift.txt",
+      "bytes": 8982,
+      "sha256": "6f4f21a71f4135d8026219e929eedd18f3e3fc437ae0602d7ba0b93bd7238107"
+    },
+    {
+      "path": "quiz_blueprint.csv",
+      "bytes": 1972,
+      "sha256": "73210744eb78ca35c7607122c9fa3f14fb437cd2d31682a2d3dfb29bc88caec3"
+    },
+    {
+      "path": "repair_path.csv",
+      "bytes": 977,
+      "sha256": "2b4537e23a1056badadd8a0713ff37374f7f06ade4c590750eac7c4c23251a07"
+    },
+    {
+      "path": "source/final_interactive_script.js",
+      "bytes": 7782,
+      "sha256": "9570b0b1df11bb982cd250415f15ed26b342ef9f6d73a8ae6e33f105f7400fe2"
+    },
+    {
+      "path": "source/full_lesson_content.md",
+      "bytes": 4144,
+      "sha256": "e999517bcc646d499e715955fc0eb66648087b0fc3bd135258d5b86b81ea9d4e"
+    },
+    {
+      "path": "source/standards_used.txt",
+      "bytes": 317,
+      "sha256": "7dc70785578c5f634c395f7aac46633a562b37f2604bacf1124949ba7b8fca5e"
+    },
+    {
+      "path": "source/unit_control_packet_summary.md",
+      "bytes": 582,
+      "sha256": "9665bc72f1668d77f2407519e02875e1d19ada8b7b8bb6088f23da282570e0b6"
+    },
+    {
+      "path": "source/watch_video_slides/concat.txt",
+      "bytes": 1221,
+      "sha256": "2249f3d99227f8d364e78245629336c31e63c9be69a5eef5112b036b75e8323c"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_01.png",
+      "bytes": 1057615,
+      "sha256": "a0e18a9055a925470d9531f1f60427349961b544634274c4029de814b1d9b8b8"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_02.png",
+      "bytes": 994590,
+      "sha256": "037cf5c22fc98335cc4d445d0d7f83df8c73d619bd2488943bcc82394917670a"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_03.png",
+      "bytes": 1042436,
+      "sha256": "eb73c34b1c3d0e6c8e2d7bad28f792b773f13f5faa569d1f36a68749b567bcfb"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_04.png",
+      "bytes": 1062406,
+      "sha256": "47b06f847bbf55e0d27b4d19acc281802c4af8e2d327af77fe4125627907ba75"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_05.png",
+      "bytes": 1095284,
+      "sha256": "1903521c71b810b245a8684963cd186e721e49b8341fdf116fbb6365d4eea57b"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_06.png",
+      "bytes": 1070290,
+      "sha256": "1ebe4b97cdd1b86739479e07604f7a63cc7968504c6c4f8c12f710b54121876d"
+    },
+    {
+      "path": "source/watch_video_slides/watch_slide_07.png",
+      "bytes": 908313,
+      "sha256": "7a0d8cb3fbc806cf11aa65fc947e8306400e0f93a46a5e677d5307d89dfcf6ec"
+    },
+    {
+      "path": "source/watch_video_transcript.txt",
+      "bytes": 152,
+      "sha256": "3bf210becad31b9616774f7ef022ba3851def1bdad0184fd6a544aeea82fb685"
+    },
+    {
+      "path": "teacher_guide.html",
+      "bytes": 24824,
+      "sha256": "f82de196925eefed5f14a86bc859e02185bbe59d62ebd347dab0b1da2b92dcec"
+    },
+    {
+      "path": "video_manifest.csv",
+      "bytes": 393,
+      "sha256": "028776cff081b08225cfe169174cf7a8a0664835dcad76128aa61035acc2dc5a"
+    },
+    {
+      "path": "visual_safety_audit.csv",
+      "bytes": 2940,
+      "sha256": "d8ef20b47963ab5c700a0872fe693f7bceeff074ea49157ca4959c72ab2e6e12"
+    },
+    {
+      "path": "watch_plan.csv",
+      "bytes": 370,
+      "sha256": "31245fea12d49439b237f5755b8ade5bed1eb5ebcc9fab7847ec59784b2d6f30"
+    }
+  ]
+}

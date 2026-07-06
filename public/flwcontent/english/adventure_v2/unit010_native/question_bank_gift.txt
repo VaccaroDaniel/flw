@@ -1,0 +1,215 @@
+::AEW2-U010-L1-Q01::Look at the woman/mom card. Choose the word. {=mom ~dad ~dog ~friend}
+
+::AEW2-U010-L1-Q02::Look at the man/dad card. Choose the word. {=dad ~sister ~dog ~mom}
+
+::AEW2-U010-L1-Q03::Look at the girl child card. Choose the word. {=sister ~grandpa ~dad ~dog}
+
+::AEW2-U010-L1-Q04::Look at the boy child card. Choose the word. {=brother ~grandma ~mom ~friend}
+
+::AEW2-U010-L1-Q05::Look at the older woman card. Choose the word. {=grandma ~brother ~dad ~dog}
+
+::AEW2-U010-L1-Q06::Look at the older man card. Choose the word. {=grandpa ~sister ~mom ~friend}
+
+::AEW2-U010-L1-Q07::Look at the teammate card. Choose the word. {=friend ~grandpa ~dad ~dog}
+
+::AEW2-U010-L1-Q08::Look at the Toto card. Choose the word. {=dog ~mom ~sister ~grandma}
+
+::AEW2-U010-L1-Q09::Match the words to the cards\: mom + dad. {=mom \= woman card; dad \= man card ~mom \= dog card; dad \= friend card ~mom \= boy card; dad \= girl card ~mom \= grandpa card; dad \= grandma card}
+
+::AEW2-U010-L1-Q10::Listen\: dad. Which card do you choose? {=dad card ~mom card ~dog card ~friend card}
+
+::AEW2-U010-L1-Q11::Toto is a dog. {TRUE}
+
+::AEW2-U010-L1-Q12::Listen\: friend. Which card do you choose? {=friend card ~grandma card ~dad card ~dog card}
+
+::AEW2-U010-L2-Q01::Complete\: This is my ___. (mom card) {=mom ~dad ~dog ~friend}
+
+::AEW2-U010-L2-Q02::Choose the sentence for the dad card. {=This is my dad. ~This is my mom. ~Who’s this? ~It’s my dog.}
+
+::AEW2-U010-L2-Q03::Choose the sentence for the friend card. {=This is my friend. ~This is my grandma. ~This is dog. ~Who’s this?}
+
+::AEW2-U010-L2-Q04::Choose the sentence for the dog card. {=This is my dog. ~This is my dad. ~This is my sister. ~It’s my mom.}
+
+::AEW2-U010-L2-Q05::Which sentence is correct? {=This is my mom. ~This my mom. ~This is mom. ~Is my mom.}
+
+::AEW2-U010-L2-Q06::Put the words in order for a dad card. {=This / is / my / dad. ~Dad / my / is / this. ~My / dad / this / is. ~Is / this / dad / my.}
+
+::AEW2-U010-L2-Q07::Match two cards to two sentences. {=mom → This is my mom.; dad → This is my dad. ~mom → This is my dad.; dad → This is my mom. ~mom → Who’s this?; dad → It’s my dog. ~mom → This is my dog.; dad → This is my friend.}
+
+::AEW2-U010-L2-Q08::Complete\: This is ___ mom. {=my ~this ~who ~dog}
+
+::AEW2-U010-L2-Q09::Choose the two correct lines for mom + dad cards. {=This is my mom. This is my dad. ~This is my dog. This is my friend. ~Who’s this? It’s my dog. ~Mom dad friend dog.}
+
+::AEW2-U010-L2-Q10::Complete\: This is my ___. (friend card) {=friend ~mom ~grandpa ~dog}
+
+::AEW2-U010-L2-Q11::Choose the best sentence. {=This is my dad. ~this is my dad ~This is dad my. ~This is my.}
+
+::AEW2-U010-L2-Q12::You show a Toto card. What can you say? {=This is my dog. ~This is my mom. ~Who’s this? ~It’s my grandma.}
+
+::AEW2-U010-L3-Q01::Choose the question for a mystery card. {=Who’s this? ~This is my mom. ~It’s my dog. ~friend}
+
+::AEW2-U010-L3-Q02::A\: Who’s this? B\: ___ (mom card) {=It’s my mom. ~Who’s this? ~This is my dog. ~mom}
+
+::AEW2-U010-L3-Q03::A\: Who’s this? B\: ___ (dad card) {=It’s my dad. ~This is my sister. ~Who’s this? ~It’s dog.}
+
+::AEW2-U010-L3-Q04::A\: Who’s this? B\: ___ (friend card) {=It’s my friend. ~Who’s this? ~It’s my grandma. ~This is my dad.}
+
+::AEW2-U010-L3-Q05::A\: Who’s this? B\: ___ (dog card) {=It’s my dog. ~It’s my mom. ~Who’s this? ~This is my brother.}
+
+::AEW2-U010-L3-Q06::Choose the correct order. {=Who’s this? → It’s my dad. ~It’s my dad. → Who’s this? ~This is my dad. → Who’s this? ~Dad → Who’s this?}
+
+::AEW2-U010-L3-Q07::What is Who’s this? {=a question ~an answer ~a family word ~a color}
+
+::AEW2-U010-L3-Q08::Choose an answer, not a question. {=It’s my friend. ~Who’s this? ~What color? ~Look!}
+
+::AEW2-U010-L3-Q09::Complete\: It’s ___ mom. {=my ~this ~who ~dog}
+
+::AEW2-U010-L3-Q10::Who’s this? asks about a card. {TRUE}
+
+::AEW2-U010-L3-Q11::Match the dialogue. {=Who’s this? → It’s my sister. ~Who’s this? → This color is red. ~It’s my sister. → Who’s this? ~Who’s this? → draw a star}
+
+::AEW2-U010-L3-Q12::Choose the best mini-dialogue. {=A\: Who’s this? B\: It’s my dog. ~A\: It’s my dog. B\: Who’s this? ~A\: Mom. B\: Dad. ~A\: This is. B\: My dog.}
+
+::AEW2-U010-L4-Q01::Where does mom go? {=family ~friend ~color ~number}
+
+::AEW2-U010-L4-Q02::Where does dad go? {=family ~friend ~color ~number}
+
+::AEW2-U010-L4-Q03::Where does friend go? {=friend ~family ~number ~weather}
+
+::AEW2-U010-L4-Q04::What word matches Toto? {=dog ~dad ~mom ~grandma}
+
+::AEW2-U010-L4-Q05::Choose the sentence for a friend card. {=This is my friend. ~This is my dad. ~Who’s this? ~This is my grandma.}
+
+::AEW2-U010-L4-Q06::You do not want to use a family card. What can you choose? {=a friend card ~a long family story ~an address ~a phone number}
+
+::AEW2-U010-L4-Q07::Choose the family group. {=mom, dad, sister, brother ~red, blue, green, yellow ~one, two, three, four ~run, jump, sit, stand}
+
+::AEW2-U010-L4-Q08::Choose the correct sort. {=mom + dad → family ~mom + dad → friend ~friend → family only ~dog → color}
+
+::AEW2-U010-L4-Q09::Choose the correct sort. {=friend card → friend ~friend card → number ~friend card → weather ~friend card → color}
+
+::AEW2-U010-L4-Q10::A friend card can be in my poster. {TRUE}
+
+::AEW2-U010-L4-Q11::Which word is NOT a Unit 10 family/friend word? {=robot ~mom ~dad ~friend}
+
+::AEW2-U010-L4-Q12::Choose the correct sentence. {=This is my friend. ~This is my friends. ~This my friend. ~Friend this my.}
+
+::AEW2-U010-L5-Q01::Read\: This is my mom. Choose the card. {=mom card ~dad card ~dog card ~friend card}
+
+::AEW2-U010-L5-Q02::Read\: This is my dad. Choose the card. {=dad card ~mom card ~friend card ~dog card}
+
+::AEW2-U010-L5-Q03::Read\: This is my friend. Choose the card. {=friend card ~grandma card ~dad card ~dog card}
+
+::AEW2-U010-L5-Q04::Read\: This is Toto. Choose the card. {=Toto/dog card ~mom card ~dad card ~sister card}
+
+::AEW2-U010-L5-Q05::Picture\: mom card. Sentence\: This is my mom. {TRUE}
+
+::AEW2-U010-L5-Q06::Picture\: dad card. Sentence\: This is my friend. {FALSE}
+
+::AEW2-U010-L5-Q07::Choose the line with friend. {=This is my friend. ~This is my mom. ~This is my dad. ~This is Toto.}
+
+::AEW2-U010-L5-Q08::What is the first word in This is my mom? {=This ~mom ~my ~is}
+
+::AEW2-U010-L5-Q09::Which ending mark do you see in This is my dad.? {=. ~? ~! ~,}
+
+::AEW2-U010-L5-Q10::Mini text\: This is my mom. This is my dad. This is my friend. How many cards? {=3 ~1 ~2 ~5}
+
+::AEW2-U010-L5-Q11::Complete\: This is my ___. (Toto card) {=dog ~dad ~mom ~grandpa}
+
+::AEW2-U010-L5-Q12::Choose the best title for the mini reading. {=My Family and Friends ~My Red Ball ~My Number Trail ~My Weather Card}
+
+::AEW2-U010-L6-Q01::What do you put on the tree poster? {=photo cards ~shoes ~lunch boxes ~weather clouds}
+
+::AEW2-U010-L6-Q02::Choose a good project line. {=This is my mom. ~Mom dad dog. ~Who’s my? ~This friend is.}
+
+::AEW2-U010-L6-Q03::Choose the question from the phrase bank. {=Who’s this? ~This is my mom. ~It’s my dad. ~dog}
+
+::AEW2-U010-L6-Q04::Complete the answer frame\: It’s my ___. {=friend ~who ~this ~is}
+
+::AEW2-U010-L6-Q05::Choose the label under a Toto card. {=dog ~mom ~dad ~grandma}
+
+::AEW2-U010-L6-Q06::Which card is okay for your poster? {=friend card ~address card ~phone number card ~family history card}
+
+::AEW2-U010-L6-Q07::Choose the best project order. {=Choose cards → put on tree → say lines ~Say lines → hide cards → choose tree ~Put glue everywhere → write long story → stop ~Count to twenty → draw weather → say dog}
+
+::AEW2-U010-L6-Q08::Use 3 or 4 cards for your poster. {TRUE}
+
+::AEW2-U010-L6-Q09::Which word does not fit the poster? {=blue ~mom ~friend ~dog}
+
+::AEW2-U010-L6-Q10::Complete\: This is ___ friend. {=my ~who ~it ~dog}
+
+::AEW2-U010-L6-Q11::Which self-check helps your presentation? {=3 lines, clear voice, smile ~Run fast, shout, hide ~Use long family history ~Write an address}
+
+::AEW2-U010-L6-Q12::Choose the line for a Toto card. {=This is Toto. ~This is my grandma. ~Who’s Toto my? ~This dog my.}
+
+::AEW2-U010-L7-Q01::Choose a friendly first word. {=Hello. ~Goodbye. ~Under. ~Robot.}
+
+::AEW2-U010-L7-Q02::Choose the line for a mom card. {=This is my mom. ~This is my dog. ~Who’s this? ~It’s my friend.}
+
+::AEW2-U010-L7-Q03::Choose the line for a friend card. {=This is my friend. ~This is my dad. ~This is Toto. ~Who’s this?}
+
+::AEW2-U010-L7-Q04::Choose the line for Toto. {=This is Toto. ~This is my mom. ~It’s my sister. ~Who’s this?}
+
+::AEW2-U010-L7-Q05::Which card means speak clearly? {=clear voice ~small voice ~no voice ~fast run}
+
+::AEW2-U010-L7-Q06::How many lines do you need? {=3 lines ~30 lines ~0 lines ~a long story}
+
+::AEW2-U010-L7-Q07::Which self-check is friendly? {=smile ~hide ~shout ~run away}
+
+::AEW2-U010-L7-Q08::Choose a good presentation order. {=Hello. → This is my mom. → This is my friend. ~This is my friend. → Hello. → Who’s this? ~Dog. → Mom. → Run. ~Who’s this? → Who’s this? → Who’s this?}
+
+::AEW2-U010-L7-Q09::Which is NOT on the self-check cards? {=hide ~3 lines ~clear voice ~smile}
+
+::AEW2-U010-L7-Q10::A friend asks\: Who’s this? You show a friend card. What do you say? {=It’s my friend. ~Who’s this? ~This is my mom. ~It’s my dad.}
+
+::AEW2-U010-L7-Q11::What is your portfolio evidence? {=poster + voice lines ~only a pencil ~a weather card ~a shopping list}
+
+::AEW2-U010-L7-Q12::It is okay to show a friend card. {TRUE}
+
+::AEW2-U010-W-Q01::Frame 1\: What does Toto find? {=photo cards ~a lunch box ~a toy car ~a pencil}
+
+::AEW2-U010-W-Q02::Frame 1\: What is near the cards? {=a blank tree poster ~a weather window ~a sports field ~a birthday cake}
+
+::AEW2-U010-W-Q03::Frame 2\: Leo shows a ___ card. {=mom ~dog ~friend ~brother}
+
+::AEW2-U010-W-Q04::Frame 2\: What caption matches? {=This is my mom. ~Who’s this? ~It’s my friend. ~This is Toto.}
+
+::AEW2-U010-W-Q05::Frame 3\: What does Mia ask? {=Who’s this? ~This is my mom. ~It’s my dog. ~Goodbye.}
+
+::AEW2-U010-W-Q06::Frame 3\: Who thinks about the answer? {=Emma ~Toto ~Leo ~the teacher}
+
+::AEW2-U010-W-Q07::Frame 4\: Emma shows a ___ card. {=friend ~grandpa ~sister ~dad}
+
+::AEW2-U010-W-Q08::Frame 4\: Choose the best reply. {=It’s my friend. ~Who’s this? ~This is my mom. ~It’s my dad.}
+
+::AEW2-U010-W-Q09::Frame 5\: What do they finish? {=a tree poster ~a toy box ~a snack order ~a weather card}
+
+::AEW2-U010-W-Q10::Choose the story order. {=Toto finds cards → Leo says mom → Mia asks → Emma says friend → poster is finished ~Poster is finished → Toto finds cards → snack time → Leo runs → goodbye ~Mia asks → poster is finished → Toto finds cards → color quest → dog ~Leo says mom → dog sleeps → weather → poster → number trail}
+
+::AEW2-U010-W-Q11::Which word is in the Watch story? {=friend ~rainy ~ticket ~robot}
+
+::AEW2-U010-W-Q12::What can you make after the Watch story? {=a family/friend poster ~a restaurant menu ~a map of town ~a sports card}
+
+::AEW2-U010-P-Q01::Choose the project title. {=My Family/Friend Poster ~My Toy Location Page ~My Snack Order ~My Weather Window}
+
+::AEW2-U010-P-Q02::Choose the line for a mom card. {=This is my mom. ~This is my dog. ~Who’s this? ~It’s my friend.}
+
+::AEW2-U010-P-Q03::Choose the line for a friend card. {=This is my friend. ~This is my dad. ~This is Toto. ~Who’s this?}
+
+::AEW2-U010-P-Q04::Choose the line for Toto. {=This is Toto. ~This is my grandma. ~Who’s this? ~It’s my sister.}
+
+::AEW2-U010-P-Q05::Complete\: This is ___ mom. {=my ~who ~dog ~this}
+
+::AEW2-U010-P-Q06::Choose the question to ask about a card. {=Who’s this? ~This is my mom. ~It’s my dad. ~Hello.}
+
+::AEW2-U010-P-Q07::A\: Who’s this? B\: ___ (dad card) {=It’s my dad. ~Who’s this? ~This is my friend. ~It’s my dog.}
+
+::AEW2-U010-P-Q08::Put the words in order. {=This / is / my / friend. ~Friend / my / is / this. ~My / this / friend / is. ~Is / friend / this / my.}
+
+::AEW2-U010-P-Q09::Use 3 or 4 cards on your poster. {TRUE}
+
+::AEW2-U010-P-Q10::Choose a good speaking check. {=clear voice ~tiny hidden voice ~no card ~run away}
+
+::AEW2-U010-P-Q11::You forget a line. What can help? {=Look at the phrase bank. ~Hide the poster. ~Write an address. ~Use a long story.}
+
+::AEW2-U010-P-Q12::Choose the final evidence. {=I can show my poster! ~I can cook lunch! ~I can buy a ticket! ~I can run fast!}

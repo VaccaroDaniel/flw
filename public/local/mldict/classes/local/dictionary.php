@@ -9,14 +9,35 @@ class dictionary {
     public const TABLE_ENTRY = 'local_mldict_entry';
     public const TABLE_TRANSLATION = 'local_mldict_translation';
     public const TABLE_EXAMPLE = 'local_mldict_example';
+    private const DEFAULT_ENABLED_LANGUAGES = 'en,ru,zh,ja,de,fr,es';
 
     public static function lang_options(): array {
+        $languages = self::all_lang_options();
+        $enabled = get_config('local_mldict', 'enabledlanguages') ?: self::DEFAULT_ENABLED_LANGUAGES;
+        $options = [];
+        foreach (preg_split('/\s*,\s*/', trim($enabled)) as $code) {
+            if ($code !== '' && isset($languages[$code])) {
+                $options[$code] = $languages[$code];
+            }
+        }
+
+        return $options ?: $languages;
+    }
+
+    public static function lang_label(string $code): string {
+        $languages = self::all_lang_options();
+        return $languages[$code] ?? $code;
+    }
+
+    private static function all_lang_options(): array {
         return [
             'en' => get_string('english', 'local_mldict'),
-            'es' => get_string('spanish', 'local_mldict'),
-            'fr' => get_string('french', 'local_mldict'),
-            'de' => get_string('german', 'local_mldict'),
+            'ru' => get_string('russian', 'local_mldict'),
+            'zh' => get_string('chinese', 'local_mldict'),
             'ja' => get_string('japanese', 'local_mldict'),
+            'de' => get_string('german', 'local_mldict'),
+            'fr' => get_string('french', 'local_mldict'),
+            'es' => get_string('spanish', 'local_mldict'),
         ];
     }
 
@@ -44,21 +65,19 @@ class dictionary {
         ];
     }
 
-    public static function search_entries(string $query = '', string $lang = '', int $limit = 100): array {
+    public static function search_entries(string $query = '', string $lang = '', int $limit = 100, int $offset = 0): array {
         global $DB;
 
-        $where = [];
-        $params = [];
-        if ($query !== '') {
-            $where[] = $DB->sql_like('headword', ':query', false, false);
-            $params['query'] = '%' . $DB->sql_like_escape($query) . '%';
-        }
-        if ($lang !== '') {
-            $where[] = 'sourcelang = :sourcelang';
-            $params['sourcelang'] = $lang;
-        }
-        $wheresql = $where ? implode(' AND ', $where) : '1=1';
-        return $DB->get_records_select(self::TABLE_ENTRY, $wheresql, $params, 'headword ASC, sourcelang ASC', '*', 0, $limit);
+        [$wheresql, $params] = self::search_filter($query, $lang);
+        $sort = self::search_sort($query, $params);
+        return $DB->get_records_select(self::TABLE_ENTRY, $wheresql, $params, $sort, '*', $offset, $limit);
+    }
+
+    public static function count_entries(string $query = '', string $lang = ''): int {
+        global $DB;
+
+        [$wheresql, $params] = self::search_filter($query, $lang);
+        return $DB->count_records_select(self::TABLE_ENTRY, $wheresql, $params);
     }
 
     public static function get_entry(int $id): \stdClass {
@@ -189,7 +208,7 @@ class dictionary {
         $out = \html_writer::tag('h3', format_string($entry->headword));
         $meta = [];
         if (!empty($entry->sourcelang)) {
-            $meta[] = s($entry->sourcelang);
+            $meta[] = s(self::lang_label($entry->sourcelang));
         }
         if (!empty($entry->partofspeech)) {
             $meta[] = s($entry->partofspeech);
@@ -209,14 +228,14 @@ class dictionary {
         if (!empty($entry->translations)) {
             $items = '';
             foreach ($entry->translations as $translation) {
-                $items .= \html_writer::tag('li', \html_writer::tag('strong', s($translation->targetlang)) . ': ' . format_text($translation->translation, FORMAT_PLAIN));
+                $items .= \html_writer::tag('li', \html_writer::tag('strong', s(self::lang_label($translation->targetlang))) . ': ' . format_text($translation->translation, FORMAT_PLAIN));
             }
             $out .= \html_writer::tag('h4', get_string('translations', 'local_mldict')) . \html_writer::tag('ul', $items);
         }
         if (!empty($entry->examples)) {
             $items = '';
             foreach ($entry->examples as $example) {
-                $text = \html_writer::tag('strong', s($example->examplelang)) . ': ' . format_text($example->sentence, FORMAT_PLAIN);
+                $text = \html_writer::tag('strong', s(self::lang_label($example->examplelang))) . ': ' . format_text($example->sentence, FORMAT_PLAIN);
                 if (!empty($example->translation)) {
                     $text .= \html_writer::div(format_text($example->translation, FORMAT_PLAIN), 'local-mldict-example-translation');
                 }
@@ -275,6 +294,44 @@ class dictionary {
             }
         }
         return $items;
+    }
+
+    private static function search_filter(string $query = '', string $lang = ''): array {
+        global $DB;
+
+        $where = [];
+        $params = [];
+        if ($query !== '') {
+            $where[] = $DB->sql_like('headword', ':query', false, false);
+            $params['query'] = '%' . $DB->sql_like_escape($query) . '%';
+        }
+        if ($lang !== '') {
+            $where[] = 'sourcelang = :sourcelang';
+            $params['sourcelang'] = $lang;
+        }
+
+        return [$where ? implode(' AND ', $where) : '1=1', $params];
+    }
+
+    private static function search_sort(string $query, array &$params): string {
+        global $DB;
+
+        if ($query === '') {
+            return 'headword ASC, sourcelang ASC';
+        }
+
+        $params['queryexact'] = $query;
+        $params['querystart'] = $DB->sql_like_escape($query) . '%';
+        $params['queryanywhere'] = '%' . $DB->sql_like_escape($query) . '%';
+        $params['queryposition'] = $query;
+        $position = $DB->sql_position('LOWER(:queryposition)', 'LOWER(headword)');
+
+        return "CASE
+                    WHEN " . $DB->sql_equal('headword', ':queryexact', false) . " THEN 0
+                    WHEN " . $DB->sql_like('headword', ':querystart', false, false) . " THEN 1
+                    WHEN " . $DB->sql_like('headword', ':queryanywhere', false, false) . " THEN 2
+                    ELSE 3
+                END ASC, {$position} ASC, " . $DB->sql_length('headword') . " ASC, headword ASC, sourcelang ASC";
     }
 
     private static function parse_example_lines(string $text): array {

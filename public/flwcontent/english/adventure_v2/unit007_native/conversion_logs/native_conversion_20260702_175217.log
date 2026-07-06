@@ -1,0 +1,105 @@
+Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit007\load_flw_native_generated_course.php
+
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit007\load_flw_native_generated_course.php
+No syntax errors detected in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit007\load_flw_native_generated_course.php
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit007\load_flw_native_generated_course.php
+{
+    "courseid": 107,
+    "shortname": "FLW-AEW2-U007-NATIVE",
+    "fullname": "Adventure English World V2 - Unit 7 Toy Box Mystery",
+    "conversion": "native_label_resources_no_iframe",
+    "source": "D:/WinPro.Delta/Projects/FLW/FLW-V2/adventure-english-world/unit007",
+    "static_assets_dir": "C:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public/flwcontent/english/adventure_v2/unit007_native",
+    "static_assets_url": "https://192.168.129.79/flwcontent/english/adventure_v2/unit007_native",
+    "course_cover_image": "AEW2_U007_IMG01_cover_toy_box_mystery.png",
+    "label_resources": [
+        {
+            "section": 1,
+            "name": "Unit Overview",
+            "cmid": 936
+        },
+        {
+            "section": 2,
+            "name": "Lesson 1 - Unit Opener: Toy Box Mystery",
+            "cmid": 937
+        },
+        {
+            "section": 3,
+            "name": "Lesson 2 - Lesson 1: Meet the Toys \u2014 I can recognize and say toy words.",
+            "cmid": 938
+        },
+        {
+            "section": 4,
+            "name": "Lesson 3 - Lesson 2: In the Box \u2014 I can say where a toy is with in.",
+            "cmid": 939
+        },
+        {
+            "section": 5,
+            "name": "Lesson 4 - Lesson 3: On the Shelf \u2014 I can say where a toy is with on.",
+            "cmid": 940
+        },
+        {
+            "section": 6,
+            "name": "Lesson 5 - Lesson 4: Under the Table \u2014 I can say where a toy is with under.",
+            "cmid": 941
+        },
+        {
+            "section": 7,
+            "name": "Lesson 6 - Lesson 5: Where Is the Toy? \u2014 I can ask and answer Where is the toy?",
+            "cmid": 942
+        },
+        {
+            "section": 8,
+            "name": "Lesson 7 - Lesson 6: Toto's Toy Hunt \u2014 I can follow toy clues with in, on, and under.",
+            "cmid": 943
+        },
+        {
+            "section": 9,
+            "name": "Lesson 8 - Lesson 7: Say and Show \u2014 I can prepare my toy location page.",
+            "cmid": 944
+        },
+        {
+            "section": 10,
+            "name": "Watch Lesson",
+            "cmid": 945
+        },
+        {
+            "section": 11,
+            "name": "Final Project",
+            "cmid": 946
+        },
+        {
+            "section": 12,
+            "name": "Final Project 2",
+            "cmid": 947
+        }
+    ],
+    "quiz_cmid": 948,
+    "quiz_question_count": 108,
+    "teacher_guide_cmid": 949,
+    "enrolments": [
+        {
+            "username": "win.pro",
+            "userid": 4,
+            "role": "student"
+        },
+        {
+            "username": "winpro.delta",
+            "userid": 3,
+            "role": "student"
+        },
+        {
+            "username": "admin",
+            "userid": 2,
+            "role": "editingteacher"
+        }
+    ],
+    "courseurl": "https://192.168.129.79/course/view.php?id=107",
+    "quizurl": "https://192.168.129.79/mod/quiz/view.php?id=948"
+}
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe C:\Dev\MoodleWindowsInstaller-latest-501\server\moodle\admin\cli\purge_caches.php
+https://192.168.129.79/course/view.php?id=107 -> HTTP 200
+https://192.168.129.79/mod/quiz/view.php?id=948 -> HTTP 200
+https://192.168.129.79/flwcontent/english/adventure_v2/unit007_native -> HTTP 200
+
+Done. Log saved to D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit007\conversion_logs\native_conversion_20260702_175217.log

@@ -1,0 +1,215 @@
+::AEW2-U011-L1-Q01:: Choose the sunny picture word. {=sunny ~rainy ~windy ~cloudy}
+
+::AEW2-U011-L1-Q02:: Choose the rainy picture word. {~windy ~cloudy =rainy ~sunny}
+
+::AEW2-U011-L1-Q03:: Choose the windy picture word. {~cloudy =windy ~rainy ~sunny}
+
+::AEW2-U011-L1-Q04:: Choose the cloudy picture word. {~sunny ~rainy =cloudy ~windy}
+
+::AEW2-U011-L1-Q05:: Match the sun picture. {=sunny ~rainy ~boots ~coat}
+
+::AEW2-U011-L1-Q06:: Match the rain picture. {=rainy ~sunny ~hat ~shoes}
+
+::AEW2-U011-L1-Q07:: Cloudy means many clouds. {=true ~false ~ ~}
+
+::AEW2-U011-L1-Q08:: Windy means the leaves move. {=true ~false ~ ~}
+
+::AEW2-U011-L1-Q09:: Leaves move outside. Choose the weather. {~rainy =windy ~sunny ~cloudy}
+
+::AEW2-U011-L1-Q10:: The sky has many clouds. Choose the weather. {=cloudy ~rainy ~sunny ~hat}
+
+::AEW2-U011-L1-Q11:: Which pair is weather only? {=sunny and rainy ~coat and boots ~hat and shoes ~umbrella and sweater}
+
+::AEW2-U011-L1-Q12:: Build the sentence for sun. {=It's sunny. ~It's boots. ~Choose rainy. ~Hat sunny.}
+
+::AEW2-U011-L2-Q01:: Choose the sunny sentence. {=It's sunny. ~It's rainy. ~Choose boots. ~This is my hat.}
+
+::AEW2-U011-L2-Q02:: Choose the rainy sentence. {~It's windy. =It's rainy. ~I want juice. ~Choose shoes.}
+
+::AEW2-U011-L2-Q03:: It's ____. {=sunny ~boots ~hat ~coat}
+
+::AEW2-U011-L2-Q04:: It's ____. {~umbrella =rainy ~T-shirt ~shoes}
+
+::AEW2-U011-L2-Q05:: Sun outside. What is it? {=sunny ~rainy ~boots ~umbrella}
+
+::AEW2-U011-L2-Q06:: Rain outside. What is it? {~cloudy ~hat =rainy ~sunny}
+
+::AEW2-U011-L2-Q07:: Match sunny day. {=hat ~boots ~coat ~umbrella}
+
+::AEW2-U011-L2-Q08:: Match rainy day. {~T-shirt ~hat =boots ~shoes}
+
+::AEW2-U011-L2-Q09:: It's sunny means rain outside. {~true =false ~ ~}
+
+::AEW2-U011-L2-Q10:: It's rainy means rain outside. {=true ~false ~ ~}
+
+::AEW2-U011-L2-Q11:: Look! Sun! Choose a reply. {=It's sunny. ~It's rainy. ~Choose boots. ~I'm Leo.}
+
+::AEW2-U011-L2-Q12:: Look! Rain! Choose a reply. {~It's windy. =It's rainy. ~Choose a hat. ~This is my mom.}
+
+::AEW2-U011-L3-Q01:: Choose the windy word. {=windy ~cloudy ~coat ~boots}
+
+::AEW2-U011-L3-Q02:: Choose the cloudy word. {~rainy ~sunny =cloudy ~umbrella}
+
+::AEW2-U011-L3-Q03:: It's ____. {=windy ~hat ~coat ~shoes}
+
+::AEW2-U011-L3-Q04:: It's ____. {~boots ~umbrella =cloudy ~T-shirt}
+
+::AEW2-U011-L3-Q05:: Leaves move. Choose the sentence. {=It's windy. ~It's cloudy. ~It's rainy. ~Choose boots.}
+
+::AEW2-U011-L3-Q06:: Many clouds. Choose the sentence. {~It's sunny. =It's cloudy. ~It's windy. ~Choose a hat.}
+
+::AEW2-U011-L3-Q07:: Windy can move leaves. {=true ~false ~ ~}
+
+::AEW2-U011-L3-Q08:: Cloudy means a bright sun only. {~true =false ~ ~}
+
+::AEW2-U011-L3-Q09:: Windy day. Choose one good clothes word. {=jacket ~sandwich ~juice ~toy}
+
+::AEW2-U011-L3-Q10:: Cloudy day. Choose one clothes word. {=sweater ~dog ~apple ~rainy}
+
+::AEW2-U011-L3-Q11:: A friend points to many clouds. What do you say? {=It's cloudy. ~It's rainy. ~Choose an apple. ~This is my dad.}
+
+::AEW2-U011-L3-Q12:: A friend points to moving leaves. What do you say? {=It's windy. ~It's sunny. ~I want milk. ~Choose boots.}
+
+::AEW2-U011-L4-Q01:: Choose the coat. {=coat ~sunny ~dog ~apple}
+
+::AEW2-U011-L4-Q02:: Choose the hat. {~rainy =hat ~boots ~milk}
+
+::AEW2-U011-L4-Q03:: Choose the boots. {=boots ~cloudy ~juice ~toy}
+
+::AEW2-U011-L4-Q04:: Choose the T-shirt. {~sandwich =T-shirt ~rainy ~mom}
+
+::AEW2-U011-L4-Q05:: Choose the shoes. {=shoes ~windy ~cookie ~dad}
+
+::AEW2-U011-L4-Q06:: Choose the umbrella. {=umbrella ~sunny ~bird ~banana}
+
+::AEW2-U011-L4-Q07:: Choose the jacket. {~cloudy =jacket ~fish ~water}
+
+::AEW2-U011-L4-Q08:: Choose the sweater. {=sweater ~rainy ~orange ~ball}
+
+::AEW2-U011-L4-Q09:: Match the rainy-day object. {=umbrella ~T-shirt ~hat ~shoes}
+
+::AEW2-U011-L4-Q10:: Match the rainy-day shoes. {=boots ~hat ~T-shirt ~sweater}
+
+::AEW2-U011-L4-Q11:: Which pair is clothes only? {=coat and hat ~sunny and rainy ~apple and juice ~cat and dog}
+
+::AEW2-U011-L4-Q12:: Which pair can help on a rainy day? {=boots and umbrella ~T-shirt and sun ~banana and milk ~ball and kite}
+
+::AEW2-U011-L5-Q01:: It's sunny. Choose one. {=hat ~boots ~umbrella ~coat}
+
+::AEW2-U011-L5-Q02:: It's sunny. Choose one. {~boots =T-shirt ~coat ~umbrella}
+
+::AEW2-U011-L5-Q03:: It's rainy. Choose one. {~hat =boots ~T-shirt ~shoes}
+
+::AEW2-U011-L5-Q04:: It's rainy. Choose one. {=umbrella ~T-shirt ~hat ~shorts}
+
+::AEW2-U011-L5-Q05:: It's windy. Choose one. {~juice =jacket ~apple ~toy}
+
+::AEW2-U011-L5-Q06:: It's cloudy. Choose one. {=sweater ~cookie ~dog ~rainy}
+
+::AEW2-U011-L5-Q07:: Build a choice for sunny weather. {=Choose a hat. ~It's boots. ~I want rain. ~This is cloudy.}
+
+::AEW2-U011-L5-Q08:: Build a choice for rainy weather. {=Choose boots. ~It's hat. ~This is rain. ~I like cloudy.}
+
+::AEW2-U011-L5-Q09:: Friend\: It's rainy. What do you say? {=Choose an umbrella. ~It's sunny. ~I want milk. ~This is my friend.}
+
+::AEW2-U011-L5-Q10:: Friend\: It's sunny. What do you say? {=Choose a T-shirt. ~Choose boots. ~It's rainy. ~I'm Emma.}
+
+::AEW2-U011-L5-Q11:: Fix the choice\: It's sunny. Choose boots. {=Choose a hat. ~Choose a coat. ~Choose an umbrella. ~It's rainy.}
+
+::AEW2-U011-L5-Q12:: Fix the choice\: It's rainy. Choose a T-shirt. {=Choose boots. ~Choose a hat. ~It's sunny. ~Choose shoes.}
+
+::AEW2-U011-L6-Q01:: Mia\: It's rainy. Help Mia. {=Choose a coat. ~Choose a T-shirt. ~Choose a toy. ~I want juice.}
+
+::AEW2-U011-L6-Q02:: Leo\: It's rainy. Help Leo. {=Choose boots. ~Choose a hat. ~It's sunny. ~This is my sister.}
+
+::AEW2-U011-L6-Q03:: Emma\: It's sunny. Help Emma. {=Choose a hat. ~Choose boots. ~Choose an umbrella. ~It's rainy.}
+
+::AEW2-U011-L6-Q04:: Mia\: It's windy. Help Mia. {=Choose a jacket. ~Choose juice. ~Choose a cookie. ~It's sunny.}
+
+::AEW2-U011-L6-Q05:: Match cloudy day. {=sweater ~water ~ball ~fish}
+
+::AEW2-U011-L6-Q06:: Match rainy day. {=umbrella ~T-shirt ~hat ~shoes}
+
+::AEW2-U011-L6-Q07:: Choose the good order. {=Look at weather. Choose clothes. ~Choose clothes. Say hello. ~Eat snack. Choose toy. ~Count first. Say family.}
+
+::AEW2-U011-L6-Q08:: ____ a coat. {=Choose ~It's ~Rainy ~Sunny}
+
+::AEW2-U011-L6-Q09:: Choose an ____. {=umbrella ~rainy ~sunny ~cloudy}
+
+::AEW2-U011-L6-Q10:: It's rainy. Choose boots. {=true ~false ~ ~}
+
+::AEW2-U011-L6-Q11:: It's sunny. Choose an umbrella is the only good choice. {~true =false ~ ~}
+
+::AEW2-U011-L6-Q12:: Friend\: Choose a hat. Best reply? {=Thank you. ~It's rainy. ~I want milk. ~This is my dog.}
+
+::AEW2-U011-L7-Q01:: A Weather Choice Card needs one ____. {=weather picture ~toy picture ~family name ~toy box}
+
+::AEW2-U011-L7-Q02:: A Weather Choice Card needs matching ____. {=clothes pictures ~animal sounds ~number signs ~food words}
+
+::AEW2-U011-L7-Q03:: Choose the weather sentence. {=It's rainy. ~Choose boots. ~This is my mom. ~I want juice.}
+
+::AEW2-U011-L7-Q04:: Choose the clothes choice. {=Choose boots. ~It's cloudy. ~Hello Mia. ~I like cats.}
+
+::AEW2-U011-L7-Q05:: Rainy card\: choose ____. {=boots ~T-shirt ~hat ~sneakers}
+
+::AEW2-U011-L7-Q06:: Sunny card\: choose ____. {=hat ~boots ~coat ~umbrella}
+
+::AEW2-U011-L7-Q07:: Build a weather sentence. {=It's cloudy. ~Choose cloudy. ~Cloudy boots. ~This is boots.}
+
+::AEW2-U011-L7-Q08:: Build a clothes choice. {=Choose a sweater. ~It's sweater. ~Sweater is weather. ~I want cloudy.}
+
+::AEW2-U011-L7-Q09:: Choose the good project order. {=Choose weather. Choose clothes. Share card. ~Share card. Choose weather. Choose clothes. ~Choose toy. Choose snack. Share card. ~Count. Read. Sleep.}
+
+::AEW2-U011-L7-Q10:: A Weather Choice Card shows weather and clothes. {=true ~false ~ ~}
+
+::AEW2-U011-L7-Q11:: The project needs a long story. {~true =false ~ ~}
+
+::AEW2-U011-L7-Q12:: Present a sunny card. {=It's sunny. Choose a hat. ~It's rainy. Choose boots. ~I want an apple. ~This is my brother.}
+
+::AEW2-U011-W-Q01:: What is the Watch about? {=weather window ~snack table ~toy box ~family tree}
+
+::AEW2-U011-W-Q02:: Mia sees the sun. What is it? {=sunny ~rainy ~windy ~cloudy}
+
+::AEW2-U011-W-Q03:: Emma sees rain. What is it? {=rainy ~sunny ~windy ~hat}
+
+::AEW2-U011-W-Q04:: Leaves move. What is it? {~cloudy =windy ~rainy ~boots}
+
+::AEW2-U011-W-Q05:: Big clouds appear. What is it? {=cloudy ~sunny ~umbrella ~coat}
+
+::AEW2-U011-W-Q06:: Choose the Watch order. {=sunny, rainy, windy, cloudy ~rainy, snack, family, toy ~cloudy, sunny, animal, number ~boots, hat, coat, shoes}
+
+::AEW2-U011-W-Q07:: Leo chooses a ____ for a sunny day. {=hat ~boots ~umbrella ~coat}
+
+::AEW2-U011-W-Q08:: Mia chooses ____ for a rainy day. {=boots ~T-shirt ~hat ~sweater}
+
+::AEW2-U011-W-Q09:: Mia chooses an ____ for a rainy day. {=umbrella ~hat ~apple ~kite}
+
+::AEW2-U011-W-Q10:: Emma chooses a ____ for a cloudy day. {=sweater ~juice ~toy ~sandwich}
+
+::AEW2-U011-W-Q11:: Choose the best summary. {=The team looks at weather and chooses clothes. ~The team counts toys. ~The team finds a toy. ~The team writes a long story.}
+
+::AEW2-U011-W-Q12:: What can you make after Watch? {=Weather Choice Card ~Snack menu ~Family tree ~Toy box}
+
+::AEW2-U011-P-Q01:: Choose one thing for your card. {=weather picture ~money price ~long story ~weather map}
+
+::AEW2-U011-P-Q02:: Choose one more thing for your card. {=clothes pictures ~number card ~toy picture ~color card}
+
+::AEW2-U011-P-Q03:: Choose a weather sentence. {=It's sunny. ~Choose shoes. ~Hello Toto. ~I want water.}
+
+::AEW2-U011-P-Q04:: Choose a clothes sentence. {=Choose a hat. ~It's rainy. ~This is my sister. ~How many?}
+
+::AEW2-U011-P-Q05:: Rainy card\: choose ____. {=umbrella ~T-shirt ~hat ~sandwich}
+
+::AEW2-U011-P-Q06:: Rainy card\: choose ____. {=boots ~T-shirt ~hat ~apple}
+
+::AEW2-U011-P-Q07:: Sunny card\: choose ____. {=hat ~boots ~coat ~umbrella}
+
+::AEW2-U011-P-Q08:: Cloudy card\: choose ____. {=sweater ~juice ~toy ~cookie}
+
+::AEW2-U011-P-Q09:: Build a rainy card line. {=It's rainy. Choose boots. ~It's sunny. Choose a hat. ~I want juice, please. ~This is my brother.}
+
+::AEW2-U011-P-Q10:: Build a sunny card line. {=It's sunny. Choose a hat. ~It's rainy. Choose boots. ~Choose an apple. ~Who's this?}
+
+::AEW2-U011-P-Q11:: My project can use one short weather sentence. {=true ~false ~ ~}
+
+::AEW2-U011-P-Q12:: Ready to share? Choose the best check. {=Weather picture + clothes pictures + one short sentence ~A long report + prices + map ~Only a snack picture ~Only a family picture}

@@ -1,0 +1,1407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="multichoice">
+<name><text><![CDATA[Q001 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose red.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q001]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q002 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose blue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q002]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q003 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose yellow.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q003]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q004 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose green.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q004]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q005 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q005]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q006 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q006]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q007 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q007]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q008 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q008]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q009 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Match the red card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q009]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q010 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Match the blue card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q010]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q011 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: Hello. I’m ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q011]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q012 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the closing word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q012]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[Hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q013 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose orange.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q013]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q014 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose purple.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q014]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q015 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose pink.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q015]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q016 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose black.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q016]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q017 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose white.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q017]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q018 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose brown.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q018]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q019 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q019]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q020 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q020]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q021 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q021]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q022 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Match: black card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q022]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q023 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Match: white card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q023]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q024 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Match: brown card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q024]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q025 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q025]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q026 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q026]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q027 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q027]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q028 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q028]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q029 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q029]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q030 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q030]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q031 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q031]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s yellow.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello yellow.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q032 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q032]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye green.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q033 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q033]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q034 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q034]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[It’s yellow.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q035 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q035]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s yellow.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I’m Leo.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q036 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q036]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hi.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q037 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Red book. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q037]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q038 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Blue bag. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q038]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q039 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Yellow pencil. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q039]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q040 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Green box. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q040]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q041 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[red book →]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q041]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q042 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[blue bag →]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q042]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q043 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[yellow pencil →]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q043]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q044 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[green box →]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q044]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q045 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the object.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q045]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue bag]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green box]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q046 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the object.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q046]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow pencil]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue bag]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q047 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the object.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q047]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green box]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange box]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink bag]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q048 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q048]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[bag]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q049 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Leo finds a clue. What color?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q049]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q050 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Mia finds a clue. What color?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q050]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q051 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Emma finds a clue. What color?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q051]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q052 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Toto finds a clue. What color?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q052]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q053 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q053]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q054 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q054]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q055 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q055]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q056 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q056]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q057 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Story order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q057]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red → blue → yellow → green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue → red → green → yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow → blue → red → green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q058 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Leo: It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q058]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q059 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Mia: It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q059]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q060 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[End of the hunt. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q060]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q061 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose brown.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q061]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q062 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose orange.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q062]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q063 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose pink.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q063]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q064 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q064]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q065 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q065]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q066 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q066]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q067 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Red card goes with:]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q067]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red basket]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q068 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Blue card goes with:]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q068]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[yellow basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue basket]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q069 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[White card goes with:]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q069]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[black basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brown basket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[white basket]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q070 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q070]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[purple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[white]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q071 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q071]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q072 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q072]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q073 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Poster name line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q073]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I’m ___.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q074 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Color word for red card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q074]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q075 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Color word for blue card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q075]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q076 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Hello. I’m ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q076]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q077 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q077]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q078 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q078]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q079 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the project start.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q079]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I’m Leo.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I’m Hello Leo.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo. Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q080 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the color line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q080]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q081 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the color line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q081]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q082 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Make the project end.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q082]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q083 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q083]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I’m Mia.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q084 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q084]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q085 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[First greeting.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q085]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello!]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q086 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Leo’s clue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q086]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q087 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Mia’s clue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q087]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q088 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Emma’s clue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q088]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[yellow]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brown]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q089 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Toto’s clue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q089]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pink]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[black]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q090 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q090]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q091 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q091]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q092 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q092]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s yellow.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I’m Leo.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q093 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q093]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[It’s green.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q094 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Watch color order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q094]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red → blue → yellow → green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[green → yellow → blue → red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue → red → green → yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q095 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q095]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q096 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[End of video.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q096]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye!]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q097 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the project title.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q097]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[My Color Mini-Poster]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Age]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q098 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the name line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q098]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I’m ___.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q099 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a color word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q099]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q100 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a color word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q100]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q101 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a color word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q101]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q102 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q102]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[red]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q103 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q103]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q104 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[It’s ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q104]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[green]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hello]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q105 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Start the recording.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q105]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I’m ___.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I’m Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye. I’m ___.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q106 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Say a color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q106]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s red.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q107 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Say another color.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q107]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s blue.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[blue It’s.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye blue.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q108 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[End the recording.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Look again. Then choose the color.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q108]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+</quiz>

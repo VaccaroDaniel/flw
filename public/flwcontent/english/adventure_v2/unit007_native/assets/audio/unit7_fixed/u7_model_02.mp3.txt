@@ -1,0 +1,8 @@
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_01.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_02.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_03.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_04.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_05.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_06.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_07.mp3'
+file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit007/assets/audio/unit7_fixed/u7_model_02_08.mp3'

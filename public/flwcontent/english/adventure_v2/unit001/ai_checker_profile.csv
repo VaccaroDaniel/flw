@@ -1,0 +1,9 @@
+checker_id,location,skill,expected_output,feedback_categories,repair_action,portfolio_link
+U1-AI-L1,Lesson 1,speaking/pronunciation,Hello. or Hi.,"Clear voice, friendly tone, and clear /h/ sound.","Listen again, point to the greeting card, and repeat once.",no
+U1-AI-L2,Lesson 2,speaking/pronunciation,I’m ___.,"I’m is present, name is clear, and final /m/ in I’m is clear.","Repeat the model, then try again.",no
+U1-AI-L3,Lesson 3,speaking/pronunciation,What’s your name? or I’m ___.,"Correct chunk, correct order, and clear name.","Put the question card before the answer card, then retry.",no
+U1-AI-L4,Lesson 4,speaking/pronunciation,Goodbye. or Bye.,"Correct phrase, clear voice, and friendly tone.","Sort picture cards into meet and leave, then retry.",no
+U1-AI-L5,Lesson 5,speaking/pronunciation,"Hello, Leo. / Hi, Mia. / Hello, Emma. / Hello, Toto.",Greeting is present and character name is clear.,"Match the name card to the character, then retry.",no
+U1-AI-L6,Lesson 6,speaking/project,Learner name + I’m ___ phrase.,"Name is visible, I’m is present, and phrase is easy to read.",Compare with the model card and add the missing part.,yes
+U1-AI-L7,Lesson 7,speaking/project,Hello. I’m ___. Goodbye.,"Greeting, I’m + name, goodbye, clear voice, and friendly tone.","Use the three-card checklist, then record again.",yes
+U1-AI-PROJ,Final Project,portfolio speaking + name card,Hello. I’m ___. Goodbye. + complete name card,task completion; clarity; card completeness,revise missing part and resubmit,yes

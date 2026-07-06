@@ -1,0 +1,15 @@
+check,status,detail
+Full lesson content file exists,PASS,AEW2_U007_full_lesson_content.csv
+Required content sections present,PASS,"Final Project, Lesson 1, Lesson 2, Lesson 3, Lesson 4, Lesson 5, Lesson 6, Lesson 7, Unit Opener, Watch"
+Practice total equals 108,PASS,108
+Practice section counts are 12 each,PASS,"{""Lesson 1"": 12, ""Lesson 2"": 12, ""Lesson 3"": 12, ""Lesson 4"": 12, ""Lesson 5"": 12, ""Lesson 6"": 12, ""Lesson 7"": 12, ""Project"": 12, ""Watch"": 12}"
+GIFT question bank count equals 108,PASS,108
+Answer option mapping valid,PASS,
+All referenced images are available,PASS,
+Image count in expected Pre-A1 range,PASS,20
+Image use map present and complete,PASS,"image_use_map=20, files=20"
+Watch script has 5 frame entries,PASS,5
+Watch frame images exist,PASS,
+Lesson/practice image alignment matrix has no FAIL,PASS,
+Visual identity and safety for available images,PASS,Manual contact-sheet review: characters and child-safe toy-room visuals are consistent.
+Moodle HTML readiness,PASS,Ready to build Moodle HTML after this gate.

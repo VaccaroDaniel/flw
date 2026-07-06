@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checks": {
+    "images": 24,
+    "practice_items": 108,
+    "gift_questions": 108,
+    "lesson_rows": 10,
+    "video_mp4_exists": true,
+    "video_vtt_exists": true
+  },
+  "html_missing_references": [],
+  "package_dir": "/mnt/data/adventure_english_world_v2_unit010_family_tree_moodle_package"
+}

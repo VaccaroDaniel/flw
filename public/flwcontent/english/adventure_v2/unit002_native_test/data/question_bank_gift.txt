@@ -1,0 +1,216 @@
+::Q001::Choose red. {=red ~blue ~yellow}
+
+::Q002::Choose blue. {~green =blue ~red}
+
+::Q003::Choose yellow. {=yellow ~red ~blue}
+
+::Q004::Choose green. {~blue ~yellow =green}
+
+::Q005::Listen. Choose the color. {=red ~green ~blue}
+
+::Q006::Listen. Choose the color. {~yellow =blue ~red}
+
+::Q007::Listen. Choose the color. {=yellow ~green ~red}
+
+::Q008::Listen. Choose the color. {~blue =green ~yellow}
+
+::Q009::Match the red card. {=red ~blue ~green}
+
+::Q010::Match the blue card. {~yellow =blue ~red}
+
+::Q011::Complete: Hello. I’m ___. {=Leo ~red ~blue}
+
+::Q012::Choose the closing word. {~Hello =Goodbye ~red}
+
+::Q013::Choose orange. {=orange ~yellow ~red}
+
+::Q014::Choose purple. {~blue =purple ~green}
+
+::Q015::Choose pink. {=pink ~black ~brown}
+
+::Q016::Choose black. {~white =black ~blue}
+
+::Q017::Choose white. {~brown ~green =white}
+
+::Q018::Choose brown. {=brown ~orange ~pink}
+
+::Q019::Listen. Choose the color. {=orange ~purple ~green}
+
+::Q020::Listen. Choose the color. {~pink =purple ~yellow}
+
+::Q021::Listen. Choose the color. {=pink ~white ~red}
+
+::Q022::Match: black card. {=black ~blue ~brown}
+
+::Q023::Match: white card. {~yellow =white ~green}
+
+::Q024::Match: brown card. {~red ~orange =brown}
+
+::Q025::It’s ___. {=red ~Leo ~hello}
+
+::Q026::It’s ___. {=blue ~Mia ~goodbye}
+
+::Q027::It’s ___. {=yellow ~Toto ~hello}
+
+::Q028::It’s ___. {=green ~Emma ~goodbye}
+
+::Q029::Make the sentence. {=It’s red. ~red It’s. ~Hello red.}
+
+::Q030::Make the sentence. {=It’s blue. ~blue It’s. ~Goodbye blue.}
+
+::Q031::Make the sentence. {=It’s yellow. ~yellow It’s. ~Hello yellow.}
+
+::Q032::Make the sentence. {=It’s green. ~green It’s. ~Goodbye green.}
+
+::Q033::Listen. Choose the sentence. {=It’s red. ~It’s blue. ~Goodbye.}
+
+::Q034::Listen. Choose the sentence. {~It’s yellow. =It’s blue. ~Hello.}
+
+::Q035::Listen. Choose the sentence. {=It’s yellow. ~It’s green. ~I’m Leo.}
+
+::Q036::Listen. Choose the sentence. {~It’s red. =It’s green. ~Hi.}
+
+::Q037::Red book. Choose the color. {=red ~blue ~yellow}
+
+::Q038::Blue bag. Choose the color. {~green =blue ~red}
+
+::Q039::Yellow pencil. Choose the color. {=yellow ~orange ~purple}
+
+::Q040::Green box. Choose the color. {~blue =green ~pink}
+
+::Q041::red book → {=red ~black ~white}
+
+::Q042::blue bag → {~brown =blue ~yellow}
+
+::Q043::yellow pencil → {~green =yellow ~pink}
+
+::Q044::green box → {~orange ~red =green}
+
+::Q045::Listen. Choose the object. {=red book ~blue bag ~green box}
+
+::Q046::Listen. Choose the object. {~yellow pencil =blue bag ~red book}
+
+::Q047::Listen. Choose the object. {=green box ~orange box ~pink bag}
+
+::Q048::It’s ___. {=blue ~bag ~book}
+
+::Q049::Leo finds a clue. What color? {=red ~blue ~green}
+
+::Q050::Mia finds a clue. What color? {~yellow =blue ~red}
+
+::Q051::Emma finds a clue. What color? {~green =yellow ~blue}
+
+::Q052::Toto finds a clue. What color? {=green ~red ~orange}
+
+::Q053::Listen. Choose the color. {=red ~blue ~yellow}
+
+::Q054::Listen. Choose the color. {~green =blue ~red}
+
+::Q055::Listen. Choose the color. {=yellow ~purple ~black}
+
+::Q056::Listen. Choose the color. {~orange =green ~blue}
+
+::Q057::Story order. {=red → blue → yellow → green ~blue → red → green → yellow ~yellow → blue → red → green}
+
+::Q058::Leo: It’s ___. {=red ~Mia ~Toto}
+
+::Q059::Mia: It’s ___. {=blue ~Leo ~Emma}
+
+::Q060::End of the hunt. Choose the word. {=Goodbye ~yellow ~green}
+
+::Q061::Choose brown. {=brown ~black ~orange}
+
+::Q062::Choose orange. {~pink =orange ~yellow}
+
+::Q063::Choose pink. {~purple =pink ~red}
+
+::Q064::It’s ___. {=brown ~Toto ~hello}
+
+::Q065::It’s ___. {=orange ~Mia ~goodbye}
+
+::Q066::It’s ___. {=pink ~Leo ~color}
+
+::Q067::Red card goes with: {=red basket ~blue basket ~green basket}
+
+::Q068::Blue card goes with: {~yellow basket =blue basket ~pink basket}
+
+::Q069::White card goes with: {~black basket ~brown basket =white basket}
+
+::Q070::Listen. Choose the color. {=purple ~orange ~white}
+
+::Q071::Listen. Choose the color. {~brown =black ~green}
+
+::Q072::Listen. Choose the color. {=brown ~pink ~blue}
+
+::Q073::Poster name line. {=I’m ___. ~Goodbye. ~red}
+
+::Q074::Color word for red card. {=red ~Leo ~hello}
+
+::Q075::Color word for blue card. {=blue ~Mia ~goodbye}
+
+::Q076::Hello. I’m ___. {=Leo ~red ~blue}
+
+::Q077::It’s ___. {=red ~Emma ~hello}
+
+::Q078::It’s ___. {=blue ~Toto ~goodbye}
+
+::Q079::Make the project start. {=Hello. I’m Leo. ~I’m Hello Leo. ~Leo. Hello.}
+
+::Q080::Make the color line. {=It’s red. ~red It’s. ~Hello red.}
+
+::Q081::Make the color line. {=It’s blue. ~blue It’s. ~Goodbye blue.}
+
+::Q082::Make the project end. {=Goodbye. ~It’s goodbye. ~Hello.}
+
+::Q083::Listen. Choose the sentence. {=Hello. I’m Mia. ~It’s green. ~Goodbye.}
+
+::Q084::Listen. Choose the sentence. {~Hello. =Goodbye. ~It’s blue.}
+
+::Q085::First greeting. {=Hello! ~Goodbye! ~red}
+
+::Q086::Leo’s clue. {=red ~blue ~yellow}
+
+::Q087::Mia’s clue. {~green =blue ~red}
+
+::Q088::Emma’s clue. {=yellow ~orange ~brown}
+
+::Q089::Toto’s clue. {=green ~pink ~black}
+
+::Q090::Listen. Choose the sentence. {=It’s red. ~It’s blue. ~Goodbye.}
+
+::Q091::Listen. Choose the sentence. {~It’s green. =It’s blue. ~Hello.}
+
+::Q092::Listen. Choose the sentence. {=It’s yellow. ~It’s red. ~I’m Leo.}
+
+::Q093::Listen. Choose the sentence. {~It’s blue. =It’s green. ~Goodbye.}
+
+::Q094::Watch color order. {=red → blue → yellow → green ~green → yellow → blue → red ~blue → red → green → yellow}
+
+::Q095::It’s ___. {=green ~Toto ~hello}
+
+::Q096::End of video. {=Goodbye! ~red ~blue}
+
+::Q097::Choose the project title. {=My Color Mini-Poster ~My Family ~My Age}
+
+::Q098::Choose the name line. {=I’m ___. ~It’s red. ~Goodbye.}
+
+::Q099::Choose a color word. {=red ~Leo ~Toto}
+
+::Q100::Choose a color word. {=blue ~hello ~Mia}
+
+::Q101::Choose a color word. {=green ~goodbye ~Emma}
+
+::Q102::It’s ___. {=red ~Leo ~hello}
+
+::Q103::It’s ___. {=blue ~Mia ~goodbye}
+
+::Q104::It’s ___. {=green ~Toto ~hello}
+
+::Q105::Start the recording. {=Hello. I’m ___. ~I’m Hello. ~Goodbye. I’m ___.}
+
+::Q106::Say a color. {=It’s red. ~red It’s. ~Hello red.}
+
+::Q107::Say another color. {=It’s blue. ~blue It’s. ~Goodbye blue.}
+
+::Q108::End the recording. {=Goodbye. ~Hello. ~It’s goodbye.}
+

@@ -8,50 +8,7 @@ $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
-$primarymenu = $primary->export_for_template($renderer);
-$primarymoremenu = $primarymenu['moremenu'];
-$primarymoremenu['nodearray'] = [];
-$primarylinks = [
-    [
-        'key' => 'home',
-        'text' => get_string('home'),
-        'url' => (new moodle_url('/'))->out(false),
-        'isactive' => false,
-    ],
-    [
-        'key' => 'myhome',
-        'text' => get_string('myhome'),
-        'url' => (new moodle_url('/my/'))->out(false),
-        'isactive' => true,
-    ],
-    [
-        'key' => 'mycourses',
-        'text' => get_string('mycourses'),
-        'url' => (new moodle_url('/my/courses.php'))->out(false),
-        'isactive' => false,
-    ],
-];
-$systemcontext = context_system::instance();
-if (is_siteadmin() || has_capability('moodle/site:config', $systemcontext)) {
-    $primarylinks[] = [
-        'key' => 'administrationsite',
-        'text' => get_string('administrationsite'),
-        'url' => (new moodle_url('/admin/search.php'))->out(false),
-        'isactive' => false,
-    ];
-}
-foreach ($primarylinks as $link) {
-    $primarymoremenu['nodearray'][] = [
-        'key' => $link['key'],
-        'text' => $link['text'],
-        'title' => $link['text'],
-        'url' => $link['url'],
-        'isactive' => $link['isactive'],
-        'children' => [],
-        'haschildren' => false,
-        'moremenuid' => $primarymoremenu['moremenuid'] ?? 'flw-dashboard',
-    ];
-}
+$primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
 
 ob_start();
 echo $OUTPUT->main_content();
@@ -60,6 +17,9 @@ $learninglanguages = theme_flwacademy_export_learning_languages();
 $defaultlanguageurl = $learninglanguages[0]['categoryurl'] ?? (new moodle_url('/course/index.php'))->out(false);
 $defaultschoolurl = $learninglanguages[0]['schoolcategoryurl'] ?? $defaultlanguageurl;
 $defaultselfstudyurl = $learninglanguages[0]['selfstudycategoryurl'] ?? $defaultlanguageurl;
+$defaultplacementtesturl = $learninglanguages[0]['placementtesturl'] ?? (new moodle_url('/local/flwplacement/index.php', [
+    'language' => $learninglanguages[0]['code'] ?? 'en',
+]))->out(false);
 $defaultpracticeurl = $learninglanguages[0]['practicecategoryurl'] ?? $defaultlanguageurl;
 $defaultexamurl = $learninglanguages[0]['examcategoryurl'] ?? $defaultlanguageurl;
 $defaultpracticewatchurl = $learninglanguages[0]['practicewatchurl'] ?? $defaultpracticeurl;
@@ -83,7 +43,7 @@ $templatecontext = [
     ]),
     'output' => $OUTPUT,
     'bodyattributes' => $bodyattributes,
-    'primarymoremenu' => $primarymoremenu,
+    'primarymoremenu' => $primarymenu['moremenu'],
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'usermenu' => $primarymenu['user'],
     'haslearninglanguages' => !empty($learninglanguages),
@@ -91,6 +51,7 @@ $templatecontext = [
     'defaultlanguageurl' => $defaultlanguageurl,
     'defaultschoolurl' => $defaultschoolurl,
     'defaultselfstudyurl' => $defaultselfstudyurl,
+    'defaultplacementtesturl' => $defaultplacementtesturl,
     'defaultpracticeurl' => $defaultpracticeurl,
     'defaultexamurl' => $defaultexamurl,
     'defaultpracticewatchurl' => $defaultpracticewatchurl,

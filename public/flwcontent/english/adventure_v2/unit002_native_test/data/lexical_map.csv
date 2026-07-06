@@ -1,0 +1,5 @@
+category,active_or_receptive,items
+colors,active,"red, blue, yellow, green, orange, purple, pink, black, white, brown"
+unit1_review,active,"hello, hi, goodbye, I’m + name, Leo, Mia, Emma, Toto"
+classroom_objects,receptive support only,"book, bag, pencil, desk, chair, door, window, box, card, poster"
+core_chunk,active,It’s + color; What color?

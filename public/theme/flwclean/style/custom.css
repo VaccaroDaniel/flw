@@ -1,0 +1,324 @@
+/* FLW Clean Mode v1 keeps core Moodle intact and changes only student-facing presentation. */
+
+body.flwclean-student-reader {
+    background: #f7f8fb;
+    color: #20242c;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+body.flwclean-student-reader .navbar,
+body.flwclean-student-reader #nav-drawer,
+body.flwclean-student-reader #theme_boost-drawers-courseindex,
+body.flwclean-student-reader #theme_boost-drawers-blocks,
+body.flwclean-student-reader .drawer-toggles,
+body.flwclean-student-reader .drawer,
+body.flwclean-student-reader .courseindex,
+body.flwclean-student-reader .block-region,
+body.flwclean-student-reader [data-region="blocks-column"],
+body.flwclean-student-reader .secondary-navigation,
+body.flwclean-student-reader .breadcrumb,
+body.flwclean-student-reader .tertiary-navigation,
+body.flwclean-student-reader .activity-header,
+body.flwclean-student-reader .activity-navigation,
+body.flwclean-student-reader #region-main-settings-menu,
+body.flwclean-student-reader .region_main_settings_menu_proxy,
+body.flwclean-student-reader .completion-info,
+body.flwclean-student-reader .automatic-completion-conditions,
+body.flwclean-student-reader .course-content-header,
+body.flwclean-student-reader .course-content-footer {
+    display: none !important;
+}
+
+body.flwclean-student-reader #page-wrapper,
+body.flwclean-student-reader #page,
+body.flwclean-student-reader #page.drawers,
+body.flwclean-student-reader #page.drawers .main-inner,
+body.flwclean-student-reader #page-content,
+body.flwclean-student-reader #region-main-box,
+body.flwclean-student-reader #region-main {
+    margin: 0;
+    max-width: none;
+    padding: 0;
+    width: 100%;
+}
+
+body.flwclean-student-reader .flw-course-reader {
+    margin: 0 auto;
+    max-width: 980px;
+    min-height: 100vh;
+    padding: 32px 20px 72px;
+}
+
+body.flwclean-student-reader .flw-course-reader__header {
+    border-bottom: 1px solid #d8dde8;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+}
+
+body.flwclean-student-reader .flw-course-reader__header h1 {
+    color: #111827;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+body.flwclean-student-reader .flw-region-main {
+    background: #ffffff;
+    border: 1px solid #e3e7ef;
+    border-radius: 8px;
+    box-shadow: 0 18px 44px rgba(25, 35, 55, 0.08);
+    overflow: hidden;
+    padding: 30px;
+}
+
+body.flwclean-student-reader .course-content ul,
+body.flwclean-student-reader .course-content .topics,
+body.flwclean-student-reader .course-content .weeks {
+    margin: 0;
+    padding: 0;
+}
+
+body.flwclean-student-reader .course-section,
+body.flwclean-student-reader .section,
+body.flwclean-student-reader li.section.main {
+    border: 0;
+    border-bottom: 1px solid #e8ecf3;
+    list-style: none;
+    margin: 0;
+    padding: 28px 0;
+}
+
+body.flwclean-student-reader .course-section:first-child,
+body.flwclean-student-reader .section:first-child,
+body.flwclean-student-reader li.section.main:first-child {
+    padding-top: 0;
+}
+
+body.flwclean-student-reader .course-section:last-child,
+body.flwclean-student-reader .section:last-child,
+body.flwclean-student-reader li.section.main:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+body.flwclean-student-reader .course-section-header,
+body.flwclean-student-reader .sectionname,
+body.flwclean-student-reader .sectionname a {
+    color: #172033;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    text-decoration: none;
+}
+
+body.flwclean-student-reader .section-summary-activities,
+body.flwclean-student-reader .section_availability,
+body.flwclean-student-reader .availabilityinfo,
+body.flwclean-student-reader .editing_move,
+body.flwclean-student-reader .actions,
+body.flwclean-student-reader .activity-actions,
+body.flwclean-student-reader .dropdown.editing,
+body.flwclean-student-reader .bulkselect {
+    display: none !important;
+}
+
+body.flwclean-student-reader .activity,
+body.flwclean-student-reader .activity-item,
+body.flwclean-student-reader .modtype_label,
+body.flwclean-student-reader .modtype_page,
+body.flwclean-student-reader .modtype_resource,
+body.flwclean-student-reader .modtype_quiz,
+body.flwclean-student-reader .modtype_lesson,
+body.flwclean-student-reader .modtype_assign {
+    border: 0;
+    border-radius: 0;
+    margin: 18px 0;
+    padding: 0;
+}
+
+body.flwclean-student-reader .activityiconcontainer,
+body.flwclean-student-reader .activity-basis,
+body.flwclean-student-reader .activity-info,
+body.flwclean-student-reader .activity-completion,
+body.flwclean-student-reader .activity-dates {
+    display: none !important;
+}
+
+body.flwclean-student-reader .activityname,
+body.flwclean-student-reader .instancename {
+    color: #1c293b;
+    font-size: 1.05rem;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+body.flwclean-student-reader .activity-grid {
+    display: block;
+}
+
+body.flwclean-student-reader .description,
+body.flwclean-student-reader .summarytext,
+body.flwclean-student-reader .contentwithoutlink,
+body.flwclean-student-reader .activity-altcontent {
+    color: #2e3748;
+    max-width: 74ch;
+}
+
+body.flwclean-student-reader iframe,
+body.flwclean-student-reader video,
+body.flwclean-student-reader .mediaplugin,
+body.flwclean-student-reader .mediaplugin_videojs {
+    max-width: 100%;
+}
+
+body.flwclean-student-reader iframe,
+body.flwclean-student-reader video {
+    border: 0;
+    border-radius: 8px;
+}
+
+.flw-mini-nav {
+    border-bottom: 1px solid #dce2ed;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 24px;
+    padding: 0 0 14px;
+}
+
+.flw-mini-nav a {
+    background: #eef4f8;
+    border: 1px solid #d5e0e7;
+    border-radius: 999px;
+    color: #183046;
+    font-size: 0.92rem;
+    font-weight: 650;
+    line-height: 1.2;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+
+.flw-mini-nav a:focus,
+.flw-mini-nav a:hover {
+    background: #dcebf2;
+    border-color: #a9c8d8;
+    color: #0f2435;
+}
+
+.flw-video-gallery {
+    margin: 28px 0;
+}
+
+.flw-video-gallery__grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.flw-video-card {
+    background: #fbfcfe;
+    border: 1px solid #dfe5ee;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.flw-video-card video {
+    aspect-ratio: 16 / 9;
+    background: #111827;
+    border-radius: 0;
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+.flw-video-card__body {
+    padding: 12px 14px 14px;
+}
+
+.flw-video-card__title {
+    color: #182233;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+}
+
+.flw-video-card__meta {
+    color: #667085;
+    font-size: 0.9rem;
+    margin: 4px 0 0;
+}
+
+.flw-video-gallery__pager {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.flw-video-gallery__pager button {
+    background: #1b405f;
+    border: 1px solid #1b405f;
+    border-radius: 6px;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 650;
+    min-width: 90px;
+    padding: 8px 12px;
+}
+
+.flw-video-gallery__pager button:disabled {
+    background: #dce2ea;
+    border-color: #dce2ea;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.flw-video-gallery__status {
+    color: #475467;
+    font-size: 0.95rem;
+    min-width: 78px;
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    body.flwclean-student-reader {
+        background: #ffffff;
+    }
+
+    body.flwclean-student-reader .flw-course-reader {
+        padding: 20px 14px 48px;
+    }
+
+    body.flwclean-student-reader .flw-course-reader__header {
+        margin-bottom: 18px;
+    }
+
+    body.flwclean-student-reader .flw-course-reader__header h1 {
+        font-size: 1.55rem;
+    }
+
+    body.flwclean-student-reader .flw-region-main {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .flw-mini-nav {
+        overflow-x: auto;
+        padding-bottom: 12px;
+    }
+
+    .flw-mini-nav a {
+        flex: 0 0 auto;
+    }
+
+    .flw-video-gallery__grid {
+        grid-template-columns: 1fr;
+    }
+}

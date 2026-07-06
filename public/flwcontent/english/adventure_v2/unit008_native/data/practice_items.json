@@ -1,0 +1,1750 @@
+{
+  "L1": [
+    {
+      "id": "AEW2-U008-L1-Q01",
+      "type": "mcq",
+      "prompt": "Look at IMG02. Leo touches his _____.",
+      "options": [
+        "head",
+        "hands",
+        "feet"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG02",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q02",
+      "type": "mcq",
+      "prompt": "Look at IMG03. Leo shows two _____.",
+      "options": [
+        "hands",
+        "feet",
+        "ears"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q03",
+      "type": "mcq",
+      "prompt": "Look at Leo’s shoes. The body word is _____.",
+      "options": [
+        "feet",
+        "mouth",
+        "eyes"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q04",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "head",
+        "feet",
+        "hands"
+      ],
+      "answer": "head",
+      "feedback": "Correct: Touch your head.",
+      "image": "IMG03",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q05",
+      "type": "match",
+      "prompt": "Choose the correct matching set.",
+      "options": [
+        "head = top of body; hands = open palms; feet = shoes",
+        "head = shoes; hands = top of body; feet = open palms",
+        "head = open palms; hands = shoes; feet = top of body"
+      ],
+      "answer": "head = top of body; hands = open palms; feet = shoes",
+      "feedback": "Good matching.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q06",
+      "type": "mcq",
+      "prompt": "Which word matches open palms?",
+      "options": [
+        "hands",
+        "head",
+        "feet"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q07",
+      "type": "truefalse",
+      "prompt": "In IMG04, Toto is near Leo’s foot.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct. Toto is near Leo’s foot.",
+      "image": "IMG04",
+      "kp": "body parts",
+      "skill": "reading",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q08",
+      "type": "sequence",
+      "prompt": "Put the body words from top to bottom.",
+      "options": [
+        "head → hands → feet",
+        "feet → hands → head",
+        "hands → head → feet"
+      ],
+      "answer": "head → hands → feet",
+      "feedback": "Correct order.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "sequence",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q09",
+      "type": "mcq",
+      "prompt": "IMG02 shows:",
+      "options": [
+        "Touch your head",
+        "Clap your hands",
+        "Point to your feet"
+      ],
+      "answer": "Touch your head",
+      "feedback": "Correct.",
+      "image": "IMG02",
+      "kp": "Touch your",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q10",
+      "type": "mcq",
+      "prompt": "In IMG04, Mia points toward Leo’s _____.",
+      "options": [
+        "feet",
+        "mouth",
+        "eyes"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG04",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q11",
+      "type": "mcq",
+      "prompt": "You can touch it on top of your body.",
+      "options": [
+        "head",
+        "feet",
+        "hands"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG03",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L1-Q12",
+      "type": "repair",
+      "prompt": "Not nose. Try again: Leo touches his _____.",
+      "options": [
+        "head",
+        "hands",
+        "feet"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG02",
+      "kp": "repair",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    }
+  ],
+  "L2": [
+    {
+      "id": "AEW2-U008-L2-Q01",
+      "type": "mcq",
+      "prompt": "In IMG05, Mia points near her _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "IMG05",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q02",
+      "type": "mcq",
+      "prompt": "In IMG07, Emma touches one _____.",
+      "options": [
+        "ear",
+        "foot",
+        "hand"
+      ],
+      "answer": "ear",
+      "feedback": "Correct: ear.",
+      "image": "IMG07",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q03",
+      "type": "mcq",
+      "prompt": "Choose the face word.",
+      "options": [
+        "eyes",
+        "feet",
+        "hands"
+      ],
+      "answer": "eyes",
+      "feedback": "Correct: eyes.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q04",
+      "type": "mcq",
+      "prompt": "Choose the face word.",
+      "options": [
+        "ears",
+        "feet",
+        "hands"
+      ],
+      "answer": "ears",
+      "feedback": "Correct: ears.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q05",
+      "type": "mcq",
+      "prompt": "Choose the face word.",
+      "options": [
+        "mouth",
+        "hands",
+        "legs"
+      ],
+      "answer": "mouth",
+      "feedback": "Correct: mouth.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q06",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: Touch your nose.",
+      "image": "IMG07",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q07",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "ears",
+        "feet",
+        "hands"
+      ],
+      "answer": "ears",
+      "feedback": "Correct: Touch your ears.",
+      "image": "IMG07",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q08",
+      "type": "mcq",
+      "prompt": "IMG06 shows a face. Choose a face word.",
+      "options": [
+        "eye",
+        "shoe",
+        "hand"
+      ],
+      "answer": "eye",
+      "feedback": "Correct: eye.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q09",
+      "type": "match",
+      "prompt": "Choose the correct face-word set.",
+      "options": [
+        "eyes, ears, nose, mouth",
+        "shoes, chair, book, bag",
+        "feet, legs, arms, table"
+      ],
+      "answer": "eyes, ears, nose, mouth",
+      "feedback": "Good face-word set.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q10",
+      "type": "truefalse",
+      "prompt": "In IMG07, Toto watches the children.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct.",
+      "image": "IMG07",
+      "kp": "story detail",
+      "skill": "reading",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q11",
+      "type": "mcq",
+      "prompt": "One face part in the middle of the face is the _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "IMG06",
+      "kp": "face parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L2-Q12",
+      "type": "repair",
+      "prompt": "The word is “ears.” Touch your _____.",
+      "options": [
+        "ears",
+        "eyes",
+        "feet"
+      ],
+      "answer": "ears",
+      "feedback": "Correct: ears.",
+      "image": "IMG07",
+      "kp": "repair",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    }
+  ],
+  "L3": [
+    {
+      "id": "AEW2-U008-L3-Q01",
+      "type": "mcq",
+      "prompt": "In IMG08, the team touches their _____.",
+      "options": [
+        "heads",
+        "feet",
+        "hands"
+      ],
+      "answer": "heads",
+      "feedback": "Correct: heads.",
+      "image": "IMG08",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q02",
+      "type": "mcq",
+      "prompt": "Which command matches IMG08?",
+      "options": [
+        "Touch your head",
+        "Point to your feet",
+        "Clap your hands"
+      ],
+      "answer": "Touch your head",
+      "feedback": "Correct.",
+      "image": "IMG08",
+      "kp": "Touch your",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q03",
+      "type": "mcq",
+      "prompt": "Which command matches IMG09?",
+      "options": [
+        "Touch your nose",
+        "Touch your feet",
+        "Touch your hands"
+      ],
+      "answer": "Touch your nose",
+      "feedback": "Correct.",
+      "image": "IMG09",
+      "kp": "Touch your",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q04",
+      "type": "mcq",
+      "prompt": "Which command matches IMG10?",
+      "options": [
+        "Point to your feet",
+        "Touch your mouth",
+        "Clap your hands"
+      ],
+      "answer": "Point to your feet",
+      "feedback": "Correct.",
+      "image": "IMG10",
+      "kp": "Point to your",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q05",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "head",
+        "table",
+        "chair"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG08",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q06",
+      "type": "gap",
+      "prompt": "Point to your _____.",
+      "options": [
+        "feet",
+        "eyes",
+        "mouth"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG10",
+      "kp": "Point to your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q07",
+      "type": "sequence",
+      "prompt": "Put the image commands in order: IMG08, IMG09, IMG10.",
+      "options": [
+        "head → nose → feet",
+        "nose → feet → head",
+        "feet → head → nose"
+      ],
+      "answer": "head → nose → feet",
+      "feedback": "Correct sequence.",
+      "image": "IMG08;IMG09;IMG10",
+      "kp": "sequence",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q08",
+      "type": "truefalse",
+      "prompt": "In IMG09, the team touches noses.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct.",
+      "image": "IMG09",
+      "kp": "story detail",
+      "skill": "reading",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q09",
+      "type": "mcq",
+      "prompt": "Choose the body command.",
+      "options": [
+        "Touch your ears",
+        "Draw a circle",
+        "Look at the window"
+      ],
+      "answer": "Touch your ears",
+      "feedback": "Correct: body command.",
+      "image": "",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q10",
+      "type": "gap",
+      "prompt": "Touch _____ head.",
+      "options": [
+        "your",
+        "red",
+        "two"
+      ],
+      "answer": "your",
+      "feedback": "Correct: Touch your head.",
+      "image": "",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q11",
+      "type": "mcq",
+      "prompt": "In IMG10, Emma points to her _____.",
+      "options": [
+        "feet",
+        "eyes",
+        "mouth"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG10",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L3-Q12",
+      "type": "repair",
+      "prompt": "This is feet, not hands. Point to your _____.",
+      "options": [
+        "feet",
+        "hands",
+        "nose"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG10",
+      "kp": "repair",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    }
+  ],
+  "L4": [
+    {
+      "id": "AEW2-U008-L4-Q01",
+      "type": "mcq",
+      "prompt": "Leo points to himself and shows a hand. He says:",
+      "options": [
+        "my hand",
+        "your hand",
+        "my feet"
+      ],
+      "answer": "my hand",
+      "feedback": "Correct: my hand.",
+      "image": "IMG11",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q02",
+      "type": "mcq",
+      "prompt": "I talk to a friend and show the friend’s hand. I say:",
+      "options": [
+        "your hand",
+        "my hand",
+        "your feet"
+      ],
+      "answer": "your hand",
+      "feedback": "Correct: your hand.",
+      "image": "IMG11",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q03",
+      "type": "mcq",
+      "prompt": "In IMG12 left, Mia touches her own head. Mia says:",
+      "options": [
+        "my head",
+        "your head",
+        "my feet"
+      ],
+      "answer": "my head",
+      "feedback": "Correct: my head.",
+      "image": "IMG12",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q04",
+      "type": "mcq",
+      "prompt": "In IMG12 right, Mia gestures toward Emma’s head. Mia says:",
+      "options": [
+        "your head",
+        "my head",
+        "your feet"
+      ],
+      "answer": "your head",
+      "feedback": "Correct: your head.",
+      "image": "IMG12",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q05",
+      "type": "gap",
+      "prompt": "Touch _____ head.",
+      "options": [
+        "your",
+        "my",
+        "blue"
+      ],
+      "answer": "your",
+      "feedback": "Correct: Touch your head.",
+      "image": "",
+      "kp": "Touch your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q06",
+      "type": "gap",
+      "prompt": "This is _____ hand.",
+      "options": [
+        "my",
+        "your",
+        "one"
+      ],
+      "answer": "my",
+      "feedback": "Correct: my hand.",
+      "image": "",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q07",
+      "type": "match",
+      "prompt": "Choose the correct meaning.",
+      "options": [
+        "my = own body; your = friend/listener’s body",
+        "my = a color; your = a number",
+        "my = feet only; your = hands only"
+      ],
+      "answer": "my = own body; your = friend/listener’s body",
+      "feedback": "Good matching.",
+      "image": "",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q08",
+      "type": "mcq",
+      "prompt": "I point to my own foot. I say:",
+      "options": [
+        "my foot",
+        "your foot",
+        "my mouth"
+      ],
+      "answer": "my foot",
+      "feedback": "Correct: my foot.",
+      "image": "",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q09",
+      "type": "mcq",
+      "prompt": "I say a command to you: Touch _____ nose.",
+      "options": [
+        "your",
+        "my",
+        "red"
+      ],
+      "answer": "your",
+      "feedback": "Correct: your nose.",
+      "image": "",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q10",
+      "type": "truefalse",
+      "prompt": "“My” means my own body.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q11",
+      "type": "mcq",
+      "prompt": "In IMG13, Leo touches his own head. Leo can say:",
+      "options": [
+        "my head",
+        "your head",
+        "my hand"
+      ],
+      "answer": "my head",
+      "feedback": "Correct: my head.",
+      "image": "IMG13",
+      "kp": "my/your",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L4-Q12",
+      "type": "repair",
+      "prompt": "Not “my.” I talk to a friend: Touch _____ head.",
+      "options": [
+        "your",
+        "my",
+        "feet"
+      ],
+      "answer": "your",
+      "feedback": "Correct: your.",
+      "image": "",
+      "kp": "repair",
+      "skill": "grammar",
+      "difficulty": "easy"
+    }
+  ],
+  "L5": [
+    {
+      "id": "AEW2-U008-L5-Q01",
+      "type": "mcq",
+      "prompt": "In IMG15, Mia claps her _____.",
+      "options": [
+        "hands",
+        "feet",
+        "ears"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "IMG15",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q02",
+      "type": "mcq",
+      "prompt": "Which command matches IMG15?",
+      "options": [
+        "Clap your hands",
+        "Touch your nose",
+        "Point to your feet"
+      ],
+      "answer": "Clap your hands",
+      "feedback": "Correct.",
+      "image": "IMG15",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q03",
+      "type": "mcq",
+      "prompt": "In IMG16, Leo waves his _____.",
+      "options": [
+        "arms",
+        "feet",
+        "nose"
+      ],
+      "answer": "arms",
+      "feedback": "Correct: arms.",
+      "image": "IMG16",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q04",
+      "type": "mcq",
+      "prompt": "Which command matches IMG16?",
+      "options": [
+        "Wave your arms",
+        "Clap your feet",
+        "Touch your mouth"
+      ],
+      "answer": "Wave your arms",
+      "feedback": "Correct.",
+      "image": "IMG16",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q05",
+      "type": "mcq",
+      "prompt": "In IMG17, Emma steps with her _____.",
+      "options": [
+        "feet",
+        "ears",
+        "mouth"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG17",
+      "kp": "body parts",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q06",
+      "type": "mcq",
+      "prompt": "Your legs help you _____.",
+      "options": [
+        "step",
+        "clap",
+        "smile"
+      ],
+      "answer": "step",
+      "feedback": "Correct: step.",
+      "image": "IMG17",
+      "kp": "actions",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q07",
+      "type": "mcq",
+      "prompt": "Choose the action word for moving arms.",
+      "options": [
+        "wave",
+        "clap",
+        "point"
+      ],
+      "answer": "wave",
+      "feedback": "Correct: wave.",
+      "image": "IMG16",
+      "kp": "actions",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q08",
+      "type": "gap",
+      "prompt": "Clap your _____.",
+      "options": [
+        "hands",
+        "nose",
+        "feet"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: Clap your hands.",
+      "image": "IMG15",
+      "kp": "commands",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q09",
+      "type": "gap",
+      "prompt": "Wave your _____.",
+      "options": [
+        "arms",
+        "ears",
+        "mouth"
+      ],
+      "answer": "arms",
+      "feedback": "Correct: Wave your arms.",
+      "image": "IMG16",
+      "kp": "commands",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q10",
+      "type": "gap",
+      "prompt": "Step with your _____.",
+      "options": [
+        "feet",
+        "eyes",
+        "mouth"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "IMG17",
+      "kp": "commands",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q11",
+      "type": "sequence",
+      "prompt": "Choose the movement order.",
+      "options": [
+        "wave arms → clap hands → step feet",
+        "step hands → wave nose → clap feet",
+        "clap ears → wave feet → step mouth"
+      ],
+      "answer": "wave arms → clap hands → step feet",
+      "feedback": "Correct sequence.",
+      "image": "IMG14",
+      "kp": "sequence",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L5-Q12",
+      "type": "mcq",
+      "prompt": "Choose the safe movement.",
+      "options": [
+        "small step",
+        "jump on a table",
+        "push a friend"
+      ],
+      "answer": "small step",
+      "feedback": "Correct: small step.",
+      "image": "",
+      "kp": "safety",
+      "skill": "strategy",
+      "difficulty": "easy"
+    }
+  ],
+  "L6": [
+    {
+      "id": "AEW2-U008-L6-Q01",
+      "type": "mcq",
+      "prompt": "In IMG18, Leo listens and touches his _____.",
+      "options": [
+        "head",
+        "feet",
+        "hands"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG18",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q02",
+      "type": "mcq",
+      "prompt": "The small speaker means:",
+      "options": [
+        "listen",
+        "sleep",
+        "run"
+      ],
+      "answer": "listen",
+      "feedback": "Correct: listen.",
+      "image": "IMG18",
+      "kp": "listening",
+      "skill": "strategy",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q03",
+      "type": "listen",
+      "prompt": "Command: Touch your nose. Choose the body part.",
+      "options": [
+        "nose",
+        "hands",
+        "feet"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q04",
+      "type": "listen",
+      "prompt": "Command: Clap your hands. Choose the body part.",
+      "options": [
+        "hands",
+        "ears",
+        "legs"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q05",
+      "type": "listen",
+      "prompt": "Command: Point to your feet. Choose the body part.",
+      "options": [
+        "feet",
+        "eyes",
+        "mouth"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q06",
+      "type": "sequence",
+      "prompt": "Listen and order: Touch your head. Clap your hands. Point to your feet.",
+      "options": [
+        "head → hands → feet",
+        "feet → head → hands",
+        "hands → feet → head"
+      ],
+      "answer": "head → hands → feet",
+      "feedback": "Correct order.",
+      "image": "",
+      "kp": "sequence",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q07",
+      "type": "mcq",
+      "prompt": "In IMG19, Mia does this action.",
+      "options": [
+        "claps hands",
+        "touches mouth",
+        "points to eyes"
+      ],
+      "answer": "claps hands",
+      "feedback": "Correct: Mia claps.",
+      "image": "IMG19",
+      "kp": "actions",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q08",
+      "type": "mcq",
+      "prompt": "In IMG19, Emma shows a feet action. Choose the command.",
+      "options": [
+        "Point to your feet",
+        "Touch your nose",
+        "Clap your hands"
+      ],
+      "answer": "Point to your feet",
+      "feedback": "Correct.",
+      "image": "IMG19",
+      "kp": "commands",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q09",
+      "type": "mcq",
+      "prompt": "In IMG20, Leo models touching his _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "IMG20",
+      "kp": "commands",
+      "skill": "repair",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q10",
+      "type": "mcq",
+      "prompt": "In IMG20, Emma touches her ____ first.",
+      "options": [
+        "ear",
+        "foot",
+        "hand"
+      ],
+      "answer": "ear",
+      "feedback": "Correct: ear.",
+      "image": "IMG20",
+      "kp": "body parts",
+      "skill": "repair",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q11",
+      "type": "gap",
+      "prompt": "Look. Listen again. Touch your _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "IMG20",
+      "kp": "repair",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L6-Q12",
+      "type": "mcq",
+      "prompt": "Choose the helpful repair phrase.",
+      "options": [
+        "Try again.",
+        "Stop learning.",
+        "Run away."
+      ],
+      "answer": "Try again.",
+      "feedback": "Correct: Try again.",
+      "image": "",
+      "kp": "repair",
+      "skill": "strategy",
+      "difficulty": "easy"
+    }
+  ],
+  "L7": [
+    {
+      "id": "AEW2-U008-L7-Q01",
+      "type": "mcq",
+      "prompt": "Choose a good first chant line.",
+      "options": [
+        "Touch your head.",
+        "Sleep your head.",
+        "Open your head."
+      ],
+      "answer": "Touch your head.",
+      "feedback": "Correct.",
+      "image": "IMG21",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q02",
+      "type": "mcq",
+      "prompt": "Choose a good face chant line.",
+      "options": [
+        "Touch your nose.",
+        "Clap your nose.",
+        "Step your nose."
+      ],
+      "answer": "Touch your nose.",
+      "feedback": "Correct.",
+      "image": "IMG21",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q03",
+      "type": "mcq",
+      "prompt": "Choose the hand action.",
+      "options": [
+        "Clap your hands.",
+        "Touch your table.",
+        "Wave your feet."
+      ],
+      "answer": "Clap your hands.",
+      "feedback": "Correct.",
+      "image": "IMG24",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q04",
+      "type": "mcq",
+      "prompt": "Choose the feet action.",
+      "options": [
+        "Point to your feet.",
+        "Smile your feet.",
+        "Listen your feet."
+      ],
+      "answer": "Point to your feet.",
+      "feedback": "Correct.",
+      "image": "IMG24",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q05",
+      "type": "sequence",
+      "prompt": "Put the model chant in order: hands, feet, head, nose.",
+      "options": [
+        "head → nose → hands → feet",
+        "hands → head → feet → nose",
+        "feet → hands → nose → head"
+      ],
+      "answer": "head → nose → hands → feet",
+      "feedback": "Correct chant order.",
+      "image": "IMG24",
+      "kp": "sequence",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q06",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "head",
+        "chair",
+        "book"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "",
+      "kp": "project phrases",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q07",
+      "type": "gap",
+      "prompt": "Clap your _____.",
+      "options": [
+        "hands",
+        "ears",
+        "nose"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "",
+      "kp": "project phrases",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q08",
+      "type": "gap",
+      "prompt": "Point to your _____.",
+      "options": [
+        "feet",
+        "mouth",
+        "eyes"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "",
+      "kp": "project phrases",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q09",
+      "type": "mcq",
+      "prompt": "Choose a good chant line.",
+      "options": [
+        "Wave your arms.",
+        "Wave your pencil.",
+        "Wave your lunch."
+      ],
+      "answer": "Wave your arms.",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q10",
+      "type": "mcq",
+      "prompt": "Choose the body command.",
+      "options": [
+        "Touch your ears.",
+        "Touch your wall.",
+        "Touch your desk."
+      ],
+      "answer": "Touch your ears.",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project phrases",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q11",
+      "type": "truefalse",
+      "prompt": "IMG21 uses picture icons to help make a chant.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct.",
+      "image": "IMG21",
+      "kp": "project",
+      "skill": "reading",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-L7-Q12",
+      "type": "selfcheck",
+      "prompt": "Ready for the chant? Choose the best answer.",
+      "options": [
+        "I can say four lines.",
+        "I can write a long story.",
+        "I can buy a snack."
+      ],
+      "answer": "I can say four lines.",
+      "feedback": "Correct: chant ready.",
+      "image": "IMG24",
+      "kp": "project",
+      "skill": "self-check",
+      "difficulty": "easy"
+    }
+  ],
+  "W": [
+    {
+      "id": "AEW2-U008-W-Q01",
+      "type": "mcq",
+      "prompt": "In IMG22, Toto finds _____.",
+      "options": [
+        "paw prints",
+        "a snack",
+        "a hat"
+      ],
+      "answer": "paw prints",
+      "feedback": "Correct.",
+      "image": "IMG22",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q02",
+      "type": "mcq",
+      "prompt": "Leo, Mia, and Emma are ready to _____.",
+      "options": [
+        "move",
+        "sleep",
+        "shop"
+      ],
+      "answer": "move",
+      "feedback": "Correct: move.",
+      "image": "IMG22",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q03",
+      "type": "mcq",
+      "prompt": "In the Watch, Leo touches his _____.",
+      "options": [
+        "head",
+        "feet",
+        "mouth"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q04",
+      "type": "mcq",
+      "prompt": "In IMG23, Emma touches her _____.",
+      "options": [
+        "nose",
+        "feet",
+        "hands"
+      ],
+      "answer": "nose",
+      "feedback": "Correct: nose.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q05",
+      "type": "mcq",
+      "prompt": "In IMG23, Mia claps her _____.",
+      "options": [
+        "hands",
+        "nose",
+        "feet"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q06",
+      "type": "truefalse",
+      "prompt": "Toto joins the movement game.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "feedback": "Correct.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q07",
+      "type": "mcq",
+      "prompt": "Choose the command for Leo.",
+      "options": [
+        "Touch your head.",
+        "Clap your hands.",
+        "Point to your feet."
+      ],
+      "answer": "Touch your head.",
+      "feedback": "Correct.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q08",
+      "type": "mcq",
+      "prompt": "Choose the command for Emma.",
+      "options": [
+        "Touch your nose.",
+        "Wave your arms.",
+        "Touch your feet."
+      ],
+      "answer": "Touch your nose.",
+      "feedback": "Correct.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q09",
+      "type": "mcq",
+      "prompt": "Choose the command for Mia.",
+      "options": [
+        "Clap your hands.",
+        "Touch your nose.",
+        "Point to your eyes."
+      ],
+      "answer": "Clap your hands.",
+      "feedback": "Correct.",
+      "image": "IMG23",
+      "kp": "watch",
+      "skill": "listening",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q10",
+      "type": "sequence",
+      "prompt": "Put the Watch actions in order.",
+      "options": [
+        "paw prints → touch head → touch nose → clap hands",
+        "clap hands → paw prints → touch nose → touch head",
+        "touch nose → clap hands → paw prints → touch head"
+      ],
+      "answer": "paw prints → touch head → touch nose → clap hands",
+      "feedback": "Correct sequence.",
+      "image": "IMG22;IMG23",
+      "kp": "watch",
+      "skill": "sequence",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q11",
+      "type": "mcq",
+      "prompt": "Choose the best Watch summary.",
+      "options": [
+        "Toto starts a move game.",
+        "Toto buys a toy.",
+        "Toto eats lunch."
+      ],
+      "answer": "Toto starts a move game.",
+      "feedback": "Correct summary.",
+      "image": "IMG22",
+      "kp": "watch",
+      "skill": "summary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-W-Q12",
+      "type": "projectlink",
+      "prompt": "Which line can go in your chant?",
+      "options": [
+        "Touch your head.",
+        "I want juice.",
+        "This is my family."
+      ],
+      "answer": "Touch your head.",
+      "feedback": "Correct: chant line.",
+      "image": "IMG24",
+      "kp": "project link",
+      "skill": "speaking",
+      "difficulty": "easy"
+    }
+  ],
+  "P": [
+    {
+      "id": "AEW2-U008-P-Q01",
+      "type": "multiselect",
+      "prompt": "Choose four good chant body words.",
+      "options": [
+        "head",
+        "nose",
+        "hands",
+        "feet",
+        "table",
+        "snack"
+      ],
+      "answer": [
+        "head",
+        "nose",
+        "hands",
+        "feet"
+      ],
+      "feedback": "Correct: body words.",
+      "image": "",
+      "kp": "project",
+      "skill": "vocabulary",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q02",
+      "type": "mcq",
+      "prompt": "Choose a good first project line.",
+      "options": [
+        "Touch your head.",
+        "Read your head.",
+        "Eat your head."
+      ],
+      "answer": "Touch your head.",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q03",
+      "type": "mcq",
+      "prompt": "Choose the correct command word.",
+      "options": [
+        "Touch your nose.",
+        "Touch my nose.",
+        "Touch red nose."
+      ],
+      "answer": "Touch your nose.",
+      "feedback": "Correct: your.",
+      "image": "",
+      "kp": "project",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q04",
+      "type": "mcq",
+      "prompt": "Choose the hand line.",
+      "options": [
+        "Clap your hands.",
+        "Clap your ears.",
+        "Clap your nose."
+      ],
+      "answer": "Clap your hands.",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project",
+      "skill": "speaking",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q05",
+      "type": "gap",
+      "prompt": "Touch your _____.",
+      "options": [
+        "head",
+        "desk",
+        "bag"
+      ],
+      "answer": "head",
+      "feedback": "Correct: head.",
+      "image": "",
+      "kp": "project",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q06",
+      "type": "gap",
+      "prompt": "Point to your _____.",
+      "options": [
+        "feet",
+        "book",
+        "chair"
+      ],
+      "answer": "feet",
+      "feedback": "Correct: feet.",
+      "image": "",
+      "kp": "project",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q07",
+      "type": "gap",
+      "prompt": "Clap your _____.",
+      "options": [
+        "hands",
+        "nose",
+        "legs"
+      ],
+      "answer": "hands",
+      "feedback": "Correct: hands.",
+      "image": "",
+      "kp": "project",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q08",
+      "type": "gap",
+      "prompt": "Wave your _____.",
+      "options": [
+        "arms",
+        "mouth",
+        "eyes"
+      ],
+      "answer": "arms",
+      "feedback": "Correct: arms.",
+      "image": "",
+      "kp": "project",
+      "skill": "grammar",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q09",
+      "type": "sequence",
+      "prompt": "Put the project chant in order.",
+      "options": [
+        "head → nose → hands → feet",
+        "feet → nose → hands → head",
+        "hands → feet → head → nose"
+      ],
+      "answer": "head → nose → hands → feet",
+      "feedback": "Correct order.",
+      "image": "",
+      "kp": "project",
+      "skill": "sequence",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q10",
+      "type": "mcq",
+      "prompt": "What do you make in this project?",
+      "options": [
+        "a movement chant",
+        "a snack order",
+        "a family tree"
+      ],
+      "answer": "a movement chant",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project",
+      "skill": "self-check",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q11",
+      "type": "mcq",
+      "prompt": "What do you do in the project?",
+      "options": [
+        "say and move",
+        "write a long story",
+        "buy a toy"
+      ],
+      "answer": "say and move",
+      "feedback": "Correct.",
+      "image": "",
+      "kp": "project",
+      "skill": "self-check",
+      "difficulty": "easy"
+    },
+    {
+      "id": "AEW2-U008-P-Q12",
+      "type": "portfolio",
+      "prompt": "Choose the best portfolio evidence.",
+      "options": [
+        "I perform my chant.",
+        "I count to 20 only.",
+        "I draw a room."
+      ],
+      "answer": "I perform my chant.",
+      "feedback": "Correct: chant performance.",
+      "image": "",
+      "kp": "portfolio",
+      "skill": "self-check",
+      "difficulty": "easy"
+    }
+  ]
+}

@@ -10,23 +10,13 @@
 <div id="page-wrapper" class="d-print-block flw-school-wrapper">
     {{{ output.standard_top_of_body_html }}}
 
-    <header class="flw-school-header">
-        {{> theme_boost/navbar }}
-    </header>
+    {{> theme_boost/navbar }}
+    {{> theme_flwacademy/flw_language_panel }}
 
     <style>
         :root{--flw-bg:#f7faf8;--flw-surface:#fff;--flw-surface-strong:#f7fbfa;--flw-soft:#f0f6f4;--flw-ink:#17242a;--flw-muted:#5d6b72;--flw-line:#d8e3df;--flw-teal:#087f8c;--flw-teal-dark:#075a64;--flw-coral:#e85d4f;--flw-green:#4f9d54;--flw-yellow:#f2b84b;--flw-blue:#3278bd;--flw-radius:8px;--flw-shadow:0 12px 30px rgba(23,36,42,.09)}
         .flw-school-category-page{margin:0;background:var(--flw-bg);color:var(--flw-ink);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.5}
-        .flw-school-header{position:sticky;top:0;z-index:1030;min-height:60px;border-bottom:1px solid var(--flw-line);background:rgba(255,255,255,.96);box-shadow:0 8px 24px rgba(23,36,42,.07);backdrop-filter:blur(16px)}
-        .flw-school-header .navbar.fixed-top{position:static!important;z-index:2;align-items:stretch;width:100%;height:61px;padding:0 .85rem;border-bottom:0!important;background:transparent!important;box-shadow:none!important}
-        .flw-school-header .navbar .container-fluid{min-height:60px;padding-right:0;padding-left:0}
-        .flw-school-header .navbar-brand,.flw-school-header #usernavigation,.flw-school-header .primary-navigation{position:relative;z-index:4}
-        .flw-school-header #usernavigation{align-items:stretch;min-width:max-content}
-        .flw-school-header .usermenu,.flw-school-header .usermenu .dropdown,.flw-school-header .langmenu .dropdown{display:flex;align-items:center;height:100%}
-        .flw-school-header .usermenu .dropdown-toggle,.flw-school-header .langmenu .dropdown-toggle{display:flex;align-items:center;height:100%;padding-top:0;padding-bottom:0;border-radius:0}
-        .flw-school-header .usermenu .dropdown-menu{min-width:235px;pointer-events:auto}
-        .flw-school-header .dropdown-menu,.flw-school-header .popover-region-container{z-index:1060}
-        .flw-school-main{width:min(1280px,calc(100% - 32px));margin:0 auto;padding:26px 0 60px}
+        .flw-school-main{width:min(1280px,calc(100% - 32px));margin:0 auto;padding:86px 0 60px}
         .flw-stack{display:grid;gap:22px}
         .flw-page-kicker{margin:0 0 8px;color:var(--flw-teal-dark)!important;font-size:13px;font-weight:800;text-transform:uppercase}
         .flw-sub-banner{position:relative;min-height:230px;display:grid;align-items:center;overflow:hidden;padding:32px;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:#fff;box-shadow:var(--flw-shadow)}
@@ -63,7 +53,7 @@
         .flw-back-link{display:inline-flex;margin-top:18px;color:var(--flw-teal-dark)!important;font-weight:700;text-decoration:none!important}
         .flw-hidden-maincontent{display:none!important}
         @media(max-width:980px){.flw-school-year-list,.flw-course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.flw-sub-banner .flw-prototype-title{font-size:34px}}
-        @media(max-width:640px){.flw-school-main{width:min(100% - 22px,1280px);padding-top:18px}.flw-sub-banner{padding:20px}.flw-school-year-list,.flw-course-grid{grid-template-columns:1fr}}
+        @media(max-width:640px){.flw-school-main{width:min(100% - 22px,1280px);padding-top:76px}.flw-sub-banner{padding:20px}.flw-school-year-list,.flw-course-grid{grid-template-columns:1fr}}
     </style>
 
     <main id="page" class="flw-school-main flw-stack">
@@ -77,19 +67,15 @@
             </div>
         </section>
 
-        <section class="flw-band" aria-label="Primary and secondary">
+        <section class="flw-band" aria-label="Primary and secondary school">
             <div class="flw-band-inner">
             <div class="flw-section-lead">
-                <p class="flw-page-kicker">Primary and secondary</p>
-                <h2>Three-year courses for English, Russian, and Chinese.</h2>
+                <p class="flw-page-kicker">Primary and secondary school</p>
+                <h2>Six-year courses for {{language}}</h2>
             </div>
             {{#hasprimarysecondarycategories}}
             <div class="flw-school-grid">
                 <article class="flw-school-course">
-                    <div class="flw-school-card-top">
-                        <p class="flw-page-kicker">School</p>
-                        <span class="flw-school-tag">{{language}}</span>
-                    </div>
                     <h3>{{language}} School Course</h3>
                     <div class="flw-school-year-list">
                         {{#primarycategories}}
@@ -112,6 +98,32 @@
             </div>
         </section>
 
+        <section class="flw-band" aria-labelledby="flw-university-title">
+            <div class="flw-band-inner">
+            <div class="flw-section-lead">
+                <p class="flw-page-kicker">University</p>
+                <h2 id="flw-university-title">Two-year courses for {{language}}</h2>
+            </div>
+            {{#hasuniversitycategories}}
+            <div class="flw-school-grid">
+                <article class="flw-school-course accent-blue">
+                    <h3>{{language}} University Course</h3>
+                    <div class="flw-school-year-list">
+                        {{#universitycategories}}
+                        <a class="flw-school-year" href="{{url}}">
+                            <strong>{{name}}</strong>
+                            {{#hasdescription}}{{{description}}}{{/hasdescription}}
+                            {{^hasdescription}}<p>{{coursecount}} courses</p>{{/hasdescription}}
+                        </a>
+                        {{/universitycategories}}
+                    </div>
+                </article>
+            </div>
+            {{/hasuniversitycategories}}
+            {{^hasuniversitycategories}}<div class="flw-empty">No university subcategories yet.</div>{{/hasuniversitycategories}}
+            </div>
+        </section>
+        
         <section class="flw-band" aria-labelledby="flw-courses-title">
             <div class="flw-band-inner">
             <div class="flw-section-head"><h2 id="flw-courses-title">{{language}} Courses</h2></div>
@@ -130,37 +142,6 @@
             </div>
         </section>
 
-        <section class="flw-band" aria-labelledby="flw-university-title">
-            <div class="flw-band-inner">
-            <div class="flw-section-lead">
-                <p class="flw-page-kicker">University</p>
-                <h2 id="flw-university-title">Two-year courses for English, Russian, Chinese, Japanese, and German.</h2>
-            </div>
-            {{#hasuniversitycategories}}
-            <div class="flw-school-grid">
-                <article class="flw-school-course accent-blue">
-                    <div class="flw-school-card-top">
-                        <p class="flw-page-kicker">University</p>
-                        <span class="flw-school-tag">{{language}}</span>
-                    </div>
-                    <h3>{{language}} University Course</h3>
-                    <div class="flw-school-year-list">
-                        {{#universitycategories}}
-                        <a class="flw-school-year" href="{{url}}">
-                            <strong>{{name}}</strong>
-                            {{#hasdescription}}{{{description}}}{{/hasdescription}}
-                            {{^hasdescription}}<p>{{coursecount}} courses</p>{{/hasdescription}}
-                        </a>
-                        {{/universitycategories}}
-                    </div>
-                </article>
-            </div>
-            {{/hasuniversitycategories}}
-            {{^hasuniversitycategories}}<div class="flw-empty">No university subcategories yet.</div>{{/hasuniversitycategories}}
-            </div>
-        </section>
-
-        <div><a class="flw-back-link" href="{{languagecategoryurl}}">Back to {{language}}</a></div>
         <div class="flw-hidden-maincontent">{{{maincontent}}}</div>
     </main>
 </div>

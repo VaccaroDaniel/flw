@@ -70,6 +70,11 @@ body {
 #region-main, .block, .card, .dashboard-card, .coursebox { box-shadow: var(--flw-shadow); }
 #region-main { background: rgba(255,255,255,.93); }
 
+.footer-popover .btn-footer-popover,
+#page-footer [data-action="footer-popover"] {
+  display: none !important;
+}
+
 .block { background: rgba(255,255,255,.95); overflow: hidden; }
 .block .card-title, .block .block-title { color: var(--flw-emerald-dark); font-weight: 700; }
 
@@ -95,16 +100,29 @@ body {
 
 .path-course-view.limitedwidth #page.drawers .main-inner,
 .path-course-view #page.drawers .main-inner {
-  max-width: none;
-  width: 100%;
-  padding-left: .75rem;
-  padding-right: .75rem;
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: .35rem !important;
+  padding-right: .35rem !important;
 }
 
 .path-course-view #region-main {
   border: 0 !important;
   box-shadow: none;
   background: transparent;
+  max-width: 75vw !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  overflow-x: visible !important;
+}
+
+.path-course-view #region-main .course-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: visible !important;
 }
 
 .path-course-view .course-content .section,
@@ -155,6 +173,182 @@ body {
 .path-course-view .courseindex .courseindex-link {
   margin-left: 0 !important;
 }
+
+body.path-course-view.pagelayout-course:not(.editing) {
+  background: var(--flw-cream);
+}
+
+body.path-course-view.pagelayout-course:not(.editing) #nav-drawer,
+body.path-course-view.pagelayout-course:not(.editing) #theme_boost-drawers-courseindex,
+body.path-course-view.pagelayout-course:not(.editing) #theme_boost-drawers-blocks,
+body.path-course-view.pagelayout-course:not(.editing) .drawer-toggles,
+body.path-course-view.pagelayout-course:not(.editing) .drawer,
+body.path-course-view.pagelayout-course:not(.editing) .courseindex,
+body.path-course-view.pagelayout-course:not(.editing) .block-region,
+body.path-course-view.pagelayout-course:not(.editing) [data-region="blocks-column"],
+body.path-course-view.pagelayout-course:not(.editing) .secondary-navigation,
+body.path-course-view.pagelayout-course:not(.editing) .breadcrumb,
+body.path-course-view.pagelayout-course:not(.editing) .tertiary-navigation,
+body.path-course-view.pagelayout-course:not(.editing) .activity-header,
+body.path-course-view.pagelayout-course:not(.editing) .activity-navigation,
+body.path-course-view.pagelayout-course:not(.editing) #region-main-settings-menu,
+body.path-course-view.pagelayout-course:not(.editing) .region_main_settings_menu_proxy,
+body.path-course-view.pagelayout-course:not(.editing) .completion-info,
+body.path-course-view.pagelayout-course:not(.editing) .automatic-completion-conditions,
+body.path-course-view.pagelayout-course:not(.editing) .section_availability,
+body.path-course-view.pagelayout-course:not(.editing) .availabilityinfo,
+body.path-course-view.pagelayout-course:not(.editing) .activity-actions,
+body.path-course-view.pagelayout-course:not(.editing) .activity-completion,
+body.path-course-view.pagelayout-course:not(.editing) .activity-dates,
+body.path-course-view.pagelayout-course:not(.editing) .activityiconcontainer,
+body.path-course-view.pagelayout-course:not(.editing) #page-header,
+body.path-course-view.pagelayout-course:not(.editing) .page-context-header,
+body.path-course-view.pagelayout-course:not(.editing) .page-header-headings,
+body.path-course-view.pagelayout-course:not(.editing) .page-header-headings h1,
+body.path-course-view.pagelayout-course:not(.editing) .course-section-header,
+body.path-course-view.pagelayout-course:not(.editing) .sectionname,
+body.path-course-view.pagelayout-course:not(.editing) [data-for="section_title"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) #page-header,
+body.path-course-view.pagelayout-course:not(.editing) .page-context-header,
+body.path-course-view.pagelayout-course:not(.editing) .page-header-headings,
+body.path-course-view.pagelayout-course:not(.editing) .course-section-header,
+body.path-course-view.pagelayout-course:not(.editing) .sectionname,
+body.path-course-view.pagelayout-course:not(.editing) [data-for="section_title"] {
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content-item-content.collapse {
+  display: block !important;
+  height: auto !important;
+  visibility: visible !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-section-header .icons-collapse-expand {
+  display: none !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) #page.drawers,
+body.path-course-view.pagelayout-course:not(.editing) #page.drawers .main-inner,
+body.path-course-view.pagelayout-course:not(.editing) #page-content,
+body.path-course-view.pagelayout-course:not(.editing) #region-main-box,
+body.path-course-view.pagelayout-course:not(.editing) #region-main {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: none;
+  width: 100%;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) #page.drawers .main-inner {
+  padding: .75rem;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) #region-main {
+  margin: 0 auto !important;
+  max-width: 75vw !important;
+  width: 100% !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: visible !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section,
+body.path-course-view.pagelayout-course:not(.editing) .course-section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .section-item {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .summary,
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .summarytext,
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .content,
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .course-content-item-content {
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .course-content [data-for="sectioninfo"],
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .description,
+body.path-course-view.pagelayout-course:not(.editing) .course-content .section .my-3 {
+  min-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .activity-grid {
+  display: block;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) iframe,
+body.path-course-view.pagelayout-course:not(.editing) video,
+body.path-course-view.pagelayout-course:not(.editing) .mediaplugin,
+body.path-course-view.pagelayout-course:not(.editing) .mediaplugin_videojs {
+  max-width: 100%;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) iframe {
+  border: 0;
+  border-radius: .5rem;
+}
+
+body.path-course-view.pagelayout-course:not(.editing) .flw-course-embed,
+body.path-course-view.pagelayout-course:not(.editing) .flw-adventure-unit,
+body.path-course-view.pagelayout-course:not(.editing) .flw-adventure-shell {
+  max-width: none;
+}
+
+@media (max-width: 720px) {
+  body.path-course-view.pagelayout-course:not(.editing) #page.drawers .main-inner {
+    padding: .75rem;
+  }
+
+  body.path-course-view.pagelayout-course:not(.editing) .course-content {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: .75rem;
+  }
+}
+
 .activity-item {
   background: #fff;
   border: 1px solid var(--flw-line);
@@ -708,92 +902,8 @@ a:hover { color: var(--flw-emerald); }
 }
 
 /* Front page refinements from the static start-page prototype. */
-.flw-combined-header {
-  position: sticky;
-  top: 0;
-  z-index: 1030;
-  display: flex;
-  align-items: stretch;
-  gap: .65rem;
-  min-height: 60px;
-  padding: 0 .85rem;
-  border-bottom: 1px solid #d8e3df;
-  background: rgba(255, 255, 255, .96);
-  box-shadow: 0 8px 24px rgba(23, 36, 42, .07);
-  backdrop-filter: blur(16px);
-}
-
-.flw-combined-header .navbar.fixed-top {
-  position: static !important;
-  z-index: 2;
-  flex: 1 1 auto;
-  min-width: 310px;
-  width: 100%;
-  padding: 0;
-  border-bottom: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  backdrop-filter: none;
-}
-
-.flw-combined-header .navbar .container-fluid {
-  min-height: 60px;
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.flw-combined-header .navbar-brand,
-.flw-combined-header #usernavigation {
-  position: relative;
-  z-index: 4;
-}
-
-.flw-combined-header #usernavigation {
-  min-width: max-content;
-}
-
-.flw-public-nav {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 3;
-  display: flex;
-  flex: 0 1 auto;
-  flex-wrap: wrap;
-  gap: .25rem;
-  align-items: center;
-  justify-content: center;
-  width: max-content;
-  max-width: calc(100% - 520px);
-  margin: 0;
-  padding: .45rem 0;
-  background: transparent;
-  backdrop-filter: none;
-  transform: translate(-50%, -50%);
-}
-
-.flw-public-nav a {
-  min-height: 2.2rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: .4rem .62rem;
-  border-radius: .5rem;
-  color: #5d6b72 !important;
-  font-size: .86rem;
-  font-weight: 800;
-  text-decoration: none !important;
-  white-space: nowrap;
-}
-
-.flw-public-nav a:hover,
-.flw-public-nav a:focus {
-  background: #f0f6f4;
-  color: #075a64 !important;
-}
-
 .flw-frontpage {
-  padding-top: 1.2rem;
+  padding-top: 5.5rem;
 }
 
 .flw-start-copy h1 {
@@ -891,7 +1001,6 @@ a:hover { color: var(--flw-emerald); }
   display: none !important;
 }
 
-.flw-start-page .flw-public-nav a,
 .flw-start-page .flw-kicker,
 .flw-start-page .flw-start-copy h1,
 .flw-start-page .flw-section-heading h2,
@@ -926,30 +1035,247 @@ a:hover { color: var(--flw-emerald); }
   font-weight: 650 !important;
 }
 
-@media (max-width: 1100px) {
-  .flw-combined-header {
-    flex-wrap: wrap;
-    gap: 0;
-    padding: .25rem .85rem;
-  }
+#page {
+  margin-top: 0px;
+}
 
-  .flw-combined-header .navbar.fixed-top {
-    flex-basis: 100%;
-    min-width: 0;
-  }
+/* Match Moodle's native Boost navbar on converted course pages. */
+body.path-course-view .navbar.fixed-top .navbar-brand,
+body.path-course-view .navbar.fixed-top .primary-navigation .nav-link,
+body.path-course-view .navbar.fixed-top .moremenu .nav-link,
+body.path-course-view .navbar.fixed-top .editmode-switch-form,
+body.path-course-view .navbar.fixed-top .editmode-switch-form label {
+  font-size: .875rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
 
-  .flw-combined-header .navbar .container-fluid {
-    min-height: 48px;
-  }
+/* Keep the account menu surface identical to Boost; only the initials badge should draw its own circle. */
+body.path-course-view .navbar.fixed-top #usernavigation,
+body.path-course-view .navbar.fixed-top #usernavigation .usermenu,
+body.path-course-view .navbar.fixed-top #usernavigation .dropdown,
+body.path-course-view .navbar.fixed-top #usernavigation .userbutton,
+body.path-course-view .navbar.fixed-top #usernavigation .btn,
+body.path-course-view .navbar.fixed-top #usernavigation .nav-link,
+body.path-course-view .navbar.fixed-top #usernavigation .nav-link.active,
+body.path-course-view .navbar.fixed-top #usernavigation .nav-link:active,
+body.path-course-view .navbar.fixed-top #usernavigation .nav-link:focus,
+body.path-course-view .navbar.fixed-top #usernavigation .nav-link:hover,
+body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle,
+body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:active,
+body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:focus,
+body.path-course-view .navbar.fixed-top #usernavigation .dropdown-toggle:hover,
+body.path-course-view .navbar.fixed-top #user-menu-toggle,
+body.path-course-view .navbar.fixed-top #user-menu-toggle:active,
+body.path-course-view .navbar.fixed-top #user-menu-toggle:focus,
+body.path-course-view .navbar.fixed-top #user-menu-toggle:hover,
+body.path-course-view .navbar.fixed-top #user-menu-toggle[aria-expanded="true"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
 
-  .flw-public-nav {
-    position: static;
-    justify-content: center;
-    width: 100%;
-    max-width: none;
-    padding: 0 0 .45rem;
-    transform: none;
+body.path-course-view .navbar.fixed-top #usernavigation .userinitials {
+  background-color: #e9ecef !important;
+  color: #344054 !important;
+}
+
+/* Converted FLW native units: remove Moodle's outer frames around embedded prototype cards. */
+body.path-course-view .course-section.flw-native-course-section,
+body.path-course-view .course-section.flw-native-course-section > .section-item,
+body.path-course-view .course-section.flw-native-course-section .course-section-item,
+body.path-course-view .course-section.flw-native-course-section .course-section-summary,
+body.path-course-view .course-section.flw-native-course-section .section-summary-activities,
+body.path-course-view .course-section.flw-native-course-section .content,
+body.path-course-view .course-section.flw-native-course-section .summary,
+body.path-course-view .course-section.flw-native-course-section .activity,
+body.path-course-view .course-section.flw-native-course-section .activity-item,
+body.path-course-view .course-section.flw-native-course-section .activity-altcontent,
+body.path-course-view .course-section.flw-native-course-section .activity-basis,
+body.path-course-view .course-section.flw-native-course-section .description,
+body.path-course-view .course-section.flw-native-course-section .contentwithoutlink,
+body.path-course-view .course-section.flw-native-course-section .no-overflow,
+body.path-course-view .course-section:has(.flw-native),
+body.path-course-view .course-section:has(.flw-native) > .section-item,
+body.path-course-view .course-section:has(.flw-native) .course-section-item,
+body.path-course-view .course-section:has(.flw-native) .course-section-summary,
+body.path-course-view .course-section:has(.flw-native) .section-summary-activities,
+body.path-course-view .course-section:has(.flw-native) .content,
+body.path-course-view .course-section:has(.flw-native) .summary,
+body.path-course-view .course-section:has(.flw-native) .activity,
+body.path-course-view .course-section:has(.flw-native) .activity-item,
+body.path-course-view .course-section:has(.flw-native) .activity-altcontent,
+body.path-course-view .course-section:has(.flw-native) .activity-basis,
+body.path-course-view .course-section:has(.flw-native) .description,
+body.path-course-view .course-section:has(.flw-native) .contentwithoutlink,
+body.path-course-view .course-section:has(.flw-native) .no-overflow {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+body.path-course-view .course-section.flw-native-course-section .activity-item,
+body.path-course-view .course-section.flw-native-course-section .activity-altcontent,
+body.path-course-view .course-section.flw-native-course-section .description,
+body.path-course-view .course-section.flw-native-course-section .contentwithoutlink,
+body.path-course-view .course-section.flw-native-course-section .no-overflow,
+body.path-course-view .course-section:has(.flw-native) .activity-item,
+body.path-course-view .course-section:has(.flw-native) .activity-altcontent,
+body.path-course-view .course-section:has(.flw-native) .description,
+body.path-course-view .course-section:has(.flw-native) .contentwithoutlink,
+body.path-course-view .course-section:has(.flw-native) .no-overflow {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+body.path-course-view .flw-native .hero .badge,
+body.path-course-view .flw-native .badges .badge {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: inherit !important;
+  white-space: normal !important;
+  vertical-align: baseline !important;
+}
+
+body.path-course-view .flw-native .container,
+body.path-course-view .flw-native .wrap {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  overflow-x: visible !important;
+}
+
+body.path-course-view .flw-native details.lesson[open] > .can-do,
+body.path-course-view .flw-native section.lesson > .can-do {
+  margin-top: 18px !important;
+}
+
+body.path-course-view .flw-native .image-card .zoom-btn,
+body.path-course-view .flw-native .img-card .zoom-btn,
+body.path-course-view .flw-native .imgbox .zoom-btn,
+body.path-course-view .flw-native .visual .zoom-btn,
+body.path-course-view .flw-native .img-plus {
+  top: 18px !important;
+  right: 18px !important;
+}
+
+body.path-course-view .flw-native .flw-native-video,
+body.path-course-view .flw-native .video-card video,
+body.path-course-view .flw-native video.watch-video,
+body.path-course-view .flw-native .watch-video video,
+body.path-course-view .flw-native .watch-grid video,
+body.path-course-view .flw-native .watch-layout video {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important;
+  box-sizing: border-box !important;
+  object-fit: contain !important;
+  background: #000 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+body.path-course-view .flw-native .video-card,
+body.path-course-view .flw-native .watch-video {
+  min-width: 0 !important;
+}
+
+body.path-course-view .flw-native .watch-grid,
+body.path-course-view .flw-native .watch-layout {
+  grid-template-columns: minmax(460px, 1.45fr) minmax(210px, .72fr) minmax(260px, .95fr) !important;
+}
+
+body.path-course-view .flw-native .video-card {
+  width: 100% !important;
+  padding: 0 !important;
+  border: 2px solid #d6ecff !important;
+  background: #000 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  line-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+body.path-course-view .flw-native .video-card .flw-video-shell {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+}
+
+body.path-course-view .flw-native .video-card .flw-video-shell video,
+body.path-course-view .flw-native .video-card .flw-video-shell .flw-native-video {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9 !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 1120px) {
+  body.path-course-view .flw-native .watch-grid,
+  body.path-course-view .flw-native .watch-layout {
+    grid-template-columns: 1fr !important;
   }
+}
+
+@media (max-width: 700px) {
+  body.path-course-view .flw-native .flw-native-video,
+  body.path-course-view .flw-native .video-card video,
+  body.path-course-view .flw-native video.watch-video,
+  body.path-course-view .flw-native .watch-video video,
+  body.path-course-view .flw-native .watch-grid video,
+  body.path-course-view .flw-native .watch-layout video {
+    min-height: 200px !important;
+  }
+}
+
+/* Unit 8 quiz: keep the displayed quiz title readable on the dark FLW surface. */
+body#page-mod-quiz-view.course-108 .page-header-headings h1,
+body#page-mod-quiz-view.course-108 .activity-header h1,
+body#page-mod-quiz-view.course-108 .activitytitle,
+body#page-mod-quiz-view.course-108 .activitytitle .instancename,
+body.path-course-view.course-108 .modtype_quiz a,
+body.path-course-view.course-108 .modtype_quiz .instancename,
+body.path-course-view.course-108 a[href*="/mod/quiz/view.php"],
+body.path-course-view.course-108 a[href*="/mod/quiz/view.php"] .instancename,
+body#page-mod-quiz-view.cmid-1211 .page-header-headings h1,
+body#page-mod-quiz-view.cmid-1211 .activity-header h1,
+body#page-mod-quiz-view.cmid-1211 .activitytitle,
+body#page-mod-quiz-view.cmid-1211 .activitytitle .instancename,
+body#page-mod-quiz-view.cmid-1259 .page-header-headings h1,
+body#page-mod-quiz-view.cmid-1259 .activity-header h1,
+body#page-mod-quiz-view.cmid-1259 .activitytitle,
+body#page-mod-quiz-view.cmid-1259 .activitytitle .instancename,
+body#page-mod-quiz-view.cmid-1195 .page-header-headings h1,
+body#page-mod-quiz-view.cmid-1195 .activity-header h1,
+body#page-mod-quiz-view.cmid-1195 .activitytitle,
+body#page-mod-quiz-view.cmid-1195 .activitytitle .instancename,
+body#page-mod-quiz-view.cmid-1211 a[href*="/mod/quiz/view.php?id=1211"],
+body#page-mod-quiz-view.cmid-1259 a[href*="/mod/quiz/view.php?id=1259"],
+body#page-mod-quiz-view.cmid-1195 a[href*="/mod/quiz/view.php?id=1195"],
+body.path-course-view a[href*="/mod/quiz/view.php?id=1211"],
+body.path-course-view a[href*="/mod/quiz/view.php?id=1211"] .instancename,
+body.path-course-view a[href*="/mod/quiz/view.php?id=1259"],
+body.path-course-view a[href*="/mod/quiz/view.php?id=1259"] .instancename,
+body.path-course-view a[href*="/mod/quiz/view.php?id=1195"],
+body.path-course-view a[href*="/mod/quiz/view.php?id=1195"] .instancename {
+  color: #fff !important;
 }
 
 @media (max-width: 920px) {
@@ -971,5 +1297,420 @@ a:hover { color: var(--flw-emerald); }
   .flw-tips-grid,
   .flw-users-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =========================================================
+   FLW SCORM Clean Viewer v1
+   Safe chrome cleanup: keep Moodle's SCORM player layout native.
+   ========================================================= */
+
+body.path-mod-scorm:not(.editing) #page-header,
+body.path-mod-scorm:not(.editing) .secondarynavigation,
+body.path-mod-scorm:not(.editing) .secondary-navigation,
+body.path-mod-scorm:not(.editing) .breadcrumb,
+body.path-mod-scorm:not(.editing) .activity-header,
+body.path-mod-scorm:not(.editing) [data-region="activity-information"],
+body.path-mod-scorm:not(.editing) [data-region="completion-info"],
+body.path-mod-scorm:not(.editing) #theme_boost-drawers-blocks,
+body.path-mod-scorm:not(.editing) .drawer-right,
+body.path-mod-scorm:not(.editing) .drawer-right-toggle,
+body.path-mod-scorm:not(.editing) [data-target="theme_boost-drawers-blocks"],
+body.path-mod-scorm:not(.editing) [data-region="blocks-column"],
+body.path-mod-scorm:not(.editing) .block-region,
+body#page-mod-scorm-player:not(.editing) #scormtop,
+body#page-mod-scorm-player:not(.editing) #scorm-topbar,
+body#page-mod-scorm-player:not(.editing) #theme_boost-drawers-blocks .drawerheader,
+body#page-mod-scorm-player:not(.editing) #theme_boost-drawers-blocks .drawerheadercontent,
+body#page-mod-scorm-player:not(.editing) .drawer-right .drawerheader,
+body#page-mod-scorm-player:not(.editing) .drawer-right .drawerheadercontent,
+body#page-mod-scorm-player:not(.editing) #region-main > h1:first-child,
+body#page-mod-scorm-player:not(.editing) #region-main > h2:first-child,
+body#page-mod-scorm-player:not(.editing) #region-main > h3:first-child,
+body#page-mod-scorm-player:not(.editing) #region-main > .d-flex.flex-row-reverse.mb-2,
+body#page-mod-scorm-player:not(.editing) .d-flex.flex-row-reverse.mb-2:has(a[title="Exit activity"]) {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+.flw-scorm-hidden-chrome {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_layout {
+  height: var(--flw-scorm-layout-height, auto) !important;
+  margin-bottom: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #page.drawers .main-inner {
+  max-width: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: .35rem .75rem 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #page-content,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #region-main-box,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #region-main {
+  min-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_content {
+  height: 100% !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_object,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) iframe.scoframe,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) iframe#scorm_object {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+html.flw-scorm-player-page,
+html.flw-scorm-player-page body#page-mod-scorm-player,
+html.flw-scorm-player-page body#page-mod-scorm-player #page,
+html.flw-scorm-player-page body#page-mod-scorm-player #topofscroll,
+html.flw-scorm-player-page body#page-mod-scorm-player #page-content,
+html.flw-scorm-player-page body#page-mod-scorm-player #region-main {
+  overflow-y: hidden !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scormpage,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #tocbox,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #toctree {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  height: var(--flw-scorm-layout-height, auto) !important;
+  min-height: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #region-main {
+  position: relative;
+}
+
+.flw-scorm-actions {
+  position: fixed;
+  top: auto;
+  bottom: 1.1rem;
+  right: 1.1rem;
+  z-index: 1060;
+  display: flex;
+  justify-content: flex-end;
+  gap: .32rem;
+  box-sizing: border-box;
+  padding: .28rem;
+  width: auto;
+  margin: 0;
+  border: 1px solid rgba(16, 35, 30, .10);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 14px 34px rgba(16, 35, 30, .16);
+  backdrop-filter: blur(10px);
+}
+
+.flw-scorm-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  min-width: 2.15rem;
+  min-height: 2.15rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #315d50 !important;
+  box-shadow: none;
+  line-height: 1;
+  text-decoration: none !important;
+}
+
+.flw-scorm-action svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flw-scorm-action span {
+  display: none !important;
+}
+
+.flw-scorm-action:hover,
+.flw-scorm-action:focus {
+  background: #e8f3ee;
+  color: #174d45 !important;
+}
+
+.flw-scorm-done {
+  background: #087f8c;
+  color: #fff !important;
+}
+
+.flw-scorm-exit {
+  background: #eef6f2;
+  color: #315d50 !important;
+}
+
+.flw-scorm-toggle-toc.is-active,
+.flw-scorm-toggle-toc:hover,
+.flw-scorm-toggle-toc:focus {
+  background: #e8f3ee;
+  color: #174d45 !important;
+}
+
+.flw-scorm-done:hover,
+.flw-scorm-done:focus,
+.flw-scorm-done.is-done {
+  background: #315d50;
+  color: #fff !important;
+}
+
+.flw-scorm-exit:hover,
+.flw-scorm-exit:focus {
+  background: #dcece5;
+  color: #174d45 !important;
+}
+
+.flw-scorm-done.is-loading {
+  opacity: .75;
+}
+
+.flw-scorm-done.is-error {
+  background: #fff4f2;
+  color: #b42318 !important;
+}
+
+@media (max-width: 680px) {
+  .flw-scorm-actions {
+    top: auto;
+    bottom: .65rem;
+    right: .65rem;
+  }
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_toc {
+  box-sizing: border-box;
+  max-height: var(--flw-scorm-toc-max-height, calc(100dvh - 10rem));
+  padding: .75rem .65rem !important;
+  border: 1px solid rgba(16, 35, 30, .08);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff 0%, #f2faf7 100%);
+  box-shadow: 0 12px 30px rgba(16, 35, 30, .08);
+  overflow: hidden !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_toc_toggle {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_toc_title {
+  margin: 0 0 .65rem !important;
+  padding: .25rem .45rem .6rem;
+  border-bottom: 1px solid rgba(8, 127, 140, .14);
+  color: #315d50;
+  font-size: .9rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree {
+  border-right: 0 !important;
+  box-sizing: border-box;
+  padding-right: .1rem;
+  padding-bottom: 5rem;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  max-height: var(--flw-scorm-tree-max-height, calc(100dvh - 13rem));
+  min-height: 0;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(49, 93, 80, .35) transparent;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree::-webkit-scrollbar {
+  width: 8px;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(49, 93, 80, .32);
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree ul,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree ol,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree li {
+  list-style: none !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree ul,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree ol {
+  margin: 0 !important;
+  padding-left: .55rem !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree > ul,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree > ol {
+  padding-left: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-label,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree a {
+  border-radius: 8px;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row {
+  position: relative;
+  min-height: 2rem;
+  margin: .12rem 0;
+  padding: .16rem .2rem;
+  color: #344b45;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row:hover,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row:focus-within {
+  background: #e8f3ee;
+  color: #174d45;
+  transform: translateX(2px);
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-label,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree a {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 1.75rem;
+  padding: .25rem .45rem;
+  color: inherit !important;
+  font-size: .88rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-selected > .yui3-treeview-row,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row.yui3-treeview-selected,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree li[aria-selected="true"] > .yui3-treeview-row {
+  background: #087f8c;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(8, 127, 140, .22);
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-selected > .yui3-treeview-row::before,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-row.yui3-treeview-selected::before,
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree li[aria-selected="true"] > .yui3-treeview-row::before {
+  content: "";
+  position: absolute;
+  top: .45rem;
+  bottom: .45rem;
+  left: -.15rem;
+  width: 3px;
+  border-radius: 999px;
+  background: #f2b84b;
+}
+
+body#page-mod-scorm-player.path-mod-scorm:not(.editing) #scorm_tree .yui3-treeview-icon {
+  opacity: .55;
+  margin-right: .2rem;
+}
+
+/* Optional FLW navigation bar for SCORM packages. */
+.flw-scorm-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  margin: 0 0 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(20, 40, 35, .10);
+  color: #243b35;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.flw-scorm-bar .flw-back {
+  flex: 0 0 auto;
+  text-decoration: none;
+  font-weight: 600;
+  color: #315d50;
+  background: #e8f3ee;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+.flw-scorm-bar .flw-unit-title {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #243b35;
+}
+
+.flw-scorm-bar .flw-progress {
+  flex: 0 0 auto;
+  font-size: .92rem;
+  font-weight: 500;
+  color: #5d746d;
+}
+
+@media (max-width: 680px) {
+  .flw-scorm-bar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .flw-scorm-bar .flw-back,
+  .flw-scorm-bar .flw-unit-title,
+  .flw-scorm-bar .flw-progress {
+    text-align: center;
   }
 }

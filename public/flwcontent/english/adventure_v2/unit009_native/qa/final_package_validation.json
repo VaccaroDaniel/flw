@@ -1,0 +1,82 @@
+{
+  "unit": "AEW2_U009",
+  "revision": "v2_ui_refined",
+  "checks": [
+    {
+      "name": "js_syntax_node_check",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "practice_item_count_108",
+      "passed": true,
+      "detail": "108"
+    },
+    {
+      "name": "practice_section_counts_12_each",
+      "passed": true,
+      "detail": "{\"Lesson 1\": 12, \"Lesson 2\": 12, \"Lesson 3\": 12, \"Lesson 4\": 12, \"Lesson 5\": 12, \"Lesson 6\": 12, \"Lesson 7\": 12, \"Watch\": 12, \"Project\": 12}"
+    },
+    {
+      "name": "unique_practice_ids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "choice_letters_removed_from_practice_rendering",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "choice_letter_css_removed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong_answer_actions_buttons_present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "wrong_answer_actions_show_only_on_wrong",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "study_model_your_turn_side_by_side_css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "study_model_your_turn_mobile_stack_css",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "watch_line_time_bands_removed_from_html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cover_has_no_zoom_button",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "watch_video_referenced",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "teacher_guide_exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_external_dependencies",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "status": "PASS"
+}

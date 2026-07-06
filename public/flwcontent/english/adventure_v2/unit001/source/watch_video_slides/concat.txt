@@ -1,0 +1,15 @@
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_01.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_02.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_03.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_04.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_05.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_06.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_07.png'
+duration 4
+file '/mnt/data/adventure_english_world_v2_unit001_hello_adventure_moodle_package_v2_interactive/source/watch_video_slides/watch_slide_07.png'

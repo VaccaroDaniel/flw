@@ -1,0 +1,2 @@
+video_id,filename,vtt,duration_seconds,format,audio,caption_status,source_frames,status
+u010_watch_totos_photo_tree,assets/video/Video.mp4,assets/video/Video.vtt,54,mp4,silent/no voice audio,burned captions + VTT sidecar,IMG16–IMG20,included

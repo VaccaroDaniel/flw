@@ -1,0 +1,37 @@
+
+:root{
+  --bg:#fff8ec; --card:#ffffff; --ink:#263238; --muted:#607d8b; --line:#ead7b6;
+  --green:#3d8c43; --gold:#f7b733; --orange:#f58b27; --blue:#2377b9; --purple:#7e57c2;
+  --soft:#fff0cf; --ok:#1b8f52; --bad:#c9473b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#fff8ec,#fff3d9);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.55}
+.container{max-width:1180px;margin:0 auto;padding:18px}
+.hero{background:linear-gradient(135deg,#f9c74f,#90be6d 65%,#43aa8b);border-radius:28px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.15);margin-bottom:18px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(2rem,6vw,4rem);margin:.2rem 0;color:white;text-shadow:0 3px 0 rgba(0,0,0,.2)}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.badge{background:rgba(255,255,255,.88);border:2px solid rgba(255,255,255,.65);border-radius:999px;padding:7px 12px;font-weight:700;color:#31572c}
+.cover{margin-top:16px;border-radius:22px;overflow:hidden;background:white;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.cover img{display:block;width:100%}
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px;margin:16px 0;box-shadow:0 5px 16px rgba(0,0,0,.06)}
+.card h2,.card h3{margin-top:0}.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.goal{background:var(--soft);border-radius:18px;padding:13px;border:1px solid #f6dc9e}
+.audio{border:none;background:#fff4c2;border-radius:50%;width:32px;height:32px;display:inline-grid;place-items:center;margin-right:7px;box-shadow:0 1px 4px rgba(0,0,0,.15);cursor:pointer}.audio:hover{transform:scale(1.08)}
+.wordgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.word{background:#f6fff4;border:1px solid #bde5ba;border-radius:14px;padding:10px;font-weight:700}
+details.lesson{border:2px solid var(--line);border-radius:22px;background:white;margin:16px 0;overflow:hidden;box-shadow:0 5px 16px rgba(0,0,0,.06)}
+details.lesson>summary{cursor:pointer;list-style:none;padding:18px 20px;font-size:1.35rem;font-weight:900;background:linear-gradient(90deg,#fff0b3,#fff7e8);display:flex;align-items:center;gap:10px}
+details.lesson>summary::-webkit-details-marker{display:none}.plus{background:var(--green);color:white;border-radius:50%;width:30px;height:30px;display:inline-grid;place-items:center;font-weight:900}.lesson[open] .plus{background:var(--orange)}
+.lesson-body{padding:18px}.visual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:12px 0}.visual{position:relative;border-radius:18px;overflow:hidden;border:2px solid #f0d9a8;background:#fff}.visual img{width:100%;height:auto;display:block}.zoom-btn{position:absolute;right:10px;top:10px;border:none;border-radius:50%;width:42px;height:42px;font-size:1.7rem;font-weight:900;background:rgba(255,255,255,.9);color:#1f6f3d;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer}.zoom-btn:hover{transform:scale(1.1)}
+.studybox{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}.studybox>div{background:#f9fbff;border:1px solid #d6e6ff;border-radius:18px;padding:14px}.studybox h4{margin:0 0 8px;color:#1f5c99}.line{margin:6px 0}.practice{border:2px solid #d3e9d2;border-radius:18px;background:#fbfffb;padding:14px;margin-top:14px}.practice-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.practice-title{font-size:1.25rem;font-weight:900;color:#24652c}.practice-page{color:var(--muted);font-weight:700}.qitem{background:white;border:1px solid #dcebd9;border-radius:16px;padding:13px;margin:12px 0}.qid{font-size:.8rem;color:#78909c;font-weight:700}.qprompt{font-weight:800;margin:6px 0 9px}.choices{display:grid;gap:8px}.choice{display:flex;align-items:center;gap:8px;border:1px solid #dedede;border-radius:12px;padding:8px 10px;cursor:pointer}.choice:hover{background:#fff8e1}.choice input{transform:scale(1.15)}.feedback{margin-top:8px;border-radius:12px;padding:9px;display:none}.feedback.ok{display:block;background:#e9f8ee;color:#096b34;border:1px solid #bde8cd}.feedback.bad{display:block;background:#ffefed;color:#8f261d;border:1px solid #f4beb9}.mini-btn{border:none;border-radius:999px;padding:7px 11px;font-weight:800;cursor:pointer;margin:6px 4px 0 0}.try{background:#fff2bd;color:#6b4b00}.show{background:#e8efff;color:#174b91}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.controls button{border:none;border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer}.prev,.next{background:#e0f1ff;color:#0b5181}.check{background:var(--green);color:white}.reset{background:#fff0d5;color:#8a4b00}.video-card video{width:100%;max-height:600px;border-radius:18px;background:black}.project-lines{display:grid;gap:8px}.blank{border-bottom:2px solid #333;display:inline-block;min-width:120px}.portfolio{background:#eff7ff;border:2px solid #b7dcff;border-radius:20px;padding:16px}.footer{font-size:.9rem;color:#607d8b;text-align:center;margin:30px 0}.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}.modal.open{display:flex}.modal img{max-width:96vw;max-height:86vh;border-radius:12px;background:white}.modal button{position:absolute;top:14px;right:18px;border:none;background:white;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}.small{font-size:.92rem;color:var(--muted)}
+
+/* UI refinement: three Practice cards side by side on desktop */
+.practice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px;align-items:stretch}
+.practice-grid .qitem{margin:0;display:flex;flex-direction:column;min-height:100%}
+.practice-grid .choices{margin-top:auto}
+/* UI refinement: Watch video, words, and lines side by side */
+.watch-layout{display:grid;grid-template-columns:minmax(420px,1.35fr) minmax(190px,.65fr) minmax(250px,.8fr);gap:14px;align-items:start;margin:12px 0}
+.watch-video{background:#111;border-radius:18px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.watch-card{background:#f9fbff;border:1px solid #d6e6ff;border-radius:18px;padding:14px;min-height:100%}
+.watch-card h4{margin:0 0 8px;color:#1f5c99}
+@media(max-width:980px){.practice-grid{grid-template-columns:1fr}.watch-layout{grid-template-columns:1fr}}
+
+@media(max-width:700px){.container{padding:10px}.lesson-body{padding:12px}.hero{border-radius:18px}.visual-grid{grid-template-columns:1fr}.studybox{grid-template-columns:1fr}.card{padding:14px}}

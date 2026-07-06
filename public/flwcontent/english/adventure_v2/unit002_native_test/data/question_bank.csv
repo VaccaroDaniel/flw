@@ -1,0 +1,109 @@
+id,section,section_title,page,type,prompt,option_a,option_b,option_c,correct_answer,audio_text,image_ref,kp_tag,feedback_hint
+Q001,L1,"Lesson 1 — Hello, Color Quest!",1,image-choice,Choose red.,red,blue,yellow,red,,IMG002-003,colors_review,Look again. Then choose the color.
+Q002,L1,"Lesson 1 — Hello, Color Quest!",1,image-choice,Choose blue.,green,blue,red,blue,,IMG002-003,colors_review,Look again. Then choose the color.
+Q003,L1,"Lesson 1 — Hello, Color Quest!",1,image-choice,Choose yellow.,yellow,red,blue,yellow,,IMG002-003,colors_review,Look again. Then choose the color.
+Q004,L1,"Lesson 1 — Hello, Color Quest!",2,image-choice,Choose green.,blue,yellow,green,green,,IMG002-003,colors_review,Look again. Then choose the color.
+Q005,L1,"Lesson 1 — Hello, Color Quest!",2,audio-choice,Listen. Choose the color.,red,green,blue,red,red,IMG002-003,colors_review,Look again. Then choose the color.
+Q006,L1,"Lesson 1 — Hello, Color Quest!",2,audio-choice,Listen. Choose the color.,yellow,blue,red,blue,blue,IMG002-003,colors_review,Look again. Then choose the color.
+Q007,L1,"Lesson 1 — Hello, Color Quest!",3,audio-choice,Listen. Choose the color.,yellow,green,red,yellow,yellow,IMG002-003,colors_review,Look again. Then choose the color.
+Q008,L1,"Lesson 1 — Hello, Color Quest!",3,audio-choice,Listen. Choose the color.,blue,green,yellow,green,green,IMG002-003,colors_review,Look again. Then choose the color.
+Q009,L1,"Lesson 1 — Hello, Color Quest!",3,match,Match the red card.,red,blue,green,red,,IMG002-003,colors_review,Look again. Then choose the color.
+Q010,L1,"Lesson 1 — Hello, Color Quest!",4,match,Match the blue card.,yellow,blue,red,blue,,IMG002-003,colors_review,Look again. Then choose the color.
+Q011,L1,"Lesson 1 — Hello, Color Quest!",4,review-choice,Complete: Hello. I’m ___.,Leo,red,blue,Leo,,IMG002-003,colors_review,Look again. Then choose the color.
+Q012,L1,"Lesson 1 — Hello, Color Quest!",4,closing-choice,Choose the closing word.,Hello,Goodbye,red,Goodbye,,IMG002-003,colors_review,Look again. Then choose the color.
+Q013,L2,Lesson 2 — Meet the Colors,1,image-choice,Choose orange.,orange,yellow,red,orange,,IMG004-005,colors_10,Look again. Then choose the color.
+Q014,L2,Lesson 2 — Meet the Colors,1,image-choice,Choose purple.,blue,purple,green,purple,,IMG004-005,colors_10,Look again. Then choose the color.
+Q015,L2,Lesson 2 — Meet the Colors,1,image-choice,Choose pink.,pink,black,brown,pink,,IMG004-005,colors_10,Look again. Then choose the color.
+Q016,L2,Lesson 2 — Meet the Colors,2,image-choice,Choose black.,white,black,blue,black,,IMG004-005,colors_10,Look again. Then choose the color.
+Q017,L2,Lesson 2 — Meet the Colors,2,image-choice,Choose white.,brown,green,white,white,,IMG004-005,colors_10,Look again. Then choose the color.
+Q018,L2,Lesson 2 — Meet the Colors,2,image-choice,Choose brown.,brown,orange,pink,brown,,IMG004-005,colors_10,Look again. Then choose the color.
+Q019,L2,Lesson 2 — Meet the Colors,3,audio-choice,Listen. Choose the color.,orange,purple,green,orange,orange,IMG004-005,colors_10,Look again. Then choose the color.
+Q020,L2,Lesson 2 — Meet the Colors,3,audio-choice,Listen. Choose the color.,pink,purple,yellow,purple,purple,IMG004-005,colors_10,Look again. Then choose the color.
+Q021,L2,Lesson 2 — Meet the Colors,3,audio-choice,Listen. Choose the color.,pink,white,red,pink,pink,IMG004-005,colors_10,Look again. Then choose the color.
+Q022,L2,Lesson 2 — Meet the Colors,4,match,Match: black card.,black,blue,brown,black,,IMG004-005,colors_10,Look again. Then choose the color.
+Q023,L2,Lesson 2 — Meet the Colors,4,match,Match: white card.,yellow,white,green,white,,IMG004-005,colors_10,Look again. Then choose the color.
+Q024,L2,Lesson 2 — Meet the Colors,4,match,Match: brown card.,red,orange,brown,brown,,IMG004-005,colors_10,Look again. Then choose the color.
+Q025,L3,Lesson 3 — It’s Red!,1,complete,It’s ___.,red,Leo,hello,red,,IMG006-008,its_color,Look again. Then choose the color.
+Q026,L3,Lesson 3 — It’s Red!,1,complete,It’s ___.,blue,Mia,goodbye,blue,,IMG006-008,its_color,Look again. Then choose the color.
+Q027,L3,Lesson 3 — It’s Red!,1,complete,It’s ___.,yellow,Toto,hello,yellow,,IMG006-008,its_color,Look again. Then choose the color.
+Q028,L3,Lesson 3 — It’s Red!,2,complete,It’s ___.,green,Emma,goodbye,green,,IMG006-008,its_color,Look again. Then choose the color.
+Q029,L3,Lesson 3 — It’s Red!,2,phrase-order,Make the sentence.,It’s red.,red It’s.,Hello red.,It’s red.,,IMG006-008,its_color,Look again. Then choose the color.
+Q030,L3,Lesson 3 — It’s Red!,2,phrase-order,Make the sentence.,It’s blue.,blue It’s.,Goodbye blue.,It’s blue.,,IMG006-008,its_color,Look again. Then choose the color.
+Q031,L3,Lesson 3 — It’s Red!,3,phrase-order,Make the sentence.,It’s yellow.,yellow It’s.,Hello yellow.,It’s yellow.,,IMG006-008,its_color,Look again. Then choose the color.
+Q032,L3,Lesson 3 — It’s Red!,3,phrase-order,Make the sentence.,It’s green.,green It’s.,Goodbye green.,It’s green.,,IMG006-008,its_color,Look again. Then choose the color.
+Q033,L3,Lesson 3 — It’s Red!,3,audio-choice,Listen. Choose the sentence.,It’s red.,It’s blue.,Goodbye.,It’s red.,It’s red.,IMG006-008,its_color,Look again. Then choose the color.
+Q034,L3,Lesson 3 — It’s Red!,4,audio-choice,Listen. Choose the sentence.,It’s yellow.,It’s blue.,Hello.,It’s blue.,It’s blue.,IMG006-008,its_color,Look again. Then choose the color.
+Q035,L3,Lesson 3 — It’s Red!,4,audio-choice,Listen. Choose the sentence.,It’s yellow.,It’s green.,I’m Leo.,It’s yellow.,It’s yellow.,IMG006-008,its_color,Look again. Then choose the color.
+Q036,L3,Lesson 3 — It’s Red!,4,audio-choice,Listen. Choose the sentence.,It’s red.,It’s green.,Hi.,It’s green.,It’s green.,IMG006-008,its_color,Look again. Then choose the color.
+Q037,L4,Lesson 4 — Color Objects,1,image-choice,Red book. Choose the color.,red,blue,yellow,red,,IMG009-010,color_objects,Look again. Then choose the color.
+Q038,L4,Lesson 4 — Color Objects,1,image-choice,Blue bag. Choose the color.,green,blue,red,blue,,IMG009-010,color_objects,Look again. Then choose the color.
+Q039,L4,Lesson 4 — Color Objects,1,image-choice,Yellow pencil. Choose the color.,yellow,orange,purple,yellow,,IMG009-010,color_objects,Look again. Then choose the color.
+Q040,L4,Lesson 4 — Color Objects,2,image-choice,Green box. Choose the color.,blue,green,pink,green,,IMG009-010,color_objects,Look again. Then choose the color.
+Q041,L4,Lesson 4 — Color Objects,2,match,red book →,red,black,white,red,,IMG009-010,color_objects,Look again. Then choose the color.
+Q042,L4,Lesson 4 — Color Objects,2,match,blue bag →,brown,blue,yellow,blue,,IMG009-010,color_objects,Look again. Then choose the color.
+Q043,L4,Lesson 4 — Color Objects,3,match,yellow pencil →,green,yellow,pink,yellow,,IMG009-010,color_objects,Look again. Then choose the color.
+Q044,L4,Lesson 4 — Color Objects,3,match,green box →,orange,red,green,green,,IMG009-010,color_objects,Look again. Then choose the color.
+Q045,L4,Lesson 4 — Color Objects,3,audio-choice,Listen. Choose the object.,red book,blue bag,green box,red book,It’s red.,IMG009-010,color_objects,Look again. Then choose the color.
+Q046,L4,Lesson 4 — Color Objects,4,audio-choice,Listen. Choose the object.,yellow pencil,blue bag,red book,blue bag,It’s blue.,IMG009-010,color_objects,Look again. Then choose the color.
+Q047,L4,Lesson 4 — Color Objects,4,audio-choice,Listen. Choose the object.,green box,orange box,pink bag,green box,It’s green.,IMG009-010,color_objects,Look again. Then choose the color.
+Q048,L4,Lesson 4 — Color Objects,4,complete,It’s ___.,blue,bag,book,blue,,IMG009-010,color_objects,Look again. Then choose the color.
+Q049,L5,Lesson 5 — Color Clue Hunt,1,story-choice,Leo finds a clue. What color?,red,blue,green,red,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q050,L5,Lesson 5 — Color Clue Hunt,1,story-choice,Mia finds a clue. What color?,yellow,blue,red,blue,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q051,L5,Lesson 5 — Color Clue Hunt,1,story-choice,Emma finds a clue. What color?,green,yellow,blue,yellow,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q052,L5,Lesson 5 — Color Clue Hunt,2,story-choice,Toto finds a clue. What color?,green,red,orange,green,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q053,L5,Lesson 5 — Color Clue Hunt,2,audio-choice,Listen. Choose the color.,red,blue,yellow,red,It’s red.,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q054,L5,Lesson 5 — Color Clue Hunt,2,audio-choice,Listen. Choose the color.,green,blue,red,blue,It’s blue.,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q055,L5,Lesson 5 — Color Clue Hunt,3,audio-choice,Listen. Choose the color.,yellow,purple,black,yellow,It’s yellow.,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q056,L5,Lesson 5 — Color Clue Hunt,3,audio-choice,Listen. Choose the color.,orange,green,blue,green,It’s green.,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q057,L5,Lesson 5 — Color Clue Hunt,3,sequence,Story order.,red → blue → yellow → green,blue → red → green → yellow,yellow → blue → red → green,red → blue → yellow → green,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q058,L5,Lesson 5 — Color Clue Hunt,4,complete,Leo: It’s ___.,red,Mia,Toto,red,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q059,L5,Lesson 5 — Color Clue Hunt,4,complete,Mia: It’s ___.,blue,Leo,Emma,blue,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q060,L5,Lesson 5 — Color Clue Hunt,4,closing-choice,End of the hunt. Choose the word.,Goodbye,yellow,green,Goodbye,,IMG011-013,color_clue_hunt,Look again. Then choose the color.
+Q061,L6,Lesson 6 — Toto’s Color Story,1,image-choice,Choose brown.,brown,black,orange,brown,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q062,L6,Lesson 6 — Toto’s Color Story,1,image-choice,Choose orange.,pink,orange,yellow,orange,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q063,L6,Lesson 6 — Toto’s Color Story,1,image-choice,Choose pink.,purple,pink,red,pink,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q064,L6,Lesson 6 — Toto’s Color Story,2,complete,It’s ___.,brown,Toto,hello,brown,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q065,L6,Lesson 6 — Toto’s Color Story,2,complete,It’s ___.,orange,Mia,goodbye,orange,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q066,L6,Lesson 6 — Toto’s Color Story,2,complete,It’s ___.,pink,Leo,color,pink,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q067,L6,Lesson 6 — Toto’s Color Story,3,sorting,Red card goes with:,red basket,blue basket,green basket,red basket,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q068,L6,Lesson 6 — Toto’s Color Story,3,sorting,Blue card goes with:,yellow basket,blue basket,pink basket,blue basket,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q069,L6,Lesson 6 — Toto’s Color Story,3,sorting,White card goes with:,black basket,brown basket,white basket,white basket,,IMG014-016,full_color_review,Look again. Then choose the color.
+Q070,L6,Lesson 6 — Toto’s Color Story,4,audio-choice,Listen. Choose the color.,purple,orange,white,purple,purple,IMG014-016,full_color_review,Look again. Then choose the color.
+Q071,L6,Lesson 6 — Toto’s Color Story,4,audio-choice,Listen. Choose the color.,brown,black,green,black,black,IMG014-016,full_color_review,Look again. Then choose the color.
+Q072,L6,Lesson 6 — Toto’s Color Story,4,audio-choice,Listen. Choose the color.,brown,pink,blue,brown,brown,IMG014-016,full_color_review,Look again. Then choose the color.
+Q073,L7,Lesson 7 — My Color Mini-Poster,1,project-choice,Poster name line.,I’m ___.,Goodbye.,red,I’m ___.,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q074,L7,Lesson 7 — My Color Mini-Poster,1,project-choice,Color word for red card.,red,Leo,hello,red,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q075,L7,Lesson 7 — My Color Mini-Poster,1,project-choice,Color word for blue card.,blue,Mia,goodbye,blue,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q076,L7,Lesson 7 — My Color Mini-Poster,2,complete,Hello. I’m ___.,Leo,red,blue,Leo,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q077,L7,Lesson 7 — My Color Mini-Poster,2,complete,It’s ___.,red,Emma,hello,red,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q078,L7,Lesson 7 — My Color Mini-Poster,2,complete,It’s ___.,blue,Toto,goodbye,blue,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q079,L7,Lesson 7 — My Color Mini-Poster,3,phrase-order,Make the project start.,Hello. I’m Leo.,I’m Hello Leo.,Leo. Hello.,Hello. I’m Leo.,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q080,L7,Lesson 7 — My Color Mini-Poster,3,phrase-order,Make the color line.,It’s red.,red It’s.,Hello red.,It’s red.,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q081,L7,Lesson 7 — My Color Mini-Poster,3,phrase-order,Make the color line.,It’s blue.,blue It’s.,Goodbye blue.,It’s blue.,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q082,L7,Lesson 7 — My Color Mini-Poster,4,phrase-order,Make the project end.,Goodbye.,It’s goodbye.,Hello.,Goodbye.,,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q083,L7,Lesson 7 — My Color Mini-Poster,4,audio-choice,Listen. Choose the sentence.,Hello. I’m Mia.,It’s green.,Goodbye.,Hello. I’m Mia.,Hello. I’m Mia.,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q084,L7,Lesson 7 — My Color Mini-Poster,4,audio-choice,Listen. Choose the sentence.,Hello.,Goodbye.,It’s blue.,Goodbye.,Goodbye.,IMG017-020,project_rehearsal,Look again. Then choose the color.
+Q085,WATCH,Watch — Toto’s Color Clues,1,video-choice,First greeting.,Hello!,Goodbye!,red,Hello!,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q086,WATCH,Watch — Toto’s Color Clues,1,video-choice,Leo’s clue.,red,blue,yellow,red,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q087,WATCH,Watch — Toto’s Color Clues,1,video-choice,Mia’s clue.,green,blue,red,blue,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q088,WATCH,Watch — Toto’s Color Clues,2,video-choice,Emma’s clue.,yellow,orange,brown,yellow,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q089,WATCH,Watch — Toto’s Color Clues,2,video-choice,Toto’s clue.,green,pink,black,green,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q090,WATCH,Watch — Toto’s Color Clues,2,audio-choice,Listen. Choose the sentence.,It’s red.,It’s blue.,Goodbye.,It’s red.,It’s red.,WATCH-001,watch_colors,Look again. Then choose the color.
+Q091,WATCH,Watch — Toto’s Color Clues,3,audio-choice,Listen. Choose the sentence.,It’s green.,It’s blue.,Hello.,It’s blue.,It’s blue.,WATCH-001,watch_colors,Look again. Then choose the color.
+Q092,WATCH,Watch — Toto’s Color Clues,3,audio-choice,Listen. Choose the sentence.,It’s yellow.,It’s red.,I’m Leo.,It’s yellow.,It’s yellow.,WATCH-001,watch_colors,Look again. Then choose the color.
+Q093,WATCH,Watch — Toto’s Color Clues,3,audio-choice,Listen. Choose the sentence.,It’s blue.,It’s green.,Goodbye.,It’s green.,It’s green.,WATCH-001,watch_colors,Look again. Then choose the color.
+Q094,WATCH,Watch — Toto’s Color Clues,4,sequence,Watch color order.,red → blue → yellow → green,green → yellow → blue → red,blue → red → green → yellow,red → blue → yellow → green,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q095,WATCH,Watch — Toto’s Color Clues,4,complete,It’s ___.,green,Toto,hello,green,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q096,WATCH,Watch — Toto’s Color Clues,4,closing-choice,End of video.,Goodbye!,red,blue,Goodbye!,,WATCH-001,watch_colors,Look again. Then choose the color.
+Q097,PROJECT,Final Project — My Color Quest Mini-Poster,1,project-choice,Choose the project title.,My Color Mini-Poster,My Family,My Age,My Color Mini-Poster,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q098,PROJECT,Final Project — My Color Quest Mini-Poster,1,project-choice,Choose the name line.,I’m ___.,It’s red.,Goodbye.,I’m ___.,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q099,PROJECT,Final Project — My Color Quest Mini-Poster,1,color-choice,Choose a color word.,red,Leo,Toto,red,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q100,PROJECT,Final Project — My Color Quest Mini-Poster,2,color-choice,Choose a color word.,blue,hello,Mia,blue,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q101,PROJECT,Final Project — My Color Quest Mini-Poster,2,color-choice,Choose a color word.,green,goodbye,Emma,green,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q102,PROJECT,Final Project — My Color Quest Mini-Poster,2,complete,It’s ___.,red,Leo,hello,red,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q103,PROJECT,Final Project — My Color Quest Mini-Poster,3,complete,It’s ___.,blue,Mia,goodbye,blue,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q104,PROJECT,Final Project — My Color Quest Mini-Poster,3,complete,It’s ___.,green,Toto,hello,green,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q105,PROJECT,Final Project — My Color Quest Mini-Poster,3,phrase-order,Start the recording.,Hello. I’m ___.,I’m Hello.,Goodbye. I’m ___.,Hello. I’m ___.,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q106,PROJECT,Final Project — My Color Quest Mini-Poster,4,phrase-order,Say a color.,It’s red.,red It’s.,Hello red.,It’s red.,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q107,PROJECT,Final Project — My Color Quest Mini-Poster,4,phrase-order,Say another color.,It’s blue.,blue It’s.,Goodbye blue.,It’s blue.,,IMG018-020,project_readiness,Look again. Then choose the color.
+Q108,PROJECT,Final Project — My Color Quest Mini-Poster,4,phrase-order,End the recording.,Goodbye.,Hello.,It’s goodbye.,Goodbye.,,IMG018-020,project_readiness,Look again. Then choose the color.

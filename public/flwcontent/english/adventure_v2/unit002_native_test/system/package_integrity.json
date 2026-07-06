@@ -1,0 +1,314 @@
+{
+  "package_id": "adventure_english_world_v2_unit002_color_quest_moodle_package_v4_watch_script_side_by_side",
+  "course": "Adventure English World V2",
+  "unit": "AEW2-U002",
+  "title": "Color Quest",
+  "level": "Pre-A1.1",
+  "revision": "v4 watch video and script side by side",
+  "generated_at": "2026-06-30",
+  "student_html": "index.html",
+  "teacher_guide": "teacher_guide.html",
+  "practice_items": 108,
+  "practice_display": "3 items per page",
+  "wrong_answer_behavior": [
+    "Try again button",
+    "Correct Answer button"
+  ],
+  "images": 20,
+  "small_image_plus_buttons": "enabled",
+  "large_image_modal": "enabled",
+  "study_layout": "responsive 3-column / 2-column / 1-column compact grid under lesson images",
+  "watch_video": "assets/video/AEW2-U002-WATCH-001.mp4",
+  "watch_video_layout": "thumbnail-sized player side by side with Video script on wide/medium screens; stacked on small screens",
+  "content_gate": "PASS",
+  "image_gate": "PASS_WITH_PATCH",
+  "layout_revision_gate": "PASS",
+  "notes": "v4 keeps the v3 thumbnail Watch video and places the video and Video script side by side. Previous v2 compact image + modal and study-grid behaviors are preserved.",
+  "static_checks": {
+    "package_id": "adventure_english_world_v2_unit002_color_quest_moodle_package_v4_watch_script_side_by_side",
+    "watch_layout_present": true,
+    "video_script_header_present": true,
+    "watch_script_lines_present": true,
+    "watch_layout_css_present": true,
+    "side_by_side_grid_css_present": true,
+    "mobile_stack_css_present": true,
+    "video_card_count": 1,
+    "practice_div_count": 9,
+    "question_bank_row_count": 108,
+    "practice_js_question_id_count": 108,
+    "img_plus_count": 22,
+    "study_grid_count": 8
+  },
+  "files": [
+    {
+      "path": "README.txt",
+      "bytes": 1880,
+      "sha256": "deab198fae6963b45785bb1a79101a3e07775aa246246452f7c21a0e3088cb32"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-001.png",
+      "bytes": 2511093,
+      "sha256": "f8c2053be535f3eca937d8486a8e50ec547b18dc46b75404bfcf33a1ff1cbbd0"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-002.png",
+      "bytes": 2345136,
+      "sha256": "64eeae31922f37b9eb6c87bed5328aa63f9179692354b48b1bb87b1c160ce8ff"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-003.png",
+      "bytes": 2364556,
+      "sha256": "c326e1d20c38520b3b9d2bba5bb2686812a83e64f93b972d185f0b18b7577bba"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-004.png",
+      "bytes": 40881,
+      "sha256": "97513a3b825f9fbb298bbbc888eba0d2a8b3a652de9982601645321d68c85eae"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-005.png",
+      "bytes": 2172179,
+      "sha256": "6a54f8ecad0c41e791baf6eb21de0f7a71f9c79ec47ffe2e3473882278a1a79d"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-006.png",
+      "bytes": 1975172,
+      "sha256": "48f48697c16d942502dac4a477500e28eb744611400b5b691b105a38c1cc4c25"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-007.png",
+      "bytes": 2107175,
+      "sha256": "0e1d41aa323a99836cfaf3575695ce278fd529c4661530a02174ac525f353c75"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-008.png",
+      "bytes": 2030329,
+      "sha256": "9da1dc3ab4a4d23ac1ef4c7b6435db7e80ce9eab083c1bebdc46448919c95139"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-009.png",
+      "bytes": 2043295,
+      "sha256": "8c4c12217f4b0145d4687dc16281854a42dcdb029d6e332d01bb13e833fa3e28"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-010.png",
+      "bytes": 2012109,
+      "sha256": "7b939bd94e78bdad1b317411505bc68a234bb3ae62e385edd072a6a8cfa1ccf1"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-011.png",
+      "bytes": 2261067,
+      "sha256": "04f00ddc4d9e6d800fcb7c80ca899c1f3b74e2200ac5b38cfaea53f4db8d4d04"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-012.png",
+      "bytes": 1918136,
+      "sha256": "829565bb78deaaf0cdb9a38874fb2727d7b50f0bd36ebc741f9f191534bd2fe8"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-013.png",
+      "bytes": 2219478,
+      "sha256": "cfb59b71fbcbf5b5745ef771e4befc0cd38484fa6872bb2edb78975c60b1f2fd"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-014.png",
+      "bytes": 42835,
+      "sha256": "7d2558333c42e176dd54bac4bfa7821f91c1f47f3e45da8d1ed93298a18721f3"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-015.png",
+      "bytes": 2133860,
+      "sha256": "030464a2dfa3bdccf25555dffee65b6e300a1dc210444655ceeb8388cffa9802"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-016.png",
+      "bytes": 2293267,
+      "sha256": "ef0c2b389e1da8648c21ec3232a2c8aeef06c6178eeb55d43f6d56eb3a611dfc"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-017.png",
+      "bytes": 2057088,
+      "sha256": "5b0466e56a03499f9eacb482500fd33a5def3c3de1c128d16b8d89166f0c3647"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-018.png",
+      "bytes": 1737509,
+      "sha256": "b8036cc6002d60fdbd3da10c2621fdcec603b2ae7e232a8fb214d42f2972796a"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-019.png",
+      "bytes": 2029575,
+      "sha256": "3a435b3d7e08a54ce001fe404bdede78733e2d85730ce0d6a42c88f6b90cf6f7"
+    },
+    {
+      "path": "assets/images/AEW2-U002-IMG-020.png",
+      "bytes": 1873264,
+      "sha256": "785a285b8c81e05a245dd1dc9176dc6667347694a0cf4947bc24635354984e15"
+    },
+    {
+      "path": "assets/js/flw_audio_config.js",
+      "bytes": 256,
+      "sha256": "28091004eb2580dbb94a9730e8ad5fd3685a6035ace164bc6c255dda12428df9"
+    },
+    {
+      "path": "assets/js/practice.js",
+      "bytes": 36526,
+      "sha256": "dce18efc38846a02ae2b663ed41fb2cd6e569b99dafd8980e0ee7aa515cb330c"
+    },
+    {
+      "path": "assets/js/style.css",
+      "bytes": 7511,
+      "sha256": "cd1c4f24ce7d1b87e237522a8769c1ec593fc0b79ed25d41b84ebcf92c4a1f9d"
+    },
+    {
+      "path": "assets/video/AEW2-U002-WATCH-001.mp4",
+      "bytes": 18703,
+      "sha256": "671fa1c8d9363904fbfa04af78eb3590e69837bdf6befca5e6c9994eae71ae4f"
+    },
+    {
+      "path": "data/ai_checker_profile.csv",
+      "bytes": 434,
+      "sha256": "62d28921d0b19d9b19e33eeddf0b2b1c0235292cc15599ef43e2143ae3806dc2"
+    },
+    {
+      "path": "data/allowed_review_blocked_kp.csv",
+      "bytes": 572,
+      "sha256": "7098d368505eb1879dcf388b13794d7f65f2227dcad4917c6730ef1e493b719f"
+    },
+    {
+      "path": "data/audio_manifest.csv",
+      "bytes": 7351,
+      "sha256": "7e1111280f4393823448b3d6f8f5bb442d0727249f328486fae13edcf5b4a1d3"
+    },
+    {
+      "path": "data/cefr_kp_map.csv",
+      "bytes": 1410,
+      "sha256": "22daf5c7a6c8c5333ce81a26313fb3a82c8522967d8c8aa2e370f8072464311d"
+    },
+    {
+      "path": "data/image_hotspot_manifest.csv",
+      "bytes": 925,
+      "sha256": "4b7e490127250753e4506cbbb66e293f274a8fc74b1f1fce55cbf032da1b4d32"
+    },
+    {
+      "path": "data/image_manifest.csv",
+      "bytes": 2504,
+      "sha256": "d873f66448fc6681a38dd4b869a4c6718cde37e07358ca8a46d175f44cdbc200"
+    },
+    {
+      "path": "data/lesson_blueprint.csv",
+      "bytes": 1126,
+      "sha256": "59981c6ce00236f04eb94f2f70bf6cec4ee8185e3b93f290b74d0fef7db6e9c6"
+    },
+    {
+      "path": "data/lexical_map.csv",
+      "bytes": 354,
+      "sha256": "16dda502acd05eb2a2ec8d4e985e57de06d2d0a68bd30b9a349bdefaea509350"
+    },
+    {
+      "path": "data/portfolio_evidence_map.csv",
+      "bytes": 301,
+      "sha256": "25b622707221de24a2bf333ea6b75b0337c7a9c31908bf0cd6e1bd3978702b71"
+    },
+    {
+      "path": "data/question_bank.csv",
+      "bytes": 18739,
+      "sha256": "c910217c804858c3b944043d39c4600fb2260b4e4d3e919e7fa2c58ad9ef54d0"
+    },
+    {
+      "path": "data/question_bank_gift.txt",
+      "bytes": 6318,
+      "sha256": "dbb93c5f3e8b5c79a2c3c71141aae6b06ab462d64e05238a65c39da5304365b1"
+    },
+    {
+      "path": "data/quiz_blueprint.csv",
+      "bytes": 1225,
+      "sha256": "5a5cbd156345899672d77c7d9494da204cebd3fdf469cb4825bb60126a963bed"
+    },
+    {
+      "path": "data/repair_path.csv",
+      "bytes": 410,
+      "sha256": "0d072157c27a50bb99b9a8cd2fb2e2175237ef4dccf495811ae5414d45be8707"
+    },
+    {
+      "path": "data/video_manifest.csv",
+      "bytes": 157,
+      "sha256": "f2a1d46a4640408fa93ff3b8abe93dc1c2804be7fa5836d5bef3dffabee087d8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 34944,
+      "sha256": "f5d3497aaad630df7778046145e69d023c89b24c50ebbad54d2e498b0846d292"
+    },
+    {
+      "path": "source_notes/content_image_alignment_gate.md",
+      "bytes": 360,
+      "sha256": "665175cb743e9ef6ecf2052f2fa14c7cc42993e752493429cbb64139bebe9d9e"
+    },
+    {
+      "path": "source_notes/image_prompts.txt",
+      "bytes": 4490,
+      "sha256": "be387161ef2b52aac96cc7332b5e70d632449603ed22d61832424ba915682218"
+    },
+    {
+      "path": "source_notes/layout_revision_v2_compact_plus.md",
+      "bytes": 574,
+      "sha256": "e5a4acd6a3488bbfbb2573cc5b7be959da752d68ada8ac2345f01bd9ad5f09a0"
+    },
+    {
+      "path": "source_notes/layout_revision_v3_watch_thumbnail.md",
+      "bytes": 475,
+      "sha256": "f1c4c7447a12938d869c72e81d65a2372f78e7331b28e49cf2746fed4d058de3"
+    },
+    {
+      "path": "source_notes/layout_revision_v4_watch_side_by_side.md",
+      "bytes": 589,
+      "sha256": "04587817eca5bd60b5be004d8bbcd47e4dcfca7af2c71944ee80173014fc6b9a"
+    },
+    {
+      "path": "source_notes/unit_control_packet.md",
+      "bytes": 481,
+      "sha256": "ce5fda2afcd28abcf6acd4328b2e3b3a597fb3a802d057a65d731d8b072a7df8"
+    },
+    {
+      "path": "system/difficulty_audit.csv",
+      "bytes": 305,
+      "sha256": "a8e771055d1eb50ef6e14f74320de107fb32f79f9fd1cd78522f4c25ed529f41"
+    },
+    {
+      "path": "system/final_contact_sheet.png",
+      "bytes": 1112406,
+      "sha256": "27aa28eb78adbd377b2127726677ae1fdd98c6e77b4b894c0d6a8cdef6536f6f"
+    },
+    {
+      "path": "system/static_layout_check_v2.json",
+      "bytes": 192,
+      "sha256": "2f60a92600c81357071cd1ad8805242e197d7724283d541ab8987726f073d223"
+    },
+    {
+      "path": "system/static_layout_check_v3_watch_thumbnail.json",
+      "bytes": 251,
+      "sha256": "19be8aa075156167b1394cadd1810daf757b9fb0ebd44efd4d84a67ae7b6254c"
+    },
+    {
+      "path": "system/static_layout_check_v4_watch_side_by_side.json",
+      "bytes": 509,
+      "sha256": "691352f053db7a134902bc659693f1aa94470b4ec600ae96dcb79e3231255ffa"
+    },
+    {
+      "path": "system/static_layout_check_v4_zip_summary.json",
+      "bytes": 703,
+      "sha256": "0e8da8d49ea4feed51e66feea566fd52962a25c02463a1bc6686064d9d1ede58"
+    },
+    {
+      "path": "system/visual_safety_audit.csv",
+      "bytes": 2391,
+      "sha256": "15d4878262b1d754e6646673a9aab86eecac332088f2b5df7c2de042cd8beca7"
+    },
+    {
+      "path": "teacher_guide.html",
+      "bytes": 15632,
+      "sha256": "da7c3ce53929f45e7cd79681262103f642a69452bbdd19e6bffc821611d67df4"
+    }
+  ]
+}

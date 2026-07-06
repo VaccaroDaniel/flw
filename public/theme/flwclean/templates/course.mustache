@@ -1,0 +1,41 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    @template theme_flwclean/course
+
+    Minimal FLW course reader layout for student-facing course pages.
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="flw-reader-page d-print-block">
+    {{{ output.standard_top_of_body_html }}}
+
+    <main id="page" class="flw-course-reader" data-region="mainpage" data-usertour="scroller">
+        <header class="flw-course-reader__header">
+            <h1>{{{ coursetitle }}}</h1>
+        </header>
+
+        <div id="page-content" class="flw-course-reader__content d-print-block">
+            <div id="region-main-box">
+                <section id="region-main" class="flw-region-main" aria-label="{{{ coursetitle }}}">
+                    {{{ output.course_content_header }}}
+                    {{{ output.main_content }}}
+                    {{{ output.course_content_footer }}}
+                </section>
+            </div>
+        </div>
+    </main>
+
+    {{{ output.standard_after_main_region_html }}}
+</div>
+{{{ output.standard_end_of_body_html }}}
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+{{/js}}

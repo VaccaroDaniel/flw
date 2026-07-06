@@ -1,0 +1,11 @@
+unit,section,cefr_band,micro_band,kp_focus,can_do,evidence
+1,Unit,Pre-A1,Pre-A1.1,greetings; I’m; names; hello/goodbye,"I can greet, say my name, and say goodbye with support.",voice greeting + name card
+1,Lesson 1: Say Hello,Pre-A1,Pre-A1.1,Greeting recognition and production,I can hear and say Hello and Hi.,12 Practice items; AI checker 1
+1,Lesson 2: I’m Leo,Pre-A1,Pre-A1.1,I’m + name as a memorized chunk,I can say a name with I’m.,12 Practice items; AI checker 2
+1,Lesson 3: What’s Your Name?,Pre-A1,Pre-A1.1,Fixed name question + answer,I can ask and answer a name question with help.,12 Practice items; AI checker 3
+1,Lesson 4: Hi and Bye,Pre-A1,Pre-A1.1,Greeting vs goodbye contrast,I can choose a greeting when someone comes or goes.,12 Practice items; AI checker 4
+1,Lesson 5: Meet the Team,Pre-A1,Pre-A1.1,Character names + greetings,"I can greet Leo, Mia, Emma, and Toto.",12 Practice items; AI checker 5
+1,Lesson 6: My Name Card,Pre-A1,Pre-A1.1,Name card preparation; copied phrase I’m ___.,I can make a simple name card.,12 Practice items; AI checker 6
+1,Lesson 7: My Voice Greeting,Pre-A1,Pre-A1.1,Final greeting sequence,I can record a short greeting.,12 Practice items; AI checker 7
+1,Watch: The Hello Gate,Pre-A1,Pre-A1.1,video-supported greeting/name/goodbye sequence,"I can recognize hello, names, and goodbye in a short video.",12 Watch Practice items
+1,Final Project,Pre-A1,Pre-A1.1,Hello. I’m ___. Goodbye.,I can make a name card and record a short voice greeting.,portfolio audio + name card

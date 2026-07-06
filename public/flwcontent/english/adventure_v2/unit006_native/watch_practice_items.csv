@@ -1,0 +1,13 @@
+﻿watch_item_id,unit,item_number,focus,question,answer_type,correct_answer,kp_link,lexical_link,feedback,repair_link
+U006-W-Q01,6,01,watch main idea,What is the Watch video about?,multiple_choice,five review badges,watch main idea,five badges,Correct.,U006-Repair-W
+U006-W-Q02,6,02,watch characters,Who is in the Watch video?,multiple_choice,"Leo, Mia, Emma, and Toto",watch characters,"Leo, Mia, Emma, and Toto",Correct.,U006-Repair-W
+U006-W-Q03,6,03,watch detail,Badge one says which review word?,multiple_choice,Hello,watch detail,Hello,Correct.,U006-Repair-W
+U006-W-Q04,6,04,watch color,What color does badge two show?,multiple_choice,blue,watch color,blue,Correct.,U006-Repair-W
+U006-W-Q05,6,05,watch number,How many in the number clue?,multiple_choice,five,watch number,five,Correct.,U006-Repair-W
+U006-W-Q06,6,06,watch action,Which action is in the Watch video?,multiple_choice,Point,watch action,Point,Correct.,U006-Repair-W
+U006-W-Q07,6,07,watch animal,Which animal is in the Watch animal clue?,multiple_choice,dog,watch animal,dog,Correct.,U006-Repair-W
+U006-W-Q08,6,08,watch detail,What does Mia like?,multiple_choice,cats,watch detail,Mia likes cats.,Correct.,U006-Repair-W
+U006-W-Q09,6,09,watch detail,What does Emma like?,multiple_choice,birds,watch detail,Emma likes birds.,Correct.,U006-Repair-W
+U006-W-Q10,6,10,watch sequence,Choose the Watch badge order.,multiple_choice,hello → color → number → action → animal,watch sequence,hello → color → number → action → animal,Correct.,U006-Repair-W
+U006-W-Q11,6,11,watch project link,What does the team make at the end?,multiple_choice,a mini picture mission card,watch project link,mini picture mission card,Correct.,U006-Repair-W
+U006-W-Q12,6,12,watch comprehension,Toto helps the team in the Watch video.,true_false,True,watch comprehension,Toto helps the team.,Correct.,U006-Repair-W

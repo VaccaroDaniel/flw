@@ -1,0 +1,3 @@
+﻿checkpoint,prompt,rubric,teacher_override
+Project speaking,"Listen to the learner’s mini picture mission. Check whether the learner says a greeting, name line, color line, number line, action word, animal like line, and closing. Give short supportive feedback and one retry instruction if needed.",task completion; correct review word; clear chunk; confidence; retry readiness,yes
+Project card,"Check whether the card includes one color, one number group, one action, and one animal. Do not penalize artwork quality. Focus on target language evidence.",visual completeness; target word match; portfolio evidence,yes

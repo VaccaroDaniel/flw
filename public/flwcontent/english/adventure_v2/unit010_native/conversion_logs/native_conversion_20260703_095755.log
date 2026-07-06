@@ -1,0 +1,105 @@
+Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit010\load_flw_native_generated_course.php
+
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit010\load_flw_native_generated_course.php
+No syntax errors detected in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit010\load_flw_native_generated_course.php
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit010\load_flw_native_generated_course.php
+{
+    "courseid": 110,
+    "shortname": "FLW-AEW2-U010-NATIVE",
+    "fullname": "Adventure English World V2 - Unit 10 Family Tree",
+    "conversion": "native_label_resources_no_iframe",
+    "source": "D:/WinPro.Delta/Projects/FLW/FLW-V2/adventure-english-world/unit010",
+    "static_assets_dir": "C:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public/flwcontent/english/adventure_v2/unit010_native",
+    "static_assets_url": "https://192.168.129.79/flwcontent/english/adventure_v2/unit010_native",
+    "course_cover_image": "AEW2_U010_IMG01_cover_family_tree.png",
+    "label_resources": [
+        {
+            "section": 1,
+            "name": "Unit Overview",
+            "cmid": 1421
+        },
+        {
+            "section": 2,
+            "name": "Unit Opener",
+            "cmid": 1422
+        },
+        {
+            "section": 3,
+            "name": "Lesson 1 - Family Words \u2014 I can recognize family and friend words.",
+            "cmid": 1423
+        },
+        {
+            "section": 4,
+            "name": "Lesson 2 - This Is My... \u2014 I can say This is my... with a photo card.",
+            "cmid": 1424
+        },
+        {
+            "section": 5,
+            "name": "Lesson 3 - Who's This? \u2014 I can ask and answer Who's this?",
+            "cmid": 1425
+        },
+        {
+            "section": 6,
+            "name": "Lesson 4 - Family and Friends \u2014 I can introduce a friend or Toto.",
+            "cmid": 1426
+        },
+        {
+            "section": 7,
+            "name": "Lesson 5 - Read a Mini Tree \u2014 I can read very short family/friend lines.",
+            "cmid": 1427
+        },
+        {
+            "section": 8,
+            "name": "Lesson 6 - Make a Picture Tree \u2014 I can plan my family/friend poster.",
+            "cmid": 1428
+        },
+        {
+            "section": 9,
+            "name": "Lesson 7 - Say and Show \u2014 I can show my poster and say 3\u20134 lines.",
+            "cmid": 1429
+        },
+        {
+            "section": 10,
+            "name": "Watch Lesson",
+            "cmid": 1430
+        },
+        {
+            "section": 11,
+            "name": "Final Project",
+            "cmid": 1431
+        },
+        {
+            "section": 12,
+            "name": "What I can do now",
+            "cmid": 1432
+        }
+    ],
+    "quiz_cmid": 1433,
+    "quiz_question_count": 108,
+    "teacher_guide_cmid": 1434,
+    "enrolments": [
+        {
+            "username": "win.pro",
+            "userid": 4,
+            "role": "student"
+        },
+        {
+            "username": "winpro.delta",
+            "userid": 3,
+            "role": "student"
+        },
+        {
+            "username": "admin",
+            "userid": 2,
+            "role": "editingteacher"
+        }
+    ],
+    "courseurl": "https://192.168.129.79/course/view.php?id=110",
+    "quizurl": "https://192.168.129.79/mod/quiz/view.php?id=1433"
+}
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe C:\Dev\MoodleWindowsInstaller-latest-501\server\moodle\admin\cli\purge_caches.php
+https://192.168.129.79/course/view.php?id=110 -> HTTP 200
+https://192.168.129.79/mod/quiz/view.php?id=1433 -> HTTP 200
+https://192.168.129.79/flwcontent/english/adventure_v2/unit010_native -> HTTP 200
+
+Done. Log saved to D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit010\conversion_logs\native_conversion_20260703_095755.log

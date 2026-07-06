@@ -1,0 +1,1499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="multichoice">
+<name><text><![CDATA[Q1 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the woman/mom card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The woman/mom card is mom.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q1]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q2 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the man/dad card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The man/dad card is dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q2]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sister]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q3 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the girl child card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The girl child card is sister.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q3]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sister]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q4 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the boy child card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The boy child card is brother.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q4]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[brother]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q5 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the older woman card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The older woman card is grandma.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q5]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[grandma]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brother]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q6 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the older man card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The older man card is grandpa.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q6]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sister]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q7 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the teammate card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The teammate card is friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q7]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q8 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Look at the Toto card. Choose the word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The Toto card is dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q8]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sister]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q9 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Match the words to the cards: mom + dad.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Mom and dad are family word cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q9]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom = woman card; dad = man card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom = dog card; dad = friend card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom = boy card; dad = girl card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom = grandpa card; dad = grandma card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q10 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen: dad. Which card do you choose?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Dad is the dad card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q11 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Toto is a dog.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q12 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen: friend. Which card do you choose?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend is the teammate card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q13 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is my ___. (mom card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is my mom.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q13]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q14 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sentence for the dad card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use This is my + dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q14]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q15 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sentence for the friend card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend uses the same frame.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q15]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q16 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sentence for the dog card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q16]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my dog.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my sister.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q17 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Which sentence is correct?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use This is my.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q17]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q18 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Put the words in order for a dad card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is my dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q18]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This / is / my / dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Dad / my / is / this.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My / dad / this / is.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Is / this / dad / my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q19 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Match two cards to two sentences.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Each card matches its word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q19]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom → This is my mom.; dad → This is my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom → This is my dad.; dad → This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom → Who’s this?; dad → It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom → This is my dog.; dad → This is my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q20 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is ___ mom.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The frame is This is my.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q20]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[my]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[this]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[who]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q21 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the two correct lines for mom + dad cards.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The lines match mom and dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q21]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom. This is my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dog. This is my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this? It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mom dad friend dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q22 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is my ___. (friend card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q22]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q23 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It is a full sentence.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q23]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[this is my dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is dad my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q24 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[You show a Toto card. What can you say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q24]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my dog.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q25 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the question for a mystery card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Who’s this? is the question.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q25]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q26 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[A: Who’s this? B: ___ (mom card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use It’s my + word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q26]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q27 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[A: Who’s this? B: ___ (dad card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q27]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my sister.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q28 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[A: Who’s this? B: ___ (friend card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q28]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q29 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[A: Who’s this? B: ___ (dog card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q29]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my dog.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my brother.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q30 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the correct order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Ask first, answer second.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q30]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this? → It’s my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dad. → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad. → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Dad → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q31 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[What is Who’s this?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Who’s this? asks about a card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q31]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a question]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[an answer]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a family word]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q32 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose an answer, not a question.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my friend is an answer.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q32]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[What color?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q33 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: It’s ___ mom.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my mom.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q33]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[my]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[this]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[who]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q34 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Who’s this? asks about a card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It asks about a person/card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q34]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q35 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Match the dialogue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The answer uses It’s my.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q35]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this? → It’s my sister.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this? → This color is red.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my sister. → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this? → draw a star]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q36 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best mini-dialogue.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The question and answer match.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q36]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[A: Who’s this? B: It’s my dog.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[A: It’s my dog. B: Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[A: Mom. B: Dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[A: This is. B: My dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q37 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Where does mom go?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Mom is a family word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q37]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[family]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q38 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Where does dad go?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Dad is a family word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q38]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[family]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q39 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Where does friend go?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend goes with friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q39]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[weather]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q40 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[What word matches Toto?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q40]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q41 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sentence for a friend card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use friend for a teammate card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q41]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q42 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[You do not want to use a family card. What can you choose?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. You can use a friend card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q42]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a friend card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a long family story]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[an address]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a phone number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q43 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the family group.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. These are family words.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q43]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom, dad, sister, brother]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[red, blue, green, yellow]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one, two, three, four]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[run, jump, sit, stand]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q44 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the correct sort.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Mom and dad go in family.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q44]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom + dad → family]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom + dad → friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend → family only]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog → color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q45 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the correct sort.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend card goes in the friend column.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q45]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend card → friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card → number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card → weather]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card → color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q46 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[A friend card can be in my poster.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Family or friend cards are okay.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q46]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q47 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Which word is NOT a Unit 10 family/friend word?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Robot is from toys, not Unit 10.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q47]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[robot]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q48 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the correct sentence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use This is my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q48]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my friends.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Friend this my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q49 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Read: This is my mom. Choose the card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The sentence says mom.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q49]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q50 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Read: This is my dad. Choose the card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The sentence says dad.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q50]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q51 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Read: This is my friend. Choose the card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The sentence says friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q51]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q52 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Read: This is Toto. Choose the card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is the dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q52]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Toto/dog card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sister card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q53 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Picture: mom card. Sentence: This is my mom.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The picture and sentence match.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q53]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q54 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Picture: dad card. Sentence: This is my friend.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Dad is not friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q54]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q55 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line with friend.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend is in the line.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q55]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q56 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[What is the first word in This is my mom?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The sentence starts with This.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q56]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[my]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[is]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q57 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Which ending mark do you see in This is my dad.?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This line ends with a period.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q57]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[,]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q58 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Mini text: This is my mom. This is my dad. This is my friend. How many cards?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. There are three lines/cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q58]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[3]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[1]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[2]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[5]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q59 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is my ___. (Toto card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q59]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q60 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best title for the mini reading.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The reading is about family and friends.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q60]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[My Family and Friends]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Red Ball]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Number Trail]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Weather Card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q61 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[What do you put on the tree poster?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use photo cards on the poster.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q61]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[photo cards]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[shoes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[lunch boxes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[weather clouds]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q62 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good project line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It is a clear project line.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q62]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mom dad dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s my?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This friend is.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q63 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the question from the phrase bank.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Who’s this? is the question.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q63]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q64 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete the answer frame: It’s my ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q64]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[who]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[this]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[is]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q65 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the label under a Toto card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto is a dog.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q65]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q66 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which card is okay for your poster?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. A friend card is okay.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q66]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[address card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[phone number card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[family history card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q67 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best project order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is the simple project order.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q67]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Choose cards → put on tree → say lines]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say lines → hide cards → choose tree]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Put glue everywhere → write long story → stop]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Count to twenty → draw weather → say dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q68 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Use 3 or 4 cards for your poster.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use 3 or 4 cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q68]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q69 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which word does not fit the poster?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Blue is a color, not a poster person/card word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q69]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[blue]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q70 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is ___ friend.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q70]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[my]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[who]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[it]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q71 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which self-check helps your presentation?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is the self-check.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q71]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[3 lines, clear voice, smile]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Run fast, shout, hide]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Use long family history]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write an address]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q72 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for a Toto card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use This is Toto.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q72]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s Toto my?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This dog my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q73 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a friendly first word.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Hello starts the presentation.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q73]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Under.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Robot.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q74 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for a mom card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This matches the mom card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q74]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q75 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for a friend card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This matches the friend card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q75]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q76 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for Toto.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This line introduces Toto.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q76]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my sister.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q77 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which card means speak clearly?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use a clear voice.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q77]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[clear voice]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[small voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[no voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[fast run]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q78 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[How many lines do you need?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Three simple lines are enough.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q78]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[3 lines]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[30 lines]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[0 lines]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a long story]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q79 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which self-check is friendly?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. A smile helps show confidence.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q79]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[smile]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[hide]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[shout]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[run away]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q80 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good presentation order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Start with Hello, then show cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q80]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. → This is my mom. → This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my friend. → Hello. → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Dog. → Mom. → Run.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this? → Who’s this? → Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q81 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which is NOT on the self-check cards?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Hide is not a good presentation check.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q81]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[hide]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[3 lines]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[clear voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[smile]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q82 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[A friend asks: Who’s this? You show a friend card. What do you say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. That answers the question.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q82]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q83 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[What is your portfolio evidence?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Show the poster and say your lines.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q83]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[poster + voice lines]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[only a pencil]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a weather card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a shopping list]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q84 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[It is okay to show a friend card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend cards are okay.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q84]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q85 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 1: What does Toto find?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Toto finds photo cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q85]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[photo cards]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a lunch box]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a toy car]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a pencil]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q86 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 1: What is near the cards?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The tree poster is ready.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q86]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a blank tree poster]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a weather window]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a sports field]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a birthday cake]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q87 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 2: Leo shows a ___ card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Leo shows a mom card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q87]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[mom]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[brother]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q88 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 2: What caption matches?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The caption matches Leo’s card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q88]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q89 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 3: What does Mia ask?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Mia asks Who’s this?]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q89]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q90 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 3: Who thinks about the answer?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Emma thinks about the answer.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q90]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[the teacher]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q91 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 4: Emma shows a ___ card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Emma shows a friend card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q91]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[grandpa]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sister]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dad]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q92 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 4: Choose the best reply.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q92]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q93 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Frame 5: What do they finish?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. They finish a tree poster.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q93]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a tree poster]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a toy box]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a snack order]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a weather card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q94 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the story order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. That is the Watch story order.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q94]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Toto finds cards → Leo says mom → Mia asks → Emma says friend → poster is finished]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Poster is finished → Toto finds cards → snack time → Leo runs → goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia asks → poster is finished → Toto finds cards → color quest → dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo says mom → dog sleeps → weather → poster → number trail]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q95 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Which word is in the Watch story?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Friend is a Unit 10 word.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q95]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[friend]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[rainy]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[ticket]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[robot]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q96 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[What can you make after the Watch story?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The Watch story helps the final project.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q96]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a family/friend poster]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a restaurant menu]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a map of town]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a sports card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q97 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the project title.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is Unit 10’s project.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q97]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[My Family/Friend Poster]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Toy Location Page]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Snack Order]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Weather Window]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q98 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for a mom card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This line matches the mom card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q98]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q99 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for a friend card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This line matches the friend card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q99]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q100 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the line for Toto.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This line introduces Toto.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q100]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This is Toto.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my grandma.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my sister.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q101 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Complete: This is ___ mom.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use my in the frame.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q101]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[my]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[who]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[this]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q102 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the question to ask about a card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Who’s this? asks about a card.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q102]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mom.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q103 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[A: Who’s this? B: ___ (dad card)]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. It’s my dad answers the question.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q103]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[It’s my dad.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Who’s this?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my friend.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It’s my dog.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q104 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Put the words in order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is my friend.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q104]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[This / is / my / friend.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Friend / my / is / this.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My / this / friend / is.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Is / friend / this / my.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q105 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Use 3 or 4 cards on your poster.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use 3 or 4 cards.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q105]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q106 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good speaking check.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. Use a clear voice.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q106]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[clear voice]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[tiny hidden voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[no card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[run away]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q107 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[You forget a line. What can help?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. The phrase bank helps.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q107]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Look at the phrase bank.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hide the poster.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write an address.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Use a long story.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[Q108 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the final evidence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Correct. This is the end-of-unit evidence.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[Q108]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I can show my poster!]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can cook lunch!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can buy a ticket!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can run fast!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+</quiz>

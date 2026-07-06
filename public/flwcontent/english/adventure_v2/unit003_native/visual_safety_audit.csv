@@ -1,0 +1,5 @@
+check,result,notes
+No denim/jeans,PASS,Characters use green top/yellow cardigan/purple outfit; no denim intended.
+No political/religious/sexual content,PASS,Outdoor counting trail only.
+No geography/maps/flags as country content,PASS,"Flags appear only as countable trail objects, not country flags."
+Character consistency,CONDITIONAL,"Leo, Mia, Emma, Toto used. Some generated images had prior visual notes; see repair_path.csv."

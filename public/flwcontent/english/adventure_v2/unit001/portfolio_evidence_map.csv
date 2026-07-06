@@ -1,0 +1,5 @@
+evidence_id,portfolio_task,skill,target_kp,required_language,teacher_check,ai_feedback,revision_required
+U1-PORT-01,Voice greeting,speaking,greeting + I’m + goodbye,Hello. I’m ___. Goodbye.,greeting/name/goodbye present,"clarity, volume, task completion",yes if missing part
+U1-PORT-02,Name card,writing/project,I’m + name,I’m ___,name visible + phrase present,card completeness,yes if incomplete
+U1-PORT-03,Project readiness completion,quiz evidence,unit KP readiness,"hello, I’m, goodbye",readiness path completed,quiz repair feedback,yes if key items fail
+U1-PORT-04,Repair evidence,revision,fix missing part,corrected phrase/card/audio,revised output accepted,short encouragement,optional

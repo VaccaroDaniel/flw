@@ -1,0 +1,99 @@
+Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
+
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
+No syntax errors detected in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
+{
+    "courseid": 40,
+    "shortname": "FLW-AEW2-U002-NATIVE-TEST",
+    "fullname": "NATIVE TEST - Adventure English World V2 - Unit 2 Color Quest",
+    "conversion": "native_label_resources_no_iframe",
+    "source": "D:/WinPro.Delta/Projects/FLW/FLW-V2/adventure-english-world/unit002",
+    "static_assets_dir": "C:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public/flwcontent/english/adventure_v2/unit002_native_test",
+    "static_assets_url": "https://192.168.129.79/flwcontent/english/adventure_v2/unit002_native_test",
+    "label_resources": [
+        {
+            "section": 1,
+            "name": "Overview & Unit Map",
+            "cmid": 467
+        },
+        {
+            "section": 2,
+            "name": "Core Language",
+            "cmid": 468
+        },
+        {
+            "section": 3,
+            "name": "Lesson 1 - Hello, Color Quest!",
+            "cmid": 469
+        },
+        {
+            "section": 4,
+            "name": "Lesson 2 - Meet the Colors",
+            "cmid": 470
+        },
+        {
+            "section": 5,
+            "name": "Lesson 3 - It\u2019s Red!",
+            "cmid": 471
+        },
+        {
+            "section": 6,
+            "name": "Lesson 4 - Color Objects",
+            "cmid": 472
+        },
+        {
+            "section": 7,
+            "name": "Lesson 5 - Color Clue Hunt",
+            "cmid": 473
+        },
+        {
+            "section": 8,
+            "name": "Lesson 6 - Toto\u2019s Color Story",
+            "cmid": 474
+        },
+        {
+            "section": 9,
+            "name": "Lesson 7 - My Color Mini-Poster",
+            "cmid": 475
+        },
+        {
+            "section": 10,
+            "name": "Watch Lesson",
+            "cmid": 476
+        },
+        {
+            "section": 11,
+            "name": "Final Project",
+            "cmid": 477
+        }
+    ],
+    "quiz_cmid": 478,
+    "quiz_question_count": 108,
+    "teacher_guide_cmid": 479,
+    "enrolments": [
+        {
+            "username": "win.pro",
+            "userid": 4,
+            "role": "student"
+        },
+        {
+            "username": "winpro.delta",
+            "userid": 3,
+            "role": "student"
+        },
+        {
+            "username": "admin",
+            "userid": 2,
+            "role": "editingteacher"
+        }
+    ],
+    "courseurl": "https://192.168.129.79/course/view.php?id=40",
+    "quizurl": "https://192.168.129.79/mod/quiz/view.php?id=478"
+}
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe C:\Dev\MoodleWindowsInstaller-latest-501\server\moodle\admin\cli\purge_caches.php
+https://192.168.129.79/course/view.php?id=40 -> HTTP 200
+https://192.168.129.79/mod/quiz/view.php?id=478 -> HTTP 200
+https://192.168.129.79/flwcontent/english/adventure_v2/unit002_native_test -> HTTP 200
+
+Done. Log saved to D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\conversion_logs\native_conversion_20260630_225936.log

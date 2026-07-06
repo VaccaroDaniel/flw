@@ -1,0 +1,2 @@
+watch_id,title,status,duration_target,script,kp_targets,practice_items,image_id,portfolio_connection
+AEW2-U001-WATCH-001,The Hello Gate,video placeholder,20-30 seconds,"Hello! I’m Leo. Hi! I’m Mia. Hello! I’m Emma. Hello, Toto. Goodbye!",greeting recognition; I’m + name; goodbye sequence,U1W01-U1W12,AEW2-U001-IMG-018,models the final voice greeting sequence

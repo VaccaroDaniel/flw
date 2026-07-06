@@ -1,0 +1,648 @@
+::U3-L1-01:: Look\: no stars. How many? {
+=0
+~1
+~2
+}
+
+::U3-L1-02:: Look\: 1 star. Choose the number. {
+=1
+~3
+~5
+}
+
+::U3-L1-03:: Look\: 2 flowers. Choose the number. {
+=2
+~4
+~5
+}
+
+::U3-L1-04:: Look\: 3 balls. Choose the number. {
+~2
+=3
+~4
+}
+
+::U3-L1-05:: Look\: 4 leaves. Choose the number. {
+~1
+=4
+~5
+}
+
+::U3-L1-06:: Look\: 5 apples. Choose the number. {
+~3
+~4
+=5
+}
+
+::U3-L1-07:: Choose the number word\: 0 \= ___. {
+=zero
+~one
+~two
+}
+
+::U3-L1-08:: Choose the number word\: 4 \= ___. {
+~three
+=four
+~five
+}
+
+::U3-L1-09:: Choose the next number\: 0, 1, 2, ___. {
+=3
+~4
+~5
+}
+
+::U3-L1-10:: Choose the next number\: 2, 3, 4, ___. {
+~0
+~1
+=5
+}
+
+::U3-L1-11:: Look\: 1 star. Choose the phrase. {
+=one star
+~two stars
+~five apples
+}
+
+::U3-L1-12:: Listen\: “five.” Choose the number. {
+~3
+~4
+=5
+}
+
+::U3-L2-01:: Look\: 6 flowers. Choose the number. {
+=6
+~8
+~10
+}
+
+::U3-L2-02:: Look\: 7 stars. Choose the number. {
+~5
+=7
+~9
+}
+
+::U3-L2-03:: Look\: 8 leaves. Choose the number. {
+~6
+=8
+~10
+}
+
+::U3-L2-04:: Look\: 9 balls. Choose the number. {
+~7
+~8
+=9
+}
+
+::U3-L2-05:: Look\: number 10. Choose the number. {
+~6
+~9
+=10
+}
+
+::U3-L2-06:: Choose the number word\: 6 \= ___. {
+=six
+~seven
+~ten
+}
+
+::U3-L2-07:: Choose the number word\: 8 \= ___. {
+~six
+=eight
+~nine
+}
+
+::U3-L2-08:: Choose the number word\: 10 \= ___. {
+=ten
+~two
+~zero
+}
+
+::U3-L2-09:: Choose the next number\: 6, 7, 8, ___. {
+~5
+=9
+~10
+}
+
+::U3-L2-10:: Choose the next number\: 8, 9, ___. {
+~6
+~7
+=10
+}
+
+::U3-L2-11:: Look\: 7 stars. Choose the phrase. {
+=seven stars
+~seven star
+~six flowers
+}
+
+::U3-L2-12:: Listen\: “nine.” Choose the number. {
+~7
+=9
+~10
+}
+
+::U3-L3-01:: Choose the counting question. {
+=How many?
+~Hello.
+~Goodbye.
+}
+
+::U3-L3-02:: How many stars? Look\: 3 stars. {
+=Three stars.
+~One star.
+~Five balls.
+}
+
+::U3-L3-03:: How many flowers? Look\: 4 flowers. {
+~Two flowers.
+=Four flowers.
+~Ten stars.
+}
+
+::U3-L3-04:: How many balls? Look\: 5 balls. {
+=Five balls.
+~Six balls.
+~Three apples.
+}
+
+::U3-L3-05:: How many books? Look\: 7 books. {
+=Seven books.
+~Six books.
+~Two books.
+}
+
+::U3-L3-06:: How many apples? Look\: 8 apples. {
+=Eight apples.
+~Nine apples.
+~Ten apples.
+}
+
+::U3-L3-07:: Mia\: How many? Leo\: ___ Look\: 6 stars. {
+=Six.
+~Two.
+~Ten.
+}
+
+::U3-L3-08:: Choose the question for counting flowers. {
+=How many flowers?
+~Goodbye, flowers.
+~I’m flowers.
+}
+
+::U3-L3-09:: How many bags? Look\: 2 bags. {
+=Two bags.
+~One bag.
+~Five balls.
+}
+
+::U3-L3-10:: Choose the next number\: 7, 8, 9, ___. {
+~6
+=10
+~0
+}
+
+::U3-L3-11:: Look\: 3 balls. The answer is “Three balls.” {
+=Yes
+~No
+~Try again
+}
+
+::U3-L3-12:: How many stars? Look\: 10 stars. {
+=Ten stars.
+~Eight stars.
+~One star.
+}
+
+::U3-L4-01:: Look\: 11 leaves. Choose the number. {
+=11
+~12
+~15
+}
+
+::U3-L4-02:: Look\: 12 stars. Choose the number. {
+~10
+=12
+~14
+}
+
+::U3-L4-03:: Look\: 13 flowers. Choose the number. {
+~11
+=13
+~15
+}
+
+::U3-L4-04:: Look\: 14 stones. Choose the number. {
+~12
+=14
+~15
+}
+
+::U3-L4-05:: Look\: number 15. Choose the number. {
+~13
+~14
+=15
+}
+
+::U3-L4-06:: Choose the number word\: 11 \= ___. {
+=eleven
+~twelve
+~fifteen
+}
+
+::U3-L4-07:: Choose the number word\: 12 \= ___. {
+=twelve
+~ten
+~twenty
+}
+
+::U3-L4-08:: Choose the number word\: 15 \= ___. {
+~five
+=fifteen
+~fifty
+}
+
+::U3-L4-09:: Choose the next number\: 11, 12, 13, ___. {
+=14
+~15
+~10
+}
+
+::U3-L4-10:: Choose the next number\: 13, 14, ___. {
+~11
+~12
+=15
+}
+
+::U3-L4-11:: Look\: 13 flowers. Choose the phrase. {
+=thirteen flowers
+~thirteen flower
+~three flowers
+}
+
+::U3-L4-12:: Listen\: “fourteen.” Choose the number. {
+~12
+=14
+~15
+}
+
+::U3-L5-01:: Look\: 16 flowers. Choose the number. {
+=16
+~18
+~20
+}
+
+::U3-L5-02:: Look\: 17 stars. Choose the number. {
+~15
+=17
+~19
+}
+
+::U3-L5-03:: Look\: 18 leaves. Choose the number. {
+~16
+=18
+~20
+}
+
+::U3-L5-04:: Look\: 19 stones. Choose the number. {
+~17
+=19
+~20
+}
+
+::U3-L5-05:: Look\: number 20. Choose the number. {
+~12
+~18
+=20
+}
+
+::U3-L5-06:: Choose the number word\: 16 \= ___. {
+~six
+=sixteen
+~sixty
+}
+
+::U3-L5-07:: Choose the number word\: 17 \= ___. {
+=seventeen
+~seven
+~eleven
+}
+
+::U3-L5-08:: Choose the number word\: 20 \= ___. {
+~twelve
+=twenty
+~two
+}
+
+::U3-L5-09:: Choose the next number\: 16, 17, 18, ___. {
+~15
+=19
+~20
+}
+
+::U3-L5-10:: Choose the next number\: 18, 19, ___. {
+~16
+~17
+=20
+}
+
+::U3-L5-11:: Look\: 20 stars. Choose the phrase. {
+=twenty stars
+~twenty star
+~two stars
+}
+
+::U3-L5-12:: Listen\: “eighteen.” Choose the number. {
+~8
+=18
+~20
+}
+
+::U3-L6-01:: Look\: 1 star. Choose the phrase. {
+=one star
+~one stars
+~two stars
+}
+
+::U3-L6-02:: Look\: 2 stars. Choose the phrase. {
+~two star
+=two stars
+~one star
+}
+
+::U3-L6-03:: Look\: 1 book. Choose the phrase. {
+=one book
+~one books
+~two books
+}
+
+::U3-L6-04:: Look\: 3 books. Choose the phrase. {
+~three book
+=three books
+~one book
+}
+
+::U3-L6-05:: Look\: 1 apple. Choose the phrase. {
+=one apple
+~one apples
+~three apples
+}
+
+::U3-L6-06:: Look\: 4 apples. Choose the phrase. {
+~four apple
+=four apples
+~one apple
+}
+
+::U3-L6-07:: Look\: 1 bag. Choose the phrase. {
+=one bag
+~one bags
+~two bags
+}
+
+::U3-L6-08:: Look\: 2 bags. Choose the phrase. {
+~two bag
+=two bags
+~one bag
+}
+
+::U3-L6-09:: Look\: 5 balls. Choose. {
+~one
+=more than one
+~zero
+}
+
+::U3-L6-10:: Look\: 1 flower. Choose. {
+=one
+~more than one
+~ten
+}
+
+::U3-L6-11:: How many flowers? Look\: 4 flowers. {
+=Four flowers.
+~Four flower.
+~One flower.
+}
+
+::U3-L6-12:: Choose the good pair. {
+=one ball / four balls
+~one balls / four ball
+~two ball / one balls
+}
+
+::U3-L7-01:: Choose the next number\: 4, 5, ___. {
+=6
+~7
+~8
+}
+
+::U3-L7-02:: Choose the next number\: 9, 10, ___. {
+~0
+=11
+~20
+}
+
+::U3-L7-03:: Look\: no apples. How many? {
+=0
+~1
+~2
+}
+
+::U3-L7-04:: Look\: 12 stars. Choose the number. {
+~10
+=12
+~20
+}
+
+::U3-L7-05:: Choose the counting question. {
+=How many?
+~Hello.
+~I’m Toto.
+}
+
+::U3-L7-06:: Look\: 1 book. Choose the phrase. {
+=one book
+~one books
+~two books
+}
+
+::U3-L7-07:: Look\: number 20. Choose the number. {
+~12
+~15
+=20
+}
+
+::U3-L7-08:: Choose the number word\: 15 \= ___. {
+~five
+=fifteen
+~fifty
+}
+
+::U3-L7-09:: Look\: 3 apples. Choose the phrase. {
+=three apples
+~three apple
+~one apple
+}
+
+::U3-L7-10:: Choose the goodbye word. {
+~Hello.
+=Goodbye.
+~How many?
+}
+
+::U3-L7-11:: Look\: 14 stones. Choose the number. {
+~13
+=14
+~15
+}
+
+::U3-L7-12:: Choose the full unit line. {
+=I can count 0 to 20.
+~I can count 0 to 5.
+~I can count 6 to 10.
+}
+
+::U3-W-01:: The video is about ___. {
+~stars
+=numbers
+~trail signs
+}
+
+::U3-W-02:: Toto follows number ___. {
+=signs
+~pencils
+~flowers
+}
+
+::U3-W-03:: What does Toto see first? {
+=one star
+~two books
+~five bags
+}
+
+::U3-W-04:: How many flowers in the video line? {
+=two flowers
+~ten flowers
+~one flower
+}
+
+::U3-W-05:: Leo counts ___. {
+=three balls
+~three bags
+~three books
+}
+
+::U3-W-06:: Mia counts ___. {
+=four leaves
+~four stars
+~four apples
+}
+
+::U3-W-07:: Emma counts ___. {
+=five apples
+~five dogs
+~five books
+}
+
+::U3-W-08:: Choose the number group from the video. {
+=6, 7, 8, 9, 10
+~1, 3, 5, 7, 9
+~10, 9, 8, 7, 6
+}
+
+::U3-W-09:: Choose the next group from the video. {
+=11, 12, 13, 14, 15
+~12, 14, 16, 18, 20
+~15, 14, 13, 12, 11
+}
+
+::U3-W-10:: Choose the final group from the video. {
+=16, 17, 18, 19, 20
+~6, 7, 8, 9, 10
+~0, 1, 2, 3, 4
+}
+
+::U3-W-11:: How many pencils? {
+=twenty pencils
+~two pencils
+~ten pencils
+}
+
+::U3-W-12:: At the end, Toto is ___. {
+=happy
+~sad
+~angry
+}
+
+::U3-P-01:: What do you make? {
+=a Number Challenge Card
+~a counting board
+~a number trail sign
+}
+
+::U3-P-02:: What must your card show? {
+=numbers
+~only stickers
+~only lines
+}
+
+::U3-P-03:: Choose a good first line. {
+=Hello. I’m ___.
+~How many stars?
+~Five balls.
+}
+
+::U3-P-04:: Choose the project question. {
+=How many stars?
+~Count stars.
+~Five stars.
+}
+
+::U3-P-05:: Card\: 3 stars. Choose the answer. {
+=Three stars.
+~One star.
+~Five balls.
+}
+
+::U3-P-06:: Card\: 5 balls. Choose the answer. {
+=Five balls.
+~Five ball.
+~Two flowers.
+}
+
+::U3-P-07:: Card\: 2 flowers. Choose the answer. {
+=Two flowers.
+~Two flower.
+~One flower.
+}
+
+::U3-P-08:: Project card\: 4 balls. Choose the phrase. {
+=four balls
+~four ball
+~one ball
+}
+
+::U3-P-09:: Project card\: 1 star. Choose the phrase. {
+=one star
+~one stars
+~two stars
+}
+
+::U3-P-10:: Choose a good last line. {
+=Goodbye.
+~How many?
+~Twenty.
+}
+
+::U3-P-11:: Choose the good order. {
+=Hello → How many? → Answer → Goodbye
+~Goodbye → Answer → Hello → How many?
+~Answer → Goodbye → How many? → Hello
+}
+
+::U3-P-12:: A good project has ___. {
+=numbers, pictures, and a voice
+~only one blank page
+~only pictures, no numbers
+}
+

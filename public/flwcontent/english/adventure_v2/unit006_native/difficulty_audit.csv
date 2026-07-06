@@ -1,0 +1,13 @@
+﻿check,status,notes
+CEFR band clear,pass,Pre-A1.1 review
+New KP allowed,pass,No major new KP
+Review KP marked,pass,Units 1–5 review
+Blocked KP avoided,pass,No toys/body/snacks/family/weather etc.
+Vocabulary load controlled,pass,Review-only active vocabulary
+Input length appropriate,pass,picture-supported short chunks
+Output length appropriate,pass,4–6 short lines
+Practice items mapped to KP,pass,108 rows in question_bank.csv
+Watch script matches level,pass,about 52 sec; repeated chunks
+Project requires target KP,pass,mini picture mission card
+Repair path linked,pass,repair_path.csv
+Portfolio evidence clear,pass,portfolio_evidence_map.csv

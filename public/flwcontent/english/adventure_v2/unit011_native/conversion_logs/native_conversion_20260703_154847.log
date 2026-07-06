@@ -1,0 +1,105 @@
+Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit011\load_flw_native_generated_course.php
+
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit011\load_flw_native_generated_course.php
+No syntax errors detected in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit011\load_flw_native_generated_course.php
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit011\load_flw_native_generated_course.php
+{
+    "courseid": 111,
+    "shortname": "FLW-AEW2-U011-NATIVE",
+    "fullname": "Adventure English World V2 - Unit 11 Weather Window",
+    "conversion": "native_label_resources_no_iframe",
+    "source": "D:/WinPro.Delta/Projects/FLW/FLW-V2/adventure-english-world/unit011",
+    "static_assets_dir": "C:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public/flwcontent/english/adventure_v2/unit011_native",
+    "static_assets_url": "https://192.168.129.79/flwcontent/english/adventure_v2/unit011_native",
+    "course_cover_image": "AEW2_U011_IMG01_cover_weather_window.png",
+    "label_resources": [
+        {
+            "section": 1,
+            "name": "Unit Overview",
+            "cmid": 1545
+        },
+        {
+            "section": 2,
+            "name": "Learning Path",
+            "cmid": 1546
+        },
+        {
+            "section": 3,
+            "name": "Lesson 1 Meet the Weather",
+            "cmid": 1547
+        },
+        {
+            "section": 4,
+            "name": "Lesson 2 It's Sunny / It's Rainy",
+            "cmid": 1548
+        },
+        {
+            "section": 5,
+            "name": "Lesson 3 It's Windy / It's Cloudy",
+            "cmid": 1549
+        },
+        {
+            "section": 6,
+            "name": "Lesson 4 Clothes Basics",
+            "cmid": 1550
+        },
+        {
+            "section": 7,
+            "name": "Lesson 5 Choose Clothes",
+            "cmid": 1551
+        },
+        {
+            "section": 8,
+            "name": "Lesson 6 Help a Friend",
+            "cmid": 1552
+        },
+        {
+            "section": 9,
+            "name": "Lesson 7 Project Rehearsal",
+            "cmid": 1553
+        },
+        {
+            "section": 10,
+            "name": "Watch Lesson",
+            "cmid": 1554
+        },
+        {
+            "section": 11,
+            "name": "Final Project",
+            "cmid": 1555
+        },
+        {
+            "section": 12,
+            "name": "Progress / Portfolio Evidence",
+            "cmid": 1556
+        }
+    ],
+    "quiz_cmid": 1557,
+    "quiz_question_count": 108,
+    "teacher_guide_cmid": 1558,
+    "enrolments": [
+        {
+            "username": "win.pro",
+            "userid": 4,
+            "role": "student"
+        },
+        {
+            "username": "winpro.delta",
+            "userid": 3,
+            "role": "student"
+        },
+        {
+            "username": "admin",
+            "userid": 2,
+            "role": "editingteacher"
+        }
+    ],
+    "courseurl": "https://192.168.129.79/course/view.php?id=111",
+    "quizurl": "https://192.168.129.79/mod/quiz/view.php?id=1557"
+}
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe C:\Dev\MoodleWindowsInstaller-latest-501\server\moodle\admin\cli\purge_caches.php
+https://192.168.129.79/course/view.php?id=111 -> HTTP 200
+https://192.168.129.79/mod/quiz/view.php?id=1557 -> HTTP 200
+https://192.168.129.79/flwcontent/english/adventure_v2/unit011_native -> HTTP 200
+
+Done. Log saved to D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit011\conversion_logs\native_conversion_20260703_154847.log

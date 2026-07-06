@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/flwplacement/db" VERSION="2026070200" COMMENT="XMLDB file for FLW Placement"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="local_flwplacement" COMMENT="FLW adaptive placement attempts and reports">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="recommendedcourse" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="startingunit" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="confidencescore" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="weightedscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="skillprofilejson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="skillpercentjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="weakskillsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="resultjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="attemptjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="course-user-time" UNIQUE="false" FIELDS="courseid, userid, timecreated"/>
+        <INDEX NAME="cefrlevel" UNIQUE="false" FIELDS="cefrlevel"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

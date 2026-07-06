@@ -1,0 +1,5 @@
+gate,status,evidence
+Pre-A1.1 limit,PASS,Short color words and It’s + color only
+Blocked KP,PASS,"No numbers, age, family, geography, likes/dislikes in content or quiz bank"
+Practice count,PASS,108 total items: 84 lesson + 12 Watch + 12 Project
+Project output,PASS,Mini-poster + short voice script

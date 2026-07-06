@@ -1,0 +1,10 @@
+category,active_or_receptive,items,notes
+core_commands,active,"listen, look, point, say, stand up, sit down, open your book, close your book, read, write","Teach as classroom chunks with audio and action."
+repeat_language,active,"say it again, one more time","Use for classroom practice and repair."
+politeness,active,"please","Add after commands without grammar explanation."
+review_greetings,active_review,"hello, hi, goodbye, I'm ___","Use in final recording opening/closing."
+characters,active_review,"Leo, Mia, Emma, Toto","Keep Adventure identity consistent."
+classroom_objects,receptive_support,"book, card, desk, board, bag, pencil","Only when needed for images and commands; do not expand into object unit."
+color_sequence_support,receptive_review,"red, blue, yellow, green; one, two, three, four","Use only as visual card support, not new KP."
+blocked_future_language,blocked,"animals, likes, family, age, countries, full classroom object grammar","Keep outside Unit 4."
+

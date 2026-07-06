@@ -4,7 +4,7 @@
     Floating FLW learning-language selector.
 }}
 {{#haslearninglanguages}}
-<aside class="flw-language-panel" aria-label="Learning language">
+<aside class="flw-language-panel" aria-label="Learning language" data-current-language-code="{{currentlanguagecode}}" data-current-category-type="{{currentcategorytype}}">
     <p class="flw-language-panel-title">Learning language</p>
     <div class="flw-language-options" role="listbox" aria-label="Choose learning language">
         {{#learninglanguages}}
@@ -16,6 +16,7 @@
                     data-category-url="{{categoryurl}}"
                     data-school-category-url="{{schoolcategoryurl}}"
                     data-selfstudy-category-url="{{selfstudycategoryurl}}"
+                    data-placement-test-url="{{placementtesturl}}"
                     data-practice-category-url="{{practicecategoryurl}}"
                     data-exam-category-url="{{examcategoryurl}}"
                     data-practice-watch-url="{{practicewatchurl}}"
@@ -61,6 +62,7 @@
 (function() {
     var storageKey = 'flw.learningLanguage';
     var cookieKey = 'flw_learning_language';
+    var panel = document.querySelector('.flw-language-panel');
     var choices = Array.prototype.slice.call(document.querySelectorAll('[data-flw-language-choice]'));
 
     if (!choices.length) {
@@ -82,7 +84,13 @@
         });
     }
 
-    function applyLanguage(code) {
+    function normalizeUrl(url) {
+        var anchor = document.createElement('a');
+        anchor.href = url;
+        return anchor.href.replace(/#.*$/, '');
+    }
+
+    function applyLanguage(code, redirectCurrentCategory) {
         var active = findChoice(code) || choices[0];
         var activeCode = active.getAttribute('data-language-code');
         var activeLabel = active.getAttribute('data-language-label');
@@ -93,6 +101,7 @@
             practice: active.getAttribute('data-practice-category-url') || activeUrl,
             exam: active.getAttribute('data-exam-category-url') || activeUrl
         };
+        var placementTestUrl = active.getAttribute('data-placement-test-url') || categoryUrls.selfstudy;
         var practiceUrls = {
             watch: active.getAttribute('data-practice-watch-url') || categoryUrls.practice,
             listen: active.getAttribute('data-practice-listen-url') || categoryUrls.practice,
@@ -107,15 +116,6 @@
                 url: active.getAttribute('data-exam-' + i + '-url') || categoryUrls.exam
             });
         }
-        var navLabels = {
-            school: active.getAttribute('data-nav-school') || 'School',
-            selfstudy: active.getAttribute('data-nav-selfstudy') || 'Self Study',
-            practice: active.getAttribute('data-nav-practice') || 'Practice',
-            dictionary: active.getAttribute('data-nav-dictionary') || 'Dictionary',
-            exam: active.getAttribute('data-nav-exam') || 'Exam',
-            teacher: active.getAttribute('data-nav-teacher') || 'Teacher',
-            collaboration: active.getAttribute('data-nav-collaboration') || 'Collaboration'
-        };
 
         try {
             window.localStorage.setItem(storageKey, activeCode);
@@ -132,21 +132,15 @@
 
         Array.prototype.slice.call(document.querySelectorAll('[data-flw-category-link]')).forEach(function(link) {
             var linkType = link.getAttribute('data-flw-category-link');
-            var targetUrl = categoryUrls[linkType] || activeUrl;
-            link.setAttribute('href', targetUrl);
+            link.setAttribute('href', categoryUrls[linkType] || activeUrl);
             link.setAttribute('data-selected-language', activeCode);
-            if (navLabels[linkType]) {
-                link.textContent = navLabels[linkType];
-            }
-            link.setAttribute('title', activeLabel + ' ' + link.textContent.trim() + ' course category');
+            link.setAttribute('title', activeLabel + ' course category');
         });
 
-        Array.prototype.slice.call(document.querySelectorAll('[data-flw-nav-label]')).forEach(function(link) {
-            var labelType = link.getAttribute('data-flw-nav-label');
-            if (navLabels[labelType]) {
-                link.textContent = navLabels[labelType];
-                link.setAttribute('title', activeLabel + ' ' + navLabels[labelType]);
-            }
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-placement-link]')).forEach(function(link) {
+            link.setAttribute('href', placementTestUrl);
+            link.setAttribute('data-selected-language', activeCode);
+            link.setAttribute('title', activeLabel + ' placement test');
         });
 
         Array.prototype.slice.call(document.querySelectorAll('[data-flw-practice-submenu-link]')).forEach(function(link) {
@@ -158,16 +152,26 @@
         Array.prototype.slice.call(document.querySelectorAll('[data-flw-exam-submenu-link]')).forEach(function(link) {
             var index = parseInt(link.getAttribute('data-flw-exam-submenu-link'), 10) - 1;
             var examLink = examLinks[index] || {};
-            link.textContent = examLink.label || '';
+            if (examLink.label) {
+                link.textContent = examLink.label;
+            }
             link.setAttribute('href', examLink.url || categoryUrls.exam);
-            link.setAttribute('title', activeLabel + ' ' + (examLink.label || navLabels.exam));
+            link.setAttribute('title', activeLabel + ' ' + (examLink.label || 'exam'));
             link.hidden = !examLink.label;
         });
+
+        if (redirectCurrentCategory && panel) {
+            var currentCategoryType = panel.getAttribute('data-current-category-type');
+            var targetUrl = categoryUrls[currentCategoryType] || '';
+            if (targetUrl && normalizeUrl(targetUrl) !== normalizeUrl(window.location.href)) {
+                window.location.href = targetUrl;
+            }
+        }
     }
 
     choices.forEach(function(choice) {
         choice.addEventListener('click', function() {
-            applyLanguage(choice.getAttribute('data-language-code'));
+            applyLanguage(choice.getAttribute('data-language-code'), true);
         });
     });
 
@@ -177,7 +181,8 @@
     } catch (error) {
         saved = '';
     }
-    applyLanguage(saved || readCookie(cookieKey) || choices[0].getAttribute('data-language-code'));
+    var currentLanguage = panel ? panel.getAttribute('data-current-language-code') : '';
+    applyLanguage(saved || readCookie(cookieKey) || currentLanguage || choices[0].getAttribute('data-language-code'), false);
 })();
 {{/js}}
 {{/haslearninglanguages}}

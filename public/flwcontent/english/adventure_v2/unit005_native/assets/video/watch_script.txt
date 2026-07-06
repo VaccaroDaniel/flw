@@ -1,0 +1,12 @@
+Hello, animal friends.
+Toto sees a dog.
+Leo says, “I like dogs.”
+Toto sees a cat.
+Mia says, “I like cats.”
+Toto sees a bird.
+Emma says, “I like birds.”
+Toto sees a rabbit.
+Toto sees a duck.
+Toto sees a frog.
+Leo says, “I don’t like frogs.”
+Choose your animal friend.

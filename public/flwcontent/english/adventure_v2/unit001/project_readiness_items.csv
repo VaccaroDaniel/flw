@@ -1,0 +1,13 @@
+id,prompt,correct_answer,repair_id
+U1PR01,What do you make in the project?,voice greeting + name card,U1-RP-PROJECT-READY
+U1PR02,Choose the first line.,Hello.,U1-RP-PROJECT-READY
+U1PR03,Choose the name line.,I’m ___.,U1-RP-PROJECT-READY
+U1PR04,Choose the final line.,Goodbye.,U1-RP-PROJECT-READY
+U1PR05,What must your card show?,your name,U1-RP-PROJECT-READY
+U1PR06,Choose the correct order.,Hello → I’m ___ → Goodbye,U1-RP-PROJECT-READY
+U1PR07,Choose the good recording rule.,speak clearly,U1-RP-PROJECT-READY
+U1PR08,Choose the best Unit 1 script.,Hello. I’m ___. Goodbye.,U1-RP-PROJECT-READY
+U1PR09,The card says “I’m ___” but no name. What do you add?,your name,U1-RP-PROJECT-READY
+U1PR10,The recording says “I’m Leo. Goodbye.” What is missing?,Hello.,U1-RP-PROJECT-READY
+U1PR11,What do you submit?,audio + name card,U1-RP-PROJECT-READY
+U1PR12,A complete project has:,greeting + name + goodbye + card,U1-RP-PROJECT-READY

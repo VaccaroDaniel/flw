@@ -20,14 +20,14 @@ foreach ($entries as $entry) {
     $translations = [];
     foreach ($full->translations as $translation) {
         $translations[] = [
-            'lang' => $translation->targetlang,
+            'lang' => dictionary::lang_label($translation->targetlang),
             'translation' => $translation->translation,
         ];
     }
     $result[] = [
         'id' => $full->id,
         'headword' => $full->headword,
-        'sourceLang' => $full->sourcelang,
+        'sourceLang' => dictionary::lang_label($full->sourcelang),
         'partOfSpeech' => $full->partofspeech,
         'cefrLevel' => $full->cefrlevel,
         'definition' => $full->definition,

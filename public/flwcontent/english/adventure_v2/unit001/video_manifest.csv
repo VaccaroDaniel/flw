@@ -1,0 +1,2 @@
+video_id,title,filename,section,duration_seconds,status,moodle_relative_path,media_server_recommended_path,notes
+AEW2-U001-WATCH-001,The Hello Gate,AEW2-U001-WATCH-001.mp4,Watch,28,inserted,assets/video/AEW2-U001-WATCH-001.mp4,MediaServer/FLW/Adventure_English_World/Unit_001/video/export/AEW2-U001-WATCH-001.mp4,silent MP4 generated from approved unit images; audio/TTS can be linked later

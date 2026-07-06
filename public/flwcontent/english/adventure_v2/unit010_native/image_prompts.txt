@@ -1,0 +1,288 @@
+AEW2_U010_IMG01 — AEW2_U010_IMG01_cover_family_tree.png
+Purpose: Unit identity; introduce family/friend tree mission
+Prompt:
+Create a warm Unit 10 cover image for Adventure English World V2. Leo, Mia, Emma, and Toto stand around a large friendly tree-shaped poster with simple photo-card spaces. The mood is a safe show-and-tell mission, not a realistic private family display. Add small adventure details such as stars, clue cards, and a compass icon. Make the poster inviting and uncluttered.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Only large cover title allowed: 'Unit 10 Family Tree'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG02 — AEW2_U010_IMG02_l1_family_word_board.png
+Purpose: Picture-word support for family/friend words
+Prompt:
+Create a clean Pre-A1 family word board with eight large friendly picture cards: mom, dad, sister, brother, grandma, grandpa, friend, dog. Use simple icons or warm portrait-style cards, not realistic personal photos. Keep each card visually distinct and easy for children to match.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Short labels may appear: mom, dad, sister, brother, grandma, grandpa, friend, dog. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG03 — AEW2_U010_IMG03_l1_leo_photo_cards.png
+Purpose: Leo recognizes family/friend photo cards
+Prompt:
+Create a lesson anchor scene with Leo holding two simple photo cards while Toto looks at a card on the table. The table has a small tree mat and picture cards. Leo looks curious and friendly, ready to point and listen. Avoid showing too many family members; use generic warm photo-card drawings.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No text, or tiny decorative labels only; keep language in HTML. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG04 — AEW2_U010_IMG04_l2_this_is_my_model.png
+Purpose: Model chunk: This is my…
+Prompt:
+Create a supportive expression-model scene. Mia presents one simple photo card on a clean board while Leo listens. Beside the card, show a large readable sentence frame: This is my ___. The frame should be large and clear, with a blank space, not a full grammar explanation.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large exact phrase allowed: 'This is my ___.'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG05 — AEW2_U010_IMG05_l2_photo_card_choices.png
+Purpose: Controlled choices for This is my… sentences
+Prompt:
+Create four large classroom photo cards arranged neatly on a table: mom, dad, friend, dog. Use warm simple drawings, child-safe and culturally neutral. Include enough empty space so the image can be used beside matching Practice items.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Labels may be large: mom, dad, friend, dog. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG06 — AEW2_U010_IMG06_l3_whos_this_question.png
+Purpose: Ask and answer Who’s this?
+Prompt:
+Create a dialogue scene where Leo points to a mystery photo card on a classroom board and Mia is ready to answer. Toto sits nearby as a friendly clue helper. Show one clear speech bubble with the exact text: Who’s this? Keep the scene simple and readable.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Speech bubble text allowed: 'Who’s this?'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG07 — AEW2_U010_IMG07_l3_reply_cards.png
+Purpose: Answer options for It’s my…
+Prompt:
+Create a reply practice scene with Emma holding a large answer card that says It’s my ___. Toto is beside a dog card, making the answer visually clear. Keep the language short and large. Use a warm classroom background.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Optional short reply frames only: 'It’s my ___.'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG08 — AEW2_U010_IMG08_l4_this_is_my_friend.png
+Purpose: Show that friend can be used in project
+Prompt:
+Create a friendly scene where Emma presents a simple friend card showing Leo and Mia as teammates. The scene should communicate that learners can introduce a friend if they prefer. Include one large clear sentence on a card: This is my friend.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large phrase allowed: 'This is my friend.'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG09 — AEW2_U010_IMG09_l4_family_friend_sort.png
+Purpose: Sort family and friend cards
+Prompt:
+Create a simple sorting board with two clean columns: family and friend. Place several picture cards nearby, including mom, dad, friend, and dog. The board should be child-friendly and easy to use for matching practice. No complex family tree.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Column titles may appear: family / friend. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG10 — AEW2_U010_IMG10_l5_mini_reading_cards.png
+Purpose: Mini reading with picture support
+Prompt:
+Create a reading corner scene where Mia and Emma look at three large simple reading cards. Each card has one clear line and a picture: This is my mom. This is my dad. This is my friend. The text must be large, accurate, and easy to read.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large readable lines allowed: 'This is my mom.' 'This is my dad.' 'This is my friend.'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG11 — AEW2_U010_IMG11_l5_my_tree_model.png
+Purpose: Mini family/friend tree with 4 lines
+Prompt:
+Create a simple model family/friend tree poster on an easel. Leo stands beside it with Toto. The poster has 3–4 photo spaces and very short model lines, such as This is my mom. This is my friend. This is Toto. Keep text large and uncluttered.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large text may appear as short model lines; keep to 3–4 lines. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG12 — AEW2_U010_IMG12_l6_project_planning_table.png
+Purpose: Learners choose cards for poster
+Prompt:
+Create a project-planning scene. Leo, Mia, and Emma arrange blank photo cards on a large tree poster. Toto watches happily. Show glue sticks, colored pencils, and blank name cards, but avoid messy clutter. The poster should be blank enough for HTML text later.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No embedded learning text; use blank card spaces. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG13 — AEW2_U010_IMG13_l6_phrase_bank_board.png
+Purpose: Support project sentence frames
+Prompt:
+Create a clean phrase bank board for a Pre-A1 project. Use three large sentence frames: This is my ___. Who’s this? It’s my ___. Add small friendly icons, but keep the board uncluttered and easy to read.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large exact phrases allowed: 'This is my ___.' 'Who’s this?' 'It’s my ___.'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG14 — AEW2_U010_IMG14_l7_say_and_show_model.png
+Purpose: Model short poster presentation
+Prompt:
+Create a show-and-tell model scene. Mia stands beside a completed family/friend poster and says simple lines while Leo and Emma listen. Toto sits proudly near the poster. The poster should have only a few large simple photo cards and short labels.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Minimal poster text allowed; keep lines large and simple. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG15 — AEW2_U010_IMG15_l7_self_check_badge.png
+Purpose: Progress/self-check support
+Prompt:
+Create a simple self-check scene with the team holding three friendly check cards for a presentation: 3 lines, clear voice, smile. Keep text very large and readable. The mood should be encouraging, not test-like.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Short checklist may appear: '3 lines' 'clear voice' 'smile'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG16 — AEW2_U010_IMG16_watch_frame01_toto_finds_cards.png
+Purpose: Opening frame: Toto finds photo cards
+Prompt:
+Create Watch frame 1 for a silent/captioned slideshow. Toto finds a small stack of photo cards near a blank tree poster. Leo notices Toto and looks surprised. The frame should clearly start a gentle mystery: what are these cards?
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No text. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG17 — AEW2_U010_IMG17_watch_frame02_leo_says_mom.png
+Purpose: Leo introduces a card
+Prompt:
+Create Watch frame 2. Leo holds one photo card and smiles as if saying This is my mom. Toto looks at the card. Do not put the sentence in the image; leave space at the bottom for later video caption.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Caption can be added later; image itself should avoid text. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG18 — AEW2_U010_IMG18_watch_frame03_mia_asks_whos_this.png
+Purpose: Mia asks Who’s this?
+Prompt:
+Create Watch frame 3. Mia points to a mystery photo card on the board while Emma thinks about the answer. Toto tilts his head playfully. Leave clear empty space at the bottom for subtitles.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No embedded text; leave caption space. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG19 — AEW2_U010_IMG19_watch_frame04_emma_says_friend.png
+Purpose: Emma introduces a friend card
+Prompt:
+Create Watch frame 4. Emma presents a friendly teammate photo card while Leo and Mia smile. The visual meaning should be 'friend' without needing text. Leave subtitle space at the bottom.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No embedded text; caption later. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG20 — AEW2_U010_IMG20_watch_frame05_finished_tree.png
+Purpose: Final Watch frame: completed tree
+Prompt:
+Create Watch frame 5. The team finishes a family/friend tree poster. Leo, Mia, Emma, and Toto stand proudly together. The poster has simple photo spaces and a friendly tree shape. Leave subtitle space.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No embedded text or only tiny decorative title; caption later. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG21 — AEW2_U010_IMG21_project_model_poster.png
+Purpose: Final project model image
+Prompt:
+Create a final project model image. Mia shows a neat family/friend poster with three or four photo cards. Toto sits beside the poster. The poster may include three large simple model lines: This is my mom. This is my friend. This is Toto. Keep it readable and uncluttered.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large simple model text allowed; use 3 lines maximum. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG22 — AEW2_U010_IMG22_project_blank_template.png
+Purpose: Learner project planning template
+Prompt:
+Create a blank learner template image: a friendly tree-shaped poster with 4 empty photo-card spaces and 4 empty label spaces. It should look printable and clean, with soft Adventure World colors. No family words inside the image.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: No text; blank spaces only. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG23 — AEW2_U010_IMG23_repair_this_is_my.png
+Purpose: Repair common chunk error
+Prompt:
+Create a friendly repair board for the sentence frame This is my ___. Show Leo pointing to the correct frame with a green check mark. Avoid showing wrong sentences in large text. The repair visual should be encouraging.
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Large correct phrase allowed: 'This is my ___.' Use a simple check mark.. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+
+AEW2_U010_IMG24 — AEW2_U010_IMG24_portfolio_celebration.png
+Purpose: End-of-unit success evidence
+Prompt:
+Create an end-of-unit celebration scene. Leo, Mia, Emma, and Toto stand with their finished family/friend posters in the classroom. The mood is proud and gentle. Include one small badge with the exact text: I can show my poster!
+
+Character identity lock: Use the uploaded Adventure World character identity card as visual reference. Leo is a 7–8-year-old Asian boy with round glasses and a green top; Mia is a 7–8-year-old girl with a yellow cardigan; Emma is a 7–8-year-old girl with a purple outfit; Toto is a small cute brown-and-white dog with a playful look. Keep faces, hair, colors, and roles consistent across all images.
+Style: semi-realistic modern children’s educational coursebook style, warm and adventure-friendly, not too cartoon-like, bright but clean, safe classroom-friendly scene, age-appropriate modest clothing, consistent recurring characters, clear visual learning context.
+Clothing and safety: no jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no political posters, no religious promotion, no slogans, no flags as central symbols, no violence, no adult content, no distracting logos.
+Text rule: Short badge text allowed: 'I can show my poster!'. Any learning text must be large, simple, and repeated later in HTML.
+
+--------------------------------------------------------------------------------
+

@@ -55,6 +55,242 @@ function theme_flwacademy_get_extra_scss($theme): string {
 }
 
 /**
+ * Returns whether a primary navigation link should be marked active.
+ *
+ * @param string $key Link key.
+ * @param string $url Link URL.
+ * @param string $currenturl Current page URL.
+ * @return bool
+ */
+function theme_flwacademy_primary_navigation_is_active(string $key, string $url, string $currenturl): bool {
+    global $DB, $PAGE;
+
+    $currentparts = parse_url($currenturl);
+    $currentpath = $currentparts['path'] ?? '/';
+    $currentquery = $currentparts['query'] ?? '';
+    $currentwithoutfragment = $currentpath . ($currentquery !== '' ? '?' . $currentquery : '');
+
+    $linkwithoutfragment = strtok($url, '#');
+    $linkparts = parse_url($linkwithoutfragment);
+    $linkpath = $linkparts['path'] ?? '/';
+    $linkquery = $linkparts['query'] ?? '';
+    $linkwithoutfragment = $linkpath . ($linkquery !== '' ? '?' . $linkquery : '');
+
+    if ($key === 'home') {
+        return in_array(rtrim($currentpath, '/') ?: '/', ['/', '/index.php'], true);
+    }
+
+    if ($key === 'myhome') {
+        return in_array(rtrim($currentpath, '/') ?: '/', ['/my', '/my/index.php'], true);
+    }
+
+    if ($key === 'administrationsite') {
+        return strpos($currentpath, '/admin/') === 0 || $currentpath === '/admin/index.php';
+    }
+
+    if ($key === 'flw-selfstudy' && strpos($currentpath, '/local/flwplacement/') === 0) {
+        return true;
+    }
+
+    if (in_array($key, ['flw-school', 'flw-selfstudy', 'flw-practice', 'flw-exam'], true)
+            && strpos($currentpath, '/course/index.php') !== false) {
+        parse_str($currentquery, $queryparams);
+        $categoryid = isset($queryparams['categoryid']) ? (int)$queryparams['categoryid'] : 0;
+        if ($categoryid > 0) {
+            $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', IGNORE_MISSING);
+            if ($category) {
+                if ($key === 'flw-school') {
+                    return theme_flwacademy_is_school_category($category);
+                }
+                if ($key === 'flw-selfstudy') {
+                    return theme_flwacademy_is_selfstudy_category($category);
+                }
+                $activity = theme_flwacademy_resolve_activity_category($category);
+                if ($key === 'flw-practice') {
+                    return $activity && $activity['area'] === 'practice';
+                }
+                if ($key === 'flw-exam') {
+                    return $activity && $activity['area'] === 'exam';
+                }
+            }
+        }
+    }
+
+    if (in_array($key, ['flw-school', 'flw-selfstudy', 'flw-practice', 'flw-exam'], true)) {
+        $courseid = 0;
+        if (strpos($currentpath, '/course/view.php') !== false) {
+            parse_str($currentquery, $queryparams);
+            $courseid = isset($queryparams['id']) ? (int)$queryparams['id'] : 0;
+        }
+        if ($courseid <= 0 && !empty($PAGE->course->id) && (int)$PAGE->course->id !== SITEID) {
+            $courseid = (int)$PAGE->course->id;
+        }
+        if ($courseid > 0) {
+            $course = $DB->get_record('course', ['id' => $courseid], 'id,category', IGNORE_MISSING);
+            if ($course) {
+                $category = $DB->get_record('course_categories', ['id' => $course->category], 'id,name,parent', IGNORE_MISSING);
+                if ($category && theme_flwacademy_category_navigation_is_active($key, $category)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    if ($currentwithoutfragment === $linkwithoutfragment) {
+        return true;
+    }
+
+    return strpos($currentwithoutfragment, $linkwithoutfragment . '&') === 0;
+}
+
+/**
+ * Returns whether a FLW navigation item matches a category or one of its parents.
+ *
+ * @param string $key Navigation key.
+ * @param stdClass $category Course category.
+ * @return bool
+ */
+function theme_flwacademy_category_navigation_is_active(string $key, stdClass $category): bool {
+    foreach (theme_flwacademy_get_category_lineage($category) as $lineagecategory) {
+        if ($key === 'flw-school' && theme_flwacademy_is_school_category($lineagecategory)) {
+            return true;
+        }
+        if ($key === 'flw-selfstudy' && theme_flwacademy_is_selfstudy_category($lineagecategory)) {
+            return true;
+        }
+        if ($key === 'flw-practice' || $key === 'flw-exam') {
+            $activity = theme_flwacademy_resolve_activity_category($lineagecategory);
+            if ($activity && (($key === 'flw-practice' && $activity['area'] === 'practice')
+                    || ($key === 'flw-exam' && $activity['area'] === 'exam'))) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/**
+ * Gets a category and its parents, starting with the given category.
+ *
+ * @param stdClass $category Course category.
+ * @return stdClass[]
+ */
+function theme_flwacademy_get_category_lineage(stdClass $category): array {
+    global $DB;
+
+    $lineage = [];
+    $seen = [];
+    while (!empty($category->id) && empty($seen[(int)$category->id])) {
+        $lineage[] = $category;
+        $seen[(int)$category->id] = true;
+        if (empty($category->parent)) {
+            break;
+        }
+        $category = $DB->get_record('course_categories', ['id' => $category->parent], 'id,name,parent', IGNORE_MISSING);
+        if (!$category) {
+            break;
+        }
+    }
+
+    return $lineage;
+}
+
+/**
+ * Build native Boost menu items for the FLW primary navigation.
+ *
+ * @param array $primarymenu Boost primary navigation export data.
+ * @return array
+ */
+function theme_flwacademy_prepare_primary_navigation(array $primarymenu): array {
+    global $CFG;
+
+    $moremenu = $primarymenu['moremenu'] ?? [];
+    $moremenu['nodearray'] = [];
+
+    $languages = theme_flwacademy_export_learning_languages();
+    $defaultlanguageurl = $languages[0]['categoryurl'] ?? (new moodle_url('/course/index.php'))->out(false);
+    $dashboardurl = (new moodle_url('/my/'))->out(false);
+    $dictionaryurl = is_readable($CFG->dirroot . '/local/mldict/index.php')
+        ? (new moodle_url('/local/mldict/index.php'))->out(false)
+        : $dashboardurl . '#flw-dictionary';
+
+    $links = [
+        'home' => [
+            'text' => get_string('home'),
+            'url' => (new moodle_url('/', ['redirect' => 0]))->out(false),
+        ],
+        'myhome' => [
+            'text' => get_string('myhome'),
+            'url' => $dashboardurl,
+        ],
+        'flw-school' => [
+            'text' => 'School',
+            'url' => $languages[0]['schoolcategoryurl'] ?? $defaultlanguageurl,
+        ],
+        'flw-selfstudy' => [
+            'text' => 'Self Study',
+            'url' => $languages[0]['selfstudycategoryurl'] ?? $defaultlanguageurl,
+        ],
+        'flw-practice' => [
+            'text' => 'Practice',
+            'url' => $languages[0]['practicecategoryurl'] ?? $defaultlanguageurl,
+        ],
+        'flw-dictionary' => [
+            'text' => 'Dictionary',
+            'url' => $dictionaryurl,
+        ],
+        'flw-exam' => [
+            'text' => 'Exam',
+            'url' => $languages[0]['examcategoryurl'] ?? $defaultlanguageurl,
+        ],
+        /*
+        'flw-teacher' => [
+            'text' => 'Teacher',
+            'url' => $dashboardurl . '#flw-teacher',
+        ],
+        'flw-collaboration' => [
+            'text' => 'Collaboration',
+            'url' => $dashboardurl . '#flw-collaboration',
+        ],
+        */
+    ];
+
+    if (is_siteadmin() || has_capability('moodle/site:config', context_system::instance())) {
+        $links['administrationsite'] = [
+            'text' => get_string('administrationsite'),
+            'url' => (new moodle_url('/admin/search.php'))->out(false),
+        ];
+    }
+
+    $currenturl = qualified_me();
+    $moremenuid = $moremenu['moremenuid'] ?? 'flw-primary';
+    foreach ($links as $key => $link) {
+        $moremenu['nodearray'][] = [
+            'key' => $key,
+            'text' => $link['text'],
+            'title' => $link['text'],
+            'url' => $link['url'],
+            'isactive' => theme_flwacademy_primary_navigation_is_active($key, $link['url'], $currenturl),
+            'children' => [],
+            'haschildren' => false,
+            'moremenuid' => $moremenuid,
+        ];
+    }
+
+    $primarymenu['moremenu'] = $moremenu;
+    $primarymenu['mobileprimarynav'] = array_map(static function(array $link, string $key) use ($currenturl): array {
+        return [
+            'key' => $key,
+            'text' => $link['text'],
+            'url' => $link['url'],
+            'isactive' => theme_flwacademy_primary_navigation_is_active($key, $link['url'], $currenturl),
+        ];
+    }, $links, array_keys($links));
+
+    return $primarymenu;
+}
+
+/**
  * Returns the FLW learning language list in the product order.
  *
  * @return array
@@ -260,6 +496,9 @@ function theme_flwacademy_export_learning_languages(): array {
             'categoryurl' => $url->out(false),
             'schoolcategoryurl' => $categoryurls['school'],
             'selfstudycategoryurl' => $categoryurls['selfstudy'],
+            'placementtesturl' => (new moodle_url('/local/flwplacement/index.php', [
+                'language' => $language['code'],
+            ]))->out(false),
             'practicecategoryurl' => $categoryurls['practice'],
             'examcategoryurl' => $categoryurls['exam'],
             'practicewatchurl' => $practicesubmenu['watchurl'],
@@ -347,6 +586,41 @@ function theme_flwacademy_is_selfstudy_category(stdClass $category): bool {
 }
 
 /**
+ * Gets the first course overview image URL, with a Self Study fallback.
+ *
+ * @param int $courseid
+ * @param core_renderer $output
+ * @return string
+ */
+function theme_flwacademy_get_course_cover_url(int $courseid, core_renderer $output): string {
+    $context = context_course::instance($courseid);
+    $fs = get_file_storage();
+    $files = $fs->get_area_files(
+        $context->id,
+        'course',
+        'overviewfiles',
+        false,
+        'sortorder ASC, id ASC',
+        false
+    );
+
+    foreach ($files as $file) {
+        if ($file->is_valid_image()) {
+            return moodle_url::make_pluginfile_url(
+                $file->get_contextid(),
+                $file->get_component(),
+                $file->get_filearea(),
+                null,
+                $file->get_filepath(),
+                $file->get_filename()
+            )->out(false);
+        }
+    }
+
+    return $output->image_url('dashboard/self-study', 'theme_flwacademy')->out(false);
+}
+
+/**
  * Exports FLW Self Study category page data.
  *
  * @param int $categoryid
@@ -429,6 +703,7 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
             'categoryname' => format_string($course->categoryname),
             'summary' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
+            'imageurl' => theme_flwacademy_get_course_cover_url((int)$course->id, $output),
         ];
     }
 
@@ -448,6 +723,9 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
         'description' => $description,
         'hasdescription' => trim(strip_tags($description)) !== '',
         'languagecategoryurl' => (new moodle_url('/course/index.php', ['categoryid' => $languagecategory->id]))->out(false),
+        'placementtesturl' => (new moodle_url('/local/flwplacement/index.php', [
+            'language' => $languageCode,
+        ]))->out(false),
         'heroimageurl' => $output->image_url('dashboard/self-study', 'theme_flwacademy')->out(false),
         'languagetiles' => $languageTiles,
         'mapnodes' => $mapnodes,
@@ -470,6 +748,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     $languagecategory = $DB->get_record('course_categories', ['id' => $category->parent], '*', MUST_EXIST);
     $language = theme_flwacademy_match_learning_language_category($languagecategory);
     $languageLabel = $language['label'] ?? format_string($languagecategory->name);
+    $languageCode = $language['code'] ?? 'en';
 
     $description = '';
     if (!empty($category->description)) {
@@ -547,6 +826,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
 
     return [
         'language' => $languageLabel,
+        'languagecode' => $languageCode,
         'title' => format_string($category->name),
         'description' => $description,
         'hasdescription' => $hasdescription,
@@ -637,6 +917,7 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
 
     $language = $resolved['language'];
     $languageLabel = $language['label'];
+    $languageCode = $language['code'];
     $area = $resolved['area'];
     $itemcategory = $resolved['itemcategory'];
     $areacategory = $resolved['areacategory'];
@@ -760,6 +1041,7 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
 
     return [
         'language' => $languageLabel,
+        'languagecode' => $languageCode,
         'area' => $area,
         'ispractice' => $area === 'practice',
         'isexam' => $area === 'exam',

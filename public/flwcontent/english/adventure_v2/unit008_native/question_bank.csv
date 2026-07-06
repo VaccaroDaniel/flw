@@ -1,0 +1,109 @@
+id,section,type,prompt,options,correct_answer,feedback,image,kp,skill,difficulty
+AEW2-U008-L1-Q01,L1,mcq,Look at IMG02. Leo touches his _____.,head | hands | feet,head,Correct: head.,IMG02,body parts,vocabulary,easy
+AEW2-U008-L1-Q02,L1,mcq,Look at IMG03. Leo shows two _____.,hands | feet | ears,hands,Correct: hands.,IMG03,body parts,vocabulary,easy
+AEW2-U008-L1-Q03,L1,mcq,Look at Leo’s shoes. The body word is _____.,feet | mouth | eyes,feet,Correct: feet.,IMG03,body parts,vocabulary,easy
+AEW2-U008-L1-Q04,L1,gap,Touch your _____.,head | feet | hands,head,Correct: Touch your head.,IMG03,Touch your,grammar,easy
+AEW2-U008-L1-Q05,L1,match,Choose the correct matching set.,head = top of body; hands = open palms; feet = shoes | head = shoes; hands = top of body; feet = open palms | head = open palms; hands = shoes; feet = top of body,head = top of body; hands = open palms; feet = shoes,Good matching.,IMG03,body parts,vocabulary,easy
+AEW2-U008-L1-Q06,L1,mcq,Which word matches open palms?,hands | head | feet,hands,Correct: hands.,IMG03,body parts,vocabulary,easy
+AEW2-U008-L1-Q07,L1,truefalse,"In IMG04, Toto is near Leo’s foot.",True | False,True,Correct. Toto is near Leo’s foot.,IMG04,body parts,reading,easy
+AEW2-U008-L1-Q08,L1,sequence,Put the body words from top to bottom.,head → hands → feet | feet → hands → head | hands → head → feet,head → hands → feet,Correct order.,IMG03,body parts,sequence,easy
+AEW2-U008-L1-Q09,L1,mcq,IMG02 shows:,Touch your head | Clap your hands | Point to your feet,Touch your head,Correct.,IMG02,Touch your,listening,easy
+AEW2-U008-L1-Q10,L1,mcq,"In IMG04, Mia points toward Leo’s _____.",feet | mouth | eyes,feet,Correct: feet.,IMG04,body parts,vocabulary,easy
+AEW2-U008-L1-Q11,L1,mcq,You can touch it on top of your body.,head | feet | hands,head,Correct: head.,IMG03,body parts,vocabulary,easy
+AEW2-U008-L1-Q12,L1,repair,Not nose. Try again: Leo touches his _____.,head | hands | feet,head,Correct: head.,IMG02,repair,vocabulary,easy
+AEW2-U008-L2-Q01,L2,mcq,"In IMG05, Mia points near her _____.",nose | feet | hands,nose,Correct: nose.,IMG05,face parts,vocabulary,easy
+AEW2-U008-L2-Q02,L2,mcq,"In IMG07, Emma touches one _____.",ear | foot | hand,ear,Correct: ear.,IMG07,face parts,vocabulary,easy
+AEW2-U008-L2-Q03,L2,mcq,Choose the face word.,eyes | feet | hands,eyes,Correct: eyes.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q04,L2,mcq,Choose the face word.,ears | feet | hands,ears,Correct: ears.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q05,L2,mcq,Choose the face word.,mouth | hands | legs,mouth,Correct: mouth.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q06,L2,gap,Touch your _____.,nose | feet | hands,nose,Correct: Touch your nose.,IMG07,Touch your,grammar,easy
+AEW2-U008-L2-Q07,L2,gap,Touch your _____.,ears | feet | hands,ears,Correct: Touch your ears.,IMG07,Touch your,grammar,easy
+AEW2-U008-L2-Q08,L2,mcq,IMG06 shows a face. Choose a face word.,eye | shoe | hand,eye,Correct: eye.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q09,L2,match,Choose the correct face-word set.,"eyes, ears, nose, mouth | shoes, chair, book, bag | feet, legs, arms, table","eyes, ears, nose, mouth",Good face-word set.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q10,L2,truefalse,"In IMG07, Toto watches the children.",True | False,True,Correct.,IMG07,story detail,reading,easy
+AEW2-U008-L2-Q11,L2,mcq,One face part in the middle of the face is the _____.,nose | feet | hands,nose,Correct: nose.,IMG06,face parts,vocabulary,easy
+AEW2-U008-L2-Q12,L2,repair,The word is “ears.” Touch your _____.,ears | eyes | feet,ears,Correct: ears.,IMG07,repair,vocabulary,easy
+AEW2-U008-L3-Q01,L3,mcq,"In IMG08, the team touches their _____.",heads | feet | hands,heads,Correct: heads.,IMG08,body parts,vocabulary,easy
+AEW2-U008-L3-Q02,L3,mcq,Which command matches IMG08?,Touch your head | Point to your feet | Clap your hands,Touch your head,Correct.,IMG08,Touch your,listening,easy
+AEW2-U008-L3-Q03,L3,mcq,Which command matches IMG09?,Touch your nose | Touch your feet | Touch your hands,Touch your nose,Correct.,IMG09,Touch your,listening,easy
+AEW2-U008-L3-Q04,L3,mcq,Which command matches IMG10?,Point to your feet | Touch your mouth | Clap your hands,Point to your feet,Correct.,IMG10,Point to your,listening,easy
+AEW2-U008-L3-Q05,L3,gap,Touch your _____.,head | table | chair,head,Correct: head.,IMG08,Touch your,grammar,easy
+AEW2-U008-L3-Q06,L3,gap,Point to your _____.,feet | eyes | mouth,feet,Correct: feet.,IMG10,Point to your,grammar,easy
+AEW2-U008-L3-Q07,L3,sequence,"Put the image commands in order: IMG08, IMG09, IMG10.",head → nose → feet | nose → feet → head | feet → head → nose,head → nose → feet,Correct sequence.,IMG08;IMG09;IMG10,sequence,listening,easy
+AEW2-U008-L3-Q08,L3,truefalse,"In IMG09, the team touches noses.",True | False,True,Correct.,IMG09,story detail,reading,easy
+AEW2-U008-L3-Q09,L3,mcq,Choose the body command.,Touch your ears | Draw a circle | Look at the window,Touch your ears,Correct: body command.,,Touch your,grammar,easy
+AEW2-U008-L3-Q10,L3,gap,Touch _____ head.,your | red | two,your,Correct: Touch your head.,,Touch your,grammar,easy
+AEW2-U008-L3-Q11,L3,mcq,"In IMG10, Emma points to her _____.",feet | eyes | mouth,feet,Correct: feet.,IMG10,body parts,vocabulary,easy
+AEW2-U008-L3-Q12,L3,repair,"This is feet, not hands. Point to your _____.",feet | hands | nose,feet,Correct: feet.,IMG10,repair,vocabulary,easy
+AEW2-U008-L4-Q01,L4,mcq,Leo points to himself and shows a hand. He says:,my hand | your hand | my feet,my hand,Correct: my hand.,IMG11,my/your,grammar,easy
+AEW2-U008-L4-Q02,L4,mcq,I talk to a friend and show the friend’s hand. I say:,your hand | my hand | your feet,your hand,Correct: your hand.,IMG11,my/your,grammar,easy
+AEW2-U008-L4-Q03,L4,mcq,"In IMG12 left, Mia touches her own head. Mia says:",my head | your head | my feet,my head,Correct: my head.,IMG12,my/your,grammar,easy
+AEW2-U008-L4-Q04,L4,mcq,"In IMG12 right, Mia gestures toward Emma’s head. Mia says:",your head | my head | your feet,your head,Correct: your head.,IMG12,my/your,grammar,easy
+AEW2-U008-L4-Q05,L4,gap,Touch _____ head.,your | my | blue,your,Correct: Touch your head.,,Touch your,grammar,easy
+AEW2-U008-L4-Q06,L4,gap,This is _____ hand.,my | your | one,my,Correct: my hand.,,my/your,grammar,easy
+AEW2-U008-L4-Q07,L4,match,Choose the correct meaning.,my = own body; your = friend/listener’s body | my = a color; your = a number | my = feet only; your = hands only,my = own body; your = friend/listener’s body,Good matching.,,my/your,grammar,easy
+AEW2-U008-L4-Q08,L4,mcq,I point to my own foot. I say:,my foot | your foot | my mouth,my foot,Correct: my foot.,,my/your,grammar,easy
+AEW2-U008-L4-Q09,L4,mcq,I say a command to you: Touch _____ nose.,your | my | red,your,Correct: your nose.,,my/your,grammar,easy
+AEW2-U008-L4-Q10,L4,truefalse,“My” means my own body.,True | False,True,Correct.,,my/your,grammar,easy
+AEW2-U008-L4-Q11,L4,mcq,"In IMG13, Leo touches his own head. Leo can say:",my head | your head | my hand,my head,Correct: my head.,IMG13,my/your,grammar,easy
+AEW2-U008-L4-Q12,L4,repair,Not “my.” I talk to a friend: Touch _____ head.,your | my | feet,your,Correct: your.,,repair,grammar,easy
+AEW2-U008-L5-Q01,L5,mcq,"In IMG15, Mia claps her _____.",hands | feet | ears,hands,Correct: hands.,IMG15,body parts,vocabulary,easy
+AEW2-U008-L5-Q02,L5,mcq,Which command matches IMG15?,Clap your hands | Touch your nose | Point to your feet,Clap your hands,Correct.,IMG15,commands,listening,easy
+AEW2-U008-L5-Q03,L5,mcq,"In IMG16, Leo waves his _____.",arms | feet | nose,arms,Correct: arms.,IMG16,body parts,vocabulary,easy
+AEW2-U008-L5-Q04,L5,mcq,Which command matches IMG16?,Wave your arms | Clap your feet | Touch your mouth,Wave your arms,Correct.,IMG16,commands,listening,easy
+AEW2-U008-L5-Q05,L5,mcq,"In IMG17, Emma steps with her _____.",feet | ears | mouth,feet,Correct: feet.,IMG17,body parts,vocabulary,easy
+AEW2-U008-L5-Q06,L5,mcq,Your legs help you _____.,step | clap | smile,step,Correct: step.,IMG17,actions,vocabulary,easy
+AEW2-U008-L5-Q07,L5,mcq,Choose the action word for moving arms.,wave | clap | point,wave,Correct: wave.,IMG16,actions,vocabulary,easy
+AEW2-U008-L5-Q08,L5,gap,Clap your _____.,hands | nose | feet,hands,Correct: Clap your hands.,IMG15,commands,grammar,easy
+AEW2-U008-L5-Q09,L5,gap,Wave your _____.,arms | ears | mouth,arms,Correct: Wave your arms.,IMG16,commands,grammar,easy
+AEW2-U008-L5-Q10,L5,gap,Step with your _____.,feet | eyes | mouth,feet,Correct: feet.,IMG17,commands,grammar,easy
+AEW2-U008-L5-Q11,L5,sequence,Choose the movement order.,wave arms → clap hands → step feet | step hands → wave nose → clap feet | clap ears → wave feet → step mouth,wave arms → clap hands → step feet,Correct sequence.,IMG14,sequence,listening,easy
+AEW2-U008-L5-Q12,L5,mcq,Choose the safe movement.,small step | jump on a table | push a friend,small step,Correct: small step.,,safety,strategy,easy
+AEW2-U008-L6-Q01,L6,mcq,"In IMG18, Leo listens and touches his _____.",head | feet | hands,head,Correct: head.,IMG18,commands,listening,easy
+AEW2-U008-L6-Q02,L6,mcq,The small speaker means:,listen | sleep | run,listen,Correct: listen.,IMG18,listening,strategy,easy
+AEW2-U008-L6-Q03,L6,listen,Command: Touch your nose. Choose the body part.,nose | hands | feet,nose,Correct: nose.,,commands,listening,easy
+AEW2-U008-L6-Q04,L6,listen,Command: Clap your hands. Choose the body part.,hands | ears | legs,hands,Correct: hands.,,commands,listening,easy
+AEW2-U008-L6-Q05,L6,listen,Command: Point to your feet. Choose the body part.,feet | eyes | mouth,feet,Correct: feet.,,commands,listening,easy
+AEW2-U008-L6-Q06,L6,sequence,Listen and order: Touch your head. Clap your hands. Point to your feet.,head → hands → feet | feet → head → hands | hands → feet → head,head → hands → feet,Correct order.,,sequence,listening,easy
+AEW2-U008-L6-Q07,L6,mcq,"In IMG19, Mia does this action.",claps hands | touches mouth | points to eyes,claps hands,Correct: Mia claps.,IMG19,actions,vocabulary,easy
+AEW2-U008-L6-Q08,L6,mcq,"In IMG19, Emma shows a feet action. Choose the command.",Point to your feet | Touch your nose | Clap your hands,Point to your feet,Correct.,IMG19,commands,listening,easy
+AEW2-U008-L6-Q09,L6,mcq,"In IMG20, Leo models touching his _____.",nose | feet | hands,nose,Correct: nose.,IMG20,commands,repair,easy
+AEW2-U008-L6-Q10,L6,mcq,"In IMG20, Emma touches her ____ first.",ear | foot | hand,ear,Correct: ear.,IMG20,body parts,repair,easy
+AEW2-U008-L6-Q11,L6,gap,Look. Listen again. Touch your _____.,nose | feet | hands,nose,Correct: nose.,IMG20,repair,listening,easy
+AEW2-U008-L6-Q12,L6,mcq,Choose the helpful repair phrase.,Try again. | Stop learning. | Run away.,Try again.,Correct: Try again.,,repair,strategy,easy
+AEW2-U008-L7-Q01,L7,mcq,Choose a good first chant line.,Touch your head. | Sleep your head. | Open your head.,Touch your head.,Correct.,IMG21,project phrases,speaking,easy
+AEW2-U008-L7-Q02,L7,mcq,Choose a good face chant line.,Touch your nose. | Clap your nose. | Step your nose.,Touch your nose.,Correct.,IMG21,project phrases,speaking,easy
+AEW2-U008-L7-Q03,L7,mcq,Choose the hand action.,Clap your hands. | Touch your table. | Wave your feet.,Clap your hands.,Correct.,IMG24,project phrases,speaking,easy
+AEW2-U008-L7-Q04,L7,mcq,Choose the feet action.,Point to your feet. | Smile your feet. | Listen your feet.,Point to your feet.,Correct.,IMG24,project phrases,speaking,easy
+AEW2-U008-L7-Q05,L7,sequence,"Put the model chant in order: hands, feet, head, nose.",head → nose → hands → feet | hands → head → feet → nose | feet → hands → nose → head,head → nose → hands → feet,Correct chant order.,IMG24,sequence,speaking,easy
+AEW2-U008-L7-Q06,L7,gap,Touch your _____.,head | chair | book,head,Correct: head.,,project phrases,grammar,easy
+AEW2-U008-L7-Q07,L7,gap,Clap your _____.,hands | ears | nose,hands,Correct: hands.,,project phrases,grammar,easy
+AEW2-U008-L7-Q08,L7,gap,Point to your _____.,feet | mouth | eyes,feet,Correct: feet.,,project phrases,grammar,easy
+AEW2-U008-L7-Q09,L7,mcq,Choose a good chant line.,Wave your arms. | Wave your pencil. | Wave your lunch.,Wave your arms.,Correct.,,project phrases,speaking,easy
+AEW2-U008-L7-Q10,L7,mcq,Choose the body command.,Touch your ears. | Touch your wall. | Touch your desk.,Touch your ears.,Correct.,,project phrases,speaking,easy
+AEW2-U008-L7-Q11,L7,truefalse,IMG21 uses picture icons to help make a chant.,True | False,True,Correct.,IMG21,project,reading,easy
+AEW2-U008-L7-Q12,L7,selfcheck,Ready for the chant? Choose the best answer.,I can say four lines. | I can write a long story. | I can buy a snack.,I can say four lines.,Correct: chant ready.,IMG24,project,self-check,easy
+AEW2-U008-W-Q01,W,mcq,"In IMG22, Toto finds _____.",paw prints | a snack | a hat,paw prints,Correct.,IMG22,watch,listening,easy
+AEW2-U008-W-Q02,W,mcq,"Leo, Mia, and Emma are ready to _____.",move | sleep | shop,move,Correct: move.,IMG22,watch,listening,easy
+AEW2-U008-W-Q03,W,mcq,"In the Watch, Leo touches his _____.",head | feet | mouth,head,Correct: head.,IMG23,watch,listening,easy
+AEW2-U008-W-Q04,W,mcq,"In IMG23, Emma touches her _____.",nose | feet | hands,nose,Correct: nose.,IMG23,watch,listening,easy
+AEW2-U008-W-Q05,W,mcq,"In IMG23, Mia claps her _____.",hands | nose | feet,hands,Correct: hands.,IMG23,watch,listening,easy
+AEW2-U008-W-Q06,W,truefalse,Toto joins the movement game.,True | False,True,Correct.,IMG23,watch,listening,easy
+AEW2-U008-W-Q07,W,mcq,Choose the command for Leo.,Touch your head. | Clap your hands. | Point to your feet.,Touch your head.,Correct.,IMG23,watch,listening,easy
+AEW2-U008-W-Q08,W,mcq,Choose the command for Emma.,Touch your nose. | Wave your arms. | Touch your feet.,Touch your nose.,Correct.,IMG23,watch,listening,easy
+AEW2-U008-W-Q09,W,mcq,Choose the command for Mia.,Clap your hands. | Touch your nose. | Point to your eyes.,Clap your hands.,Correct.,IMG23,watch,listening,easy
+AEW2-U008-W-Q10,W,sequence,Put the Watch actions in order.,paw prints → touch head → touch nose → clap hands | clap hands → paw prints → touch nose → touch head | touch nose → clap hands → paw prints → touch head,paw prints → touch head → touch nose → clap hands,Correct sequence.,IMG22;IMG23,watch,sequence,easy
+AEW2-U008-W-Q11,W,mcq,Choose the best Watch summary.,Toto starts a move game. | Toto buys a toy. | Toto eats lunch.,Toto starts a move game.,Correct summary.,IMG22,watch,summary,easy
+AEW2-U008-W-Q12,W,projectlink,Which line can go in your chant?,Touch your head. | I want juice. | This is my family.,Touch your head.,Correct: chant line.,IMG24,project link,speaking,easy
+AEW2-U008-P-Q01,P,multiselect,Choose four good chant body words.,head | nose | hands | feet | table | snack,head | nose | hands | feet,Correct: body words.,,project,vocabulary,easy
+AEW2-U008-P-Q02,P,mcq,Choose a good first project line.,Touch your head. | Read your head. | Eat your head.,Touch your head.,Correct.,,project,speaking,easy
+AEW2-U008-P-Q03,P,mcq,Choose the correct command word.,Touch your nose. | Touch my nose. | Touch red nose.,Touch your nose.,Correct: your.,,project,grammar,easy
+AEW2-U008-P-Q04,P,mcq,Choose the hand line.,Clap your hands. | Clap your ears. | Clap your nose.,Clap your hands.,Correct.,,project,speaking,easy
+AEW2-U008-P-Q05,P,gap,Touch your _____.,head | desk | bag,head,Correct: head.,,project,grammar,easy
+AEW2-U008-P-Q06,P,gap,Point to your _____.,feet | book | chair,feet,Correct: feet.,,project,grammar,easy
+AEW2-U008-P-Q07,P,gap,Clap your _____.,hands | nose | legs,hands,Correct: hands.,,project,grammar,easy
+AEW2-U008-P-Q08,P,gap,Wave your _____.,arms | mouth | eyes,arms,Correct: arms.,,project,grammar,easy
+AEW2-U008-P-Q09,P,sequence,Put the project chant in order.,head → nose → hands → feet | feet → nose → hands → head | hands → feet → head → nose,head → nose → hands → feet,Correct order.,,project,sequence,easy
+AEW2-U008-P-Q10,P,mcq,What do you make in this project?,a movement chant | a snack order | a family tree,a movement chant,Correct.,,project,self-check,easy
+AEW2-U008-P-Q11,P,mcq,What do you do in the project?,say and move | write a long story | buy a toy,say and move,Correct.,,project,self-check,easy
+AEW2-U008-P-Q12,P,portfolio,Choose the best portfolio evidence.,I perform my chant. | I count to 20 only. | I draw a room.,I perform my chant.,Correct: chant performance.,,portfolio,self-check,easy

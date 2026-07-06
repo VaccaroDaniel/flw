@@ -1,0 +1,100 @@
+Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit003\load_flw_native_generated_course.php
+
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit003\load_flw_native_generated_course.php
+No syntax errors detected in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit003\load_flw_native_generated_course.php
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit003\load_flw_native_generated_course.php
+{
+    "courseid": 103,
+    "shortname": "FLW-AEW2-U003-NATIVE",
+    "fullname": "Adventure English World V2 Unit 3 - Number Trail",
+    "conversion": "native_label_resources_no_iframe",
+    "source": "D:/WinPro.Delta/Projects/FLW/FLW-V2/adventure-english-world/unit003",
+    "static_assets_dir": "C:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public/flwcontent/english/adventure_v2/unit003_native",
+    "static_assets_url": "https://192.168.129.79/flwcontent/english/adventure_v2/unit003_native",
+    "course_cover_image": "unit003_img01_cover_number_trail.png",
+    "label_resources": [
+        {
+            "section": 1,
+            "name": "Overview & Unit Map",
+            "cmid": 554
+        },
+        {
+            "section": 2,
+            "name": "Unit Story",
+            "cmid": 555
+        },
+        {
+            "section": 3,
+            "name": "Lesson 1 - Meet the Trail Numbers",
+            "cmid": 556
+        },
+        {
+            "section": 4,
+            "name": "Lesson 2 - More Number Signs",
+            "cmid": 557
+        },
+        {
+            "section": 5,
+            "name": "Lesson 3 - How Many?",
+            "cmid": 558
+        },
+        {
+            "section": 6,
+            "name": "Lesson 4 - Big Number Signs",
+            "cmid": 559
+        },
+        {
+            "section": 7,
+            "name": "Lesson 5 - To Twenty",
+            "cmid": 560
+        },
+        {
+            "section": 8,
+            "name": "Lesson 6 - One Star, Two Stars",
+            "cmid": 561
+        },
+        {
+            "section": 9,
+            "name": "Lesson 7 - Number Challenge",
+            "cmid": 562
+        },
+        {
+            "section": 10,
+            "name": "Watch Lesson",
+            "cmid": 563
+        },
+        {
+            "section": 11,
+            "name": "Final Project",
+            "cmid": 564
+        }
+    ],
+    "quiz_cmid": 565,
+    "quiz_question_count": 108,
+    "teacher_guide_cmid": 566,
+    "enrolments": [
+        {
+            "username": "win.pro",
+            "userid": 4,
+            "role": "student"
+        },
+        {
+            "username": "winpro.delta",
+            "userid": 3,
+            "role": "student"
+        },
+        {
+            "username": "admin",
+            "userid": 2,
+            "role": "editingteacher"
+        }
+    ],
+    "courseurl": "https://192.168.129.79/course/view.php?id=103",
+    "quizurl": "https://192.168.129.79/mod/quiz/view.php?id=565"
+}
+$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe C:\Dev\MoodleWindowsInstaller-latest-501\server\moodle\admin\cli\purge_caches.php
+https://192.168.129.79/course/view.php?id=103 -> HTTP 200
+https://192.168.129.79/mod/quiz/view.php?id=565 -> HTTP 200
+https://192.168.129.79/flwcontent/english/adventure_v2/unit003_native -> HTTP 200
+
+Done. Log saved to D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit003\conversion_logs\native_conversion_20260702_102447.log

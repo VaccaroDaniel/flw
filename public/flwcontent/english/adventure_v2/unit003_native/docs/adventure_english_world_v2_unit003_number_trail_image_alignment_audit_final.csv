@@ -1,0 +1,21 @@
+image_no,section,filename,status,alignment_notes,required_action
+1,Cover,adventure_world_let_s_explore_the_path.png,PASS,Cover title and Number Trail theme align; core characters present.,None
+2,L1 Main 0–5,a_bright_colorful_3d_cgi_style_children_s_educatio.png,PASS,Numbers 0–5 visible with matching small groups.,None
+3,L1 Support 0–5,a_bright_cheerful_cartoon_3d_rendered_outdoor_le.png,PASS,Mia and Toto with clear 0–5 cards and matching objects.,None
+4,L2 Main 6–10,a_bright_colorful_3d_cartoony_children_s_illustra.png,NEEDS_REPAIR,"The 9 sign appears paired with about 12 balls, so direct 6–10 counting practice is unsafe.","Regenerate with exact 6, 7, 8, 9, and 10 quantities."
+5,L2 Support 6–10,forest_checkpoint_fun_with_numbers.png,NEEDS_REPAIR,Regenerated support image still has mismatches: 8 shows 9 leaves; 10 shows 8 flags.,"Regenerate with exactly 6 flowers, 7 stars, 8 leaves, 9 balls, 10 flags."
+6,L3 Main How many,a_bright_colorful_3d_cgi_cartoon_style_outdoor_sc.png,PASS,Mia points to a clearly countable flower group; How many? concept is clear.,None
+7,L3 Support questions,wide_bright_cartoon_3d_illustration_of_an_outdoor.png,PASS,Simple counting board supports How many? practice.,None
+8,L4 Main 11–15,a_bright_colorful_3d_cgi_illustration_of_an_outdo.png,PASS,Numbers 11–15 visible with generally aligned grouped objects.,None
+9,L4 Support 11–15,counting_fun_in_the_sunny_forest.png,NEEDS_REPAIR,"Regenerated image still mismatches several groups: 11, 12, 13, and 14 appear too high; 15 pencils may be correct.","Regenerate with exact, easy-to-count groups for 11–15."
+10,L5 Main 16–20,counting_fun_at_the_forest_race.png,PASS,Regenerated image shows 16–20 signs with broadly count-matched groups and all core characters.,None
+11,L5 Support 16–20,bright_colorful_3d_cgi_children_s_educational_sce.png,NEEDS_REPAIR,Rows for 16–20 are not reliably count-matched; several rows show too many objects.,"Regenerate with exact rows: 16, 17, 18, 19, 20 only."
+12,L6 Main one/more,a_bright_colorful_3d_cgi_educational_poster_scene.png,PASS,"Clear one vs more-than-one contrast with 1 star/2 stars, 1 flower/3 flowers, 1 ball/4 balls.",None
+13,L6 Support sorting,a_bright_colorful_3d_cgi_illustration_set_outdoor.png,PASS,Mia and Emma sort one/more-than-one cards; plural noticing is clear.,None
+14,L7 Main challenge,a_bright_colorful_3d_cgi_children_s_illustration.png,NEEDS_REPAIR,Regenerated image still includes an extra non-canonical child and several challenge boards with mismatched counts; too cluttered for Pre-A1 direct practice.,"Regenerate with only Leo, Mia, Emma, Toto and simpler 0–20 review boards."
+15,L7 Support review map,a_bright_colorful_3d_cg_children_s_illustration_o.png,NEEDS_REPAIR,"Review map has many count/number mismatches, so it is not reliable for final recap practice.",Regenerate with exact count checkpoints or use abstract number path without object-count claims.
+16,Watch thumbnail,a_bright_colorful_3d_cartoon_illustration_in_a_ch.png,PASS,Thumbnail supports Watch section and number trail motion.,None
+17,Watch support,a_bright_colorful_3d_cgi_animated_outdoor_scene_i.png,PASS,How many? scene supports short listening lines and visible counting.,None
+18,Project model,a_bright_colorful_high_quality_3d_cgi_cartoon_cl.png,NEEDS_REPAIR,"Regenerated image still shows Emma holding the card instead of Mia, and the 5-ball row shows only 4 balls.","Regenerate with Mia holding the card and exact 3 stars, 5 balls, 2 flowers."
+19,Project support,a_bright_colorful_children_s_illustration_3d_cart.png,NEEDS_REPAIR,Image shows Leo and Mia making cards; prompt requires Leo and Emma. Some worksheet text is also visually busy.,"Regenerate with Leo and Emma only, plus Toto, making simple number cards."
+20,End review,a_bright_colorful_3d_cartoon_cgi_scene_in_a_lush.png,PASS,Cheerful closing image with main characters and 0–20 celebration.,None

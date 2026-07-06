@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Adventure English World V2 · Unit 1 · Hello Adventure</title>
+<style>
+:root {
+  --bg:#fff8ec; --paper:#ffffff; --ink:#203142; --muted:#5f6f7a; --brand:#3b8f54; --brand2:#f2b84b; --accent:#7a5cff; --danger:#c84343; --ok:#2f8a4d; --line:#e6dccb;
+  --shadow:0 10px 28px rgba(64,48,24,.12); --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#fff7e6,#fffdf8 40%,#f7fbff);font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);line-height:1.55}
+a{color:var(--brand);font-weight:700}
+.v2-unit-topbar{position:sticky;top:0;z-index:12;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:10px 14px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);box-shadow:0 6px 18px rgba(64,48,24,.08)}
+.v2-unit-topbar a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 12px;border:1px solid #eadfcd;border-radius:999px;background:#fff;color:#244e36;text-decoration:none;font-weight:900}
+.v2-unit-topbar a:hover{background:#efffed;border-color:#bfe1be}
+.header{position:relative;overflow:hidden;background:linear-gradient(135deg,#ffe9b2,#d9f1ff 55%,#ecffe6);border-bottom:6px solid #ffe0a1}
+.header-inner{max-width:1180px;margin:auto;padding:28px 18px 34px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid #ffd980;border-radius:999px;padding:7px 12px;font-weight:800;color:#7a4d00;box-shadow:var(--shadow)}
+h1{font-size:clamp(2rem,5vw,4.6rem);line-height:1.02;margin:.45rem 0 .5rem;color:#1f4f34}
+.subtitle{font-size:1.2rem;color:#40515e;margin:0 0 1rem}
+.hero-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;transform:rotate(.4deg)}
+.hero-card img,.image-card img{display:block;width:100%;border-radius:18px;cursor:zoom-in}
+.container{max-width:1180px;margin:auto;padding:22px 18px 70px}
+.nav{position:sticky;top:58px;z-index:5;background:rgba(255,248,236,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1180px;margin:auto;padding:10px 18px;display:flex;gap:8px;overflow:auto}
+.nav a{white-space:nowrap;text-decoration:none;background:#fff;border:1px solid #eadfcd;border-radius:999px;padding:8px 12px;color:#334;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.nav a:hover{background:#efffed;border-color:#bfe1be}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+.info-card,.course-card,.practice-block,.ai-box,.watch-box,.project-box,.portfolio-box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.info-card strong{display:block;color:#1f4f34;font-size:1.05rem}
+.path{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0}
+.path-step{background:#fff;border:2px dashed #ffd87a;border-radius:18px;padding:12px;text-align:center;font-weight:800;color:#624500}
+.section-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin:34px 0 16px}
+.section-head h2,.section-head h3{margin:0;color:#244e36}
+.section-head p{margin:0;color:var(--muted)}
+.section-head.compact{margin:0 0 14px}
+.word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.word-card{background:#fff;border:2px solid #e8ecd5;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:4px;min-height:100px;justify-content:center;align-items:center;text-align:center}
+.word-card strong{font-size:1.35rem;color:#2b5e3b}
+.word-card small{color:var(--muted)}
+.mini-audio,.audio-chip{border:0;border-radius:999px;background:#e7f7ff;color:#224b62;font-weight:800;padding:8px 12px;cursor:pointer}
+.audio-chip{background:#f0fff1;border:2px solid #c8edc6;margin:.35rem 0 .5rem}
+.mini-audio.is-playing,.audio-chip.is-playing{background:#fff7d6;border-color:#f1d88e;color:#604700}
+.lesson{margin:40px 0;padding-top:4px}
+.lesson-title{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.lesson-title span{background:var(--brand);color:#fff;padding:10px 13px;border-radius:16px;font-weight:900}
+.lesson-title h2{margin:0;font-size:clamp(1.7rem,3vw,2.6rem);color:#253f2e}
+.can-do{display:inline-block;background:#fffbdc;border:2px solid #f0d573;border-radius:16px;padding:10px 14px;margin:0 0 16px;font-weight:800}
+.media-content-grid{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(320px,1.1fr);gap:18px;align-items:start}
+.media-stack{display:grid;gap:14px}
+.image-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+.content-stack{display:grid;gap:14px}
+ul{margin:.4rem 0 .2rem;padding-left:1.25rem}
+.phrase-list{list-style:none;padding-left:0}
+.phrase-list li{background:#f7fbff;border-left:5px solid #acd8ff;border-radius:12px;padding:8px 10px;margin:6px 0;font-size:1.08rem;font-weight:800}
+.ai-box{border:2px solid #d8ccff;background:#fbf9ff}
+.ai-box button,.practice-actions button,.project-button{border:0;background:var(--accent);color:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer}
+.practice-block{margin-top:18px}
+.practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.practice-item{background:#fff;border:1px solid #e8dfce;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:230px}
+.practice-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.qid{font-weight:900;color:#315e3f;background:#eef9ee;border-radius:999px;padding:4px 9px;font-size:.85rem}
+.qtype{font-size:.78rem;color:#6a596b;background:#f4edff;border-radius:999px;padding:4px 8px}
+.prompt{font-weight:800;margin:.2rem 0}
+.choices{display:grid;gap:6px;margin-top:auto}
+.choice{display:flex;gap:8px;align-items:flex-start;background:#fbfbfd;border:1px solid #e8e8ee;border-radius:12px;padding:8px;cursor:pointer}
+.choice input{margin-top:4px}
+.feedback{min-height:26px;font-weight:900}
+.feedback.ok{color:var(--ok)}
+.feedback.no{color:var(--danger)}
+.practice-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.practice-actions .secondary{background:#fff;color:#334;border:2px solid #d8d8d8}
+.watch-grid,.project-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:start}
+.video-placeholder{position:relative;background:#111;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.video-placeholder img{opacity:.96;width:100%;display:block}
+.video-label{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.94);border-radius:999px;padding:8px 12px;font-weight:900}
+.play-dot{position:absolute;inset:0;margin:auto;width:86px;height:86px;border-radius:50%;background:rgba(255,255,255,.82);display:grid;place-items:center;font-size:2.5rem}
+.project-script{font-size:1.35rem;font-weight:900;background:#fffdf4;border:2px dashed #ffc857;border-radius:18px;padding:14px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.portfolio-item{background:#fff;border:1px solid #eadfcd;border-radius:16px;padding:14px}
+.repair-note{font-size:.95rem;color:#58416a;background:#fff;border-radius:12px;padding:8px}
+.progressbar{position:fixed;right:18px;bottom:18px;background:#fff;border:2px solid #d7ecd4;border-radius:20px;box-shadow:var(--shadow);padding:10px 14px;font-weight:900;z-index:6}
+.lightbox{display:none;position:fixed;z-index:20;inset:0;background:rgba(0,0,0,.82);align-items:center;justify-content:center;padding:22px}
+.lightbox img{max-width:95vw;max-height:88vh;border-radius:18px;background:#fff}
+.lightbox button{position:absolute;top:16px;right:16px;border:0;border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}
+.footer{padding:28px 18px;background:#244e36;color:#fff;text-align:center}
+@media(max-width:850px){.header-inner,.media-content-grid,.watch-grid,.project-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:repeat(2,1fr)}.path{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.info-grid{grid-template-columns:1fr}.practice-grid{grid-template-columns:1fr}}
+@media print{.nav,.progressbar,.practice-actions,.audio-chip,.mini-audio,.ai-box button,.project-button{display:none}body{background:#fff}.practice-item{break-inside:avoid}}
+
+
+/* V2 interactive repair: folding lessons, video, paged Practice */
+.lesson-fold{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:0;margin:28px 0;overflow:hidden}
+.lesson-fold[open]{border-color:#ffd980}
+.lesson-summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;background:linear-gradient(90deg,#fff3cc,#f3fff2);border-bottom:1px solid var(--line)}
+.lesson-summary::-webkit-details-marker{display:none}
+.lesson-summary span:first-child{background:#2f8a4d;color:#fff;border-radius:999px;padding:6px 12px;font-weight:900;white-space:nowrap}
+.lesson-summary h2{margin:0;flex:1;color:#244e36}
+.fold-hint{font-size:.86rem;background:#fff;border:1px solid #e0d5c4;border-radius:999px;padding:5px 10px;color:#5f6f7a;font-weight:800}
+.lesson-fold>.can-do,.lesson-fold>.media-content-grid,.lesson-fold>.practice-block{margin-left:18px;margin-right:18px}
+.lesson-fold>.can-do{margin-top:18px}
+.video-card{position:relative;background:#111;border-radius:22px;box-shadow:var(--shadow);padding:12px;border:1px solid #e1d8c7}
+.video-card video{display:block;width:100%;border-radius:16px;background:#000;max-height:520px}
+.video-caption{font-weight:900;color:#244e36;background:#fff;border-radius:14px;padding:8px 12px;margin-top:10px;text-align:center}
+.practice-block{position:relative}
+.practice-grid{display:block}
+.practice-item{margin:12px 0}
+.practice-item.practice-hidden{display:none!important}
+.choice{cursor:pointer}
+.choice input:disabled + span{opacity:.82}
+.feedback{min-height:1.4em;margin-top:10px;font-weight:800;border-radius:14px;padding:0}
+.feedback.ok{background:#ecfff1;border:1px solid #b9e3c2;color:#1e6b35;padding:10px 12px}
+.feedback.no{background:#fff1ef;border:1px solid #f3b8b1;color:#8a2f25;padding:10px 12px}
+.feedback .repair-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.feedback .retry-one,.feedback .show-answer{border:0;border-radius:999px;padding:8px 12px;font-weight:900;cursor:pointer}
+.feedback .retry-one{background:#ffca58;color:#493100}
+.feedback .show-answer{background:#fff;border:1px solid #d7cdbb;color:#244e36}
+.practice-pager{display:grid;grid-template-columns:auto auto 1fr auto auto;gap:8px;align-items:center;margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.practice-pager button{border:0;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer;background:#2f8a4d;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.practice-pager button.secondary{background:#fff;color:#244e36;border:1px solid #d7cdbb}
+.practice-pager button:disabled{opacity:.45;cursor:not-allowed}
+.practice-page-indicator{text-align:center;font-weight:900;color:#604700;background:#fff7d6;border:1px solid #f1d88e;border-radius:999px;padding:8px 10px}
+.practice-mini-note{font-size:.92rem;color:var(--muted);margin:6px 0 0}
+@media(max-width:720px){.practice-pager{grid-template-columns:1fr 1fr}.practice-page-indicator{grid-column:1/-1;order:-1}.lesson-summary{align-items:flex-start}.fold-hint{display:none}}
+</style>
+</head>
+<body>
+<nav class="v2-unit-topbar" aria-label="FLW-V2 unit navigation">
+<a href="../index.html">Back to Adventure English World V2 map</a>
+<a href="../../index.html">FLW-V2 Course Gateway</a>
+<a href="teacher_guide.html">Teacher Guide</a>
+<a href="online_tts_manifest.csv">TTS Manifest</a>
+</nav>
+<header class="header" id="top">
+<div class="header-inner">
+<div>
+<span class="badge">Adventure English World V2 · Pre-A1.1</span>
+<h1>Unit 1<br/>Hello Adventure</h1>
+<p class="subtitle">Meet Leo, Mia, Emma, and Toto. Say hello. Say your name. Say goodbye.</p>
+<div class="path">
+<div class="path-step">1 Hello</div><div class="path-step">2 I’m</div><div class="path-step">3 Name?</div><div class="path-step">4 Bye</div><div class="path-step">5 Card</div><div class="path-step">6 Voice</div>
+</div>
+</div>
+<div class="hero-card"><img alt="Leo, Mia, Emma, and Toto waving at the Hello Adventure classroom" onclick="openLightbox(this.src,this.alt)" src="assets/images/AEW2-U001-IMG-001.png"/></div>
+</div>
+</header>
+<nav class="nav"><div class="nav-inner"><a href="#story">Story</a><a href="#lesson-1">L1</a><a href="#lesson-2">L2</a><a href="#lesson-3">L3</a><a href="#lesson-4">L4</a><a href="#lesson-5">L5</a><a href="#lesson-6">L6</a><a href="#lesson-7">L7</a><a href="#watch">Watch</a><a href="#project">Project</a><a href="#portfolio">Portfolio</a></div></nav>
+<main class="container">
+<section aria-label="Unit information" class="info-grid">
+<div class="info-card"><strong>Course</strong>Adventure English World V2</div>
+<div class="info-card"><strong>Level</strong>Pre-A1.1</div>
+<div class="info-card"><strong>Unit KP</strong>Hello · I’m · names · goodbye</div>
+<div class="info-card"><strong>Portfolio</strong>Voice greeting + name card</div>
+</section>
+<section class="course-card" id="goals">
+<div class="section-head compact"><h2>Today I can</h2><p>Learning Path</p></div>
+<ul>
+<li>say <strong>hello</strong> and <strong>hi</strong>;</li>
+<li>say <strong>I’m + my name</strong>;</li>
+<li>ask <strong>What’s your name?</strong>;</li>
+<li>say <strong>goodbye</strong> and <strong>bye</strong>;</li>
+<li>make a name card;</li>
+<li>record a short voice greeting.</li>
+</ul>
+</section>
+<section id="story">
+<div class="section-head"><h2>Unit Story</h2><p>Listen and meet the team.</p></div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="The Adventure team waves in a bright classroom" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-002.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Story</h3><button aria-label="Audio placeholder: Listen to the Unit Story" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-STORY')" type="button">🔊 Listen to the Unit Story</button><ul class="phrase-list"><li>Hello! I’m Leo.</li><li>Hi! I’m Mia.</li><li>Hello! I’m Emma.</li><li>Hello, Toto!</li><li>Goodbye!</li></ul></div>
+<div class="course-card"><h3>Unit word cards</h3><div class="word-grid"><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-hello')" type="button">🔊</button><strong>hello</strong><small>greeting</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-hi')" type="button">🔊</button><strong>hi</strong><small>greeting</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-I’m')" type="button">🔊</button><strong>I’m</strong><small>name phrase</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-name')" type="button">🔊</button><strong>name</strong><small>name word</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-What’s your name?')" type="button">🔊</button><strong>What’s your name?</strong><small>name question</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-goodbye')" type="button">🔊</button><strong>goodbye</strong><small>leaving phrase</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-bye')" type="button">🔊</button><strong>bye</strong><small>leaving phrase</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-Leo')" type="button">🔊</button><strong>Leo</strong><small>character name</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-Mia')" type="button">🔊</button><strong>Mia</strong><small>character name</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-Emma')" type="button">🔊</button><strong>Emma</strong><small>character name</small></div><div class="word-card"><button class="mini-audio" onclick="audioPlaceholder('WORD-Toto')" type="button">🔊</button><strong>Toto</strong><small>character name</small></div></div></div>
+</div>
+</div>
+</section>
+<details class="lesson lesson-fold" id="lesson-1" open="open">
+<summary class="lesson-title lesson-summary"><span>Lesson 1</span><h2>Say Hello</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can hear and say Hello and Hi.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 1 support image 3" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-003.png"/></div><div class="image-card"><img alt="Unit 1 lesson 1 support image 4" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-004.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>Look at Leo and Mia.</li><li>Leo waves. Mia smiles.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L1-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>Hello.</li><li>Hi.</li><li>Hello, Mia.</li><li>Hi, Leo.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 1" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L1-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>A: Hello.</li><li>B: Hi.</li><li>A: Hello, Mia.</li><li>B: Hi, Leo.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Point and say: Hello.</li><li>Point and say: Hi.</li><li>Point and say: Hello, Leo.</li><li>Point and say: Hi, Mia.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Say one greeting.</p><p><strong>Say / show:</strong> Hello. or Hi.</p><p><strong>Feedback:</strong> Clear voice, friendly tone, and clear /h/ sound.</p><button onclick="aiPlaceholder('AI checker for Lesson 1')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Listen again, point to the greeting card, and repeat once.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson1">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 1 · Say Hello · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L1P01" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P01</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Look at the waving child. Choose the greeting.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P01" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1L1P01" type="radio" value="B"/> <span>B. Goodbye</span></label>
+<label class="choice"><input name="U1L1P01" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L1P02" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P02</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “Hello.” Choose the word you hear.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P02" type="radio" value="A"/> <span>A. Hi</span></label>
+<label class="choice"><input name="U1L1P02" type="radio" value="B"/> <span>B. Hello</span></label>
+<label class="choice"><input name="U1L1P02" type="radio" value="C"/> <span>C. Bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L1P03" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P03</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Mia smiles and waves. Choose the short greeting.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P03" type="radio" value="A"/> <span>A. Bye</span></label>
+<label class="choice"><input name="U1L1P03" type="radio" value="B"/> <span>B. Hi</span></label>
+<label class="choice"><input name="U1L1P03" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P04" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P04</span><span class="qtype">Word-picture match</span></div>
+<p class="prompt">Match hello to the correct picture.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P04" type="radio" value="A"/> <span>A. child waving</span></label>
+<label class="choice"><input name="U1L1P04" type="radio" value="B"/> <span>B. child leaving</span></label>
+<label class="choice"><input name="U1L1P04" type="radio" value="C"/> <span>C. blank card</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P05" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P05</span><span class="qtype">Dialogue choice</span></div>
+<p class="prompt">Leo says, “Hello.” Mia says:</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P05" type="radio" value="A"/> <span>A. Hi.</span></label>
+<label class="choice"><input name="U1L1P05" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L1P05" type="radio" value="C"/> <span>C. Name.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P06" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P06</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “___!”</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P06" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1L1P06" type="radio" value="B"/> <span>B. Toto</span></label>
+<label class="choice"><input name="U1L1P06" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P07" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P07</span><span class="qtype">Sorting</span></div>
+<p class="prompt">Which two are greetings?</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P07" type="radio" value="A"/> <span>A. hello + hi</span></label>
+<label class="choice"><input name="U1L1P07" type="radio" value="B"/> <span>B. goodbye + bye</span></label>
+<label class="choice"><input name="U1L1P07" type="radio" value="C"/> <span>C. name + Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P08" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P08</span><span class="qtype">True / false</span></div>
+<p class="prompt">Hello and Hi are greetings.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P08" type="radio" value="A"/> <span>A. True</span></label>
+<label class="choice"><input name="U1L1P08" type="radio" value="B"/> <span>B. False</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P09" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P09</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">Leo meets Mia. What can Leo say?</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P09" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1L1P09" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L1P09" type="radio" value="C"/> <span>C. Bye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P10" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P10</span><span class="qtype">Audio-picture match</span></div>
+<p class="prompt">Listen: “Hi!” Choose the matching picture.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P10" type="radio" value="A"/> <span>A. smiling wave</span></label>
+<label class="choice"><input name="U1L1P10" type="radio" value="B"/> <span>B. leaving door</span></label>
+<label class="choice"><input name="U1L1P10" type="radio" value="C"/> <span>C. name card</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P11" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P11</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">A child comes into the room. Choose the greeting.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P11" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1L1P11" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L1P11" type="radio" value="C"/> <span>C. Bye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L1P12" data-repair="U1-RP-GREETING">
+<div class="practice-head"><span class="qid">U1L1P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The child meets a friend and says “Goodbye.” Choose the better word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L1P12" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1L1P12" type="radio" value="B"/> <span>B. Name</span></label>
+<label class="choice"><input name="U1L1P12" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-2">
+<summary class="lesson-title lesson-summary"><span>Lesson 2</span><h2>I’m Leo</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can say a name with I’m.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 2 support image 5" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-005.png"/></div><div class="image-card"><img alt="Unit 1 lesson 2 support image 6" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-006.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>Leo has a name card.</li><li>Mia has a name card.</li><li>Emma has a name card.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L2-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>I’m Leo.</li><li>I’m Mia.</li><li>I’m Emma.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 2" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L2-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>I’m Leo.</li><li>I’m Mia.</li><li>I’m Emma.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Hold a card.</li><li>Say: I’m ___.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Say I’m + your name.</p><p><strong>Say / show:</strong> I’m ___.</p><p><strong>Feedback:</strong> I’m is present, name is clear, and final /m/ in I’m is clear.</p><button onclick="aiPlaceholder('AI checker for Lesson 2')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Repeat the model, then try again.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson2">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 2 · I’m Leo · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L2P01" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P01</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Leo holds a name card. Choose the phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P01" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P01" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1L2P01" type="radio" value="C"/> <span>C. Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P02" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P02</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “___ Leo.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P02" type="radio" value="A"/> <span>A. I’m</span></label>
+<label class="choice"><input name="U1L2P02" type="radio" value="B"/> <span>B. Hi</span></label>
+<label class="choice"><input name="U1L2P02" type="radio" value="C"/> <span>C. Bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L2P03" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P03</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “I’m Mia.” Choose the name.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P03" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L2P03" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1L2P03" type="radio" value="C"/> <span>C. Emma</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="C" data-qid="U1L2P04" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P04</span><span class="qtype">Match</span></div>
+<p class="prompt">Match the phrase to Emma.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P04" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P04" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1L2P04" type="radio" value="C"/> <span>C. I’m Emma.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L2P05" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P05</span><span class="qtype">Word order</span></div>
+<p class="prompt">Put the words in order.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P05" type="radio" value="A"/> <span>A. Leo I’m</span></label>
+<label class="choice"><input name="U1L2P05" type="radio" value="B"/> <span>B. I’m Leo</span></label>
+<label class="choice"><input name="U1L2P05" type="radio" value="C"/> <span>C. Leo Hello</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P06" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P06</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the good name phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P06" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P06" type="radio" value="B"/> <span>B. Leo I’m.</span></label>
+<label class="choice"><input name="U1L2P06" type="radio" value="C"/> <span>C. Goodbye Leo.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L2P07" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P07</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Mia points to herself. Choose the phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P07" type="radio" value="A"/> <span>A. I’m Emma.</span></label>
+<label class="choice"><input name="U1L2P07" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1L2P07" type="radio" value="C"/> <span>C. I’m Toto.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P08" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P08</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Leo points to himself. Choose the phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P08" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P08" type="radio" value="B"/> <span>B. I’m Emma.</span></label>
+<label class="choice"><input name="U1L2P08" type="radio" value="C"/> <span>C. Bye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P09" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P09</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “Hello. I’m ___.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P09" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L2P09" type="radio" value="B"/> <span>B. Hello</span></label>
+<label class="choice"><input name="U1L2P09" type="radio" value="C"/> <span>C. Goodbye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P10" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P10</span><span class="qtype">Model choice</span></div>
+<p class="prompt">Which card is correct for Mia?</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P10" type="radio" value="A"/> <span>A. I’m Mia.</span></label>
+<label class="choice"><input name="U1L2P10" type="radio" value="B"/> <span>B. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P10" type="radio" value="C"/> <span>C. Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P11" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P11</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “I’m Emma.” Choose the phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P11" type="radio" value="A"/> <span>A. I’m Emma.</span></label>
+<label class="choice"><input name="U1L2P11" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1L2P11" type="radio" value="C"/> <span>C. Hi.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L2P12" data-repair="U1-RP-IM-NAME">
+<div class="practice-head"><span class="qid">U1L2P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">Fix: “Hello. Leo.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L2P12" type="radio" value="A"/> <span>A. Hello. I’m Leo.</span></label>
+<label class="choice"><input name="U1L2P12" type="radio" value="B"/> <span>B. Hello. Bye.</span></label>
+<label class="choice"><input name="U1L2P12" type="radio" value="C"/> <span>C. I’m Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-3">
+<summary class="lesson-title lesson-summary"><span>Lesson 3</span><h2>What’s Your Name?</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can ask and answer a name question with help.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 3 support image 7" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-007.png"/></div><div class="image-card"><img alt="Unit 1 lesson 3 support image 8" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-008.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>Mia talks to Leo.</li><li>Mia asks a question.</li><li>Leo says his name.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L3-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>What’s your name?</li><li>I’m Leo.</li><li>What’s your name?</li><li>I’m Mia.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 3" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L3-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>A: What’s your name?</li><li>B: I’m Leo.</li><li>A: What’s your name?</li><li>B: I’m Mia.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Choose a card.</li><li>Ask: What’s your name?</li><li>Answer: I’m ___.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Ask or answer the name question.</p><p><strong>Say / show:</strong> What’s your name? or I’m ___.</p><p><strong>Feedback:</strong> Correct chunk, correct order, and clear name.</p><button onclick="aiPlaceholder('AI checker for Lesson 3')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Put the question card before the answer card, then retry.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson3">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 3 · What’s Your Name? · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L3P01" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P01</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the question for a name.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P01" type="radio" value="A"/> <span>A. What’s your name?</span></label>
+<label class="choice"><input name="U1L3P01" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L3P01" type="radio" value="C"/> <span>C. I’m Leo.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P02" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P02</span><span class="qtype">Response choice</span></div>
+<p class="prompt">Mia asks, “What’s your name?” Choose Leo’s answer.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P02" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L3P02" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L3P02" type="radio" value="C"/> <span>C. What’s your name?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P03" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P03</span><span class="qtype">Dialogue order</span></div>
+<p class="prompt">Put the dialogue in order.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P03" type="radio" value="A"/> <span>A. Hello → What’s your name? → I’m Leo.</span></label>
+<label class="choice"><input name="U1L3P03" type="radio" value="B"/> <span>B. I’m Leo → Goodbye → Hello</span></label>
+<label class="choice"><input name="U1L3P03" type="radio" value="C"/> <span>C. Name → Hi → Bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P04" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P04</span><span class="qtype">Match</span></div>
+<p class="prompt">Match the question to the answer.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P04" type="radio" value="A"/> <span>A. What’s your name? → I’m Mia.</span></label>
+<label class="choice"><input name="U1L3P04" type="radio" value="B"/> <span>B. Goodbye → I’m Mia.</span></label>
+<label class="choice"><input name="U1L3P04" type="radio" value="C"/> <span>C. Hi → Bye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P05" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P05</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “What’s your ___?”</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P05" type="radio" value="A"/> <span>A. name</span></label>
+<label class="choice"><input name="U1L3P05" type="radio" value="B"/> <span>B. Leo</span></label>
+<label class="choice"><input name="U1L3P05" type="radio" value="C"/> <span>C. bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P06" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P06</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “What’s your name?” Choose the phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P06" type="radio" value="A"/> <span>A. What’s your name?</span></label>
+<label class="choice"><input name="U1L3P06" type="radio" value="B"/> <span>B. I’m Emma.</span></label>
+<label class="choice"><input name="U1L3P06" type="radio" value="C"/> <span>C. Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P07" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P07</span><span class="qtype">Picture choice</span></div>
+<p class="prompt">Choose the picture where Mia asks a question.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P07" type="radio" value="A"/> <span>A. Mia speaks to Leo</span></label>
+<label class="choice"><input name="U1L3P07" type="radio" value="B"/> <span>B. Leo leaves</span></label>
+<label class="choice"><input name="U1L3P07" type="radio" value="C"/> <span>C. Toto sleeps</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P08" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P08</span><span class="qtype">Response choice</span></div>
+<p class="prompt">Mia asks Leo. Leo says:</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P08" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L3P08" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1L3P08" type="radio" value="C"/> <span>C. Bye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P09" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P09</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Which phrase asks for a name?</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P09" type="radio" value="A"/> <span>A. What’s your name?</span></label>
+<label class="choice"><input name="U1L3P09" type="radio" value="B"/> <span>B. I’m Emma.</span></label>
+<label class="choice"><input name="U1L3P09" type="radio" value="C"/> <span>C. Hello.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L3P10" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P10</span><span class="qtype">True / false</span></div>
+<p class="prompt">“Goodbye” asks for a name.</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P10" type="radio" value="A"/> <span>A. True</span></label>
+<label class="choice"><input name="U1L3P10" type="radio" value="B"/> <span>B. False</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P11" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P11</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “What’s your name?” “___ Mia.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P11" type="radio" value="A"/> <span>A. I’m</span></label>
+<label class="choice"><input name="U1L3P11" type="radio" value="B"/> <span>B. Hello</span></label>
+<label class="choice"><input name="U1L3P11" type="radio" value="C"/> <span>C. Bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L3P12" data-repair="U1-RP-QA-ORDER">
+<div class="practice-head"><span class="qid">U1L3P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">Fix the exchange: “I’m Leo.” “What’s your name?”</p>
+<div class="choices">
+<label class="choice"><input name="U1L3P12" type="radio" value="A"/> <span>A. What’s your name? → I’m Leo.</span></label>
+<label class="choice"><input name="U1L3P12" type="radio" value="B"/> <span>B. Goodbye → Hello.</span></label>
+<label class="choice"><input name="U1L3P12" type="radio" value="C"/> <span>C. I’m Leo → I’m Mia.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-4">
+<summary class="lesson-title lesson-summary"><span>Lesson 4</span><h2>Hi and Bye</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can choose a greeting when someone comes or goes.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 4 support image 9" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-009.png"/></div><div class="image-card"><img alt="Unit 1 lesson 4 support image 10" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-010.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>A child comes in. Say hello.</li><li>A child goes out. Say goodbye.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L4-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>Hello.</li><li>Hi.</li><li>Goodbye.</li><li>Bye.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 4" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L4-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>When we meet: Hello. Hi.</li><li>When we leave: Goodbye. Bye.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Look at the scene.</li><li>Choose: Hello or goodbye?</li><li>Choose: Hi or bye?</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Say a goodbye phrase.</p><p><strong>Say / show:</strong> Goodbye. or Bye.</p><p><strong>Feedback:</strong> Correct phrase, clear voice, and friendly tone.</p><button onclick="aiPlaceholder('AI checker for Lesson 4')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Sort picture cards into meet and leave, then retry.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson4">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 4 · Hi and Bye · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L4P01" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P01</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">A child comes into the room. Choose the word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P01" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1L4P01" type="radio" value="B"/> <span>B. Goodbye</span></label>
+<label class="choice"><input name="U1L4P01" type="radio" value="C"/> <span>C. Bye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L4P02" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P02</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">A child leaves the room. Choose the word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P02" type="radio" value="A"/> <span>A. Hi</span></label>
+<label class="choice"><input name="U1L4P02" type="radio" value="B"/> <span>B. Goodbye</span></label>
+<label class="choice"><input name="U1L4P02" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P03" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P03</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “Bye.” Choose the word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P03" type="radio" value="A"/> <span>A. Bye</span></label>
+<label class="choice"><input name="U1L4P03" type="radio" value="B"/> <span>B. Hi</span></label>
+<label class="choice"><input name="U1L4P03" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P04" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P04</span><span class="qtype">Word-picture match</span></div>
+<p class="prompt">Match goodbye to the picture.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P04" type="radio" value="A"/> <span>A. leaving wave</span></label>
+<label class="choice"><input name="U1L4P04" type="radio" value="B"/> <span>B. name card</span></label>
+<label class="choice"><input name="U1L4P04" type="radio" value="C"/> <span>C. meeting smile</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P05" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P05</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the short greeting.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P05" type="radio" value="A"/> <span>A. Hi</span></label>
+<label class="choice"><input name="U1L4P05" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L4P05" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L4P06" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P06</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the short goodbye.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P06" type="radio" value="A"/> <span>A. Hi</span></label>
+<label class="choice"><input name="U1L4P06" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L4P06" type="radio" value="C"/> <span>C. Hello</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P07" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P07</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete: “___, Leo.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P07" type="radio" value="A"/> <span>A. Goodbye</span></label>
+<label class="choice"><input name="U1L4P07" type="radio" value="B"/> <span>B. Name</span></label>
+<label class="choice"><input name="U1L4P07" type="radio" value="C"/> <span>C. I’m</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P08" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P08</span><span class="qtype">Sorting</span></div>
+<p class="prompt">Which pair is for leaving?</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P08" type="radio" value="A"/> <span>A. goodbye + bye</span></label>
+<label class="choice"><input name="U1L4P08" type="radio" value="B"/> <span>B. hello + hi</span></label>
+<label class="choice"><input name="U1L4P08" type="radio" value="C"/> <span>C. name + I’m</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P09" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P09</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">Mia comes in and smiles. Choose the word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P09" type="radio" value="A"/> <span>A. Hi</span></label>
+<label class="choice"><input name="U1L4P09" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L4P09" type="radio" value="C"/> <span>C. Goodbye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L4P10" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P10</span><span class="qtype">Scene choice</span></div>
+<p class="prompt">Leo leaves and waves. Choose the word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P10" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1L4P10" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L4P10" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P11" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P11</span><span class="qtype">Sequence choice</span></div>
+<p class="prompt">Choose the last word: “Hello. I’m Mia. ___.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P11" type="radio" value="A"/> <span>A. Goodbye</span></label>
+<label class="choice"><input name="U1L4P11" type="radio" value="B"/> <span>B. Name</span></label>
+<label class="choice"><input name="U1L4P11" type="radio" value="C"/> <span>C. What’s</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L4P12" data-repair="U1-RP-HELLO-GOODBYE">
+<div class="practice-head"><span class="qid">U1L4P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">A child leaves and says “Hi.” Choose the better word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L4P12" type="radio" value="A"/> <span>A. Bye</span></label>
+<label class="choice"><input name="U1L4P12" type="radio" value="B"/> <span>B. Name</span></label>
+<label class="choice"><input name="U1L4P12" type="radio" value="C"/> <span>C. I’m</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-5">
+<summary class="lesson-title lesson-summary"><span>Lesson 5</span><h2>Meet the Team</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can greet Leo, Mia, Emma, and Toto.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 5 support image 11" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-011.png"/></div><div class="image-card"><img alt="Unit 1 lesson 5 support image 12" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-012.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>This is the Adventure team.</li><li>Leo. Mia. Emma. Toto.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L5-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>Hello, Leo.</li><li>Hi, Mia.</li><li>Hello, Emma.</li><li>Hello, Toto.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 5" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L5-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>Leo.</li><li>Mia.</li><li>Emma.</li><li>Toto.</li><li>Hello, Leo.</li><li>Hi, Mia.</li><li>Hello, Emma.</li><li>Hello, Toto.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Point to one character.</li><li>Say hello to that character.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Choose one character and greet them.</p><p><strong>Say / show:</strong> Hello, Leo. / Hi, Mia. / Hello, Emma. / Hello, Toto.</p><p><strong>Feedback:</strong> Greeting is present and character name is clear.</p><button onclick="aiPlaceholder('AI checker for Lesson 5')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Match the name card to the character, then retry.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson5">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 5 · Meet the Team · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L5P01" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P01</span><span class="qtype">Picture-name match</span></div>
+<p class="prompt">Choose Leo.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P01" type="radio" value="A"/> <span>A. boy with glasses</span></label>
+<label class="choice"><input name="U1L5P01" type="radio" value="B"/> <span>B. girl in yellow</span></label>
+<label class="choice"><input name="U1L5P01" type="radio" value="C"/> <span>C. small dog</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L5P02" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P02</span><span class="qtype">Picture-name match</span></div>
+<p class="prompt">Choose Mia.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P02" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L5P02" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1L5P02" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P03" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P03</span><span class="qtype">Picture-name match</span></div>
+<p class="prompt">Choose Emma.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P03" type="radio" value="A"/> <span>A. Emma</span></label>
+<label class="choice"><input name="U1L5P03" type="radio" value="B"/> <span>B. Leo</span></label>
+<label class="choice"><input name="U1L5P03" type="radio" value="C"/> <span>C. Mia</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="C" data-qid="U1L5P04" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P04</span><span class="qtype">Picture-name match</span></div>
+<p class="prompt">Choose Toto.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P04" type="radio" value="A"/> <span>A. Mia</span></label>
+<label class="choice"><input name="U1L5P04" type="radio" value="B"/> <span>B. Emma</span></label>
+<label class="choice"><input name="U1L5P04" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P05" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P05</span><span class="qtype">Phrase match</span></div>
+<p class="prompt">Match “Hello, Leo.” to the character.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P05" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L5P05" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1L5P05" type="radio" value="C"/> <span>C. Emma</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L5P06" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P06</span><span class="qtype">Phrase match</span></div>
+<p class="prompt">Match “Hi, Mia.” to the character.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P06" type="radio" value="A"/> <span>A. Toto</span></label>
+<label class="choice"><input name="U1L5P06" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1L5P06" type="radio" value="C"/> <span>C. Leo</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P07" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P07</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">Listen: “I’m Emma.” Choose the character.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P07" type="radio" value="A"/> <span>A. Emma</span></label>
+<label class="choice"><input name="U1L5P07" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1L5P07" type="radio" value="C"/> <span>C. Leo</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P08" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P08</span><span class="qtype">Character clue</span></div>
+<p class="prompt">Which character has glasses?</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P08" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L5P08" type="radio" value="B"/> <span>B. Emma</span></label>
+<label class="choice"><input name="U1L5P08" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1L5P09" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P09</span><span class="qtype">Character clue</span></div>
+<p class="prompt">Which character is Toto?</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P09" type="radio" value="A"/> <span>A. child</span></label>
+<label class="choice"><input name="U1L5P09" type="radio" value="B"/> <span>B. small dog</span></label>
+<label class="choice"><input name="U1L5P09" type="radio" value="C"/> <span>C. teacher</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P10" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P10</span><span class="qtype">Greeting choice</span></div>
+<p class="prompt">Choose a greeting for Emma.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P10" type="radio" value="A"/> <span>A. Hello, Emma.</span></label>
+<label class="choice"><input name="U1L5P10" type="radio" value="B"/> <span>B. Goodbye, Leo.</span></label>
+<label class="choice"><input name="U1L5P10" type="radio" value="C"/> <span>C. I’m Toto.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P11" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P11</span><span class="qtype">Sequence choice</span></div>
+<p class="prompt">Choose the team greeting set.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P11" type="radio" value="A"/> <span>A. Hello, Leo. Hi, Mia. Hello, Emma.</span></label>
+<label class="choice"><input name="U1L5P11" type="radio" value="B"/> <span>B. Bye, Name, What’s.</span></label>
+<label class="choice"><input name="U1L5P11" type="radio" value="C"/> <span>C. I’m Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L5P12" data-repair="U1-RP-CHARACTER-NAME">
+<div class="practice-head"><span class="qid">U1L5P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The picture shows Leo. The card says “Mia.” Choose the fix.</p>
+<div class="choices">
+<label class="choice"><input name="U1L5P12" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1L5P12" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L5P12" type="radio" value="C"/> <span>C. Hello</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-6">
+<summary class="lesson-title lesson-summary"><span>Lesson 6</span><h2>My Name Card</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can make a simple name card.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 6 support image 13" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-013.png"/></div><div class="image-card"><img alt="Unit 1 lesson 6 support image 14" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-014.png"/></div><div class="image-card"><img alt="Unit 1 lesson 6 support image 15" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-015.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>A name card shows your name.</li><li>A name card can say: I’m ___.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L6-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>I’m Leo.</li><li>I’m Mia.</li><li>I’m Emma.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 6" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L6-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>I’m Leo.</li><li>I’m Mia.</li><li>I’m Emma.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Choose a card.</li><li>Write your name.</li><li>Add I’m ___.</li><li>Hold up your card.</li><li>Say the phrase.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Check a name-card draft.</p><p><strong>Say / show:</strong> Learner name + I’m ___ phrase.</p><p><strong>Feedback:</strong> Name is visible, I’m is present, and phrase is easy to read.</p><button onclick="aiPlaceholder('AI checker for Lesson 6')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Compare with the model card and add the missing part.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson6">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 6 · My Name Card · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L6P01" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P01</span><span class="qtype">Project object choice</span></div>
+<p class="prompt">Which object is a name card?</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P01" type="radio" value="A"/> <span>A. card with a name</span></label>
+<label class="choice"><input name="U1L6P01" type="radio" value="B"/> <span>B. door</span></label>
+<label class="choice"><input name="U1L6P01" type="radio" value="C"/> <span>C. plant</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P02" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P02</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the phrase for Leo’s card.</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P02" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1L6P02" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1L6P02" type="radio" value="C"/> <span>C. What’s?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P03" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P03</span><span class="qtype">Step order</span></div>
+<p class="prompt">Choose the correct order.</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P03" type="radio" value="A"/> <span>A. choose card → write name → say greeting</span></label>
+<label class="choice"><input name="U1L6P03" type="radio" value="B"/> <span>B. say goodbye → write hello → leave</span></label>
+<label class="choice"><input name="U1L6P03" type="radio" value="C"/> <span>C. name → bye → Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P04" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P04</span><span class="qtype">Checklist</span></div>
+<p class="prompt">What does a name card need?</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P04" type="radio" value="A"/> <span>A. a name</span></label>
+<label class="choice"><input name="U1L6P04" type="radio" value="B"/> <span>B. a map</span></label>
+<label class="choice"><input name="U1L6P04" type="radio" value="C"/> <span>C. a number test</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P05" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P05</span><span class="qtype">Cloze</span></div>
+<p class="prompt">Complete the card: “I’m ___.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P05" type="radio" value="A"/> <span>A. Mia</span></label>
+<label class="choice"><input name="U1L6P05" type="radio" value="B"/> <span>B. goodbye</span></label>
+<label class="choice"><input name="U1L6P05" type="radio" value="C"/> <span>C. name?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P06" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P06</span><span class="qtype">Model choice</span></div>
+<p class="prompt">Which card is correct for Emma?</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P06" type="radio" value="A"/> <span>A. I’m Emma.</span></label>
+<label class="choice"><input name="U1L6P06" type="radio" value="B"/> <span>B. Emma I’m.</span></label>
+<label class="choice"><input name="U1L6P06" type="radio" value="C"/> <span>C. Bye Emma.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P07" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P07</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose the simple card phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P07" type="radio" value="A"/> <span>A. I’m Mia.</span></label>
+<label class="choice"><input name="U1L6P07" type="radio" value="B"/> <span>B. Mia hello I.</span></label>
+<label class="choice"><input name="U1L6P07" type="radio" value="C"/> <span>C. Goodbye name?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P08" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P08</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The card says “Leo.” What is missing?</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P08" type="radio" value="A"/> <span>A. I’m</span></label>
+<label class="choice"><input name="U1L6P08" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1L6P08" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P09" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P09</span><span class="qtype">Project object match</span></div>
+<p class="prompt">Match name card to the picture.</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P09" type="radio" value="A"/> <span>A. card</span></label>
+<label class="choice"><input name="U1L6P09" type="radio" value="B"/> <span>B. chair</span></label>
+<label class="choice"><input name="U1L6P09" type="radio" value="C"/> <span>C. window</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P10" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P10</span><span class="qtype">Portfolio match</span></div>
+<p class="prompt">Which two things go together for the project?</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P10" type="radio" value="A"/> <span>A. name card + voice</span></label>
+<label class="choice"><input name="U1L6P10" type="radio" value="B"/> <span>B. plant + door</span></label>
+<label class="choice"><input name="U1L6P10" type="radio" value="C"/> <span>C. book + map</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P11" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P11</span><span class="qtype">Copy phrase</span></div>
+<p class="prompt">Choose the phrase to copy on a name card.</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P11" type="radio" value="A"/> <span>A. I’m ___.</span></label>
+<label class="choice"><input name="U1L6P11" type="radio" value="B"/> <span>B. Goodbye?</span></label>
+<label class="choice"><input name="U1L6P11" type="radio" value="C"/> <span>C. What’s?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L6P12" data-repair="U1-RP-NAME-CARD">
+<div class="practice-head"><span class="qid">U1L6P12</span><span class="qtype">Project check</span></div>
+<p class="prompt">A complete card has:</p>
+<div class="choices">
+<label class="choice"><input name="U1L6P12" type="radio" value="A"/> <span>A. name + I’m phrase</span></label>
+<label class="choice"><input name="U1L6P12" type="radio" value="B"/> <span>B. goodbye only</span></label>
+<label class="choice"><input name="U1L6P12" type="radio" value="C"/> <span>C. no name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<details class="lesson lesson-fold" id="lesson-7">
+<summary class="lesson-title lesson-summary"><span>Lesson 7</span><h2>My Voice Greeting</h2><span class="fold-hint">Open / close</span></summary>
+<div class="can-do">✅ I can record a short greeting.</div>
+<div class="media-content-grid">
+<div class="media-stack"><div class="image-card"><img alt="Unit 1 lesson 7 support image 16" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-016.png"/></div><div class="image-card"><img alt="Unit 1 lesson 7 support image 17" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-017.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Look</h3><ul class="text-list"><li>The learner holds a name card.</li><li>The learner speaks.</li></ul></div>
+<div class="course-card"><h3>Listen</h3><button aria-label="Audio placeholder: Listen to the model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L7-LISTEN')" type="button">🔊 Listen to the model</button><ul class="phrase-list"><li>Hello. I’m Leo. Goodbye.</li><li>Hi. I’m Mia. Bye.</li><li>Hello. I’m Emma. Goodbye.</li></ul></div>
+<div class="course-card"><h3>Say</h3><button aria-label="Play Say model for Lesson 7" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-L7-SAY')" type="button">🔊 Play Say model</button><ul class="phrase-list"><li>Use three parts:</li><li>1. Hello.</li><li>2. I’m ___.</li><li>3. Goodbye.</li></ul></div>
+<div class="course-card"><h3>Try</h3><ul class="text-list"><li>Hold your name card.</li><li>Look up.</li><li>Speak clearly.</li><li>Model: Hello. I’m Leo. Goodbye.</li></ul></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Record your voice greeting.</p><p><strong>Say / show:</strong> Hello. I’m ___. Goodbye.</p><p><strong>Feedback:</strong> Greeting, I’m + name, goodbye, clear voice, and friendly tone.</p><button onclick="aiPlaceholder('AI checker for Lesson 7')" type="button">🎙️ Record / Check placeholder</button><p class="repair-note"><strong>Repair:</strong> Use the three-card checklist, then record again.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-lesson7">
+<div class="section-head compact"><h3>Practice</h3><p>Lesson 7 · My Voice Greeting · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1L7P01" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P01</span><span class="qtype">Sequence choice</span></div>
+<p class="prompt">Choose the first word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P01" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1L7P01" type="radio" value="B"/> <span>B. Name.</span></label>
+<label class="choice"><input name="U1L7P01" type="radio" value="C"/> <span>C. Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P02" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P02</span><span class="qtype">Sequence choice</span></div>
+<p class="prompt">Choose the name line.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P02" type="radio" value="A"/> <span>A. I’m ___.</span></label>
+<label class="choice"><input name="U1L7P02" type="radio" value="B"/> <span>B. Bye.</span></label>
+<label class="choice"><input name="U1L7P02" type="radio" value="C"/> <span>C. What’s?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P03" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P03</span><span class="qtype">Sequence choice</span></div>
+<p class="prompt">Choose the last word.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P03" type="radio" value="A"/> <span>A. Goodbye.</span></label>
+<label class="choice"><input name="U1L7P03" type="radio" value="B"/> <span>B. Hello.</span></label>
+<label class="choice"><input name="U1L7P03" type="radio" value="C"/> <span>C. Name.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P04" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P04</span><span class="qtype">Ordering</span></div>
+<p class="prompt">Put the script in order.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P04" type="radio" value="A"/> <span>A. Hello → I’m ___ → Goodbye</span></label>
+<label class="choice"><input name="U1L7P04" type="radio" value="B"/> <span>B. Goodbye → Hello → I’m ___</span></label>
+<label class="choice"><input name="U1L7P04" type="radio" value="C"/> <span>C. I’m ___ → Goodbye → Hello</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P05" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P05</span><span class="qtype">Checklist</span></div>
+<p class="prompt">What helps a good recording?</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P05" type="radio" value="A"/> <span>A. speak slowly and clearly</span></label>
+<label class="choice"><input name="U1L7P05" type="radio" value="B"/> <span>B. hide the card</span></label>
+<label class="choice"><input name="U1L7P05" type="radio" value="C"/> <span>C. say nothing</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P06" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P06</span><span class="qtype">Strategy choice</span></div>
+<p class="prompt">What can you look at while speaking?</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P06" type="radio" value="A"/> <span>A. name card</span></label>
+<label class="choice"><input name="U1L7P06" type="radio" value="B"/> <span>B. shoe</span></label>
+<label class="choice"><input name="U1L7P06" type="radio" value="C"/> <span>C. door</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P07" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P07</span><span class="qtype">Audio checklist</span></div>
+<p class="prompt">Listen: “Hello. I’m Emma. Goodbye.” What parts are included?</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P07" type="radio" value="A"/> <span>A. greeting + name + goodbye</span></label>
+<label class="choice"><input name="U1L7P07" type="radio" value="B"/> <span>B. goodbye only</span></label>
+<label class="choice"><input name="U1L7P07" type="radio" value="C"/> <span>C. name only</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P08" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P08</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The recording says “Hello. I’m Leo.” What is missing?</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P08" type="radio" value="A"/> <span>A. Goodbye.</span></label>
+<label class="choice"><input name="U1L7P08" type="radio" value="B"/> <span>B. What’s?</span></label>
+<label class="choice"><input name="U1L7P08" type="radio" value="C"/> <span>C. Name?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P09" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P09</span><span class="qtype">Recording choice</span></div>
+<p class="prompt">Which recording is ready?</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P09" type="radio" value="A"/> <span>A. Hello. I’m Mia. Goodbye.</span></label>
+<label class="choice"><input name="U1L7P09" type="radio" value="B"/> <span>B. Mia.</span></label>
+<label class="choice"><input name="U1L7P09" type="radio" value="C"/> <span>C. Goodbye. Hello.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P10" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P10</span><span class="qtype">Phrase choice</span></div>
+<p class="prompt">Choose a friendly start.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P10" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1L7P10" type="radio" value="B"/> <span>B. Bye.</span></label>
+<label class="choice"><input name="U1L7P10" type="radio" value="C"/> <span>C. Name.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P11" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P11</span><span class="qtype">Project boundary</span></div>
+<p class="prompt">Choose the Unit 1 script.</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P11" type="radio" value="A"/> <span>A. Hello. I’m ___. Goodbye.</span></label>
+<label class="choice"><input name="U1L7P11" type="radio" value="B"/> <span>B. What color is it?</span></label>
+<label class="choice"><input name="U1L7P11" type="radio" value="C"/> <span>C. I have three toys.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1L7P12" data-repair="U1-RP-FINAL-GREETING">
+<div class="practice-head"><span class="qid">U1L7P12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">Fix: “Hello. Leo. Goodbye.”</p>
+<div class="choices">
+<label class="choice"><input name="U1L7P12" type="radio" value="A"/> <span>A. Hello. I’m Leo. Goodbye.</span></label>
+<label class="choice"><input name="U1L7P12" type="radio" value="B"/> <span>B. Goodbye. Leo. Hello.</span></label>
+<label class="choice"><input name="U1L7P12" type="radio" value="C"/> <span>C. I’m Goodbye.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</details>
+<section class="watch-box" id="watch">
+<div class="section-head"><h2>Watch — The Hello Gate</h2><p>MP4 video inserted · 12 Practice items</p></div>
+<div class="watch-grid">
+<div class="video-card"><video aria-label="Watch video: The Hello Gate" controls="" poster="assets/images/AEW2-U001-IMG-018.png" preload="metadata"><source src="assets/video/AEW2-U001-WATCH-001.mp4" type="video/mp4"/>Your browser does not support the video tag.</video><div class="video-caption">Watch video · The Hello Gate · 28 seconds</div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Watch story</h3><button aria-label="Audio placeholder: Listen to the Watch script" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-WATCH-SCRIPT')" type="button">🔊 Listen to the Watch script</button><ul><li>The Hello Gate opens.</li><li>Leo waves.</li><li>Mia says hi.</li><li>Emma says her name.</li><li>Toto joins the team.</li><li>Everyone says goodbye.</li></ul></div>
+<div class="course-card"><h3>Watch script</h3><ul class="phrase-list"><li>Hello!</li><li>I’m Leo.</li><li>Hi! I’m Mia.</li><li>Hello! I’m Emma.</li><li>Hello, Toto.</li><li>Goodbye!</li></ul></div>
+</div>
+</div>
+<section class="practice-block" id="practice-watch">
+<div class="section-head compact"><h3>Practice</h3><p>Watch · The Hello Gate · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1W01" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W01</span><span class="qtype">Audio choice</span></div>
+<p class="prompt">What word do you hear first?</p>
+<div class="choices">
+<label class="choice"><input name="U1W01" type="radio" value="A"/> <span>A. Hello</span></label>
+<label class="choice"><input name="U1W01" type="radio" value="B"/> <span>B. Goodbye</span></label>
+<label class="choice"><input name="U1W01" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W02" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W02</span><span class="qtype">Video detail</span></div>
+<p class="prompt">Who says “I’m Leo”?</p>
+<div class="choices">
+<label class="choice"><input name="U1W02" type="radio" value="A"/> <span>A. Leo</span></label>
+<label class="choice"><input name="U1W02" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1W02" type="radio" value="C"/> <span>C. Emma</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="B" data-qid="U1W03" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W03</span><span class="qtype">Video detail</span></div>
+<p class="prompt">Who says “I’m Mia”?</p>
+<div class="choices">
+<label class="choice"><input name="U1W03" type="radio" value="A"/> <span>A. Emma</span></label>
+<label class="choice"><input name="U1W03" type="radio" value="B"/> <span>B. Mia</span></label>
+<label class="choice"><input name="U1W03" type="radio" value="C"/> <span>C. Toto</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W04" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W04</span><span class="qtype">Video detail</span></div>
+<p class="prompt">Who says “I’m Emma”?</p>
+<div class="choices">
+<label class="choice"><input name="U1W04" type="radio" value="A"/> <span>A. Emma</span></label>
+<label class="choice"><input name="U1W04" type="radio" value="B"/> <span>B. Leo</span></label>
+<label class="choice"><input name="U1W04" type="radio" value="C"/> <span>C. Mia</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W05" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W05</span><span class="qtype">Video detail</span></div>
+<p class="prompt">Who joins the team?</p>
+<div class="choices">
+<label class="choice"><input name="U1W05" type="radio" value="A"/> <span>A. Toto</span></label>
+<label class="choice"><input name="U1W05" type="radio" value="B"/> <span>B. Name</span></label>
+<label class="choice"><input name="U1W05" type="radio" value="C"/> <span>C. Goodbye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W06" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W06</span><span class="qtype">Phrase recognition</span></div>
+<p class="prompt">Choose the phrase from the video.</p>
+<div class="choices">
+<label class="choice"><input name="U1W06" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1W06" type="radio" value="B"/> <span>B. Goodbye, Leo.</span></label>
+<label class="choice"><input name="U1W06" type="radio" value="C"/> <span>C. What’s Leo?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W07" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W07</span><span class="qtype">Goodbye</span></div>
+<p class="prompt">What word comes at the end?</p>
+<div class="choices">
+<label class="choice"><input name="U1W07" type="radio" value="A"/> <span>A. Goodbye</span></label>
+<label class="choice"><input name="U1W07" type="radio" value="B"/> <span>B. Hello</span></label>
+<label class="choice"><input name="U1W07" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W08" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W08</span><span class="qtype">Ordering</span></div>
+<p class="prompt">Put the video language in order.</p>
+<div class="choices">
+<label class="choice"><input name="U1W08" type="radio" value="A"/> <span>A. Hello → I’m → Goodbye</span></label>
+<label class="choice"><input name="U1W08" type="radio" value="B"/> <span>B. Goodbye → I’m → Hello</span></label>
+<label class="choice"><input name="U1W08" type="radio" value="C"/> <span>C. Name → Bye → Hello</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W09" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W09</span><span class="qtype">Match</span></div>
+<p class="prompt">Match Leo to his phrase.</p>
+<div class="choices">
+<label class="choice"><input name="U1W09" type="radio" value="A"/> <span>A. I’m Leo.</span></label>
+<label class="choice"><input name="U1W09" type="radio" value="B"/> <span>B. I’m Mia.</span></label>
+<label class="choice"><input name="U1W09" type="radio" value="C"/> <span>C. I’m Emma.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W10" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W10</span><span class="qtype">Response choice</span></div>
+<p class="prompt">Someone asks, “What’s your name?” Choose an answer.</p>
+<div class="choices">
+<label class="choice"><input name="U1W10" type="radio" value="A"/> <span>A. I’m Mia.</span></label>
+<label class="choice"><input name="U1W10" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1W10" type="radio" value="C"/> <span>C. What’s?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W11" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W11</span><span class="qtype">Main idea</span></div>
+<p class="prompt">What does the video help you do?</p>
+<div class="choices">
+<label class="choice"><input name="U1W11" type="radio" value="A"/> <span>A. say hello and your name</span></label>
+<label class="choice"><input name="U1W11" type="radio" value="B"/> <span>B. count to twenty</span></label>
+<label class="choice"><input name="U1W11" type="radio" value="C"/> <span>C. choose colors</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1W12" data-repair="U1-RP-WATCH-HELLO-GATE">
+<div class="practice-head"><span class="qid">U1W12</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">Fix the video line: “Hello. ___ Mia.”</p>
+<div class="choices">
+<label class="choice"><input name="U1W12" type="radio" value="A"/> <span>A. I’m</span></label>
+<label class="choice"><input name="U1W12" type="radio" value="B"/> <span>B. Bye</span></label>
+<label class="choice"><input name="U1W12" type="radio" value="C"/> <span>C. Name</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</section>
+<section class="project-box" id="project">
+<div class="section-head"><h2>Final Project — My Hello Adventure Name Card</h2><p>Voice greeting + name card</p></div>
+<div class="project-grid">
+<div class="media-stack"><div class="image-card"><img alt="Final project model showing a generic greeting card and record button" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-019.png"/></div><div class="image-card"><img alt="Adventure portfolio board with name cards for Leo, Mia, Emma, and Toto" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="assets/images/AEW2-U001-IMG-020.png"/></div></div>
+<div class="content-stack">
+<div class="course-card"><h3>Make</h3><ol><li>Choose a name card.</li><li>Write your name.</li><li>Add <strong>I’m</strong>.</li><li>Practice the script.</li><li>Record your voice.</li><li>Check your card.</li><li>Submit your card and voice.</li></ol></div>
+<div class="course-card"><h3>Final project script</h3><div class="project-script">Hello.<br/>I’m ______.<br/>Goodbye.</div><button aria-label="Audio placeholder: Listen to the project model" class="audio-chip" onclick="audioPlaceholder('AEW2-U001-PROJECT-MODEL')" type="button">🔊 Listen to the project model</button></div>
+<div class="ai-box"><h3>AI Checker</h3><p><strong>Task:</strong> Submit your voice greeting and name card.</p><p><strong>Check:</strong> greeting, I’m + name, goodbye, clear voice, and complete name card.</p><button onclick="aiPlaceholder('Final Project AI Checker')" type="button">🎙️ Project check placeholder</button><p class="repair-note">If one part is missing, fix only that part and submit again.</p></div>
+</div>
+</div>
+<section class="practice-block" id="practice-project">
+<div class="section-head compact"><h3>Practice</h3><p>Project readiness · My Hello Adventure Name Card · 12 items</p></div>
+<div class="practice-grid">
+<article class="practice-item" data-correct="A" data-qid="U1PR01" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR01</span><span class="qtype">Project choice</span></div>
+<p class="prompt">What do you make in the project?</p>
+<div class="choices">
+<label class="choice"><input name="U1PR01" type="radio" value="A"/> <span>A. voice greeting + name card</span></label>
+<label class="choice"><input name="U1PR01" type="radio" value="B"/> <span>B. long story</span></label>
+<label class="choice"><input name="U1PR01" type="radio" value="C"/> <span>C. number chart</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR02" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR02</span><span class="qtype">Script choice</span></div>
+<p class="prompt">Choose the first line.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR02" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1PR02" type="radio" value="B"/> <span>B. Goodbye.</span></label>
+<label class="choice"><input name="U1PR02" type="radio" value="C"/> <span>C. Name?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR03" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR03</span><span class="qtype">Script choice</span></div>
+<p class="prompt">Choose the name line.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR03" type="radio" value="A"/> <span>A. I’m ___.</span></label>
+<label class="choice"><input name="U1PR03" type="radio" value="B"/> <span>B. Bye.</span></label>
+<label class="choice"><input name="U1PR03" type="radio" value="C"/> <span>C. What’s?</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR04" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR04</span><span class="qtype">Script choice</span></div>
+<p class="prompt">Choose the final line.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR04" type="radio" value="A"/> <span>A. Goodbye.</span></label>
+<label class="choice"><input name="U1PR04" type="radio" value="B"/> <span>B. Hello.</span></label>
+<label class="choice"><input name="U1PR04" type="radio" value="C"/> <span>C. I’m.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR05" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR05</span><span class="qtype">Card checklist</span></div>
+<p class="prompt">What must your card show?</p>
+<div class="choices">
+<label class="choice"><input name="U1PR05" type="radio" value="A"/> <span>A. your name</span></label>
+<label class="choice"><input name="U1PR05" type="radio" value="B"/> <span>B. a world map</span></label>
+<label class="choice"><input name="U1PR05" type="radio" value="C"/> <span>C. a long story</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR06" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR06</span><span class="qtype">Ordering</span></div>
+<p class="prompt">Choose the correct order.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR06" type="radio" value="A"/> <span>A. Hello → I’m ___ → Goodbye</span></label>
+<label class="choice"><input name="U1PR06" type="radio" value="B"/> <span>B. Goodbye → Hello → I’m ___</span></label>
+<label class="choice"><input name="U1PR06" type="radio" value="C"/> <span>C. I’m ___ → Hello → Goodbye</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR07" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR07</span><span class="qtype">Voice checklist</span></div>
+<p class="prompt">Choose the good recording rule.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR07" type="radio" value="A"/> <span>A. speak clearly</span></label>
+<label class="choice"><input name="U1PR07" type="radio" value="B"/> <span>B. speak too fast</span></label>
+<label class="choice"><input name="U1PR07" type="radio" value="C"/> <span>C. cover your mouth</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR08" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR08</span><span class="qtype">Boundary choice</span></div>
+<p class="prompt">Choose the best Unit 1 script.</p>
+<div class="choices">
+<label class="choice"><input name="U1PR08" type="radio" value="A"/> <span>A. Hello. I’m ___. Goodbye.</span></label>
+<label class="choice"><input name="U1PR08" type="radio" value="B"/> <span>B. I have four animals.</span></label>
+<label class="choice"><input name="U1PR08" type="radio" value="C"/> <span>C. It’s blue and red.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR09" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR09</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The card says “I’m ___” but no name. What do you add?</p>
+<div class="choices">
+<label class="choice"><input name="U1PR09" type="radio" value="A"/> <span>A. your name</span></label>
+<label class="choice"><input name="U1PR09" type="radio" value="B"/> <span>B. goodbye</span></label>
+<label class="choice"><input name="U1PR09" type="radio" value="C"/> <span>C. hello only</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR10" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR10</span><span class="qtype">Repair choice</span></div>
+<p class="prompt">The recording says “I’m Leo. Goodbye.” What is missing?</p>
+<div class="choices">
+<label class="choice"><input name="U1PR10" type="radio" value="A"/> <span>A. Hello.</span></label>
+<label class="choice"><input name="U1PR10" type="radio" value="B"/> <span>B. Bye.</span></label>
+<label class="choice"><input name="U1PR10" type="radio" value="C"/> <span>C. Toto.</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR11" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR11</span><span class="qtype">Portfolio evidence</span></div>
+<p class="prompt">What do you submit?</p>
+<div class="choices">
+<label class="choice"><input name="U1PR11" type="radio" value="A"/> <span>A. audio + name card</span></label>
+<label class="choice"><input name="U1PR11" type="radio" value="B"/> <span>B. only a pencil</span></label>
+<label class="choice"><input name="U1PR11" type="radio" value="C"/> <span>C. only a chair</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article>
+<article class="practice-item" data-correct="A" data-qid="U1PR12" data-repair="U1-RP-PROJECT-READY">
+<div class="practice-head"><span class="qid">U1PR12</span><span class="qtype">Final checklist</span></div>
+<p class="prompt">A complete project has:</p>
+<div class="choices">
+<label class="choice"><input name="U1PR12" type="radio" value="A"/> <span>A. greeting + name + goodbye + card</span></label>
+<label class="choice"><input name="U1PR12" type="radio" value="B"/> <span>B. color words only</span></label>
+<label class="choice"><input name="U1PR12" type="radio" value="C"/> <span>C. no voice</span></label></div>
+<div aria-live="polite" class="feedback"></div>
+</article></div>
+
+</section>
+</section>
+<section class="portfolio-box" id="portfolio">
+<div class="section-head compact"><h2>Portfolio Evidence</h2><p>Show your first Adventure English step.</p></div>
+<div class="portfolio-grid">
+<div class="portfolio-item"><strong>Voice greeting</strong><br/>Hello. I’m ___. Goodbye.</div>
+<div class="portfolio-item"><strong>Name card</strong><br/>Your name + I’m ___.</div>
+<div class="portfolio-item"><strong>Readiness record</strong><br/>Practice items completed.</div>
+<div class="portfolio-item"><strong>Repair evidence</strong><br/>Fix and try again if needed.</div>
+</div>
+</section>
+</main>
+<div class="progressbar" id="progress">Practice: 0 / 108</div>
+<div aria-modal="true" class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog"><button onclick="closeLightbox()" type="button">Close ×</button><img alt="" id="lightbox-img"/></div>
+<footer class="footer">Adventure English World V2 · Unit 1 — Hello Adventure · Moodle-ready student index.html</footer>
+<script>
+const repairBank = {
+  "U1-RP-GREETING": "Look at the wave card. Listen: “Hello.” Repeat: “Hello.”",
+  "U1-RP-IM-NAME": "Put I’m before the name. Say: “I’m Leo.”",
+  "U1-RP-QA-ORDER": "Put the question first: “What’s your name?” Then answer: “I’m ___.”",
+  "U1-RP-HELLO-GOODBYE": "Meet = hello/hi. Leave = goodbye/bye. Sort the scene cards.",
+  "U1-RP-CHARACTER-NAME": "Match the name card to the character picture. Try again.",
+  "U1-RP-NAME-CARD": "Add your name and I’m ___ to the card.",
+  "U1-RP-FINAL-GREETING": "Use three cards: Hello → I’m ___ → Goodbye. Record again.",
+  "U1-RP-WATCH-HELLO-GATE": "Watch again. Listen for Hello, I’m, and Goodbye.",
+  "U1-RP-PROJECT-READY": "Check the project list: voice greeting + name card. Fix the missing part."
+};
+const PAGE_SIZE = 3;
+const audioAliases = {
+  'WORD-hello': 'AEW2-U001-WORD-HELLO',
+  'WORD-hi': 'AEW2-U001-WORD-HI',
+  'WORD-I’m': 'AEW2-U001-WORD-I-M',
+  'WORD-name': 'AEW2-U001-WORD-NAME',
+  'WORD-What’s your name?': 'AEW2-U001-WORD-WHAT-S-YOUR-NAME',
+  'WORD-goodbye': 'AEW2-U001-WORD-GOODBYE',
+  'WORD-bye': 'AEW2-U001-WORD-BYE',
+  'WORD-Leo': 'AEW2-U001-WORD-LEO',
+  'WORD-Mia': 'AEW2-U001-WORD-MIA',
+  'WORD-Emma': 'AEW2-U001-WORD-EMMA',
+  'WORD-Toto': 'AEW2-U001-WORD-TOTO'
+};
+let flwAudio = null;
+let flwAudioButton = null;
+function audioPlaceholder(id) {
+  const audioId = audioAliases[id] || id;
+  const src = `assets/audio/${audioId}.mp3`;
+  const trigger = window.event && window.event.currentTarget ? window.event.currentTarget : null;
+  if (flwAudio && flwAudio.dataset && flwAudio.dataset.src === src && !flwAudio.paused) {
+    flwAudio.pause();
+    if (flwAudioButton) flwAudioButton.classList.remove('is-playing');
+    return;
+  }
+  if (flwAudio) flwAudio.pause();
+  if (flwAudioButton) flwAudioButton.classList.remove('is-playing');
+  flwAudio = new Audio(src);
+  flwAudio.dataset.src = src;
+  flwAudioButton = trigger;
+  if (flwAudioButton) flwAudioButton.classList.add('is-playing');
+  flwAudio.addEventListener('ended', () => {
+    if (flwAudioButton) flwAudioButton.classList.remove('is-playing');
+  }, { once: true });
+  flwAudio.addEventListener('error', () => {
+    if (flwAudioButton) flwAudioButton.classList.remove('is-playing');
+    alert(`Audio file is not ready: ${src}`);
+  }, { once: true });
+  flwAudio.play().catch(() => {
+    if (flwAudioButton) flwAudioButton.classList.remove('is-playing');
+    alert(`Your browser blocked audio playback for: ${audioId}`);
+  });
+}
+function aiPlaceholder(label) {
+  alert(label + '\n\nThis is a student-facing placeholder for future AI speaking/writing feedback.');
+}
+function getItems(block) {
+  return Array.from(block.querySelectorAll('.practice-item'));
+}
+function getCurrentPage(block) {
+  const page = parseInt(block.dataset.page || '0', 10);
+  return Number.isFinite(page) ? page : 0;
+}
+function setCurrentPage(block, page) {
+  const items = getItems(block);
+  const pages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  block.dataset.page = String(Math.max(0, Math.min(page, pages - 1)));
+  renderPracticePage(block);
+}
+function renderPracticePage(block) {
+  const items = getItems(block);
+  const page = getCurrentPage(block);
+  const pages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  items.forEach((item, index) => {
+    const visible = index >= page * PAGE_SIZE && index < (page + 1) * PAGE_SIZE;
+    item.classList.toggle('practice-hidden', !visible);
+  });
+  const indicator = block.querySelector('.practice-page-indicator');
+  if (indicator) indicator.textContent = `Practice page ${page + 1} / ${pages}`;
+  const prev = block.querySelector('[data-action="prev-page"]');
+  const next = block.querySelector('[data-action="next-page"]');
+  if (prev) prev.disabled = page === 0;
+  if (next) next.disabled = page >= pages - 1;
+}
+function initPracticeBlock(block) {
+  if (block.dataset.pagedReady === '1') return;
+  block.dataset.pagedReady = '1';
+  block.dataset.page = '0';
+  const note = document.createElement('p');
+  note.className = 'practice-mini-note';
+  note.textContent = 'This Practice shows 3 questions at a time. Check the page, then use Next.';
+  const head = block.querySelector('.section-head');
+  if (head) head.insertAdjacentElement('afterend', note);
+  const pager = document.createElement('div');
+  pager.className = 'practice-pager';
+  pager.innerHTML = `
+    <button type="button" class="secondary" data-action="prev-page">◀ Previous</button>
+    <button type="button" data-action="check-page">Check page</button>
+    <span class="practice-page-indicator">Practice page 1 / 1</span>
+    <button type="button" class="secondary" data-action="reset-page">Reset page</button>
+    <button type="button" data-action="next-page">Next ▶</button>`;
+  block.appendChild(pager);
+  block.addEventListener('click', event => {
+    const actionButton = event.target.closest('[data-action]');
+    if (!actionButton) return;
+    const action = actionButton.dataset.action;
+    if (action === 'prev-page') setCurrentPage(block, getCurrentPage(block) - 1);
+    if (action === 'next-page') setCurrentPage(block, getCurrentPage(block) + 1);
+    if (action === 'check-page') checkCurrentPage(block);
+    if (action === 'reset-page') resetCurrentPage(block);
+  });
+  block.addEventListener('click', event => {
+    const retry = event.target.closest('.retry-one');
+    if (retry) {
+      const item = retry.closest('.practice-item');
+      if (item) resetItem(item);
+      return;
+    }
+    const show = event.target.closest('.show-answer');
+    if (show) {
+      const item = show.closest('.practice-item');
+      if (item) showCorrectAnswer(item);
+    }
+  });
+  block.addEventListener('change', event => {
+    if (event.target.matches('input[type="radio"]')) {
+      const item = event.target.closest('.practice-item');
+      if (item && item.dataset.done !== '1') {
+        const feedback = item.querySelector('.feedback');
+        if (feedback) { feedback.textContent = ''; feedback.className = 'feedback'; }
+      }
+    }
+  });
+  renderPracticePage(block);
+}
+function visibleItems(block) {
+  return getItems(block).filter(item => !item.classList.contains('practice-hidden'));
+}
+function selectedInput(item) {
+  return item.querySelector('input[type="radio"]:checked');
+}
+function answerText(item, value) {
+  const input = item.querySelector(`input[type="radio"][value="${CSS.escape(value)}"]`);
+  if (!input) return value;
+  const label = input.closest('label');
+  return label ? label.innerText.trim() : value;
+}
+function checkItem(item) {
+  const correct = item.dataset.correct;
+  const selected = selectedInput(item);
+  const feedback = item.querySelector('.feedback');
+  if (!feedback) return;
+  feedback.className = 'feedback';
+  if (!selected) {
+    feedback.innerHTML = 'Choose one answer.';
+    feedback.classList.add('no');
+    item.dataset.done = '0';
+    return;
+  }
+  if (selected.value === correct) {
+    feedback.innerHTML = '✓ Good!';
+    feedback.classList.add('ok');
+    item.dataset.done = '1';
+  } else {
+    const repair = repairBank[item.dataset.repair] || 'Try again.';
+    feedback.innerHTML = `Try again. ${repair}<div class="repair-tools"><button type="button" class="retry-one">Try again</button><button type="button" class="show-answer">Correct Answer</button></div>`;
+    feedback.classList.add('no');
+    item.dataset.done = '0';
+  }
+}
+function checkCurrentPage(block) {
+  visibleItems(block).forEach(checkItem);
+  updateProgress();
+}
+function resetItem(item) {
+  item.querySelectorAll('input[type="radio"]').forEach(input => { input.checked = false; });
+  const feedback = item.querySelector('.feedback');
+  if (feedback) { feedback.textContent = ''; feedback.className = 'feedback'; }
+  item.dataset.done = '0';
+  updateProgress();
+}
+function resetCurrentPage(block) {
+  visibleItems(block).forEach(resetItem);
+}
+function showCorrectAnswer(item) {
+  const correct = item.dataset.correct;
+  const feedback = item.querySelector('.feedback');
+  if (!feedback) return;
+  feedback.className = 'feedback no';
+  feedback.innerHTML = `Correct Answer: ${answerText(item, correct)}<div class="repair-tools"><button type="button" class="retry-one">Try again</button></div>`;
+}
+function updateProgress() {
+  const total = document.querySelectorAll('.practice-item').length;
+  const done = Array.from(document.querySelectorAll('.practice-item')).filter(i => i.dataset.done === '1').length;
+  const progress = document.getElementById('progress');
+  if (progress) progress.textContent = 'Practice: ' + done + ' / ' + total;
+}
+function openLightbox(src, alt) {
+  const box = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src; img.alt = alt || '';
+  box.style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+function openHashDetails() {
+  if (!location.hash) return;
+  const el = document.querySelector(location.hash);
+  if (el && el.tagName && el.tagName.toLowerCase() === 'details') el.open = true;
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.practice-block').forEach(initPracticeBlock);
+  openHashDetails();
+  updateProgress();
+});
+window.addEventListener('hashchange', openHashDetails);
+</script>
+</body>
+</html>

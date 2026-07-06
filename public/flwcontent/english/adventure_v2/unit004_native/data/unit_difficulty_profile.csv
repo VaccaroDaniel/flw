@@ -1,0 +1,30 @@
+field,entry
+course,Adventure English World V2
+unit_number,4
+unit_title,Classroom Magic
+cefr_band,Pre-A1.1
+micro_band,Early Pre-A1 command recognition and response
+learner_age_identity,Adventure learners about 7-8 years old
+can_do_goal,I can understand and use simple classroom action commands.
+new_kp,"classroom commands as chunks; imperative meaning through action; please as polite classroom support"
+review_kp,"Unit 1 greetings and names; Unit 2 colors as card support; Unit 3 numbers 1-5 as sequence support"
+blocked_kp,"animals; likes/dislikes; family; age; countries; geography; full grammar explanation; prepositions; modals"
+active_vocabulary_target,"listen, look, point, say, stand up, sit down, open, close, read, write, please"
+receptive_vocabulary_target,"book, card, board, desk, pencil, teacher"
+expression_target,"Listen, please.; Look, please.; Stand up, please.; Sit down, please.; Open your book, please.; Close your book, please."
+collocation_target,"open your book; close your book; say it again"
+discourse_target,"short classroom routine: greeting -> four commands -> goodbye"
+register_target,polite child classroom English
+pronunciation_script_target,"clear command stress: LISTEN, LOOK, POINT, STAND, SIT, OPEN, CLOSE, READ, WRITE"
+reading_input_target,recognize command cards with icons and short text
+listening_watch_target,20-30 second command-routine Watch video
+speaking_output_target,record four commands with action cards
+writing_output_target,copy 3-4 command labels on an action strip
+practice_item_difficulty_mix,"70% recognition, 20% controlled production, 10% project readiness"
+watch_practice_focus,"main idea, command detail, sequence, speaker/action matching, phrase completion"
+project_output_requirement,classroom action card plus voice/video action recording
+ai_feedback_categories,"task completion, command pronunciation, command-action match, fluency, allowed-language control"
+repair_path,"wrong command -> icon board; wrong action -> contrast image; missing please -> model retry; unclear voice -> slow repeat"
+portfolio_evidence,"action card image, action recording, practice completion, feedback note"
+difficulty_audit_result,planned level-correct for Pre-A1.1
+

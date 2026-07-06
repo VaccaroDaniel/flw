@@ -1,0 +1,26 @@
+{
+  "unit_id": "AEW2_U011",
+  "unit_title": "Weather Window",
+  "gate": "Final Content + Image Alignment Quality Gate",
+  "status": "PASS",
+  "approved_for_moodle_html": true,
+  "content_checks": {
+    "unit_map_alignment": "PASS",
+    "7_lessons_watch_project": "PASS",
+    "practice_items": 108,
+    "practice_distribution": "12 items for Lessons 1-7, Watch, Project",
+    "correct_answers_feedback_repair_links": "PASS",
+    "blocked_learner_facing_content": "PASS after text repairs"
+  },
+  "image_checks": {
+    "image_count": 20,
+    "image_files_complete": "PASS",
+    "IMG01": "repaired/regenerated; no globe and no jeans/denim-style trousers accepted",
+    "IMG09": "regenerated/restored; asset present",
+    "IMG15": "accepted by user",
+    "IMG18": "accepted by user",
+    "IMG19": "accepted by user"
+  },
+  "decision": "PASS \u2014 approved for Moodle HTML and package build.",
+  "timestamp": "2026-07-02T03:20:48"
+}

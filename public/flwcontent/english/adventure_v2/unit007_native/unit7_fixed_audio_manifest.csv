@@ -1,0 +1,42 @@
+item,segment,text,voice,file,sha256
+1,1,toy box,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_01_01.mp3,dacdd32ff1194ede1ceecb2107abdf032f9c075fea00e0c4e96e94f6a78f38f9
+1,2,Where is the toy?,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_01_02.mp3,7a59d9e0f78380caabc3bbf2969197ae7d26e4629839045a66c581f1137654ee
+1,3,It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_01_03.mp3,e8d37bdd68d269c4b5bcf22bf4f39e3280eefaccf464a08efe529ce7fad0cb61
+1,model,toy box / Where is the toy? / It's in the box.,combined,assets/audio/unit7_fixed/u7_model_01.mp3,2d5071b0a907d83e5981da218b9f8ce8f6f34ca3846b1ce763edb6e17f88766c
+2,1,ball,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_01.mp3,7bea3ce48ad4c86686ec1d476015c56710562fc85a40abaee696ada7baa4672e
+2,2,car,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_02.mp3,64348683920d13fbe7c45498e7b0400c031d2a8530a9adfb05d7bdc8b708539a
+2,3,doll,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_03.mp3,ffbce6e3aea908e1e991850707321d812193307709f831b4e8f0044fb99945ff
+2,4,robot,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_04.mp3,0cb279654ef76bebcae9fc9f0cfc8df12443f7553b6fe1607029909c45b20032
+2,5,kite,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_05.mp3,4342d027a369a7198945aa781cae1e38154c703326885f9a124e4c350505ce2d
+2,6,teddy bear,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_06.mp3,b73a421cb6ac3aad8702cb4677a62d1d8aed11d0f48733175e6cfc6637a7c552
+2,7,blocks,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_07.mp3,1c1d58dd385a608ad0b46d8e72d77e2a347a51e278d278d2dc71ed4163c5790e
+2,8,train,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_02_08.mp3,d4499aa636b9337db2d04683644ed08b9b8381425c7310d11397c845fc299914
+2,model,ball / car / doll / robot / kite / teddy bear / blocks / train,combined,assets/audio/unit7_fixed/u7_model_02.mp3,e99a16ccac13f57046a487e270724958adb9b0854f9485e8367592e91313ec13
+3,1,Where is the teddy bear? It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_03_01.mp3,f566cd7651f356c39b1eb680c5e1fa849be5063905b1df7037d3fede6028b7ad
+3,2,Where is the robot? It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_03_02.mp3,a9fa6866a5667e80b4b2331bc72431c9839c4d23accdb894291a51a96389ab0d
+3,model,Where is the teddy bear? It's in the box. / Where is the robot? It's in the box.,combined,assets/audio/unit7_fixed/u7_model_03.mp3,4c3ef3de7cb450cdc2446d0d506c331f72d28649ea5f3c90ea5972c45f0b30e3
+4,1,Where is the car? It's on the shelf.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_04_01.mp3,ab665a9197dc8e39ec9e826743108baf9befec64b067ad472e3bfb7f235596df
+4,2,Where is the ball? It's on the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_04_02.mp3,84b707734ac7fdf0cbc9beb58a3f82e4e7cb2e436871c340373b8bb64b43067a
+4,model,Where is the car? It's on the shelf. / Where is the ball? It's on the table.,combined,assets/audio/unit7_fixed/u7_model_04.mp3,4287e2b50eb8d421ac801470e540d6f5c93dc5af4c8a11d4394e6768c80cd688
+5,1,Where is the ball? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_05_01.mp3,e40a251d413557ce80f4948fd396dd5b43ba1586da7031c1bdd39eae5f57851d
+5,2,Where is the car? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_05_02.mp3,5c114108509cf67cb83b9f734c1357be42b5a730f7f69a0b6a143b6b7b0a363c
+5,model,Where is the ball? It's under the table. / Where is the car? It's under the table.,combined,assets/audio/unit7_fixed/u7_model_05.mp3,a2f8450857938709b2c70749fbefd7d340b30f4a177b863be7f89e5f0f0fde69
+6,1,Where is the robot? B: It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_06_01.mp3,7ffb600806c76dc07fcdebe9ec61b7b402bf973f727c7f902290d6ac68d801b2
+6,2,Where is the car? B: It's on the shelf.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_06_02.mp3,2063751be6330f0741d185ee3d0adfe824fc6ad11070a053fd9989101042d1a7
+6,3,Where is the ball? B: It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_06_03.mp3,8790e02772d37c24401ce3b928b33dd255c8817ce862efddd8f121e83df12eb0
+6,model,A: Where is the robot? B: It's in the box. / A: Where is the car? B: It's on the shelf. / A: Where is the ball? B: It's under the table.,combined,assets/audio/unit7_fixed/u7_model_06.mp3,c3c13ccd32845016f6f3e66dcec1991c8fe9de826800b02b066cadb58546fe76
+7,1,Clue: under. Where is the ball? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_07_01.mp3,711d01c251bc478e8b858dba860f1fd5ae098c13c275185db8f9c9e220e8e6c9
+7,2,Clue: in. It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_07_02.mp3,469f62847425b6b954ef642e26bad98215b696921c96588601db2f4ee9b39ef6
+7,model,Clue: under. Where is the ball? It's under the table. / Clue: in. It's in the box.,combined,assets/audio/unit7_fixed/u7_model_07.mp3,e7604e56348afd391f459a5d1ee5a38af6533fa7b75c540ab7e5f90e8254f3e1
+8,1,Where is the ball? It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_08_01.mp3,cfbd07936257ee4a090952e9d3c3fabd8f5784f63cd7c71c87165b603f433c02
+8,2,Where is the car? It's on the shelf.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_08_02.mp3,ab665a9197dc8e39ec9e826743108baf9befec64b067ad472e3bfb7f235596df
+8,3,Where is the robot? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_08_03.mp3,47841fd21dab1c2cf6d1b0d1cb5ea5c90009ea9d25e37a014f8d1617ea032acc
+8,model,Where is the ball? It's in the box. / Where is the car? It's on the shelf. / Where is the robot? It's under the table.,combined,assets/audio/unit7_fixed/u7_model_08.mp3,a7f9a7948ade8c042dc248a676e3bb564e36a0c4f23190cd4234e122a65d0c68
+9,1,Where is the robot? It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_09_01.mp3,a9fa6866a5667e80b4b2331bc72431c9839c4d23accdb894291a51a96389ab0d
+9,2,Where is the car? It's on the shelf.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_09_02.mp3,ab665a9197dc8e39ec9e826743108baf9befec64b067ad472e3bfb7f235596df
+9,3,Where is the ball? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_09_03.mp3,e40a251d413557ce80f4948fd396dd5b43ba1586da7031c1bdd39eae5f57851d
+9,model,Where is the robot? It's in the box. / Where is the car? It's on the shelf. / Where is the ball? It's under the table.,combined,assets/audio/unit7_fixed/u7_model_09.mp3,9fd2757726262aa76194ca8dee24b063e1cae9e3e4e13aec810ddc4996ae326d
+10,1,Where is the ball? It's in the box.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_10_01.mp3,cfbd07936257ee4a090952e9d3c3fabd8f5784f63cd7c71c87165b603f433c02
+10,2,Where is the robot? It's on the shelf.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_10_02.mp3,bfb46b08ce7d7cc45758c131df4005fd129268f6f26ea7452b79634a2628baf3
+10,3,Where is the teddy bear? It's under the table.,en-US-AnaNeural,assets/audio/unit7_fixed/u7_model_10_03.mp3,960b4f215e3e2fdee9067911ef77ce631ed478f32d5f8fe13168a8048dc39f1e
+10,model,Where is the ball? It's in the box. / Where is the robot? It's on the shelf. / Where is the teddy bear? It's under the table.,combined,assets/audio/unit7_fixed/u7_model_10.mp3,7a7335933978197636524548e61cc719a96d86e3c60c6d50d9a8254abcfd482f

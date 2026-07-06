@@ -10,48 +10,20 @@
 <div id="page-wrapper" class="d-print-block flw-dashboard-wrapper">
     {{{ output.standard_top_of_body_html }}}
 
-    <header class="flw-dashboard-header">
-        {{> theme_boost/navbar }}
-        <ul class="navbar-nav flw-app-nav" aria-label="FLW custom navigation">
-            <li class="nav-item"><a class="nav-link" href="{{defaultschoolurl}}" data-flw-category-link="school">School</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{defaultselfstudyurl}}" data-flw-category-link="selfstudy">Self Study</a></li>
-            <li class="nav-item flw-nav-dropdown">
-                <button type="button" class="nav-link flw-nav-toggle" data-flw-nav-label="practice">Practice</button>
-                <div class="flw-nav-menu" aria-label="Practice submenu">
-                    <a href="{{defaultpracticewatchurl}}" data-flw-practice-submenu-link="watch">Watch</a>
-                    <a href="{{defaultpracticelistenurl}}" data-flw-practice-submenu-link="listen">Listen</a>
-                    <a href="{{defaultpracticespeakurl}}" data-flw-practice-submenu-link="speak">Speak</a>
-                    <a href="{{defaultpracticereadurl}}" data-flw-practice-submenu-link="read">Read</a>
-                    <a href="{{defaultpracticedictateurl}}" data-flw-practice-submenu-link="dictate">Dictate</a>
-                </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#flw-dictionary" data-flw-nav-label="dictionary">Dictionary</a></li>
-            <li class="nav-item flw-nav-dropdown">
-                <button type="button" class="nav-link flw-nav-toggle" data-flw-nav-label="exam">Exam</button>
-                <div class="flw-nav-menu" aria-label="Exam submenu">
-                    {{#defaultexamlinks}}
-                    <a href="{{url}}" data-flw-exam-submenu-link="{{index}}">{{label}}</a>
-                    {{/defaultexamlinks}}
-                </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#flw-teacher" data-flw-nav-label="teacher">Teacher</a></li>
-            <li class="nav-item"><a class="nav-link" href="#flw-collaboration" data-flw-nav-label="collaboration">Collaboration</a></li>
-        </ul>
-    </header>
+    {{> theme_boost/navbar }}
     {{> theme_flwacademy/flw_language_panel }}
 
     <style>
         :root{--flw-font-body:Inter,"Segoe UI",Arial,sans-serif;--flw-bg:#f7faf8;--flw-surface:#fff;--flw-soft:#f0f6f4;--flw-ink:#17242a;--flw-muted:#5d6b72;--flw-line:#d8e3df;--flw-teal:#087f8c;--flw-teal-dark:#075a64;--flw-coral:#e85d4f;--flw-green:#4f9d54;--flw-yellow:#f2b84b;--flw-blue:#3278bd;--flw-radius:8px;--flw-shadow:0 12px 30px rgba(23,36,42,.09)}
         .flw-dashboard-page{margin:0;background:var(--flw-bg);color:var(--flw-ink);font-family:var(--flw-font-body);line-height:1.5;letter-spacing:0;color-scheme:light}
-        .flw-dashboard-page a{text-decoration:none}.flw-dashboard-header{position:sticky;top:0;z-index:1030;display:flex;align-items:stretch;gap:.65rem;min-height:60px;margin:0;padding:0 .85rem;border-bottom:1px solid var(--flw-line);background:rgba(255,255,255,.96);box-shadow:0 8px 24px rgba(23,36,42,.07);backdrop-filter:blur(16px)}
-      .flw-dashboard-header .navbar.fixed-top{position:static!important;z-index:2;flex:1 1 auto;min-width:310px;width:100%;padding:0;border-bottom:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none}.flw-dashboard-header .navbar .container-fluid{min-height:60px;padding-right:0;padding-left:0}.flw-dashboard-header .navbar-brand,.flw-dashboard-header #usernavigation{position:relative;z-index:4}.flw-dashboard-header #usernavigation{min-width:max-content}.flw-dashboard-header .primary-navigation{position:relative;z-index:4}.flw-app-nav{position:absolute;top:50%;left:50%;z-index:3;display:flex;flex:0 1 auto;flex-direction:row;flex-wrap:wrap;gap:.25rem;align-items:center;justify-content:center;width:max-content;max-width:calc(100% - 520px);margin:0;padding:.45rem 0;background:transparent;backdrop-filter:none;transform:translate(-50%,-50%)}.flw-app-nav .nav-link{min-height:2.2rem;display:inline-flex;align-items:center;justify-content:center;padding:.4rem .62rem;border-radius:.5rem;color:#5d6b72!important;font-size:.86rem;font-weight:700!important;text-decoration:none!important;white-space:nowrap}.flw-app-nav button.nav-link{border:0;background:transparent;font-family:inherit;cursor:pointer}.flw-app-nav .nav-link:hover,.flw-app-nav .nav-link:focus,.flw-nav-dropdown:hover>.nav-link,.flw-nav-dropdown:focus-within>.nav-link{background:#f0f6f4;color:#075a64!important}.flw-nav-dropdown{position:relative}.flw-nav-menu{position:absolute;top:calc(100% + 8px);left:50%;z-index:1040;display:none;width:210px;padding:8px;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:#fff;box-shadow:var(--flw-shadow);transform:translateX(-50%)}.flw-nav-dropdown:hover .flw-nav-menu,.flw-nav-dropdown:focus-within .flw-nav-menu{display:grid;gap:4px}.flw-nav-menu a{min-height:34px;display:flex;align-items:center;justify-content:flex-start;padding:7px 10px;border-radius:var(--flw-radius);color:#5d6b72!important;font-size:.86rem;font-weight:700!important;text-decoration:none!important}.flw-nav-menu a:hover,.flw-nav-menu a:focus{background:#f0f6f4;color:#075a64!important}
-        .flw-dashboard{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:26px 0 56px;color:var(--flw-ink)!important}.flw-stack{display:grid;gap:22px}.flw-band,.flw-card{border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:var(--flw-surface);color:var(--flw-ink)!important;box-shadow:var(--flw-shadow)}.flw-band-inner{padding:24px}.flw-hero-banner{position:relative;min-height:430px;display:grid;align-items:center;overflow:hidden;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:#fff;color:var(--flw-ink)!important;box-shadow:var(--flw-shadow)}.flw-hero-banner:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(247,250,248,.96),rgba(247,250,248,.54),rgba(247,250,248,.1))}.flw-hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.flw-hero-content{position:relative;z-index:2;max-width:780px;padding:34px}.flw-dashboard h1,.flw-dashboard h2,.flw-dashboard h3,.flw-dashboard p{margin-top:0}.flw-dashboard h1,.flw-dashboard h2,.flw-dashboard h3{color:var(--flw-ink)!important}.flw-dashboard p{color:var(--flw-ink)!important}.flw-dashboard h1{max-width:780px;margin-bottom:12px;font-size:42px;line-height:1.08;font-weight:700}.flw-dashboard h2{margin-bottom:10px;font-size:26px;line-height:1.18;font-weight:700}.flw-dashboard h3{margin-bottom:8px;font-size:18px;line-height:1.25;font-weight:700}.flw-lead{max-width:780px;color:var(--flw-muted)!important;font-size:18px}.flw-muted{color:var(--flw-muted)!important}.flw-page-kicker{margin:0 0 8px;color:var(--flw-teal-dark)!important;font-size:13px;font-weight:700;text-transform:uppercase}
+        .flw-dashboard-page a{text-decoration:none}
+        .flw-dashboard{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:86px 0 56px;color:var(--flw-ink)!important}.flw-stack{display:grid;gap:22px}.flw-band,.flw-card{border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:var(--flw-surface);color:var(--flw-ink)!important;box-shadow:var(--flw-shadow)}.flw-band-inner{padding:24px}.flw-hero-banner{position:relative;min-height:430px;display:grid;align-items:center;overflow:hidden;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:#fff;color:var(--flw-ink)!important;box-shadow:var(--flw-shadow)}.flw-hero-banner:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(247,250,248,.96),rgba(247,250,248,.54),rgba(247,250,248,.1))}.flw-hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.flw-hero-content{position:relative;z-index:2;max-width:780px;padding:34px}.flw-dashboard h1,.flw-dashboard h2,.flw-dashboard h3,.flw-dashboard p{margin-top:0}.flw-dashboard h1,.flw-dashboard h2,.flw-dashboard h3{color:var(--flw-ink)!important}.flw-dashboard p{color:var(--flw-ink)!important}.flw-dashboard h1{max-width:780px;margin-bottom:12px;font-size:42px;line-height:1.08;font-weight:700}.flw-dashboard h2{margin-bottom:10px;font-size:26px;line-height:1.18;font-weight:700}.flw-dashboard h3{margin-bottom:8px;font-size:18px;line-height:1.25;font-weight:700}.flw-lead{max-width:780px;color:var(--flw-muted)!important;font-size:18px}.flw-muted{color:var(--flw-muted)!important}.flw-page-kicker{margin:0 0 8px;color:var(--flw-teal-dark)!important;font-size:13px;font-weight:700;text-transform:uppercase}
         .flw-actions,.flw-action-row{display:flex;flex-wrap:wrap;gap:10px}.flw-button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:#fff;color:var(--flw-ink)!important;font-weight:700}.flw-button.primary{border-color:var(--flw-teal);background:var(--flw-teal);color:#fff!important}.flw-button.ghost{background:rgba(255,255,255,.72)}.flw-button.small{min-height:34px;padding:7px 10px;font-size:14px}
         .flw-metric-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}.flw-metric{padding:14px;border:1px solid var(--flw-line);border-radius:var(--flw-radius);background:rgba(255,255,255,.86);color:var(--flw-ink)!important}.flw-metric strong{display:block;color:var(--flw-teal-dark)!important;font-size:26px;line-height:1;font-weight:700}.flw-metric span{color:var(--flw-muted)!important;font-size:13px;font-weight:650}
         .flw-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}.flw-grid{display:grid;gap:14px}.flw-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.flw-grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.flw-split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:24px;align-items:stretch}.flw-card{min-width:0;padding:18px}.flw-card.accent-teal{border-top:5px solid var(--flw-teal)}.flw-card.accent-coral{border-top:5px solid var(--flw-coral)}.flw-card.accent-green{border-top:5px solid var(--flw-green)}.flw-card.accent-yellow{border-top:5px solid var(--flw-yellow)}.flw-card.accent-blue{border-top:5px solid var(--flw-blue)}.flw-card-link{color:var(--flw-ink)!important}.flw-card-link:hover{transform:translateY(-2px)}
         .flw-progress-bar{height:10px;overflow:hidden;border-radius:999px;background:#dfe8e5}.flw-progress-fill{height:100%;width:var(--value,0%);border-radius:inherit;background:linear-gradient(90deg,var(--flw-teal),var(--flw-green))}.flw-skill-bars{display:grid;gap:12px}.flw-skill-line{display:grid;grid-template-columns:120px minmax(0,1fr) 44px;gap:10px;align-items:center}.flw-skill-line span{color:var(--flw-muted);font-size:13px}.flw-hidden-maincontent{display:none!important}
-        @media(max-width:1100px){.flw-dashboard-header{flex-wrap:wrap;gap:0;padding:.25rem .85rem}.flw-dashboard-header .navbar.fixed-top{flex-basis:100%;min-width:0}.flw-dashboard-header .navbar .container-fluid{min-height:48px}.flw-app-nav{position:static;justify-content:center;width:100%;max-width:none;padding:0 0 .45rem;transform:none}.flw-split,.flw-grid.four{grid-template-columns:1fr 1fr}}
-        @media(max-width:720px){.flw-dashboard{width:min(100% - 22px,1180px);padding-top:18px}.flw-hero-content,.flw-band-inner{padding:18px}.flw-dashboard h1{font-size:32px}.flw-grid.three,.flw-grid.four,.flw-split,.flw-metric-strip{grid-template-columns:1fr}.flw-skill-line{grid-template-columns:1fr}.flw-app-usernav{width:100%;justify-content:space-between}}
+        @media(max-width:1100px){.flw-split,.flw-grid.four{grid-template-columns:1fr 1fr}}
+        @media(max-width:720px){.flw-dashboard{width:min(100% - 22px,1180px);padding-top:76px}.flw-hero-content,.flw-band-inner{padding:18px}.flw-dashboard h1{font-size:32px}.flw-grid.three,.flw-grid.four,.flw-split,.flw-metric-strip{grid-template-columns:1fr}.flw-skill-line{grid-template-columns:1fr}.flw-app-usernav{width:100%;justify-content:space-between}}
     </style>
 
     <main id="page" data-region="mainpage" data-usertour="scroller" class="flw-dashboard">
@@ -62,8 +34,8 @@
                     <h1>Find your level, choose a path, and know what to learn next.</h1>
                     <p class="flw-lead">FLW connects placement, course content, knowledge points, and progress so learners can answer three questions every day: where am I, what should I do next, and am I improving?</p>
                     <div class="flw-actions">
-                        <a class="flw-button primary" href="#flw-self-study">Start placement test</a>
-                        <a class="flw-button" href="#flw-self-study">Continue English</a>
+                        <a class="flw-button primary" href="{{defaultplacementtesturl}}" data-flw-placement-link>Start placement test</a>
+                        <a class="flw-button" href="{{defaultselfstudyurl}}" data-flw-category-link="selfstudy">Continue course</a>
                         <a class="flw-button ghost" href="#flw-progress">View progress</a>
                     </div>
                     <div class="flw-metric-strip" aria-label="Dashboard summary">
@@ -82,13 +54,13 @@
                             <p class="flw-page-kicker">Self Study</p>
                             <h2>Choose a language, then choose how to begin.</h2>
                         </div>
-                        <a class="flw-button small primary" href="#flw-practice">Open Practice</a>
+                        <a class="flw-button small primary" href="{{defaultpracticeurl}}" data-flw-category-link="practice">Open Practice</a>
                     </div>
                     <div class="flw-grid four">
-                        <a class="flw-card flw-card-link accent-teal" href="#flw-self-study"><p class="flw-page-kicker">Continue Learning</p><h3>English A2 path</h3><p class="flw-muted">Return to your visible path with placement, KP evidence, and progress checkpoints.</p></a>
-                        <a class="flw-card flw-card-link accent-coral" href="#flw-self-study"><p class="flw-page-kicker">Choose Course</p><h3>Language library</h3><p class="flw-muted">Open English, Russian, Chinese, Japanese, German, French, or Spanish.</p></a>
-                        <a class="flw-card flw-card-link accent-green" href="#flw-self-study"><p class="flw-page-kicker">Placement Test</p><h3>Find my level</h3><p class="flw-muted">Use diagnostic tasks to locate your next useful language step.</p></a>
-                        <a class="flw-card flw-card-link accent-yellow" href="#flw-self-study"><p class="flw-page-kicker">Course Map</p><h3>KP structure</h3><p class="flw-muted">See units, subskills, knowledge points, and expected evidence.</p></a>
+                        <a class="flw-card flw-card-link accent-teal" href="{{defaultselfstudyurl}}" data-flw-category-link="selfstudy"><p class="flw-page-kicker">Continue Learning</p><h3>Current path</h3><p class="flw-muted">Return to your visible path with placement, KP evidence, and progress checkpoints.</p></a>
+                        <a class="flw-card flw-card-link accent-coral" href="{{defaultselfstudyurl}}" data-flw-category-link="selfstudy"><p class="flw-page-kicker">Choose Course</p><h3>Language library</h3><p class="flw-muted">Open the selected language course category.</p></a>
+                        <a class="flw-card flw-card-link accent-green" href="{{defaultplacementtesturl}}" data-flw-placement-link><p class="flw-page-kicker">Placement Test</p><h3>Find my level</h3><p class="flw-muted">Use diagnostic tasks to locate your next useful language step.</p></a>
+                        <a class="flw-card flw-card-link accent-yellow" href="{{defaultschoolurl}}" data-flw-category-link="school"><p class="flw-page-kicker">Course Map</p><h3>KP structure</h3><p class="flw-muted">See units, subskills, knowledge points, and expected evidence.</p></a>
                     </div>
                 </div>
             </section>
@@ -103,9 +75,9 @@
                     </div>
                     <div class="flw-split">
                         <div class="flw-grid three">
-                            <a class="flw-card flw-card-link accent-teal" href="#flw-practice"><p class="flw-page-kicker">Video</p><h3>Watch</h3><p class="flw-muted">Video practice by language and level: Easy, Medium, or Hard.</p></a>
-                            <a class="flw-card flw-card-link accent-coral" href="#flw-practice"><p class="flw-page-kicker">Listening</p><h3>Listen</h3><p class="flw-muted">Audio and audio-plus-book materials by CEFR, HSK, JLPT, or TORFL level.</p></a>
-                            <a class="flw-card flw-card-link accent-green" href="#flw-practice"><p class="flw-page-kicker">Speaking</p><h3>Speak</h3><p class="flw-muted">Choose a language, level, and topic for guided AI speaking practice.</p></a>
+                            <a class="flw-card flw-card-link accent-teal" href="{{defaultpracticewatchurl}}" data-flw-practice-submenu-link="watch"><p class="flw-page-kicker">Video</p><h3>Watch</h3><p class="flw-muted">Video practice by language and level: Easy, Medium, or Hard.</p></a>
+                            <a class="flw-card flw-card-link accent-coral" href="{{defaultpracticelistenurl}}" data-flw-practice-submenu-link="listen"><p class="flw-page-kicker">Listening</p><h3>Listen</h3><p class="flw-muted">Audio and audio-plus-book materials by CEFR, HSK, JLPT, or TORFL level.</p></a>
+                            <a class="flw-card flw-card-link accent-green" href="{{defaultpracticespeakurl}}" data-flw-practice-submenu-link="speak"><p class="flw-page-kicker">Speaking</p><h3>Speak</h3><p class="flw-muted">Choose a language, level, and topic for guided AI speaking practice.</p></a>
                         </div>
                         <article class="flw-card accent-yellow">
                             <p class="flw-page-kicker">Learner profile</p>
@@ -128,8 +100,8 @@
                         <h2>Your next recommended mission</h2>
                         <p class="flw-lead">The current fast path is A2+ to B2 Speaking. Repair A2 listening and grammar gaps before B1 and B2 speaking missions.</p>
                         <div class="flw-action-row">
-                            <a class="flw-button primary" href="#flw-self-study">Open KP Coach</a>
-                            <a class="flw-button" href="#flw-practice">Open lesson</a>
+                            <a class="flw-button primary" href="{{defaultselfstudyurl}}" data-flw-category-link="selfstudy">Open KP Coach</a>
+                            <a class="flw-button" href="{{defaultpracticeurl}}" data-flw-category-link="practice">Open lesson</a>
                         </div>
                     </div>
                     <div class="flw-card accent-coral">
@@ -146,7 +118,7 @@
 
             <section class="flw-grid four" aria-label="FLW tools">
                 <article id="flw-dictionary" class="flw-card accent-blue"><p class="flw-page-kicker">Dictionary</p><h3>Learner dictionary</h3><p class="flw-muted">Search words across FLW languages, compare meanings, and connect vocabulary to knowledge points.</p></article>
-                <article id="flw-exam" class="flw-card accent-coral"><p class="flw-page-kicker">Exam</p><h3>Exam practice</h3><p class="flw-muted">Choose target exam levels and open sample listening, reading, grammar, speaking, or writing tasks.</p></article>
+                <a id="flw-exam" class="flw-card flw-card-link accent-coral" href="{{defaultexamurl}}" data-flw-category-link="exam"><p class="flw-page-kicker">Exam</p><h3>Exam practice</h3><p class="flw-muted">Choose target exam levels and open sample listening, reading, grammar, speaking, or writing tasks.</p></a>
                 <article id="flw-teacher" class="flw-card accent-yellow"><p class="flw-page-kicker">Teacher</p><h3>Feedback Queue</h3><p class="flw-muted">Review speaking recordings, writing tasks, quiz results, and teacher comments.</p></article>
                 <article id="flw-collaboration" class="flw-card accent-green"><p class="flw-page-kicker">Collaboration</p><h3>Practice with people</h3><p class="flw-muted">Small daily exchanges make speaking and writing feel normal.</p></article>
             </section>

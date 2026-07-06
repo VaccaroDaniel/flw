@@ -10,7 +10,7 @@ $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
-$primarymenu = $primary->export_for_template($renderer);
+$primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
 $flwlangorder = [
     'en' => 0,
     'ru' => 1,

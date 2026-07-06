@@ -1,0 +1,216 @@
+::AEW2-U008-L1-Q01::Look at IMG02. Leo touches his _____. {=head~hands~feet}
+
+::AEW2-U008-L1-Q02::Look at IMG03. Leo shows two _____. {=hands~feet~ears}
+
+::AEW2-U008-L1-Q03::Look at Leo’s shoes. The body word is _____. {=feet~mouth~eyes}
+
+::AEW2-U008-L1-Q04::Touch your _____. {=head~feet~hands}
+
+::AEW2-U008-L1-Q05::Choose the correct matching set. {=head \= top of body; hands \= open palms; feet \= shoes~head \= shoes; hands \= top of body; feet \= open palms~head \= open palms; hands \= shoes; feet \= top of body}
+
+::AEW2-U008-L1-Q06::Which word matches open palms? {=hands~head~feet}
+
+::AEW2-U008-L1-Q07::In IMG04, Toto is near Leo’s foot. {=True~False}
+
+::AEW2-U008-L1-Q08::Put the body words from top to bottom. {=head → hands → feet~feet → hands → head~hands → head → feet}
+
+::AEW2-U008-L1-Q09::IMG02 shows\: {=Touch your head~Clap your hands~Point to your feet}
+
+::AEW2-U008-L1-Q10::In IMG04, Mia points toward Leo’s _____. {=feet~mouth~eyes}
+
+::AEW2-U008-L1-Q11::You can touch it on top of your body. {=head~feet~hands}
+
+::AEW2-U008-L1-Q12::Not nose. Try again\: Leo touches his _____. {=head~hands~feet}
+
+::AEW2-U008-L2-Q01::In IMG05, Mia points near her _____. {=nose~feet~hands}
+
+::AEW2-U008-L2-Q02::In IMG07, Emma touches one _____. {=ear~foot~hand}
+
+::AEW2-U008-L2-Q03::Choose the face word. {=eyes~feet~hands}
+
+::AEW2-U008-L2-Q04::Choose the face word. {=ears~feet~hands}
+
+::AEW2-U008-L2-Q05::Choose the face word. {=mouth~hands~legs}
+
+::AEW2-U008-L2-Q06::Touch your _____. {=nose~feet~hands}
+
+::AEW2-U008-L2-Q07::Touch your _____. {=ears~feet~hands}
+
+::AEW2-U008-L2-Q08::IMG06 shows a face. Choose a face word. {=eye~shoe~hand}
+
+::AEW2-U008-L2-Q09::Choose the correct face-word set. {=eyes, ears, nose, mouth~shoes, chair, book, bag~feet, legs, arms, table}
+
+::AEW2-U008-L2-Q10::In IMG07, Toto watches the children. {=True~False}
+
+::AEW2-U008-L2-Q11::One face part in the middle of the face is the _____. {=nose~feet~hands}
+
+::AEW2-U008-L2-Q12::The word is “ears.” Touch your _____. {=ears~eyes~feet}
+
+::AEW2-U008-L3-Q01::In IMG08, the team touches their _____. {=heads~feet~hands}
+
+::AEW2-U008-L3-Q02::Which command matches IMG08? {=Touch your head~Point to your feet~Clap your hands}
+
+::AEW2-U008-L3-Q03::Which command matches IMG09? {=Touch your nose~Touch your feet~Touch your hands}
+
+::AEW2-U008-L3-Q04::Which command matches IMG10? {=Point to your feet~Touch your mouth~Clap your hands}
+
+::AEW2-U008-L3-Q05::Touch your _____. {=head~table~chair}
+
+::AEW2-U008-L3-Q06::Point to your _____. {=feet~eyes~mouth}
+
+::AEW2-U008-L3-Q07::Put the image commands in order\: IMG08, IMG09, IMG10. {=head → nose → feet~nose → feet → head~feet → head → nose}
+
+::AEW2-U008-L3-Q08::In IMG09, the team touches noses. {=True~False}
+
+::AEW2-U008-L3-Q09::Choose the body command. {=Touch your ears~Draw a circle~Look at the window}
+
+::AEW2-U008-L3-Q10::Touch _____ head. {=your~red~two}
+
+::AEW2-U008-L3-Q11::In IMG10, Emma points to her _____. {=feet~eyes~mouth}
+
+::AEW2-U008-L3-Q12::This is feet, not hands. Point to your _____. {=feet~hands~nose}
+
+::AEW2-U008-L4-Q01::Leo points to himself and shows a hand. He says\: {=my hand~your hand~my feet}
+
+::AEW2-U008-L4-Q02::I talk to a friend and show the friend’s hand. I say\: {=your hand~my hand~your feet}
+
+::AEW2-U008-L4-Q03::In IMG12 left, Mia touches her own head. Mia says\: {=my head~your head~my feet}
+
+::AEW2-U008-L4-Q04::In IMG12 right, Mia gestures toward Emma’s head. Mia says\: {=your head~my head~your feet}
+
+::AEW2-U008-L4-Q05::Touch _____ head. {=your~my~blue}
+
+::AEW2-U008-L4-Q06::This is _____ hand. {=my~your~one}
+
+::AEW2-U008-L4-Q07::Choose the correct meaning. {=my \= own body; your \= friend/listener’s body~my \= a color; your \= a number~my \= feet only; your \= hands only}
+
+::AEW2-U008-L4-Q08::I point to my own foot. I say\: {=my foot~your foot~my mouth}
+
+::AEW2-U008-L4-Q09::I say a command to you\: Touch _____ nose. {=your~my~red}
+
+::AEW2-U008-L4-Q10::“My” means my own body. {=True~False}
+
+::AEW2-U008-L4-Q11::In IMG13, Leo touches his own head. Leo can say\: {=my head~your head~my hand}
+
+::AEW2-U008-L4-Q12::Not “my.” I talk to a friend\: Touch _____ head. {=your~my~feet}
+
+::AEW2-U008-L5-Q01::In IMG15, Mia claps her _____. {=hands~feet~ears}
+
+::AEW2-U008-L5-Q02::Which command matches IMG15? {=Clap your hands~Touch your nose~Point to your feet}
+
+::AEW2-U008-L5-Q03::In IMG16, Leo waves his _____. {=arms~feet~nose}
+
+::AEW2-U008-L5-Q04::Which command matches IMG16? {=Wave your arms~Clap your feet~Touch your mouth}
+
+::AEW2-U008-L5-Q05::In IMG17, Emma steps with her _____. {=feet~ears~mouth}
+
+::AEW2-U008-L5-Q06::Your legs help you _____. {=step~clap~smile}
+
+::AEW2-U008-L5-Q07::Choose the action word for moving arms. {=wave~clap~point}
+
+::AEW2-U008-L5-Q08::Clap your _____. {=hands~nose~feet}
+
+::AEW2-U008-L5-Q09::Wave your _____. {=arms~ears~mouth}
+
+::AEW2-U008-L5-Q10::Step with your _____. {=feet~eyes~mouth}
+
+::AEW2-U008-L5-Q11::Choose the movement order. {=wave arms → clap hands → step feet~step hands → wave nose → clap feet~clap ears → wave feet → step mouth}
+
+::AEW2-U008-L5-Q12::Choose the safe movement. {=small step~jump on a table~push a friend}
+
+::AEW2-U008-L6-Q01::In IMG18, Leo listens and touches his _____. {=head~feet~hands}
+
+::AEW2-U008-L6-Q02::The small speaker means\: {=listen~sleep~run}
+
+::AEW2-U008-L6-Q03::Command\: Touch your nose. Choose the body part. {=nose~hands~feet}
+
+::AEW2-U008-L6-Q04::Command\: Clap your hands. Choose the body part. {=hands~ears~legs}
+
+::AEW2-U008-L6-Q05::Command\: Point to your feet. Choose the body part. {=feet~eyes~mouth}
+
+::AEW2-U008-L6-Q06::Listen and order\: Touch your head. Clap your hands. Point to your feet. {=head → hands → feet~feet → head → hands~hands → feet → head}
+
+::AEW2-U008-L6-Q07::In IMG19, Mia does this action. {=claps hands~touches mouth~points to eyes}
+
+::AEW2-U008-L6-Q08::In IMG19, Emma shows a feet action. Choose the command. {=Point to your feet~Touch your nose~Clap your hands}
+
+::AEW2-U008-L6-Q09::In IMG20, Leo models touching his _____. {=nose~feet~hands}
+
+::AEW2-U008-L6-Q10::In IMG20, Emma touches her ____ first. {=ear~foot~hand}
+
+::AEW2-U008-L6-Q11::Look. Listen again. Touch your _____. {=nose~feet~hands}
+
+::AEW2-U008-L6-Q12::Choose the helpful repair phrase. {=Try again.~Stop learning.~Run away.}
+
+::AEW2-U008-L7-Q01::Choose a good first chant line. {=Touch your head.~Sleep your head.~Open your head.}
+
+::AEW2-U008-L7-Q02::Choose a good face chant line. {=Touch your nose.~Clap your nose.~Step your nose.}
+
+::AEW2-U008-L7-Q03::Choose the hand action. {=Clap your hands.~Touch your table.~Wave your feet.}
+
+::AEW2-U008-L7-Q04::Choose the feet action. {=Point to your feet.~Smile your feet.~Listen your feet.}
+
+::AEW2-U008-L7-Q05::Put the model chant in order\: hands, feet, head, nose. {=head → nose → hands → feet~hands → head → feet → nose~feet → hands → nose → head}
+
+::AEW2-U008-L7-Q06::Touch your _____. {=head~chair~book}
+
+::AEW2-U008-L7-Q07::Clap your _____. {=hands~ears~nose}
+
+::AEW2-U008-L7-Q08::Point to your _____. {=feet~mouth~eyes}
+
+::AEW2-U008-L7-Q09::Choose a good chant line. {=Wave your arms.~Wave your pencil.~Wave your lunch.}
+
+::AEW2-U008-L7-Q10::Choose the body command. {=Touch your ears.~Touch your wall.~Touch your desk.}
+
+::AEW2-U008-L7-Q11::IMG21 uses picture icons to help make a chant. {=True~False}
+
+::AEW2-U008-L7-Q12::Ready for the chant? Choose the best answer. {=I can say four lines.~I can write a long story.~I can buy a snack.}
+
+::AEW2-U008-W-Q01::In IMG22, Toto finds _____. {=paw prints~a snack~a hat}
+
+::AEW2-U008-W-Q02::Leo, Mia, and Emma are ready to _____. {=move~sleep~shop}
+
+::AEW2-U008-W-Q03::In the Watch, Leo touches his _____. {=head~feet~mouth}
+
+::AEW2-U008-W-Q04::In IMG23, Emma touches her _____. {=nose~feet~hands}
+
+::AEW2-U008-W-Q05::In IMG23, Mia claps her _____. {=hands~nose~feet}
+
+::AEW2-U008-W-Q06::Toto joins the movement game. {=True~False}
+
+::AEW2-U008-W-Q07::Choose the command for Leo. {=Touch your head.~Clap your hands.~Point to your feet.}
+
+::AEW2-U008-W-Q08::Choose the command for Emma. {=Touch your nose.~Wave your arms.~Touch your feet.}
+
+::AEW2-U008-W-Q09::Choose the command for Mia. {=Clap your hands.~Touch your nose.~Point to your eyes.}
+
+::AEW2-U008-W-Q10::Put the Watch actions in order. {=paw prints → touch head → touch nose → clap hands~clap hands → paw prints → touch nose → touch head~touch nose → clap hands → paw prints → touch head}
+
+::AEW2-U008-W-Q11::Choose the best Watch summary. {=Toto starts a move game.~Toto buys a toy.~Toto eats lunch.}
+
+::AEW2-U008-W-Q12::Which line can go in your chant? {=Touch your head.~I want juice.~This is my family.}
+
+::AEW2-U008-P-Q01::Choose four good chant body words. {=head=nose=hands=feet~table~snack}
+
+::AEW2-U008-P-Q02::Choose a good first project line. {=Touch your head.~Read your head.~Eat your head.}
+
+::AEW2-U008-P-Q03::Choose the correct command word. {=Touch your nose.~Touch my nose.~Touch red nose.}
+
+::AEW2-U008-P-Q04::Choose the hand line. {=Clap your hands.~Clap your ears.~Clap your nose.}
+
+::AEW2-U008-P-Q05::Touch your _____. {=head~desk~bag}
+
+::AEW2-U008-P-Q06::Point to your _____. {=feet~book~chair}
+
+::AEW2-U008-P-Q07::Clap your _____. {=hands~nose~legs}
+
+::AEW2-U008-P-Q08::Wave your _____. {=arms~mouth~eyes}
+
+::AEW2-U008-P-Q09::Put the project chant in order. {=head → nose → hands → feet~feet → nose → hands → head~hands → feet → head → nose}
+
+::AEW2-U008-P-Q10::What do you make in this project? {=a movement chant~a snack order~a family tree}
+
+::AEW2-U008-P-Q11::What do you do in the project? {=say and move~write a long story~buy a toy}
+
+::AEW2-U008-P-Q12::Choose the best portfolio evidence. {=I perform my chant.~I count to 20 only.~I draw a room.}
+

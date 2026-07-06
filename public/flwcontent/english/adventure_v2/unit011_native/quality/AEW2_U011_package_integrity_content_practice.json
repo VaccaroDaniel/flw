@@ -1,0 +1,18 @@
+{
+  "unit_id": "AEW2_U011",
+  "unit_type": "normal",
+  "content_files_exist": true,
+  "practice_items": 108,
+  "expected_practice_items": 108,
+  "lesson_sections": 7,
+  "watch_items": 12,
+  "project_items": 12,
+  "teacher_guide_draft": true,
+  "audio_manifest": true,
+  "image_manifest": true,
+  "question_bank_csv": true,
+  "gift_file": true,
+  "final_gate_before_moodle_html": "not_run",
+  "moodle_html_created": false,
+  "status": "CONTENT_PRACTICE_PACKET_READY"
+}

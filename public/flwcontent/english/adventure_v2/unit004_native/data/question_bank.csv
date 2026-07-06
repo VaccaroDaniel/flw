@@ -1,0 +1,109 @@
+id,section,type,prompt,choices,answer,audio_text,kp_tag,image_ref,repair_note
+U4-L1-P01,L1,image_choice,Which action means Listen?,"['ear action', 'eye action', 'voice action']",ear action,,command_recognition,IMG003,Listen uses your ears.
+U4-L1-P02,L1,image_choice,Which action means Look?,"['eye action', 'finger action', 'chair action']",eye action,,command_recognition,IMG003,Look uses your eyes.
+U4-L1-P03,L1,image_choice,Which action means Say?,"['voice action', 'ear action', 'book action']",voice action,,command_recognition,IMG003,Say uses your voice.
+U4-L1-P04,L1,audio_choice,Listen. Choose the command.,"['Listen.', 'Look.', 'Say.']",Listen.,Listen.,command_listening,IMG004,Replay the model and choose the command you hear.
+U4-L1-P05,L1,audio_choice,Listen. Choose the command.,"['Say.', 'Listen.', 'Look.']",Look.,Look.,command_listening,IMG004,Replay the model and choose the command you hear.
+U4-L1-P06,L1,audio_choice,Listen. Choose the command.,"['Look.', 'Say.', 'Listen.']",Say.,Say.,command_listening,IMG004,Replay the model and choose the command you hear.
+U4-L1-P07,L1,meaning_choice,Use your ears.,"['Listen.', 'Look.', 'Say.']",Listen.,,meaning,IMG003,Ears show listen.
+U4-L1-P08,L1,meaning_choice,Use your eyes.,"['Look.', 'Point.', 'Stop.']",Look.,,meaning,IMG003,Eyes show look.
+U4-L1-P09,L1,meaning_choice,Use your voice.,"['Say.', 'Sit down.', 'Write.']",Say.,,meaning,IMG003,Voice shows say.
+U4-L1-P10,L1,sequence_choice,Choose the model order.,"['Listen -> Look -> Say', 'Say -> Sit -> Write', 'Open -> Read -> Goodbye']",Listen -> Look -> Say,,sequence,IMG004,"The first lesson model is listen, look, say."
+U4-L1-P11,L1,polite_choice,Make it polite.,"['Listen, please.', 'Listen book.', 'Please listen book.']","Listen, please.",,politeness,IMG004,Put please after the command.
+U4-L1-P12,L1,project_link,Which command can start your action routine?,"['Listen, please.', 'I like animals.', 'My family is big.']","Listen, please.",,project_readiness,IMG004,Use only Unit 4 commands.
+U4-L2-P01,L2,meaning_choice,Ear icon means...,"['Listen.', 'Look.', 'Point.']",Listen.,,command_recognition,IMG006,Ear means listen.
+U4-L2-P02,L2,meaning_choice,Eyes icon means...,"['Look.', 'Say.', 'Sit down.']",Look.,,command_recognition,IMG006,Eyes mean look.
+U4-L2-P03,L2,meaning_choice,Finger icon means...,"['Point.', 'Listen.', 'Write.']",Point.,,command_recognition,IMG006,Finger means point.
+U4-L2-P04,L2,audio_choice,Listen and choose.,"['Point.', 'Look.', 'Listen.']",Point.,Point.,command_listening,IMG005,The word begins with /p/.
+U4-L2-P05,L2,audio_choice,Listen and choose.,"['Listen.', 'Point.', 'Say.']",Listen.,Listen.,command_listening,IMG005,Listen uses your ears.
+U4-L2-P06,L2,audio_choice,Listen and choose.,"['Look.', 'Write.', 'Stop.']",Look.,Look.,command_listening,IMG005,Look uses your eyes.
+U4-L2-P07,L2,sequence_choice,Choose the trail order.,"['Listen -> Look -> Point', 'Point -> Sit -> Read', 'Look -> Write -> Stop']",Listen -> Look -> Point,,sequence,IMG007,"Follow the trail: listen, look, point."
+U4-L2-P08,L2,action_choice,"Teacher says Point, please. What do you do?","['point to a card', 'close a book', 'sit on a chair']",point to a card,,action_response,IMG005,Point uses your finger.
+U4-L2-P09,L2,repair_choice,You chose Look for an ear icon. Fix it.,"['Listen.', 'Look.', 'Point.']",Listen.,,repair,IMG008,Ear icon means listen.
+U4-L2-P10,L2,polite_choice,Choose the polite command.,"['Point, please.', 'Point now you.', 'Please point book you.']","Point, please.",,politeness,IMG006,Use command plus please.
+U4-L2-P11,L2,contrast_choice,Which two commands are different?,"['Look and Point', 'Look and Look', 'Point and Point']",Look and Point,,contrast,IMG006,Look uses eyes; point uses finger.
+U4-L2-P12,L2,project_link,Choose three safe project actions.,"['Listen, Look, Point', 'Animals, Family, Country', 'Age, Like, Map']","Listen, Look, Point",,project_readiness,IMG007,Use Unit 4 classroom commands.
+U4-L3-P01,L3,meaning_choice,Say it again means...,"['repeat the word', 'close the book', 'stand up']",repeat the word,,repeat_language,IMG010,Again means repeat.
+U4-L3-P02,L3,audio_choice,Listen and choose.,"['Say.', 'Sit down.', 'Read.']",Say.,Say.,command_listening,IMG009,Say uses your voice.
+U4-L3-P03,L3,audio_choice,Listen and choose.,"['Say it again.', 'Open your book.', 'Point.']",Say it again.,Say it again.,repeat_language,IMG009,The model asks for repetition.
+U4-L3-P04,L3,audio_choice,Listen and choose.,"['One more time.', 'Close your book.', 'Stop.']",One more time.,One more time.,repeat_language,IMG010,One more time means repeat once.
+U4-L3-P05,L3,dialogue_order,Choose the best dialogue order.,"['Mia: Hello. -> Emma: Hello. -> Leo: Say it again.', 'Leo: Close book. -> Mia: Family. -> Emma: Map.', 'Toto: Read. -> Teacher: Country. -> Mia: Age.']",Mia: Hello. -> Emma: Hello. -> Leo: Say it again.,,dialogue,IMG009,The lesson is repeat practice.
+U4-L3-P06,L3,response_choice,Teacher says Say hello. What do you say?,"['Hello.', 'Open.', 'Point.']",Hello.,,speaking_response,IMG009,Say hello means use your voice.
+U4-L3-P07,L3,response_choice,Teacher says Say it again. What do you do?,"['repeat the word', 'draw a map', 'close the chair']",repeat the word,,action_response,IMG010,Again means repeat.
+U4-L3-P08,L3,phrase_choice,Choose a repeat phrase.,"['One more time.', 'My country.', 'I like dogs.']",One more time.,,repeat_language,IMG010,One more time is classroom repeat language.
+U4-L3-P09,L3,repair_choice,You did not hear the word. Choose a helpful phrase.,"['Say it again.', 'I am seven.', 'It is a map.']",Say it again.,,repair,IMG010,Ask to hear it again.
+U4-L3-P10,L3,polite_choice,Make it kind.,"['Say it again, please.', 'Say again you.', 'Please again it say.']","Say it again, please.",,politeness,IMG010,Use the fixed polite chunk.
+U4-L3-P11,L3,boundary_choice,Which phrase is too difficult for Unit 4?,"['Can you repeat the instruction for me?', 'Say it again.', 'One more time.']",Can you repeat the instruction for me?,,KP_boundary,IMG010,Unit 4 uses short chunks.
+U4-L3-P12,L3,project_link,Which line can help your recording?,"['Say it again.', 'My sister is ten.', 'I like rabbits.']",Say it again.,,project_readiness,IMG009,Repeat language helps you practise the project.
+U4-L4-P01,L4,image_choice,Choose Stand up.,"['standing child', 'sitting child', 'open book']",standing child,,action_recognition,IMG011,Stand up means body is standing.
+U4-L4-P02,L4,image_choice,Choose Sit down.,"['sitting child', 'pointing child', 'writing child']",sitting child,,action_recognition,IMG012,Sit down means body is seated.
+U4-L4-P03,L4,audio_choice,Listen and choose.,"['Stand up.', 'Sit down.', 'Read.']",Stand up.,Stand up.,command_listening,IMG011,Stand up begins with stand.
+U4-L4-P04,L4,audio_choice,Listen and choose.,"['Sit down.', 'Look.', 'Open your book.']",Sit down.,Sit down.,command_listening,IMG012,Sit down begins with sit.
+U4-L4-P05,L4,contrast_choice,Which pair is correct?,"['Stand up = standing / Sit down = sitting', 'Stand up = reading / Sit down = writing', 'Stand up = open / Sit down = close']",Stand up = standing / Sit down = sitting,,contrast,IMG013,Use the contrast board.
+U4-L4-P06,L4,sequence_choice,Choose the action order.,"['Stand up -> Sit down -> Stop', 'Read -> Map -> Family', 'Point -> Country -> Age']",Stand up -> Sit down -> Stop,,sequence,IMG013,This lesson uses body actions.
+U4-L4-P07,L4,action_choice,"Teacher says Stand up, please. What do you do?","['stand beside the chair', 'close the book', 'write a card']",stand beside the chair,,action_response,IMG011,Stand beside the chair.
+U4-L4-P08,L4,action_choice,"Teacher says Sit down, please. What do you do?","['sit on the chair', 'point to a card', 'say goodbye']",sit on the chair,,action_response,IMG012,Sit on the chair.
+U4-L4-P09,L4,polite_choice,Choose the polite command.,"['Sit down, please.', 'Down sit you.', 'Please down sit.']","Sit down, please.",,politeness,IMG012,Use command plus please.
+U4-L4-P10,L4,true_false,Stand up and sit down are the same action.,"['False', 'True']",False,,contrast,IMG013,They are opposite body actions.
+U4-L4-P11,L4,repair_choice,You mixed up stand and sit. Which image helps?,"['Stand/Sit contrast board', 'Read/Write board', 'Open/Close board']",Stand/Sit contrast board,,repair,IMG013,Use the stand/sit board.
+U4-L4-P12,L4,project_link,Choose two commands for your routine.,"['Stand up, please. Sit down, please.', 'I like cats. I am eight.', 'My country. My map.']","Stand up, please. Sit down, please.",,project_readiness,IMG011,Use body action commands.
+U4-L5-P01,L5,image_choice,Choose Open your book.,"['open book', 'closed book', 'standing child']",open book,,action_recognition,IMG014,Open book shows pages.
+U4-L5-P02,L5,image_choice,Choose Close your book.,"['closed book', 'pointing finger', 'reading eyes']",closed book,,action_recognition,IMG015,Closed book is shut.
+U4-L5-P03,L5,audio_choice,Listen and choose.,"['Open your book.', 'Close your book.', 'Stand up.']",Open your book.,Open your book.,command_listening,IMG014,Open is the action you hear.
+U4-L5-P04,L5,audio_choice,Listen and choose.,"['Close your book.', 'Look.', 'Say it again.']",Close your book.,Close your book.,command_listening,IMG015,Close is the action you hear.
+U4-L5-P05,L5,contrast_choice,Which pair is correct?,"['Open = pages out / Close = book shut', 'Open = sit / Close = stand', 'Open = ear / Close = eyes']",Open = pages out / Close = book shut,,contrast,IMG016,Use the open/close board.
+U4-L5-P06,L5,phrase_completion,Open your ___.,"['book', 'chair', 'voice']",book,,form,IMG014,The fixed chunk is Open your book.
+U4-L5-P07,L5,phrase_completion,Close your ___.,"['book', 'finger', 'eyes']",book,,form,IMG015,The fixed chunk is Close your book.
+U4-L5-P08,L5,polite_choice,Choose the polite command.,"['Open your book, please.', 'Book open please your.', 'Open you book.']","Open your book, please.",,politeness,IMG014,Use command plus please.
+U4-L5-P09,L5,action_choice,Teacher says Close your book. What changes?,"['open pages become shut', 'student stands up', 'student points']",open pages become shut,,action_response,IMG015,Close means shut the book.
+U4-L5-P10,L5,sequence_choice,Choose the classroom order.,"['Open your book -> Read -> Close your book', 'Close -> Country -> Family', 'Sit -> Map -> Animal']",Open your book -> Read -> Close your book,,sequence,IMG016,"Open, read, close is a classroom routine."
+U4-L5-P11,L5,repair_choice,You chose open for a closed book. Fix it.,"['Close your book.', 'Open your book.', 'Listen.']",Close your book.,,repair,IMG016,Closed book means close.
+U4-L5-P12,L5,project_link,Choose one object action for the final routine.,"['Open your book, please.', 'I like apples.', 'My family is here.']","Open your book, please.",,project_readiness,IMG014,Use a classroom object action.
+U4-L6-P01,L6,image_choice,Choose Read.,"['eyes on card', 'pencil on card', 'standing child']",eyes on card,,action_recognition,IMG017,Read uses eyes on a card or book.
+U4-L6-P02,L6,image_choice,Choose Write.,"['pencil on card', 'ear icon', 'closed book']",pencil on card,,action_recognition,IMG018,Write uses a pencil.
+U4-L6-P03,L6,audio_choice,Listen and choose.,"['Read.', 'Write.', 'Stop.']",Read.,Read.,command_listening,IMG017,Read is the command you hear.
+U4-L6-P04,L6,audio_choice,Listen and choose.,"['Write.', 'Look.', 'Sit down.']",Write.,Write.,command_listening,IMG018,Write is the command you hear.
+U4-L6-P05,L6,contrast_choice,Which pair is correct?,"['Read = eyes / Write = pencil', 'Read = chair / Write = dog', 'Read = ear / Write = stand']",Read = eyes / Write = pencil,,contrast,IMG019,Use the notebook board.
+U4-L6-P06,L6,phrase_choice,"Teacher says Read, please. What do you do?","['look at the card/book', 'close your book', 'stand beside chair']",look at the card/book,,action_response,IMG017,Read means look at text or card.
+U4-L6-P07,L6,phrase_choice,"Teacher says Write, please. What do you do?","['use a pencil', 'point to Toto', 'say goodbye']",use a pencil,,action_response,IMG018,Write means use pencil on paper/card.
+U4-L6-P08,L6,polite_choice,Choose the polite command.,"['Write, please.', 'Please writing.', 'You write please it.']","Write, please.",,politeness,IMG018,Short command plus please.
+U4-L6-P09,L6,sequence_choice,Choose a good work order.,"['Read -> Write', 'Write -> Sit -> Country', 'Look -> Animal -> Family']",Read -> Write,,sequence,IMG019,Read before writing is a simple classroom order.
+U4-L6-P10,L6,repair_choice,You mixed up read and write. Which clue helps?,"['eyes for read, pencil for write', 'chair for read, dog for write', 'map for read, country for write']","eyes for read, pencil for write",,repair,IMG019,Eyes and pencil are the key cues.
+U4-L6-P11,L6,copy_choice,Which label can you copy for this lesson?,"['Read.', 'I like animals.', 'My country is big.']",Read.,,writing_support,IMG019,Copy only Unit 4 command labels.
+U4-L6-P12,L6,project_link,Choose a command for your routine.,"['Write, please.', 'I am from Canada.', 'I like cats.']","Write, please.",,project_readiness,IMG018,Use Unit 4 command language.
+U4-L7-P01,L7,review_choice,Choose a Unit 4 command.,"['Listen, please.', 'I like rabbits.', 'My sister is ten.']","Listen, please.",,review,IMG020,Use classroom command language.
+U4-L7-P02,L7,review_choice,Choose a Unit 4 command.,"['Open your book, please.', 'I am from London.', 'I have a cat.']","Open your book, please.",,review,IMG020,Use classroom command language.
+U4-L7-P03,L7,review_choice,Choose a Unit 4 command.,"['Write, please.', 'My favorite color is old.', 'This is my mother.']","Write, please.",,review,IMG020,Use classroom command language.
+U4-L7-P04,L7,sequence_choice,Choose four good project commands.,"['Listen -> Point -> Stand up -> Open your book', 'Family -> Country -> Animal -> Age', 'Map -> Sister -> Like -> Plural']",Listen -> Point -> Stand up -> Open your book,,sequence,IMG020,Final project uses four commands.
+U4-L7-P05,L7,polite_choice,Which line uses please correctly?,"['Stand up, please.', 'Please up stand you.', 'Stand please up your.']","Stand up, please.",,politeness,IMG020,Command plus please.
+U4-L7-P06,L7,project_check,Your routine has three commands. What is missing?,"['one more command', 'a country', 'an animal opinion']",one more command,,project_readiness,IMG022,The project needs four commands.
+U4-L7-P07,L7,project_check,"Your card says Listen, Look, Point, Write. Is it Unit 4 language?","['Yes', 'No']",Yes,,project_readiness,IMG022,All four are Unit 4 commands.
+U4-L7-P08,L7,project_check,Which line is off-scope?,"['I like dogs.', 'Sit down, please.', 'Read, please.']",I like dogs.,,KP_boundary,IMG020,Likes and animals come later.
+U4-L7-P09,L7,repair_choice,You used a long sentence. Choose a shorter Unit 4 line.,"['Read, please.', 'Can you please read the classroom instruction slowly?', 'I am reading because I like books.']","Read, please.",,repair,IMG020,Keep output short at Pre-A1.1.
+U4-L7-P10,L7,speaking_choice,Which line is easy to record clearly?,"['Close your book, please.', 'Could everyone close those books immediately?', 'I close closed closing book.']","Close your book, please.",,speaking,IMG022,Use the fixed model chunk.
+U4-L7-P11,L7,evidence_choice,Choose the complete project evidence.,"['four-card strip + voice/video recording + feedback note', 'one picture only', 'a long grammar table']",four-card strip + voice/video recording + feedback note,,portfolio,IMG022,"Portfolio needs product, recording, and feedback."
+U4-L7-P12,L7,final_gate,Choose the best project script.,"[""Hello. I'm ___. Listen, please. Stand up, please. Sit down, please. Goodbye."", 'Hello. I like dogs. My sister is ten. I live in a big city.', 'This grammar explains imperatives and modal verbs.']","Hello. I'm ___. Listen, please. Stand up, please. Sit down, please. Goodbye.",,project_readiness,IMG022,Keep it short and Unit 4 only.
+U4-WATCH-P01,WATCH,gist_choice,What is the video about?,"['classroom action commands', 'animal likes', 'family names']",classroom action commands,,watch_gist,IMG021,The Watch section reviews classroom commands.
+U4-WATCH-P02,WATCH,detail_choice,The teacher first says...,"['Listen, please.', 'I like animals.', 'What country?']","Listen, please.",,watch_detail,IMG021,"The first line is Listen, please."
+U4-WATCH-P03,WATCH,detail_choice,Leo says...,"['Point, please.', 'Close your family.', 'I am eight.']","Point, please.",,watch_detail,IMG021,"Leo says Point, please."
+U4-WATCH-P04,WATCH,detail_choice,Mia does which action?,"['stands up', 'writes a map', 'counts animals']",stands up,,watch_detail,IMG021,Mia stands up.
+U4-WATCH-P05,WATCH,detail_choice,Emma does which action?,"['sits down', 'opens a country', 'likes a rabbit']",sits down,,watch_detail,IMG021,Emma sits down.
+U4-WATCH-P06,WATCH,detail_choice,The teacher says...,"['Open your book, please.', 'Open your sister, please.', 'Open your animal, please.']","Open your book, please.",,watch_detail,IMG021,The object is book.
+U4-WATCH-P07,WATCH,sequence_choice,Choose the Watch order.,"['Listen -> Look -> Point -> Stand up -> Sit down', 'Read -> Family -> Age -> Country', 'Animal -> Like -> Map -> Sister']",Listen -> Look -> Point -> Stand up -> Sit down,,watch_sequence,IMG021,The video follows the command routine.
+U4-WATCH-P08,WATCH,phrase_completion,Close your ___.,"['book', 'chair', 'voice']",book,,watch_language,IMG021,Close your book is the unit chunk.
+U4-WATCH-P09,WATCH,audio_choice,Listen and choose.,"['Classroom magic!', 'Animal friends!', 'Family tree!']",Classroom magic!,Classroom magic!,watch_listening,IMG021,The video ends with Classroom magic.
+U4-WATCH-P10,WATCH,true_false,The Watch video uses Unit 4 commands.,"['True', 'False']",True,,watch_gist,IMG021,It reviews Unit 4.
+U4-WATCH-P11,WATCH,project_link,Which Watch line can go into your project?,"['Stand up, please.', 'I like cats.', 'My father is tall.']","Stand up, please.",,project_readiness,IMG021,Use Watch language in the project.
+U4-WATCH-P12,WATCH,repair_choice,You missed the order. What should you do?,"['Replay and match each action card.', 'Skip the unit.', 'Add new grammar.']",Replay and match each action card.,,repair,IMG021,Replay supports listening.
+U4-PROJECT-P01,PROJECT,project_choice,Choose the project title.,"['My Classroom Action Recording', 'My Animal Poster', 'My Family Tree']",My Classroom Action Recording,,project_identity,IMG022,Unit 4 project is action recording.
+U4-PROJECT-P02,PROJECT,project_choice,How many commands do you need?,"['four', 'one', 'ten long sentences']",four,,project_requirements,IMG022,The project requires four commands.
+U4-PROJECT-P03,PROJECT,script_choice,Choose a good opening.,"[""Hello. I'm ___."", 'I like three rabbits.', 'This is a country map.']",Hello. I'm ___.,,review,IMG022,Use Unit 1 review opening.
+U4-PROJECT-P04,PROJECT,script_choice,Choose a good command.,"['Listen, please.', 'I am from Russia.', 'My brother is seven.']","Listen, please.",,project_language,IMG022,Use a Unit 4 command.
+U4-PROJECT-P05,PROJECT,script_choice,Choose a good command.,"['Open your book, please.', 'I like bananas.', 'This is my mother.']","Open your book, please.",,project_language,IMG022,Use a Unit 4 command.
+U4-PROJECT-P06,PROJECT,script_choice,Choose a good ending.,"['Goodbye.', 'My phone number is five.', 'The imperative mood is simple.']",Goodbye.,,review,IMG022,Use Unit 1 review ending.
+U4-PROJECT-P07,PROJECT,evidence_choice,What should you submit?,"['action card image and recording', 'only a grammar note', 'only a map']",action card image and recording,,portfolio,IMG022,Project evidence needs card plus recording.
+U4-PROJECT-P08,PROJECT,checker_choice,What does the checker listen for?,"['clear command words', 'long grammar explanation', 'country names']",clear command words,,ai_checker,IMG022,The checker focuses on clear command words.
+U4-PROJECT-P09,PROJECT,checker_choice,What does the checker compare?,"['spoken command and action card', 'animal and color', 'country and family']",spoken command and action card,,ai_checker,IMG022,Your action should match your command.
+U4-PROJECT-P10,PROJECT,repair_choice,Your recording has no please. What do you add?,"['please after each command', 'a long story', 'a country name']",please after each command,,repair,IMG022,Add please to make it polite.
+U4-PROJECT-P11,PROJECT,repair_choice,Your recording uses I like dogs. What do you do?,"['replace it with a Unit 4 command', 'keep it for Unit 4', 'add more animal words']",replace it with a Unit 4 command,,KP_boundary,IMG022,Animals and likes are not Unit 4.
+U4-PROJECT-P12,PROJECT,final_self_check,Choose the complete final script.,"[""Hello. I'm ___. Listen, please. Look, please. Stand up, please. Open your book, please. Goodbye."", 'Hello. I like animals. My sister is ten. My country is big. Goodbye.', 'This is a full grammar explanation of commands.']","Hello. I'm ___. Listen, please. Look, please. Stand up, please. Open your book, please. Goodbye.",,project_gate,IMG022,Use review greeting plus four Unit 4 commands.

@@ -1,0 +1,14 @@
+{
+  "unit": "AEW2_U010",
+  "revision": "v2_ui_refined_audio_practice_clean_larger_lesson_images",
+  "checks": {
+    "index_html_exists": true,
+    "teacher_guide_exists": true,
+    "practice_items_expected": 108,
+    "practice_metadata_hidden_from_learner": true,
+    "audio_placeholders_icon_only_in_index": true,
+    "lesson_images_enlarged_css": true,
+    "wrong_answer_try_again_correct_answer_preserved": true
+  },
+  "timestamp_utc": "2026-07-01T10:34:52Z"
+}

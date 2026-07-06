@@ -1,0 +1,125 @@
+Adventure English World V2 - Unit 4 Classroom Magic
+Complete Image Prompts
+
+Reference character image:
+D:/Downloads/01-Adventure character.png
+
+Global style lock for all images:
+Semi-realistic modern children/teen Adventure English coursebook style, warm and polished, not too cartoon-like, bright but not childish, clean classroom-adventure atmosphere. Keep the recurring characters consistent with the reference identity card: Leo is an Asian boy with black hair, round glasses, green top, neat school-adventure look; Mia has long brown hair and a yellow cardigan; Emma has blonde hair, purple outfit, purple headband; Toto is a small brown-and-white playful dog with a small name tag. Characters are about 7-8 years old for Pre-A1.1. Use soft warm lighting, rounded coursebook composition, functional learning visuals, readable gestures, and clear action poses.
+
+Global negative prompt for all images:
+No jeans, no denim, no short skirts, no striped skirts, no loose trousers, no revealing clothing, no political symbols, no religious promotion, no slogans, no central flags, no violence, no adult content, no distracting logos, no geography map content, no country references, no messy classroom clutter, no cropped faces, no distorted hands, no unreadable random text, no extra recurring characters replacing Leo/Mia/Emma/Toto.
+
+Text-in-image rule:
+Avoid readable embedded text in generated images unless specifically requested. Leave clean blank label spaces for HTML overlays. All important words must be repeated in HTML.
+
+Image 01 - AEW2-U004-IMG-001 - Cover
+Aspect ratio: 16:9
+Prompt:
+Create a polished cover image for "Adventure English World V2 Unit 4 Classroom Magic." Leo, Mia, Emma, and Toto stand in a warm adventure classroom. A friendly magic command board glows softly behind them with icon-only action cards for listening, looking, pointing, standing, sitting, opening a book, reading, and writing. Leo holds a small book and smiles; Mia waves near a yellow action card; Emma gives a cheerful thumbs-up; Toto sits playfully beside a small stack of command cards. Leave a clean top area for the HTML title overlay. No readable text inside the image.
+
+Image 02 - AEW2-U004-IMG-002 - Unit Opener Anchor Scene
+Aspect ratio: 16:9
+Prompt:
+Create the opener scene for Unit 4 Classroom Magic. In the same warm adventure classroom, a friendly teacher/adventure guide appears as a secondary adult figure at the side, pointing to a glowing command board. Leo, Mia, Emma, and Toto look excited and ready to follow classroom instructions. The board has three large icon cards only: an ear for listen, eyes for look, and a speech bubble for say. Keep the teacher secondary; the main focus is Leo, Mia, Emma, and Toto. No readable text.
+
+Image 03 - AEW2-U004-IMG-003 - First Command Board
+Aspect ratio: 4:3
+Prompt:
+Create a functional vocabulary-board image with three large rounded action cards on a classroom table: listen, look, and say. Use icon-only cards: ear, eyes, and speech bubble. Leo, Mia, and Emma are partly visible around the table, smiling and pointing at the cards. Leave blank label space below each card for HTML text. No readable text in the image.
+
+Image 04 - AEW2-U004-IMG-004 - First Classroom Action Scene
+Aspect ratio: 16:9
+Prompt:
+Create a classroom action scene for Lesson 1. The teacher points to the magic command board while Leo touches one ear to show listening, Mia looks carefully at the board, and Emma prepares to say a word. Toto watches with a playful curious expression. The scene must clearly show three actions: listen, look, say. No readable text. Keep the composition simple and easy for young learners to understand.
+
+Image 05 - AEW2-U004-IMG-005 - Listen Look Point Action Circle
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 2 anchor scene. Leo, Mia, and Emma stand in a small action circle on a clean classroom rug. Leo cups his hand near his ear to listen, Mia looks toward a bright card, Emma points to a card, and Toto sits in the middle watching. The action difference must be visually obvious. No readable text. Use warm classroom-adventure colors.
+
+Image 06 - AEW2-U004-IMG-006 - Listen Look Point Icon Board
+Aspect ratio: 4:3
+Prompt:
+Create a clean three-panel icon board for listen, look, and point. Panel 1 has an ear icon and Leo listening. Panel 2 has eye icons and Mia looking. Panel 3 has a pointing hand icon and Emma pointing. Use blank label strips below each panel for HTML labels. No readable text. Keep all panels balanced and not crowded.
+
+Image 07 - AEW2-U004-IMG-007 - Three-Step Command Trail
+Aspect ratio: 16:9
+Prompt:
+Create a three-step classroom command trail on the floor, like a small adventure path. Step 1 shows Leo listening, Step 2 shows Mia looking, Step 3 shows Emma pointing. Toto follows the trail with a small paw print path. The path should feel playful but educational. Use simple number icons only if needed; avoid readable text.
+
+Image 08 - AEW2-U004-IMG-008 - Repair Icon Board
+Aspect ratio: 4:3
+Prompt:
+Create a repair support image: a clean board with three large icons only: ear, eyes, pointing finger. Add a small cheerful Toto sticker in the corner. The image should be simple, uncluttered, and useful for wrong-answer repair. Leave blank spaces for HTML labels. No readable text.
+
+Image 09 - AEW2-U004-IMG-009 - Say It Again Dialogue Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 3 dialogue scene. Mia says a classroom word into a soft speech bubble, Emma repeats it with a happy expression, and Leo listens carefully with his book. Toto sits beside them. The visual focus is repeating language, not reading a long text. Use blank speech bubbles only; no readable text. Make the scene warm, cooperative, and clear.
+
+Image 10 - AEW2-U004-IMG-010 - Repeat Expression Board
+Aspect ratio: 4:3
+Prompt:
+Create a board with three large blank speech-bubble cards for repeat language. The cards represent "Say," "Say it again," and "One more time," but do not include readable text. Add small supportive character poses: Leo speaking, Mia repeating, Emma smiling. Leave clean label areas for HTML overlay. No readable text.
+
+Image 11 - AEW2-U004-IMG-011 - Stand Up Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 4 action scene for "Stand up." Leo, Mia, and Emma stand safely beside classroom chairs, smiling and following the teacher's command. Toto stands on all four paws beside them in a playful way. The classroom should be tidy and warm. The action must be clear at first glance. No readable text.
+
+Image 12 - AEW2-U004-IMG-012 - Sit Down Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 4 action scene for "Sit down." Leo, Mia, and Emma sit safely on classroom chairs with good posture. Toto sits on the floor near them. Show a calm classroom moment after the action. The image should contrast clearly with the stand-up image. No readable text.
+
+Image 13 - AEW2-U004-IMG-013 - Stand Sit Contrast Board
+Aspect ratio: 4:3
+Prompt:
+Create a two-panel contrast board. Left panel: a child standing beside a chair. Right panel: a child sitting on a chair. Use Leo on the left and Emma on the right, with Toto as a small helper icon. Leave blank label strips below both panels for HTML overlays. No readable text. The difference between stand up and sit down must be obvious.
+
+Image 14 - AEW2-U004-IMG-014 - Open Your Book Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 5 action scene for "Open your book." Leo opens an adventure classroom book on a desk while Mia watches and smiles. The book pages should be mostly blank or show simple non-readable shapes. No readable text on the book. The action of opening must be clear. Warm classroom light, neat desk.
+
+Image 15 - AEW2-U004-IMG-015 - Close Your Book Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 5 action scene for "Close your book." Emma gently closes a book on a desk, and Toto looks at the closing book with curiosity. The closed book should be clearly different from the open-book image. No readable text. The visual should support an open/close contrast activity.
+
+Image 16 - AEW2-U004-IMG-016 - Open Close Contrast Board
+Aspect ratio: 4:3
+Prompt:
+Create a clean two-panel classroom object board for open and close. Left panel shows an open book with a small hand gesture. Right panel shows a closed book with a small hand gesture. Add tiny Leo and Mia helper badges, but keep the board functional. Leave blank label strips. No readable text.
+
+Image 17 - AEW2-U004-IMG-017 - Read Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 6 scene for "Read." Emma reads a simple classroom action card while Mia listens. The card should have a blank area or simple icon only, no readable text. Leo is in the background with a book. The scene must make reading visually clear and calm. No readable text.
+
+Image 18 - AEW2-U004-IMG-018 - Write Scene
+Aspect ratio: 16:9
+Prompt:
+Create a Lesson 6 scene for "Write." Leo writes on a classroom action card with a pencil while Toto watches from the side. Mia and Emma can be in the background organizing cards. The card should not show readable writing; use blank lines or simple marks. The action of writing must be clear. No readable text.
+
+Image 19 - AEW2-U004-IMG-019 - Read Write Notebook Board
+Aspect ratio: 4:3
+Prompt:
+Create a notebook-style action board with two large panels: one for reading and one for writing. Left panel shows an open card/book with eyes; right panel shows pencil and card. Add small character stickers of Emma reading and Leo writing. Leave blank label strips for HTML text. No readable text. Clean, readable, and not crowded.
+
+Image 20 - AEW2-U004-IMG-020 - Classroom Magic Mission Board
+Aspect ratio: 16:9
+Prompt:
+Create the Lesson 7 mission board. Leo, Mia, Emma, and Toto stand around a large classroom mission board with six icon-only action cards: listen, look, point, stand up, sit down, open book, close book, read, write. Arrange the icons as a simple selectable mission path. Use blank label areas for HTML overlay. No readable text. The image should feel like a final rehearsal for the unit.
+
+Image 21 - AEW2-U004-IMG-021 - Watch Frame
+Aspect ratio: 16:9
+Prompt:
+Create a Watch video thumbnail/frame for "The Magic Action Class." Teacher/adventure guide stands at the side pointing to the command board; Leo listens, Mia stands up, Emma opens a book, and Toto sits near the board. The image should look like a still frame from an educational video. Leave a clean bottom or side area for a play button overlay. No readable text.
+
+Image 22 - AEW2-U004-IMG-022 - Final Project Model
+Aspect ratio: 16:9
+Prompt:
+Create the final project model image for "My Classroom Action Recording." A tablet or recording device is on a desk beside four blank classroom action cards. Leo, Mia, and Emma prepare to record a short command routine; Toto sits beside the cards. The action cards should show icons only and blank label spaces. The image must clearly support the final portfolio task: choose commands, say them, act them out, record. No readable text.
+

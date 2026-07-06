@@ -1,0 +1,21 @@
+image_id,status,geography_visuals,denim,love_like_text,extra_characters,notes
+IMG001,PASS,none observed,none observed,none observed,none observed,Cover; generated image
+IMG002,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG003,PASS,none observed,none observed,none observed,none observed,L1 color card support
+IMG004,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Clean replacement support board generated for missing overwritten asset
+IMG005,PASS,none observed,none observed,none observed,none observed,Tabletop 10 colors
+IMG006,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG007,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG008,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG009,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG010,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG011,PASS,none observed,none observed,none observed,none observed,Color clue hunt
+IMG012,PASS,none observed,none observed,none observed,none observed,Leo red clue
+IMG013,PASS,none observed,none observed,none observed,none observed,Blue/yellow/green story
+IMG014,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Clean replacement review board generated for missing overwritten asset
+IMG015,PASS,none observed,none observed,none observed,none observed,Color sorting baskets
+IMG016,PASS_WITH_PATCH,removed/covered,none observed,none observed,none observed,Auto-patched: geography prop covered
+IMG017,PASS_WITH_PATCH,removed/covered,none observed,removed/covered,none observed,Auto-patched: geography and love/like text covered
+IMG018,PASS_WITH_PATCH,removed/covered,none observed,removed/covered,none observed,Auto-patched: love/like text covered
+IMG019,PASS_WITH_PATCH,removed/covered,none observed,removed/covered,none observed,Auto-patched: geography and love/like text covered
+IMG020,PASS_WITH_PATCH,removed/covered,none observed,removed/covered,none observed,Auto-patched: geography and love/like text covered; side poster simplified

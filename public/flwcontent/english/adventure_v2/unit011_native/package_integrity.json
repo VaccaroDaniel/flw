@@ -1,0 +1,37 @@
+{
+  "unit_id": "AEW2_U011",
+  "course": "Adventure English World V2",
+  "title": "Weather Window",
+  "unit_type": "normal",
+  "level": "Pre-A1.2",
+  "status": "PASS",
+  "contents": {
+    "index_html": true,
+    "teacher_guide_html": true,
+    "images": 20,
+    "video_mp4": true,
+    "video_vtt": true,
+    "question_bank_csv": true,
+    "question_bank_gift": true,
+    "audio_manifest": true,
+    "image_manifest": true,
+    "video_manifest": true,
+    "cefr_kp_map": true,
+    "lexical_map": true,
+    "repair_path": true,
+    "portfolio_evidence_map": true
+  },
+  "practice": {
+    "total": 108,
+    "three_items_per_page": true,
+    "wrong_answer_buttons_only_after_wrong_check": true,
+    "choice_letters_removed": true
+  },
+  "ui": {
+    "study_model_yourturn_side_by_side": true,
+    "watch_lines_no_time_bands": true,
+    "cover_no_plus_button": true
+  },
+  "final_gate": "PASS",
+  "timestamp": "2026-07-02T03:20:48"
+}

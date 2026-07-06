@@ -1,0 +1,94 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_videotime/tabs
+
+    This template for tab panel
+
+    Variables required for this template:
+    * tabs - tabs with  content
+
+    Variables optional for this template:
+    * active - whether link is styled as active
+    * persistent - whether content is retained when tab is inactive
+
+    Example context (json):
+    {
+        "tabs": [
+            {
+                "active": true,
+                "name": "watch",
+                "label": "Watch",
+                "persistent": true,
+                "tabcontent": "<div class=\"videotime-small-view\">\"UX design tips\"</div>"
+            },
+            {
+                "active": false,
+                "name": "info",
+                "label": "Information",
+                "tabcontent": "<p>Hello World</p>"
+            }
+        ]
+    }
+
+}}
+    <div class="instance-container videotime-small-view mb-2"></div>
+    <ul class="nav nav-tabs nav-pills nav-justified" id="videotimetabs-{{ id }}" role="tablist">
+        {{#tabs}}
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link {{#active}}active{{/active}}"
+                    id="{{name}}-{{id}}-tab"
+                    data-bs-toggle="tab"
+                    data-toggle="tab"
+                    data-bs-target="#{{name}}-{{id}}"
+                    href="#{{name}}-{{id}}"
+                    role="tab"
+                    aria-controls="{{name}}-{{id}}"
+                    aria-selected="{{# active }}true{{/ active }}{{^ active }}false{{/ active }}"
+                >{{{label}}}</a>
+            </li>
+        {{/tabs}}
+    </ul>
+    <div class="tab-content">
+        {{#tabs}}
+            {{^persistent}}
+                <div class="tab-pane mt-3 fade {{#active}}show active{{/active}}" id="{{name}}-{{id}}" role="tabpanel" aria-labelledby="{{name}}-{{id}}-tab">
+                    <div class="" style="display: flex">
+                        <div class="videotimetab-resize {{ panelclass }}">
+                            {{{tabcontent}}}
+                        </div>
+                        <div class="videotimetab-resize-handle" draggable="true"></div>
+                        <div class="instance-container videotime-large-view" style="flex-grow: 1"></div>
+                    </div>
+                </div>
+            {{/persistent}}
+            {{#persistent}}
+                <div class="tab-pane mt-3 fade persistent-tab {{#active}}show active{{/active}}" id="{{name}}-{{id}}" role="tabpanel" aria-labelledby="{{name}}-{{id}}-tab">
+                    <div class="instance-container videotime-large-view"></div>
+                    <div class="">
+                        {{{tabcontent}}}
+                    </div>
+                </div>
+            {{/persistent}}
+        {{/tabs}}
+    </div>
+{{# js }}
+    require(['mod_videotime/resize_tab_player'], function(TabResizer) {
+        TabResizer.initialize();
+    });
+{{/ js }}

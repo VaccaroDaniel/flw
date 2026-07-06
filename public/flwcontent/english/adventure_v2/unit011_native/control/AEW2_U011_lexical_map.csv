@@ -1,0 +1,34 @@
+item_id,category,item,language,script_form,pronunciation,cefr_band,unit_introduced,active_receptive_review,domain,grammar_link,register,collocation_expression,review_units,checkpoint_tested,portfolio_required,repair_note
+U011-ACT-WEATHER-01,Active Words,sunny,English,sunny,placeholder audio,Pre-A1.2,11,active,weather,,neutral/friendly,,Unit 12 checkpoint,Unit 12,yes,weather picture review
+U011-ACT-WEATHER-02,Active Words,rainy,English,rainy,placeholder audio,Pre-A1.2,11,active,weather,,neutral/friendly,,Unit 12 checkpoint,Unit 12,yes,weather picture review
+U011-ACT-WEATHER-03,Active Words,windy,English,windy,placeholder audio,Pre-A1.2,11,active,weather,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,weather picture review
+U011-ACT-WEATHER-04,Active Words,cloudy,English,cloudy,placeholder audio,Pre-A1.2,11,active,weather,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,weather picture review
+U011-ACT-CLOTHES-01,Active Words,coat,English,coat,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,clothes picture review
+U011-ACT-CLOTHES-02,Active Words,hat,English,hat,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,yes,clothes picture review
+U011-ACT-CLOTHES-03,Active Words,boots,English,boots,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,yes,clothes picture review
+U011-ACT-CLOTHES-04,Active Words,T-shirt,English,T-shirt,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,clothes picture review
+U011-ACT-CLOTHES-05,Active Words,shoes,English,shoes,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,clothes picture review
+U011-ACT-CLOTHES-06,Active Words,umbrella,English,umbrella,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,yes,clothes picture review
+U011-ACT-CLOTHES-07,Active Words,jacket,English,jacket,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,clothes picture review
+U011-ACT-CLOTHES-08,Active Words,sweater,English,sweater,placeholder audio,Pre-A1.2,11,active,clothes,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,clothes picture review
+U011-CHK-01,Expressions / Chunks,It's sunny.,English,It's sunny.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-02,Expressions / Chunks,It's rainy.,English,It's rainy.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-03,Expressions / Chunks,It's windy.,English,It's windy.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-04,Expressions / Chunks,It's cloudy.,English,It's cloudy.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-05,Expressions / Chunks,Choose a hat.,English,Choose a hat.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-06,Expressions / Chunks,Choose boots.,English,Choose boots.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-07,Expressions / Chunks,Choose an umbrella.,English,Choose an umbrella.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-CHK-08,Expressions / Chunks,Choose a coat.,English,Choose a coat.,placeholder audio,Pre-A1.2,11,active,weather/clothes,fixed chunk,neutral/friendly,chunk,Unit 12 checkpoint,Unit 12,yes,repeat chunk with picture
+U011-REC-01,Receptive Words,window,English,window,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REC-02,Receptive Words,weather,English,weather,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REC-03,Receptive Words,friend,English,friend,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REC-04,Receptive Words,card,English,card,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REC-05,Receptive Words,choose,English,choose,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REC-06,Receptive Words,look,English,look,placeholder audio,Pre-A1.2,11,receptive,classroom/project,,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,support with picture
+U011-REV-01,Review Words,hello,English,hello,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-02,Review Words,I'm,English,I'm,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-03,Review Words,How many?,English,How many?,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-04,Review Words,Where is?,English,Where is?,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-05,Review Words,Touch your,English,Touch your,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-06,Review Words,"I want ..., please",English,"I want ..., please",placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review
+U011-REV-07,Review Words,This is my,English,This is my,placeholder audio,Pre-A1.2,11,review,spiral review,review from Units 1-10,neutral/friendly,,Unit 12 checkpoint,Unit 12,no,spiral review

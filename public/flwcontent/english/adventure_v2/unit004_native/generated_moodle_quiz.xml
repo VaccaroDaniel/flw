@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P01 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which action means Listen?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[ear action]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[eye action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[voice action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P02 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which action means Look?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[eye action]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[finger action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[chair action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P03 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which action means Say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[voice action]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[ear action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[book action]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P04 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P05 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P06 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen. Choose the command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P07 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Use your ears.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P08 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Use your eyes.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stop.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P09 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Use your voice.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P10 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the model order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen -> Look -> Say]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say -> Sit -> Write]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open -> Read -> Goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P11 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Make it polite.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please listen book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L1-P12 L1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which command can start your action routine?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L1-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like animals.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My family is big.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P01 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Ear icon means...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P02 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Eyes icon means...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P03 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Finger icon means...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P04 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P05 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P06 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stop.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P07 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the trail order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen -> Look -> Point]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point -> Sit -> Read]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look -> Write -> Stop]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P08 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Point, please. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[point to a card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[close a book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sit on a chair]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P09 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[You chose Look for an ear icon. Fix it.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P10 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the polite command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Point, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point now you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please point book you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P11 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Which two commands are different?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Look and Point]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look and Look]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point and Point]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L2-P12 L2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose three safe project actions.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L2-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, Look, Point]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Animals, Family, Country]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Age, Like, Map]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P01 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Say it again means...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[repeat the word]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[close the book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[stand up]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P02 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P03 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say it again.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open your book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P04 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[One more time.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Close your book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stop.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P05 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best dialogue order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Mia: Hello. -> Emma: Hello. -> Leo: Say it again.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Leo: Close book. -> Mia: Family. -> Emma: Map.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto: Read. -> Teacher: Country. -> Mia: Age.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P06 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Say hello. What do you say?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P07 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Say it again. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[repeat the word]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[draw a map]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[close the chair]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P08 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a repeat phrase.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[One more time.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My country.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like dogs.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P09 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[You did not hear the word. Choose a helpful phrase.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say it again.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am seven.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is a map.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P10 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Make it kind.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say it again, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say again you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please again it say.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P11 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Which phrase is too difficult for Unit 4?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Can you repeat the instruction for me?]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say it again.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[One more time.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L3-P12 L3]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line can help your recording?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L3-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Say it again.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My sister is ten.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like rabbits.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P01 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Stand up.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[standing child]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sitting child]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[open book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P02 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Sit down.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sitting child]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pointing child]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[writing child]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P03 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P04 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open your book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P05 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Which pair is correct?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up = standing / Sit down = sitting]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stand up = reading / Sit down = writing]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stand up = open / Sit down = close]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P06 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the action order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up -> Sit down -> Stop]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read -> Map -> Family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Point -> Country -> Age]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P07 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Stand up, please. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[stand beside the chair]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[close the book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[write a card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P08 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Sit down, please. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sit on the chair]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[point to a card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[say goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P09 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the polite command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Sit down, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Down sit you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please down sit.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P10 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Stand up and sit down are the same action.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P11 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[You mixed up stand and sit. Which image helps?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand/Sit contrast board]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read/Write board]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open/Close board]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L4-P12 L4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose two commands for your routine.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L4-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up, please. Sit down, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like cats. I am eight.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My country. My map.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P01 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Open your book.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[open book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[closed book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[standing child]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P02 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Close your book.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[closed book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pointing finger]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[reading eyes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P03 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Close your book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stand up.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P04 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Close your book.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say it again.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P05 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Which pair is correct?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open = pages out / Close = book shut]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open = sit / Close = stand]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open = ear / Close = eyes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P06 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Open your ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[chair]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P07 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Close your ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[finger]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[eyes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P08 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the polite command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Book open please your.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open you book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P09 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Close your book. What changes?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[open pages become shut]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[student stands up]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[student points]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P10 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the classroom order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book -> Read -> Close your book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Close -> Country -> Family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit -> Map -> Animal]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P11 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[You chose open for a closed book. Fix it.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Close your book.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open your book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L5-P12 L5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose one object action for the final routine.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L5-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like apples.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My family is here.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P01 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Read.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[eyes on card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[pencil on card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[standing child]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P02 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose Write.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[pencil on card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[ear icon]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[closed book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P03 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Read.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stop.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P04 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Write.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P05 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which pair is correct?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Read = eyes / Write = pencil]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read = chair / Write = dog]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read = ear / Write = stand]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P06 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Read, please. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[look at the card/book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[close your book]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[stand beside chair]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P07 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Teacher says Write, please. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[use a pencil]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[point to Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[say goodbye]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P08 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the polite command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Write, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please writing.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[You write please it.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P09 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good work order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Read -> Write]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Write -> Sit -> Country]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look -> Animal -> Family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P10 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[You mixed up read and write. Which clue helps?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[eyes for read, pencil for write]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[chair for read, dog for write]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[map for read, country for write]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P11 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which label can you copy for this lesson?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Read.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like animals.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My country is big.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L6-P12 L6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a command for your routine.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L6-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Write, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am from Canada.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like cats.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P01 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a Unit 4 command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like rabbits.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My sister is ten.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P02 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a Unit 4 command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am from London.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I have a cat.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P03 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a Unit 4 command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Write, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My favorite color is old.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mother.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P04 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose four good project commands.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen -> Point -> Stand up -> Open your book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Family -> Country -> Animal -> Age]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Map -> Sister -> Like -> Plural]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P05 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line uses please correctly?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Please up stand you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Stand please up your.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P06 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Your routine has three commands. What is missing?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[one more command]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a country]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[an animal opinion]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P07 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Your card says Listen, Look, Point, Write. Is it Unit 4 language?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Yes]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[No]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P08 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line is off-scope?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I like dogs.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Sit down, please.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read, please.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P09 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[You used a long sentence. Choose a shorter Unit 4 line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Read, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Can you please read the classroom instruction slowly?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am reading because I like books.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P10 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line is easy to record clearly?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Close your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Could everyone close those books immediately?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I close closed closing book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P11 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the complete project evidence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[four-card strip + voice/video recording + feedback note]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one picture only]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a long grammar table]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-L7-P12 L7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best project script.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-L7-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I'm ___. Listen, please. Stand up, please. Sit down, please. Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello. I like dogs. My sister is ten. I live in a big city.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This grammar explains imperatives and modal verbs.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P01 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[What is the video about?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[classroom action commands]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[animal likes]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[family names]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P02 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[The teacher first says...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like animals.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[What country?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P03 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Leo says...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Point, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Close your family.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am eight.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P04 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Mia does which action?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[stands up]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[writes a map]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[counts animals]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P05 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Emma does which action?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sits down]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[opens a country]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[likes a rabbit]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P06 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[The teacher says...]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open your sister, please.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open your animal, please.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P07 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the Watch order.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen -> Look -> Point -> Stand up -> Sit down]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Read -> Family -> Age -> Country]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Animal -> Like -> Map -> Sister]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P08 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Close your ___.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[book]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[chair]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[voice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P09 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Listen and choose.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Classroom magic!]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Animal friends!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Family tree!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P10 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[The Watch video uses Unit 4 commands.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P11 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[Which Watch line can go into your project?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Stand up, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like cats.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My father is tall.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-WATCH-P12 WATCH]]></text></name>
+<questiontext format="html"><text><![CDATA[You missed the order. What should you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-WATCH-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Replay and match each action card.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Skip the unit.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Add new grammar.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P01 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the project title.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[My Classroom Action Recording]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Animal Poster]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My Family Tree]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P02 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[How many commands do you need?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[four]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[ten long sentences]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P03 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good opening.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I'm ___.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like three rabbits.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is a country map.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P04 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Listen, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am from Russia.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My brother is seven.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P05 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good command.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Open your book, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I like bananas.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my mother.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P06 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good ending.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My phone number is five.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The imperative mood is simple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P07 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[What should you submit?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[action card image and recording]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[only a grammar note]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[only a map]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P08 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[What does the checker listen for?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[clear command words]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[long grammar explanation]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[country names]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P09 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[What does the checker compare?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[spoken command and action card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[animal and color]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[country and family]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P10 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Your recording has no please. What do you add?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[please after each command]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a long story]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a country name]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P11 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Your recording uses I like dogs. What do you do?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[replace it with a Unit 4 command]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[keep it for Unit 4]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[add more animal words]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[U4-PROJECT-P12 PROJECT]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the complete final script.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[U4-PROJECT-P12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello. I'm ___. Listen, please. Look, please. Stand up, please. Open your book, please. Goodbye.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello. I like animals. My sister is ten. My country is big. Goodbye.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is a full grammar explanation of commands.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+</quiz>

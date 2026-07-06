@@ -1,0 +1,104 @@
+[
+  {
+    "index": 1,
+    "file": "adventure_unit011_audio_001.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Unit Story"
+  },
+  {
+    "index": 2,
+    "file": "adventure_unit011_audio_002.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Look at the weather window. Point to the weather. Say one word: sunny, rainy, windy, or cloudy."
+  },
+  {
+    "index": 3,
+    "file": "adventure_unit011_audio_003.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "sunny rainy windy cloudy"
+  },
+  {
+    "index": 4,
+    "file": "adventure_unit011_audio_004.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Look outside. Use the chunk It's ... with sunny or rainy."
+  },
+  {
+    "index": 5,
+    "file": "adventure_unit011_audio_005.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "It's sunny. It's rainy."
+  },
+  {
+    "index": 6,
+    "file": "adventure_unit011_audio_006.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Look for moving leaves for windy. Look for many clouds for cloudy."
+  },
+  {
+    "index": 7,
+    "file": "adventure_unit011_audio_007.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "It's windy. It's cloudy."
+  },
+  {
+    "index": 8,
+    "file": "adventure_unit011_audio_008.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Look at the clothes. Point and say one clothes word."
+  },
+  {
+    "index": 9,
+    "file": "adventure_unit011_audio_009.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "coat hat boots T-shirt shoes umbrella jacket sweater"
+  },
+  {
+    "index": 10,
+    "file": "adventure_unit011_audio_010.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Look at the weather. Choose one or two clothes items."
+  },
+  {
+    "index": 11,
+    "file": "adventure_unit011_audio_011.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Sunny day: choose a hat. Rainy day: choose boots. Rainy day: choose an umbrella."
+  },
+  {
+    "index": 12,
+    "file": "adventure_unit011_audio_012.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "A friend looks at the weather. Help with one short choice."
+  },
+  {
+    "index": 13,
+    "file": "adventure_unit011_audio_013.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "It's rainy. Choose boots. It's sunny. Choose a hat. It's windy. Choose a jacket."
+  },
+  {
+    "index": 14,
+    "file": "adventure_unit011_audio_014.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "A weather choice card has one weather picture and matching clothes pictures."
+  },
+  {
+    "index": 15,
+    "file": "adventure_unit011_audio_015.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "It's rainy. Choose boots. Choose an umbrella. It's sunny. Choose a hat."
+  },
+  {
+    "index": 16,
+    "file": "adventure_unit011_audio_016.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Leo opens the Weather Window. Mia sees the sun. It's sunny. Emma sees rain. It's rainy. Toto watches leaves move. It's windy. The team sees big clouds. It's cloudy. Leo chooses a hat for a sunny day. Mia chooses boots and an umbrella for a rainy day. Emma chooses a sweater for a cloudy day. The team helps a friend choose clothes. Now it is your turn: make a Weather Choice Card."
+  },
+  {
+    "index": 17,
+    "file": "adventure_unit011_audio_017.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "It's rainy. Choose boots. It's sunny. Choose a hat."
+  }
+]

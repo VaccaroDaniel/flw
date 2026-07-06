@@ -1,0 +1,572 @@
+[
+  {
+    "filename": "aew8_0_head_0d580086a1.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "head",
+    "raw": "head"
+  },
+  {
+    "filename": "aew8_1_eyes_260faf70d4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "eyes",
+    "raw": "eyes"
+  },
+  {
+    "filename": "aew8_2_ears_b12a5d5db4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "ears",
+    "raw": "ears"
+  },
+  {
+    "filename": "aew8_3_nose_aff6ff3244.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "nose",
+    "raw": "nose"
+  },
+  {
+    "filename": "aew8_4_mouth_0616b93d20.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "mouth",
+    "raw": "mouth"
+  },
+  {
+    "filename": "aew8_5_hands_4f2d19d6d2.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "hands",
+    "raw": "hands"
+  },
+  {
+    "filename": "aew8_6_arms_957338533f.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "arms",
+    "raw": "arms"
+  },
+  {
+    "filename": "aew8_7_legs_6a219b7c3e.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "legs",
+    "raw": "legs"
+  },
+  {
+    "filename": "aew8_8_feet_a0813461be.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "feet",
+    "raw": "feet"
+  },
+  {
+    "filename": "aew8_9_touch_your_head_c18d1f4dd2.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_10_touch_your_nose_5ed3199e2b.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_11_touch_your_ears_e9edb8cece.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your ears.",
+    "raw": "Touch your ears."
+  },
+  {
+    "filename": "aew8_12_clap_your_hands_92a253901e.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_13_wave_your_arms_8e96a757fb.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Wave your arms.",
+    "raw": "Wave your arms."
+  },
+  {
+    "filename": "aew8_14_point_to_your_feet_7f185b1f59.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_15_head_e65c2e8e87.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "head",
+    "raw": "head"
+  },
+  {
+    "filename": "aew8_16_hands_d067678ed4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "hands",
+    "raw": "hands"
+  },
+  {
+    "filename": "aew8_17_feet_abdf2162b1.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "feet",
+    "raw": "feet"
+  },
+  {
+    "filename": "aew8_18_leo_touches_his_head_4d571af423.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Leo touches his head.",
+    "raw": "Leo touches his head."
+  },
+  {
+    "filename": "aew8_19_mia_points_to_leo_s_feet_05e5587742.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Mia points to Leo’s feet.",
+    "raw": "Mia points to Leo’s feet."
+  },
+  {
+    "filename": "aew8_20_emma_shows_her_hands_11e387dca7.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Emma shows her hands.",
+    "raw": "Emma shows her hands."
+  },
+  {
+    "filename": "aew8_21_toto_finds_a_star_clue_e363cc1f44.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Toto finds a star clue.",
+    "raw": "Toto finds a star clue."
+  },
+  {
+    "filename": "aew8_22_touch_your_head_afd57ee138.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_23_show_your_hands_0c6cf680c4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Show your hands.",
+    "raw": "Show your hands."
+  },
+  {
+    "filename": "aew8_24_point_to_your_feet_b94c77bfe7.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_25_eyes_2aa72f25c6.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "eyes",
+    "raw": "eyes"
+  },
+  {
+    "filename": "aew8_26_ears_f754138060.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "ears",
+    "raw": "ears"
+  },
+  {
+    "filename": "aew8_27_nose_21c66455f2.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "nose",
+    "raw": "nose"
+  },
+  {
+    "filename": "aew8_28_mouth_61c6b256b6.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "mouth",
+    "raw": "mouth"
+  },
+  {
+    "filename": "aew8_29_mia_touches_her_nose_9d4f93909e.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Mia touches her nose.",
+    "raw": "Mia touches her nose."
+  },
+  {
+    "filename": "aew8_30_emma_touches_her_ear_48368e0108.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Emma touches her ear.",
+    "raw": "Emma touches her ear."
+  },
+  {
+    "filename": "aew8_31_leo_watches_and_smiles_eb4a428ae9.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Leo watches and smiles.",
+    "raw": "Leo watches and smiles."
+  },
+  {
+    "filename": "aew8_32_toto_listens_7cc879ccab.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Toto listens.",
+    "raw": "Toto listens."
+  },
+  {
+    "filename": "aew8_33_touch_your_nose_0ea82bcb54.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_34_touch_your_ears_4ee942f78f.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your ears.",
+    "raw": "Touch your ears."
+  },
+  {
+    "filename": "aew8_35_open_your_mouth_bab11ed0d9.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Open your mouth.",
+    "raw": "Open your mouth."
+  },
+  {
+    "filename": "aew8_36_look_with_your_eyes_d6f7468b00.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Look with your eyes.",
+    "raw": "Look with your eyes."
+  },
+  {
+    "filename": "aew8_37_touch_your_head_9197f89391.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_38_touch_your_nose_f72a3e2ff6.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_39_point_to_your_feet_70607513a4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_40_the_team_listens_490b5e2241.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "The team listens.",
+    "raw": "The team listens."
+  },
+  {
+    "filename": "aew8_41_the_team_moves_d5505b71ef.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "The team moves.",
+    "raw": "The team moves."
+  },
+  {
+    "filename": "aew8_42_toto_is_the_guide_e7a05c0fae.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Toto is the guide.",
+    "raw": "Toto is the guide."
+  },
+  {
+    "filename": "aew8_43_teacher_touch_your_head_team_t_ff299740a3.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head. Touch your head.",
+    "raw": "Teacher: Touch your head. Team: Touch your head."
+  },
+  {
+    "filename": "aew8_44_teacher_touch_your_nose_team_t_7e508d59e7.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose. Touch your nose.",
+    "raw": "Teacher: Touch your nose. Team: Touch your nose."
+  },
+  {
+    "filename": "aew8_45_teacher_point_to_your_feet_tea_cbf4ab4db7.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet. Point to your feet.",
+    "raw": "Teacher: Point to your feet. Team: Point to your feet."
+  },
+  {
+    "filename": "aew8_46_my_hand_10ae0b38ea.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "my hand",
+    "raw": "my hand"
+  },
+  {
+    "filename": "aew8_47_your_hand_33755a5511.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "your hand",
+    "raw": "your hand"
+  },
+  {
+    "filename": "aew8_48_my_head_c8e84cad72.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "my head",
+    "raw": "my head"
+  },
+  {
+    "filename": "aew8_49_your_head_ea657e10f5.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "your head",
+    "raw": "your head"
+  },
+  {
+    "filename": "aew8_50_leo_my_hand_d02fe610ef.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "My hand.",
+    "raw": "Leo: My hand."
+  },
+  {
+    "filename": "aew8_51_leo_your_hand_92eea07747.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Your hand.",
+    "raw": "Leo: Your hand."
+  },
+  {
+    "filename": "aew8_52_mia_my_head_5d2a2962b8.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "My head.",
+    "raw": "Mia: My head."
+  },
+  {
+    "filename": "aew8_53_mia_your_head_892e183332.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Your head.",
+    "raw": "Mia: Your head."
+  },
+  {
+    "filename": "aew8_54_hands_8d9f897302.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "hands",
+    "raw": "hands"
+  },
+  {
+    "filename": "aew8_55_arms_3b8588d792.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "arms",
+    "raw": "arms"
+  },
+  {
+    "filename": "aew8_56_legs_de86e9dcbf.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "legs",
+    "raw": "legs"
+  },
+  {
+    "filename": "aew8_57_feet_44b9c1c8d6.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "feet",
+    "raw": "feet"
+  },
+  {
+    "filename": "aew8_58_clap_your_hands_1bf5a02188.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_59_wave_your_arms_2cb43b4498.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Wave your arms.",
+    "raw": "Wave your arms."
+  },
+  {
+    "filename": "aew8_60_step_with_your_feet_141d66db66.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Step with your feet.",
+    "raw": "Step with your feet."
+  },
+  {
+    "filename": "aew8_61_clap_your_hands_2b6bcbf1f4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_62_wave_your_arms_a41b1af2fc.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Wave your arms.",
+    "raw": "Wave your arms."
+  },
+  {
+    "filename": "aew8_63_step_with_your_feet_5e8de4b828.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Step with your feet.",
+    "raw": "Step with your feet."
+  },
+  {
+    "filename": "aew8_64_listen_eeeafd87c1.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Listen.",
+    "raw": "Listen."
+  },
+  {
+    "filename": "aew8_65_do_2baa9c6313.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Do.",
+    "raw": "Do."
+  },
+  {
+    "filename": "aew8_66_try_again_1e89fd69cc.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Try again.",
+    "raw": "Try again."
+  },
+  {
+    "filename": "aew8_67_touch_your_head_1dc9f0fc19.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_68_touch_your_nose_19aac64caf.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_69_clap_your_hands_cfd65a5900.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_70_point_to_your_feet_b03e1edb9d.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_71_teacher_listen_touch_your_head_c013c4f766.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Listen. Touch your head. Leo touches his head.",
+    "raw": "Teacher: Listen. Touch your head. Leo touches his head."
+  },
+  {
+    "filename": "aew8_72_teacher_clap_your_hands_mia_cl_ae0432249c.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Clap your hands. Mia claps her hands.",
+    "raw": "Teacher: Clap your hands. Mia claps her hands."
+  },
+  {
+    "filename": "aew8_73_teacher_point_to_your_feet_emm_6aae26fb54.mp3",
+    "voice": "en-US-AnaNeural",
+    "text": "Point to your feet. Emma points to her feet.",
+    "raw": "Teacher: Point to your feet. Emma points to her feet."
+  },
+  {
+    "filename": "aew8_74_a_chant_has_short_lines_48bd69ee03.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "A chant has short lines.",
+    "raw": "A chant has short lines."
+  },
+  {
+    "filename": "aew8_75_a_chant_has_actions_a69ab0f4e4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "A chant has actions.",
+    "raw": "A chant has actions."
+  },
+  {
+    "filename": "aew8_76_you_say_and_move_87c400445c.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "You say and move.",
+    "raw": "You say and move."
+  },
+  {
+    "filename": "aew8_77_touch_your_head_3f04b781e2.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_78_touch_your_nose_39e0f9e4d0.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_79_clap_your_hands_718bb31185.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_80_point_to_your_feet_fa3fb84053.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_81_paw_prints_108fd37a80.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "paw prints",
+    "raw": "paw prints"
+  },
+  {
+    "filename": "aew8_82_touch_72c192bfea.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "touch",
+    "raw": "touch"
+  },
+  {
+    "filename": "aew8_83_point_cc5b837548.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "point",
+    "raw": "point"
+  },
+  {
+    "filename": "aew8_84_clap_afd332b447.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "clap",
+    "raw": "clap"
+  },
+  {
+    "filename": "aew8_85_move_71428c3e24.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "move",
+    "raw": "move"
+  },
+  {
+    "filename": "aew8_86_touch_your_head_4cdcf02408.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_87_touch_your_nose_d9225406a3.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_88_clap_your_hands_e06b4adebe.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_89_point_to_your_feet_72ba544e47.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  },
+  {
+    "filename": "aew8_90_great_let_s_chant_5a443c7a42.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Great! Let’s chant.",
+    "raw": "Great! Let’s chant."
+  },
+  {
+    "filename": "aew8_91_touch_your_head_0a4fca105b.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your head.",
+    "raw": "Touch your head."
+  },
+  {
+    "filename": "aew8_92_touch_your_nose_74aa6b8bf8.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Touch your nose.",
+    "raw": "Touch your nose."
+  },
+  {
+    "filename": "aew8_93_clap_your_hands_441d8d66d4.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Clap your hands.",
+    "raw": "Clap your hands."
+  },
+  {
+    "filename": "aew8_94_point_to_your_feet_becf4e942a.mp3",
+    "voice": "en-GB-MaisieNeural",
+    "text": "Point to your feet.",
+    "raw": "Point to your feet."
+  }
+]

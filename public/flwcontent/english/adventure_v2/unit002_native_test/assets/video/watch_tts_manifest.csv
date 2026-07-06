@@ -1,0 +1,7 @@
+segment_id,start_sec,end_sec,speaker,voice,role,text,audio_file
+AEW2-U002-WATCH-001-01-leo,0.000,5.000,Leo,en-GB-MaisieNeural,Maisie for Leo/story,Hello!,assets/video/audio/AEW2-U002-WATCH-001-01-leo.mp3
+AEW2-U002-WATCH-001-02-leo,5.000,10.000,Leo,en-GB-MaisieNeural,Maisie for Leo/story,It's red.,assets/video/audio/AEW2-U002-WATCH-001-02-leo.mp3
+AEW2-U002-WATCH-001-03-mia,10.000,15.000,Mia,en-US-AnaNeural,Ana for Mia/Emma,It's blue.,assets/video/audio/AEW2-U002-WATCH-001-03-mia.mp3
+AEW2-U002-WATCH-001-04-emma,15.000,20.000,Emma,en-US-AnaNeural,Ana for Mia/Emma,It's yellow.,assets/video/audio/AEW2-U002-WATCH-001-04-emma.mp3
+AEW2-U002-WATCH-001-05-leo,20.000,25.000,Leo,en-GB-MaisieNeural,Maisie for Leo/story,It's green.,assets/video/audio/AEW2-U002-WATCH-001-05-leo.mp3
+AEW2-U002-WATCH-001-06-mia,25.000,30.040,Mia,en-US-AnaNeural,Ana for Mia/Emma,Goodbye!,assets/video/audio/AEW2-U002-WATCH-001-06-mia.mp3

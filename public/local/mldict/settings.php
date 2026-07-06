@@ -19,7 +19,7 @@ if ($hassiteconfig) {
         'local_mldict/enabledlanguages',
         get_string('enabledlanguages', 'local_mldict'),
         get_string('enabledlanguages_desc', 'local_mldict'),
-        'en,es,fr,de,ja',
+        'en,ru,zh,ja,de,fr,es',
         PARAM_TEXT
     ));
 

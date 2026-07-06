@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q01 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the apple.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q02 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the banana.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q03 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the orange.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[bread]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q04 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sandwich.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sandwich]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q05 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the cookie.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q09 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[A sandwich is a drink.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q10 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which one is a snack?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L1-Q12 Lesson 1]]></text></name>
+<questiontext format="html"><text><![CDATA[Which word is an extra snack picture word?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L1-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[bread]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q01 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the model line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want an apple.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I see a toy.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your head.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is under the box.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q02 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[What can Leo say for a banana?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[I want water.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[I want a banana.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[This is my family.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open the book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q03 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the orange line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[I want a cookie.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want milk.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[I want an orange.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want water.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q04 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the sandwich line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a sandwich.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want an apple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want juice.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want milk.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q08 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Friend: What do you want? Choose the best answer.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a cookie.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Hello, teacher.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is purple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your ear.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q11 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[The words I want show a choice.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L2-Q12 Lesson 2]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line is a snack choice?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L2-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a cookie.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look and listen.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[My name is Leo.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Where is the ball?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q01 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Which word makes the snack line polite?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[please]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q02 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the polite line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[I want an apple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[I want an apple, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Apple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q03 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[What can Mia say politely?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a banana, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want a banana.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Banana!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am Mia.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q06 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Learner: I want an orange, please. Helper: ____]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want a book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your nose.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[No name.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q07 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Helper: Here you are. Learner: ____]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Thank you.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want desk.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Goodbye, ball.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is under.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q09 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[The word please can come at the end of the snack line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q10 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line is polite?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want juice, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Juice!]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want juice.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Drink.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L3-Q12 Lesson 3]]></text></name>
+<questiontext format="html"><text><![CDATA[What is missing? I want an apple, _____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L3-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[please]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L4-Q01 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the fixed chunk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L4-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[a apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[an apple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L4-Q02 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the fixed chunk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L4-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a banana]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[an banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L4-Q03 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the fixed chunk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L4-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[a orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[an orange]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L4-Q04 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the fixed chunk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L4-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[an sandwich]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sandwich a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[a sandwich]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sandwich an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L4-Q05 Lesson 4]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the fixed chunk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L4-Q05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[an cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[a cookie]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q01 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the drink word: water.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[sandwich]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q02 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the drink word: milk.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q03 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the drink word: juice.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[sandwich]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q04 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Water is a snack.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q05 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[A cookie is a drink.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q05]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q10 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Friend: What drink do you want?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want water, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want an apple, please.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your hand.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is on the table.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L5-Q12 Lesson 5]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose one snack + one drink.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L5-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sandwich and milk]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water and juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk and juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple and cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L6-Q02 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[What is a good first line?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L6-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Hello.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Thank you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Cookie.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L6-Q03 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a full snack order line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L6-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a sandwich and juice, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I am a sandwich.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your nose.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L6-Q04 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which choice has one snack and one drink?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L6-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[an apple and water]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water and milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a cookie and a sandwich]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice and milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L6-Q11 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line is ready for role-play?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L6-Q11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a cookie and milk, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Cookie milk please want.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[A cookie is purple.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L6-Q12 Lesson 6]]></text></name>
+<questiontext format="html"><text><![CDATA[Thank you can be the last line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L6-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q01 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose one snack for a snack order card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q02 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose one drink for a snack order card.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[sandwich]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q03 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a good project choice.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[a banana and milk]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water and milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a cookie and an apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[juice and water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q06 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Check three things. What are they?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[name, color, number]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[snack, drink, please]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[toy, box, under]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[head, hand, foot]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q07 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[The project needs a snack card and a short voice line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q07]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q08 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Helper: Hello. Learner: ____]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q08]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want an orange and water, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Thank you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Look and point.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q09 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Learner: I want a cookie and milk, please. Helper: ____]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[Thank you.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[Here you are.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I want water.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[It is green.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-L7-Q12 Lesson 7]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the progress line for this unit.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-L7-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I can ask politely.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can tell a long story.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can compare camps.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can give directions.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q01 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[What is the video mainly about?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[The team chooses snacks politely.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The team plays with toys.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The team counts to twenty.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The team talks about weather.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q02 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Who wants an apple?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Leo]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Mia]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Emma]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q03 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[What drink does Mia want?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[water]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[juice]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q04 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[What snack does Emma want?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[sandwich]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[orange]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q06 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Toto sits by the table.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q06]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q09 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Which chunk is in the video?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="0" format="html"><text><![CDATA[a apple]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="100" format="html"><text><![CDATA[an apple]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple an]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[apple a]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q10 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Which words are polite?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[please and thank you]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[banana and cookie]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[water and milk]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[head and hand]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q11 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Which line helps the project?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want a snack and a drink, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Where is the toy?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Touch your ear.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[How many books?]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-W-Q12 Watch]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the best summary.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-W-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Leo, Mia, and Emma choose snacks and say thank you.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Toto hides a toy under a box.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The team learns clothes for weather.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[The team draws a family tree.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q01 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Step 1: Choose _____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q01]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[one snack]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[three toys]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a weather card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[a family tree]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q02 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Step 2: Choose _____.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q02]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[one drink]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one animal]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one room]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[one color only]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q03 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[What do you make?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q03]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[snack order card]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[toy box page]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[weather card]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[number trail]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q04 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose a strong project line.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q04]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I want an apple and water, please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Apple water.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I see a toy.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Open the book.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q09 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[The project line needs please.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q09]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q10 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[You can record your snack order line for portfolio evidence.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q10]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[True]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[False]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q11 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[If your line is “I want a cookie and milk,” what repair helps?]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q11]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[Add please.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Say a toy word.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Count to ten.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[Choose clothes.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+<question type="multichoice">
+<name><text><![CDATA[AEW2-U009-P-Q12 Project]]></text></name>
+<questiontext format="html"><text><![CDATA[Choose the final self-check.]]></text></questiontext>
+<generalfeedback format="html"><text><![CDATA[Review the lesson and try again.]]></text></generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber><text><![CDATA[AEW2-U009-P-Q12]]></text></idnumber>
+<single>true</single><shuffleanswers>true</shuffleanswers><answernumbering>abc</answernumbering>
+<answer fraction="100" format="html"><text><![CDATA[I can say my snack order politely.]]></text><feedback format="html"><text><![CDATA[Correct.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can write a long story.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can give directions.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+<answer fraction="0" format="html"><text><![CDATA[I can describe the weather.]]></text><feedback format="html"><text><![CDATA[Try again.]]></text></feedback></answer>
+</question>
+</quiz>

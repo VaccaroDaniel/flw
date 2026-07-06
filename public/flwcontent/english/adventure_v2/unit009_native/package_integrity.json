@@ -1,0 +1,72 @@
+{
+  "course": "Adventure English World V2",
+  "unit": "9",
+  "title": "Snack Time",
+  "status": "Moodle-ready v2 UI refined",
+  "final_content_image_alignment_gate": "PASS",
+  "package_validation": "PASS",
+  "files": {
+    "index_html": true,
+    "teacher_guide_html": true,
+    "question_bank_csv": true,
+    "question_bank_gift": true,
+    "audio_manifest": true,
+    "image_manifest": true,
+    "video_manifest": true,
+    "cefr_kp_map": true,
+    "unit_difficulty_profile": true,
+    "difficulty_audit": true,
+    "repair_path": true,
+    "portfolio_evidence_map": true,
+    "video_mp4": true,
+    "video_vtt": true
+  },
+  "counts": {
+    "images": 20,
+    "practice_items": 108,
+    "practice_sections": {
+      "Lesson 1": 12,
+      "Lesson 2": 12,
+      "Lesson 3": 12,
+      "Lesson 4": 12,
+      "Lesson 5": 12,
+      "Lesson 6": 12,
+      "Lesson 7": 12,
+      "Watch": 12,
+      "Project": 12
+    },
+    "video_duration_seconds": 53.967
+  },
+  "behavior": {
+    "practice_items_per_page": 3,
+    "practice_controls": [
+      "Previous",
+      "Check page",
+      "Reset page",
+      "Next"
+    ],
+    "wrong_answer_actions": [
+      "Try again",
+      "Correct Answer"
+    ],
+    "audio": "icon-only placeholders",
+    "lessons": "folding/collapsible",
+    "image_modal": "enabled for lesson/project images; disabled for cover image",
+    "choice_letters_visible": false,
+    "wrong_answer_buttons_trigger": "Try again and Correct Answer appear after a checked wrong answer",
+    "study_model_your_turn_layout": "side-by-side on desktop; stacked on mobile",
+    "watch_lines_show_time_bands": false
+  },
+  "blocked_content_absent": true,
+  "notes": "V2 UI refinement applied: wrong-answer action buttons confirmed; choice letters removed; Study/Model/Your turn aligned side by side; learner-facing Watch line time bands removed.",
+  "revision": "v2_ui_refined",
+  "package_version": "v3_buttons_hidden_until_wrong_answer",
+  "ui_revision": "Try again and Correct Answer buttons are hidden initially and shown only after a checked wrong answer.",
+  "validated_at": "2026-07-02",
+  "checks": {
+    "try_again_correct_answer_hidden_initially": true,
+    "try_again_correct_answer_show_only_after_wrong_answer": true,
+    "css_hidden_override_for_answer_actions": true,
+    "inline_display_none_initial_answer_actions": true
+  }
+}

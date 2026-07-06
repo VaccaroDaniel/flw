@@ -1,0 +1,24 @@
+{
+  "course": "Adventure English World V2",
+  "unit": 4,
+  "title": "Classroom Magic",
+  "level": "Pre-A1.1",
+  "lesson_count": 7,
+  "practice_sections": 9,
+  "question_count": 108,
+  "image_count": 22,
+  "watch_section": true,
+  "final_project": "My Classroom Action Recording",
+  "audio_mode": "whole-model MP3 audio generated with en-GB-MaisieNeural at -15%; browser speechSynthesis fallback for study chunks and quiz audio",
+  "edge_tts_audio": {
+    "updated_at": "2026-07-01T04:51:59.614Z",
+    "voices": {
+      "ana": "en-US-AnaNeural",
+      "maisie": "en-GB-MaisieNeural",
+      "teacher": "en-US-EmmaMultilingualNeural"
+    },
+    "map_count": 50,
+    "manifest_count": 50,
+    "video": "assets/video/Video.mp4"
+  }
+}

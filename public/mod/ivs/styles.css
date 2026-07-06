@@ -1,0 +1,32 @@
+#id_switchcast_video {
+    width: 250px;
+    max-width: 100%;
+}
+
+#page-admin-setting-modsettingivs .adminsettingsflags {
+    right: 0;
+    padding-top: 0.5%;
+}
+
+#fitem_id_ivssubmitbutton{
+    float: left;
+    margin-top: 2%;
+}
+
+.ivs-questions .question-listing form.form-inline {
+    float: left;
+}
+
+.modicon_ivs.activityiconcontainer {
+    padding: 0;
+}
+
+.modtype_ivs .activityiconcontainer img {
+    width: 28px;
+    height: 28px;
+}
+.modicon_ivs.activityiconcontainer img {
+    width: 35px;
+    height: 35px;
+}
+

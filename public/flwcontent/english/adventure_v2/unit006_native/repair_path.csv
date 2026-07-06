@@ -1,0 +1,8 @@
+﻿error_type,detection_source,feedback_message,repair_activity,retest_item,portfolio_link
+greeting/name confusion,L1 Practice / project opening,Try again. Use “Hello. I’m ___.”,Point to character card and repeat model line.,U006-L1-Q06; U006-P-Q03,Mini picture mission opening
+color confusion,L2 Practice / project color choice,Look again at the color badge.,"Match color badge to color word, then say “It’s ___.”",U006-L2-Q01 to U006-L2-Q12; U006-P-Q04,Project color choice
+number confusion,L3 Practice / project number group,"Count slowly. One, two, three…",Point-count the picture group and choose the number word.,U006-L3-Q01 to U006-L3-Q12; U006-P-Q05,Project number choice
+action word confusion,L4 Practice / project action choice,Do the action. Say the word.,Act out listen/look/point/draw/open/close.,U006-L4-Q01 to U006-L4-Q12; U006-P-Q06,Project action choice
+animal word confusion,L5 Practice / project animal choice,Look at the animal picture again.,Match animal card to animal word and repeat “It’s a ___.”,U006-L5-Q01 to U006-L5-Q12; U006-P-Q07,Project animal choice
+mixed clue order,L6/L7 mixed review,"Use the five clues: hello, color, number, action, animal.","Sort five badges, then say one word or phrase for each.",U006-L6-Q11; U006-L7-Q07,Mini picture mission sequence
+low speaking confidence,project recording,Good try. Say one line at a time.,Repeat after model audio; record again with 4–6 short lines.,Project speaking retry,Final speaking recording

@@ -1,0 +1,25 @@
+audio_id,section,text,filename,status
+unit8_audio_001,unit_words_commands,head,assets/audio/unit8_audio_001.mp3,placeholder_not_generated
+unit8_audio_002,unit_words_commands,eyes,assets/audio/unit8_audio_002.mp3,placeholder_not_generated
+unit8_audio_003,unit_words_commands,ears,assets/audio/unit8_audio_003.mp3,placeholder_not_generated
+unit8_audio_004,unit_words_commands,nose,assets/audio/unit8_audio_004.mp3,placeholder_not_generated
+unit8_audio_005,unit_words_commands,mouth,assets/audio/unit8_audio_005.mp3,placeholder_not_generated
+unit8_audio_006,unit_words_commands,hands,assets/audio/unit8_audio_006.mp3,placeholder_not_generated
+unit8_audio_007,unit_words_commands,arms,assets/audio/unit8_audio_007.mp3,placeholder_not_generated
+unit8_audio_008,unit_words_commands,legs,assets/audio/unit8_audio_008.mp3,placeholder_not_generated
+unit8_audio_009,unit_words_commands,feet,assets/audio/unit8_audio_009.mp3,placeholder_not_generated
+unit8_audio_010,unit_words_commands,Touch your head.,assets/audio/unit8_audio_010.mp3,placeholder_not_generated
+unit8_audio_011,unit_words_commands,Touch your nose.,assets/audio/unit8_audio_011.mp3,placeholder_not_generated
+unit8_audio_012,unit_words_commands,Touch your ears.,assets/audio/unit8_audio_012.mp3,placeholder_not_generated
+unit8_audio_013,unit_words_commands,Clap your hands.,assets/audio/unit8_audio_013.mp3,placeholder_not_generated
+unit8_audio_014,unit_words_commands,Wave your arms.,assets/audio/unit8_audio_014.mp3,placeholder_not_generated
+unit8_audio_015,unit_words_commands,Point to your feet.,assets/audio/unit8_audio_015.mp3,placeholder_not_generated
+unit8_lesson01_model,Lesson 1,Touch your head.; Show your hands.; Point to your feet.,assets/audio/unit8_lesson01_model.mp3,placeholder_not_generated
+unit8_lesson02_model,Lesson 2,Touch your nose.; Touch your ears.; Open your mouth.; Look with your eyes.,assets/audio/unit8_lesson02_model.mp3,placeholder_not_generated
+unit8_lesson03_model,Lesson 3,Teacher: Touch your head. Team: Touch your head.; Teacher: Touch your nose. Team: Touch your nose.; Teacher: Point to your feet. Team: Point to your feet.,assets/audio/unit8_lesson03_model.mp3,placeholder_not_generated
+unit8_lesson04_model,Lesson 4,Leo: My hand.; Leo: Your hand.; Mia: My head.; Mia: Your head.,assets/audio/unit8_lesson04_model.mp3,placeholder_not_generated
+unit8_lesson05_model,Lesson 5,Clap your hands.; Wave your arms.; Step with your feet.,assets/audio/unit8_lesson05_model.mp3,placeholder_not_generated
+unit8_lesson06_model,Lesson 6,Teacher: Listen. Touch your head. Leo touches his head.; Teacher: Clap your hands. Mia claps her hands.; Teacher: Point to your feet. Emma points to her feet.,assets/audio/unit8_lesson06_model.mp3,placeholder_not_generated
+unit8_lesson07_model,Lesson 7,Touch your head.; Touch your nose.; Clap your hands.; Point to your feet.,assets/audio/unit8_lesson07_model.mp3,placeholder_not_generated
+unit8_watch_script,Watch,Toto’s Move Game captions,assets/audio/unit8_watch_script.mp3,placeholder_not_generated
+unit8_project_model,Project,My Movement Chant model,assets/audio/unit8_project_model.mp3,placeholder_not_generated

@@ -1,0 +1,63 @@
+audio_id,text,mode,target_file_or_tts_key,notes
+A001,Hello.,speechSynthesis-placeholder,tts://en-US/001,Replace with recorded audio or server TTS as needed.
+A002,Hi.,speechSynthesis-placeholder,tts://en-US/002,Replace with recorded audio or server TTS as needed.
+A003,I’m Leo.,speechSynthesis-placeholder,tts://en-US/003,Replace with recorded audio or server TTS as needed.
+A004,I’m Mia.,speechSynthesis-placeholder,tts://en-US/004,Replace with recorded audio or server TTS as needed.
+A005,I’m Emma.,speechSynthesis-placeholder,tts://en-US/005,Replace with recorded audio or server TTS as needed.
+A006,Goodbye.,speechSynthesis-placeholder,tts://en-US/006,Replace with recorded audio or server TTS as needed.
+A007,red,speechSynthesis-placeholder,tts://en-US/007,Replace with recorded audio or server TTS as needed.
+A008,blue,speechSynthesis-placeholder,tts://en-US/008,Replace with recorded audio or server TTS as needed.
+A009,yellow,speechSynthesis-placeholder,tts://en-US/009,Replace with recorded audio or server TTS as needed.
+A010,green,speechSynthesis-placeholder,tts://en-US/010,Replace with recorded audio or server TTS as needed.
+A011,orange,speechSynthesis-placeholder,tts://en-US/011,Replace with recorded audio or server TTS as needed.
+A012,purple,speechSynthesis-placeholder,tts://en-US/012,Replace with recorded audio or server TTS as needed.
+A013,pink,speechSynthesis-placeholder,tts://en-US/013,Replace with recorded audio or server TTS as needed.
+A014,black,speechSynthesis-placeholder,tts://en-US/014,Replace with recorded audio or server TTS as needed.
+A015,white,speechSynthesis-placeholder,tts://en-US/015,Replace with recorded audio or server TTS as needed.
+A016,brown,speechSynthesis-placeholder,tts://en-US/016,Replace with recorded audio or server TTS as needed.
+A017,What color?,speechSynthesis-placeholder,tts://en-US/017,Replace with recorded audio or server TTS as needed.
+A018,It’s red.,speechSynthesis-placeholder,tts://en-US/018,Replace with recorded audio or server TTS as needed.
+A019,It’s blue.,speechSynthesis-placeholder,tts://en-US/019,Replace with recorded audio or server TTS as needed.
+A020,It’s yellow.,speechSynthesis-placeholder,tts://en-US/020,Replace with recorded audio or server TTS as needed.
+A021,It’s green.,speechSynthesis-placeholder,tts://en-US/021,Replace with recorded audio or server TTS as needed.
+A022,It’s orange.,speechSynthesis-placeholder,tts://en-US/022,Replace with recorded audio or server TTS as needed.
+A023,It’s purple.,speechSynthesis-placeholder,tts://en-US/023,Replace with recorded audio or server TTS as needed.
+A024,It’s pink.,speechSynthesis-placeholder,tts://en-US/024,Replace with recorded audio or server TTS as needed.
+A025,It’s black.,speechSynthesis-placeholder,tts://en-US/025,Replace with recorded audio or server TTS as needed.
+A026,It’s white.,speechSynthesis-placeholder,tts://en-US/026,Replace with recorded audio or server TTS as needed.
+A027,It’s brown.,speechSynthesis-placeholder,tts://en-US/027,Replace with recorded audio or server TTS as needed.
+A028,"Hello, Leo.",speechSynthesis-placeholder,tts://en-US/028,Replace with recorded audio or server TTS as needed.
+A029,"Hello, Mia.",speechSynthesis-placeholder,tts://en-US/029,Replace with recorded audio or server TTS as needed.
+A030,"Hello, Emma.",speechSynthesis-placeholder,tts://en-US/030,Replace with recorded audio or server TTS as needed.
+A031,"Hello, Toto.",speechSynthesis-placeholder,tts://en-US/031,Replace with recorded audio or server TTS as needed.
+A032,Color Quest!,speechSynthesis-placeholder,tts://en-US/032,Replace with recorded audio or server TTS as needed.
+A033,"Red, blue.",speechSynthesis-placeholder,tts://en-US/033,Replace with recorded audio or server TTS as needed.
+A034,"Yellow, green.",speechSynthesis-placeholder,tts://en-US/034,Replace with recorded audio or server TTS as needed.
+A035,Goodbye!,speechSynthesis-placeholder,tts://en-US/035,Replace with recorded audio or server TTS as needed.
+A036,Leo: It’s red.,speechSynthesis-placeholder,tts://en-US/036,Replace with recorded audio or server TTS as needed.
+A037,Mia: It’s blue.,speechSynthesis-placeholder,tts://en-US/037,Replace with recorded audio or server TTS as needed.
+A038,Emma: It’s yellow.,speechSynthesis-placeholder,tts://en-US/038,Replace with recorded audio or server TTS as needed.
+A039,red book,speechSynthesis-placeholder,tts://en-US/039,Replace with recorded audio or server TTS as needed.
+A040,blue bag,speechSynthesis-placeholder,tts://en-US/040,Replace with recorded audio or server TTS as needed.
+A041,yellow pencil,speechSynthesis-placeholder,tts://en-US/041,Replace with recorded audio or server TTS as needed.
+A042,green box,speechSynthesis-placeholder,tts://en-US/042,Replace with recorded audio or server TTS as needed.
+A043,orange box,speechSynthesis-placeholder,tts://en-US/043,Replace with recorded audio or server TTS as needed.
+A044,purple book,speechSynthesis-placeholder,tts://en-US/044,Replace with recorded audio or server TTS as needed.
+A045,pink bag,speechSynthesis-placeholder,tts://en-US/045,Replace with recorded audio or server TTS as needed.
+A046,black chair,speechSynthesis-placeholder,tts://en-US/046,Replace with recorded audio or server TTS as needed.
+A047,white box,speechSynthesis-placeholder,tts://en-US/047,Replace with recorded audio or server TTS as needed.
+A048,brown box,speechSynthesis-placeholder,tts://en-US/048,Replace with recorded audio or server TTS as needed.
+A049,Hello!,speechSynthesis-placeholder,tts://en-US/049,Replace with recorded audio or server TTS as needed.
+A050,Toto: It’s green.,speechSynthesis-placeholder,tts://en-US/050,Replace with recorded audio or server TTS as needed.
+A051,"red, blue, yellow, green",speechSynthesis-placeholder,tts://en-US/051,Replace with recorded audio or server TTS as needed.
+A052,"orange, purple, pink",speechSynthesis-placeholder,tts://en-US/052,Replace with recorded audio or server TTS as needed.
+A053,"black, white, brown",speechSynthesis-placeholder,tts://en-US/053,Replace with recorded audio or server TTS as needed.
+A054,I’m ___.,speechSynthesis-placeholder,tts://en-US/054,Replace with recorded audio or server TTS as needed.
+A055,Hello. I’m Leo. It’s red. It’s blue. Goodbye.,speechSynthesis-placeholder,tts://en-US/055,Replace with recorded audio or server TTS as needed.
+A056,Hello. I’m Mia. It’s yellow. It’s green. Goodbye.,speechSynthesis-placeholder,tts://en-US/056,Replace with recorded audio or server TTS as needed.
+A057,Hello. I’m Emma. It’s pink. It’s purple. Goodbye.,speechSynthesis-placeholder,tts://en-US/057,Replace with recorded audio or server TTS as needed.
+A058,color mini-poster,speechSynthesis-placeholder,tts://en-US/058,Replace with recorded audio or server TTS as needed.
+A059,short voice greeting,speechSynthesis-placeholder,tts://en-US/059,Replace with recorded audio or server TTS as needed.
+A060,teacher or AI feedback,speechSynthesis-placeholder,tts://en-US/060,Replace with recorded audio or server TTS as needed.
+A061,retry recording if needed,speechSynthesis-placeholder,tts://en-US/061,Replace with recorded audio or server TTS as needed.
+A062,Hello. I’m Mia.,speechSynthesis-placeholder,tts://en-US/062,Replace with recorded audio or server TTS as needed.

@@ -1,0 +1,30 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+
+$string['pluginname'] = 'FLW Placement';
+$string['placementtest'] = 'FLW Placement Test';
+$string['takeplacement'] = 'Take placement test';
+$string['placementreports'] = 'Placement reports';
+$string['viewreport'] = 'View report';
+$string['downloadquestionbank'] = 'Download Moodle question bank CSV';
+$string['privacy:metadata:local_flwplacement'] = 'Stores FLW placement test attempts and reports.';
+$string['privacy:metadata:local_flwplacement:userid'] = 'The learner who completed the placement test.';
+$string['privacy:metadata:local_flwplacement:courseid'] = 'The site-level context used to store the placement test.';
+$string['privacy:metadata:local_flwplacement:resultjson'] = 'The structured placement report JSON.';
+$string['privacy:metadata:local_flwplacement:attemptjson'] = 'The attempt evidence used by the placement engine.';
+$string['flwplacement:take'] = 'Take FLW placement test';
+$string['flwplacement:viewreports'] = 'View FLW placement reports';
+$string['flwplacement:manage'] = 'Manage FLW placement';
+$string['pluginnotinstalled'] = 'The FLW Placement database table is not installed yet. Run Moodle upgrade.';
+$string['noresults'] = 'No placement reports found.';
+$string['saved'] = 'Placement report saved.';
+$string['savefailed'] = 'Could not save the placement report.';
+$string['invalidpayload'] = 'Invalid placement payload.';
+$string['learner'] = 'Learner';
+$string['cefrlevel'] = 'CEFR level';
+$string['recommendedcourse'] = 'Recommended course';
+$string['startingunit'] = 'Starting unit';
+$string['confidencescore'] = 'Confidence score';
+$string['weightedscore'] = 'Weighted score';
+$string['timecreated'] = 'Time created';
+$string['courseplacementlink'] = 'FLW Placement';

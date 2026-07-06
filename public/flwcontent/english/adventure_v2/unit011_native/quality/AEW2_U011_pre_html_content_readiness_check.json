@@ -1,0 +1,19 @@
+{
+  "unit_id": "AEW2_U011",
+  "status": "CONTENT_AND_PRACTICE_READY",
+  "final_content_image_alignment_gate": "NOT_RUN",
+  "practice_item_count": 108,
+  "sections": {
+    "Lesson 1": 12,
+    "Lesson 2": 12,
+    "Lesson 3": 12,
+    "Lesson 4": 12,
+    "Lesson 5": 12,
+    "Lesson 6": 12,
+    "Lesson 7": 12,
+    "Project": 12,
+    "Watch": 12
+  },
+  "watch_lines_have_time_bands": false,
+  "notes": "Run final Content + Image Alignment Quality Gate before Moodle HTML. Some generated images may still need visual repair under the no-globe rule."
+}
