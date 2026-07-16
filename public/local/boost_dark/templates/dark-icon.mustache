@@ -1,0 +1,85 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_boost_dark/dark-icon
+
+    Example context (json):
+    {}
+}}
+
+<div class="kraus-layout-dark" style="order:-1;">
+    {{#enable}}
+        <a class="dark-mode nav-link dark-lua" href="#">
+            <svg style="width:19px;height:19px" enable-background="new 0 0 128 128" viewBox="0 0 128 128"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="m64.823 128c-17.085
+                0-33.789-6.941-45.826-19.045-12.248-12.246-18.997-28.562-18.997-45.935s6.749-33.687
+                19.003-45.935c8.074-8.042 18.161-13.842 29.174-16.776.759-.205 1.551-.309
+                2.344-.309.786 0 1.57.103 2.332.305 4.835 1.287 7.724 6.266 6.441 11.1-4.285
+                16.086.347 33.406 12.086 45.203 8.813 8.81 20.55 13.664 33.039 13.664 4.095 0
+                8.188-.533 12.17-1.59.756-.201 1.54-.305 2.326-.305.787 0 1.572.104 2.333.307
+                4.834 1.281 7.729 6.264 6.446 11.105-2.937 11.02-8.741 21.105-16.787 29.174-12.207
+                12.275-28.47 19.037-45.789 19.037-.002 0-.295 0-.295 0zm.281-18.15c12.285 0 24.302-4.998
+                32.967-13.711 2.341-2.352 4.418-4.93
+                6.205-7.699-17.03-.031-33.693-6.948-45.733-18.99-12.165-12.22-18.927-28.651-18.979-45.734-2.785
+                1.787-5.368 3.866-7.717 6.212-8.827 8.824-13.688 20.58-13.688 33.101 0 12.522
+                4.861 24.277 13.688 33.1 8.675 8.724 20.703 13.722 33.009 13.722h.104.144z"/>
+            </svg>
+        </a>
+    {{/enable}}
+    <a class="light-mode nav-link dark-sol" href="#">
+        <svg style="width:19px;height:19px" enable-background="new 0 0 128 128" viewBox="0 0 128 128"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="m55.021 128v-24.072h17.958v24.072zm-42.631-25.098
+                17.012-17.027 12.705 12.695-17.013 17.03zm73.492-4.323 12.697-12.697 17.021 17.025-12.693
+                12.693zm-21.87-1.104c-18.458 0-33.475-15.017-33.475-33.475s15.017-33.475 33.475-33.475
+                33.474 15.017 33.474 33.475-15.015 33.475-33.474 33.475zm0-48.991c-8.556 0-15.517
+                6.96-15.517 15.516 0 8.557 6.961 15.518 15.517 15.518 8.554 0 15.515-6.961
+                15.515-15.518 0-8.556-6.961-15.516-15.515-15.516zm39.916
+                24.495v-17.958h24.072v17.958zm-103.928 0v-17.958h24.072v17.958zm12.394-47.881
+                12.706-12.694 17.011 17.022-12.69 12.699zm73.488 4.322 17.026-17.022 12.689
+                12.694-17.018 17.027zm-30.861-5.348v-24.072h17.958v24.072z"/>
+        </svg>
+    </a>
+</div>
+
+{{#js}}
+    // <script>
+    require(["jquery", "core/ajax"], function($, ajax) {
+        var $layoutdark = $(".kraus-layout-dark .nav-link");
+        $layoutdark.click(function(event) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+
+            $("body").addClass("dark-animation");
+            setTimeout(function() {
+                $("body").removeClass("dark-animation");
+            }, 500);
+
+            var darkmode = "dark";
+            if ($("html").attr("data-bs-theme") == "dark") {
+                darkmode = "light";
+            }
+            $("html").attr("data-bs-theme", darkmode);
+
+            ajax.call([{
+                methodname: "local_boost_dark_userpreference",
+                args: {darkmode: darkmode}
+            }]);
+        });
+    });
+{{/js}}
