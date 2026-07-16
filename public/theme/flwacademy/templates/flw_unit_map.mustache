@@ -1,0 +1,10 @@
+{{!
+    @template theme_flwacademy/flw_unit_map
+
+    Visual-only FLW Clean v3 unit map.
+}}
+<nav class="flw-unit-map" aria-label="{{#str}}flwunitmap, theme_flwacademy{{/str}}">
+    {{#units}}
+        <a class="flw-unit-node {{state}}" href="{{url}}">{{label}}</a>
+    {{/units}}
+</nav>

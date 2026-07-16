@@ -1,0 +1,21 @@
+{{!
+    @template theme_flwacademy/flw_video_hub
+
+    FLW Clean v3 reusable video hub.
+}}
+<section id="flw-watch" class="flw-video-hub" data-page-size="{{pagesize}}">
+    {{#title}}<h2>{{title}}</h2>{{/title}}
+    <div class="flw-video-grid">
+        {{#videos}}
+            <article class="flw-video-card">
+                <video controls preload="metadata" {{#poster}}poster="{{poster}}"{{/poster}}>
+                    <source data-src="{{src}}" type="video/mp4">
+                    {{#caption}}
+                        <track src="{{caption}}" kind="subtitles" srclang="{{srclang}}" label="{{captionlabel}}">
+                    {{/caption}}
+                </video>
+                <h3>{{title}}</h3>
+            </article>
+        {{/videos}}
+    </div>
+</section>

@@ -1,0 +1,431 @@
+{{!
+    @template theme_flwacademy/flw_tools_group
+
+    Reusable floating FLW tools group.
+}}
+{{#hasflwtools}}
+<nav class="flw-course-tools" aria-label="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" data-current-category-type="{{currentcategorytype}}">
+    <button type="button" class="flw-course-tool flw-course-tools-toggle" title="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-label="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+    </button>
+    <div class="flw-course-tool-panel">
+        {{#hasflwdictionary}}
+            <button type="button" class="flw-course-tool flw-dictionary-toggle" data-flw-dictionary-url="{{flwdictionaryurl}}" title="{{#str}}flwdictionary, theme_flwacademy{{/str}}" aria-label="{{#str}}flwdictionary, theme_flwacademy{{/str}}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path><path d="m9 9 2 2 4-4"></path></svg>
+            </button>
+        {{/hasflwdictionary}}
+        {{#flwtoolsshowlanguage}}
+            <div class="flw-course-language-tool">
+                <button type="button" class="flw-course-tool flw-course-language-toggle" title="{{#str}}flwlearninglanguage, theme_flwacademy{{/str}}: {{currentlanguagelabel}}" aria-label="{{#str}}flwlearninglanguage, theme_flwacademy{{/str}}" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M12 3c2.1 2.3 3.2 5.3 3.2 9S14.1 18.7 12 21"></path><path d="M12 3C9.9 5.3 8.8 8.3 8.8 12S9.9 18.7 12 21"></path></svg>
+                    <span class="flw-course-language-current" data-flw-course-language-current>{{currentlanguagelabel}}</span>
+                </button>
+                <div class="flw-course-language-menu" role="listbox" aria-label="{{#str}}flwlearninglanguage, theme_flwacademy{{/str}}">
+                    {{#learninglanguages}}
+                        <button type="button"
+                                class="flw-course-language-choice{{#isdefault}} is-active{{/isdefault}}"
+                                data-flw-course-language-choice
+                                data-language-code="{{code}}"
+                                data-language-label="{{label}}"
+                                data-category-url="{{categoryurl}}"
+                                data-school-category-url="{{schoolcategoryurl}}"
+                                data-selfstudy-category-url="{{selfstudycategoryurl}}"
+                                data-placement-test-url="{{placementtesturl}}"
+                                data-practice-category-url="{{practicecategoryurl}}"
+                                data-exam-category-url="{{examcategoryurl}}"
+                                data-practice-watch-url="{{practicewatchurl}}"
+                                data-practice-listen-url="{{practicelistenurl}}"
+                                data-practice-speak-url="{{practicespeakurl}}"
+                                data-practice-read-url="{{practicereadurl}}"
+                                data-practice-dictate-url="{{practicedictateurl}}"
+                                data-exam-1-label="{{exam1label}}"
+                                data-exam-1-url="{{exam1url}}"
+                                data-exam-2-label="{{exam2label}}"
+                                data-exam-2-url="{{exam2url}}"
+                                data-exam-3-label="{{exam3label}}"
+                                data-exam-3-url="{{exam3url}}"
+                                data-exam-4-label="{{exam4label}}"
+                                data-exam-4-url="{{exam4url}}"
+                                data-exam-5-label="{{exam5label}}"
+                                data-exam-5-url="{{exam5url}}"
+                                data-exam-6-label="{{exam6label}}"
+                                data-exam-6-url="{{exam6url}}"
+                                aria-pressed="{{#isdefault}}true{{/isdefault}}{{^isdefault}}false{{/isdefault}}">
+                            {{label}}
+                        </button>
+                    {{/learninglanguages}}
+                </div>
+            </div>
+        {{/flwtoolsshowlanguage}}
+        {{#hasflwreadingtoc}}
+            <button type="button" class="flw-course-tool flw-reading-toggle-toc is-active" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+                <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+                <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
+            </button>
+        {{/hasflwreadingtoc}}
+        {{#flwtoolsshowcourseindex}}
+            <button type="button" class="flw-course-tool flw-course-index-toggle is-active" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+                <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+                <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
+            </button>
+        {{/flwtoolsshowcourseindex}}
+        {{#flwtoolsshowscormtoc}}
+            <button type="button" class="flw-course-tool flw-scorm-toggle-toc" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+                <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+                <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
+            </button>
+        {{/flwtoolsshowscormtoc}}
+        <button type="button" class="flw-course-tool flw-reading-back" title="{{#str}}back, core{{/str}}" aria-label="{{#str}}back, core{{/str}}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l-5-5 5-5"></path><path d="M5 12h14"></path></svg>
+        </button>
+        {{#flwtoolsshowscormdone}}
+            <button type="button" class="flw-course-tool flw-scorm-done" title="{{#str}}completion_manual:markdone, core_course{{/str}}" aria-label="{{#str}}completion_manual:markdone, core_course{{/str}}" data-flw-scorm-cmid="{{flwscormcmid}}" data-flw-scorm-courseid="{{flwscormcourseid}}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+            </button>
+        {{/flwtoolsshowscormdone}}
+        {{#flwtoolsshowdone}}
+            <button type="button" class="flw-course-tool flw-reading-done is-hidden" title="{{#str}}completion_manual:markdone, core_course{{/str}}" aria-label="{{#str}}completion_manual:markdone, core_course{{/str}}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+            </button>
+        {{/flwtoolsshowdone}}
+    </div>
+</nav>
+{{#js}}
+(function() {
+    if (window.flwCourseToolsReady) {
+        return;
+    }
+    window.flwCourseToolsReady = true;
+
+    function writeCookie(name, value) {
+        document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; max-age=31536000; SameSite=Lax';
+    }
+
+    function normalizeUrl(url) {
+        var anchor = document.createElement('a');
+        anchor.href = url || window.location.href;
+        return anchor.href.replace(/#.*$/, '');
+    }
+
+    function applyCourseLanguage(choice) {
+        var code = choice.getAttribute('data-language-code') || '';
+        var label = choice.getAttribute('data-language-label') || 'English';
+        if (!code) {
+            return;
+        }
+        try {
+            window.localStorage.setItem('flw.learningLanguage', code);
+        } catch (error) {
+            // The cookie keeps the selection when local storage is unavailable.
+        }
+        writeCookie('flw_learning_language', code);
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-course-language-choice]')).forEach(function(item) {
+            var selected = item.getAttribute('data-language-code') === code;
+            item.classList.toggle('is-active', selected);
+            item.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        });
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-course-language-current]')).forEach(function(item) {
+            item.textContent = label;
+        });
+        document.dispatchEvent(new CustomEvent('flw:learningLanguageChanged', {
+            detail: {
+                code: code,
+                label: label
+            }
+        }));
+
+        var categoryUrls = {
+            school: choice.getAttribute('data-school-category-url') || choice.getAttribute('data-category-url'),
+            selfstudy: choice.getAttribute('data-selfstudy-category-url') || choice.getAttribute('data-category-url'),
+            practice: choice.getAttribute('data-practice-category-url') || choice.getAttribute('data-category-url'),
+            exam: choice.getAttribute('data-exam-category-url') || choice.getAttribute('data-category-url')
+        };
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-category-link]')).forEach(function(link) {
+            var linkType = link.getAttribute('data-flw-category-link');
+            link.setAttribute('href', categoryUrls[linkType] || choice.getAttribute('data-category-url') || '#');
+        });
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-placement-link]')).forEach(function(link) {
+            link.setAttribute('href', choice.getAttribute('data-placement-test-url') || categoryUrls.selfstudy || '#');
+        });
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-practice-submenu-link]')).forEach(function(link) {
+            var key = link.getAttribute('data-flw-practice-submenu-link');
+            link.setAttribute('href', choice.getAttribute('data-practice-' + key + '-url') || categoryUrls.practice || '#');
+        });
+        Array.prototype.slice.call(document.querySelectorAll('[data-flw-exam-submenu-link]')).forEach(function(link) {
+            var index = link.getAttribute('data-flw-exam-submenu-link');
+            var label = choice.getAttribute('data-exam-' + index + '-label') || '';
+            link.setAttribute('href', choice.getAttribute('data-exam-' + index + '-url') || categoryUrls.exam || '#');
+            if (label) {
+                link.textContent = label;
+            }
+            link.hidden = !label;
+        });
+
+        var toolGroup = choice.closest('.flw-course-tools');
+        var currentCategoryType = toolGroup ? toolGroup.getAttribute('data-current-category-type') : '';
+        var targetUrl = categoryUrls[currentCategoryType] || '';
+        if (targetUrl && normalizeUrl(targetUrl) !== normalizeUrl(window.location.href)) {
+            window.location.href = targetUrl;
+        }
+    }
+
+    function setTocButtonState(button, hidden) {
+        if (!button) {
+            return;
+        }
+        button.classList.toggle('is-active', !hidden);
+        button.setAttribute('aria-pressed', hidden ? 'false' : 'true');
+    }
+
+    function refreshScormTocButtons() {
+        var toc = document.getElementById('scorm_toc');
+        Array.prototype.slice.call(document.querySelectorAll('.flw-scorm-toggle-toc')).forEach(function(button) {
+            button.classList.toggle('is-active', toc && !toc.classList.contains('disabled'));
+        });
+    }
+
+    function isCourseIndexOpen() {
+        var page = document.getElementById('page');
+        var drawer = document.getElementById('theme_boost-drawers-courseindex');
+        return !!((page && page.classList.contains('show-drawer-left')) ||
+            document.body.classList.contains('drawer-open-index') ||
+            (drawer && drawer.classList.contains('show')));
+    }
+
+    function refreshCourseIndexButtons() {
+        var open = isCourseIndexOpen();
+        document.body.classList.toggle('flw-course-index-visible', open);
+        Array.prototype.slice.call(document.querySelectorAll('.flw-course-index-toggle')).forEach(function(button) {
+            button.classList.toggle('is-active', open);
+            button.setAttribute('aria-pressed', open ? 'true' : 'false');
+        });
+    }
+
+    function toggleCourseIndex() {
+        var drawer = document.getElementById('theme_boost-drawers-courseindex');
+        var page = document.getElementById('page');
+        if (drawer && page) {
+            var open = !isCourseIndexOpen();
+            drawer.classList.toggle('show', open);
+            page.classList.toggle('show-drawer-left', open);
+            document.body.classList.toggle('drawer-open-index', open);
+            document.body.classList.toggle('flw-course-index-visible', open);
+            drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        }
+        window.setTimeout(refreshCourseIndexButtons, 60);
+    }
+
+    function openDictionary(button) {
+        var nativeButton = document.querySelector('.local-mldict-float-button');
+        if (nativeButton) {
+            nativeButton.click();
+            return;
+        }
+        var url = button.getAttribute('data-flw-dictionary-url');
+        if (url) {
+            window.location.href = url;
+        }
+    }
+
+    function toggleScormToc() {
+        var moodleToggle = document.getElementById('scorm_toc_toggle_btn');
+        var toc = document.getElementById('scorm_toc');
+        if (moodleToggle) {
+            moodleToggle.click();
+        } else if (toc) {
+            toc.classList.toggle('disabled');
+        }
+        window.setTimeout(refreshScormTocButtons, 30);
+    }
+
+    function markScormDone(button) {
+        var cmid = parseInt(button.getAttribute('data-flw-scorm-cmid') || '0', 10);
+        var courseid = parseInt(button.getAttribute('data-flw-scorm-courseid') || '0', 10);
+        if (!cmid) {
+            button.classList.add('is-error');
+            return;
+        }
+        button.disabled = true;
+        button.classList.add('is-loading');
+        require(['core/ajax'], function(Ajax) {
+            Ajax.call([{
+                methodname: 'core_completion_update_activity_completion_status_manually',
+                args: {cmid: cmid, completed: true}
+            }])[0].then(function() {
+                if (!courseid) {
+                    return true;
+                }
+                return Ajax.call([{
+                    methodname: 'core_completion_mark_course_self_completed',
+                    args: {courseid: courseid}
+                }])[0].catch(function(error) {
+                    if (error && error.errorcode === 'useralreadymarkedcomplete') {
+                        return true;
+                    }
+                    return true;
+                });
+            }).then(function() {
+                button.classList.remove('is-loading');
+                button.classList.add('is-done');
+            }).catch(function() {
+                button.disabled = false;
+                button.classList.remove('is-loading');
+                button.classList.add('is-error');
+            });
+        });
+    }
+
+    function getManualDoneButton() {
+        var buttons = Array.prototype.slice.call(document.querySelectorAll('button[data-action="toggle-manual-completion"][data-toggletype="manual:mark-done"]')).filter(function(button) {
+            return !button.disabled && !button.closest('.flw-course-tools');
+        });
+        if (!buttons.length) {
+            return null;
+        }
+        var viewportCenter = window.innerHeight / 2;
+        buttons.sort(function(left, right) {
+            var leftTarget = left.closest('.course-section, .section, li.activity, .activity') || left;
+            var rightTarget = right.closest('.course-section, .section, li.activity, .activity') || right;
+            var leftRect = leftTarget.getBoundingClientRect();
+            var rightRect = rightTarget.getBoundingClientRect();
+            return Math.abs((leftRect.top + leftRect.bottom) / 2 - viewportCenter) - Math.abs((rightRect.top + rightRect.bottom) / 2 - viewportCenter);
+        });
+        return buttons[0];
+    }
+
+    function refreshDoneTools() {
+        Array.prototype.slice.call(document.querySelectorAll('.flw-reading-done')).forEach(function(doneTool) {
+            doneTool.classList.toggle('is-hidden', !getManualDoneButton());
+        });
+    }
+
+    window.addEventListener('scroll', refreshDoneTools, {passive: true});
+    document.addEventListener('core_course/manualCompletionToggled', function() {
+        window.setTimeout(refreshDoneTools, 250);
+    });
+    window.setTimeout(refreshDoneTools, 0);
+    window.setTimeout(refreshScormTocButtons, 0);
+    window.setTimeout(refreshCourseIndexButtons, 0);
+
+    document.addEventListener('click', function(event) {
+        var toolGroup = event.target.closest && event.target.closest('.flw-course-tools');
+        var toolsToggle = event.target.closest && event.target.closest('.flw-course-tools-toggle');
+        if (toolsToggle) {
+            var targetGroup = toolsToggle.closest('.flw-course-tools');
+            var open = !targetGroup.classList.contains('is-open');
+            targetGroup.classList.toggle('is-open', open);
+            targetGroup.classList.remove('is-language-open');
+            toolsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (typeof toolsToggle.blur === 'function') {
+                toolsToggle.blur();
+            }
+            return;
+        }
+
+        if (!toolGroup) {
+            Array.prototype.slice.call(document.querySelectorAll('.flw-course-tools.is-open')).forEach(function(group) {
+                group.classList.remove('is-open', 'is-language-open');
+                var toggle = group.querySelector('.flw-course-tools-toggle');
+                if (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        var tocLink = event.target.closest && event.target.closest('.flw-reading-toc a');
+        if (tocLink) {
+            var toc = tocLink.closest('.flw-reading-toc');
+            if (toc) {
+                Array.prototype.slice.call(toc.querySelectorAll('li.current')).forEach(function(item) {
+                    item.classList.remove('current');
+                });
+                var currentItem = tocLink.closest('li');
+                if (currentItem) {
+                    currentItem.classList.add('current');
+                }
+            }
+            return;
+        }
+
+        if (!toolGroup) {
+            return;
+        }
+
+        var languageToggle = event.target.closest && event.target.closest('.flw-course-language-toggle');
+        if (languageToggle) {
+            var languageGroup = languageToggle.closest('.flw-course-tools');
+            if (languageGroup) {
+                var languageOpen = !languageGroup.classList.contains('is-language-open');
+                languageGroup.classList.toggle('is-language-open', languageOpen);
+                languageToggle.setAttribute('aria-expanded', languageOpen ? 'true' : 'false');
+            }
+            return;
+        }
+
+        var dictionaryButton = event.target.closest && event.target.closest('.flw-dictionary-toggle');
+        if (dictionaryButton) {
+            openDictionary(dictionaryButton);
+            return;
+        }
+
+        var languageChoice = event.target.closest && event.target.closest('[data-flw-course-language-choice]');
+        if (languageChoice) {
+            applyCourseLanguage(languageChoice);
+            var languageTools = languageChoice.closest('.flw-course-tools');
+            if (languageTools) {
+                languageTools.classList.remove('is-language-open');
+            }
+            return;
+        }
+
+        var tocButton = event.target.closest && event.target.closest('.flw-reading-toggle-toc');
+        if (tocButton) {
+            var shell = document.querySelector('.flw-app-shell.has-flw-reading-toc');
+            if (!shell) {
+                return;
+            }
+            var hidden = shell.classList.toggle('is-toc-hidden');
+            setTocButtonState(tocButton, hidden);
+            return;
+        }
+
+        var courseIndexButton = event.target.closest && event.target.closest('.flw-course-index-toggle');
+        if (courseIndexButton) {
+            toggleCourseIndex();
+            return;
+        }
+
+        var scormTocButton = event.target.closest && event.target.closest('.flw-scorm-toggle-toc');
+        if (scormTocButton) {
+            toggleScormToc();
+            return;
+        }
+
+        var scormDoneButton = event.target.closest && event.target.closest('.flw-scorm-done');
+        if (scormDoneButton) {
+            markScormDone(scormDoneButton);
+            return;
+        }
+
+        var doneButton = event.target.closest && event.target.closest('.flw-reading-done');
+        if (doneButton) {
+            var manualDoneButton = getManualDoneButton();
+            if (manualDoneButton) {
+                manualDoneButton.click();
+                window.setTimeout(refreshDoneTools, 450);
+            }
+            return;
+        }
+
+        var backButton = event.target.closest && event.target.closest('.flw-reading-back');
+        if (backButton) {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = (window.M && M.cfg && M.cfg.wwwroot) || '/';
+            }
+        }
+    });
+})();
+{{/js}}
+{{/hasflwtools}}

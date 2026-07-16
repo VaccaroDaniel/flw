@@ -1,0 +1,17 @@
+{{!
+    @template theme_flwacademy/flw_lesson_flow
+
+    FLW Clean v3 accordion lesson flow.
+}}
+<section id="flw-lessons" class="flw-lesson-flow">
+    {{#lessons}}
+        <article class="flw-lesson-card">
+            <button class="flw-lesson-toggle" type="button" aria-expanded="{{#expanded}}true{{/expanded}}{{^expanded}}false{{/expanded}}">
+                {{title}}
+            </button>
+            <div class="flw-lesson-body" {{^expanded}}hidden{{/expanded}}>
+                {{{content}}}
+            </div>
+        </article>
+    {{/lessons}}
+</section>

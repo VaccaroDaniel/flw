@@ -1,0 +1,91 @@
+{{!
+    @template theme_flwacademy/flw_topnav
+
+    Shared FLW top navigation used by home, dashboard, course, category and
+    standard Moodle pages.
+}}
+{{#flwtopnav}}
+<header class="flw-topnav d-print-none" data-flw-topnav>
+    <a class="flw-topnav-brand" href="{{brandurl}}" aria-label="FLW home">
+        <span class="flw-topnav-brandmark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" focusable="false">
+                <path d="M16 3 27 8v8c0 6.4-4.3 10.7-11 13C9.3 26.7 5 22.4 5 16V8Z"></path>
+                <path d="M10 12h12M10 16h9M10 20h6" class="flw-topnav-brandmark-lines"></path>
+            </svg>
+        </span>
+        <span class="flw-topnav-brandtext">FLW</span>
+    </a>
+
+    <button class="flw-topnav-toggle" type="button" data-flw-topnav-toggle aria-expanded="false" aria-controls="flw-topnav-links">
+        <span class="visually-hidden">Open navigation</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 7h14M5 12h14M5 17h14"></path>
+        </svg>
+    </button>
+
+    {{#hasnavitems}}
+    <nav class="flw-topnav-links" id="flw-topnav-links" data-flw-topnav-links aria-label="Primary navigation">
+        {{#navitems}}
+        <a class="flw-topnav-link {{#isactive}}is-active{{/isactive}}" href="{{url}}" data-flw-nav-key="{{key}}" {{#isactive}}aria-current="page"{{/isactive}}>{{{iconhtml}}}<span>{{text}}</span></a>
+        {{/navitems}}
+    </nav>
+    {{/hasnavitems}}
+
+    <div id="usernavigation" class="flw-topnav-actions navbar-nav">
+        {{#isloggedinuser}}
+        {{{ output.navbar_plugin_output }}}
+        <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+            {{#usermenu}}
+                {{> core/user_menu }}
+            {{/usermenu}}
+        </div>
+        {{/isloggedinuser}}
+        {{^isloggedinuser}}
+        <a class="flw-topnav-login" href="{{loginurl}}">Log in</a>
+        {{/isloggedinuser}}
+        {{{ output.edit_switch }}}
+    </div>
+</header>
+{{/flwtopnav}}
+{{#js}}
+(function() {
+    if (window.flwTopnavReady) {
+        return;
+    }
+    window.flwTopnavReady = true;
+
+    function closeNav(nav, button) {
+        if (nav) {
+            nav.classList.remove('is-open');
+        }
+        if (button) {
+            button.setAttribute('aria-expanded', 'false');
+            button.blur();
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        document.querySelectorAll('[data-flw-topnav]').forEach(function(root) {
+            var nav = root.querySelector('[data-flw-topnav-links]');
+            var toggle = root.querySelector('[data-flw-topnav-toggle]');
+            if (!root.contains(event.target)) {
+                closeNav(nav, toggle);
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-flw-topnav]').forEach(function(root) {
+        var nav = root.querySelector('[data-flw-topnav-links]');
+        var toggle = root.querySelector('[data-flw-topnav-toggle]');
+        if (toggle && nav) {
+            toggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                var open = !nav.classList.contains('is-open');
+                nav.classList.toggle('is-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.blur();
+            });
+        }
+    });
+}());
+{{/js}}
