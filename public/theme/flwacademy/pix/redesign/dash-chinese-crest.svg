@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" width="240" height="260" role="img" aria-labelledby="title" overflow="visible">
+    <title id="title">Chinese World crest</title>
+    <defs>
+      <g id="leaf"><ellipse cx="0" cy="0" rx="4.4" ry="10.2" fill="#bd351f"/></g>
+    </defs>
+    <g aria-hidden="true">
+      <path d="M94 45h52l-4.5 13h-43z" fill="#bd351f"/>
+      <path d="M98 46l5-16 12 10 5-18 6 18 12-10 4 16z" fill="#bd351f" stroke="#ffffff" stroke-opacity=".3" stroke-width="1.5"/>
+      <circle cx="103" cy="29" r="3" fill="#bd351f"/><circle cx="120" cy="20" r="3.2" fill="#bd351f"/><circle cx="138" cy="29" r="3" fill="#bd351f"/>
+    </g>
+    <g aria-hidden="true">
+      <path d="M40 104C34 154 52 202 93 229" fill="none" stroke="#bd351f" stroke-width="4" stroke-linecap="round"/>
+      <path d="M200 104C206 154 188 202 147 229" fill="none" stroke="#bd351f" stroke-width="4" stroke-linecap="round"/>
+      <use href="#leaf" transform="translate(65 108) rotate(-28)"/><use href="#leaf" transform="translate(57 122) rotate(-34)"/><use href="#leaf" transform="translate(51 137) rotate(-39)"/><use href="#leaf" transform="translate(48 153) rotate(-43)"/><use href="#leaf" transform="translate(49 169) rotate(-48)"/><use href="#leaf" transform="translate(54 185) rotate(-54)"/><use href="#leaf" transform="translate(62 200) rotate(-62)"/><use href="#leaf" transform="translate(73 214) rotate(-68)"/><use href="#leaf" transform="translate(175 108) rotate(28)"/><use href="#leaf" transform="translate(183 122) rotate(34)"/><use href="#leaf" transform="translate(189 137) rotate(39)"/><use href="#leaf" transform="translate(192 153) rotate(43)"/><use href="#leaf" transform="translate(191 169) rotate(48)"/><use href="#leaf" transform="translate(186 185) rotate(54)"/><use href="#leaf" transform="translate(178 200) rotate(62)"/><use href="#leaf" transform="translate(167 214) rotate(68)"/>
+      <path d="M91 229c12 8 46 8 58 0" fill="none" stroke="#bd351f" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <path d="M72 60Q120 48 168 60v78c0 37-20 64-48 79-28-15-48-42-48-79z" fill="#c42018" stroke="#efb83e" stroke-width="6"/>
+    <path d="M81 69q39-9 78 0v67c0 31-15 54-39 68-24-14-39-37-39-68z" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="2"/>
+    <text x="120" y="159" text-anchor="middle" font-family="Noto Serif CJK SC, Source Han Serif SC, SimSun, serif" font-size="74" font-weight="700" fill="#fff9e6">文</text>
+    </svg>

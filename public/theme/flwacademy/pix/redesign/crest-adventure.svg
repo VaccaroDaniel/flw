@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" width="240" height="260" role="img" aria-labelledby="title" overflow="visible">
+    <title id="title">Adventure World crest</title>
+    <defs>
+      <g id="leaf"><ellipse cx="0" cy="0" rx="4.4" ry="10.2" fill="#d4a33b"/></g>
+    </defs>
+    <g aria-hidden="true">
+      <path d="M94 45h52l-4.5 13h-43z" fill="#d4a33b"/>
+      <path d="M98 46l5-16 12 10 5-18 6 18 12-10 4 16z" fill="#d4a33b" stroke="#ffffff" stroke-opacity=".3" stroke-width="1.5"/>
+      <circle cx="103" cy="29" r="3" fill="#d4a33b"/><circle cx="120" cy="20" r="3.2" fill="#d4a33b"/><circle cx="138" cy="29" r="3" fill="#d4a33b"/>
+    </g>
+    <g aria-hidden="true">
+      <path d="M40 104C34 154 52 202 93 229" fill="none" stroke="#d4a33b" stroke-width="4" stroke-linecap="round"/>
+      <path d="M200 104C206 154 188 202 147 229" fill="none" stroke="#d4a33b" stroke-width="4" stroke-linecap="round"/>
+      <use href="#leaf" transform="translate(65 108) rotate(-28)"/><use href="#leaf" transform="translate(57 122) rotate(-34)"/><use href="#leaf" transform="translate(51 137) rotate(-39)"/><use href="#leaf" transform="translate(48 153) rotate(-43)"/><use href="#leaf" transform="translate(49 169) rotate(-48)"/><use href="#leaf" transform="translate(54 185) rotate(-54)"/><use href="#leaf" transform="translate(62 200) rotate(-62)"/><use href="#leaf" transform="translate(73 214) rotate(-68)"/><use href="#leaf" transform="translate(175 108) rotate(28)"/><use href="#leaf" transform="translate(183 122) rotate(34)"/><use href="#leaf" transform="translate(189 137) rotate(39)"/><use href="#leaf" transform="translate(192 153) rotate(43)"/><use href="#leaf" transform="translate(191 169) rotate(48)"/><use href="#leaf" transform="translate(186 185) rotate(54)"/><use href="#leaf" transform="translate(178 200) rotate(62)"/><use href="#leaf" transform="translate(167 214) rotate(68)"/>
+      <path d="M91 229c12 8 46 8 58 0" fill="none" stroke="#d4a33b" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <path d="M72 60Q120 48 168 60v78c0 37-20 64-48 79-28-15-48-42-48-79z" fill="#123d82" stroke="#efb83e" stroke-width="6"/>
+    <path d="M81 69q39-9 78 0v67c0 31-15 54-39 68-24-14-39-37-39-68z" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="2"/>
+    <g fill="#fff9e8" stroke="#d7c9a5" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M90 102q17-10 30 1v48q-14-11-30-1z"/><path d="M150 102q-17-10-30 1v48q14-11 30-1z"/>
+      <path d="M120 103v48" fill="none"/>
+    </g><g fill="#f3bb3d"><circle cx="108" cy="171" r="4"/><circle cx="132" cy="171" r="4"/><path d="M120 162l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></g>
+    </svg>

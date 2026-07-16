@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" width="240" height="260" role="img" aria-labelledby="title" overflow="visible">
+    <title id="title">Spanish World crest</title>
+    <defs>
+      <g id="leaf"><ellipse cx="0" cy="0" rx="4.4" ry="10.2" fill="#c88914"/></g>
+    </defs>
+    <g aria-hidden="true">
+      <path d="M94 45h52l-4.5 13h-43z" fill="#c88914"/>
+      <path d="M98 46l5-16 12 10 5-18 6 18 12-10 4 16z" fill="#c88914" stroke="#ffffff" stroke-opacity=".3" stroke-width="1.5"/>
+      <circle cx="103" cy="29" r="3" fill="#c88914"/><circle cx="120" cy="20" r="3.2" fill="#c88914"/><circle cx="138" cy="29" r="3" fill="#c88914"/>
+    </g>
+    <g aria-hidden="true">
+      <path d="M40 104C34 154 52 202 93 229" fill="none" stroke="#c88914" stroke-width="4" stroke-linecap="round"/>
+      <path d="M200 104C206 154 188 202 147 229" fill="none" stroke="#c88914" stroke-width="4" stroke-linecap="round"/>
+      <use href="#leaf" transform="translate(65 108) rotate(-28)"/><use href="#leaf" transform="translate(57 122) rotate(-34)"/><use href="#leaf" transform="translate(51 137) rotate(-39)"/><use href="#leaf" transform="translate(48 153) rotate(-43)"/><use href="#leaf" transform="translate(49 169) rotate(-48)"/><use href="#leaf" transform="translate(54 185) rotate(-54)"/><use href="#leaf" transform="translate(62 200) rotate(-62)"/><use href="#leaf" transform="translate(73 214) rotate(-68)"/><use href="#leaf" transform="translate(175 108) rotate(28)"/><use href="#leaf" transform="translate(183 122) rotate(34)"/><use href="#leaf" transform="translate(189 137) rotate(39)"/><use href="#leaf" transform="translate(192 153) rotate(43)"/><use href="#leaf" transform="translate(191 169) rotate(48)"/><use href="#leaf" transform="translate(186 185) rotate(54)"/><use href="#leaf" transform="translate(178 200) rotate(62)"/><use href="#leaf" transform="translate(167 214) rotate(68)"/>
+      <path d="M91 229c12 8 46 8 58 0" fill="none" stroke="#c88914" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <path d="M72 60Q120 48 168 60v78c0 37-20 64-48 79-28-15-48-42-48-79z" fill="#e78b00" stroke="#efb83e" stroke-width="6"/>
+    <path d="M81 69q39-9 78 0v67c0 31-15 54-39 68-24-14-39-37-39-68z" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="2"/>
+    <g fill="none" stroke="#fff5d7" stroke-width="5" stroke-linecap="round"><line x1="120" y1="92" x2="120" y2="104" transform="rotate(0 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(30 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(60 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(90 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(120 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(150 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(180 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(210 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(240 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(270 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(300 120 132)"/><line x1="120" y1="92" x2="120" y2="104" transform="rotate(330 120 132)"/><circle cx="120" cy="132" r="25"/><path d="M108 134c5 8 19 8 24 0"/></g><circle cx="110" cy="124" r="3" fill="#fff5d7"/><circle cx="130" cy="124" r="3" fill="#fff5d7"/>
+    </svg>
