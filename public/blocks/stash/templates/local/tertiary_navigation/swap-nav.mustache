@@ -1,0 +1,45 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_stash/local/tertiary_navigation/swap-nav
+
+    Swap navigation.
+}}
+<div class="container-fluid tertiary-navigation full-width-bottom-border">
+    <nav class="navbar navbar-expand-lg">
+        <span class="navbar-brand mb-0 h4">{{header}}</span>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="{{tradeurl}}">{{#str}}tradecenter, block_stash{{/str}}</a>
+                </li>
+                <li class="nav-item px-1">|</li>
+                <li class="nav-item">
+                    <a href="{{offerurl}}">{{#str}}offers, block_stash{{/str}}</a>
+                </li>
+                {{#other}}
+                <li class="nav-item ps-1">
+                    {{>block_stash/item_selector}}
+                </li>
+                <li class="nav-item ps-1">
+                    {{>block_stash/user_selector}}
+                </li>
+                {{/other}}
+            </ul>
+        </div>
+    </nav>
+</div>
