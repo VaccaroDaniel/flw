@@ -12,7 +12,7 @@ if ($ADMIN->fulltree) {
     ));
 
     $colours = [
-        ['emerald', '#0F9D7A'],
+        ['emerald', '#0a4be8'],
         ['orange', '#FF8A00'],
         ['purple', '#7B4DFF'],
         ['pink', '#E05280'],

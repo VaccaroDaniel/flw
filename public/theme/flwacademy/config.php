@@ -16,7 +16,7 @@ $THEME->extrascsscallback = 'theme_flwacademy_get_extra_scss';
 $THEME->layouts = [
     'base' => ['file' => 'drawers.php', 'regions' => []],
     'standard' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
-    'course' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre', 'options' => ['langmenu' => true]],
+    'course' => ['file' => 'course.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre', 'options' => ['langmenu' => true]],
     'coursecategory' => ['file' => 'school_category_flw.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
     'incourse' => ['file' => 'drawers.php', 'regions' => ['side-pre'], 'defaultregion' => 'side-pre'],
     'frontpage' => ['file' => 'frontpage_flw.php', 'regions' => [], 'options' => ['nonavbar' => true]],
@@ -40,4 +40,4 @@ $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->requiredblocks = '';
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_DEFAULT;
 $THEME->haseditswitch = true;
-$THEME->favicon = $CFG->wwwroot . '/theme/flwacademy/pix/favicon.ico';
+$THEME->favicon = $CFG->wwwroot . '/theme/flwacademy/pix/favicon.png';

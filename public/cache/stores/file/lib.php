@@ -916,8 +916,20 @@ class cachestore_file extends store implements
             return false;
         }
 
-        // Finally rename the temp file to the desired file, returning the true|false result.
-        $result = rename($tempfile, $file);
+        // Finally rename the temp file to the desired file. Windows can fail
+        // if the target cache file already exists or was briefly held by
+        // another PHP process, so replace generated cache files defensively.
+        $result = false;
+        for ($attempt = 0; $attempt < 3 && !$result; $attempt++) {
+            clearstatcache(true, $file);
+            if (file_exists($file)) {
+                @unlink($file);
+            }
+            $result = @rename($tempfile, $file);
+            if (!$result) {
+                usleep(50000);
+            }
+        }
         @chmod($file, $this->cfg->filepermissions);
         if (!$result) {
             // Failed to rename, don't leave files lying around.

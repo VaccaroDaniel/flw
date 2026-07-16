@@ -139,7 +139,8 @@ if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
                 toolbar.setAttribute('aria-label', 'Course actions');
                 toolbar.innerHTML =
                     '<button type=\"button\" class=\"flw-scorm-action flw-scorm-toggle-toc\" title=\"Toggle contents\" aria-label=\"Toggle contents\">' +
-                    '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6h16\"></path><path d=\"M4 12h16\"></path><path d=\"M4 18h16\"></path></svg></button>' +
+                    '<svg class=\"flw-toc-icon-horizontal\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6h16\"></path><path d=\"M4 12h16\"></path><path d=\"M4 18h16\"></path></svg>' +
+                    '<svg class=\"flw-toc-icon-vertical\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 4v16\"></path><path d=\"M12 4v16\"></path><path d=\"M17 4v16\"></path></svg></button>' +
                     '<button type=\"button\" class=\"flw-scorm-action flw-scorm-done\" title=\"Mark course done\" aria-label=\"Mark course done\">' +
                     '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"></path></svg></button>' +
                     '<a class=\"flw-scorm-action flw-scorm-exit\" title=\"Exit activity\" aria-label=\"Exit activity\" href=\"' + getExitUrl() + '\">' +
@@ -147,6 +148,11 @@ if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
                 scormPage.parentNode.insertBefore(toolbar, scormPage);
 
                 var tocButton = toolbar.querySelector('.flw-scorm-toggle-toc');
+                function updateTocButtonState() {
+                    var toc = document.getElementById('scorm_toc');
+                    tocButton.classList.toggle('is-active', toc && !toc.classList.contains('disabled'));
+                }
+                updateTocButtonState();
                 tocButton.addEventListener('click', function() {
                     var moodleToggle = document.getElementById('scorm_toc_toggle_btn');
                     var toc = document.getElementById('scorm_toc');
@@ -155,7 +161,7 @@ if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
                     } else if (toc) {
                         toc.classList.toggle('disabled');
                     }
-                    tocButton.classList.toggle('is-active', toc && !toc.classList.contains('disabled'));
+                    window.setTimeout(updateTocButtonState, 30);
                 });
 
                 var exitButton = toolbar.querySelector('.flw-scorm-exit');
@@ -322,30 +328,26 @@ if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
                 var tocTop = toc.getBoundingClientRect().top;
                 var title = root.querySelector('#scorm_toc_title');
                 var titleHeight = title && title.getBoundingClientRect ? title.getBoundingClientRect().height : 0;
-                var bottomGap = window.matchMedia('(max-width: 680px)').matches ? 86 : 78;
+                var bottomGap = window.matchMedia('(max-width: 680px)').matches ? 18 : 20;
                 var tocHeight = Math.max(180, window.innerHeight - tocTop - bottomGap);
-                var treeHeight = Math.max(140, tocHeight - titleHeight - 32);
+                var treeHeight = Math.max(140, tocHeight - titleHeight - 22);
                 toc.style.setProperty('--flw-scorm-toc-max-height', tocHeight + 'px');
                 tree.style.setProperty('--flw-scorm-tree-max-height', treeHeight + 'px');
             }
 
             function startCleanMode() {
-                addToolbar();
                 hideReachableScormChrome();
                 window.addEventListener('resize', hideReachableScormChrome);
                 if (window.MutationObserver && document.body) {
                     var observer = new MutationObserver(function() {
-                        addToolbar();
                         hideReachableScormChrome();
                     });
                     observer.observe(document.body, {childList: true, subtree: true});
                 }
                 window.setTimeout(function() {
-                    addToolbar();
                     hideReachableScormChrome();
                 }, 250);
                 window.setTimeout(function() {
-                    addToolbar();
                     hideReachableScormChrome();
                 }, 1500);
                 var attempts = 0;
@@ -414,6 +416,7 @@ if ($PAGE->has_secondary_navigation()) {
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
+$flwtopnav = theme_flwacademy_export_topnav_context($OUTPUT, $primarymenu);
 $learninglanguages = theme_flwacademy_export_learning_languages();
 $currentlanguagecode = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
 if ($currentlanguagecode !== '') {
@@ -442,6 +445,7 @@ $templatecontext = [
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'usermenu' => $primarymenu['user'],
     'langmenu' => $primarymenu['lang'],
+    'flwtopnav' => $flwtopnav,
     'forceblockdraweropen' => $forceblockdraweropen,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
@@ -454,11 +458,19 @@ $templatecontext = [
     'currentcategorytype' => '',
 ];
 
+$toolscontext = theme_flwacademy_extend_tools_context([
+    'output' => $OUTPUT,
+    'haslearninglanguages' => !empty($learninglanguages),
+    'learninglanguages' => $learninglanguages,
+    'currentlanguagecode' => $currentlanguagecode,
+    'currentcategorytype' => '',
+    'courseindex' => $courseindex,
+]);
 $pagehtml = $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
-$languagepanel = $OUTPUT->render_from_template('theme_flwacademy/flw_language_panel', $templatecontext);
-if ($languagepanel !== '' && strpos($pagehtml, '</body>') !== false) {
-    $pagehtml = str_replace('</body>', $languagepanel . "\n</body>", $pagehtml);
+$toolsgroup = $OUTPUT->render_from_template('theme_flwacademy/flw_tools_group', $toolscontext);
+if ($toolsgroup !== '' && strpos($pagehtml, '</body>') !== false) {
+    $pagehtml = str_replace('</body>', $toolsgroup . "\n</body>", $pagehtml);
 } else {
-    $pagehtml .= $languagepanel;
+    $pagehtml .= $toolsgroup;
 }
 echo $pagehtml;

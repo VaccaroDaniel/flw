@@ -32,6 +32,13 @@ class provider implements
             'attemptjson' => 'privacy:metadata:local_flwplacement:attemptjson',
         ], 'privacy:metadata:local_flwplacement');
 
+        $collection->add_database_table('local_flwplacement_profile', [
+            'userid' => 'privacy:metadata:local_flwplacement_profile:userid',
+            'coursekey' => 'privacy:metadata:local_flwplacement_profile:coursekey',
+            'profilejson' => 'privacy:metadata:local_flwplacement_profile:profilejson',
+            'placementhistoryjson' => 'privacy:metadata:local_flwplacement_profile:placementhistoryjson',
+        ], 'privacy:metadata:local_flwplacement_profile');
+
         return $collection;
     }
 
@@ -55,6 +62,10 @@ class provider implements
                     $contextlist->add_context($context);
                 }
             }
+        }
+        if ($DB->get_manager()->table_exists('local_flwplacement_profile') &&
+            $DB->record_exists('local_flwplacement_profile', ['userid' => $userid])) {
+            $contextlist->add_system_context();
         }
 
         return $contextlist;
@@ -85,9 +96,16 @@ class provider implements
             }
 
             if ($records) {
+                $profiles = [];
+                if ($context->contextlevel === CONTEXT_SYSTEM &&
+                    $DB->get_manager()->table_exists('local_flwplacement_profile')) {
+                    $profiles = array_values($DB->get_records('local_flwplacement_profile', [
+                        'userid' => $userid,
+                    ], 'timemodified ASC'));
+                }
                 writer::with_context($context)->export_data(
                     [get_string('pluginname', 'local_flwplacement')],
-                    (object) ['results' => $records]
+                    (object) ['results' => $records, 'profiles' => $profiles]
                 );
             }
         }
@@ -103,6 +121,9 @@ class provider implements
 
         if ($context->contextlevel === CONTEXT_SYSTEM) {
             $DB->delete_records('local_flwplacement', ['courseid' => SITEID]);
+            if ($DB->get_manager()->table_exists('local_flwplacement_profile')) {
+                $DB->delete_records('local_flwplacement_profile');
+            }
         } else if ($context->contextlevel === CONTEXT_COURSE) {
             $DB->delete_records('local_flwplacement', ['courseid' => $context->instanceid]);
         }
@@ -123,6 +144,9 @@ class provider implements
                     'userid' => $userid,
                     'courseid' => SITEID,
                 ]);
+                if ($DB->get_manager()->table_exists('local_flwplacement_profile')) {
+                    $DB->delete_records('local_flwplacement_profile', ['userid' => $userid]);
+                }
             } else if ($context->contextlevel === CONTEXT_COURSE) {
                 $DB->delete_records('local_flwplacement', [
                     'userid' => $userid,

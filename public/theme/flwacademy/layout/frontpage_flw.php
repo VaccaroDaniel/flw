@@ -3,6 +3,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $USER;
+
 require_once($CFG->dirroot . '/course/lib.php');
 
 $extraclasses = ['flw-start-page'];
@@ -11,13 +13,14 @@ $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
+$flwtopnav = theme_flwacademy_export_topnav_context($OUTPUT, $primarymenu, ['activekey' => 'home']);
 $flwlangorder = [
     'en' => 0,
     'ru' => 1,
     'zh_cn' => 2,
     'zh' => 2,
-    'ja' => 3,
-    'de' => 4,
+    'de' => 3,
+    'ja' => 4,
     'fr' => 5,
     'es' => 6,
 ];
@@ -54,6 +57,93 @@ $loginurl = new moodle_url('/login/index.php');
 $dashboardurl = new moodle_url('/my/');
 $courseindexurl = new moodle_url('/course/index.php');
 $frontpageurl = new moodle_url('/');
+$placementurl = new moodle_url('/local/flwplacement/index.php', ['language' => 'en']);
+$signinurl = isloggedin() && !isguestuser() ? $dashboardurl : $loginurl;
+$signinlabel = isloggedin() && !isguestuser() ? get_string('myhome') : get_string('login');
+$isloggedinuser = isloggedin() && !isguestuser();
+$userfullname = $isloggedinuser ? fullname($USER) : '';
+$userpicture = $isloggedinuser
+    ? $OUTPUT->user_picture($USER, ['size' => 36, 'link' => false, 'class' => 'flw-home-avatar'])
+    : '';
+
+$flwasset = static function(string $name) use ($OUTPUT): string {
+    return $OUTPUT->image_url('redesign/' . $name, 'theme_flwacademy')->out(false);
+};
+
+$coursecards = [
+    [
+        'name' => 'Adventure English World',
+        'range' => 'Pre-A1 to B1',
+        'status' => 'Unit 37 of 72',
+        'progress' => '58%',
+        'cresturl' => $flwasset('crest-adventure'),
+        'alt' => 'Adventure English World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'Real English World',
+        'range' => 'A1 to C1',
+        'status' => 'Unit 52 of 108',
+        'progress' => '48%',
+        'cresturl' => $flwasset('crest-real'),
+        'alt' => 'Real English World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'Russian World',
+        'range' => 'A1 to C1',
+        'status' => 'Unit 22 of 120',
+        'progress' => '45%',
+        'cresturl' => $flwasset('crest-russian'),
+        'alt' => 'Russian World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'Chinese World',
+        'range' => 'A1 to C1',
+        'status' => 'Next checkpoint',
+        'progress' => '47%',
+        'cresturl' => $flwasset('crest-chinese'),
+        'alt' => 'Chinese World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'German World',
+        'range' => 'A1 to C2',
+        'status' => 'Unit 15 of 72',
+        'progress' => '42%',
+        'cresturl' => $flwasset('crest-german'),
+        'alt' => 'German World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'Japanese World',
+        'range' => 'A1 to C1',
+        'status' => 'Unit 27 of 60',
+        'progress' => '45%',
+        'cresturl' => $flwasset('crest-japanese'),
+        'alt' => 'Japanese World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'French World',
+        'range' => 'A1 to B2',
+        'status' => 'Unit 31 of 48',
+        'progress' => '58%',
+        'cresturl' => $flwasset('crest-french'),
+        'alt' => 'French World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+    [
+        'name' => 'Spanish World',
+        'range' => 'A1 to B2',
+        'status' => 'Next checkpoint',
+        'progress' => '47%',
+        'cresturl' => $flwasset('crest-spanish'),
+        'alt' => 'Spanish World crest',
+        'url' => $dashboardurl->out(false),
+    ],
+];
 
 $frontpagecopy = [
     'en' => [
@@ -303,7 +393,7 @@ if ($langcode === 'zh' || strpos($langcode, 'zh_') === 0) {
 }
 $copy = array_merge($frontpagecopy['en'], $frontpagecopy[$langcode] ?? $frontpagecopy[substr($langcode, 0, 2)] ?? []);
 
-$flwlangcodes = ['en', 'ru', 'zh_cn', 'ja', 'de', 'fr', 'es'];
+$flwlangcodes = ['en', 'ru', 'zh_cn', 'de', 'ja', 'fr', 'es'];
 $flwlangitems = [];
 $stringmanager = get_string_manager();
 $currentlangcode = current_language();
@@ -367,21 +457,21 @@ $languages = [
         'url' => $courseindexurl->out(false),
     ],
     [
-        'name' => 'Japanese',
-        'native' => '日本語',
-        'framework' => 'JLPT N5-N1',
-        'motto' => '文字から会話へ、毎日少しずつ。',
-        'accent' => 'blue',
-        'imageurl' => $OUTPUT->image_url('frontpage/lang-japanese', 'theme_flwacademy')->out(false),
-        'url' => $courseindexurl->out(false),
-    ],
-    [
         'name' => 'German',
         'native' => 'Deutsch',
         'framework' => 'CEFR A1-C2',
         'motto' => 'Lerne klar, übe gezielt, wachse sicher.',
         'accent' => 'green',
         'imageurl' => $OUTPUT->image_url('frontpage/lang-german', 'theme_flwacademy')->out(false),
+        'url' => $courseindexurl->out(false),
+    ],
+    [
+        'name' => 'Japanese',
+        'native' => '日本語',
+        'framework' => 'JLPT N5-N1',
+        'motto' => '文字から会話へ、毎日少しずつ。',
+        'accent' => 'blue',
+        'imageurl' => $OUTPUT->image_url('frontpage/lang-japanese', 'theme_flwacademy')->out(false),
         'url' => $courseindexurl->out(false),
     ],
     [
@@ -411,6 +501,11 @@ if ($currentlanguagecode !== '') {
         return $language;
     }, $learninglanguages);
 }
+$selectedlearninglanguage = theme_flwacademy_get_selected_learning_language($learninglanguages);
+$placementurl = new moodle_url('/local/flwplacement/index.php', [
+    'language' => $selectedlearninglanguage['code'] ?? 'en',
+]);
+$coursecards = theme_flwacademy_export_home_course_cards($OUTPUT, $learninglanguages);
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, [
@@ -423,12 +518,26 @@ $templatecontext = [
     'mobileprimarynav' => $primarymenu['mobileprimarynav'],
     'usermenu' => $primarymenu['user'],
     'langmenu' => $flwlangmenu,
+    'flwtopnav' => $flwtopnav,
     'heroimageurl' => $OUTPUT->image_url('frontpage/login-main', 'theme_flwacademy')->out(false),
+    'redesignheroimageurl' => $flwasset('home-hero'),
+    'placementimageurl' => $flwasset('placement-clipboard'),
+    'howlearnimageurl' => $flwasset('how-learn'),
+    'howpractiseimageurl' => $flwasset('how-practise'),
+    'howcommunicateimageurl' => $flwasset('how-communicate'),
+    'howcreateimageurl' => $flwasset('how-create'),
     'loginurl' => $loginurl->out(false),
+    'signinurl' => $signinurl->out(false),
+    'signinlabel' => $signinlabel,
+    'isloggedinuser' => $isloggedinuser,
+    'userfullname' => $userfullname,
+    'userpicturehtml' => $userpicture,
     'dashboardurl' => $dashboardurl->out(false),
+    'placementurl' => $placementurl->out(false),
     'courseindexurl' => $courseindexurl->out(false),
     'frontpageurl' => $frontpageurl->out(false),
     'maincontent' => $maincontent,
+    'coursecards' => $coursecards,
     'languages' => $languages,
     'haslearninglanguages' => !empty($learninglanguages),
     'learninglanguages' => $learninglanguages,
@@ -437,4 +546,5 @@ $templatecontext = [
     'copy' => $copy,
 ];
 
+$templatecontext = theme_flwacademy_extend_tools_context($templatecontext);
 echo $OUTPUT->render_from_template('theme_flwacademy/frontpage', $templatecontext);

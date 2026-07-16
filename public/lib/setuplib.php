@@ -610,13 +610,17 @@ if (\$CFG->bootstraphash === hash_local_config_cache() && !defined('SYSCONTEXTID
         $temp = $bootstraplocalfile . '.tmp' . uniqid();
         file_put_contents($temp, $contents);
         @chmod($temp, $CFG->filepermissions);
-        rename($temp, $bootstraplocalfile);
+        if (!@rename($temp, $bootstraplocalfile)) {
+            @unlink($temp);
+        }
 
         // Create the central bootstrap backup file.
         $temp = $bootstrapsharedfile . '.tmp' . uniqid();
         file_put_contents($temp, $contents);
         @chmod($temp, $CFG->filepermissions);
-        rename($temp, $bootstrapsharedfile);
+        if (!@rename($temp, $bootstrapsharedfile)) {
+            @unlink($temp);
+        }
 
     }
 }

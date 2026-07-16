@@ -1,10 +1,10 @@
 <?php
 $string['pluginname'] = 'FLW Academy';
-$string['choosereadme'] = 'A warm no-blue Moodle theme with a Test-English-style homepage structure for Foreign Language World.';
+$string['choosereadme'] = 'A clean blue Moodle theme with a Test-English-style homepage structure for Foreign Language World.';
 $string['configtitle'] = 'FLW Academy settings';
 $string['generalsettings'] = 'FLW Academy design settings';
-$string['generalsettings_desc'] = 'Configure the warm no-blue academy palette.';
-$string['emerald'] = 'Emerald color';
+$string['generalsettings_desc'] = 'Configure the clean blue academy palette.';
+$string['emerald'] = 'Primary blue color';
 $string['orange'] = 'Orange color';
 $string['purple'] = 'Purple color';
 $string['pink'] = 'Pink color';
@@ -12,4 +12,10 @@ $string['cream'] = 'Cream background';
 $string['radius'] = 'Corner radius';
 $string['extrascss'] = 'Extra SCSS';
 $string['extrascss_desc'] = 'Optional extra SCSS appended after theme styles.';
+$string['flwreadingactions'] = 'Reading tools';
+$string['flwreadingtoc'] = 'Course contents';
+$string['flwtoggletoc'] = 'Show or hide course contents';
+$string['flwdictionary'] = 'Dictionary';
+$string['flwlearninglanguage'] = 'Learning language';
+$string['flwunitmap'] = 'FLW unit map';
 $string['privacy:metadata'] = 'The FLW Academy theme does not store any personal data.';

@@ -138,11 +138,21 @@ class Mustache_Cache_FilesystemCache extends Mustache_Cache_AbstractCache
 
         $tempFile = tempnam($dirName, basename($fileName));
         if (false !== @file_put_contents($tempFile, $value)) {
-            if (@rename($tempFile, $fileName)) {
-                $mode = isset($this->fileMode) ? $this->fileMode : (0666 & ~umask());
-                @chmod($fileName, $mode);
+            for ($attempt = 0; $attempt < 20; $attempt++) {
+                if (@rename($tempFile, $fileName)) {
+                    $mode = isset($this->fileMode) ? $this->fileMode : (0666 & ~umask());
+                    @chmod($fileName, $mode);
 
-                return;
+                    return;
+                }
+
+                if (is_file($fileName)) {
+                    @unlink($tempFile);
+
+                    return;
+                }
+
+                usleep(50000);
             }
 
             // @codeCoverageIgnoreStart

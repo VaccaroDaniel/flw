@@ -18,7 +18,7 @@ $CFG->dboptions = array (
 );
 
 $CFG->wwwroot   = 'https://192.168.129.79';
-$CFG->dataroot  = 'C:\\Dev\\MoodleWindowsInstaller-latest-501\\server/moodledata';
+$CFG->dataroot  = 'D:\\Dev\\MoodleWindowsInstaller-latest-501\\server/moodledata';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;

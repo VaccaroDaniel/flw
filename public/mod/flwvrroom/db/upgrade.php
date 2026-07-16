@@ -209,5 +209,20 @@ function xmldb_flwvrroom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026061223, 'flwvrroom');
     }
 
+    if ($oldversion < 2026071402) {
+        $guestrole = $DB->get_record('role', ['shortname' => 'guest'], 'id', IGNORE_MISSING);
+        if ($guestrole) {
+            assign_capability(
+                'mod/flwvrroom:view',
+                CAP_ALLOW,
+                (int)$guestrole->id,
+                context_system::instance()->id,
+                true
+            );
+        }
+
+        upgrade_mod_savepoint(true, 2026071402, 'flwvrroom');
+    }
+
     return true;
 }

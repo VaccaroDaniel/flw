@@ -27,7 +27,18 @@ if (!is_array($payload) || empty($payload['result']) || !is_array($payload['resu
     exit;
 }
 
-$required = ['cefr_level', 'skill_profile', 'recommended_course', 'starting_unit', 'confidence_score'];
+$required = [
+    'overall_cefr',
+    'recommended_start_unit',
+    'placement_confidence',
+    'placement_status',
+    'skill_levels',
+    'kp_mastery',
+    'support_flags',
+    'speaking_profile',
+    'learning_path',
+    'audit',
+];
 foreach ($required as $key) {
     if (!array_key_exists($key, $payload['result'])) {
         http_response_code(400);

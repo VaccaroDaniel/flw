@@ -26,6 +26,127 @@
     return encodeURIComponent(value).replace(/'/g, "%27");
   }
 
+  var LANGUAGE_STORAGE_KEY = "flw.learningLanguage";
+  var LANGUAGE_COOKIE_KEY = "flw_learning_language";
+
+  function normalizeLanguageCode(code) {
+    var normalized = String(code || "").trim().toLowerCase();
+    return normalized === "zh_cn" ? "zh" : normalized;
+  }
+
+  function readCookie(name) {
+    var parts = String(document.cookie || "").split("; ");
+    for (var i = 0; i < parts.length; i += 1) {
+      var pair = parts[i].split("=");
+      if (pair[0] === name) {
+        return decodeURIComponent(pair.slice(1).join("=") || "");
+      }
+    }
+    return "";
+  }
+
+  function getPanelLanguageCode() {
+    var stored = "";
+    try {
+      stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) || "";
+    } catch (error) {
+      stored = "";
+    }
+    return normalizeLanguageCode(stored || readCookie(LANGUAGE_COOKIE_KEY));
+  }
+
+  function placementUrlForLanguage(code) {
+    var url = new URL(window.location.href);
+    url.searchParams.set("language", normalizeLanguageCode(code));
+    return url.toString();
+  }
+
+  function redirectToPanelLanguage(config, code) {
+    var nextCode = normalizeLanguageCode(code);
+    var currentCode = normalizeLanguageCode(config.selectedLearningLanguageCode);
+    if (!nextCode || nextCode === currentCode) {
+      return false;
+    }
+    window.location.href = placementUrlForLanguage(nextCode);
+    return true;
+  }
+
+  function syncPlacementLanguageFromPanel(config) {
+    return redirectToPanelLanguage(config, getPanelLanguageCode());
+  }
+
+  function bindLearningLanguagePanelSync(config) {
+    document.addEventListener("click", function (event) {
+      var choice = event.target.closest ? event.target.closest("[data-flw-language-choice]") : null;
+      if (!choice) {
+        return;
+      }
+      var nextCode = normalizeLanguageCode(choice.getAttribute("data-language-code"));
+      if (!nextCode) {
+        return;
+      }
+      window.setTimeout(function () {
+        redirectToPanelLanguage(config, nextCode);
+      }, 80);
+    });
+
+    window.addEventListener("storage", function (event) {
+      if (event.key === LANGUAGE_STORAGE_KEY) {
+        redirectToPanelLanguage(config, event.newValue);
+      }
+    });
+  }
+
+  function percent(value) {
+    return Math.round(Number(value || 0) * 100);
+  }
+
+  function renderLatestProfile(profile) {
+    if (!profile) {
+      return [
+        '<div class="flw-placement-current-profile empty">',
+        '<p class="flw-placement-eyebrow">Current placement</p>',
+        '<strong>No saved learning map yet</strong>',
+        '<span>The next completed test will create the learner profile map.</span>',
+        '</div>'
+      ].join("");
+    }
+
+    var supportFlags = profile.support_flags || {};
+    var support = Object.keys(supportFlags).filter(function (key) {
+      return supportFlags[key] && key !== "teacher_review_recommended";
+    }).map(function (key) {
+      return key.replace(/^needs_/, "").replace(/_support$|_repair$/g, "").replace(/_/g, " ");
+    });
+    var supportText = support.length ? support.slice(0, 3).join(", ") : "None";
+    var viewUrl = profile.latest_result_id ? '<a class="btn btn-outline-secondary btn-sm" href="view.php?id=' + encodeURIComponent(profile.latest_result_id) + '">Open latest report</a>' : "";
+
+    return [
+      '<div class="flw-placement-current-profile">',
+      '<div>',
+      '<p class="flw-placement-eyebrow">Current placement</p>',
+      '<strong>' + escapeHtml(profile.overall_cefr || "Pending") + '</strong>',
+      '<span>' + escapeHtml(profile.course || "FLW") + '</span>',
+      '</div>',
+      '<div class="flw-placement-current-grid">',
+      '<span>Start unit <b>' + escapeHtml(profile.recommended_start_unit || "-") + '</b></span>',
+      '<span>Checkpoint <b>' + escapeHtml(profile.next_checkpoint_unit || "-") + '</b></span>',
+      '<span>Confidence <b>' + escapeHtml(percent(profile.placement_confidence)) + '%</b></span>',
+      '<span>Status <b>' + escapeHtml(profile.placement_status || "pending") + '</b></span>',
+      '</div>',
+      '<div class="flw-placement-support-line"><span>Repair support</span><b>' + escapeHtml(supportText) + '</b></div>',
+      viewUrl,
+      '</div>'
+    ].join("");
+  }
+
+  function countAnswersBySkill(engineInstance) {
+    return engineInstance.getAllObjectiveAnswers().reduce(function (counts, answer) {
+      counts[answer.skill] = (counts[answer.skill] || 0) + 1;
+      return counts;
+    }, {});
+  }
+
   function boot() {
     var config = readConfig();
     var bank = window.FLWPlacementQuestionBank;
@@ -38,6 +159,11 @@
     var progressBar = document.getElementById("flw-placement-progress-bar");
 
     if (!config || !bank || !Engine || !report || !workspace) {
+      return;
+    }
+
+    bindLearningLanguagePanelSync(config);
+    if (syncPlacementLanguageFromPanel(config)) {
       return;
     }
 
@@ -64,52 +190,59 @@
 
     function renderStart() {
       var saved = Engine.loadSavedState();
-      var languageOptions = config.courseLanguages || [
-        { value: "english", label: "English" },
-        { value: "russian", label: "Russian" },
-        { value: "chinese", label: "Chinese" },
-        { value: "japanese", label: "Japanese" },
-        { value: "german", label: "German" },
-        { value: "french", label: "French" },
-        { value: "spanish", label: "Spanish" }
+      var targetWorldOptions = config.targetWorldOptions || [
+        { value: "selfstudy", label: "Self Study", categoryid: 0 }
       ];
-      var defaultCourseLanguage = config.defaultCourseLanguage || "english";
-      var languageSelectOptions = languageOptions.map(function (option) {
-        var selected = option.value === defaultCourseLanguage ? " selected" : "";
-        return '<option value="' + escapeHtml(option.value) + '"' + selected + '>' + escapeHtml(option.label) + '</option>';
+      var targetWorldSelectOptions = targetWorldOptions.map(function (option, index) {
+        var selected = index === 0 ? " selected" : "";
+        return '<option value="' + escapeHtml(option.value) + '" data-label="' + escapeHtml(option.label) + '" data-categoryid="' + escapeHtml(option.categoryid || 0) + '"' + selected + '>' + escapeHtml(option.label) + '</option>';
       }).join("");
       setProgress("Ready", 0);
       workspace.innerHTML = [
-        '<section class="panel flw-placement-card flw-placement-start">',
-        '<div>',
-        '<p class="flw-placement-eyebrow">Adaptive CEFR diagnosis</p>',
-        '<h3>Start FLW placement</h3>',
-        '<p class="flw-placement-muted">This Moodle module reuses the offline FLW engine and saves the structured placement report to Moodle.</p>',
+        '<section class="flw-placement-start-shell">',
+        '<div class="panel flw-placement-card flw-placement-start-copy">',
+        '<p class="flw-placement-eyebrow">Placement learning map</p>',
+        '<h3>Build learner profile</h3>',
+        '<div class="flw-placement-output-grid">',
+        '<span>CEFR band</span>',
+        '<span>Start unit</span>',
+        '<span>KP mastery</span>',
+        '<span>Repair path</span>',
+        '<span>Checkpoint</span>',
+        '<span>Teacher status</span>',
         '</div>',
+        renderLatestProfile(config.latestPlacementProfile),
+        '</div>',
+        '<div class="panel flw-placement-card">',
         '<form id="flw-placement-start-form" class="flw-placement-form-grid">',
-        '<label>Learner name<input id="flw-placement-learner" type="text" value="' + escapeHtml(config.learnerName || "Learner") + '"></label>',
-        '<label>Learner group<select id="flw-placement-age"><option value="adult">Adult / university</option><option value="junior">Junior learner</option></select></label>',
-        '<label>Target world<select id="flw-placement-world"><option value="real">Real World</option><option value="adventure">Adventure World</option><option value="russian">Russian World</option><option value="chinese">Chinese World</option></select></label>',
-        '<label>Course language<select id="flw-placement-language">' + languageSelectOptions + '</select></label>',
+        '<div class="flw-placement-static-field"><span>Learner name</span><strong>' + escapeHtml(config.learnerName || "Learner") + '</strong></div>',
+        '<div class="flw-placement-static-field"><span>Learning language</span><strong>' + escapeHtml(config.learningLanguageLabel || config.defaultCourseLanguage || "English") + '</strong></div>',
+        '<label class="flw-placement-full">Target world<select id="flw-placement-world">' + targetWorldSelectOptions + '</select></label>',
         '<div class="flw-placement-button-row flw-placement-full">',
-        '<button class="btn btn-primary" type="submit">Start Test</button>',
+        '<button class="btn btn-primary" type="submit">Start placement test</button>',
         saved && saved.phase !== "result" ? '<button id="flw-placement-resume" class="btn btn-secondary" type="button">Resume Saved Test</button>' : '',
         saved ? '<button id="flw-placement-clear" class="btn btn-light" type="button">Clear Saved Test</button>' : '',
         config.canViewReports ? '<a class="btn btn-outline-secondary" href="' + escapeHtml(config.reportsUrl) + '">Placement Reports</a>' : '',
         '<a class="btn btn-outline-secondary" href="' + escapeHtml(config.exportUrl) + '">Question Bank CSV</a>',
         '</div>',
         '</form>',
+        '</div>',
         '</section>'
       ].join("");
 
       document.getElementById("flw-placement-start-form").addEventListener("submit", function (event) {
         event.preventDefault();
         engine.clearProgress();
+        var targetWorld = document.getElementById("flw-placement-world");
+        var selectedWorld = targetWorld.options[targetWorld.selectedIndex];
         engine.reset({
-          learnerName: document.getElementById("flw-placement-learner").value.trim() || config.learnerName || "Learner",
-          ageBand: document.getElementById("flw-placement-age").value,
-          targetWorld: document.getElementById("flw-placement-world").value,
-          courseLanguage: document.getElementById("flw-placement-language").value,
+          learnerName: config.learnerName || "Learner",
+          targetWorld: targetWorld.value,
+          targetWorldName: selectedWorld ? selectedWorld.getAttribute("data-label") : targetWorld.value,
+          targetWorldCategoryId: selectedWorld ? Number(selectedWorld.getAttribute("data-categoryid") || 0) : 0,
+          courseLanguage: config.defaultCourseLanguage || "english",
+          learningLanguageLabel: config.learningLanguageLabel || config.defaultCourseLanguage || "English",
+          learningLanguageCategoryId: Number(config.learningLanguageCategoryId || 0),
           moodleUserId: config.userid
         });
         beginAdaptive();
@@ -134,14 +267,17 @@
 
     function sidePanel() {
       var adaptive = engine.state.adaptiveAnswers;
-      var correct = adaptive.filter(function (answer) { return answer.correct; }).length;
+      var diagnostics = engine.state.diagnosticAnswers;
+      var bySkill = countAnswersBySkill(engine);
       return [
         '<aside class="flw-placement-side">',
-        '<h4>Progress</h4>',
-        '<div class="flw-placement-metric"><span>Adaptive answered</span><strong>' + adaptive.length + '/' + engine.state.adaptiveTarget + '</strong></div>',
-        '<div class="flw-placement-metric"><span>Adaptive correct</span><strong>' + correct + '</strong></div>',
-        '<div class="flw-placement-metric"><span>Streak correct</span><strong>' + engine.state.streakCorrect + '</strong></div>',
-        '<div class="flw-placement-metric"><span>Streak wrong</span><strong>' + engine.state.streakWrong + '</strong></div>',
+        '<h4>Evidence map</h4>',
+        '<div class="flw-placement-metric"><span>Adaptive items</span><strong>' + adaptive.length + '/' + engine.state.adaptiveTarget + '</strong></div>',
+        '<div class="flw-placement-metric"><span>Diagnostic items</span><strong>' + diagnostics.length + '/' + (bank.diagnosticReading.length + bank.diagnosticListening.length) + '</strong></div>',
+        '<div class="flw-placement-metric"><span>Reading evidence</span><strong>' + (bySkill.reading || 0) + '</strong></div>',
+        '<div class="flw-placement-metric"><span>Listening evidence</span><strong>' + (bySkill.listening || 0) + '</strong></div>',
+        '<div class="flw-placement-metric"><span>Writing sample</span><strong>' + (engine.state.writingResponse ? "yes" : "pending") + '</strong></div>',
+        '<div class="flw-placement-metric"><span>Voice check</span><strong>' + (engine.state.speakingEvidence ? "added" : "optional") + '</strong></div>',
         '<span class="flw-placement-hidden" id="flw-placement-internal-level">' + escapeHtml(engine.getCurrentLevel()) + '</span>',
         '</aside>'
       ].join("");
@@ -221,6 +357,12 @@
         '<h4>Speaking Prompt</h4>',
         '<p class="flw-placement-muted">' + escapeHtml(bank.speakingPrompt.text) + '</p>',
         '<label class="flw-placement-check"><input id="flw-placement-speaking-done" type="checkbox" ' + (engine.state.speakingAcknowledged ? "checked" : "") + '> Speaking prompt shown to learner</label>',
+        '<div class="flw-placement-voice-grid">',
+        '<label>STT confidence<input id="flw-placement-stt-confidence" type="number" min="0" max="1" step="0.01" value="' + escapeHtml((engine.state.speakingEvidence && engine.state.speakingEvidence.stt_confidence) || "") + '" placeholder="0.00-1.00"></label>',
+        '<label>Sentence completion<input id="flw-placement-sentence-completion" type="number" min="0" max="1" step="0.01" value="' + escapeHtml((engine.state.speakingEvidence && engine.state.speakingEvidence.sentence_completion) || "") + '" placeholder="0.00-1.00"></label>',
+        '<label>Pronunciation accuracy<input id="flw-placement-pronunciation" type="number" min="0" max="1" step="0.01" value="' + escapeHtml((engine.state.speakingEvidence && engine.state.speakingEvidence.pronunciation_accuracy) || "") + '" placeholder="0.00-1.00"></label>',
+        '<label>Fluency<input id="flw-placement-fluency" type="number" min="0" max="1" step="0.01" value="' + escapeHtml((engine.state.speakingEvidence && engine.state.speakingEvidence.fluency) || "") + '" placeholder="0.00-1.00"></label>',
+        '</div>',
         '</div>',
         '<div class="flw-placement-button-row"><button id="flw-placement-profile" class="btn btn-primary" type="button">Continue</button></div>',
         '</section>'
@@ -228,6 +370,19 @@
       document.getElementById("flw-placement-profile").addEventListener("click", function () {
         engine.setWritingResponse(document.getElementById("flw-placement-writing").value);
         engine.setSpeakingAcknowledged(document.getElementById("flw-placement-speaking-done").checked);
+        var sttConfidence = document.getElementById("flw-placement-stt-confidence").value;
+        var sentenceCompletion = document.getElementById("flw-placement-sentence-completion").value;
+        var pronunciation = document.getElementById("flw-placement-pronunciation").value;
+        var fluency = document.getElementById("flw-placement-fluency").value;
+        var hasVoiceEvidence = [sttConfidence, sentenceCompletion, pronunciation, fluency].some(function (value) {
+          return value !== "";
+        });
+        engine.setSpeakingEvidence(hasVoiceEvidence ? {
+          stt_confidence: sttConfidence === "" ? undefined : Number(sttConfidence),
+          sentence_completion: sentenceCompletion === "" ? undefined : Number(sentenceCompletion),
+          pronunciation_accuracy: pronunciation === "" ? undefined : Number(pronunciation),
+          fluency: fluency === "" ? undefined : Number(fluency)
+        } : null);
         renderProfile();
       });
     }
@@ -290,7 +445,8 @@
             diagnosticAnswers: engine.state.diagnosticAnswers,
             profileAnswers: engine.state.profileAnswers,
             writingResponse: engine.state.writingResponse,
-            speakingAcknowledged: engine.state.speakingAcknowledged
+            speakingAcknowledged: engine.state.speakingAcknowledged,
+            speakingEvidence: engine.state.speakingEvidence
           }
         })
       }).then(function (response) {

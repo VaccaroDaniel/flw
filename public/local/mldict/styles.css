@@ -1,26 +1,640 @@
 .local-mldict-actions {
-    margin: 0 0 1rem 0;
-}
-.local-mldict-search {
     display: flex;
     gap: .5rem;
-    align-items: center;
-    margin: 1rem 0;
-    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 72rem;
+    margin: 0 auto 1rem;
 }
-.local-mldict-search input[type="text"] {
-    min-width: 18rem;
+body.path-local-mldict {
+    background: #eef0f3;
+}
+body.path-local-mldict #page-header,
+body.path-local-mldict .page-context-header,
+body.path-local-mldict .page-header-headings {
+    display: none !important;
+}
+body.path-local-mldict #page.drawers .main-inner,
+body.path-local-mldict #page-content,
+body.path-local-mldict #region-main-box,
+body.path-local-mldict #region-main {
+    background: transparent;
+}
+body.path-local-mldict #page.drawers .main-inner {
+    padding-top: 0rem;
+}
+body.path-local-mldict #region-main {
+    border: 0;
+    box-shadow: none;
+}
+.local-mldict-page {
+    width: min(1428px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 84px 0 44px;
+    color: #111936;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.local-mldict-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: end;
+    padding: 24px;
+    border: 1px solid #e5e8ef;
+    border-radius: 12px;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, .94) 0%, rgba(255, 255, 255, .78) 50%, rgba(255, 255, 255, .34) 100%),
+        url("/theme/flwacademy/pix/dashboard/dictate.jpg") center / cover no-repeat,
+        #fff;
+    box-shadow: 0 4px 14px rgba(23, 39, 79, .10);
+    overflow: hidden;
+}
+.local-mldict-hero::after {
+    content: "Aa";
+    justify-self: end;
+    align-self: start;
+    min-width: 5.5rem;
+    min-height: 5.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid #cbd8f5;
+    border-radius: 8px;
+    background: #eef3ff;
+    color: #0a4be8;
+    font-size: 2rem;
+    font-weight: 700;
+    box-shadow: 0 14px 28px rgba(21, 49, 58, .08);
+}
+.local-mldict-hero-kicker {
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: .55rem;
+    padding: .28rem .55rem;
+    border: 1px solid #cbd8f5;
+    border-radius: 999px;
+    background: #eef3ff;
+    color: #082a84;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.local-mldict-hero h1 {
+    margin: 0;
+    color: #101a3a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.05;
+}
+.local-mldict-hero p {
+    max-width: 46rem;
+    margin: .75rem 0 0;
+    color: #5f6d8d;
+    font-size: 13px;
+    line-height: 1.35;
+}
+.local-mldict-hero-points {
+    display: grid;
+    gap: .42rem;
+    min-width: 11rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.local-mldict-hero-points li {
+    padding: .48rem .68rem;
+    border: 1px solid #e0ece8;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .82);
+    color: #315d50;
+    font-size: .88rem;
+    font-weight: 650;
+    box-shadow: 0 8px 18px rgba(21, 49, 58, .06);
+}
+.local-mldict-search {
+    display: grid;
+    grid-template-columns: minmax(14rem, 1fr) minmax(9rem, auto) auto;
+    gap: .65rem;
+    align-items: center;
+    max-width: 54rem;
+    margin: 1.1rem auto 1.25rem;
+    padding: .7rem;
+    border: 1px solid #e5e8ef;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(23, 39, 79, .10);
+}
+.local-mldict-search input[type="text"],
+.local-mldict-search input[type="search"] {
+    min-width: 0;
+}
+.local-mldict-search input[type="search"],
+.local-mldict-search select {
+    min-height: 2.75rem;
+    border: 1px solid #e3e6ec;
+    border-radius: 8px;
+    background: #fff;
+    color: #22333a;
+}
+.local-mldict-search input[type="search"] {
+    padding: .62rem .8rem;
+    font-size: 1rem;
+}
+.local-mldict-search select {
+    padding: .55rem .7rem;
+}
+.local-mldict-search input[type="search"]:focus,
+.local-mldict-search select:focus {
+    border-color: #6f93ee;
+    box-shadow: 0 0 0 .2rem rgba(10, 75, 232, .14);
+    outline: 0;
+}
+.local-mldict-search .btn,
+.local-mldict-search button {
+    min-height: 2.75rem;
+    padding: .55rem 1rem;
+    border: 0;
+    border-radius: 7px;
+    background: #0a4be8;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 10px 22px rgba(8, 127, 140, .18);
+}
+.local-mldict-search .btn:hover,
+.local-mldict-search .btn:focus,
+.local-mldict-search button:hover,
+.local-mldict-search button:focus {
+    background: #073fca;
+    color: #fff;
+}
+.local-mldict-candidates {
+    max-width: 54rem;
+    margin: 0 auto;
+}
+.local-mldict-candidate-list,
+.local-mldict-floating-candidates {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.local-mldict-candidate-list {
+    border: 1px solid #e5e8ef;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(23, 39, 79, .10);
+    overflow: hidden;
+}
+.local-mldict-candidate-list li + li,
+.local-mldict-floating-candidates li + li {
+    border-top: 1px solid #edf4f1;
+}
+.local-mldict-candidate-list a,
+.local-mldict-floating-candidates a {
+    display: grid;
+    gap: .22rem;
+    padding: .82rem 1rem;
+    color: #17242a;
+    text-decoration: none;
+    transition: background-color .16s ease, color .16s ease;
+}
+.local-mldict-candidate-list a:hover,
+.local-mldict-candidate-list a:focus,
+.local-mldict-floating-candidates a:hover,
+.local-mldict-floating-candidates a:focus {
+    background: #eef8f5;
+    color: #087f8c;
+}
+.local-mldict-candidate-word,
+.local-mldict-floating-word {
+    font-weight: 720;
+    line-height: 1.25;
+}
+.local-mldict-candidate-meta,
+.local-mldict-floating-meta {
+    color: #667b83;
+    font-size: .82rem;
+}
+.local-mldict-candidate-empty {
+    max-width: 54rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    color: #667b83;
+    box-shadow: 0 12px 28px rgba(21, 49, 58, .06);
+}
+.local-mldict-management {
+    width: min(72rem, 100%);
+    margin: 0 auto;
+}
+.local-mldict-management-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.local-mldict-detail-open {
+    overflow: hidden;
+}
+.local-mldict-detail-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 1120;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    backdrop-filter: blur(4px);
+}
+.local-mldict-detail-popup[hidden] {
+    display: none;
+}
+.local-mldict-detail-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(11, 26, 32, .46);
+}
+.local-mldict-detail-panel {
+    position: relative;
+    width: min(46rem, 100%);
+    max-height: min(42rem, calc(100vh - 2.5rem));
+    overflow: auto;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 26px 74px rgba(11, 28, 42, .26);
+}
+.local-mldict-detail-close {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    top: 1.35rem;
+    right: 1.35rem;
+    z-index: 2;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #eef8f5;
+    color: #315d50;
+    font-size: 0;
+    line-height: 0;
+    padding: 0;
+    transition: background-color .14s ease, box-shadow .14s ease, color .14s ease, transform .14s ease;
+}
+.local-mldict-detail-close::before,
+.local-mldict-detail-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: .82rem;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transform-origin: center;
+}
+.local-mldict-detail-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.local-mldict-detail-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.local-mldict-detail-close:hover,
+.local-mldict-detail-close:focus {
+    background: #dcece5;
+    box-shadow: 0 6px 16px rgba(49, 93, 80, .18);
+    color: #23483e;
+    transform: translateY(-1px) scale(1.03);
+}
+.local-mldict-detail-close:focus-visible {
+    outline: 3px solid rgba(8, 127, 140, .22);
+    outline-offset: 2px;
+}
+.local-mldict-detail-close:active,
+.local-mldict-detail-close.is-clicked {
+    background: #315d50;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .18);
+    color: #fff;
+    transform: scale(.92);
+}
+.local-mldict-detail-content {
+    clear: none;
+}
+.local-mldict-popup-header {
+    padding: 1.4rem 4.75rem 1.05rem 1.6rem;
+    border-bottom: 1px solid #e0ece8;
+    background: linear-gradient(135deg, #f1faf7 0%, #ffffff 72%);
+}
+.local-mldict-popup-header h2 {
+    margin: 0 2.25rem .4rem 0;
+    color: #17242a;
+    font-size: 2rem;
+    font-weight: 680;
+    line-height: 1.15;
+}
+.local-mldict-popup-header p {
+    margin: 0;
+    color: #667b83;
+    font-weight: 650;
+}
+.local-mldict-popup-block {
+    padding: 1rem 1.6rem;
+    border-bottom: 1px solid #edf4f1;
+}
+.local-mldict-popup-block:last-child {
+    border-bottom: 0;
+}
+.local-mldict-popup-block h3 {
+    margin: 0 0 .6rem;
+    color: #315d50;
+    font-size: 1rem;
+    font-weight: 680;
+}
+.local-mldict-popup-block p {
+    margin: 0;
+    color: #22333a;
+    font-size: 1.02rem;
+    line-height: 1.55;
+}
+.local-mldict-popup-translations,
+.local-mldict-popup-examples {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.local-mldict-popup-translations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: .5rem;
+}
+.local-mldict-popup-translations li {
+    display: grid;
+    gap: .18rem;
+    padding: .65rem .75rem;
+    border: 1px solid #e0ece8;
+    border-radius: 6px;
+    background: #f8fbfa;
+}
+.local-mldict-popup-translations strong,
+.local-mldict-popup-examples span {
+    color: #667b83;
+    font-size: .78rem;
+    font-weight: 800;
+}
+.local-mldict-popup-translations span {
+    color: #22333a;
+    line-height: 1.35;
+}
+.local-mldict-popup-examples li {
+    padding: .75rem 0;
+    border-top: 1px solid #edf4f1;
+}
+.local-mldict-popup-examples li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+.local-mldict-popup-examples p {
+    margin: .2rem 0 0;
+}
+.local-mldict-popup-examples small {
+    display: block;
+    margin-top: .25rem;
+    color: #667b83;
+}
+.local-mldict-starter {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 72rem;
+    margin: 1.25rem auto 0;
+}
+.local-mldict-starter[hidden] {
+    display: none;
+}
+.local-mldict-starter-section {
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 14px 34px rgba(21, 49, 58, .07);
+    padding: 1rem;
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.local-mldict-starter-section:hover {
+    border-color: #c7e2d9;
+    box-shadow: 0 18px 42px rgba(21, 49, 58, .09);
+    transform: translateY(-1px);
+}
+.local-mldict-starter-section-wide {
+    grid-column: 1 / -1;
+}
+.local-mldict-starter h2 {
+    margin: 0 0 .75rem;
+    color: #17242a;
+    font-size: 1rem;
+    font-weight: 680;
+}
+.local-mldict-starter-coverage,
+.local-mldict-starter-words,
+.local-mldict-starter-themes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.local-mldict-starter-coverage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: .5rem;
+}
+.local-mldict-starter-coverage li {
+    display: grid;
+    gap: .15rem;
+    padding: .55rem .65rem;
+    border-radius: 6px;
+    border: 1px solid #e0ece8;
+    background: #f8fbfa;
+}
+.local-mldict-starter-label,
+.local-mldict-starter-word-lang,
+.local-mldict-starter-theme-words {
+    color: #667b83;
+    font-size: .8rem;
+}
+.local-mldict-starter-count {
+    color: #087f8c;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+.local-mldict-starter-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+}
+.local-mldict-starter-word {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .42rem .62rem;
+    border: 1px solid #d9e8e2;
+    border-radius: 999px;
+    background: #f8fbfa;
+    color: #22333a;
+    font-weight: 650;
+    text-decoration: none;
+}
+.local-mldict-starter-word:hover,
+.local-mldict-starter-word:focus {
+    background: #eaf7f4;
+    color: #087f8c;
+}
+.local-mldict-starter-themes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+}
+.local-mldict-starter-themes li {
+    display: grid;
+    gap: .25rem;
+    padding: .75rem;
+    border-left: 4px solid #f2b84b;
+    border-radius: 6px;
+    background: #fffaf0;
+}
+.local-mldict-starter-theme-title {
+    color: #17242a;
+    font-weight: 680;
 }
 .local-mldict-entry {
-    max-width: 58rem;
+    max-width: 64rem;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    box-shadow: 0 16px 34px rgba(21, 49, 58, .08);
+    overflow: hidden;
+}
+.local-mldict-entry-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid #e0ece8;
+    background: linear-gradient(135deg, #f1faf7 0%, #ffffff 72%);
+}
+.local-mldict-headword {
+    margin: 0 0 .5rem;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    letter-spacing: 0;
+    color: #17242a;
+    font-weight: 680;
 }
 .local-mldict-meta,
 .local-mldict-pronunciation {
-    color: #555;
-    margin-bottom: .5rem;
+    color: #4f6070;
+    margin-bottom: .75rem;
+}
+.local-mldict-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+.local-mldict-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.6rem;
+    padding: .18rem .55rem;
+    border-radius: 999px;
+    background: #e8f2fb;
+    color: #134f78;
+    font-size: .82rem;
+    font-weight: 700;
+}
+.local-mldict-chip-muted {
+    background: #eef2f5;
+    color: #42505c;
+}
+.local-mldict-chip-level {
+    background: #eaf7ef;
+    color: #2f6b42;
+}
+.local-mldict-section-label {
+    display: block;
+    margin-bottom: .3rem;
+    color: #6b7a88;
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.local-mldict-pronunciation,
+.local-mldict-definition,
+.local-mldict-section {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf1f5;
+}
+.local-mldict-pron-value,
+.local-mldict-ipa {
+    display: inline-block;
+    margin-right: .5rem;
+    font-size: 1rem;
+    color: #243746;
+}
+.local-mldict-ipa {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #9b2f28;
+}
+.local-mldict-definition-text {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: #20313f;
+}
+.local-mldict-section h3 {
+    margin: 0 0 .75rem;
+    font-size: 1rem;
+    color: #12324a;
+}
+.local-mldict-translation-grid,
+.local-mldict-example-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.local-mldict-translation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: .5rem;
+}
+.local-mldict-translation-grid li {
+    display: grid;
+    gap: .2rem;
+    padding: .65rem .75rem;
+    border: 1px solid #e4ebf1;
+    border-radius: 6px;
+    background: #fbfdff;
+}
+.local-mldict-translation-lang,
+.local-mldict-example-lang {
+    color: #607282;
+    font-size: .78rem;
+    font-weight: 700;
+}
+.local-mldict-translation-text {
+    color: #1d2d3a;
+    line-height: 1.35;
+}
+.local-mldict-example-list li {
+    padding: .85rem 0;
+    border-top: 1px solid #edf1f5;
+}
+.local-mldict-example-list li:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+.local-mldict-example-sentence {
+    color: #1e2e3b;
+    font-size: 1.02rem;
+    line-height: 1.5;
 }
 .local-mldict-example-translation {
-    color: #555;
+    color: #61717f;
     margin-top: .25rem;
 }
 .local-mldict-autolink {
@@ -30,4 +644,294 @@
 .block_mldict .mldict-block-form input[type="text"] {
     width: 100%;
     margin-bottom: .5rem;
+}
+.local-mldict-floating {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 5.75rem;
+    z-index: 1085;
+    font-family: inherit;
+}
+.local-mldict-float-button {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 3rem;
+    padding: .55rem .9rem;
+    border: 0;
+    border-radius: 999px;
+    background: #087f8c;
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(8, 127, 140, .24);
+    cursor: grab;
+    font-weight: 720;
+    touch-action: none;
+    user-select: none;
+}
+.local-mldict-floating-dragging .local-mldict-float-button {
+    cursor: grabbing;
+}
+.local-mldict-float-button:focus,
+.local-mldict-float-button:hover {
+    background: #315d50;
+    color: #fff;
+}
+.local-mldict-float-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: #fff;
+    color: #087f8c;
+    font-size: .78rem;
+    font-weight: 800;
+}
+.local-mldict-floating-panel {
+    position: absolute;
+    right: 0;
+    bottom: 3.75rem;
+    width: min(28rem, calc(100vw - 2rem));
+    max-height: min(40rem, calc(100vh - 7rem));
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 24px 58px rgba(11, 28, 42, .22);
+    overflow: hidden;
+}
+.local-mldict-floating-panel[hidden] {
+    display: none;
+}
+.local-mldict-floating-integrated {
+    top: 50%;
+    right: 4.75rem;
+    bottom: auto;
+    width: 0;
+    height: 0;
+    transform: none;
+}
+.local-mldict-floating-integrated .local-mldict-float-button {
+    display: none;
+}
+.local-mldict-floating-integrated .local-mldict-floating-panel {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    transform: translateY(-50%);
+}
+.local-mldict-floating-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .95rem 1rem;
+    background:
+        radial-gradient(circle at top right, rgba(242, 184, 75, .18), transparent 42%),
+        linear-gradient(135deg, #f1faf7 0%, #ffffff 78%);
+    border-bottom: 1px solid #e0ece8;
+}
+.local-mldict-floating-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #17242a;
+    font-weight: 680;
+}
+.local-mldict-floating-close {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #667b83;
+    font-size: 0;
+    line-height: 0;
+    padding: 0;
+    transition: background-color .14s ease, box-shadow .14s ease, color .14s ease, transform .14s ease;
+}
+.local-mldict-floating-close::before,
+.local-mldict-floating-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: .72rem;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transform-origin: center;
+}
+.local-mldict-floating-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.local-mldict-floating-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.local-mldict-floating-close:hover,
+.local-mldict-floating-close:focus {
+    background: #eaf7f4;
+    box-shadow: 0 5px 14px rgba(49, 93, 80, .14);
+    color: #315d50;
+    transform: translateY(-1px) scale(1.03);
+}
+.local-mldict-floating-close:focus-visible {
+    outline: 3px solid rgba(8, 127, 140, .22);
+    outline-offset: 2px;
+}
+.local-mldict-floating-close:active,
+.local-mldict-floating-close.is-clicked {
+    background: #315d50;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .18);
+    color: #fff;
+    transform: scale(.92);
+}
+.local-mldict-floating-search {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: .55rem;
+    padding: .85rem 1rem;
+    border-bottom: 1px solid #edf4f1;
+    background: #fbfdfc;
+}
+.local-mldict-floating-query,
+.local-mldict-floating-lang,
+.local-mldict-floating-search-button {
+    min-height: 2.45rem;
+    border: 1px solid #d2e2dd;
+    border-radius: 8px;
+}
+.local-mldict-floating-query {
+    min-width: 0;
+    padding: .48rem .65rem;
+    background: #fff;
+    color: #22333a;
+}
+.local-mldict-floating-lang {
+    max-width: 8.2rem;
+    padding: .4rem .5rem;
+    background: #fff;
+    color: #22333a;
+}
+.local-mldict-floating-query:focus,
+.local-mldict-floating-lang:focus {
+    border-color: #087f8c;
+    box-shadow: 0 0 0 .18rem rgba(8, 127, 140, .12);
+    outline: 0;
+}
+.local-mldict-floating-search-button {
+    padding: .4rem .75rem;
+    background: #087f8c;
+    color: #fff;
+    border-color: #087f8c;
+    font-weight: 700;
+}
+.local-mldict-floating-search-button:hover,
+.local-mldict-floating-search-button:focus {
+    background: #315d50;
+    border-color: #315d50;
+}
+.local-mldict-floating-results {
+    overflow: auto;
+    padding: .72rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfa 100%);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(49, 93, 80, .36) transparent;
+}
+.local-mldict-floating-results::-webkit-scrollbar {
+    width: 8px;
+}
+.local-mldict-floating-results::-webkit-scrollbar-track {
+    background: transparent;
+}
+.local-mldict-floating-results::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(49, 93, 80, .32);
+}
+.local-mldict-floating-empty {
+    padding: 1rem;
+    border: 1px dashed #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    color: #667b83;
+    text-align: center;
+}
+.local-mldict-floating-candidates {
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(21, 49, 58, .06);
+}
+@media (max-width: 480px) {
+    .local-mldict-page {
+        padding: 76px .85rem .85rem;
+    }
+    .local-mldict-hero {
+        grid-template-columns: 1fr;
+    }
+    .local-mldict-hero::after {
+        display: none;
+    }
+    .local-mldict-hero-points {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        min-width: 0;
+    }
+    .local-mldict-hero-points li {
+        padding: .42rem;
+        text-align: center;
+    }
+    .local-mldict-search {
+        grid-template-columns: 1fr;
+        padding: .65rem;
+    }
+    .local-mldict-starter,
+    .local-mldict-starter-themes {
+        grid-template-columns: 1fr;
+    }
+    .local-mldict-floating {
+        right: .75rem;
+        bottom: 5rem;
+    }
+    .local-mldict-floating-integrated {
+        top: 50%;
+        right: 4rem;
+        bottom: auto;
+    }
+    .local-mldict-floating-panel {
+        right: -.25rem;
+        width: calc(100vw - 1rem);
+        max-height: calc(100vh - 5.75rem);
+    }
+    .local-mldict-floating-integrated .local-mldict-floating-panel {
+        right: 0;
+        top: 0;
+        bottom: auto;
+        transform: translateY(-50%);
+    }
+    .local-mldict-float-text {
+        display: none;
+    }
+    .local-mldict-floating-search {
+        grid-template-columns: 1fr;
+    }
+    .local-mldict-detail-popup {
+        padding: .75rem;
+    }
+    .local-mldict-popup-header h2 {
+        font-size: 1.55rem;
+    }
+    .local-mldict-popup-translations {
+        grid-template-columns: 1fr;
+    }
+    .local-mldict-floating-lang,
+    .local-mldict-floating-search-button {
+        max-width: none;
+    }
 }

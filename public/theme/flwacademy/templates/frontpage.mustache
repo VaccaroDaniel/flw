@@ -1,228 +1,158 @@
 {{!
     @template theme_flwacademy/frontpage
 
-    FLW Academy Moodle front page.
+    FLW Academy redesigned Moodle front page.
 }}
 {{> theme_boost/head }}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}
-<div id="page-wrapper" class="d-print-block flw-frontpage-wrapper">
+<div id="page-wrapper" class="d-print-block flw-frontpage-wrapper flw-redesign-page">
     {{{ output.standard_top_of_body_html }}}
     {{> theme_boost/navbar }}
-    {{> theme_flwacademy/flw_language_panel }}
+
     <style>
-        :root{--flw-font-body:Inter,"Segoe UI",Arial,sans-serif;--flw-font-heading:Inter,"Segoe UI",Arial,sans-serif;--flw-font-serif:Georgia,"Times New Roman","Noto Serif","Noto Serif CJK SC","Noto Serif CJK JP","Noto Serif CJK KR",serif}.flw-start-page,.flw-start-page button,.flw-start-page input,.flw-start-page select,.flw-start-page textarea{font-family:var(--flw-font-body)}.flw-start-page h1,.flw-start-page h2,.flw-start-page h3,.flw-frontpage{font-family:var(--flw-font-heading)}.flw-start-page,.flw-start-page #page-wrapper{background:#f7faf8}.flw-frontpage{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:5.5rem 0 3.5rem;color:#17242a}.flw-frontpage a{text-decoration:none}.flw-start-hero{position:relative;min-height:470px;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,360px);gap:1.5rem;align-items:center;overflow:hidden;border:1px solid #d8e3df;border-radius:.75rem;background:#fff;box-shadow:0 12px 30px rgba(23,36,42,.09)}.flw-start-hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(255,255,255,.92),rgba(255,255,255,.18))}.flw-start-hero-art{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center 58%}.flw-start-copy,.flw-start-access{position:relative;z-index:2}.flw-start-copy{max-width:720px;padding:2.25rem}.flw-kicker{margin:0 0 .5rem;color:#075a64;font-size:.82rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.flw-start-copy h1{max-width:11ch;margin:0;color:#17242a;font-size:clamp(2.45rem,5vw,4.45rem);font-weight:900;letter-spacing:0;line-height:.98}.flw-start-access h2,.flw-section-heading h2{margin:0;color:#17242a;font-weight:900;letter-spacing:0}.flw-lead{max-width:42rem;margin:1rem 0 0;color:#5d6b72;font-size:1.15rem;line-height:1.6}.flw-start-metrics,.flw-start-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.1rem}.flw-start-metrics span{display:inline-flex;min-height:2.5rem;align-items:center;gap:.4rem;padding:.5rem .65rem;border:1px solid rgba(8,127,140,.22);border-radius:.5rem;background:rgba(255,255,255,.88);color:#5d6b72;font-size:.82rem;font-weight:800}.flw-start-metrics strong{color:#075a64;font-size:1.12rem}.flw-start-button{min-height:2.75rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.65rem .95rem;border:1px solid #d8e3df;border-radius:.5rem;background:#fff;color:#17242a!important;font-weight:900}.flw-start-button-primary{border-color:#087f8c;background:#087f8c;color:#fff!important}.flw-start-button-small{min-height:2.25rem;padding:.45rem .7rem;font-size:.88rem}.flw-full{width:100%}.flw-start-access{display:grid;gap:.9rem;align-content:start;margin-right:1.5rem;padding:1.25rem;border:1px solid #d8e3df;border-radius:.5rem;background:rgba(255,255,255,.92);box-shadow:0 10px 24px rgba(23,36,42,.10)}.flw-start-access h2{font-size:1.5rem;line-height:1.18}.flw-start-access ul{display:grid;gap:.65rem;margin:0;padding:0;list-style:none}.flw-start-access li{display:grid;gap:.15rem;padding:.65rem;border:1px solid #d8e3df;border-radius:.5rem;background:#f0f6f4}.flw-start-access li span{color:#5d6b72;font-size:.82rem;font-weight:650}.flw-route-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:1.35rem 0}.flw-route-strip a{display:grid;min-height:8.25rem;align-content:start;gap:.35rem;padding:1.1rem;border:1px solid #d8e3df;border-top:5px solid #087f8c;border-radius:.5rem;background:#fff;color:#17242a!important;box-shadow:0 8px 18px rgba(23,36,42,.06)}.flw-route-strip a:nth-child(2){border-top-color:#e85d4f}.flw-route-strip a:nth-child(3){border-top-color:#4f9d54}.flw-route-strip span{color:#075a64;font-size:.82rem;font-weight:900}.flw-route-strip strong{font-size:1.18rem}.flw-route-strip small{color:#5d6b72;font-size:.82rem;line-height:1.45}.flw-front-band{margin-top:1.35rem;padding:1.5rem;border:1px solid #d8e3df;border-radius:.5rem;background:#fff;box-shadow:0 12px 30px rgba(23,36,42,.09)}.flw-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:.9rem}.flw-section-heading h2{font-size:clamp(1.65rem,3vw,2.25rem)}.flw-language-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem}.flw-language-card{display:grid;min-height:15.6rem;align-content:start;gap:.55rem;padding:1.1rem;border:1px solid #d8e3df;border-top:5px solid #087f8c;border-radius:.5rem;background:#fff;color:#17242a!important}.flw-language-card:first-child{grid-column:span 2}.flw-language-card img{width:100%;aspect-ratio:16/8.5;display:block;border-radius:.5rem;object-fit:cover;background:#f0f6f4}.flw-language-card span{width:fit-content;min-height:1.75rem;display:inline-flex;align-items:center;padding:.3rem .55rem;border-radius:.5rem;background:#f0f6f4;color:#075a64;font-size:.75rem;font-weight:900}.flw-language-card h3{margin:0;color:#17242a;font-size:1.38rem;font-weight:900}.flw-language-card p{margin:0;color:#5d6b72}.flw-language-card .flw-native{color:#17242a;font-weight:850}.flw-language-coral{border-top-color:#e85d4f}.flw-language-yellow{border-top-color:#f2b84b}.flw-language-green{border-top-color:#4f9d54}.flw-language-blue{border-top-color:#3278bd}.flw-daily-grid,.flw-news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}.flw-daily-grid article,.flw-news-grid article{min-height:11rem;padding:1rem;border:1px solid #d8e3df;border-top:5px solid #3278bd;border-radius:.5rem;background:#fff}.flw-news-grid article:nth-child(2){border-top-color:#f2b84b}.flw-news-grid article:nth-child(3){border-top-color:#e85d4f}.flw-daily-grid span,.flw-news-grid span{color:#075a64;font-size:.78rem;font-weight:900;text-transform:uppercase}.flw-daily-grid h3,.flw-news-grid h3{margin:.45rem 0;color:#17242a;font-size:1.25rem;font-weight:900}.flw-daily-grid p,.flw-news-grid p{margin:0;color:#5d6b72}@media(max-width:920px){.flw-start-hero,.flw-route-strip,.flw-language-grid,.flw-daily-grid,.flw-news-grid{grid-template-columns:1fr}.flw-language-card:first-child{grid-column:auto}.flw-start-access{margin:0 1.1rem 1.1rem}}@media(max-width:620px){.flw-frontpage{width:min(100% - 22px,1180px);padding-top:4.8rem}.flw-start-copy,.flw-front-band{padding:1rem}.flw-start-copy h1{font-size:2.1rem}.flw-section-heading{align-items:flex-start;flex-direction:column}.flw-start-metrics span{width:100%}}
-    </style>
-    <style>
-        .flw-frontpage{padding-top:5.5rem}
-        .flw-start-copy h1{max-width:780px;font-size:42px;font-weight:900;line-height:1.08}
-        .flw-start-access h2{font-size:24px;font-weight:700;line-height:1.18}
-        .flw-tips-grid,.flw-users-grid,.flw-faq-grid{display:grid;gap:.9rem}
-        .flw-tips-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-        .flw-users-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
-        .flw-tip-card,.flw-user-card,.flw-faq-grid details{padding:1rem;border:1px solid #d8e3df;border-top:5px solid #087f8c;border-radius:.5rem;background:#fff}
-        .flw-tip-card:nth-child(2),.flw-user-card:nth-child(2){border-top-color:#3278bd}.flw-tip-card:nth-child(3),.flw-user-card:nth-child(3){border-top-color:#e85d4f}.flw-user-card:nth-child(4){border-top-color:#4f9d54}.flw-user-card:nth-child(5){border-top-color:#f2b84b}
-        .flw-tip-card span,.flw-user-card span{color:#075a64;font-size:.78rem;font-weight:900;text-transform:uppercase}
-        .flw-tip-card h3,.flw-user-card h3{margin:.45rem 0;color:#17242a;font-size:1.15rem;font-weight:900}
-        .flw-tip-card p,.flw-user-card p,.flw-faq-grid p{margin:0;color:#5d6b72}
-        .flw-user-card strong{display:block;color:#17242a;font-size:1.35rem}
-        .flw-faq-grid summary{cursor:pointer;color:#17242a;font-weight:900}
-        .flw-hidden-maincontent{display:none!important}
-        .flw-start-page .flw-kicker,.flw-start-page .flw-start-copy h1,.flw-start-page .flw-section-heading h2,.flw-start-page .flw-start-access h2,.flw-start-page .flw-start-button,.flw-start-page .flw-route-strip strong,.flw-start-page .flw-language-card h3,.flw-start-page .flw-daily-grid h3,.flw-start-page .flw-news-grid h3,.flw-start-page .flw-tip-card h3,.flw-start-page .flw-user-card h3,.flw-start-page .flw-faq-grid summary{font-weight:700!important}
-        .flw-start-page .flw-section-heading h2{font-size:26px!important;line-height:1.18}
-        .flw-start-page .flw-start-metrics span,.flw-start-page .flw-start-metrics strong,.flw-start-page .flw-route-strip span,.flw-start-page .flw-language-card span,.flw-start-page .flw-language-card .flw-native,.flw-start-page .flw-daily-grid span,.flw-start-page .flw-news-grid span,.flw-start-page .flw-tip-card span,.flw-start-page .flw-user-card span,.flw-start-page .flw-user-card strong,.flw-start-page .flw-start-access li strong{font-weight:650!important}
-        @media(max-width:920px){.flw-tips-grid,.flw-users-grid{grid-template-columns:1fr 1fr}}
-        @media(max-width:620px){.flw-start-copy h1{font-size:32px}.flw-start-access h2{font-size:20px}.flw-tips-grid,.flw-users-grid{grid-template-columns:1fr}}
+        :root{--flw-rd-blue:#0a4be8;--flw-rd-blue-dark:#082a84;--flw-rd-navy:#091438;--flw-rd-text:#111936;--flw-rd-muted:#5f6d8d;--flw-rd-line:#e5e8ef;--flw-rd-soft:#f7f9fd;--flw-rd-green:#327be1;--flw-rd-purple:#7750d9;--flw-rd-orange:#f38a00;--flw-rd-cyan:#327be1;--flw-rd-shadow:0 4px 14px rgba(23,39,79,.10);--flw-rd-shadow-soft:0 2px 9px rgba(23,39,79,.08)}
+        .flw-start-page,.flw-start-page #page-wrapper{margin:0;background:#eef0f3;color:var(--flw-rd-text);font-family:Arial,Helvetica,sans-serif;line-height:1.35}
+        .flw-redesign-page *{box-sizing:border-box}.flw-redesign-page a{color:inherit;text-decoration:none}.flw-redesign-page button,.flw-redesign-page input{font:inherit}.flw-redesign-page img,.flw-redesign-page svg{display:block;max-width:100%}
+        .flw-redesign-home{width:min(1428px,calc(100vw - 20px));margin:58px auto 18px;padding:22px 0 22px;background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible;display:grid;gap:20px}
+        .flw-logo{color:var(--flw-rd-blue);font-weight:900;letter-spacing:-2px;font-size:37px;line-height:1}.flw-primary-button,.flw-outline-button{height:46px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;padding:0 28px;font-size:15px;font-weight:700;border:1px solid transparent;cursor:pointer;white-space:nowrap}.flw-primary-button{background:var(--flw-rd-blue);color:#fff!important;box-shadow:0 3px 7px rgba(10,75,232,.18)}.flw-primary-button:hover{background:#073fca}.flw-outline-button{background:#fff;border-color:#6f93ee;color:var(--flw-rd-blue)!important}
+        .flw-home-header{height:65px;border-bottom:1px solid #e6e8ec;display:flex;align-items:center;padding:0 79px;background:#fff;position:relative;z-index:5}.flw-home-nav{margin-left:auto;display:flex;align-items:center;gap:46px;font-size:14px;font-weight:700;color:#11182c}.flw-home-nav a:not(.flw-sign-in):not(.flw-home-user-button):hover{color:var(--flw-rd-blue)}.flw-sign-in{border:1px solid #cbd2df;border-radius:8px;height:39px;min-width:100px;display:flex;align-items:center;justify-content:center}.flw-home-user-button{height:41px;max-width:185px;border:1px solid #d8dee9;border-radius:999px;background:#fff;box-shadow:0 1px 4px rgba(22,37,68,.04);display:flex;align-items:center;gap:9px;padding:0 12px 0 3px;color:#18213a;font-size:13px;font-weight:700}.flw-home-user-button .userpicture,.flw-home-user-button .userinitials,.flw-home-user-button .flw-home-avatar{width:34px!important;height:34px!important;border-radius:50%!important;object-fit:cover;overflow:hidden;flex:0 0 34px;display:grid;place-items:center}.flw-home-user-button span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flw-mobile-menu-button{display:none;background:#fff;border:1px solid var(--flw-rd-line);border-radius:8px;width:40px;height:40px;font-size:20px;color:var(--flw-rd-text)}
+        .flw-home-hero{min-height:302px;display:grid;grid-template-columns:44% 56%;overflow:hidden;background:#fff;border:1px solid #d8dbe1;border-radius:0;box-shadow:0 5px 20px rgba(31,43,68,.14)}.flw-hero-copy{padding:34px 0 28px 81px;position:relative;z-index:2}.flw-hero-copy h1{font-family:Georgia,"Times New Roman",serif;color:#091338;font-size:60px;line-height:1.02;letter-spacing:-2.2px;margin:0 0 16px;font-weight:700}.flw-hero-copy p{margin:0;color:#4b5d7b;font-size:17px;line-height:1.35}.flw-hero-buttons{display:flex;gap:17px;margin-top:20px}.flw-hero-buttons .flw-primary-button{width:189px}.flw-hero-buttons .flw-outline-button{width:170px}.flw-hero-reference{width:100%;height:302px;object-fit:cover;object-position:left top;border-radius:0}
+        .flw-course-section{padding:22px 70px 24px;background:#fff;border:1px solid #d8dbe1;border-radius:11px;box-shadow:0 5px 20px rgba(31,43,68,.14)}.flw-home-block-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 16px}.flw-home-block-head p{margin:0 0 5px;color:#0a4be8;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0}.flw-home-block-head h2{margin:0;color:#101a3a;font-family:Georgia,"Times New Roman",serif;font-size:29px;font-weight:700;line-height:1.12}.flw-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px 14px}.flw-course-card{min-height:126px;background:#fff;border:1px solid #e2e4e9;border-radius:13px;box-shadow:var(--flw-rd-shadow-soft);display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;padding:8px 12px 8px 7px;overflow:visible}.flw-crest-frame{display:flex;align-items:center;justify-content:center;overflow:visible;padding:6px;width:96px;height:108px;flex-shrink:0}.flw-crest-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;flex-shrink:0}.flw-course-info{min-width:0;padding-left:2px}.flw-course-info h2{font-size:15px;font-weight:700;line-height:1.15;margin:0 0 4px;color:#10162b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.flw-course-info>p{font-size:13px;font-weight:400;margin:0 0 16px;color:#3d4b67}.flw-card-progress{height:3px;background:#e6e9ef;border-radius:6px;margin:0 0 5px;width:100%;overflow:hidden}.flw-card-progress i{display:block;height:100%;background:#2197e4;border-radius:6px}.flw-course-bottom{display:flex;align-items:center;justify-content:space-between;gap:7px;font-size:11px;color:#4a566d}.flw-course-bottom a{border:1px solid #5f8df2;border-radius:6px;color:var(--flw-rd-blue)!important;font-weight:700;padding:7px 10px;background:#fff}
+        .flw-how-section{display:grid;grid-template-columns:60% 40%;gap:23px;padding:24px 78px;background:#fff;border:1px solid #d8dbe1;border-radius:11px;box-shadow:0 5px 20px rgba(31,43,68,.14)}.flw-how-left h2{font:700 29px/1 Georgia,"Times New Roman",serif;margin:0 0 13px;color:#111a36}.flw-method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.flw-method-card{min-height:161px;border:1px solid #e2e5ea;border-radius:12px;box-shadow:0 2px 8px rgba(24,40,75,.05);padding:11px 10px 10px;overflow:hidden}.flw-method-card.learn{background:#f3f8fd}.flw-method-card.practise{background:#f4f7ff}.flw-method-card.communicate{background:#f6f4fc}.flw-method-card.create{background:#fff8ef}.flw-method-card img{width:100%;height:65px;object-fit:cover;border-radius:7px;margin-bottom:4px}.flw-method-card h3{margin:0 0 2px;font-size:14px;color:#121929}.flw-method-card p{margin:0;font-size:11px;line-height:1.22;color:#233049}
+        .flw-placement-panel{min-height:201px;border:1px solid #cbd8f5;border-radius:14px;background:linear-gradient(135deg,#fbfdff,#f2f7ff);display:grid;grid-template-columns:1fr 166px;align-items:center;padding:16px 18px 15px 25px;box-shadow:0 2px 8px rgba(32,57,104,.05)}.flw-placement-copy h2{font:700 26px/1.1 Georgia,"Times New Roman",serif;margin:0 0 9px;color:#111a36}.flw-placement-copy p{margin:0 0 13px;font-size:13px;color:#3f4e68;line-height:1.35}.flw-placement-copy .flw-primary-button,.flw-placement-copy .flw-outline-button{height:38px;margin-top:0;font-size:14px;width:100%}.flw-placement-copy .flw-outline-button{margin-top:7px}.flw-placement-panel img{width:146px;height:174px;object-fit:contain;justify-self:end}
+        .flw-trust-strip{margin:0;min-height:99px;border:1px solid #dfe3ea;border-radius:11px;box-shadow:0 5px 20px rgba(31,43,68,.14);display:grid;grid-template-columns:repeat(4,1fr);background:#fff;overflow:hidden}.flw-trust-item{display:grid;grid-template-columns:58px 1fr;gap:13px;align-items:center;padding:13px 18px}.flw-trust-item+.flw-trust-item{border-left:1px solid #e5e8ee}.flw-trust-item strong{font-size:14px;color:#1d2840}.flw-trust-item p{font-size:11px;line-height:1.35;color:#516079;margin:4px 0 0}.flw-trust-icon{width:54px;height:54px;display:grid;place-items:center;color:currentColor}.flw-trust-icon svg{width:54px;height:54px;display:block;fill:currentColor}.flw-trust-icon.blue{color:#0e57dc}.flw-trust-icon.green{color:#327be1}.flw-trust-icon.purple{color:#8654cf}.flw-trust-icon.orange{color:#f68b00}
+        .flw-demo-toast{position:fixed;left:50%;bottom:24px;z-index:100;transform:translate(-50%,20px);max-width:min(420px,calc(100vw - 32px));padding:11px 16px;border-radius:9px;background:#101a3a;color:#fff;font-size:13px;box-shadow:0 10px 30px rgba(10,20,50,.25);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}.flw-demo-toast.show{opacity:1;transform:translate(-50%,0)}.flw-hidden-maincontent{display:none!important}
+        .flw-home-nav a,.flw-primary-button,.flw-outline-button,.flw-course-bottom a,.flw-mobile-menu-button{outline:0;transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .12s ease}.flw-home-nav a{display:inline-flex;align-items:center;justify-content:center}.flw-home-nav a:not(.flw-sign-in):not(.flw-home-user-button){border-radius:8px;padding:9px 10px;margin:-9px -10px}.flw-home-nav a:hover,.flw-home-nav a:focus-visible,.flw-outline-button:hover,.flw-outline-button:focus-visible,.flw-course-bottom a:hover,.flw-course-bottom a:focus-visible,.flw-mobile-menu-button:hover,.flw-mobile-menu-button:focus-visible{background:#f4f7ff;color:var(--flw-rd-blue)!important;border-color:#9db8ff;box-shadow:inset 0 0 0 1px #dbe6ff}.flw-primary-button:hover,.flw-primary-button:focus-visible{background:#073fca;color:#fff!important;box-shadow:0 6px 16px rgba(10,75,232,.18)}.flw-home-nav a:active,.flw-home-nav a.is-pressing,.flw-primary-button:active,.flw-primary-button.is-pressing,.flw-outline-button:active,.flw-outline-button.is-pressing,.flw-course-bottom a:active,.flw-course-bottom a.is-pressing,.flw-mobile-menu-button:active,.flw-mobile-menu-button.is-pressing{transform:translateY(1px) scale(.985);background:#eaf1ff;box-shadow:inset 0 0 0 1px #b8cbff}.flw-primary-button:active,.flw-primary-button.is-pressing{background:#073fca;color:#fff!important}.flw-course-card,.flw-method-card,.flw-trust-item{transition:border-color .16s ease,box-shadow .16s ease,transform .12s ease}.flw-course-card:hover,.flw-method-card:hover,.flw-trust-item:hover{border-color:#cbd8f5;box-shadow:0 6px 16px rgba(10,75,232,.08)}
+        @media(max-width:1150px){.flw-home-header{padding:0 40px}.flw-home-nav{gap:25px}.flw-hero-copy{padding-left:40px}.flw-hero-copy h1{font-size:49px}.flw-course-section{padding-left:35px;padding-right:35px}.flw-how-section{padding-left:40px;padding-right:40px;grid-template-columns:1fr}.flw-trust-strip{margin:0}}
+        @media(max-width:1180px){html,body{overflow-y:auto!important}.flw-redesign-page{overflow-x:hidden;overflow-y:auto}.flw-redesign-home{height:auto!important;min-height:100vh!important;overflow:visible!important}.flw-home-hero{grid-template-columns:1fr!important;min-height:0!important;height:auto!important;overflow:visible!important}.flw-hero-copy{padding:38px 36px 28px!important}.flw-hero-copy h1{font-size:52px;letter-spacing:0}.flw-hero-reference{height:auto!important;max-height:360px!important;object-position:center top}.flw-course-section{padding:20px 34px 18px!important}.flw-course-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))!important}.flw-how-section{display:block!important;padding:22px 34px!important}.flw-method-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))!important}.flw-placement-panel{margin-top:18px}.flw-trust-strip{height:auto!important;margin:0!important;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))!important;overflow:visible!important}.flw-trust-item{border-top:1px solid #e5e8ee}.flw-trust-item+.flw-trust-item{border-left:0!important}}
+        @media(max-width:800px){.flw-redesign-home{width:calc(100% - 20px);margin:4px auto 8px;padding:16px 0 18px;border-radius:0;border:0;gap:14px}.flw-home-header{height:64px;padding:0 20px}.flw-home-nav{display:none;position:absolute;top:64px;left:12px;right:12px;background:#fff;border:1px solid var(--flw-rd-line);border-radius:12px;padding:14px;box-shadow:var(--flw-rd-shadow);flex-direction:column;align-items:stretch;gap:6px}.flw-home-nav.open{display:flex}.flw-home-nav a{padding:10px}.flw-mobile-menu-button{display:block;margin-left:auto}.flw-home-hero{height:auto;grid-template-columns:1fr}.flw-hero-copy{padding:42px 24px 30px}.flw-hero-copy h1{font-size:49px}.flw-hero-copy p br{display:none}.flw-hero-reference{height:auto;max-height:320px}.flw-course-section{padding:20px}.flw-home-block-head{display:block}.flw-home-block-head h2{font-size:25px}.flw-course-grid{grid-template-columns:1fr 1fr}.flw-how-section{padding:20px;grid-template-columns:1fr}.flw-method-grid{grid-template-columns:1fr 1fr}.flw-placement-panel{grid-template-columns:1fr 120px}.flw-trust-strip{height:auto;margin:0;grid-template-columns:1fr 1fr}.flw-trust-item:nth-child(3){border-left:0;border-top:1px solid #e5e8ee}.flw-trust-item:nth-child(4){border-top:1px solid #e5e8ee}}
+        @media(max-width:520px){.flw-course-grid,.flw-method-grid,.flw-trust-strip{grid-template-columns:1fr}.flw-trust-item+.flw-trust-item{border-left:0;border-top:1px solid #e5e8ee}.flw-hero-copy h1{font-size:41px}.flw-hero-buttons{flex-direction:column}.flw-hero-buttons .flw-primary-button,.flw-hero-buttons .flw-outline-button{width:100%}.flw-placement-panel{grid-template-columns:1fr}.flw-placement-panel img{display:none}.flw-course-card{grid-template-columns:84px 1fr;min-height:106px;padding:9px 10px 9px 7px}.flw-crest-frame{width:80px;height:98px}.flw-course-info h2{font-size:13px}.flw-course-info>p{font-size:11px;margin-bottom:12px}.flw-course-bottom{font-size:10px}.flw-course-bottom a{padding:6px 9px}.flw-method-card{min-height:118px;display:grid;grid-template-columns:105px minmax(0,1fr);grid-template-rows:auto 1fr;gap:4px 10px;padding:12px;align-items:start}.flw-method-card img{grid-column:1;grid-row:1/3;width:105px;height:88px;object-fit:contain;margin:0;border-radius:8px;align-self:center}.flw-method-card h3{grid-column:2;grid-row:1;font-size:15px;margin-top:4px}.flw-method-card p{grid-column:2;grid-row:2;font-size:11px;line-height:1.35}.flw-trust-item{grid-template-columns:50px 1fr;padding:14px 13px;gap:11px}.flw-trust-icon,.flw-trust-icon svg{width:46px;height:46px}.flw-trust-item strong{font-size:13px}.flw-trust-item p{font-size:10px}}
+        @media(prefers-reduced-motion:reduce){.flw-redesign-page *{scroll-behavior:auto!important;transition:none!important}}
     </style>
 
-    <main id="page" data-region="mainpage" data-usertour="scroller" class="flw-frontpage">
-        <section class="flw-start-hero">
-            <img class="flw-start-hero-art" src="{{heroimageurl}}" alt="">
-            <div class="flw-start-copy">
-                <p class="flw-kicker">{{copy.brand}}</p>
-                <h1>{{copy.herotitle}}</h1>
-                <p class="flw-lead">{{copy.herolead}}</p>
-                <div class="flw-start-metrics" aria-label="{{copy.metricsaria}}">
-                    <span><strong>7</strong> {{copy.metriclanguages}}</span>
-                    <span><strong>120</strong> {{copy.metricplacement}}</span>
-                    <span><strong>365</strong> {{copy.metricmottos}}</span>
-                </div>
-                <div class="flw-start-actions">
-                    <a class="flw-start-button flw-start-button-primary" href="{{loginurl}}">{{copy.startplacement}}</a>
-                    <a class="flw-start-button" href="{{courseindexurl}}">{{copy.browsecoursemap}}</a>
-                    <a class="flw-start-button" href="{{dashboardurl}}">{{copy.enterdashboard}}</a>
+    <main id="page" data-region="mainpage" data-usertour="scroller" class="flw-redesign-home">
+        <section class="flw-home-hero">
+            <div class="flw-hero-copy">
+                <h1>Learn a language<br>by using it.</h1>
+                <p>Structured lessons, real communication, voice practice,<br> video, projects, and CEFR-aligned progress.</p>
+                <div class="flw-hero-buttons">
+                    <a class="flw-primary-button" href="{{dashboardurl}}">Continue Learning</a>
+                    <a class="flw-outline-button" href="{{placementurl}}">Find My Level</a>
                 </div>
             </div>
-            <aside class="flw-start-access">
-                <p class="flw-kicker">{{copy.accesskicker}}</p>
-                <h2>{{copy.accesstitle}}</h2>
-                <ul>
-                    <li><strong>{{copy.learnerstitle}}</strong><span>{{copy.learnersdesc}}</span></li>
-                    <li><strong>{{copy.teacherstitle}}</strong><span>{{copy.teachersdesc}}</span></li>
-                    <li><strong>{{copy.schoolstitle}}</strong><span>{{copy.schoolsdesc}}</span></li>
-                </ul>
-                <a class="flw-start-button flw-start-button-primary flw-full" href="{{loginurl}}">{{copy.loginflw}}</a>
-                <a class="flw-start-button flw-full" href="#flw-daily">{{copy.previewdaily}}</a>
-            </aside>
+            <img class="flw-hero-reference" src="{{redesignheroimageurl}}" alt="Learner using FLW with progress, voice practice, and video lesson cards">
         </section>
 
-        <section id="flw-path" class="flw-route-strip" aria-label="{{copy.patharia}}">
-            <a href="{{loginurl}}">
-                <span>01</span>
-                <strong>{{copy.route1title}}</strong>
-                <small>{{copy.route1text}}</small>
-            </a>
-            <a href="{{courseindexurl}}">
-                <span>02</span>
-                <strong>{{copy.route2title}}</strong>
-                <small>{{copy.route2text}}</small>
-            </a>
-            <a href="{{dashboardurl}}">
-                <span>03</span>
-                <strong>{{copy.route3title}}</strong>
-                <small>{{copy.route3text}}</small>
-            </a>
-        </section>
-
-        <section id="flw-categories" class="flw-front-band">
-            <div class="flw-section-heading">
+        <section class="flw-course-section" id="courses" aria-label="FLW courses">
+            <div class="flw-home-block-head">
                 <div>
-                    <p class="flw-kicker">{{copy.categorieskicker}}</p>
-                    <h2>{{copy.categoriestitle}}</h2>
+                    <p>Language World</p>
+                    <h2>Choose your language world.</h2>
                 </div>
-                <a class="flw-start-button flw-start-button-small" href="{{courseindexurl}}">{{copy.viewalllanguages}}</a>
             </div>
-            <div class="flw-language-grid">
-                {{#languages}}
-                    <a class="flw-language-card flw-language-{{accent}}" href="{{url}}">
-                        <img src="{{imageurl}}" alt="{{name}} {{copy.languagealt}}">
-                        <span>{{framework}}</span>
-                        <h3>{{name}}</h3>
-                        <p class="flw-native">{{native}}</p>
-                        <p>{{motto}}</p>
-                    </a>
-                {{/languages}}
+            <div class="flw-course-grid">
+                {{#coursecards}}
+                    <article class="flw-course-card">
+                        <div class="flw-crest-frame">
+                            <img class="flw-crest-image" src="{{cresturl}}" alt="{{alt}}">
+                        </div>
+                        <div class="flw-course-info">
+                            <h2>{{name}}</h2>
+                            <p>{{range}}</p>
+                            <div class="flw-card-progress"><i style="width:{{progress}}"></i></div>
+                            <div class="flw-course-bottom"><span>{{status}}</span><a href="{{url}}">Continue</a></div>
+                        </div>
+                    </article>
+                {{/coursecards}}
             </div>
         </section>
 
-        <section id="flw-daily" class="flw-front-band">
-            <div class="flw-section-heading">
-                <div>
-                    <p class="flw-kicker">{{copy.dailykicker}}</p>
-                    <h2>{{copy.dailytitle}}</h2>
+        <section class="flw-how-section" id="how">
+            <div class="flw-how-left">
+                <h2>How FLW Works</h2>
+                <div class="flw-method-grid">
+                    <article class="flw-method-card learn"><img src="{{howlearnimageurl}}" alt="Learn"><h3>Learn</h3><p>Structured lessons build<br>vocabulary, grammar,<br>and confidence.</p></article>
+                    <article class="flw-method-card practise"><img src="{{howpractiseimageurl}}" alt="Practise"><h3>Practise</h3><p>Voice practice, listening<br>and exercises help you<br>improve every day.</p></article>
+                    <article class="flw-method-card communicate"><img src="{{howcommunicateimageurl}}" alt="Communicate"><h3>Communicate</h3><p>Real conversations and<br>feedback help you use<br>language naturally.</p></article>
+                    <article class="flw-method-card create"><img src="{{howcreateimageurl}}" alt="Create"><h3>Create</h3><p>Projects and portfolios<br>show what you can do<br>in the real world.</p></article>
                 </div>
             </div>
-            <div class="flw-daily-grid">
-                <article>
-                    <span>{{copy.dailywordlabel}}</span>
-                    <h3>{{copy.dailyword}}</h3>
-                    <p>{{copy.dailywordtext}}</p>
-                </article>
-                <article>
-                    <span>{{copy.dailysentencelabel}}</span>
-                    <h3>{{copy.dailysentence}}</h3>
-                    <p>{{copy.dailysentencetext}}</p>
-                </article>
-                <article>
-                    <span>{{copy.todaylabel}}</span>
-                    <h3>{{copy.todaytitle}}</h3>
-                    <p>{{copy.todaytext}}</p>
-                </article>
-            </div>
+
+            <article class="flw-placement-panel" id="placement">
+                <div class="flw-placement-copy">
+                    <h2>Not sure where to begin?</h2>
+                    <p>Take a placement test to find your CEFR level<br>and get a personalised learning path.</p>
+                    <a class="flw-primary-button" href="{{placementurl}}">Take a Placement Test</a>
+                    <button class="flw-outline-button" type="button" data-flw-demo-message="Previous placement results would open here.">View Previous Results</button>
+                </div>
+                <img src="{{placementimageurl}}" alt="Placement test checklist">
+            </article>
         </section>
 
-        <section id="flw-news" class="flw-front-band">
-            <div class="flw-section-heading">
-                <div>
-                    <p class="flw-kicker">{{copy.newskicker}}</p>
-                    <h2>{{copy.newstitle}}</h2>
-                </div>
-            </div>
-            <div class="flw-news-grid">
-                <article>
-                    <span>{{copy.news1meta}}</span>
-                    <h3>{{copy.news1title}}</h3>
-                    <p>{{copy.news1text}}</p>
-                </article>
-                <article>
-                    <span>{{copy.news2meta}}</span>
-                    <h3>{{copy.news2title}}</h3>
-                    <p>{{copy.news2text}}</p>
-                </article>
-                <article>
-                    <span>{{copy.news3meta}}</span>
-                    <h3>{{copy.news3title}}</h3>
-                    <p>{{copy.news3text}}</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="flw-tips" class="flw-front-band">
-            <div class="flw-section-heading">
-                <div>
-                    <p class="flw-kicker">{{copy.tipskicker}}</p>
-                    <h2>{{copy.tipstitle}}</h2>
-                </div>
-            </div>
-            <div class="flw-tips-grid">
-                <article class="flw-tip-card">
-                    <span>{{copy.tip1meta}}</span>
-                    <h3>{{copy.tip1title}}</h3>
-                    <p>{{copy.tip1text}}</p>
-                </article>
-                <article class="flw-tip-card">
-                    <span>{{copy.tip2meta}}</span>
-                    <h3>{{copy.tip2title}}</h3>
-                    <p>{{copy.tip2text}}</p>
-                </article>
-                <article class="flw-tip-card">
-                    <span>{{copy.tip3meta}}</span>
-                    <h3>{{copy.tip3title}}</h3>
-                    <p>{{copy.tip3text}}</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="flw-users" class="flw-front-band">
-            <div class="flw-section-heading">
-                <div>
-                    <p class="flw-kicker">{{copy.userskicker}}</p>
-                    <h2>{{copy.userstitle}}</h2>
-                </div>
-            </div>
-            <div class="flw-users-grid">
-                <article class="flw-user-card"><span>English | B1</span><h3>Mina</h3><strong>18 h</strong><p>{{copy.listeningstreak}}</p></article>
-                <article class="flw-user-card"><span>Chinese | HSK 3</span><h3>Alex</h3><strong>15 h</strong><p>{{copy.speakingroom}}</p></article>
-                <article class="flw-user-card"><span>French | A2</span><h3>Sofia</h3><strong>12 h</strong><p>{{copy.readingnotes}}</p></article>
-                <article class="flw-user-card"><span>German | B2</span><h3>Daniel</h3><strong>21 h</strong><p>{{copy.exampractice}}</p></article>
-                <article class="flw-user-card"><span>Spanish | A1</span><h3>Yuki</h3><strong>10 h</strong><p>{{copy.dailysentencebrief}}</p></article>
-            </div>
-        </section>
-
-        <section id="flw-faq" class="flw-front-band">
-            <div class="flw-section-heading">
-                <div>
-                    <p class="flw-kicker">{{copy.faqkicker}}</p>
-                    <h2>{{copy.faqtitle}}</h2>
-                </div>
-            </div>
-            <div class="flw-faq-grid">
-                <details><summary>{{copy.faq1q}}</summary><p>{{copy.faq1a}}</p></details>
-                <details><summary>{{copy.faq2q}}</summary><p>{{copy.faq2a}}</p></details>
-                <details><summary>{{copy.faq3q}}</summary><p>{{copy.faq3a}}</p></details>
-                <details><summary>{{copy.faq4q}}</summary><p>{{copy.faq4a}}</p></details>
-            </div>
+        <section class="flw-trust-strip" aria-label="FLW features">
+            <div class="flw-trust-item"><div class="flw-trust-icon blue" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="39" width="8" height="17" rx="2"/><rect x="21" y="29" width="8" height="27" rx="2"/><rect x="34" y="18" width="8" height="38" rx="2"/><rect x="47" y="8" width="8" height="48" rx="2"/></svg></div><div><strong>CEFR-aligned progression</strong><p>Clear learning paths mapped<br>to the CEFR framework.</p></div></div>
+            <div class="flw-trust-item"><div class="flw-trust-icon green" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M31 5a27 27 0 1 0 27 27H31Z"/><path d="M35 5v23h23A27 27 0 0 0 35 5Z" opacity=".35"/></svg></div><div><strong>Five-skill reporting</strong><p>Track listening, speaking, reading,<br>writing, and dictation separately.</p></div></div>
+            <div class="flw-trust-item"><div class="flw-trust-icon purple" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="23" y="7" width="18" height="34" rx="9" fill="none" stroke="currentColor" stroke-width="5"/><path d="M15 31a17 17 0 0 0 34 0M32 48v9M23 57h18" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div><div><strong>Voice practice</strong><p>Offline speech checking supports<br>clearer, more confident speaking.</p></div></div>
+            <div class="flw-trust-item"><div class="flw-trust-icon orange" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M6 17h22l5 6h25v31H6Z"/><path d="M6 13h20l5 6H6Z" opacity=".7"/></svg></div><div><strong>Project portfolios</strong><p>Build, save and share projects<br>that demonstrate your progress.</p></div></div>
         </section>
         <div class="flw-hidden-maincontent" hidden aria-hidden="true">{{{maincontent}}}</div>
     </main>
-
+    <div class="flw-demo-toast" data-flw-toast role="status" aria-live="polite"></div>
     {{{ output.standard_after_main_region_html }}}
 </div>
 {{{ output.standard_end_of_body_html }}}
 </body>
 </html>
 {{#js}}
+(function() {
+    function bindPressEffect(root, selector) {
+        root.querySelectorAll(selector).forEach(function(control) {
+            control.addEventListener('pointerdown', function() {
+                control.classList.add('is-pressing');
+            });
+            ['pointerup', 'pointercancel', 'mouseleave', 'blur'].forEach(function(eventname) {
+                control.addEventListener(eventname, function() {
+                    control.classList.remove('is-pressing');
+                });
+            });
+        });
+    }
+    bindPressEffect(document, '.flw-home-nav a,.flw-primary-button,.flw-outline-button,.flw-course-bottom a,.flw-mobile-menu-button');
+    var button = document.querySelector('[data-flw-mobile-menu]');
+    var nav = document.querySelector('[data-flw-home-nav]');
+    if (button && nav) {
+        nav.id = 'flw-home-nav';
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            var open = !nav.classList.contains('open');
+            nav.classList.toggle('open', open);
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                nav.classList.remove('open');
+                button.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+    var toast = document.querySelector('[data-flw-toast]');
+    var timer;
+    document.querySelectorAll('[data-flw-demo-message]').forEach(function(control) {
+        control.addEventListener('click', function() {
+            if (!toast) {
+                return;
+            }
+            toast.textContent = control.getAttribute('data-flw-demo-message') || 'This action is ready to connect.';
+            toast.classList.add('show');
+            window.clearTimeout(timer);
+            timer = window.setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2400);
+        });
+    });
+})();
 M.util.js_pending('theme_boost/loader');
 require(['theme_boost/loader'], function() {
     M.util.js_complete('theme_boost/loader');
