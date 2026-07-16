@@ -1,0 +1,19 @@
+{{!
+    @template local_flwmedia/card_dictate
+}}
+<article class="flwmedia-card flwmedia-card-dictate" data-itemid="{{id}}" data-mode="dictate" data-expected="{{expectedtext}}">
+    <div class="flwmedia-card-body">
+        <h4>{{title}}</h4>
+        {{#description}}<p>{{description}}</p>{{/description}}
+        <audio controls preload="metadata">
+            {{#hasmediaurl}}<source data-src="{{mediaurl}}">{{/hasmediaurl}}
+        </audio>
+        <label class="flwmedia-label">Type what you hear<textarea class="flwmedia-dictation-response"></textarea></label>
+        <div class="flwmedia-actions">
+            <button type="button" class="flwmedia-btn flwmedia-dictation-check">Check</button>
+            <button type="button" class="flwmedia-btn flwmedia-dictation-reset">Try again</button>
+        </div>
+        <div class="flwmedia-status" aria-live="polite"></div>
+        <details class="flwmedia-answer"><summary>Correct answer</summary><p>{{expectedtext}}</p></details>
+    </div>
+</article>

@@ -1,0 +1,20 @@
+{{!
+    @template local_flwmedia/card_speak
+}}
+<article class="flwmedia-card flwmedia-card-speak" data-itemid="{{id}}" data-mode="speak">
+    <div class="flwmedia-card-body">
+        <h4>{{title}}</h4>
+        {{#description}}<p>{{description}}</p>{{/description}}
+        {{#hasexpectedtext}}<div class="flwmedia-prompt">{{expectedtext}}</div>{{/hasexpectedtext}}
+        {{#hasmediaurl}}
+            <audio controls preload="metadata">
+                <source data-src="{{mediaurl}}">
+            </audio>
+        {{/hasmediaurl}}
+        <div class="flwmedia-actions">
+            <button type="button" class="flwmedia-btn flwmedia-record-start">Start recording</button>
+            <button type="button" class="flwmedia-btn flwmedia-record-stop" disabled>Stop</button>
+        </div>
+        <div class="flwmedia-status" aria-live="polite"></div>
+    </div>
+</article>

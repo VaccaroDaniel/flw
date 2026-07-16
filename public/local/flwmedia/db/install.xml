@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/flwmedia/db" VERSION="2026071002" COMMENT="XMLDB file for FLW Media"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="local_flwmedia_items" COMMENT="FLW external media practice records">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="lessoncode" TYPE="char" LENGTH="80" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="mode" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="category" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="mediaurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="posterurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="subtitleurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="transcript" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="readtext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="expectedtext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="duration" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="lang" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="en" SEQUENCE="false"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="kptags" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="unitcode" UNIQUE="false" FIELDS="unitcode"/>
+        <INDEX NAME="lang" UNIQUE="false" FIELDS="lang"/>
+        <INDEX NAME="mode" UNIQUE="false" FIELDS="mode"/>
+        <INDEX NAME="category" UNIQUE="false" FIELDS="category"/>
+        <INDEX NAME="visible" UNIQUE="false" FIELDS="visible"/>
+        <INDEX NAME="course-unit-mode" UNIQUE="false" FIELDS="courseid, unitcode, mode"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_flwmedia_categories" COMMENT="Language-level FLW practice category registry">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="lang" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="en" SEQUENCE="false"/>
+        <FIELD NAME="categorykey" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="mode" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="lang" UNIQUE="false" FIELDS="lang"/>
+        <INDEX NAME="categorykey" UNIQUE="false" FIELDS="categorykey"/>
+        <INDEX NAME="lang-key-mode" UNIQUE="true" FIELDS="lang, categorykey, mode"/>
+        <INDEX NAME="visible" UNIQUE="false" FIELDS="visible"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_flwmedia_progress" COMMENT="FLW learner media progress">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="mode" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="secondsdone" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="percentdone" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="score" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="attemptjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="itemid" UNIQUE="false" FIELDS="itemid"/>
+        <INDEX NAME="mode" UNIQUE="false" FIELDS="mode"/>
+        <INDEX NAME="user-item" UNIQUE="false" FIELDS="userid, itemid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="local_flwmedia_attempts" COMMENT="FLW learner practice attempts">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="mode" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="response" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="transcript" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="score" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="feedback" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="audiofileurl" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="attemptjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="itemid" UNIQUE="false" FIELDS="itemid"/>
+        <INDEX NAME="mode" UNIQUE="false" FIELDS="mode"/>
+        <INDEX NAME="user-item-mode" UNIQUE="false" FIELDS="userid, itemid, mode"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

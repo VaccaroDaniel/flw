@@ -1,0 +1,17 @@
+{{!
+    @template local_flwmedia/card_read
+}}
+<article class="flwmedia-card flwmedia-card-read" data-itemid="{{id}}" data-mode="read">
+    <div class="flwmedia-card-body">
+        <h4>{{title}}</h4>
+        {{#hasreadtext}}<div class="flwmedia-readtext">{{readtext}}</div>{{/hasreadtext}}
+        {{#hasmediaurl}}
+            <audio controls preload="metadata">
+                <source data-src="{{mediaurl}}">
+            </audio>
+        {{/hasmediaurl}}
+        {{#hasexpectedtext}}<label class="flwmedia-label">Short response<textarea class="flwmedia-read-response"></textarea></label>{{/hasexpectedtext}}
+        <button type="button" class="flwmedia-btn flwmedia-mark-read">Mark as read</button>
+        <div class="flwmedia-status" aria-live="polite"></div>
+    </div>
+</article>
