@@ -88,9 +88,9 @@ body.path-local-mldict #region-main {
 }
 .local-mldict-hero p {
     max-width: 46rem;
-    margin: .75rem 0 0;
-    color: #5f6d8d;
-    font-size: 13px;
+    margin: 10px 0 0;
+    color: #405477;
+    font-size: 15px;
     line-height: 1.35;
 }
 .local-mldict-hero-points {
@@ -462,7 +462,7 @@ body.path-local-mldict #region-main {
     font-size: .8rem;
 }
 .local-mldict-starter-count {
-    color: #087f8c;
+    color: #111936;
     font-size: 1.15rem;
     font-weight: 800;
 }

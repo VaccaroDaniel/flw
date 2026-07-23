@@ -1,0 +1,68 @@
+{{!
+    @template theme_flwacademy/secure
+
+    FLW Academy secure layout. Used by Moodle quiz secure/attempt pages while
+    preserving the FLW site navigation.
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+
+<div id="page-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_flwacademy/flw_topnav }}
+    {{^flwtopnav}}
+        {{> theme_boost/navbar-secure}}
+    {{/flwtopnav}}
+
+    <div id="page" class="container-fluid">
+        <header id="page-header" class="row">
+            <div class="col-12 py-3">
+                <div class="page-context-header">
+                    <div class="page-header-headings">
+                        {{{ output.page_heading }}}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="page-content" class="row">
+            <div id="region-main-box" class="col-12">
+                <div id="region-main" {{#hasblocks}}class="has-blocks"{{/hasblocks}}>
+
+                    {{{ output.course_content_header }}}
+                    {{#headercontent}}
+                        {{> core/activity_header }}
+                    {{/headercontent}}
+                    {{{ flwquizheading }}}
+                    {{{ output.main_content }}}
+                    {{{ output.course_content_footer }}}
+
+                </div>
+                {{#hasblocks}}
+                <div data-region="blocks-column">
+                    {{{ sidepreblocks }}}
+                </div>
+                {{/hasblocks}}
+            </div>
+        </div>
+    </div>
+    <footer id="page-footer" class="py-3">
+        <div class="container">
+            <div id="course-footer">{{{ output.course_footer }}}</div>
+            {{{ output.standard_end_of_body_html }}}
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+{{/js}}

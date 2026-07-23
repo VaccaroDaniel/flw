@@ -1,0 +1,169 @@
+{
+  "cupkp_schema_version": "1.0",
+  "course_code": "REW",
+  "unit_code": "U038",
+  "cefr_level": "B1",
+  "frameworks": [
+    {
+      "externalid": "FLW-REW-B1-FW-U038",
+      "name": "Real English World Unit 38 Problem Solving Reference",
+      "course_code": "REW",
+      "language": "en",
+      "cefr_range": "B1",
+      "version": "reference-1.0",
+      "status": "reference",
+      "description": "Reference fixture derived from REW3_U038_V31_text_image_moodle_package.zip metadata."
+    }
+  ],
+  "competencies": [
+    {
+      "externalid": "FLW-REW-B1-C-038",
+      "title": "Explain a practical problem and solution",
+      "can_do": "The learner can explain a practical problem, compare possible solutions, agree on the best next step, and write a clear solution note.",
+      "description": "Unit 38 Problem Solving integrated outcome from unit_profile.json.",
+      "cefr": "B1",
+      "domain": "problem solving",
+      "scope": "unit",
+      "evidence_rule": {
+        "minimum_direct_events": 1,
+        "required_strength": "guided_performance",
+        "minimum_score": 0.78
+      },
+      "status": "reference",
+      "version": "1.0"
+    }
+  ],
+  "use_points": [
+    {
+      "externalid": "FLW-REW-B1-UP-038-01",
+      "title": "Name a problem and a practical solution",
+      "action_statement": "Describe what is wrong and what action may help.",
+      "intention": "Identify problem and solution.",
+      "context": "Everyday or workplace practical problem.",
+      "observable_action": "Names the problem and a practical solution.",
+      "conditions": "Given a visual, short reading, listening prompt, or real-life scenario.",
+      "success_criteria": "The problem and practical action are both clear.",
+      "cefr": "B1",
+      "language_mode": "spoken/written",
+      "interaction_type": "explanatory",
+      "evidence_requirements": ["lesson_practice", "quiz"],
+      "status": "reference",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B1-UP-038-02",
+      "title": "Compare options and explain reasons",
+      "action_statement": "Connect cause, effect, advice, and possible action.",
+      "intention": "Compare solution choices.",
+      "context": "Problem-solving discussion or written note.",
+      "observable_action": "Uses because, so, should, could, might, and comparison language.",
+      "conditions": "Given two or more possible responses.",
+      "success_criteria": "The chosen option is supported by a clear reason.",
+      "cefr": "B1",
+      "language_mode": "spoken/written",
+      "interaction_type": "problem solving",
+      "evidence_requirements": ["quiz", "speaking_task", "writing_task"],
+      "status": "reference",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B1-UP-038-03",
+      "title": "Discuss a problem and agree on action",
+      "action_statement": "Speak without blaming and keep the discussion useful.",
+      "intention": "Collaborate on a next step.",
+      "context": "Pair or group problem-solving discussion.",
+      "observable_action": "Explains, compares, disagrees politely, and summarizes agreement.",
+      "conditions": "Given a role-play or real-life situation.",
+      "success_criteria": "The speakers reach an understandable next step.",
+      "cefr": "B1",
+      "language_mode": "spoken",
+      "interaction_type": "dialogic",
+      "evidence_requirements": ["speaking_task", "stt_check"],
+      "status": "reference",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B1-UP-038-04",
+      "title": "Write a solution note",
+      "action_statement": "Write something another person can act on.",
+      "intention": "Create a concise action-oriented note.",
+      "context": "Practical message, support note, or team update.",
+      "observable_action": "Includes problem, cause, decision, responsibility, and next check.",
+      "conditions": "Given a model or independent problem prompt.",
+      "success_criteria": "The note is short, complete, and actionable.",
+      "cefr": "B1",
+      "language_mode": "written",
+      "interaction_type": "transactional",
+      "evidence_requirements": ["writing_task", "project"],
+      "status": "reference",
+      "version": "1.0"
+    }
+  ],
+  "knowledge_points": [
+    {"externalid": "FLW-EN-B1-LEX-038-001", "title": "Problem nouns and solution verbs", "description": "problem, cause, effect, solution, option, fix, prevent, check", "language": "en", "cefr": "B1", "domain": "LEX", "form": "unit vocabulary", "meaning_function": "Name problems, causes, options, and next steps.", "difficulty": 0.45, "estimated_learning_load": 1.0, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-GRAM-038-001", "title": "Because and so for cause and result", "description": "Use because and so to connect problem, cause, and result.", "language": "en", "cefr": "B1", "domain": "GRAM", "form": "because/so clauses", "meaning_function": "Explain why a problem happened and what happened next.", "difficulty": 0.48, "estimated_learning_load": 1.0, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-GRAM-038-002", "title": "Should, could, and might for options", "description": "Use should, could, and might to compare possible actions.", "language": "en", "cefr": "B1", "domain": "GRAM", "form": "modal verbs", "meaning_function": "Give advice and compare solution strength.", "difficulty": 0.50, "estimated_learning_load": 1.1, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-READ-038-001", "title": "Problem-cause-solution text structure", "description": "Find what happened, why it happened, which solution was chosen, and how the process changed.", "language": "en", "cefr": "B1", "domain": "READ", "form": "reading strategy", "meaning_function": "Read solution notes and identify evidence.", "difficulty": 0.52, "estimated_learning_load": 1.0, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-LISTEN-038-001", "title": "Listen for problem, option, and next step", "description": "Catch the situation, possible options, and agreed next action.", "language": "en", "cefr": "B1", "domain": "LISTEN", "form": "listening strategy", "meaning_function": "Understand spoken problem-solving discussions.", "difficulty": 0.54, "estimated_learning_load": 1.0, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-SPEAK-038-001", "title": "Polite disagreement and agreement summary", "description": "Use careful disagreement, option comparison, and agreement summary language.", "language": "en", "cefr": "B1", "domain": "SPEAK", "form": "interaction frames", "meaning_function": "Discuss options without blaming.", "difficulty": 0.58, "estimated_learning_load": 1.2, "status": "reference", "version": "1.0"},
+    {"externalid": "FLW-EN-B1-WRITE-038-001", "title": "Solution-note organization", "description": "Organize a note with problem, cause, decision, responsibility, and next check.", "language": "en", "cefr": "B1", "domain": "WRITE", "form": "short note structure", "meaning_function": "Write a practical solution note.", "difficulty": 0.56, "estimated_learning_load": 1.2, "status": "reference", "version": "1.0"}
+  ],
+  "competency_up_mappings": [
+    {"competency_externalid": "FLW-REW-B1-C-038", "up_externalid": "FLW-REW-B1-UP-038-01", "role": "required", "weight": 0.20, "sequence": 1, "minimum_up_mastery": 0.65},
+    {"competency_externalid": "FLW-REW-B1-C-038", "up_externalid": "FLW-REW-B1-UP-038-02", "role": "required", "weight": 0.25, "sequence": 2, "minimum_up_mastery": 0.70},
+    {"competency_externalid": "FLW-REW-B1-C-038", "up_externalid": "FLW-REW-B1-UP-038-03", "role": "required", "weight": 0.30, "sequence": 3, "minimum_up_mastery": 0.70},
+    {"competency_externalid": "FLW-REW-B1-C-038", "up_externalid": "FLW-REW-B1-UP-038-04", "role": "required", "weight": 0.25, "sequence": 4, "minimum_up_mastery": 0.70}
+  ],
+  "up_kp_mappings": [
+    {"up_externalid": "FLW-REW-B1-UP-038-01", "kp_externalid": "FLW-EN-B1-LEX-038-001", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B1-UP-038-02", "kp_externalid": "FLW-EN-B1-GRAM-038-001", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B1-UP-038-02", "kp_externalid": "FLW-EN-B1-GRAM-038-002", "role": "required", "weight": 1.0, "sequence": 2},
+    {"up_externalid": "FLW-REW-B1-UP-038-02", "kp_externalid": "FLW-EN-B1-READ-038-001", "role": "supporting", "weight": 0.6, "sequence": 3},
+    {"up_externalid": "FLW-REW-B1-UP-038-03", "kp_externalid": "FLW-EN-B1-LISTEN-038-001", "role": "supporting", "weight": 0.7, "sequence": 1},
+    {"up_externalid": "FLW-REW-B1-UP-038-03", "kp_externalid": "FLW-EN-B1-SPEAK-038-001", "role": "required", "weight": 1.0, "sequence": 2},
+    {"up_externalid": "FLW-REW-B1-UP-038-04", "kp_externalid": "FLW-EN-B1-WRITE-038-001", "role": "required", "weight": 1.0, "sequence": 1}
+  ],
+  "kp_prerequisites": [
+    {"kp_externalid": "FLW-EN-B1-GRAM-038-001", "prereq_kp_externalid": "FLW-EN-B1-LEX-038-001", "relationship_type": "meaning_support", "strength": 0.6, "requirement": "recommended"},
+    {"kp_externalid": "FLW-EN-B1-SPEAK-038-001", "prereq_kp_externalid": "FLW-EN-B1-GRAM-038-002", "relationship_type": "production_support", "strength": 0.7, "requirement": "recommended"},
+    {"kp_externalid": "FLW-EN-B1-WRITE-038-001", "prereq_kp_externalid": "FLW-EN-B1-READ-038-001", "relationship_type": "genre_model", "strength": 0.5, "requirement": "recommended"}
+  ],
+  "learning_objects": [
+    {"externalid": "REW-U038-L1-VOCAB", "title": "Words for Problems and Solutions", "unit_code": "U038", "lesson": "1", "object_type": "lesson", "source_id": "V01-V30", "purpose": "instruction", "evidence_strength": "recognition", "role": "practice"},
+    {"externalid": "REW-U038-L2-GRAMMAR", "title": "Cause, Advice, and Options", "unit_code": "U038", "lesson": "2", "object_type": "lesson", "source_id": "G01-G08", "purpose": "instruction", "evidence_strength": "controlled_production", "role": "practice"},
+    {"externalid": "REW-U038-L3-READING", "title": "Read the Solution Path", "unit_code": "U038", "lesson": "3", "object_type": "reading_quiz", "source_id": "R01-R04", "purpose": "practice_evidence", "evidence_strength": "recognition", "role": "practice"},
+    {"externalid": "REW-U038-L4-LISTENING", "title": "Listen for Problem, Option, and Next Step", "unit_code": "U038", "lesson": "4", "object_type": "listening_quiz", "source_id": "L01-L07", "purpose": "practice_evidence", "evidence_strength": "recognition", "role": "practice"},
+    {"externalid": "REW-U038-L5-SPEAKING", "title": "Discuss Options Without Blaming", "unit_code": "U038", "lesson": "5", "object_type": "speaking_task", "source_id": "SP01-SP04", "purpose": "performance_evidence", "evidence_strength": "guided_performance", "role": "assessment"},
+    {"externalid": "REW-U038-L6-WRITING", "title": "Write a Solution Note", "unit_code": "U038", "lesson": "6", "object_type": "writing_task", "source_id": "W01-W04", "purpose": "performance_evidence", "evidence_strength": "guided_performance", "role": "assessment"},
+    {"externalid": "REW-U038-L7-PROJECT", "title": "Problem-Solving Project", "unit_code": "U038", "lesson": "7", "object_type": "project", "source_id": "Project", "purpose": "integrated_performance", "evidence_strength": "independent_performance", "role": "assessment"}
+  ],
+  "activity_mappings": [
+    {"object_externalid": "REW-U038-L1-VOCAB", "target_type": "kp", "target_externalid": "FLW-EN-B1-LEX-038-001", "role": "practice", "evidence_strength": "recognition"},
+    {"object_externalid": "REW-U038-L2-GRAMMAR", "target_type": "kp", "target_externalid": "FLW-EN-B1-GRAM-038-001", "role": "practice", "evidence_strength": "controlled_production"},
+    {"object_externalid": "REW-U038-L2-GRAMMAR", "target_type": "kp", "target_externalid": "FLW-EN-B1-GRAM-038-002", "role": "practice", "evidence_strength": "controlled_production"},
+    {"object_externalid": "REW-U038-L3-READING", "target_type": "kp", "target_externalid": "FLW-EN-B1-READ-038-001", "role": "practice", "evidence_strength": "recognition"},
+    {"object_externalid": "REW-U038-L4-LISTENING", "target_type": "kp", "target_externalid": "FLW-EN-B1-LISTEN-038-001", "role": "practice", "evidence_strength": "recognition"},
+    {"object_externalid": "REW-U038-L5-SPEAKING", "target_type": "kp", "target_externalid": "FLW-EN-B1-SPEAK-038-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW-U038-L6-WRITING", "target_type": "kp", "target_externalid": "FLW-EN-B1-WRITE-038-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW-U038-L5-SPEAKING", "target_type": "up", "target_externalid": "FLW-REW-B1-UP-038-03", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW-U038-L6-WRITING", "target_type": "up", "target_externalid": "FLW-REW-B1-UP-038-04", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW-U038-L7-PROJECT", "target_type": "competency", "target_externalid": "FLW-REW-B1-C-038", "role": "assessment", "evidence_strength": "independent_performance"}
+  ],
+  "assessment_rules": [
+    {
+      "rule_id": "REW-U038-COMPETENCY-DEFAULT",
+      "target_type": "competency",
+      "minimum_direct_events": 1,
+      "minimum_score": 0.78,
+      "critical_rule": "Project or equivalent integrated speaking/writing evidence required."
+    }
+  ],
+  "project_evidence": [
+    {
+      "object_externalid": "REW-U038-L7-PROJECT",
+      "target_externalid": "FLW-REW-B1-C-038",
+      "evidence_strength": "independent_performance",
+      "rubric": ["problem clarity", "cause explanation", "option comparison", "next-step note"]
+    }
+  ]
+}

@@ -89,6 +89,8 @@ class view_page {
     public $preflightcheckform;
     /** @var moodle_url $startattempturl URL for any Back to the course button. */
     public $backtocourseurl;
+    /** @var moodle_url|null $flwexamresulturl URL for the synced FLW Exam result. */
+    public $flwexamresulturl = null;
     /** @var bool $showbacktocourse should we show a back to the course button? */
     public $showbacktocourse;
     /** @var bool whether the attempt must take place in a popup window. */

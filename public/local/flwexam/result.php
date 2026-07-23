@@ -11,14 +11,15 @@ $id = required_param('id', PARAM_INT);
 require_login();
 
 $context = context_system::instance();
-$result = exam_service::get_result_package($id, (int)$USER->id, true);
-
 $url = new moodle_url('/local/flwexam/result.php', ['id' => $id]);
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('viewresult', 'local_flwexam'));
 $PAGE->set_heading(get_string('viewresult', 'local_flwexam'));
+local_flwexam_require_styles();
+
+$result = exam_service::get_result_package($id, (int)$USER->id, true);
 
 $output = $PAGE->get_renderer('core');
 echo $output->header();
@@ -30,8 +31,8 @@ echo local_flwexam_render_hero(
     $result['examname'],
     [
         html_writer::link(
-            new moodle_url('/local/flwexam/index.php'),
-            get_string('backtohistory', 'local_flwexam'),
+            new moodle_url('/local/flwexam/index.php', ['view' => 'history']),
+            get_string('backtoexamcenter', 'local_flwexam'),
             ['class' => 'btn btn-secondary flwexam-main-action']
         ),
     ],
@@ -47,7 +48,6 @@ echo html_writer::start_div('flwexam-summary-grid');
 $summary = [
     get_string('learner', 'local_flwexam') => $result['learnername'],
     get_string('language', 'local_flwexam') => $result['language'],
-    get_string('track', 'local_flwexam') => $result['learning_course_category'],
     get_string('cefrlevel', 'local_flwexam') => $result['cefr_level'],
     get_string('overallscore', 'local_flwexam') => local_flwexam_format_score($result['overall_score']),
     get_string('passstatus', 'local_flwexam') => exam_service::status_label($result['pass_status']),
@@ -72,6 +72,7 @@ if (!empty($result['verify_code'])) {
 }
 echo html_writer::end_div();
 
+echo html_writer::start_div('flwexam-result-card');
 echo html_writer::tag('h4', get_string('skillscores', 'local_flwexam'));
 $skilltable = new html_table();
 $skilltable->attributes['class'] = 'generaltable flwexam-table';
@@ -87,33 +88,43 @@ foreach ($result['skills'] as $skill) {
         $skill['passed'] ? get_string('yes') : get_string('no'),
     ];
 }
-echo html_writer::table($skilltable);
+echo html_writer::div(html_writer::table($skilltable), 'flwexam-table-wrap');
+echo html_writer::end_div();
 
+echo html_writer::start_div('flwexam-result-card');
 echo html_writer::tag('h4', get_string('kpgates', 'local_flwexam'));
-$kptable = new html_table();
-$kptable->attributes['class'] = 'generaltable flwexam-table';
-$kptable->head = [
-    get_string('kpcode', 'local_flwexam'),
-    get_string('score', 'local_flwexam'),
-    get_string('passed', 'local_flwexam'),
-    get_string('critical', 'local_flwexam'),
-];
-foreach ($result['kp_results'] as $kp) {
-    $kptable->data[] = [
-        s($kp['kpcode']),
-        local_flwexam_format_score($kp['score']),
-        $kp['passed'] ? get_string('yes') : get_string('no'),
-        $kp['critical'] ? get_string('yes') : get_string('no'),
+if (empty($result['kp_results'])) {
+    echo html_writer::div(get_string('nokpgates', 'local_flwexam'), 'flwexam-muted');
+} else {
+    $kptable = new html_table();
+    $kptable->attributes['class'] = 'generaltable flwexam-table';
+    $kptable->head = [
+        get_string('kpcode', 'local_flwexam'),
+        get_string('score', 'local_flwexam'),
+        get_string('passed', 'local_flwexam'),
+        get_string('critical', 'local_flwexam'),
     ];
+    foreach ($result['kp_results'] as $kp) {
+        $kptable->data[] = [
+            s($kp['kpcode']),
+            local_flwexam_format_score($kp['score']),
+            $kp['passed'] ? get_string('yes') : get_string('no'),
+            $kp['critical'] ? get_string('yes') : get_string('no'),
+        ];
+    }
+    echo html_writer::div(html_writer::table($kptable), 'flwexam-table-wrap');
 }
-echo html_writer::table($kptable);
+echo html_writer::end_div();
 
 if (!empty($result['decision']['failures'])) {
+    echo html_writer::start_div('flwexam-result-card');
     echo html_writer::tag('h4', get_string('certificateblockedby', 'local_flwexam'));
     echo html_writer::alist(array_map('s', $result['decision']['failures']), ['class' => 'flwexam-warning-list']);
+    echo html_writer::end_div();
 }
 
 if (!empty($result['private'])) {
+    echo html_writer::start_div('flwexam-result-card');
     echo html_writer::tag('h4', get_string('privatecontrols', 'local_flwexam'));
     echo html_writer::start_div('flwexam-summary-grid');
     echo html_writer::div(
@@ -126,6 +137,7 @@ if (!empty($result['private'])) {
         html_writer::tag('strong', s(exam_service::status_label($result['private']['moderation_status']))),
         'flwexam-mini-card'
     );
+    echo html_writer::end_div();
     echo html_writer::end_div();
 }
 

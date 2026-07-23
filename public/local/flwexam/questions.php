@@ -21,6 +21,7 @@ $PAGE->set_context($context);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('managequestionsfor', 'local_flwexam', format_string($exam->name)));
 $PAGE->set_heading(get_string('managequestionsfor', 'local_flwexam', format_string($exam->name)));
+local_flwexam_require_styles();
 
 $editingquestion = null;
 if ($questionid > 0) {
@@ -124,7 +125,7 @@ echo local_flwexam_render_hero(
         html_writer::link(new moodle_url('/local/flwexam/manage.php'), get_string('backtomanageexams', 'local_flwexam'), [
             'class' => 'btn btn-secondary',
         ]),
-        html_writer::link(new moodle_url('/local/flwexam/take.php'), get_string('takeexam', 'local_flwexam'), [
+        html_writer::link(new moodle_url('/local/flwexam/index.php', ['view' => 'available']), get_string('examcenter', 'local_flwexam'), [
             'class' => 'btn btn-secondary',
         ]),
     ],
@@ -134,11 +135,27 @@ echo local_flwexam_render_hero(
     ]
 );
 
+if (!empty($exam->quizid)) {
+    $quizinfo = exam_service::get_linked_quiz_info((int)$exam->quizid);
+    echo html_writer::start_div('flwexam-question-card');
+    echo html_writer::div(get_string('moodlequiz', 'local_flwexam'), 'flwexam-card-label');
+    echo html_writer::tag('h3', get_string('moodlequizsource', 'local_flwexam'));
+    echo html_writer::tag('p', get_string('quizquestioneditnotice', 'local_flwexam'), ['class' => 'flwexam-muted']);
+    if ($quizinfo) {
+        echo html_writer::link($quizinfo['url'], get_string('openmoodlequiz', 'local_flwexam'), [
+            'class' => 'btn btn-primary',
+        ]);
+    }
+    echo html_writer::end_div();
+    echo html_writer::end_div();
+    echo $output->footer();
+    exit;
+}
+
 echo html_writer::start_div('flwexam-result-summary');
 $details = [
     get_string('examcode', 'local_flwexam') => $exam->code,
     get_string('language', 'local_flwexam') => exam_service::language_label($exam->language),
-    get_string('track', 'local_flwexam') => exam_service::track_label($exam->learningcoursecategory),
     get_string('cefrlevel', 'local_flwexam') => $exam->cefrlevel,
 ];
 echo html_writer::start_div('flwexam-summary-grid');
@@ -352,7 +369,7 @@ if (!$questions) {
             ),
         ];
     }
-    echo html_writer::table($table);
+    echo html_writer::div(html_writer::table($table), 'flwexam-table-wrap');
 }
 
 echo html_writer::end_div();

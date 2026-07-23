@@ -7,6 +7,8 @@ require_once(__DIR__ . '/locallib.php');
 use local_flwexam\service\exam_service;
 
 $examid = required_param('examid', PARAM_INT);
+$sessionid = optional_param('sessionid', 0, PARAM_INT);
+$accesscode = optional_param('accesscode', '', PARAM_TEXT);
 
 require_login();
 
@@ -17,7 +19,161 @@ $exam = $DB->get_record('local_flwexam_exams', [
     'id' => $examid,
     'visible' => 1,
 ], '*', MUST_EXIST);
-$questions = exam_service::get_attempt_questions($examid);
+
+$urlparams = ['examid' => $examid];
+if ($sessionid > 0) {
+    $urlparams['sessionid'] = $sessionid;
+}
+$url = new moodle_url('/local/flwexam/attempt.php', $urlparams);
+$PAGE->set_url($url);
+$PAGE->set_context($context);
+$PAGE->set_pagelayout('report');
+$PAGE->set_title(get_string('attempttitle', 'local_flwexam', format_string($exam->name)));
+$PAGE->set_heading(get_string('attempttitle', 'local_flwexam', format_string($exam->name)));
+local_flwexam_require_styles();
+
+$session = null;
+$questionlimit = 20;
+$needsaccesscode = false;
+if ($sessionid > 0) {
+    $session = exam_service::get_session($sessionid);
+    if ((int)$session->examid !== $examid) {
+        throw new moodle_exception('sessionnotavailable', 'local_flwexam');
+    }
+    $questionlimit = max(1, min(30, (int)$session->questioncount));
+    $needsaccesscode = trim((string)$session->accesscode) !== '' && trim($accesscode) === '';
+    if (!$needsaccesscode) {
+        exam_service::require_can_attempt_session($session, (int)$USER->id, $accesscode);
+    }
+}
+
+$quizsyncerror = null;
+if (!empty($exam->quizid)) {
+    if (data_submitted() && confirm_sesskey()) {
+        try {
+            $result = exam_service::record_quiz_attempt_result($examid, (int)$USER->id);
+            redirect(new moodle_url('/local/flwexam/result.php', ['id' => $result['id']]), get_string('quizattemptsynced', 'local_flwexam'));
+        } catch (moodle_exception $e) {
+            $quizsyncerror = $e;
+        }
+    }
+
+    $output = $PAGE->get_renderer('core');
+    echo $output->header();
+
+    $quizinfo = exam_service::get_linked_quiz_info((int)$exam->quizid);
+    $latestresult = exam_service::get_latest_result_for_exam($examid, (int)$USER->id);
+    echo html_writer::start_div('flwexam-page');
+    echo local_flwexam_render_hero(
+        get_string('exam', 'local_flwexam'),
+        get_string('attempttitle', 'local_flwexam', format_string($exam->name)),
+        get_string('quizbackedexamintro', 'local_flwexam'),
+        [
+            html_writer::link(
+                new moodle_url('/local/flwexam/index.php', ['view' => 'available']),
+                get_string('backtoexamcenter', 'local_flwexam'),
+                ['class' => 'btn btn-secondary flwexam-main-action']
+            ),
+        ],
+        [
+            get_string('questions', 'local_flwexam') => $quizinfo ? (string)$quizinfo['questioncount'] : '0',
+            get_string('cefrlevel', 'local_flwexam') => $exam->cefrlevel,
+            get_string('question_source', 'local_flwexam') => get_string('moodlequiz', 'local_flwexam'),
+        ]
+    );
+
+    if ($quizsyncerror) {
+        echo $output->notification($quizsyncerror->getMessage(), 'warning');
+    }
+
+    if (!$quizinfo) {
+        echo $output->notification(get_string('linkedquiznotavailable', 'local_flwexam'), 'warning');
+    } else {
+        echo html_writer::start_div('flwexam-question-card flwexam-quiz-launch-card');
+        echo html_writer::div(get_string('moodlequiz', 'local_flwexam'), 'flwexam-card-label');
+        echo html_writer::tag('h3', s($quizinfo['name']));
+        echo html_writer::tag('p', get_string('quizbackedexamintro', 'local_flwexam'), ['class' => 'flwexam-muted']);
+        echo html_writer::start_div('flwexam-action-row');
+        echo $output->single_button(
+            new moodle_url('/mod/quiz/startattempt.php', [
+                'cmid' => (int)$quizinfo['cmid'],
+                'sesskey' => sesskey(),
+            ]),
+            get_string('openmoodlequiz', 'local_flwexam'),
+            'post',
+            [
+                'class' => 'flwexam-inline-form flwexam-quiz-start-form',
+                'type' => \core\output\single_button::BUTTON_PRIMARY,
+            ]
+        );
+        if ($latestresult) {
+            echo html_writer::link(
+                new moodle_url('/local/flwexam/result.php', ['id' => $latestresult['id']]),
+                get_string('viewlatestresult', 'local_flwexam'),
+                ['class' => 'btn btn-secondary']
+            );
+        }
+        echo html_writer::end_div();
+        echo html_writer::end_div();
+    }
+
+    echo html_writer::end_div();
+    echo $output->footer();
+    exit;
+}
+
+$output = $PAGE->get_renderer('core');
+if ($needsaccesscode) {
+    echo $output->header();
+    echo html_writer::start_div('flwexam-page');
+    echo local_flwexam_render_hero(
+        get_string('exam', 'local_flwexam'),
+        get_string('sessionaccessrequired', 'local_flwexam'),
+        get_string('sessionaccessrequiredintro', 'local_flwexam'),
+        [
+            html_writer::link(
+                new moodle_url('/local/flwexam/index.php', ['view' => 'available']),
+                get_string('backtoexamcenter', 'local_flwexam'),
+                ['class' => 'btn btn-secondary flwexam-main-action']
+            ),
+        ],
+        [
+            get_string('examname', 'local_flwexam') => format_string($exam->name),
+            get_string('cefrlevel', 'local_flwexam') => $exam->cefrlevel,
+        ]
+    );
+    echo html_writer::start_tag('form', [
+        'method' => 'post',
+        'action' => $url->out(false),
+        'class' => 'flwexam-filter-form',
+    ]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+    echo html_writer::start_div('form-group');
+    echo html_writer::label(get_string('accesscode', 'local_flwexam'), 'flwexam-accesscode');
+    echo html_writer::empty_tag('input', [
+        'type' => 'text',
+        'name' => 'accesscode',
+        'id' => 'flwexam-accesscode',
+        'class' => 'form-control',
+        'required' => 'required',
+    ]);
+    echo html_writer::end_div();
+    echo html_writer::empty_tag('input', [
+        'type' => 'submit',
+        'class' => 'btn btn-primary',
+        'value' => get_string('continue'),
+    ]);
+    echo html_writer::end_tag('form');
+    echo html_writer::end_div();
+    echo $output->footer();
+    exit;
+}
+
+$submittedquestionids = optional_param('questionids', '', PARAM_SEQUENCE);
+$questionids = array_values(array_filter(array_map('intval', explode(',', $submittedquestionids))));
+$questions = $questionids
+    ? exam_service::get_attempt_questions($examid, $questionlimit, $questionids)
+    : exam_service::get_attempt_questions($examid, $questionlimit);
 if (!$questions) {
     throw new moodle_exception('noquestions', 'local_flwexam');
 }
@@ -27,18 +183,10 @@ if (data_submitted() && confirm_sesskey()) {
     foreach ($questions as $question) {
         $answers[(int)$question['id']] = optional_param('q' . (int)$question['id'], '', PARAM_TEXT);
     }
-    $result = exam_service::submit_learner_attempt($examid, (int)$USER->id, $answers);
+    $result = exam_service::submit_learner_attempt($examid, (int)$USER->id, $answers, $sessionid, $questionids, $accesscode);
     redirect(new moodle_url('/local/flwexam/result.php', ['id' => $result['id']]));
 }
 
-$url = new moodle_url('/local/flwexam/attempt.php', ['examid' => $examid]);
-$PAGE->set_url($url);
-$PAGE->set_context($context);
-$PAGE->set_pagelayout('report');
-$PAGE->set_title(get_string('attempttitle', 'local_flwexam', format_string($exam->name)));
-$PAGE->set_heading(get_string('attempttitle', 'local_flwexam', format_string($exam->name)));
-
-$output = $PAGE->get_renderer('core');
 echo $output->header();
 
 echo html_writer::start_div('flwexam-page');
@@ -48,14 +196,15 @@ echo local_flwexam_render_hero(
     get_string('attemptintro', 'local_flwexam'),
     [
         html_writer::link(
-            new moodle_url('/local/flwexam/take.php'),
-            get_string('backtoavailableexams', 'local_flwexam'),
+            new moodle_url('/local/flwexam/index.php', ['view' => 'available']),
+            get_string('backtoexamcenter', 'local_flwexam'),
             ['class' => 'btn btn-secondary flwexam-main-action']
         ),
     ],
     [
         get_string('questions', 'local_flwexam') => (string)count($questions),
         get_string('cefrlevel', 'local_flwexam') => $exam->cefrlevel,
+        get_string('examdelivery', 'local_flwexam') => $session ? exam_service::session_type_label($session->sessiontype) : get_string('directexam', 'local_flwexam'),
     ]
 );
 echo html_writer::tag('p', get_string('unansweredquestionswarning', 'local_flwexam'), ['class' => 'flwexam-muted']);
@@ -67,6 +216,14 @@ echo html_writer::start_tag('form', [
     'novalidate' => 'novalidate',
 ]);
 echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+if ($accesscode !== '') {
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'accesscode', 'value' => s($accesscode)]);
+}
+echo html_writer::empty_tag('input', [
+    'type' => 'hidden',
+    'name' => 'questionids',
+    'value' => implode(',', array_map(static fn($question): int => (int)$question['id'], $questions)),
+]);
 
 foreach ($questions as $index => $question) {
     echo html_writer::start_div('flwexam-question-card');
@@ -109,7 +266,7 @@ echo html_writer::empty_tag('input', [
     'class' => 'btn btn-primary',
     'value' => get_string('submitexam', 'local_flwexam'),
 ]);
-echo html_writer::link(new moodle_url('/local/flwexam/take.php'), get_string('cancel'), ['class' => 'btn btn-secondary']);
+echo html_writer::link(new moodle_url('/local/flwexam/index.php', ['view' => 'available']), get_string('cancel'), ['class' => 'btn btn-secondary']);
 echo html_writer::end_div();
 echo html_writer::end_tag('form');
 echo html_writer::end_div();

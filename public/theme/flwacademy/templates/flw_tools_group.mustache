@@ -75,7 +75,7 @@
                 <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
             </button>
         {{/flwtoolsshowscormtoc}}
-        <button type="button" class="flw-course-tool flw-reading-back" title="{{#str}}back, core{{/str}}" aria-label="{{#str}}back, core{{/str}}">
+        <button type="button" class="flw-course-tool flw-reading-back" title="{{flwbacklabel}}" aria-label="{{flwbacklabel}}"{{#flwbackurl}} data-flw-back-url="{{flwbackurl}}"{{/flwbackurl}}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l-5-5 5-5"></path><path d="M5 12h14"></path></svg>
         </button>
         {{#flwtoolsshowscormdone}}
@@ -164,6 +164,10 @@
         var toolGroup = choice.closest('.flw-course-tools');
         var currentCategoryType = toolGroup ? toolGroup.getAttribute('data-current-category-type') : '';
         var targetUrl = categoryUrls[currentCategoryType] || '';
+        if (document.body.classList.contains('flw-dashboard-page')) {
+            var baseUrl = (window.M && M.cfg && M.cfg.wwwroot ? M.cfg.wwwroot : '') + '/my/';
+            targetUrl = baseUrl + '?flwlang=' + encodeURIComponent(code);
+        }
         if (targetUrl && normalizeUrl(targetUrl) !== normalizeUrl(window.location.href)) {
             window.location.href = targetUrl;
         }
@@ -419,6 +423,11 @@
 
         var backButton = event.target.closest && event.target.closest('.flw-reading-back');
         if (backButton) {
+            var backUrl = backButton.getAttribute('data-flw-back-url') || '';
+            if (backUrl) {
+                window.location.href = backUrl;
+                return;
+            }
             if (window.history.length > 1) {
                 window.history.back();
             } else {

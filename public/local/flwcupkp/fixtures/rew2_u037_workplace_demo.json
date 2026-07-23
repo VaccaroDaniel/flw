@@ -1,0 +1,274 @@
+{
+  "cupkp_schema_version": "1.0",
+  "course_code": "REW2",
+  "unit_code": "U037",
+  "cefr_level": "B2",
+  "frameworks": [
+    {
+      "externalid": "FLW-REW2-B2-FW-U037",
+      "name": "Real English World V2 B2 Unit 37 Workplace Communication Pilot",
+      "course_code": "REW2",
+      "language": "en",
+      "cefr_range": "B2",
+      "version": "pilot-1.0",
+      "status": "pilot",
+      "description": "Separated pilot fixture for the master prompt demonstration dataset."
+    }
+  ],
+  "competencies": [
+    {
+      "externalid": "FLW-REW-B2-C-037",
+      "title": "Discuss workplace situations and supported solutions",
+      "can_do": "The learner can discuss workplace situations, explain problems, propose solutions, and express a supported opinion.",
+      "description": "Integrated workplace communication competency requiring direct speaking, writing, or project evidence.",
+      "cefr": "B2",
+      "domain": "workplace communication",
+      "scope": "unit",
+      "evidence_rule": {
+        "minimum_direct_events": 1,
+        "required_strength": "guided_performance",
+        "minimum_score": 0.82
+      },
+      "status": "pilot",
+      "version": "1.0"
+    }
+  ],
+  "use_points": [
+    {
+      "externalid": "FLW-REW-B2-UP-037-01",
+      "title": "Describe a workplace situation",
+      "action_statement": "Describe a workplace situation clearly enough for another person to understand the context.",
+      "intention": "Set context and identify what is happening.",
+      "context": "Workplace meeting, report, customer, or team scenario.",
+      "observable_action": "States the situation, people involved, and relevant context.",
+      "conditions": "Given a workplace prompt or self-selected situation.",
+      "success_criteria": "Listener can identify who is involved, what happened, and why it matters.",
+      "cefr": "B2",
+      "language_mode": "spoken/written",
+      "interaction_type": "monologic or dialogic",
+      "evidence_requirements": ["speaking_task", "writing_task"],
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B2-UP-037-02",
+      "title": "Explain a workplace problem and its cause",
+      "action_statement": "Explain the problem, cause, and consequence without overgeneralizing.",
+      "intention": "Clarify the issue and evidence.",
+      "context": "Problem-solving discussion or written incident note.",
+      "observable_action": "Uses cause-result language and relevant evidence.",
+      "conditions": "Given incomplete workplace information or a role-play card.",
+      "success_criteria": "Problem and cause are understandable and supported.",
+      "cefr": "B2",
+      "language_mode": "spoken/written",
+      "interaction_type": "explanatory",
+      "evidence_requirements": ["quiz", "speaking_task", "project"],
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B2-UP-037-03",
+      "title": "Propose an appropriate solution",
+      "action_statement": "Propose a realistic solution and compare it with at least one alternative.",
+      "intention": "Move from analysis to action.",
+      "context": "Team decision, manager update, or customer support response.",
+      "observable_action": "Uses modal verbs, comparisons, and practical next steps.",
+      "conditions": "Given a problem with two or more possible responses.",
+      "success_criteria": "Proposed solution is relevant, polite, and actionable.",
+      "cefr": "B2",
+      "language_mode": "spoken/written",
+      "interaction_type": "problem solving",
+      "evidence_requirements": ["speaking_task", "writing_task", "project"],
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-REW-B2-UP-037-04",
+      "title": "Express and support an opinion",
+      "action_statement": "Express a workplace opinion and support it with reasons or evidence.",
+      "intention": "State a position while maintaining professional tone.",
+      "context": "Meeting, written recommendation, or project reflection.",
+      "observable_action": "Gives opinion, reasons, and acknowledgement of alternatives.",
+      "conditions": "Given a decision prompt or solution comparison task.",
+      "success_criteria": "Opinion is clear, supported, and appropriate for the audience.",
+      "cefr": "B2",
+      "language_mode": "spoken/written",
+      "interaction_type": "argumentation",
+      "evidence_requirements": ["speaking_task", "project"],
+      "status": "pilot",
+      "version": "1.0"
+    }
+  ],
+  "knowledge_points": [
+    {
+      "externalid": "FLW-EN-B2-LEX-037-001",
+      "title": "Workplace situation nouns",
+      "description": "Issue, delay, deadline, workflow, responsibility, update, request, decision.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "LEX",
+      "form": "lexical set",
+      "meaning_function": "Name workplace situations and process elements.",
+      "difficulty": 0.55,
+      "estimated_learning_load": 1.0,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-GRAM-037-001",
+      "title": "Cause and result clauses",
+      "description": "Because, since, as a result, therefore, which means that.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "GRAM",
+      "form": "cause-result connectors",
+      "meaning_function": "Explain causes and consequences.",
+      "difficulty": 0.62,
+      "estimated_learning_load": 1.4,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-GRAM-037-002",
+      "title": "Modals for solutions",
+      "description": "Should, could, might, would be better to, we may need to.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "GRAM",
+      "form": "modal verbs and semi-modals",
+      "meaning_function": "Propose actions with appropriate certainty and politeness.",
+      "difficulty": 0.58,
+      "estimated_learning_load": 1.2,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-FUNC-037-001",
+      "title": "Problem explanation functions",
+      "description": "The main issue is..., This happened because..., The result was...",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "FUNC",
+      "form": "functional frames",
+      "meaning_function": "Explain a problem in a professional tone.",
+      "difficulty": 0.60,
+      "estimated_learning_load": 1.0,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-DISC-037-001",
+      "title": "Problem-solution discourse structure",
+      "description": "Situation, problem, cause, option, decision, next step.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "DISC",
+      "form": "structured explanation sequence",
+      "meaning_function": "Organize workplace problem-solving communication.",
+      "difficulty": 0.66,
+      "estimated_learning_load": 1.5,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-SPEAK-037-001",
+      "title": "Professional turn-taking in problem solving",
+      "description": "Acknowledge, add evidence, compare options, summarize agreement.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "SPEAK",
+      "form": "interaction strategy",
+      "meaning_function": "Keep workplace discussion productive.",
+      "difficulty": 0.70,
+      "estimated_learning_load": 1.6,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-PRON-037-001",
+      "title": "Intonation for polite recommendations",
+      "description": "Use moderate stress and falling-rising tone to sound constructive.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "PRON",
+      "form": "prosody",
+      "meaning_function": "Make recommendations sound polite and collaborative.",
+      "difficulty": 0.52,
+      "estimated_learning_load": 0.8,
+      "status": "pilot",
+      "version": "1.0"
+    },
+    {
+      "externalid": "FLW-EN-B2-WRITE-037-001",
+      "title": "Concise solution note",
+      "description": "Write a short note with problem, cause, recommended action, owner, and follow-up.",
+      "language": "en",
+      "cefr": "B2",
+      "domain": "WRITE",
+      "form": "workplace note genre",
+      "meaning_function": "Provide actionable written communication.",
+      "difficulty": 0.64,
+      "estimated_learning_load": 1.3,
+      "status": "pilot",
+      "version": "1.0"
+    }
+  ],
+  "competency_up_mappings": [
+    {"competency_externalid": "FLW-REW-B2-C-037", "up_externalid": "FLW-REW-B2-UP-037-01", "role": "required", "weight": 0.20, "sequence": 1, "minimum_up_mastery": 0.70},
+    {"competency_externalid": "FLW-REW-B2-C-037", "up_externalid": "FLW-REW-B2-UP-037-02", "role": "required", "weight": 0.30, "sequence": 2, "minimum_up_mastery": 0.75},
+    {"competency_externalid": "FLW-REW-B2-C-037", "up_externalid": "FLW-REW-B2-UP-037-03", "role": "required", "weight": 0.30, "sequence": 3, "minimum_up_mastery": 0.75},
+    {"competency_externalid": "FLW-REW-B2-C-037", "up_externalid": "FLW-REW-B2-UP-037-04", "role": "required", "weight": 0.20, "sequence": 4, "minimum_up_mastery": 0.70}
+  ],
+  "up_kp_mappings": [
+    {"up_externalid": "FLW-REW-B2-UP-037-01", "kp_externalid": "FLW-EN-B2-LEX-037-001", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B2-UP-037-02", "kp_externalid": "FLW-EN-B2-GRAM-037-001", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B2-UP-037-02", "kp_externalid": "FLW-EN-B2-FUNC-037-001", "role": "required", "weight": 1.0, "sequence": 2},
+    {"up_externalid": "FLW-REW-B2-UP-037-03", "kp_externalid": "FLW-EN-B2-GRAM-037-002", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B2-UP-037-03", "kp_externalid": "FLW-EN-B2-DISC-037-001", "role": "supporting", "weight": 0.8, "sequence": 2},
+    {"up_externalid": "FLW-REW-B2-UP-037-04", "kp_externalid": "FLW-EN-B2-SPEAK-037-001", "role": "required", "weight": 1.0, "sequence": 1},
+    {"up_externalid": "FLW-REW-B2-UP-037-04", "kp_externalid": "FLW-EN-B2-PRON-037-001", "role": "supporting", "weight": 0.5, "sequence": 2},
+    {"up_externalid": "FLW-REW-B2-UP-037-03", "kp_externalid": "FLW-EN-B2-WRITE-037-001", "role": "extension", "weight": 0.7, "sequence": 3}
+  ],
+  "kp_prerequisites": [
+    {"kp_externalid": "FLW-EN-B2-FUNC-037-001", "prereq_kp_externalid": "FLW-EN-B2-LEX-037-001", "relationship_type": "language_resource", "strength": 0.8, "requirement": "mandatory"},
+    {"kp_externalid": "FLW-EN-B2-DISC-037-001", "prereq_kp_externalid": "FLW-EN-B2-GRAM-037-001", "relationship_type": "discourse_support", "strength": 0.7, "requirement": "recommended"},
+    {"kp_externalid": "FLW-EN-B2-WRITE-037-001", "prereq_kp_externalid": "FLW-EN-B2-DISC-037-001", "relationship_type": "genre_support", "strength": 0.7, "requirement": "recommended"}
+  ],
+  "learning_objects": [
+    {"externalid": "REW2-U037-L1-VOCAB", "title": "Workplace situation vocabulary", "unit_code": "U037", "lesson": "1", "object_type": "lesson", "purpose": "instruction", "evidence_strength": "recognition", "role": "practice"},
+    {"externalid": "REW2-U037-L2-GRAMMAR", "title": "Cause, result, and solution grammar", "unit_code": "U037", "lesson": "2", "object_type": "lesson", "purpose": "instruction", "evidence_strength": "controlled_production", "role": "practice"},
+    {"externalid": "REW2-U037-L5-SPEAKING", "title": "Workplace solution meeting speaking task", "unit_code": "U037", "lesson": "5", "object_type": "speaking_task", "purpose": "assessment", "evidence_strength": "guided_performance", "role": "assessment"},
+    {"externalid": "REW2-U037-L6-WRITING", "title": "Solution note writing task", "unit_code": "U037", "lesson": "6", "object_type": "writing_task", "purpose": "assessment", "evidence_strength": "guided_performance", "role": "assessment"},
+    {"externalid": "REW2-U037-PROJECT", "title": "Workplace problem-solving project", "unit_code": "U037", "lesson": "Project", "object_type": "project", "purpose": "integrated_performance", "evidence_strength": "independent_performance", "role": "assessment"}
+  ],
+  "activity_mappings": [
+    {"object_externalid": "REW2-U037-L1-VOCAB", "target_type": "kp", "target_externalid": "FLW-EN-B2-LEX-037-001", "role": "practice", "evidence_strength": "recognition"},
+    {"object_externalid": "REW2-U037-L2-GRAMMAR", "target_type": "kp", "target_externalid": "FLW-EN-B2-GRAM-037-001", "role": "practice", "evidence_strength": "controlled_production"},
+    {"object_externalid": "REW2-U037-L2-GRAMMAR", "target_type": "kp", "target_externalid": "FLW-EN-B2-GRAM-037-002", "role": "practice", "evidence_strength": "controlled_production"},
+    {"object_externalid": "REW2-U037-L2-GRAMMAR", "target_type": "kp", "target_externalid": "FLW-EN-B2-FUNC-037-001", "role": "practice", "evidence_strength": "controlled_production"},
+    {"object_externalid": "REW2-U037-L5-SPEAKING", "target_type": "kp", "target_externalid": "FLW-EN-B2-SPEAK-037-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-L5-SPEAKING", "target_type": "kp", "target_externalid": "FLW-EN-B2-PRON-037-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-L6-WRITING", "target_type": "kp", "target_externalid": "FLW-EN-B2-DISC-037-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-L5-SPEAKING", "target_type": "up", "target_externalid": "FLW-REW-B2-UP-037-02", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-L5-SPEAKING", "target_type": "up", "target_externalid": "FLW-REW-B2-UP-037-03", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-L6-WRITING", "target_type": "kp", "target_externalid": "FLW-EN-B2-WRITE-037-001", "role": "assessment", "evidence_strength": "guided_performance"},
+    {"object_externalid": "REW2-U037-PROJECT", "target_type": "competency", "target_externalid": "FLW-REW-B2-C-037", "role": "assessment", "evidence_strength": "independent_performance"}
+  ],
+  "assessment_rules": [
+    {
+      "rule_id": "REW2-U037-COMPETENCY-DEFAULT",
+      "target_type": "competency",
+      "minimum_direct_events": 1,
+      "minimum_score": 0.82,
+      "critical_rule": "Direct integrated performance required; quiz-only evidence cannot mark competency achieved."
+    }
+  ],
+  "project_evidence": [
+    {
+      "object_externalid": "REW2-U037-PROJECT",
+      "target_externalid": "FLW-REW-B2-C-037",
+      "evidence_strength": "independent_performance",
+      "rubric": ["problem clarity", "solution appropriacy", "supporting reason", "professional tone"]
+    }
+  ]
+}

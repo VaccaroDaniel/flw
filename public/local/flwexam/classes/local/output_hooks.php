@@ -17,9 +17,13 @@ final class output_hooks {
     public static function before_standard_head_html_generation(
         \core\hook\output\before_standard_head_html_generation $hook,
     ): void {
+        global $CFG;
+
+        $stylesheet = $CFG->dirroot . '/local/flwexam/styles.css';
+        $version = is_readable($stylesheet) ? filemtime($stylesheet) : time();
         $hook->add_html(\html_writer::empty_tag('link', [
             'rel' => 'stylesheet',
-            'href' => (new \moodle_url('/local/flwexam/styles.css'))->out(false),
+            'href' => (new \moodle_url('/local/flwexam/styles.css', ['v' => $version]))->out(false),
         ]));
     }
 }

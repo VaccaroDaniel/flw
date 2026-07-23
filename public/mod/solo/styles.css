@@ -270,8 +270,7 @@ div#poodllconvedit_previewbox {
 }
 
 /* FONTS CSS */
-/* font-family: 'Roboto', sans-serif; */
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+/* Use local system fonts; remote @import blocks Moodle's combined theme CSS on local/offline installs. */
 
 /* MAIN CSS */
 
@@ -454,7 +453,7 @@ button#poodllconvedit_edcancel:hover,
 	margin-right: 8px;
 	background: #57DA54;
 	border-radius: 50%;
-	font-family: 'Roboto', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 500;
 	font-size: 12px;
 	color: #FFFFFF;
@@ -487,7 +486,7 @@ button#poodllconvedit_edcancel:hover,
 	border: none;
 	font-size: 13px;
 	color: #333333;
-	font-family: 'Roboto', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 400;
 	cursor: pointer;
 }
@@ -559,7 +558,7 @@ button#poodllconvedit_edcancel:hover,
 	outline: none;
 	font-size: 14px;
 	color: #333333;
-	font-family: 'Roboto', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 400;
 	padding: 15px 0;
 }
@@ -586,7 +585,7 @@ button#poodllconvedit_edcancel:hover,
 	border-radius:5px;
 	color: #333333;
 	font-size: 14px;
-	font-family: 'Roboto', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 400;
 	transition:0.3s;
 }
@@ -646,7 +645,7 @@ button#poodllconvedit_edcancel:hover,
 	align-items: center;
 	font-size: 18px;
 	color: #FFFFFF;
-	font-family: 'Roboto', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 400;
 	background: linear-gradient(10.08deg, #77DB7B -17.6%, #57DA54 139.61%);
 	border-radius: 5px;

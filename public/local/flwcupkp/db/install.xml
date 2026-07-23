@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/flwcupkp/db" VERSION="2026072301" COMMENT="FLW C-UP-KP schema">
+  <TABLES>
+    <TABLE NAME="flwcupkp_framework" COMMENT="C-UP-KP frameworks">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="externalid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="coursecode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="cefrrange" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" DEFAULT="1.0"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="draft"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="parentid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="moodleframeworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="externalid_uix" UNIQUE="true" FIELDS="externalid"/><INDEX NAME="coursecode_ix" UNIQUE="false" FIELDS="coursecode"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_comp" COMMENT="Competencies">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="externalid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="cando" TYPE="text"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="stage" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="domain" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="scope" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="evidencerule" TYPE="text"/>
+        <FIELD NAME="moodlecompetencyid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="draft"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" DEFAULT="1.0"/>
+        <FIELD NAME="validfrom" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="validto" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="externalid_uix" UNIQUE="true" FIELDS="externalid"/><INDEX NAME="framework_ix" UNIQUE="false" FIELDS="frameworkid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_up" COMMENT="Use Points">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="externalid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="actionstatement" TYPE="text"/>
+        <FIELD NAME="intention" TYPE="text"/>
+        <FIELD NAME="context" TYPE="text"/>
+        <FIELD NAME="observableaction" TYPE="text"/>
+        <FIELD NAME="conditions" TYPE="text"/>
+        <FIELD NAME="successcriteria" TYPE="text"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="languagemode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="interactiontype" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="evidencerequirements" TYPE="text"/>
+        <FIELD NAME="rubricref" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="draft"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" DEFAULT="1.0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="externalid_uix" UNIQUE="true" FIELDS="externalid"/><INDEX NAME="framework_ix" UNIQUE="false" FIELDS="frameworkid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_kp" COMMENT="Knowledge Points">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="externalid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="description" TYPE="text"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="domain" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="formtext" TYPE="text"/>
+        <FIELD NAME="meaningfunction" TYPE="text"/>
+        <FIELD NAME="usageconstraints" TYPE="text"/>
+        <FIELD NAME="difficulty" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="learningload" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="evidencerequirements" TYPE="text"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="draft"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" DEFAULT="1.0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="externalid_uix" UNIQUE="true" FIELDS="externalid"/><INDEX NAME="domain_ix" UNIQUE="false" FIELDS="domain"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_comp_up" COMMENT="Competency to Use Point mappings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="competencyid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="upid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="role" TYPE="char" LENGTH="40" DEFAULT="required"/>
+        <FIELD NAME="weight" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="1"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="minmastery" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="evidencerule" TYPE="text"/>
+        <FIELD NAME="notes" TYPE="text"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="map_uix" UNIQUE="true" FIELDS="competencyid, upid"/><INDEX NAME="up_ix" UNIQUE="false" FIELDS="upid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_up_kp" COMMENT="Use Point to Knowledge Point mappings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="upid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="kpid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="role" TYPE="char" LENGTH="40" DEFAULT="required"/>
+        <FIELD NAME="weight" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="1"/>
+        <FIELD NAME="minreadiness" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="notes" TYPE="text"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="map_uix" UNIQUE="true" FIELDS="upid, kpid"/><INDEX NAME="kp_ix" UNIQUE="false" FIELDS="kpid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_kp_prereq" COMMENT="Knowledge Point prerequisites">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="kpid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="prereqkpid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="relationshiptype" TYPE="char" LENGTH="40" DEFAULT="prerequisite"/>
+        <FIELD NAME="strength" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="1"/>
+        <FIELD NAME="requirement" TYPE="char" LENGTH="40" DEFAULT="recommended"/>
+        <FIELD NAME="notes" TYPE="text"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="map_uix" UNIQUE="true" FIELDS="kpid, prereqkpid"/><INDEX NAME="prereq_ix" UNIQUE="false" FIELDS="prereqkpid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_object" COMMENT="Learning objects and activities">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="externalid" TYPE="char" LENGTH="120" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="lesson" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="objecttype" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourceid" TYPE="char" LENGTH="120"/>
+        <FIELD NAME="purpose" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="evidencestrength" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="difficulty" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="role" TYPE="char" LENGTH="40" DEFAULT="practice"/>
+        <FIELD NAME="metadatajson" TYPE="text"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="externalid_uix" UNIQUE="true" FIELDS="externalid"/><INDEX NAME="unit_ix" UNIQUE="false" FIELDS="unitcode"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_object_map" COMMENT="Object target mappings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="objectid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="role" TYPE="char" LENGTH="40" DEFAULT="practice"/>
+        <FIELD NAME="evidencestrength" TYPE="char" LENGTH="40"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="map_uix" UNIQUE="true" FIELDS="objectid, targettype, targetid"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_evidence" COMMENT="Evidence events">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="objectid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourceattempt" TYPE="char" LENGTH="120"/>
+        <FIELD NAME="evidencetype" TYPE="char" LENGTH="60" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="rawscore" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="normalizedscore" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="rubricjson" TYPE="text"/>
+        <FIELD NAME="assessortype" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="confidence" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="evidencestrength" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="provenance" TYPE="char" LENGTH="120"/>
+        <FIELD NAME="sourceref" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="overrideflag" TYPE="int" LENGTH="1" DEFAULT="0"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/><INDEX NAME="time_ix" UNIQUE="false" FIELDS="timecreated"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_state" COMMENT="Learner mastery states">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="masteryscore" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="masterystate" TYPE="char" LENGTH="60" NOTNULL="true"/>
+        <FIELD NAME="confidence" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="evidencecount" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="lastevidence" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="lastsuccess" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="nextreview" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="manualoverride" TYPE="int" LENGTH="1" DEFAULT="0"/>
+        <FIELD NAME="overridereason" TYPE="text"/>
+        <FIELD NAME="ruleversion" TYPE="char" LENGTH="40" DEFAULT="default-v1"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="state_uix" UNIQUE="true" FIELDS="userid, targettype, targetid"/><INDEX NAME="review_ix" UNIQUE="false" FIELDS="nextreview"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_rule" COMMENT="Versioned rules">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="ruletype" TYPE="char" LENGTH="60" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="120" NOTNULL="true"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="configjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="active"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="rule_uix" UNIQUE="true" FIELDS="ruletype, version"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_recommend" COMMENT="Learner recommendations">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="objectid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="reason" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="prereqinfo" TYPE="text"/>
+        <FIELD NAME="masterygap" TYPE="number" LENGTH="10" DECIMALS="5"/>
+        <FIELD NAME="expectedbenefit" TYPE="text"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="recommended"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_import" COMMENT="Import batches">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcefile" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="schemaversion" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="validationstatus" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="warningsjson" TYPE="text"/>
+        <FIELD NAME="errorsjson" TYPE="text"/>
+        <FIELD NAME="entitycount" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="rollbackstatus" TYPE="char" LENGTH="40" DEFAULT="not_rolled_back"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="checksum_uix" UNIQUE="true" FIELDS="checksum"/></INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_calsnapshot" COMMENT="Saved evidence calibration snapshots">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="120" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="summaryjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="reportjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="note" TYPE="text"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="scope_ix" UNIQUE="false" FIELDS="courseid, unitcode, targettype"/>
+        <INDEX NAME="time_ix" UNIQUE="false" FIELDS="timecreated"/>
+        <INDEX NAME="checksum_ix" UNIQUE="false" FIELDS="checksum"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_calproposal" COMMENT="Draft threshold calibration proposals">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="snapshotid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="120" NOTNULL="true"/>
+        <FIELD NAME="version" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="draft"/>
+        <FIELD NAME="thresholdsjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="previewjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="activatedruleid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="note" TYPE="text"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="snapshot_ix" UNIQUE="false" FIELDS="snapshotid"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="version_ix" UNIQUE="false" FIELDS="version"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_audit" COMMENT="Audit log">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="action" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="detailsjson" TYPE="text"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES><INDEX NAME="action_ix" UNIQUE="false" FIELDS="action"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/></INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

@@ -22,6 +22,8 @@
       </KEYS>
       <INDEXES>
         <INDEX NAME="headwordlang" UNIQUE="false" FIELDS="headword, sourcelang"/>
+        <INDEX NAME="sourcelang_headword" UNIQUE="false" FIELDS="sourcelang, headword"/>
+        <INDEX NAME="sourcelang" UNIQUE="false" FIELDS="sourcelang"/>
         <INDEX NAME="cefrlevel" UNIQUE="false" FIELDS="cefrlevel"/>
       </INDEXES>
     </TABLE>

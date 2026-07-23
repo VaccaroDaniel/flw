@@ -27,6 +27,12 @@ class exam_service {
     /** @var string Valid certificate status. */
     public const CERT_STATUS_VALID = 'valid';
 
+    /** @var string Teacher/class self exam session. */
+    public const SESSION_TYPE_SELF = 'self';
+
+    /** @var string Branch/government official exam session. */
+    public const SESSION_TYPE_OFFICIAL = 'official';
+
     /**
      * Return a named status in a readable form.
      *
@@ -101,6 +107,85 @@ class exam_service {
     }
 
     /**
+     * Fetch the learner's latest result for one exam.
+     *
+     * @param int $examid
+     * @param int $userid
+     * @return array|null
+     */
+    public static function get_latest_result_for_exam(int $examid, int $userid): ?array {
+        global $DB;
+
+        if ($examid <= 0 || $userid <= 0 || !$DB->get_manager()->table_exists('local_flwexam_results')) {
+            return null;
+        }
+
+        $resultid = $DB->get_field_sql(
+            "SELECT id
+               FROM {local_flwexam_results}
+              WHERE examid = :examid
+                AND userid = :userid
+           ORDER BY timecreated DESC, id DESC",
+            [
+                'examid' => $examid,
+                'userid' => $userid,
+            ],
+            IGNORE_MULTIPLE
+        );
+        if (!$resultid) {
+            return null;
+        }
+
+        return self::get_result_package((int)$resultid, $userid);
+    }
+
+    /**
+     * Return the FLW Exam result URL for a finished Moodle Quiz review.
+     *
+     * If the quiz attempt has not been synced yet, this tries to sync visible
+     * FLW Exam definitions linked to the Moodle Quiz before returning the URL.
+     *
+     * @param int $quizid Moodle quiz instance id.
+     * @param int $userid Learner id.
+     * @param int $quizattemptid Moodle quiz attempt id.
+     * @return moodle_url|null Result URL, or null for normal Moodle flow.
+     */
+    public static function get_quiz_review_result_url(int $quizid, int $userid, int $quizattemptid): ?moodle_url {
+        global $DB;
+
+        if ($quizid <= 0 || $userid <= 0 || $quizattemptid <= 0 ||
+                !$DB->get_manager()->table_exists('local_flwexam_results') ||
+                !$DB->get_manager()->table_exists('local_flwexam_attempts') ||
+                !$DB->get_manager()->table_exists('local_flwexam_exams')) {
+            return null;
+        }
+
+        $resultid = self::find_quiz_attempt_result_id($quizid, $userid, $quizattemptid);
+        if ($resultid <= 0) {
+            $exams = $DB->get_records('local_flwexam_exams', [
+                'quizid' => $quizid,
+                'visible' => 1,
+            ], 'id ASC', 'id');
+
+            foreach ($exams as $exam) {
+                try {
+                    self::record_quiz_attempt_result_from_event((int)$exam->id, $userid, $quizattemptid);
+                } catch (\Throwable $e) {
+                    debugging(
+                        'local_flwexam could not prepare exam result URL for quiz attempt ' .
+                            $quizattemptid . ': ' . $e->getMessage(),
+                        DEBUG_DEVELOPER
+                    );
+                }
+            }
+
+            $resultid = self::find_quiz_attempt_result_id($quizid, $userid, $quizattemptid);
+        }
+
+        return $resultid > 0 ? new moodle_url('/local/flwexam/result.php', ['id' => $resultid]) : null;
+    }
+
+    /**
      * Fetch a result package.
      *
      * @param int $resultid
@@ -136,7 +221,7 @@ class exam_service {
             'userid' => (int)$result->userid,
             'learnername' => fullname($user),
             'examid' => (int)$result->examid,
-            'examname' => format_string($exam->name),
+            'examname' => self::format_display_name($exam->name),
             'examcode' => $exam->code,
             'language' => $result->language,
             'learning_course_category' => $result->learningcoursecategory,
@@ -157,6 +242,68 @@ class exam_service {
                 'summary' => json_decode($result->summaryjson ?? '[]', true) ?: [],
             ] : [],
         ];
+    }
+
+    /**
+     * Return the minimal result data needed by trusted server-side sync paths.
+     *
+     * @param int $resultid
+     * @return array
+     */
+    protected static function get_trusted_result_summary(int $resultid): array {
+        global $DB;
+
+        $sql = "SELECT r.id, r.examid, r.certificateid, r.overallscore, e.code AS examcode
+                  FROM {local_flwexam_results} r
+                  JOIN {local_flwexam_exams} e ON e.id = r.examid
+                 WHERE r.id = :resultid";
+        $record = $DB->get_record_sql($sql, ['resultid' => $resultid], MUST_EXIST);
+
+        return [
+            'id' => (int)$record->id,
+            'examid' => (int)$record->examid,
+            'examcode' => $record->examcode,
+            'certificate_id' => (int)$record->certificateid,
+            'overall_score' => (float)$record->overallscore,
+        ];
+    }
+
+    /**
+     * Find an FLW Exam result created from a specific Moodle Quiz attempt.
+     *
+     * @param int $quizid Moodle quiz instance id.
+     * @param int $userid Learner id.
+     * @param int $quizattemptid Moodle quiz attempt id.
+     * @return int Result id or 0.
+     */
+    protected static function find_quiz_attempt_result_id(int $quizid, int $userid, int $quizattemptid): int {
+        global $DB;
+
+        if ($quizid <= 0 || $userid <= 0 || $quizattemptid <= 0) {
+            return 0;
+        }
+
+        $resultid = $DB->get_field_sql(
+            "SELECT r.id
+               FROM {local_flwexam_results} r
+               JOIN {local_flwexam_attempts} a ON a.id = r.attemptid
+               JOIN {local_flwexam_exams} e ON e.id = r.examid
+              WHERE r.userid = :userid
+                AND e.quizid = :quizid
+                AND e.visible = 1
+                AND a.source = :source
+                AND a.externalattemptid = :externalid
+           ORDER BY r.timecreated DESC, r.id DESC",
+            [
+                'userid' => $userid,
+                'quizid' => $quizid,
+                'source' => 'modquiz',
+                'externalid' => 'quizattempt' . $quizattemptid,
+            ],
+            IGNORE_MULTIPLE
+        );
+
+        return $resultid ? (int)$resultid : 0;
     }
 
     /**
@@ -181,30 +328,271 @@ class exam_service {
             }
         }
 
-        $sql = "SELECT e.*, COUNT(q.id) AS questioncount
+        $sql = "SELECT e.*, COUNT(q.id) AS localquestioncount
                   FROM {local_flwexam_exams} e
              LEFT JOIN {local_flwexam_questions} q ON q.examid = e.id AND q.visible = 1
                  WHERE " . implode(' AND ', $where) . "
               GROUP BY e.id, e.code, e.name, e.language, e.learningcoursecategory, e.cefrlevel,
                        e.requiredthreshold, e.requiredskillfloor, e.moderationrequired,
-                       e.criticalkpjson, e.profilejson, e.visible, e.timecreated, e.timemodified
+                       e.criticalkpjson, e.profilejson, e.quizid, e.visible, e.timecreated, e.timemodified
               ORDER BY e.language ASC, e.learningcoursecategory ASC, e.cefrlevel ASC, e.name ASC";
         $records = $DB->get_records_sql($sql, $params);
         $exams = [];
         foreach ($records as $record) {
+            $questioncount = self::get_exam_question_count($record);
             $exams[] = [
                 'id' => (int)$record->id,
                 'code' => $record->code,
-                'name' => format_string($record->name),
+                'name' => self::format_display_name($record->name),
                 'language' => $record->language,
                 'learning_course_category' => $record->learningcoursecategory,
                 'cefr_level' => $record->cefrlevel,
                 'required_threshold' => (float)$record->requiredthreshold,
                 'required_skill_floor' => (float)$record->requiredskillfloor,
-                'question_count' => (int)$record->questioncount,
+                'question_count' => $questioncount,
+                'question_source' => !empty($record->quizid) ? 'moodle_quiz' : 'flw_internal',
+                'quizid' => (int)($record->quizid ?? 0),
             ];
         }
         return $exams;
+    }
+
+    /**
+     * Return Moodle Quiz activities that can be linked as an FLW question source.
+     *
+     * @return array
+     */
+    public static function get_quiz_options(): array {
+        global $DB;
+
+        if (!$DB->get_manager()->table_exists('quiz')) {
+            return [];
+        }
+
+        $sql = "SELECT q.id, q.name, q.course, c.fullname AS coursename, cm.id AS cmid
+                  FROM {quiz} q
+                  JOIN {course} c ON c.id = q.course
+                  JOIN {modules} m ON m.name = :modname
+                  JOIN {course_modules} cm
+                    ON cm.instance = q.id
+                   AND cm.module = m.id
+                   AND cm.course = q.course
+                 WHERE cm.deletioninprogress = 0
+              ORDER BY c.fullname ASC, q.name ASC";
+        $records = $DB->get_records_sql($sql, ['modname' => 'quiz']);
+        $options = [];
+        foreach ($records as $record) {
+            $options[(int)$record->id] =
+                self::format_display_name($record->coursename) . ' / ' .
+                self::format_display_name($record->name) . ' (#' . (int)$record->cmid . ')';
+        }
+        return $options;
+    }
+
+    /**
+     * Check whether a Moodle Quiz exists.
+     *
+     * @param int $quizid
+     * @return bool
+     */
+    public static function quiz_exists(int $quizid): bool {
+        global $DB;
+
+        return $quizid > 0 && $DB->record_exists('quiz', ['id' => $quizid]);
+    }
+
+    /**
+     * Return linked Moodle Quiz display metadata.
+     *
+     * @param int $quizid
+     * @return array|null
+     */
+    public static function get_linked_quiz_info(int $quizid): ?array {
+        global $CFG, $DB;
+
+        if ($quizid <= 0 || !$DB->get_manager()->table_exists('quiz')) {
+            return null;
+        }
+
+        $quiz = $DB->get_record('quiz', ['id' => $quizid], '*', IGNORE_MISSING);
+        if (!$quiz) {
+            return null;
+        }
+
+        require_once($CFG->dirroot . '/course/lib.php');
+        $cm = get_coursemodule_from_instance('quiz', $quizid, (int)$quiz->course, false, IGNORE_MISSING);
+        if (!$cm) {
+            return null;
+        }
+
+        return [
+            'id' => (int)$quiz->id,
+            'name' => self::format_display_name($quiz->name),
+            'courseid' => (int)$quiz->course,
+            'cmid' => (int)$cm->id,
+            'url' => new moodle_url('/mod/quiz/view.php', ['id' => (int)$cm->id]),
+            'questioncount' => self::get_quiz_question_count((int)$quiz->id),
+            'grade' => (float)$quiz->grade,
+            'sumgrades' => (float)$quiz->sumgrades,
+        ];
+    }
+
+    /**
+     * Return the effective question count for an FLW Exam definition.
+     *
+     * @param object $exam
+     * @return int
+     */
+    public static function get_exam_question_count(object $exam): int {
+        global $DB;
+
+        if (!empty($exam->quizid)) {
+            return self::get_quiz_question_count((int)$exam->quizid);
+        }
+
+        return (int)$DB->count_records('local_flwexam_questions', [
+            'examid' => (int)$exam->id,
+            'visible' => 1,
+        ]);
+    }
+
+    /**
+     * Import the learner's latest completed Moodle Quiz attempt as an official FLW Exam result.
+     *
+     * @param int $examid
+     * @param int $userid
+     * @return array
+     */
+    public static function record_quiz_attempt_result(int $examid, int $userid): array {
+        require_capability('local/flwexam:viewown', context_system::instance());
+
+        return self::record_quiz_attempt_result_internal($examid, $userid);
+    }
+
+    /**
+     * Import a completed Moodle Quiz attempt after Moodle fires a quiz completion event.
+     *
+     * @param int $examid
+     * @param int $userid
+     * @param int $quizattemptid
+     * @return array
+     */
+    public static function record_quiz_attempt_result_from_event(int $examid, int $userid, int $quizattemptid): array {
+        return self::record_quiz_attempt_result_internal($examid, $userid, $quizattemptid, true);
+    }
+
+    /**
+     * Import a completed Moodle Quiz attempt as an official FLW Exam result.
+     *
+     * @param int $examid
+     * @param int $userid
+     * @param int $quizattemptid Exact Moodle quiz attempt id, or 0 for latest attempt.
+     * @param bool $trustedreturn Return a minimal package without current-user capability checks.
+     * @return array
+     */
+    protected static function record_quiz_attempt_result_internal(
+        int $examid,
+        int $userid,
+        int $quizattemptid = 0,
+        bool $trustedreturn = false
+    ): array {
+        global $CFG, $DB;
+
+        $exam = $DB->get_record('local_flwexam_exams', [
+            'id' => $examid,
+            'visible' => 1,
+        ], '*', MUST_EXIST);
+        if (empty($exam->quizid)) {
+            throw new moodle_exception('linkedquiznotavailable', 'local_flwexam');
+        }
+
+        if ($quizattemptid > 0) {
+            $quizattempt = $DB->get_record('quiz_attempts', [
+                'id' => $quizattemptid,
+                'quiz' => (int)$exam->quizid,
+                'userid' => $userid,
+                'state' => 'finished',
+                'preview' => 0,
+            ], '*', IGNORE_MISSING);
+        } else {
+            $attempts = $DB->get_records('quiz_attempts', [
+                'quiz' => (int)$exam->quizid,
+                'userid' => $userid,
+                'state' => 'finished',
+                'preview' => 0,
+            ], 'timefinish DESC, id DESC', '*', 0, 1);
+            $quizattempt = $attempts ? reset($attempts) : false;
+        }
+        if (!$quizattempt || $quizattempt->sumgrades === null) {
+            throw new moodle_exception('noquizattempttosync', 'local_flwexam');
+        }
+        $externalid = 'quizattempt' . (int)$quizattempt->id;
+
+        $existingresultid = $DB->get_field_sql(
+            "SELECT r.id
+               FROM {local_flwexam_results} r
+               JOIN {local_flwexam_attempts} a ON a.id = r.attemptid
+              WHERE r.examid = :examid
+                AND r.userid = :userid
+                AND a.source = :source
+                AND a.externalattemptid = :externalid
+           ORDER BY r.id DESC",
+            [
+                'examid' => (int)$exam->id,
+                'userid' => $userid,
+                'source' => 'modquiz',
+                'externalid' => $externalid,
+            ],
+            IGNORE_MULTIPLE
+        );
+        if ($existingresultid) {
+            if ($trustedreturn) {
+                return self::get_trusted_result_summary((int)$existingresultid);
+            }
+            return self::get_result_package((int)$existingresultid, $userid, true);
+        }
+
+        $quiz = $DB->get_record('quiz', ['id' => (int)$exam->quizid], '*', MUST_EXIST);
+        require_once($CFG->dirroot . '/mod/quiz/locallib.php');
+        $overall = self::get_quiz_attempt_percent($quiz, $quizattempt);
+        $skills = self::build_quiz_skill_scores($exam, $overall);
+        $kpresults = self::build_quiz_kp_results($exam, $overall);
+
+        $result = self::record_result([
+            'userid' => $userid,
+            'examid' => (int)$exam->id,
+            'language' => $exam->language,
+            'learning_course_category' => $exam->learningcoursecategory,
+            'cefr_level' => $exam->cefrlevel,
+            'overall_score' => $overall,
+            'skill_scores' => $skills,
+            'kp_results' => $kpresults,
+            'integrity_status' => 'clear',
+            'moderation_status' => 'approved',
+            'attempt_metadata' => [
+                'source' => 'modquiz',
+                'external_attempt_id' => $externalid,
+                'quizid' => (int)$quiz->id,
+                'quiz_attempt_id' => (int)$quizattempt->id,
+                'quiz_courseid' => (int)$quiz->course,
+                'quiz_sumgrades' => (float)$quiz->sumgrades,
+                'quiz_grade' => (float)$quiz->grade,
+                'attempt_sumgrades' => (float)$quizattempt->sumgrades,
+                'question_count' => self::get_quiz_question_count((int)$quiz->id),
+                'time_started' => (int)$quizattempt->timestart,
+                'time_finished' => (int)$quizattempt->timefinish,
+                'score_source' => 'moodle_quiz_attempt',
+            ],
+        ], $userid, false, $trustedreturn);
+
+        self::audit('quiz_attempt_synced', $userid, $userid, (int)$result['id'], (int)$result['certificate_id'], 'success', [
+            'examid' => (int)$exam->id,
+            'quizid' => (int)$quiz->id,
+            'quiz_attempt_id' => (int)$quizattempt->id,
+            'overall_score' => $overall,
+        ]);
+
+        return $result;
     }
 
     /**
@@ -272,7 +660,7 @@ class exam_service {
     }
 
     /**
-     * Get FLW track selector options for a language.
+     * Get legacy internal category options for a language.
      *
      * @param string $language
      * @return array
@@ -318,7 +706,7 @@ class exam_service {
     }
 
     /**
-     * Human label for FLW track key.
+     * Human label for a legacy internal category key.
      *
      * @param string $track
      * @return string
@@ -338,18 +726,241 @@ class exam_service {
     }
 
     /**
+     * Human label for an exam session type.
+     *
+     * @param string $type
+     * @return string
+     */
+    public static function session_type_label(string $type): string {
+        if ($type === self::SESSION_TYPE_OFFICIAL) {
+            return get_string('officialexam', 'local_flwexam');
+        }
+        return get_string('selfexam', 'local_flwexam');
+    }
+
+    /**
+     * Return valid session status options.
+     *
+     * @return array
+     */
+    public static function get_session_status_options(): array {
+        return [
+            'draft' => get_string('sessionstatusdraft', 'local_flwexam'),
+            'open' => get_string('sessionstatusopen', 'local_flwexam'),
+            'closed' => get_string('sessionstatusclosed', 'local_flwexam'),
+        ];
+    }
+
+    /**
+     * Return sessions a learner can see in Exam Center.
+     *
+     * @param int $userid
+     * @param array $filters
+     * @return array
+     */
+    public static function get_available_sessions(int $userid, array $filters = []): array {
+        global $CFG, $DB;
+
+        if (!$DB->get_manager()->table_exists('local_flwexam_sessions')) {
+            return [];
+        }
+
+        $where = ['s.visible = 1', 's.status = :status', 'e.visible = 1'];
+        $params = ['status' => 'open'];
+        foreach ([
+            'language' => 'language',
+            'learning_course_category' => 'learningcoursecategory',
+            'cefr_level' => 'cefrlevel',
+        ] as $filterkey => $field) {
+            $value = clean_param($filters[$filterkey] ?? '', PARAM_ALPHANUMEXT);
+            if ($value !== '') {
+                $where[] = 'e.' . $field . ' = :' . $filterkey;
+                $params[$filterkey] = $value;
+            }
+        }
+
+        $now = time();
+        $where[] = '(s.timestart = 0 OR s.timestart <= :nowstart)';
+        $where[] = '(s.timeend = 0 OR s.timeend >= :nowend)';
+        $params['nowstart'] = $now;
+        $params['nowend'] = $now;
+
+        $sql = "SELECT s.*, e.code AS examcode, e.name AS examname, e.language,
+                       e.learningcoursecategory, e.cefrlevel, e.quizid
+                  FROM {local_flwexam_sessions} s
+                  JOIN {local_flwexam_exams} e ON e.id = s.examid
+                 WHERE " . implode(' AND ', $where) . "
+              ORDER BY s.sessiontype ASC, s.timeend ASC, s.name ASC";
+        $records = $DB->get_records_sql($sql, $params);
+
+        require_once($CFG->libdir . '/enrollib.php');
+        $courseids = array_map('intval', array_keys(enrol_get_users_courses($userid, true, 'id')));
+        $sessions = [];
+        foreach ($records as $record) {
+            if ((int)$record->courseid > 0 && !in_array((int)$record->courseid, $courseids, true)) {
+                continue;
+            }
+            if ((int)$record->groupid > 0 && !$DB->record_exists('groups_members', [
+                'groupid' => (int)$record->groupid,
+                'userid' => $userid,
+            ])) {
+                continue;
+            }
+            $attemptcount = self::count_session_attempts((int)$record->id, $userid);
+            $maxattempts = max(1, (int)$record->maxattempts);
+            if ($attemptcount >= $maxattempts) {
+                continue;
+            }
+            $sessions[] = self::export_session_record($record, $attemptcount);
+        }
+
+        return $sessions;
+    }
+
+    /**
+     * Return all sessions for the organiser page.
+     *
+     * @return array
+     */
+    public static function get_manage_sessions(): array {
+        global $DB;
+
+        if (!$DB->get_manager()->table_exists('local_flwexam_sessions')) {
+            return [];
+        }
+
+        $sql = "SELECT s.*, e.code AS examcode, e.name AS examname, e.language,
+                       e.learningcoursecategory, e.cefrlevel, e.quizid
+                  FROM {local_flwexam_sessions} s
+                  JOIN {local_flwexam_exams} e ON e.id = s.examid
+              ORDER BY s.timemodified DESC, s.id DESC";
+        $records = $DB->get_records_sql($sql);
+        $sessions = [];
+        foreach ($records as $record) {
+            $sessions[] = self::export_session_record($record, 0);
+        }
+        return $sessions;
+    }
+
+    /**
+     * Return a session joined to its exam.
+     *
+     * @param int $sessionid
+     * @return object
+     */
+    public static function get_session(int $sessionid): object {
+        global $DB;
+
+        $sql = "SELECT s.*, e.code AS examcode, e.name AS examname, e.language,
+                       e.learningcoursecategory, e.cefrlevel, e.quizid
+                  FROM {local_flwexam_sessions} s
+                  JOIN {local_flwexam_exams} e ON e.id = s.examid
+                 WHERE s.id = :sessionid";
+        return $DB->get_record_sql($sql, ['sessionid' => $sessionid], MUST_EXIST);
+    }
+
+    /**
+     * Validate that a learner may attempt a session right now.
+     *
+     * @param object $session
+     * @param int $userid
+     * @param string $accesscode
+     */
+    public static function require_can_attempt_session(object $session, int $userid, string $accesscode = ''): void {
+        global $CFG, $DB;
+
+        if (empty($session->visible) || $session->status !== 'open') {
+            throw new moodle_exception('sessionnotopen', 'local_flwexam');
+        }
+
+        $now = time();
+        if (!empty($session->timestart) && (int)$session->timestart > $now) {
+            throw new moodle_exception('sessionnotopen', 'local_flwexam');
+        }
+        if (!empty($session->timeend) && (int)$session->timeend < $now) {
+            throw new moodle_exception('sessionclosed', 'local_flwexam');
+        }
+
+        if ((int)$session->courseid > 0) {
+            require_once($CFG->libdir . '/enrollib.php');
+            $courseids = array_map('intval', array_keys(enrol_get_users_courses($userid, true, 'id')));
+            if (!in_array((int)$session->courseid, $courseids, true)) {
+                throw new moodle_exception('sessionnotavailable', 'local_flwexam');
+            }
+        }
+        if ((int)$session->groupid > 0 && !$DB->record_exists('groups_members', [
+            'groupid' => (int)$session->groupid,
+            'userid' => $userid,
+        ])) {
+            throw new moodle_exception('sessionnotavailable', 'local_flwexam');
+        }
+
+        $expectedcode = trim((string)($session->accesscode ?? ''));
+        if ($expectedcode !== '' && !hash_equals($expectedcode, trim($accesscode))) {
+            throw new moodle_exception('invalidsessionaccesscode', 'local_flwexam');
+        }
+
+        $attemptcount = self::count_session_attempts((int)$session->id, $userid);
+        if ($attemptcount >= max(1, (int)$session->maxattempts)) {
+            throw new moodle_exception('sessionattemptlimitreached', 'local_flwexam');
+        }
+    }
+
+    /**
+     * Count a learner's attempts in one organised session.
+     *
+     * @param int $sessionid
+     * @param int $userid
+     * @return int
+     */
+    public static function count_session_attempts(int $sessionid, int $userid): int {
+        global $DB;
+
+        if ($sessionid <= 0 || !$DB->get_manager()->field_exists('local_flwexam_attempts', 'sessionid')) {
+            return 0;
+        }
+
+        return (int)$DB->count_records('local_flwexam_attempts', [
+            'sessionid' => $sessionid,
+            'userid' => $userid,
+        ]);
+    }
+
+    /**
      * Export visible questions without correct answers.
      *
      * @param int $examid
+     * @param int $limit
+     * @param array $questionids
      * @return array
      */
-    public static function get_attempt_questions(int $examid): array {
+    public static function get_attempt_questions(int $examid, int $limit = 20, array $questionids = []): array {
         global $DB;
 
-        $questions = $DB->get_records('local_flwexam_questions', [
-            'examid' => $examid,
-            'visible' => 1,
-        ], 'sortorder ASC, id ASC');
+        if ($questionids) {
+            [$insql, $params] = $DB->get_in_or_equal(array_map('intval', $questionids), SQL_PARAMS_NAMED, 'qid');
+            $params['examid'] = $examid;
+            $questions = $DB->get_records_sql(
+                "SELECT *
+                   FROM {local_flwexam_questions}
+                  WHERE examid = :examid
+                    AND visible = 1
+                    AND id $insql
+               ORDER BY sortorder ASC, id ASC",
+                $params
+            );
+        } else {
+            $questions = $DB->get_records('local_flwexam_questions', [
+                'examid' => $examid,
+                'visible' => 1,
+            ], 'sortorder ASC, id ASC');
+            $limit = max(1, min(30, $limit));
+            if (count($questions) > $limit) {
+                $questions = array_values($questions);
+                shuffle($questions);
+                $questions = array_slice($questions, 0, $limit);
+            }
+        }
         $out = [];
         foreach ($questions as $question) {
             $out[] = [
@@ -370,9 +981,19 @@ class exam_service {
      * @param int $examid
      * @param int $userid
      * @param array $answers
+     * @param int $sessionid
+     * @param array $questionids
+     * @param string $accesscode
      * @return array
      */
-    public static function submit_learner_attempt(int $examid, int $userid, array $answers): array {
+    public static function submit_learner_attempt(
+        int $examid,
+        int $userid,
+        array $answers,
+        int $sessionid = 0,
+        array $questionids = [],
+        string $accesscode = ''
+    ): array {
         global $DB;
 
         $context = context_system::instance();
@@ -382,10 +1003,16 @@ class exam_service {
             'id' => $examid,
             'visible' => 1,
         ], '*', MUST_EXIST);
-        $questions = $DB->get_records('local_flwexam_questions', [
-            'examid' => $examid,
-            'visible' => 1,
-        ], 'sortorder ASC, id ASC');
+        $session = null;
+        if ($sessionid > 0) {
+            $session = self::get_session($sessionid);
+            if ((int)$session->examid !== (int)$exam->id) {
+                throw new moodle_exception('sessionnotavailable', 'local_flwexam');
+            }
+            self::require_can_attempt_session($session, $userid, $accesscode);
+        }
+
+        $questions = self::get_grading_questions($examid, $questionids);
         if (!$questions) {
             throw new moodle_exception('noquestions', 'local_flwexam');
         }
@@ -427,7 +1054,7 @@ class exam_service {
             ];
         }
 
-        $criticalkp = array_flip(json_decode($exam->criticalkpjson ?? '[]', true) ?: []);
+        $criticalkp = array_flip(self::normalise_critical_kp_codes($exam));
         $kpresults = [];
         foreach ($kptotals as $kpcode => $total) {
             $score = $total > 0 ? round(($kpcorrect[$kpcode] / $total) * 100, 2) : 0;
@@ -453,6 +1080,9 @@ class exam_service {
             'moderation_status' => 'approved',
             'attempt_metadata' => [
                 'source' => 'local_flwexam_take',
+                'session_id' => $session ? (int)$session->id : 0,
+                'session_type' => $session ? $session->sessiontype : '',
+                'session_name' => $session ? $session->name : '',
                 'question_count' => count($questions),
                 'answer_log' => $answerlog,
             ],
@@ -460,10 +1090,75 @@ class exam_service {
 
         self::audit('learner_attempt_submitted', $userid, $userid, (int)$result['id'], (int)$result['certificate_id'], 'success', [
             'examid' => (int)$exam->id,
+            'sessionid' => $session ? (int)$session->id : 0,
             'overall_score' => $overall,
         ]);
 
         return $result;
+    }
+
+    /**
+     * Fetch visible question records for grading.
+     *
+     * @param int $examid
+     * @param array $questionids
+     * @return array
+     */
+    private static function get_grading_questions(int $examid, array $questionids = []): array {
+        global $DB;
+
+        if (!$questionids) {
+            return $DB->get_records('local_flwexam_questions', [
+                'examid' => $examid,
+                'visible' => 1,
+            ], 'sortorder ASC, id ASC');
+        }
+
+        [$insql, $params] = $DB->get_in_or_equal(array_map('intval', $questionids), SQL_PARAMS_NAMED, 'qid');
+        $params['examid'] = $examid;
+        return $DB->get_records_sql(
+            "SELECT *
+               FROM {local_flwexam_questions}
+              WHERE examid = :examid
+                AND visible = 1
+                AND id $insql
+           ORDER BY sortorder ASC, id ASC",
+            $params
+        );
+    }
+
+    /**
+     * Export one organised session row.
+     *
+     * @param object $record
+     * @param int $attemptcount
+     * @return array
+     */
+    private static function export_session_record(object $record, int $attemptcount): array {
+        return [
+            'id' => (int)$record->id,
+            'name' => self::format_display_name($record->name),
+            'session_type' => $record->sessiontype,
+            'session_type_label' => self::session_type_label($record->sessiontype),
+            'examid' => (int)$record->examid,
+            'examcode' => $record->examcode,
+            'examname' => self::format_display_name($record->examname),
+            'language' => $record->language,
+            'learning_course_category' => $record->learningcoursecategory,
+            'cefr_level' => $record->cefrlevel,
+            'courseid' => (int)$record->courseid,
+            'groupid' => (int)$record->groupid,
+            'question_count' => max(1, min(30, (int)$record->questioncount)),
+            'max_attempts' => max(1, (int)$record->maxattempts),
+            'attempt_count' => $attemptcount,
+            'timestart' => (int)$record->timestart,
+            'timeend' => (int)$record->timeend,
+            'requires_access_code' => trim((string)$record->accesscode) !== '',
+            'branchname' => $record->branchname,
+            'requireproctor' => !empty($record->requireproctor),
+            'status' => $record->status,
+            'visible' => !empty($record->visible),
+        ];
     }
 
     /**
@@ -503,9 +1198,15 @@ class exam_service {
      * @param array $data
      * @param int $actorid
      * @param bool $requiresubmitcapability
+     * @param bool $trustedreturn Return a minimal package without current-user capability checks.
      * @return array
      */
-    public static function record_result(array $data, int $actorid, bool $requiresubmitcapability = true): array {
+    public static function record_result(
+        array $data,
+        int $actorid,
+        bool $requiresubmitcapability = true,
+        bool $trustedreturn = false
+    ): array {
         global $DB;
 
         if ($requiresubmitcapability) {
@@ -526,19 +1227,25 @@ class exam_service {
         $skills = self::normalise_skill_scores($data['skill_scores'] ?? []);
         $kpresults = self::normalise_kp_results($data['kp_results'] ?? [], $exam);
         $metadata = is_array($data['attempt_metadata'] ?? null) ? $data['attempt_metadata'] : [];
+        $sessionid = max(0, (int)($metadata['session_id'] ?? $data['session_id'] ?? 0));
         $now = time();
 
         $decision = self::decide_certificate($exam, (float)$data['overall_score'], $skills, $kpresults, $integrity, $moderation);
 
         $transaction = $DB->start_delegated_transaction();
         try {
-            $attemptnumber = (int)$DB->count_records('local_flwexam_attempts', [
+            $attemptconditions = [
                 'userid' => $userid,
                 'examid' => (int)$exam->id,
-            ]) + 1;
+            ];
+            if ($sessionid > 0) {
+                $attemptconditions['sessionid'] = $sessionid;
+            }
+            $attemptnumber = (int)$DB->count_records('local_flwexam_attempts', $attemptconditions) + 1;
             $attempt = (object)[
                 'userid' => $userid,
                 'examid' => (int)$exam->id,
+                'sessionid' => $sessionid,
                 'attemptnumber' => $attemptnumber,
                 'source' => self::clean_key($metadata['source'] ?? 'api', 'source'),
                 'externalattemptid' => clean_param($metadata['external_attempt_id'] ?? '', PARAM_ALPHANUMEXT),
@@ -621,6 +1328,10 @@ class exam_service {
             $transaction->rollback($e);
         }
 
+        if ($trustedreturn) {
+            return self::get_trusted_result_summary((int)$resultid);
+        }
+
         return self::get_result_package($resultid, $actorid, true);
     }
 
@@ -645,7 +1356,7 @@ class exam_service {
     ): array {
         $requiredthreshold = (float)$exam->requiredthreshold;
         $requiredskillfloor = (float)$exam->requiredskillfloor;
-        $criticalkp = json_decode($exam->criticalkpjson ?? '[]', true) ?: [];
+        $criticalkp = self::normalise_critical_kp_codes($exam);
 
         $failures = [];
         if ($overallscore < $requiredthreshold) {
@@ -778,7 +1489,7 @@ class exam_service {
         return [
             'id' => (int)$record->id,
             'examid' => (int)$record->examid,
-            'examname' => format_string($record->examname),
+            'examname' => self::format_display_name($record->examname),
             'examcode' => $record->examcode,
             'language' => $record->language,
             'learning_course_category' => $record->learningcoursecategory,
@@ -912,6 +1623,325 @@ class exam_service {
     }
 
     /**
+     * Count Moodle Quiz source questions.
+     *
+     * Random-slot quizzes should report the size of the source bank rather than
+     * only the sampled attempt length.
+     *
+     * @param int $quizid
+     * @return int
+     */
+    protected static function get_quiz_question_count(int $quizid): int {
+        global $DB;
+
+        if ($quizid <= 0) {
+            return 0;
+        }
+
+        $entryids = [];
+        $directentries = $DB->get_records_sql(
+            "SELECT DISTINCT qr.questionbankentryid AS id
+               FROM {quiz_slots} qs
+               JOIN {question_references} qr
+                 ON qr.itemid = qs.id
+                AND qr.component = :component
+                AND qr.questionarea = :questionarea
+              WHERE qs.quizid = :quizid",
+            [
+                'component' => 'mod_quiz',
+                'questionarea' => 'slot',
+                'quizid' => $quizid,
+            ]
+        );
+        foreach ($directentries as $entry) {
+            $entryids[(int)$entry->id] = true;
+        }
+
+        $categoryids = self::get_quiz_random_source_category_ids($quizid);
+        if ($categoryids) {
+            [$insql, $params] = $DB->get_in_or_equal($categoryids, SQL_PARAMS_NAMED);
+            $params['status'] = \core_question\local\bank\question_version_status::QUESTION_STATUS_READY;
+            $randomentries = $DB->get_records_sql(
+                "SELECT DISTINCT qbe.id
+                   FROM {question_bank_entries} qbe
+                   JOIN {question_versions} qv ON qv.questionbankentryid = qbe.id
+                   JOIN {question} q ON q.id = qv.questionid
+                  WHERE qbe.questioncategoryid {$insql}
+                    AND qv.status = :status
+                    AND q.parent = 0",
+                $params
+            );
+            foreach ($randomentries as $entry) {
+                $entryids[(int)$entry->id] = true;
+            }
+        }
+
+        return $entryids ? count($entryids) : (int)$DB->count_records('quiz_slots', ['quizid' => $quizid]);
+    }
+
+    /**
+     * Get question category ids used by random slots in a Moodle Quiz.
+     *
+     * @param int $quizid
+     * @return array
+     */
+    protected static function get_quiz_random_source_category_ids(int $quizid): array {
+        global $DB;
+
+        $refs = $DB->get_records_sql(
+            "SELECT qsr.id, qsr.filtercondition
+               FROM {quiz_slots} qs
+               JOIN {question_set_references} qsr
+                 ON qsr.itemid = qs.id
+                AND qsr.component = :component
+                AND qsr.questionarea = :questionarea
+              WHERE qs.quizid = :quizid",
+            [
+                'component' => 'mod_quiz',
+                'questionarea' => 'slot',
+                'quizid' => $quizid,
+            ]
+        );
+
+        $categoryids = [];
+        foreach ($refs as $ref) {
+            $filter = json_decode($ref->filtercondition ?? '[]', true) ?: [];
+            $categoryfilter = $filter['filter']['category'] ?? [];
+            $values = array_map('intval', $categoryfilter['values'] ?? []);
+            if (!empty($categoryfilter['filteroptions']['includesubcategories'])) {
+                $values = self::expand_question_category_ids($values);
+            }
+            foreach ($values as $value) {
+                if ($value > 0) {
+                    $categoryids[$value] = $value;
+                }
+            }
+        }
+
+        return array_values($categoryids);
+    }
+
+    /**
+     * Include descendants for a list of question category ids.
+     *
+     * @param array $categoryids
+     * @return array
+     */
+    protected static function expand_question_category_ids(array $categoryids): array {
+        global $DB;
+
+        $expanded = [];
+        $queue = array_values(array_filter(array_map('intval', $categoryids)));
+        while ($queue) {
+            $id = array_shift($queue);
+            if (isset($expanded[$id])) {
+                continue;
+            }
+            $expanded[$id] = $id;
+            $children = $DB->get_records('question_categories', ['parent' => $id], '', 'id');
+            foreach ($children as $child) {
+                $queue[] = (int)$child->id;
+            }
+        }
+
+        return array_values($expanded);
+    }
+
+    /**
+     * Convert a completed Moodle Quiz attempt into a 0-100 percentage.
+     *
+     * @param object $quiz
+     * @param object $attempt
+     * @return float
+     */
+    protected static function get_quiz_attempt_percent(object $quiz, object $attempt): float {
+        $rawgrade = (float)($attempt->sumgrades ?? 0);
+        $quizgrade = (float)($quiz->grade ?? 0);
+        $sumgrades = (float)($quiz->sumgrades ?? 0);
+
+        if ($quizgrade > 0 && function_exists('quiz_rescale_grade')) {
+            $scaledgrade = (float)quiz_rescale_grade($rawgrade, $quiz, false);
+            return round(max(0, min(100, ($scaledgrade / $quizgrade) * 100)), 2);
+        }
+
+        if ($sumgrades > 0) {
+            return round(max(0, min(100, ($rawgrade / $sumgrades) * 100)), 2);
+        }
+
+        return 0.0;
+    }
+
+    /**
+     * Build skill scores for a Quiz-backed exam.
+     *
+     * Moodle Quiz is the question engine. FLW keeps certificate gates stable by
+     * applying the final Quiz percentage to the configured skill profile.
+     *
+     * @param object $exam
+     * @param float $overall
+     * @return array
+     */
+    protected static function build_quiz_skill_scores(object $exam, float $overall): array {
+        $profile = json_decode($exam->profilejson ?? '[]', true) ?: [];
+        $skills = $profile['skills'] ?? ['listening', 'speaking', 'reading', 'writing'];
+        if (!is_array($skills) || !$skills) {
+            $skills = ['listening', 'speaking', 'reading', 'writing'];
+        }
+
+        $scores = [];
+        foreach (array_unique($skills) as $skill) {
+            $skill = clean_param((string)$skill, PARAM_ALPHANUMEXT);
+            if ($skill !== '') {
+                $scores[] = [
+                    'skill' => $skill,
+                    'score' => $overall,
+                ];
+            }
+        }
+
+        return $scores ?: [
+            ['skill' => 'reading', 'score' => $overall],
+        ];
+    }
+
+    /**
+     * Build knowledge-point gate scores for a Quiz-backed exam.
+     *
+     * @param object $exam
+     * @param float $overall
+     * @return array
+     */
+    protected static function build_quiz_kp_results(object $exam, float $overall): array {
+        $criticalkp = self::normalise_critical_kp_codes($exam);
+
+        $results = [];
+        foreach ($criticalkp as $kpcode) {
+            $kpcode = clean_param((string)$kpcode, PARAM_ALPHANUMEXT);
+            if ($kpcode === '') {
+                continue;
+            }
+            $results[] = [
+                'kpcode' => $kpcode,
+                'score' => $overall,
+                'passed' => $overall >= 60,
+                'critical' => true,
+            ];
+        }
+
+        return $results;
+    }
+
+    /**
+     * Return scalar critical KP codes from stored JSON.
+     *
+     * Older seed/admin data may store KP gates as strings, rows, or keyed maps.
+     *
+     * @param object $exam
+     * @return array
+     */
+    protected static function normalise_critical_kp_codes(object $exam): array {
+        $raw = json_decode($exam->criticalkpjson ?? '[]', true);
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        $codes = [];
+        self::collect_critical_kp_codes($raw, $codes, true);
+        return array_values($codes);
+    }
+
+    /**
+     * Collect KP code strings from mixed legacy shapes.
+     *
+     * @param array $values
+     * @param array $codes
+     * @param bool $allowlist
+     */
+    protected static function collect_critical_kp_codes(array $values, array &$codes, bool $allowlist): void {
+        foreach (['kpcode', 'code', 'id', 'value'] as $field) {
+            if (isset($values[$field]) && (is_string($values[$field]) || is_int($values[$field]))) {
+                self::add_critical_kp_code($values[$field], $codes);
+                return;
+            }
+        }
+
+        $islist = array_keys($values) === range(0, count($values) - 1);
+        if (!$islist) {
+            foreach ($values as $key => $value) {
+                if (is_string($key) && $value === true && !self::is_reserved_critical_kp_key($key)) {
+                    self::add_critical_kp_code($key, $codes);
+                }
+            }
+            return;
+        }
+
+        if (!$allowlist) {
+            return;
+        }
+
+        foreach ($values as $key => $value) {
+            if (is_string($key) && !ctype_digit($key) && $value === true) {
+                self::add_critical_kp_code($key, $codes);
+                continue;
+            }
+
+            if ((is_int($key) || ctype_digit((string)$key)) && (is_string($value) || is_int($value))) {
+                self::add_critical_kp_code($value, $codes);
+                continue;
+            }
+
+            if (!is_array($value)) {
+                continue;
+            }
+
+            self::collect_critical_kp_codes($value, $codes, false);
+        }
+    }
+
+    /**
+     * Check whether a JSON key is known exam metadata, not a KP code.
+     *
+     * @param string $key
+     * @return bool
+     */
+    protected static function is_reserved_critical_kp_key(string $key): bool {
+        return isset([
+            'language' => true,
+            'level' => true,
+            'skills' => true,
+            'source' => true,
+            'score' => true,
+            'passed' => true,
+            'critical' => true,
+            'details' => true,
+            'missing' => true,
+        ][$key]);
+    }
+
+    /**
+     * Add a cleaned KP code to a set.
+     *
+     * @param string|int $value
+     * @param array $codes
+     */
+    protected static function add_critical_kp_code($value, array &$codes): void {
+        $code = clean_param((string)$value, PARAM_ALPHANUMEXT);
+        if ($code !== '') {
+            $codes[$code] = $code;
+        }
+    }
+
+    /**
+     * Format a display name without depending on a prepared $PAGE context.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected static function format_display_name(string $name): string {
+        return format_string($name, true, ['context' => context_system::instance()]);
+    }
+
+    /**
      * Normalise skill score input.
      *
      * @param array $skillrows
@@ -941,7 +1971,7 @@ class exam_service {
      * @return array
      */
     protected static function normalise_kp_results(array $kprows, object $exam): array {
-        $criticalkp = array_flip(json_decode($exam->criticalkpjson ?? '[]', true) ?: []);
+        $criticalkp = array_flip(self::normalise_critical_kp_codes($exam));
         $kpresults = [];
         foreach ($kprows as $row) {
             $kpcode = self::clean_key($row['kpcode'] ?? '', 'KP code');

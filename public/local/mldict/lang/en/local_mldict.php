@@ -9,6 +9,7 @@ $string['opendictionary'] = 'Open dictionary';
 $string['viewentry'] = 'View entry';
 $string['typeword'] = 'Type a word';
 $string['searching'] = 'Searching...';
+$string['task_refresh_dictionary_payload'] = 'Refresh dictionary startup cache payload';
 $string['startercoverage'] = 'Language coverage';
 $string['starterthemeclassroom'] = 'Classroom';
 $string['starterthemecommunication'] = 'Communication';

@@ -15,6 +15,7 @@ $PAGE->set_context($context);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('verifycertificate', 'local_flwexam'));
 $PAGE->set_heading(get_string('verifycertificate', 'local_flwexam'));
+local_flwexam_require_styles();
 
 $output = $PAGE->get_renderer('core');
 echo $output->header();
@@ -60,7 +61,6 @@ try {
         get_string('certificateid', 'local_flwexam') => $certificate['certificate_code'],
         get_string('learner', 'local_flwexam') => $certificate['learner_name'],
         get_string('language', 'local_flwexam') => $certificate['language'],
-        get_string('track', 'local_flwexam') => $certificate['learning_course_category'],
         get_string('cefrlevel', 'local_flwexam') => $certificate['cefr_level'],
         get_string('issuedate', 'local_flwexam') => userdate($certificate['timeissued']),
         get_string('status', 'local_flwexam') => exam_service::status_label($certificate['status']),

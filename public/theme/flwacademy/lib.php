@@ -60,6 +60,45 @@ function theme_flwacademy_get_extra_scss($theme): string {
 }
 
 /**
+ * Gets a theme cache store by name with safe fallback.
+ *
+ * @param string $name Cache definition name.
+ * @return \cache|null
+ */
+function theme_flwacademy_get_cache_store(string $name): ?\cache {
+    static $stores = [];
+
+    if (array_key_exists($name, $stores)) {
+        return $stores[$name];
+    }
+
+    try {
+        $stores[$name] = \cache::make('theme_flwacademy', $name);
+        return $stores[$name];
+    } catch (\Throwable $exception) {
+        $stores[$name] = null;
+        return null;
+    }
+}
+
+/**
+ * Cached DB table existence check to avoid repeated manager metadata queries.
+ *
+ * @param string $table
+ * @return bool
+ */
+function theme_flwacademy_db_table_exists(string $table): bool {
+    global $DB;
+    static $cache = [];
+    if (array_key_exists($table, $cache)) {
+        return $cache[$table];
+    }
+
+    $cache[$table] = $DB->get_manager()->table_exists($table);
+    return $cache[$table];
+}
+
+/**
  * Returns whether the current page should use FLW Clean Theme v3 student mode.
  *
  * Clean mode is intentionally limited to non-editing course pages where the
@@ -102,6 +141,12 @@ function theme_flwacademy_is_clean_mode(): bool {
 function theme_flwacademy_primary_navigation_is_active(string $key, string $url, string $currenturl): bool {
     global $DB, $PAGE;
 
+    static $activecache = [];
+    $cachekey = $key . '|' . $url . '|' . $currenturl;
+    if (array_key_exists($cachekey, $activecache)) {
+        return $activecache[$cachekey];
+    }
+
     $currentparts = parse_url($currenturl);
     $currentpath = $currentparts['path'] ?? '/';
     $currentquery = $currentparts['query'] ?? '';
@@ -114,32 +159,47 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
     $linkwithoutfragment = $linkpath . ($linkquery !== '' ? '?' . $linkquery : '');
 
     if ($key === 'home') {
-        return in_array(rtrim($currentpath, '/') ?: '/', ['/', '/index.php'], true);
+        if (strpos($currentpath, '/local/flwplacement/') === 0) {
+            $activecache[$cachekey] = true;
+            return true;
+        }
+        $active = in_array(rtrim($currentpath, '/') ?: '/', ['/', '/index.php'], true);
+        $activecache[$cachekey] = $active;
+        return $active;
     }
 
     if ($key === 'myhome') {
-        return in_array(rtrim($currentpath, '/') ?: '/', ['/my', '/my/index.php'], true);
+        $active = in_array(rtrim($currentpath, '/') ?: '/', ['/my', '/my/index.php'], true);
+        $activecache[$cachekey] = $active;
+        return $active;
     }
 
     if ($key === 'administrationsite') {
-        return strpos($currentpath, '/admin/') === 0 || $currentpath === '/admin/index.php';
+        $active = strpos($currentpath, '/admin/') === 0 || $currentpath === '/admin/index.php';
+        $activecache[$cachekey] = $active;
+        return $active;
     }
 
     if ($key === 'flw-dictionary') {
-        return strpos($currentpath, '/local/mldict/') === 0
+        $active = strpos($currentpath, '/local/mldict/') === 0
             || $currentpath === '/local/mldict/index.php';
+        $activecache[$cachekey] = $active;
+        return $active;
     }
 
     if ($key === 'flw-practice' && strpos($currentpath, '/local/flwmedia/') === 0) {
+        $activecache[$cachekey] = true;
         return true;
     }
 
     if ($key === 'flw-exam' && strpos($currentpath, '/local/flwexam/') === 0) {
+        $activecache[$cachekey] = true;
         return true;
     }
 
     if ($key === 'flw-selfstudy' && strpos($currentpath, '/local/flwplacement/') === 0) {
-        return true;
+        $activecache[$cachekey] = false;
+        return false;
     }
 
     if (in_array($key, ['flw-demo', 'flw-school', 'flw-selfstudy', 'flw-practice', 'flw-exam'], true)
@@ -150,20 +210,30 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
             $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', IGNORE_MISSING);
             if ($category) {
                 if ($key === 'flw-demo') {
-                    return theme_flwacademy_category_navigation_is_active($key, $category);
+                    $active = theme_flwacademy_category_navigation_is_active($key, $category);
+                    $activecache[$cachekey] = $active;
+                    return $active;
                 }
                 if ($key === 'flw-school') {
-                    return theme_flwacademy_is_school_category($category);
+                    $active = theme_flwacademy_is_school_category($category);
+                    $activecache[$cachekey] = $active;
+                    return $active;
                 }
                 if ($key === 'flw-selfstudy') {
-                    return theme_flwacademy_is_selfstudy_category($category);
+                    $active = theme_flwacademy_is_selfstudy_category($category);
+                    $activecache[$cachekey] = $active;
+                    return $active;
                 }
                 $activity = theme_flwacademy_resolve_activity_category($category);
                 if ($key === 'flw-practice') {
-                    return $activity && $activity['area'] === 'practice';
+                    $active = !empty($activity) && $activity['area'] === 'practice';
+                    $activecache[$cachekey] = $active;
+                    return $active;
                 }
                 if ($key === 'flw-exam') {
-                    return $activity && $activity['area'] === 'exam';
+                    $active = !empty($activity) && $activity['area'] === 'exam';
+                    $activecache[$cachekey] = $active;
+                    return $active;
                 }
             }
         }
@@ -183,6 +253,7 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
             if ($course) {
                 $category = $DB->get_record('course_categories', ['id' => $course->category], 'id,name,parent', IGNORE_MISSING);
                 if ($category && theme_flwacademy_category_navigation_is_active($key, $category)) {
+                    $activecache[$cachekey] = true;
                     return true;
                 }
             }
@@ -190,10 +261,13 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
     }
 
     if ($currentwithoutfragment === $linkwithoutfragment) {
+        $activecache[$cachekey] = true;
         return true;
     }
 
-    return strpos($currentwithoutfragment, $linkwithoutfragment . '&') === 0;
+    $active = strpos($currentwithoutfragment, $linkwithoutfragment . '&') === 0;
+    $activecache[$cachekey] = $active;
+    return $active;
 }
 
 /**
@@ -204,24 +278,36 @@ function theme_flwacademy_primary_navigation_is_active(string $key, string $url,
  * @return bool
  */
 function theme_flwacademy_category_navigation_is_active(string $key, stdClass $category): bool {
+    static $lineagecache = [];
+    $cachekey = $key . '|' . (int)$category->id;
+    if (array_key_exists($cachekey, $lineagecache)) {
+        return $lineagecache[$cachekey];
+    }
+
     foreach (theme_flwacademy_get_category_lineage($category) as $lineagecategory) {
         if ($key === 'flw-demo' && core_text::strtolower(trim((string)$lineagecategory->name)) === 'demo') {
+            $lineagecache[$cachekey] = true;
             return true;
         }
         if ($key === 'flw-school' && theme_flwacademy_is_school_category($lineagecategory)) {
+            $lineagecache[$cachekey] = true;
             return true;
         }
         if ($key === 'flw-selfstudy' && theme_flwacademy_is_selfstudy_category($lineagecategory)) {
+            $lineagecache[$cachekey] = true;
             return true;
         }
         if ($key === 'flw-practice' || $key === 'flw-exam') {
             $activity = theme_flwacademy_resolve_activity_category($lineagecategory);
             if ($activity && (($key === 'flw-practice' && $activity['area'] === 'practice')
                     || ($key === 'flw-exam' && $activity['area'] === 'exam'))) {
+                $lineagecache[$cachekey] = true;
                 return true;
             }
         }
     }
+
+    $lineagecache[$cachekey] = false;
     return false;
 }
 
@@ -233,6 +319,15 @@ function theme_flwacademy_category_navigation_is_active(string $key, stdClass $c
  */
 function theme_flwacademy_get_category_lineage(stdClass $category): array {
     global $DB;
+
+    $categoryid = (int)($category->id ?? 0);
+    static $lineagecache = [];
+    if ($categoryid <= 0) {
+        return [];
+    }
+    if (array_key_exists($categoryid, $lineagecache)) {
+        return $lineagecache[$categoryid];
+    }
 
     $lineage = [];
     $seen = [];
@@ -248,6 +343,7 @@ function theme_flwacademy_get_category_lineage(stdClass $category): array {
         }
     }
 
+    $lineagecache[$categoryid] = $lineage;
     return $lineage;
 }
 
@@ -259,14 +355,21 @@ function theme_flwacademy_get_category_lineage(stdClass $category): array {
 function theme_flwacademy_get_demo_category_url(): string {
     global $DB;
 
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+
     $categories = $DB->get_records('course_categories', ['name' => 'Demo'], 'parent ASC, sortorder ASC', 'id,visible');
     foreach ($categories as $category) {
         if (!property_exists($category, 'visible') || (int)$category->visible === 1) {
-            return (new moodle_url('/course/index.php', ['categoryid' => (int)$category->id]))->out(false);
+            $cache = (new moodle_url('/course/index.php', ['categoryid' => (int)$category->id]))->out(false);
+            return $cache;
         }
     }
 
-    return '';
+    $cache = '';
+    return $cache;
 }
 
 /**
@@ -721,7 +824,262 @@ function theme_flwacademy_get_practice_page_url(string $languagecode, string $mo
  * @return string
  */
 function theme_flwacademy_get_exam_page_url(): string {
-    return (new moodle_url('/local/flwexam/take.php'))->out(false);
+    return (new moodle_url('/local/flwexam/index.php', ['view' => 'available']))->out(false);
+}
+
+/**
+ * Returns the Moodle Quiz id for the current mod_quiz page, if any.
+ *
+ * @return int
+ */
+function theme_flwacademy_get_current_quiz_id(): int {
+    global $DB, $PAGE;
+
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+
+    $quizid = 0;
+    $pagecm = null;
+    try {
+        $pagecm = $PAGE->cm;
+    } catch (Throwable $exception) {
+        $pagecm = null;
+    }
+    if ($pagecm && ($pagecm->modname ?? '') === 'quiz') {
+        $quizid = (int)$pagecm->instance;
+    }
+
+    if ($quizid <= 0) {
+        $cmid = optional_param('cmid', 0, PARAM_INT);
+        if ($cmid <= 0) {
+            $cmid = optional_param('id', 0, PARAM_INT);
+        }
+        if ($cmid > 0) {
+            $cm = get_coursemodule_from_id('quiz', $cmid, 0, false, IGNORE_MISSING);
+            if ($cm) {
+                $quizid = (int)$cm->instance;
+            }
+        }
+    }
+
+    if ($quizid <= 0) {
+        $attemptid = optional_param('attempt', 0, PARAM_INT);
+        if ($attemptid > 0) {
+            $quizid = (int)$DB->get_field('quiz_attempts', 'quiz', ['id' => $attemptid], IGNORE_MISSING);
+        }
+    }
+
+    if ($quizid <= 0) {
+        $cache = 0;
+        return 0;
+    }
+
+    $cache = (int)$quizid;
+    return $cache;
+}
+
+/**
+ * Finds the linked FLW Exam for the current Moodle Quiz page, if any.
+ *
+ * @return stdClass|null
+ */
+function theme_flwacademy_get_current_flw_exam_quiz(): ?stdClass {
+    global $DB;
+
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+
+    if (!theme_flwacademy_db_table_exists('local_flwexam_exams')) {
+        $cache = null;
+        return null;
+    }
+
+    $quizid = theme_flwacademy_get_current_quiz_id();
+    if ($quizid <= 0) {
+        $cache = null;
+        return null;
+    }
+
+    $cache = $DB->get_record('local_flwexam_exams', [
+        'quizid' => $quizid,
+        'visible' => 1,
+    ], 'id, name, quizid, visible', IGNORE_MISSING) ?: null;
+    return $cache;
+}
+
+/**
+ * Finds the linked FLW Placement test for the current Moodle Quiz page, if any.
+ *
+ * @return stdClass|null
+ */
+function theme_flwacademy_get_current_flw_placement_quiz(): ?stdClass {
+    global $DB, $CFG;
+
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+
+    $quizid = theme_flwacademy_get_current_quiz_id();
+    if (!theme_flwacademy_db_table_exists('quiz')) {
+        $cache = null;
+        return null;
+    }
+
+    if ($quizid <= 0) {
+        $cache = null;
+        return null;
+    }
+
+    $hasplacementparams = optional_param('flwplacement', false, PARAM_BOOL)
+        || optional_param('flwskippreflight', false, PARAM_BOOL)
+        || optional_param('flwautostart', false, PARAM_BOOL)
+        || optional_param('autostart', false, PARAM_BOOL);
+    if (!$hasplacementparams) {
+        if (!is_readable($CFG->dirroot . '/local/flwplacement/locallib.php')) {
+            $cache = null;
+            return null;
+        }
+        require_once($CFG->dirroot . '/local/flwplacement/locallib.php');
+        $isplacementquiz = function_exists('local_flwplacement_get_quiz_language_for_quiz_id')
+            && !empty(local_flwplacement_get_quiz_language_for_quiz_id((int)$quizid));
+        if (!$isplacementquiz) {
+            $cache = null;
+            return null;
+        }
+    }
+
+    $languages = [
+        'en' => 'English',
+        'ru' => 'Russian',
+        'zh' => 'Chinese',
+        'de' => 'German',
+        'ja' => 'Japanese',
+        'fr' => 'French',
+        'es' => 'Spanish',
+    ];
+    foreach ($languages as $code => $label) {
+        if ((int)get_config('local_flwplacement', 'quizid_' . $code) !== $quizid) {
+            continue;
+        }
+
+        $quiz = $DB->get_record('quiz', ['id' => $quizid], 'id, name, course', IGNORE_MISSING);
+        if (!$quiz) {
+            $cache = null;
+            return null;
+        }
+
+        $cache = (object)[
+            'id' => 0,
+            'name' => $quiz->name,
+            'quizid' => $quizid,
+            'courseid' => (int)$quiz->course,
+            'languagecode' => $code,
+            'languagelabel' => $label,
+            'visible' => 1,
+        ];
+        return $cache;
+    }
+
+    if ($hasplacementparams) {
+        $quiz = $DB->get_record('quiz', ['id' => $quizid], 'id, name, course', IGNORE_MISSING);
+        if ($quiz) {
+            $cache = (object)[
+                'id' => 0,
+                'name' => $quiz->name,
+                'quizid' => $quizid,
+                'courseid' => (int)$quiz->course,
+                'languagecode' => '',
+                'languagelabel' => '',
+                'visible' => 1,
+            ];
+            return $cache;
+        }
+    }
+
+    $cache = null;
+    return null;
+}
+
+/**
+ * Returns the Placement module URL, optionally for a specific learning language.
+ *
+ * @param stdClass|null $placementquiz Placement quiz metadata.
+ * @return string
+ */
+function theme_flwacademy_get_placement_page_url(?stdClass $placementquiz = null): string {
+    $params = [];
+    if ($placementquiz && !empty($placementquiz->languagecode)) {
+        $params['language'] = clean_param($placementquiz->languagecode, PARAM_ALPHANUMEXT);
+    }
+    $params['flwplacement'] = 1;
+    $params['flwautostart'] = 1;
+    $params['flwskippreflight'] = 1;
+    $params['autostart'] = 1;
+
+    return (new moodle_url('/local/flwplacement/index.php', $params))->out(false);
+}
+
+/**
+ * Returns the direct placement attempt URL for a learning language.
+ *
+ * If the placement quiz and its course module are configured, returns a direct
+ * start-attempt URL so users jump straight into the quiz. Falls back to the
+ * landing page when quiz configuration is incomplete.
+ *
+ * @param string $languagecode Language code from the language selector.
+ * @return string
+ */
+function theme_flwacademy_get_placement_quiz_start_url(string $languagecode): string {
+    global $DB;
+
+    $language = core_text::strtolower(clean_param($languagecode, PARAM_ALPHANUMEXT));
+    $language = $language === 'zh_cn' ? 'zh' : $language;
+
+    $placementlanguagecodes = ['en', 'ru', 'zh', 'de', 'ja', 'fr', 'es'];
+    if ($language === '' || !in_array($language, $placementlanguagecodes, true)) {
+        $language = 'en';
+    }
+    if (!theme_flwacademy_db_table_exists('quiz')) {
+        return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
+    }
+
+    $quizid = (int)get_config('local_flwplacement', 'quizid_' . $language);
+    if ($quizid <= 0) {
+        foreach ($placementlanguagecodes as $fallback) {
+            $quizid = (int)get_config('local_flwplacement', 'quizid_' . $fallback);
+            if ($quizid > 0) {
+                break;
+            }
+        }
+    }
+
+    if ($quizid <= 0) {
+        return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
+    }
+
+    $quiz = $DB->get_record('quiz', ['id' => $quizid], 'id, course', IGNORE_MISSING);
+    if (!$quiz) {
+        return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
+    }
+
+    $cm = get_coursemodule_from_instance('quiz', $quizid, (int)$quiz->course, false, IGNORE_MISSING);
+    if (!$cm) {
+        return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
+    }
+
+    return (new moodle_url('/mod/quiz/startattempt.php', [
+        'cmid' => (int)$cm->id,
+        'sesskey' => sesskey(),
+        'flwplacement' => 1,
+        'flwautostart' => 1,
+        'flwskippreflight' => 1,
+        'autostart' => 1,
+    ]))->out(false);
 }
 
 /**
@@ -731,6 +1089,11 @@ function theme_flwacademy_get_exam_page_url(): string {
  */
 function theme_flwacademy_export_learning_languages(): array {
     global $DB;
+
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
 
     $records = $DB->get_records('course_categories', null, 'parent ASC, sortorder ASC', 'id,parent,name');
     $categoriesbyname = [];
@@ -809,9 +1172,7 @@ function theme_flwacademy_export_learning_languages(): array {
             'categoryurl' => $url->out(false),
             'schoolcategoryurl' => $categoryurls['school'],
             'selfstudycategoryurl' => $categoryurls['selfstudy'],
-            'placementtesturl' => (new moodle_url('/local/flwplacement/index.php', [
-                'language' => $language['code'],
-            ]))->out(false),
+            'placementtesturl' => theme_flwacademy_get_placement_quiz_start_url($language['code']),
             'practicecategoryurl' => $practicepageurl,
             'examcategoryurl' => $exampageurl,
             'practicewatchurl' => $practicesubmenu['watchurl'],
@@ -843,7 +1204,8 @@ function theme_flwacademy_export_learning_languages(): array {
         ];
     }
 
-    return $languages;
+    $cache = $languages;
+    return $cache;
 }
 
 /**
@@ -882,18 +1244,31 @@ function theme_flwacademy_extend_tools_context(array $context): array {
     $isadminpage = strpos($currentlocalurl, '/admin/') === 0 || $currentlocalurl === '/admin/index.php';
     $isflwexampage = strpos($PAGE->pagetype, 'local-flwexam-') === 0
         || strpos($currentlocalurl, '/local/flwexam/') === 0;
+    $flwexamquiz = theme_flwacademy_get_current_flw_exam_quiz();
+    $flwplacementquiz = theme_flwacademy_get_current_flw_placement_quiz();
+    $isflwquizpage = !empty($flwexamquiz) || !empty($flwplacementquiz);
 
     $context['hasflwtools'] = true;
-    $context['hasflwdictionary'] = $dictionaryurl !== '' && !$isflwexampage && !$isdashboardpage;
+    $context['hasflwdictionary'] = $dictionaryurl !== '' && !$isflwexampage && !$isdashboardpage && !$isflwquizpage;
     $context['flwdictionaryurl'] = $dictionaryurl;
+    if ($flwexamquiz) {
+        $context['flwbackurl'] = theme_flwacademy_get_exam_page_url();
+        $context['flwbacklabel'] = get_string('backtoexamcenter', 'local_flwexam');
+    } else if ($flwplacementquiz) {
+        $context['flwbackurl'] = theme_flwacademy_get_placement_page_url($flwplacementquiz);
+        $context['flwbacklabel'] = get_string('backtoplacementtest', 'local_flwplacement');
+    } else {
+        $context['flwbackurl'] = $context['flwbackurl'] ?? '';
+        $context['flwbacklabel'] = $context['flwbacklabel'] ?? get_string('back', 'core');
+    }
     $context['haslearninglanguages'] = !empty($learninglanguages);
     $context['learninglanguages'] = $learninglanguages;
     $context['currentlanguagecode'] = $currentlanguagecode;
     $context['currentlanguagelabel'] = $currentlanguagelabel;
-    $context['flwtoolsshowlanguage'] = !empty($learninglanguages) && !$isscormpage && !$iscoursepage;
-    $context['flwtoolsshowdone'] = !$isscormpage && !$isdashboardpage && !$isadminpage;
+    $context['flwtoolsshowlanguage'] = !empty($learninglanguages) && !$isscormpage && !$iscoursepage && !$isflwquizpage;
+    $context['flwtoolsshowdone'] = !$isscormpage && !$isdashboardpage && !$isadminpage && !$isflwquizpage;
     $context['flwtoolsshowcourseindex'] = $context['flwtoolsshowcourseindex']
-        ?? (!empty($context['courseindex']) && !$isscormpage);
+        ?? (!empty($context['courseindex']) && !$isscormpage && !$isflwquizpage);
     $context['flwtoolsshowscormtoc'] = $PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing();
     $context['flwtoolsshowscormdone'] = $PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing();
     $context['flwscormcmid'] = !empty($PAGE->cm->id) ? (int)$PAGE->cm->id : 0;
@@ -929,12 +1304,23 @@ function theme_flwacademy_match_learning_language_category(stdClass $category): 
 function theme_flwacademy_is_school_category(stdClass $category): bool {
     global $DB;
 
+    $categoryid = (int)($category->id ?? 0);
+    static $cache = [];
+    if ($categoryid <= 0) {
+        return false;
+    }
+    if (array_key_exists($categoryid, $cache)) {
+        return $cache[$categoryid];
+    }
+
     if (core_text::strtolower(trim($category->name)) !== 'school' || empty($category->parent)) {
+        $cache[$categoryid] = false;
         return false;
     }
 
     $parent = $DB->get_record('course_categories', ['id' => $category->parent], 'id,name', IGNORE_MISSING);
-    return $parent && theme_flwacademy_match_learning_language_category($parent) !== null;
+    $cache[$categoryid] = $parent && theme_flwacademy_match_learning_language_category($parent) !== null;
+    return $cache[$categoryid];
 }
 
 /**
@@ -946,13 +1332,24 @@ function theme_flwacademy_is_school_category(stdClass $category): bool {
 function theme_flwacademy_is_selfstudy_category(stdClass $category): bool {
     global $DB;
 
+    $categoryid = (int)($category->id ?? 0);
+    static $cache = [];
+    if ($categoryid <= 0) {
+        return false;
+    }
+    if (array_key_exists($categoryid, $cache)) {
+        return $cache[$categoryid];
+    }
+
     $name = core_text::strtolower(trim($category->name));
     if (($name !== 'self study' && $name !== 'self-study') || empty($category->parent)) {
+        $cache[$categoryid] = false;
         return false;
     }
 
     $parent = $DB->get_record('course_categories', ['id' => $category->parent], 'id,name', IGNORE_MISSING);
-    return $parent && theme_flwacademy_match_learning_language_category($parent) !== null;
+    $cache[$categoryid] = $parent && theme_flwacademy_match_learning_language_category($parent) !== null;
+    return $cache[$categoryid];
 }
 
 /**
@@ -1013,7 +1410,7 @@ function theme_flwacademy_get_course_cover_url(int $courseid, core_renderer $out
  * @param string $name
  * @return string
  */
-function theme_flwacademy_redesign_asset_url(core_renderer $output, string $name): string {
+function theme_flwacademy_redesign_asset_url($output, string $name): string {
     return $output->image_url('redesign/' . $name, 'theme_flwacademy')->out(false);
 }
 
@@ -1085,6 +1482,850 @@ function theme_flwacademy_percent_width($value): string {
 }
 
 /**
+ * Normalises FLW learning language codes and language names.
+ *
+ * @param string $code
+ * @return string
+ */
+function theme_flwacademy_normalise_learning_language_code(string $code): string {
+    $code = core_text::strtolower(trim(str_replace('-', '_', $code)));
+    $aliases = [
+        'english' => 'en',
+        'russian' => 'ru',
+        'русский' => 'ru',
+        'chinese' => 'zh',
+        'han_chinese' => 'zh',
+        '汉语' => 'zh',
+        'zh_cn' => 'zh',
+        'german' => 'de',
+        'deutsch' => 'de',
+        'japanese' => 'ja',
+        '日本語' => 'ja',
+        'french' => 'fr',
+        'français' => 'fr',
+        'spanish' => 'es',
+        'español' => 'es',
+    ];
+
+    return $aliases[$code] ?? clean_param($code, PARAM_ALPHANUMEXT);
+}
+
+/**
+ * Gets the selected learning language from URL first, then the persistent cookie.
+ *
+ * @return string
+ */
+function theme_flwacademy_get_active_learning_language_code(): string {
+    $requested = optional_param('flwlang', '', PARAM_ALPHANUMEXT);
+    if ($requested === '') {
+        $requested = optional_param('learninglanguage', '', PARAM_ALPHANUMEXT);
+    }
+    if ($requested === '') {
+        $requested = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
+    }
+
+    return theme_flwacademy_normalise_learning_language_code($requested);
+}
+
+/**
+ * Builds a dashboard URL that selects a language world immediately.
+ *
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_get_dashboard_url_for_language(string $languagecode): string {
+    $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode);
+    return (new moodle_url('/my/', ['flwlang' => $languagecode ?: 'en']))->out(false);
+}
+
+/**
+ * Extracts a category id from a Moodle URL string.
+ *
+ * @param string $url
+ * @return int
+ */
+function theme_flwacademy_get_categoryid_from_url(string $url): int {
+    $query = parse_url($url, PHP_URL_QUERY);
+    if (!$query) {
+        return 0;
+    }
+    parse_str($query, $params);
+    return (int)($params['categoryid'] ?? 0);
+}
+
+/**
+ * Returns visible courses in a category branch.
+ *
+ * @param int $categoryid
+ * @param int $limit
+ * @return stdClass[]
+ */
+function theme_flwacademy_get_courses_in_category(int $categoryid, int $limit = 0): array {
+    global $DB;
+
+    static $cache = [];
+    $cachekey = $categoryid . '|' . $limit;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+
+    if ($categoryid <= 0) {
+        $cache[$cachekey] = [];
+        return [];
+    }
+    $category = $DB->get_record('course_categories', ['id' => $categoryid], 'id,path', IGNORE_MISSING);
+    if (!$category) {
+        $cache[$cachekey] = [];
+        return [];
+    }
+
+    $sql = "SELECT c.*
+              FROM {course} c
+              JOIN {course_categories} cc ON cc.id = c.category
+             WHERE c.id <> :siteid
+               AND c.visible = 1
+               AND (cc.id = :categoryid OR " . $DB->sql_like('cc.path', ':pathmatch', false) . ")
+          ORDER BY cc.depth ASC, cc.sortorder ASC, c.sortorder ASC, c.fullname ASC";
+
+    $cache[$cachekey] = array_values($DB->get_records_sql($sql, [
+        'siteid' => SITEID,
+        'categoryid' => $category->id,
+        'pathmatch' => $category->path . '/%',
+    ], 0, $limit));
+    return $cache[$cachekey];
+}
+
+/**
+ * Returns visible course ids in a category branch.
+ *
+ * @param int $categoryid
+ * @return int[]
+ */
+function theme_flwacademy_get_course_ids_in_category(int $categoryid): array {
+    return array_map(static function(stdClass $course): int {
+        return (int)$course->id;
+    }, theme_flwacademy_get_courses_in_category($categoryid));
+}
+
+/**
+ * Returns aggregate learner progress for a category branch.
+ *
+ * @param int $categoryid
+ * @param int $userid
+ * @param int $limit
+ * @return array
+ */
+function theme_flwacademy_get_category_progress_summary(int $categoryid, int $userid, int $limit = 0, bool $skipcompletion = false): array {
+    static $cache = [];
+    $store = theme_flwacademy_get_cache_store('category_progress');
+    $cachekey = $categoryid . '|' . $userid . '|' . $limit . '|' . ($skipcompletion ? '1' : '0');
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $cache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
+    $courses = theme_flwacademy_get_courses_in_category($categoryid, $limit);
+
+    if ($skipcompletion) {
+        $coursecount = count($courses);
+        $result = [
+            'coursecount' => $coursecount,
+            'coursecountlabel' => $coursecount === 1 ? '1 course' : $coursecount . ' courses',
+            'completedcourses' => 0,
+            'completed' => 0,
+            'total' => 0,
+            'percent' => 0,
+            'progress' => '0%',
+            'label' => $coursecount > 0 ? 'Browse courses' : 'Ready to start',
+            'meta' => $coursecount > 0 ? $coursecount . ' available courses' : 'No courses yet',
+        ];
+        if ($store) {
+            $store->set($cachekey, $result);
+        }
+        $cache[$cachekey] = $result;
+        return $cache[$cachekey];
+    }
+
+    $totalactivities = 0;
+    $completedactivities = 0;
+    $completedcourses = 0;
+
+    foreach ($courses as $course) {
+        $summary = theme_flwacademy_get_course_progress_summary($course, $userid);
+        $totalactivities += (int)$summary['total'];
+        $completedactivities += (int)$summary['completed'];
+        if ((int)$summary['total'] > 0 && (int)$summary['completed'] >= (int)$summary['total']) {
+            $completedcourses++;
+        }
+    }
+
+    $percent = $totalactivities > 0 ? (int)round(($completedactivities / $totalactivities) * 100) : 0;
+    $coursecount = count($courses);
+    $result = [
+        'coursecount' => $coursecount,
+        'coursecountlabel' => $coursecount === 1 ? '1 course' : $coursecount . ' courses',
+        'completedcourses' => $completedcourses,
+        'completed' => $completedactivities,
+        'total' => $totalactivities,
+        'percent' => $percent,
+        'progress' => theme_flwacademy_percent_width($percent),
+        'label' => $totalactivities > 0 ? $percent . '% complete' : 'Ready to start',
+        'meta' => $totalactivities > 0
+            ? $completedactivities . ' / ' . $totalactivities . ' activities'
+            : ($coursecount > 0 ? $coursecount . ' available courses' : 'No courses yet'),
+    ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $cache[$cachekey] = $result;
+    return $cache[$cachekey];
+}
+
+/**
+ * Returns the FLW placement course-key language value.
+ *
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_get_language_profile_value(string $languagecode): string {
+    $values = [
+        'en' => 'english',
+        'ru' => 'russian',
+        'zh' => 'chinese',
+        'ja' => 'japanese',
+        'de' => 'german',
+        'fr' => 'french',
+        'es' => 'spanish',
+    ];
+    $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode);
+    return $values[$languagecode] ?? 'english';
+}
+
+/**
+ * Returns a course-key prefix for placement profile lookup.
+ *
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_get_language_coursekey_prefix(string $languagecode): string {
+    return 'FLW_' . strtoupper(theme_flwacademy_get_language_profile_value($languagecode)) . '_';
+}
+
+/**
+ * Builds CEFR journey steps for the dashboard/report graph.
+ *
+ * @param string $level
+ * @return array
+ */
+function theme_flwacademy_get_cefr_journey_context(string $level): array {
+    $levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+    $baselevel = 'A1';
+    if (preg_match('/\b(A1|A2|B1|B2|C1|C2)\b/i', $level, $matches)) {
+        $baselevel = strtoupper($matches[1]);
+    }
+    $currentindex = array_search($baselevel, $levels, true);
+    if ($currentindex === false) {
+        $currentindex = 0;
+    }
+
+    $steps = [];
+    foreach ($levels as $index => $steplevel) {
+        $class = $index < $currentindex ? 'complete' : ($index === $currentindex ? 'current' : 'upcoming');
+        $steps[] = [
+            'label' => $steplevel,
+            'class' => $class,
+            'checked' => $index === $currentindex,
+        ];
+    }
+
+    return [
+        'steps' => $steps,
+        'fillwidth' => theme_flwacademy_percent_width(($currentindex / max(1, count($levels) - 1)) * 100),
+    ];
+}
+
+/**
+ * Converts a timestamp to the current user's date string.
+ *
+ * @param int $timestamp
+ * @return string
+ */
+function theme_flwacademy_user_day_key(int $timestamp): string {
+    $date = new DateTimeImmutable('@' . $timestamp);
+    return $date->setTimezone(core_date::get_user_timezone_object())->format('Y-m-d');
+}
+
+/**
+ * Returns rank and streak data for a selected language world.
+ *
+ * @param int $userid
+ * @param string $languagecode
+ * @param int $categoryid
+ * @return array
+ */
+function theme_flwacademy_get_language_rank_and_streak(int $userid, string $languagecode, int $categoryid): array {
+    global $DB;
+
+    $store = theme_flwacademy_get_cache_store('language_rank');
+    static $cache = [];
+    $cachekey = $userid . '|' . $languagecode . '|' . $categoryid;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $cache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
+    if ($userid <= 0 || isguestuser()) {
+        $cache[$cachekey] = [
+            'title' => '#1 in ' . ucfirst(theme_flwacademy_get_language_profile_value($languagecode)) . ' World',
+            'text' => '0 day streak · 0 pts',
+            'userscount' => 1,
+            'score' => 0,
+            'streak' => theme_flwacademy_get_language_streak_summary(0, $languagecode, $categoryid),
+        ];
+        return $cache[$cachekey];
+    }
+
+    $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
+    $worldlabel = ucfirst(theme_flwacademy_get_language_profile_value($languagecode)) . ' World';
+    $scores = [];
+
+    if (theme_flwacademy_db_table_exists('local_flwplacement_profile')) {
+        $prefix = theme_flwacademy_get_language_coursekey_prefix($languagecode);
+        $hasplacementtable = theme_flwacademy_db_table_exists('local_flwplacement');
+        $placementjoin = $hasplacementtable
+            ? ' LEFT JOIN {local_flwplacement} lp ON lp.id = p.latestresultid'
+            : '';
+        $placementselect = $hasplacementtable ? ', lp.weightedscore' : '';
+        $profiles = $DB->get_records_sql(
+            "SELECT p.userid, p.overallcefr, p.placementconfidence, p.timemodified" . $placementselect . "
+               FROM {local_flwplacement_profile} p
+               JOIN (
+                     SELECT userid, MAX(timemodified) AS timemodified
+                       FROM {local_flwplacement_profile}
+                      WHERE " . $DB->sql_like('coursekey', ':coursekeysub', false) . "
+                   GROUP BY userid
+               ) latest ON latest.userid = p.userid AND latest.timemodified = p.timemodified" . $placementjoin . "
+              WHERE " . $DB->sql_like('p.coursekey', ':coursekey', false) . "
+           ORDER BY p.timemodified DESC",
+            [
+                'coursekeysub' => $prefix . '%',
+                'coursekey' => $prefix . '%',
+            ]
+        );
+        foreach ($profiles as $profile) {
+            $weighted = (float)($profile->weightedscore ?? 0);
+            $placementscore = $weighted > 0 ? $weighted : ((float)$profile->placementconfidence * 100);
+            $scores[(int)$profile->userid]['placement'] = max($scores[(int)$profile->userid]['placement'] ?? 0, $placementscore);
+            $scores[(int)$profile->userid]['level'] = $profile->overallcefr ?: '';
+        }
+    }
+
+    if (theme_flwacademy_db_table_exists('local_flwexam_results')) {
+        $examrows = $DB->get_records_sql(
+            "SELECT userid, AVG(overallscore) AS score
+               FROM {local_flwexam_results}
+              WHERE language = :language
+           GROUP BY userid",
+            ['language' => $languagecode]
+        );
+        foreach ($examrows as $row) {
+            $scores[(int)$row->userid]['exam'] = (float)$row->score;
+        }
+    }
+
+    $courseids = theme_flwacademy_get_course_ids_in_category($categoryid);
+    if ($courseids && theme_flwacademy_db_table_exists('course_modules_completion')) {
+        [$insql, $inparams] = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED, 'cid');
+        $completionrows = $DB->get_records_sql(
+            "SELECT cmc.userid, COUNT(1) AS completecount
+               FROM {course_modules_completion} cmc
+               JOIN {course_modules} cm ON cm.id = cmc.coursemoduleid
+              WHERE cm.course {$insql}
+                AND cmc.completionstate IN (1, 2, 3)
+           GROUP BY cmc.userid",
+            $inparams
+        );
+        foreach ($completionrows as $row) {
+            $scores[(int)$row->userid]['activity'] = min(100, (int)$row->completecount * 5);
+        }
+    }
+
+    if ($userid > 0 && empty($scores[$userid])) {
+        $scores[$userid] = ['placement' => 0, 'exam' => 0, 'activity' => 0, 'level' => ''];
+    }
+
+    $rankrows = [];
+    foreach ($scores as $scoreuserid => $parts) {
+        $placement = (float)($parts['placement'] ?? 0);
+        $exam = (float)($parts['exam'] ?? 0);
+        $activity = (float)($parts['activity'] ?? 0);
+        $rankrows[] = [
+            'userid' => (int)$scoreuserid,
+            'score' => round(($placement * 0.55) + ($exam * 0.35) + ($activity * 0.10), 2),
+            'level' => $parts['level'] ?? '',
+        ];
+    }
+    usort($rankrows, static function(array $left, array $right): int {
+        return $right['score'] <=> $left['score'] ?: $left['userid'] <=> $right['userid'];
+    });
+
+    $rank = 1;
+    $userscount = max(1, count($rankrows));
+    $currentscore = 0.0;
+    $currentlevel = '';
+    foreach ($rankrows as $index => $row) {
+        if ((int)$row['userid'] === $userid) {
+            $rank = $index + 1;
+            $currentscore = (float)$row['score'];
+            $currentlevel = $row['level'];
+            break;
+        }
+    }
+
+    $streak = theme_flwacademy_get_language_streak_summary($userid, $languagecode, $categoryid);
+    $result = [
+        'title' => '#' . $rank . ' in ' . $worldlabel,
+        'text' => trim(($currentlevel !== '' ? 'Placement ' . $currentlevel . ' · ' : '') .
+            $streak['days'] . ' day streak · ' . (int)round($currentscore) . ' pts'),
+        'userscount' => $userscount,
+        'score' => (int)round($currentscore),
+        'streak' => $streak,
+    ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $cache[$cachekey] = $result;
+    return $cache[$cachekey];
+}
+
+/**
+ * Returns continuous studied days for the selected language.
+ *
+ * @param int $userid
+ * @param string $languagecode
+ * @param int $categoryid
+ * @return array
+ */
+function theme_flwacademy_get_language_streak_summary(int $userid, string $languagecode, int $categoryid): array {
+    global $DB;
+
+    $store = theme_flwacademy_get_cache_store('language_streak');
+    static $cache = [];
+    $cachekey = $userid . '|' . $languagecode . '|' . $categoryid;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $cache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
+    $dates = [];
+    $since = time() - (86400 * 90);
+    $courseids = theme_flwacademy_get_course_ids_in_category($categoryid);
+    if ($userid > 0 && $courseids && theme_flwacademy_db_table_exists('logstore_standard_log')) {
+        [$insql, $inparams] = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED, 'cid');
+        $params = $inparams + [
+            'userid' => $userid,
+            'since' => $since,
+        ];
+        $logs = $DB->get_records_sql(
+            "SELECT id, timecreated
+               FROM {logstore_standard_log}
+              WHERE userid = :userid
+                AND courseid {$insql}
+                AND timecreated >= :since
+           ORDER BY timecreated DESC",
+            $params,
+            0,
+            500
+        );
+        foreach ($logs as $log) {
+            $dates[theme_flwacademy_user_day_key((int)$log->timecreated)] = true;
+        }
+    }
+
+    if ($userid > 0 && theme_flwacademy_db_table_exists('local_flwplacement_profile')) {
+        $prefix = theme_flwacademy_get_language_coursekey_prefix($languagecode);
+        $profiles = $DB->get_records_select(
+            'local_flwplacement_profile',
+            'userid = :userid AND timemodified >= :since AND ' . $DB->sql_like('coursekey', ':coursekey', false),
+            ['userid' => $userid, 'since' => $since, 'coursekey' => $prefix . '%'],
+            'timemodified DESC',
+            'id,timemodified'
+        );
+        foreach ($profiles as $profile) {
+            $dates[theme_flwacademy_user_day_key((int)$profile->timemodified)] = true;
+        }
+    }
+
+    if ($userid > 0 && theme_flwacademy_db_table_exists('local_flwexam_results')) {
+        $results = $DB->get_records_select(
+            'local_flwexam_results',
+            'userid = :userid AND language = :language AND timecreated >= :since',
+            ['userid' => $userid, 'language' => theme_flwacademy_normalise_learning_language_code($languagecode), 'since' => $since],
+            'timecreated DESC',
+            'id,timecreated'
+        );
+        foreach ($results as $result) {
+            $dates[theme_flwacademy_user_day_key((int)$result->timecreated)] = true;
+        }
+    }
+
+    $timezone = core_date::get_user_timezone_object();
+    $today = (new DateTimeImmutable('now', $timezone))->setTime(0, 0);
+    $start = !empty($dates[$today->format('Y-m-d')])
+        ? $today
+        : $today->sub(new DateInterval('P1D'));
+    $days = 0;
+    $cursor = $start;
+    while (!empty($dates[$cursor->format('Y-m-d')])) {
+        $days++;
+        $cursor = $cursor->sub(new DateInterval('P1D'));
+    }
+
+    $week = [];
+    $weekstart = $today->sub(new DateInterval('P' . max(0, ((int)$today->format('N')) - 1) . 'D'));
+    for ($i = 0; $i < 7; $i++) {
+        $day = $weekstart->add(new DateInterval('P' . $i . 'D'));
+        $week[] = [
+            'label' => substr($day->format('D'), 0, 1),
+            'active' => !empty($dates[$day->format('Y-m-d')]),
+        ];
+    }
+
+    $result = [
+        'days' => $days,
+        'displaydays' => (string)$days,
+        'summary' => $days === 1 ? '1 day streak' : $days . ' day streak',
+        'label' => $days === 1 ? 'Day streak' : 'Day streak',
+        'weeklabel' => 'This week',
+        'week' => $week,
+    ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $cache[$cachekey] = $result;
+    return $cache[$cachekey];
+}
+
+/**
+ * Gets the latest module URL for a learner in a course.
+ *
+ * @param stdClass $course
+ * @param int $userid
+ * @return string
+ */
+function theme_flwacademy_get_latest_course_module_url(stdClass $course, int $userid): string {
+    global $DB;
+
+    static $cache = [];
+    $cachekey = (int)($course->id ?? 0) . '|' . $userid;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+
+    if ($userid <= 0 || !theme_flwacademy_db_table_exists('logstore_standard_log')) {
+        $cache[$cachekey] = '';
+        return '';
+    }
+    $record = $DB->get_record_sql(
+        "SELECT contextinstanceid
+           FROM {logstore_standard_log}
+          WHERE userid = :userid
+            AND courseid = :courseid
+            AND contextlevel = :contextlevel
+            AND contextinstanceid > 0
+       ORDER BY timecreated DESC",
+        [
+            'userid' => $userid,
+            'courseid' => (int)$course->id,
+            'contextlevel' => CONTEXT_MODULE,
+        ],
+        IGNORE_MULTIPLE
+    );
+    if (!$record) {
+        return '';
+    }
+
+    try {
+        $modinfo = get_fast_modinfo($course, $userid);
+        $cm = $modinfo->get_cm((int)$record->contextinstanceid);
+        if ($cm && $cm->uservisible && $cm->url) {
+            return $cm->url->out(false);
+        }
+    } catch (Throwable $exception) {
+        $cache[$cachekey] = '';
+        return '';
+    }
+
+    $cache[$cachekey] = '';
+    return '';
+}
+
+/**
+ * Returns dashboard unit map and lesson URLs for a course.
+ *
+ * @param stdClass $course
+ * @param int $userid
+ * @return array
+ */
+function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid): array {
+    global $DB, $CFG;
+
+    $store = theme_flwacademy_get_cache_store('learning_map');
+    static $cache = [];
+    $cachekey = (int)$course->id . '|' . $userid;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $cache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
+    require_once($CFG->libdir . '/completionlib.php');
+
+    $courseurl = (new moodle_url('/course/view.php', ['id' => (int)$course->id]))->out(false);
+    $firstcmurl = '';
+    $firstincompleteurl = '';
+    $unitnodes = [];
+    $sectionstatus = [];
+    $completion = new completion_info($course);
+    $modinfo = get_fast_modinfo($course, $userid);
+
+    foreach ($modinfo->cms as $cm) {
+        if (!$cm->uservisible || !$cm->url) {
+            continue;
+        }
+        if ($firstcmurl === '') {
+            $firstcmurl = $cm->url->out(false);
+        }
+        $complete = false;
+        if ((int)$cm->completion !== COMPLETION_TRACKING_NONE) {
+            $data = $completion->get_data($cm, false, $userid);
+            $complete = in_array((int)$data->completionstate, [
+                COMPLETION_COMPLETE,
+                COMPLETION_COMPLETE_PASS,
+                COMPLETION_COMPLETE_FAIL,
+            ], true);
+        }
+        if (!$complete && $firstincompleteurl === '') {
+            $firstincompleteurl = $cm->url->out(false);
+        }
+        $sectionstatus[$cm->sectionnum]['total'] = ($sectionstatus[$cm->sectionnum]['total'] ?? 0) + 1;
+        $sectionstatus[$cm->sectionnum]['complete'] = ($sectionstatus[$cm->sectionnum]['complete'] ?? 0) + ($complete ? 1 : 0);
+    }
+
+    foreach ($modinfo->cms as $cm) {
+        if ($cm->modname !== 'scorm' || !$cm->uservisible) {
+            continue;
+        }
+        $scoes = $DB->get_records_select(
+            'scorm_scoes',
+            'scorm = :scorm AND launch <> :emptylaunch AND title <> :emptytitle',
+            [
+                'scorm' => (int)$cm->instance,
+                'emptylaunch' => '',
+                'emptytitle' => '',
+            ],
+            'sortorder ASC, id ASC',
+            'id,title'
+        );
+        if (!$scoes) {
+            continue;
+        }
+
+        $statuses = [];
+        if ($userid > 0 && theme_flwacademy_db_table_exists('scorm_scoes_value')) {
+            $tracks = $DB->get_records_sql(
+                "SELECT sv.id, sv.scoid, sv.value, sv.timemodified
+                   FROM {scorm_scoes_value} sv
+                   JOIN {scorm_attempt} sa ON sa.id = sv.attemptid
+                   JOIN {scorm_element} se ON se.id = sv.elementid
+                  WHERE sa.userid = :userid
+                    AND sa.scormid = :scormid
+                    AND se.element IN ('cmi.core.lesson_status', 'cmi.completion_status')
+               ORDER BY sv.timemodified DESC",
+                [
+                    'userid' => $userid,
+                    'scormid' => (int)$cm->instance,
+                ]
+            );
+            foreach ($tracks as $track) {
+                if (!isset($statuses[(int)$track->scoid])) {
+                    $statuses[(int)$track->scoid] = core_text::strtolower((string)$track->value);
+                }
+            }
+        }
+
+        $activefound = false;
+        foreach ($scoes as $sco) {
+            $statusvalue = $statuses[(int)$sco->id] ?? '';
+            $complete = in_array($statusvalue, ['completed', 'passed'], true);
+            $active = !$complete && !$activefound;
+            if ($active) {
+                $activefound = true;
+            }
+            $unitnodes[] = [
+                'class' => $complete ? 'complete' : ($active ? 'active' : ''),
+                'title' => format_string($sco->title),
+                'status' => $complete ? 'Complete' : ($active ? 'In progress' : 'Next'),
+                'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
+                'url' => $cm->url ? $cm->url->out(false) : $courseurl,
+            ];
+            if (count($unitnodes) >= 10) {
+                break 2;
+            }
+        }
+    }
+
+    if (!$unitnodes) {
+        $firstactive = false;
+        foreach ($modinfo->get_section_info_all() as $section) {
+            if ((int)$section->section === 0 || !$section->uservisible) {
+                continue;
+            }
+            $status = $sectionstatus[$section->section] ?? ['total' => 0, 'complete' => 0];
+            $complete = $status['total'] > 0 && $status['complete'] >= $status['total'];
+            $active = !$complete && !$firstactive;
+            if ($active) {
+                $firstactive = true;
+            }
+            $unitnodes[] = [
+                'class' => $complete ? 'complete' : ($active ? 'active' : ''),
+                'title' => get_section_name($course, $section),
+                'status' => $complete ? 'Complete' : ($active ? 'In progress' : 'Next'),
+                'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
+                'url' => (new moodle_url('/course/view.php', [
+                    'id' => (int)$course->id,
+                    'section' => (int)$section->section,
+                ]))->out(false),
+            ];
+            if (count($unitnodes) >= 10) {
+                break;
+            }
+        }
+    }
+
+    $latesturl = theme_flwacademy_get_latest_course_module_url($course, $userid);
+    $result = [
+        'continueurl' => $latesturl ?: ($firstincompleteurl ?: ($firstcmurl ?: $courseurl)),
+        'overviewurl' => $courseurl,
+        'restarturl' => $firstcmurl ?: $courseurl,
+        'unitnodes' => $unitnodes,
+    ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $cache[$cachekey] = $result;
+    return $cache[$cachekey];
+}
+
+/**
+ * Returns units/activities studied today in the selected language.
+ *
+ * @param int $userid
+ * @param int[] $courseids
+ * @param string $fallbacklabel
+ * @param string $fallbackurl
+ * @return array
+ */
+function theme_flwacademy_get_today_learning_items(int $userid, array $courseids, string $fallbacklabel, string $fallbackurl): array {
+    global $DB;
+
+    $courseids = array_values(array_unique(array_filter(array_map('intval', $courseids))));
+    sort($courseids, SORT_NUMERIC);
+    static $cache = [];
+    $cachekey = $userid . '|' . implode(',', $courseids) . '|' . $fallbacklabel . '|' . $fallbackurl;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+
+    $items = [];
+    if ($userid > 0 && $courseids && theme_flwacademy_db_table_exists('logstore_standard_log')) {
+        $timezone = core_date::get_user_timezone_object();
+        $startofday = (new DateTimeImmutable('now', $timezone))->setTime(0, 0)->getTimestamp();
+        [$insql, $inparams] = $DB->get_in_or_equal($courseids, SQL_PARAMS_NAMED, 'cid');
+        $params = $inparams + [
+            'userid' => $userid,
+            'startofday' => $startofday,
+            'contextlevel' => CONTEXT_MODULE,
+        ];
+        $logs = $DB->get_records_sql(
+            "SELECT MAX(id) AS id, courseid, contextinstanceid, MAX(timecreated) AS lasttime
+               FROM {logstore_standard_log}
+              WHERE userid = :userid
+                AND courseid {$insql}
+                AND contextlevel = :contextlevel
+                AND contextinstanceid > 0
+                AND timecreated >= :startofday
+           GROUP BY courseid, contextinstanceid
+           ORDER BY MAX(timecreated) DESC",
+            $params,
+            0,
+            6
+        );
+        foreach ($logs as $log) {
+            if (count($items) >= 3) {
+                break;
+            }
+            $course = $DB->get_record('course', ['id' => (int)$log->courseid], '*', IGNORE_MISSING);
+            if (!$course) {
+                continue;
+            }
+            try {
+                $modinfo = get_fast_modinfo($course, $userid);
+                $cm = $modinfo->get_cm((int)$log->contextinstanceid);
+                if (!$cm || !$cm->uservisible || !$cm->url) {
+                    continue;
+                }
+                $items[] = [
+                    'class' => ['blue', 'green', 'purple'][count($items)] ?? 'blue',
+                    'title' => format_string($course->fullname),
+                    'meta' => format_string($cm->name) . ' · ' . get_string('pluginname', 'mod_' . $cm->modname),
+                    'time' => userdate((int)$log->lasttime, get_string('strftimetime')),
+                    'url' => $cm->url->out(false),
+                ];
+            } catch (Throwable $exception) {
+                continue;
+            }
+        }
+    }
+
+    if (!$items) {
+        $items[] = [
+            'class' => 'blue',
+            'title' => 'Start learning today',
+            'meta' => $fallbacklabel,
+            'time' => 'Open',
+            'url' => $fallbackurl,
+        ];
+    }
+
+    $cache[$cachekey] = $items;
+    return $cache[$cachekey];
+}
+
+/**
  * Returns user activity completion progress for a course.
  *
  * @param stdClass $course
@@ -1093,6 +2334,36 @@ function theme_flwacademy_percent_width($value): string {
  */
 function theme_flwacademy_get_course_progress_summary(stdClass $course, int $userid): array {
     global $CFG;
+
+    $store = theme_flwacademy_get_cache_store('course_progress');
+    static $cache = [];
+    $courseid = (int)($course->id ?? 0);
+    $cachekey = $courseid . '|' . $userid;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $cache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+    if ($courseid <= 0) {
+        $fallback = [
+            'completed' => 0,
+            'total' => 0,
+            'percent' => 0,
+            'progress' => '0%',
+            'meta' => 'Open course',
+            'label' => 'Ready to start',
+        ];
+        if ($store) {
+            $store->set($cachekey, $fallback);
+        }
+        $cache[$cachekey] = $fallback;
+        return $cache[$cachekey];
+    }
 
     require_once($CFG->libdir . '/completionlib.php');
 
@@ -1123,7 +2394,7 @@ function theme_flwacademy_get_course_progress_summary(stdClass $course, int $use
     }
 
     $percent = $total > 0 ? (int)round(($completed / $total) * 100) : 0;
-    return [
+    $result = [
         'completed' => $completed,
         'total' => $total,
         'percent' => $percent,
@@ -1131,6 +2402,11 @@ function theme_flwacademy_get_course_progress_summary(stdClass $course, int $use
         'meta' => $total > 0 ? $completed . ' / ' . $total . ' activities' : 'Open course',
         'label' => $total > 0 ? $percent . '% complete' : 'Ready to start',
     ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $cache[$cachekey] = $result;
+    return $cache[$cachekey];
 }
 
 /**
@@ -1140,18 +2416,109 @@ function theme_flwacademy_get_course_progress_summary(stdClass $course, int $use
  * @return array
  */
 function theme_flwacademy_get_user_courses(int $limit = 12): array {
-    global $CFG;
+    global $CFG, $USER;
 
-    if (!isloggedin() || isguestuser()) {
+    static $cache = [];
+    $userid = (int)($USER->id ?? 0);
+    $cachekey = $userid . '|' . $limit;
+    if (array_key_exists($cachekey, $cache)) {
+        return $cache[$cachekey];
+    }
+
+    if (!isloggedin() || isguestuser() || $userid <= 0) {
+        $cache[$cachekey] = [];
         return [];
     }
 
+    $store = theme_flwacademy_get_cache_store('user_courses');
+    if ($store) {
+        $cached = $store->get($cachekey);
+        if ($cached !== false) {
+            $cache[$cachekey] = $cached;
+            return $cached;
+        }
+    }
+
     require_once($CFG->libdir . '/enrollib.php');
-    return array_values(enrol_get_my_courses(
+    $courses = array_values(enrol_get_my_courses(
         'format, summary, summaryformat',
         'ul.timeaccess DESC, c.sortorder ASC',
         $limit
     ));
+    if ($store) {
+        $store->set($cachekey, $courses);
+    }
+    $cache[$cachekey] = $courses;
+    return $cache[$cachekey];
+}
+
+/**
+ * Returns count of fully completed courses for a user by comparing completion totals to completed count.
+ *
+ * @param stdClass[] $courses
+ * @param int $userid
+ * @return int
+ */
+function theme_flwacademy_count_user_completed_courses(array $courses, int $userid): int {
+    global $DB;
+
+    if ($userid <= 0 || empty($courses)) {
+        return 0;
+    }
+    $courseids = [];
+    foreach ($courses as $course) {
+        $courseid = (int)($course->id ?? 0);
+        if ($courseid > 0) {
+            $courseids[$courseid] = $courseid;
+        }
+    }
+    if (empty($courseids)) {
+        return 0;
+    }
+
+    if (!theme_flwacademy_db_table_exists('course_modules_completion')) {
+        return 0;
+    }
+
+    [$insql, $inparams] = $DB->get_in_or_equal(array_values($courseids), SQL_PARAMS_NAMED, 'cid');
+
+    $totals = $DB->get_records_sql(
+        "SELECT cm.course, COUNT(cm.id) AS total
+           FROM {course_modules} cm
+          WHERE cm.course {$insql}
+            AND cm.completion > 0
+            AND cm.visible = 1
+       GROUP BY cm.course",
+        $inparams
+    );
+    if (empty($totals)) {
+        return 0;
+    }
+
+    $completed = $DB->get_records_sql(
+        "SELECT cm.course, COUNT(1) AS complete
+           FROM {course_modules_completion} cmc
+           JOIN {course_modules} cm ON cm.id = cmc.coursemoduleid
+          WHERE cm.course {$insql}
+            AND cmc.userid = :userid
+            AND cmc.completionstate IN (1, 2, 3)
+       GROUP BY cm.course",
+        $inparams + ['userid' => $userid]
+    );
+
+    $completedcourses = 0;
+    foreach ($totals as $courseid => $totalsrow) {
+        $total = (int)$totalsrow->total;
+        if ($total <= 0) {
+            continue;
+        }
+        $complete = (int)($completed[(int)$courseid]->complete ?? 0);
+        if ($complete >= $total) {
+            $completedcourses++;
+        }
+    }
+
+    return $completedcourses;
 }
 
 /**
@@ -1229,9 +2596,9 @@ function theme_flwacademy_find_visible_course_by_name(?stdClass $category, strin
  * @return array
  */
 function theme_flwacademy_get_selected_learning_language(array $learninglanguages): array {
-    $selectedcode = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
+    $selectedcode = theme_flwacademy_get_active_learning_language_code();
     foreach ($learninglanguages as $language) {
-        if (($language['code'] ?? '') === $selectedcode) {
+        if (theme_flwacademy_normalise_learning_language_code($language['code'] ?? '') === $selectedcode) {
             return $language;
         }
     }
@@ -1250,7 +2617,7 @@ function theme_flwacademy_get_selected_learning_language(array $learninglanguage
  * @param array $learninglanguages
  * @return array
  */
-function theme_flwacademy_export_home_course_cards(core_renderer $output, array $learninglanguages): array {
+function theme_flwacademy_export_home_course_cards($output, array $learninglanguages): array {
     global $DB, $USER;
 
     $ranges = [
@@ -1264,14 +2631,7 @@ function theme_flwacademy_export_home_course_cards(core_renderer $output, array 
     $cards = [];
     foreach ($learninglanguages as $language) {
         $code = $language['code'] ?? 'en';
-        $categoryid = 0;
-        if (!empty($language['categoryurl'])) {
-            $query = parse_url($language['categoryurl'], PHP_URL_QUERY);
-            if ($query) {
-                parse_str($query, $params);
-                $categoryid = (int)($params['categoryid'] ?? 0);
-            }
-        }
+        $categoryid = theme_flwacademy_get_categoryid_from_url($language['categoryurl'] ?? '');
         $category = $categoryid > 0
             ? $DB->get_record('course_categories', ['id' => $categoryid], '*', IGNORE_MISSING)
             : null;
@@ -1279,7 +2639,13 @@ function theme_flwacademy_export_home_course_cards(core_renderer $output, array 
             ? theme_flwacademy_get_first_visible_course_in_category($category)
             : 0;
         $course = $courseid > 0 ? $DB->get_record('course', ['id' => $courseid], '*', IGNORE_MISSING) : null;
-        $coursecount = $categoryid > 0 ? theme_flwacademy_count_visible_courses_in_category($categoryid) : 0;
+        $categoryprogress = theme_flwacademy_get_category_progress_summary(
+            $categoryid,
+            (int)($USER->id ?? 0),
+            0,
+            true
+        );
+        $coursecount = (int)$categoryprogress['coursecount'];
         $carddefs = $code === 'en' ? [
             [
                 'name' => 'Adventure English World',
@@ -1311,20 +2677,100 @@ function theme_flwacademy_export_home_course_cards(core_renderer $output, array 
             $cards[] = [
                 'name' => $carddef['name'],
                 'range' => $carddef['range'],
-                'status' => $progress && $progress['total'] > 0
-                    ? $progress['label']
-                    : ($coursecount > 0 ? $coursecount . ' courses' : 'Ready to learn'),
-                'progress' => $progress ? $progress['progress'] : '0%',
+                'status' => $coursecount > 0 ? $coursecount . ' courses' : 'Ready to learn',
+                'progresslabel' => $progress && $progress['total'] > 0 ? $progress['label'] : $categoryprogress['label'],
+                'progress' => $progress && $progress['total'] > 0 ? $progress['progress'] : $categoryprogress['progress'],
                 'cresturl' => theme_flwacademy_redesign_asset_url($output, $carddef['asset']),
                 'alt' => $carddef['name'] . ' crest',
-                'url' => $cardcourse
-                    ? (new moodle_url('/course/view.php', ['id' => (int)$cardcourse->id]))->out(false)
-                    : ($language['selfstudycategoryurl'] ?? $language['categoryurl'] ?? (new moodle_url('/course/index.php'))->out(false)),
+                'url' => theme_flwacademy_get_dashboard_url_for_language($code),
+                'languagecode' => $code,
             ];
         }
     }
 
     return $cards;
+}
+
+/**
+ * Returns home-page K-12 cards for the first three language worlds.
+ *
+ * @param core_renderer $output
+ * @param array $learninglanguages
+ * @return array
+ */
+function theme_flwacademy_export_home_school_groups($output, array $learninglanguages): array {
+    global $DB, $USER;
+
+    $targetcodes = ['en', 'ru', 'zh'];
+    $slotnames = [
+        'Primary Year 1',
+        'Primary Year 2',
+        'Primary Year 3',
+        'Secondary Year 1',
+        'Secondary Year 2',
+        'Secondary Year 3',
+        'University Year 1',
+        'University Year 2',
+    ];
+    $groups = [];
+    foreach ($learninglanguages as $language) {
+        $code = theme_flwacademy_normalise_learning_language_code($language['code'] ?? '');
+        if (!in_array($code, $targetcodes, true)) {
+            continue;
+        }
+
+        $schoolcategoryid = theme_flwacademy_get_categoryid_from_url($language['schoolcategoryurl'] ?? '');
+        $schoolcategory = $schoolcategoryid > 0
+            ? $DB->get_record('course_categories', ['id' => $schoolcategoryid], 'id,name,path', IGNORE_MISSING)
+            : null;
+        $childrenbyname = [];
+        if ($schoolcategory) {
+            $children = $DB->get_records('course_categories', [
+                'parent' => $schoolcategory->id,
+                'visible' => 1,
+            ], 'sortorder ASC', 'id,name,coursecount,path');
+            foreach ($children as $child) {
+                $childrenbyname[core_text::strtolower(trim($child->name))] = $child;
+            }
+        }
+
+        $cards = [];
+        foreach ($slotnames as $index => $slotname) {
+            $child = $childrenbyname[core_text::strtolower($slotname)] ?? null;
+            $targetcategoryid = $child ? (int)$child->id : 0;
+            $progress = $targetcategoryid > 0
+                ? theme_flwacademy_get_category_progress_summary($targetcategoryid, (int)($USER->id ?? 0), 0, true)
+                : [
+                    'coursecount' => 0,
+                    'coursecountlabel' => '0 courses',
+                    'progress' => '0%',
+                    'label' => 'Ready to start',
+                    'meta' => 'No courses yet',
+                ];
+            $cards[] = [
+                'name' => $slotname,
+                'shortname' => preg_replace('/^(.+?)\s+Year\s+/', '$1 ', $slotname),
+                'number' => $index + 1,
+                'coursecountlabel' => $progress['coursecountlabel'],
+                'progress' => $progress['progress'],
+                'progresslabel' => $progress['label'],
+                'url' => $targetcategoryid > 0
+                    ? (new moodle_url('/course/index.php', ['categoryid' => $targetcategoryid]))->out(false)
+                    : ($language['schoolcategoryurl'] ?? (new moodle_url('/course/index.php'))->out(false)),
+            ];
+        }
+
+        $groups[] = [
+            'languagecode' => $code,
+            'name' => ($language['label'] ?? 'English') . ' K-12',
+            'worldname' => theme_flwacademy_get_world_label($language),
+            'cresturl' => theme_flwacademy_redesign_asset_url($output, theme_flwacademy_get_world_crest_asset($code)),
+            'url' => $language['schoolcategoryurl'] ?? (new moodle_url('/course/index.php'))->out(false),
+            'cards' => $cards,
+        ];
+    }
+
+    return $groups;
 }
 
 /**
@@ -1334,20 +2780,26 @@ function theme_flwacademy_export_home_course_cards(core_renderer $output, array 
  * @param array $learninglanguages
  * @return array
  */
-function theme_flwacademy_export_dashboard_data(core_renderer $output, array $learninglanguages): array {
+function theme_flwacademy_export_dashboard_data($output, array $learninglanguages): array {
     global $CFG, $DB, $USER;
 
     require_once($CFG->libdir . '/completionlib.php');
 
+    $dashboardcache = theme_flwacademy_get_cache_store('dashboard');
     $selectedlanguage = theme_flwacademy_get_selected_learning_language($learninglanguages);
     $selectedcode = $selectedlanguage['code'] ?? 'en';
+    $selectedcode = theme_flwacademy_normalise_learning_language_code($selectedcode) ?: 'en';
     $selectedlabel = $selectedlanguage['label'] ?? 'English';
+    $selectedlanguagecategoryid = theme_flwacademy_get_categoryid_from_url($selectedlanguage['categoryurl'] ?? '');
     $selectedselfstudyid = 0;
     if (!empty($selectedlanguage['selfstudycategoryurl'])) {
-        $query = parse_url($selectedlanguage['selfstudycategoryurl'], PHP_URL_QUERY);
-        if ($query) {
-            parse_str($query, $params);
-            $selectedselfstudyid = (int)($params['categoryid'] ?? 0);
+        $selectedselfstudyid = theme_flwacademy_get_categoryid_from_url($selectedlanguage['selfstudycategoryurl']);
+    }
+    $dashboardcachekey = (int)($USER->id ?? 0) . '|' . $selectedcode . '|' . $selectedlanguagecategoryid . '|' . $selectedselfstudyid;
+    if ($dashboardcache) {
+        $cached = $dashboardcache->get($dashboardcachekey);
+        if ($cached !== false) {
+            return $cached;
         }
     }
 
@@ -1405,76 +2857,27 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
         $unitlabel = 'Course path';
     }
 
-    $todayitems = [];
-    $unitnodes = [];
-    if ($course) {
-        $modinfo = get_fast_modinfo($course, (int)($USER->id ?? 0));
-        $completion = new completion_info($course);
-        $sectionstatus = [];
-        foreach ($modinfo->cms as $cm) {
-            if (!$cm->uservisible || !$cm->url) {
-                continue;
-            }
-            $complete = false;
-            if ((int)$cm->completion !== COMPLETION_TRACKING_NONE) {
-                $data = $completion->get_data($cm, false, (int)($USER->id ?? 0));
-                $complete = in_array((int)$data->completionstate, [
-                    COMPLETION_COMPLETE,
-                    COMPLETION_COMPLETE_PASS,
-                    COMPLETION_COMPLETE_FAIL,
-                ], true);
-            }
-            $sectionstatus[$cm->sectionnum]['total'] = ($sectionstatus[$cm->sectionnum]['total'] ?? 0) + 1;
-            $sectionstatus[$cm->sectionnum]['complete'] = ($sectionstatus[$cm->sectionnum]['complete'] ?? 0) + ($complete ? 1 : 0);
-            if (!$complete && count($todayitems) < 3) {
-                $todayitems[] = [
-                    'class' => ['blue', 'green', 'purple'][count($todayitems)] ?? 'blue',
-                    'title' => format_string($cm->name),
-                    'meta' => $unitlabel . ' · ' . get_string('pluginname', 'mod_' . $cm->modname),
-                    'time' => 'Open',
-                    'url' => $cm->url->out(false),
-                ];
-            }
-        }
-
-        $firstactive = false;
-        foreach ($modinfo->get_section_info_all() as $section) {
-            if ((int)$section->section === 0 || !$section->uservisible) {
-                continue;
-            }
-            $status = $sectionstatus[$section->section] ?? ['total' => 0, 'complete' => 0];
-            $complete = $status['total'] > 0 && $status['complete'] >= $status['total'];
-            $active = !$complete && !$firstactive;
-            if ($active) {
-                $firstactive = true;
-            }
-            $unitnodes[] = [
-                'class' => $complete ? 'complete' : ($active ? 'active' : ''),
-                'title' => get_section_name($course, $section),
-                'status' => $complete ? 'Complete' : ($active ? 'In progress' : 'Next'),
-                'symbol' => $complete ? '●' : ($active ? '●' : '○'),
-            ];
-            if (count($unitnodes) >= 10) {
-                break;
-            }
-        }
-    }
-
-    if (!$todayitems) {
-        $todayitems[] = [
-            'class' => 'blue',
-            'title' => 'Start learning',
-            'meta' => $coursename,
-            'time' => 'Open',
-            'url' => $courseurl,
-        ];
-    }
+    $learningmap = $course ? theme_flwacademy_get_course_learning_map($course, (int)($USER->id ?? 0)) : [
+        'continueurl' => $courseurl,
+        'overviewurl' => $courseurl,
+        'restarturl' => $courseurl,
+        'unitnodes' => [],
+    ];
+    $languagecourseids = theme_flwacademy_get_course_ids_in_category($selectedlanguagecategoryid ?: $selectedselfstudyid);
+    $todayitems = theme_flwacademy_get_today_learning_items(
+        (int)($USER->id ?? 0),
+        $languagecourseids,
+        $coursename,
+        $learningmap['continueurl'] ?: $courseurl
+    );
+    $unitnodes = $learningmap['unitnodes'];
     if (!$unitnodes) {
         $unitnodes[] = [
             'class' => 'active',
             'title' => $unitlabel,
             'status' => 'Ready',
             'symbol' => '●',
+            'url' => $courseurl,
         ];
     }
 
@@ -1484,12 +2887,13 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
         'Speaking' => ['speak', 'green'],
         'Reading' => ['read', 'purple'],
         'Writing' => ['write', 'orange'],
-        'Grammar' => ['dictate', 'cyan'],
-        'Vocabulary' => ['dictate', 'cyan'],
     ];
     foreach (($placement['skillitems'] ?? []) as $skillitem) {
         $score = (int)preg_replace('/\D+/', '', (string)($skillitem['score'] ?? '0'));
         $label = $skillitem['label'] ?? 'Skill';
+        if (!isset($skillclassmap[$label])) {
+            continue;
+        }
         $classes = $skillclassmap[$label] ?? ['dictate', 'cyan'];
         $skillrows[] = [
             'class' => $classes[0],
@@ -1510,7 +2914,6 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
             ['Speaking', 0, 'speak'],
             ['Reading', 0, 'read'],
             ['Writing', 0, 'write'],
-            ['Dictation', 0, 'dictate'],
         ];
         foreach ($fallbackskills as $skill) {
             $skillrows[] = [
@@ -1528,22 +2931,24 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
         }
     }
 
-    $dictcount = $DB->get_manager()->table_exists('local_mldict_entry')
-        ? (int)$DB->count_records('local_mldict_entry', ['sourcelang' => $selectedcode])
-        : 0;
-    if ($dictcount === 0 && $selectedcode === 'zh' && $DB->get_manager()->table_exists('local_mldict_entry')) {
-        $dictcount = (int)$DB->count_records('local_mldict_entry', ['sourcelang' => 'zh_cn']);
+    $dictcount = 0;
+    if (theme_flwacademy_db_table_exists('local_mldict_entry') && class_exists('local_mldict\\local\\dictionary')) {
+        $dictcount = (int)\local_mldict\local\dictionary::count_distinct_headwords($selectedcode);
     }
 
-    $completedcourses = 0;
-    foreach ($courses as $enrolledcourse) {
-        $summary = theme_flwacademy_get_course_progress_summary($enrolledcourse, (int)($USER->id ?? 0));
-        if ($summary['total'] > 0 && $summary['completed'] >= $summary['total']) {
-            $completedcourses++;
-        }
-    }
+    $completedcourses = theme_flwacademy_count_user_completed_courses(
+        $courses,
+        (int)($USER->id ?? 0)
+    );
 
-    return [
+    $journeycontext = theme_flwacademy_get_cefr_journey_context($placement['overallcefr'] ?? '');
+    $rankcontext = theme_flwacademy_get_language_rank_and_streak(
+        (int)($USER->id ?? 0),
+        $selectedcode,
+        $selectedlanguagecategoryid ?: $selectedselfstudyid
+    );
+
+    $result = [
         'currentlanguagecode' => $selectedcode,
         'currentlanguagelabel' => $selectedlabel,
         'currentworldname' => $worldlabel,
@@ -1555,6 +2960,9 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
                 ? format_string(strip_tags(format_text($course->summary, $course->summaryformat ?? FORMAT_HTML)))
                 : ($placement['studyrecommendation'] ?? 'Continue from your next useful learning step.'),
             'url' => $courseurl,
+            'continueurl' => $learningmap['continueurl'] ?: $courseurl,
+            'overviewurl' => $learningmap['overviewurl'] ?: $courseurl,
+            'restarturl' => $learningmap['restarturl'] ?: $courseurl,
             'imageurl' => $worldcresturl,
             'progress' => $progress['progress'],
             'progresslabel' => $progress['label'],
@@ -1566,7 +2974,9 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
             'level' => $placement['overallcefr'] ?? '-',
             'small' => $placement ? 'Placement' : 'Not placed',
             'progresslabel' => $placement ? (($placement['confidencepercent'] ?? '0%') . ' confidence') : 'Take placement test',
-            'reporturl' => $placement['reporturl'] ?? ($selectedlanguage['placementtesturl'] ?? (new moodle_url('/local/flwplacement/index.php'))->out(false)),
+            'reporturl' => $placement['reporturl'] ?? ($selectedlanguage['placementtesturl'] ?? theme_flwacademy_get_placement_quiz_start_url($selectedcode)),
+            'steps' => $journeycontext['steps'],
+            'fillwidth' => $journeycontext['fillwidth'],
         ],
         'skillrows' => $skillrows,
         'vocab' => [
@@ -1591,10 +3001,17 @@ function theme_flwacademy_export_dashboard_data(core_renderer $output, array $le
             'url' => (new moodle_url('/my/'))->out(false),
         ],
         'rank' => [
-            'title' => count($courses) > 0 ? 'You are enrolled in ' . count($courses) . ' courses' : 'Your learning path is ready',
-            'text' => $progress['total'] > 0 ? $progress['meta'] : 'Open a course or take placement to begin.',
+            'title' => $rankcontext['title'],
+            'text' => $rankcontext['text'],
+            'score' => $rankcontext['score'],
+            'userscount' => $rankcontext['userscount'],
         ],
+        'streak' => $rankcontext['streak'],
     ];
+    if ($dashboardcache) {
+        $dashboardcache->set($dashboardcachekey, $result);
+    }
+    return $result;
 }
 
 /**
@@ -1652,7 +3069,7 @@ function theme_flwacademy_get_selfstudy_unit_url(int $categoryid, int $unit): st
 function theme_flwacademy_export_selfstudy_placement_profile(int $userid, string $languagecode, int $selfstudycategoryid = 0): ?array {
     global $DB;
 
-    if ($userid <= 0 || isguestuser() || !$DB->get_manager()->table_exists('local_flwplacement_profile')) {
+    if ($userid <= 0 || isguestuser() || !theme_flwacademy_db_table_exists('local_flwplacement_profile')) {
         return null;
     }
 
@@ -1869,9 +3286,7 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
         'description' => $description,
         'hasdescription' => trim(strip_tags($description)) !== '',
         'languagecategoryurl' => (new moodle_url('/course/index.php', ['categoryid' => $languagecategory->id]))->out(false),
-        'placementtesturl' => (new moodle_url('/local/flwplacement/index.php', [
-            'language' => $languageCode,
-        ]))->out(false),
+        'placementtesturl' => theme_flwacademy_get_placement_quiz_start_url($languageCode),
         'heroimageurl' => $output->image_url('dashboard/self-study', 'theme_flwacademy')->out(false),
         'languagetiles' => $languageTiles,
         'hasplacementprofile' => $placementprofile !== null,
@@ -2065,7 +3480,17 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
 function theme_flwacademy_resolve_activity_category(stdClass $category): ?array {
     global $DB;
 
+    $categoryid = (int)($category->id ?? 0);
+    static $cache = [];
+    if ($categoryid <= 0) {
+        return null;
+    }
+    if (array_key_exists($categoryid, $cache)) {
+        return $cache[$categoryid];
+    }
+
     if (empty($category->parent)) {
+        $cache[$categoryid] = null;
         return null;
     }
 
@@ -2078,18 +3503,20 @@ function theme_flwacademy_resolve_activity_category(stdClass $category): ?array 
     if (($categoryname === 'practice' || $categoryname === 'exam') && !empty($parent->id)) {
         $language = theme_flwacademy_match_learning_language_category($parent);
         if ($language) {
-            return [
+            $cache[$categoryid] = [
                 'area' => $categoryname,
                 'languagecategory' => $parent,
                 'areacategory' => $category,
                 'itemcategory' => null,
                 'language' => $language,
             ];
+            return $cache[$categoryid];
         }
     }
 
     $parentname = core_text::strtolower(trim($parent->name));
     if ($parentname !== 'practice' && $parentname !== 'exam') {
+        $cache[$categoryid] = null;
         return null;
     }
 
@@ -2099,16 +3526,18 @@ function theme_flwacademy_resolve_activity_category(stdClass $category): ?array 
     }
     $language = theme_flwacademy_match_learning_language_category($languagecategory);
     if (!$language) {
+        $cache[$categoryid] = null;
         return null;
     }
 
-    return [
+    $cache[$categoryid] = [
         'area' => $parentname,
         'languagecategory' => $languagecategory,
         'areacategory' => $parent,
         'itemcategory' => $category,
         'language' => $language,
     ];
+    return $cache[$categoryid];
 }
 
 /**

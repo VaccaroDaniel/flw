@@ -4,6 +4,24 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
+ * Load the FLW Exam stylesheet with a file timestamp so browser cache cannot
+ * hold on to stale layout rules after theme changes.
+ */
+function local_flwexam_require_styles(): void {
+    global $CFG, $PAGE;
+
+    static $required = false;
+    if ($required) {
+        return;
+    }
+
+    $stylesheet = $CFG->dirroot . '/local/flwexam/styles.css';
+    $version = is_readable($stylesheet) ? filemtime($stylesheet) : time();
+    $PAGE->requires->css(new moodle_url('/local/flwexam/styles.css', ['v' => $version]));
+    $required = true;
+}
+
+/**
  * Require the plugin database tables.
  */
 function local_flwexam_require_installed(): void {

@@ -114,7 +114,7 @@ echo html_writer::div(
     html_writer::div(
         html_writer::span('FLW word lab', 'local-mldict-hero-kicker') .
         html_writer::tag('h1', get_string('pluginname', 'local_mldict')) .
-        html_writer::tag('p', 'Search learner-friendly definitions, translations, pronunciation notes, and examples across your FLW learning languages.'),
+        html_writer::tag('p', 'Search learner-friendly definitions, translations, pronunciation notes, and examples across your FLW learning languages.', ['class' => 'local-mldict-dashboard-subtitle']),
         'local-mldict-hero-copy'
     ) .
     html_writer::tag('ul',
@@ -168,16 +168,21 @@ echo html_writer::div(
     ['hidden' => 'hidden']
 );
 
+$coveragecounts = dictionary::get_language_counts();
 $coverageitems = '';
 foreach (dictionary::lang_options() as $code => $label) {
+    $count = $coveragecounts[$code] ?? 0;
+    if (($count === 0) && $code === 'zh' && array_key_exists('zh_cn', $coveragecounts)) {
+        $count = $coveragecounts['zh_cn'];
+    }
     $coverageitems .= html_writer::tag('li',
         html_writer::span(s($label), 'local-mldict-starter-label') .
-        html_writer::span(number_format(dictionary::count_distinct_headwords($code)), 'local-mldict-starter-count')
+        html_writer::span(number_format((int)$count), 'local-mldict-starter-count')
     );
 }
 
 $worditems = '';
-foreach (dictionary::starter_entries($lang, 12) as $entry) {
+foreach (dictionary::get_startup_starter_words($lang, 12) as $entry) {
     $worditems .= html_writer::tag('li',
         html_writer::link(
             new moodle_url('/local/mldict/view.php', ['id' => $entry->id]),

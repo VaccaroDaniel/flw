@@ -12,10 +12,13 @@ $context = context_system::instance();
 require_capability('local/flwexam:manageexams', $context);
 
 $selectedlanguage = optional_param('language', '', PARAM_ALPHANUMEXT);
-$selectedtrack = optional_param('track', '', PARAM_ALPHANUMEXT);
 $selectedlevel = optional_param('cefr', 'A1', PARAM_ALPHANUMEXT);
 $editid = optional_param('edit', 0, PARAM_INT);
 $search = trim(optional_param('search', '', PARAM_TEXT));
+$filterlanguage = optional_param('filterlanguage', '', PARAM_ALPHANUMEXT);
+$filtercefr = optional_param('filtercefr', '', PARAM_ALPHANUMEXT);
+$filtersource = optional_param('filtersource', '', PARAM_ALPHA);
+$filtervisibility = optional_param('filtervisibility', '', PARAM_ALPHA);
 $page = optional_param('page', 0, PARAM_INT);
 $perpage = optional_param('perpage', 12, PARAM_INT);
 $page = max(0, $page);
@@ -27,6 +30,7 @@ $PAGE->set_context($context);
 $PAGE->set_pagelayout('report');
 $PAGE->set_title(get_string('manageexams', 'local_flwexam'));
 $PAGE->set_heading(get_string('manageexams', 'local_flwexam'));
+local_flwexam_require_styles();
 
 $output = $PAGE->get_renderer('core');
 echo $output->header();
@@ -46,29 +50,29 @@ if ($selectedlanguage === '' && $filteroptions['languages']) {
 if ($selectedlanguage !== '' && !isset($filteroptions['languages'][$selectedlanguage])) {
     $selectedlanguage = array_key_first($filteroptions['languages']) ?: '';
 }
-$trackoptions = $selectedlanguage !== '' ? exam_service::get_track_options_for_language($selectedlanguage) : [];
-if ($selectedtrack === '' && $trackoptions) {
-    $selectedtrack = array_key_first($trackoptions);
-}
-if ($selectedtrack !== '' && !isset($trackoptions[$selectedtrack])) {
-    $selectedtrack = array_key_first($trackoptions) ?: '';
-}
 if (!isset($filteroptions['levels'][$selectedlevel])) {
     $selectedlevel = 'A1';
 }
+$filterlanguage = isset($filteroptions['languages'][$filterlanguage]) ? $filterlanguage : '';
+$filtercefr = isset($filteroptions['levels'][$filtercefr]) ? $filtercefr : '';
+$filtersource = in_array($filtersource, ['moodlequiz', 'internal'], true) ? $filtersource : '';
+$filtervisibility = in_array($filtervisibility, ['visible', 'hidden'], true) ? $filtervisibility : '';
 
-$alltrackoptions = [];
-foreach (array_keys($filteroptions['languages']) as $languagecode) {
-    $alltrackoptions[$languagecode] = exam_service::get_track_options_for_language($languagecode);
-}
+$quizoptions = [0 => get_string('internalquestions', 'local_flwexam')] + exam_service::get_quiz_options();
+$listfilters = [
+    'search' => $search,
+    'filterlanguage' => $filterlanguage,
+    'filtercefr' => $filtercefr,
+    'filtersource' => $filtersource,
+    'filtervisibility' => $filtervisibility,
+    'perpage' => $perpage,
+];
 
 $editingexam = null;
 if ($editid > 0) {
     $editingexam = $DB->get_record('local_flwexam_exams', ['id' => $editid], '*', MUST_EXIST);
     $selectedlanguage = $editingexam->language;
-    $selectedtrack = $editingexam->learningcoursecategory;
     $selectedlevel = $editingexam->cefrlevel;
-    $trackoptions = exam_service::get_track_options_for_language($selectedlanguage);
 }
 
 if (data_submitted() && confirm_sesskey()) {
@@ -76,22 +80,35 @@ if (data_submitted() && confirm_sesskey()) {
     $code = core_text::strtoupper(required_param('code', PARAM_ALPHANUMEXT));
     $name = required_param('name', PARAM_TEXT);
     $language = required_param('language', PARAM_ALPHANUMEXT);
-    $track = required_param('track', PARAM_ALPHANUMEXT);
     $cefr = required_param('cefr', PARAM_ALPHANUMEXT);
     $threshold = optional_param('requiredthreshold', 70, PARAM_FLOAT);
     $skillfloor = optional_param('requiredskillfloor', 60, PARAM_FLOAT);
+    $quizid = optional_param('quizid', 0, PARAM_INT);
     $moderationrequired = optional_param('moderationrequired', 0, PARAM_BOOL);
     $visible = optional_param('visible', 0, PARAM_BOOL);
 
     $languageoptions = exam_service::get_learning_language_options();
-    $validtracks = exam_service::get_track_options_for_language($language);
     $leveloptions = exam_service::get_cefr_level_options();
-    if (!isset($languageoptions[$language]) || !isset($validtracks[$track]) || !isset($leveloptions[$cefr])) {
+    if (!isset($languageoptions[$language]) || !isset($leveloptions[$cefr])) {
         throw new moodle_exception('invalidexamprofile', 'local_flwexam');
     }
     $duplicate = $DB->get_record('local_flwexam_exams', ['code' => $code], 'id', IGNORE_MISSING);
     if ($duplicate && (int)$duplicate->id !== $submittedid) {
         throw new moodle_exception('duplicateexamcode', 'local_flwexam', '', s($code));
+    }
+    if ($quizid > 0 && !exam_service::quiz_exists($quizid)) {
+        throw new moodle_exception('invalidquizsource', 'local_flwexam');
+    }
+    $existingexamforupdate = null;
+    $internalcategory = 'exam';
+    if ($submittedid > 0) {
+        $existingexamforupdate = $DB->get_record(
+            'local_flwexam_exams',
+            ['id' => $submittedid],
+            'id,timecreated,learningcoursecategory',
+            MUST_EXIST
+        );
+        $internalcategory = $existingexamforupdate->learningcoursecategory ?: $internalcategory;
     }
 
     $now = time();
@@ -99,7 +116,7 @@ if (data_submitted() && confirm_sesskey()) {
         'code' => $code,
         'name' => $name,
         'language' => $language,
-        'learningcoursecategory' => $track,
+        'learningcoursecategory' => $internalcategory,
         'cefrlevel' => $cefr,
         'requiredthreshold' => max(0, min(100, $threshold)),
         'requiredskillfloor' => max(0, min(100, $skillfloor)),
@@ -109,14 +126,14 @@ if (data_submitted() && confirm_sesskey()) {
             'description' => '',
             'skills' => ['listening', 'speaking', 'reading', 'writing'],
         ]),
+        'quizid' => $quizid,
         'visible' => $visible ? 1 : 0,
         'timemodified' => $now,
     ];
 
     if ($submittedid > 0) {
-        $existing = $DB->get_record('local_flwexam_exams', ['id' => $submittedid], 'id,timecreated', MUST_EXIST);
-        $record->id = (int)$existing->id;
-        $record->timecreated = (int)$existing->timecreated;
+        $record->id = (int)$existingexamforupdate->id;
+        $record->timecreated = (int)$existingexamforupdate->timecreated;
         $DB->update_record('local_flwexam_exams', $record);
         redirect($url, get_string('examupdated', 'local_flwexam'), null, \core\output\notification::NOTIFY_SUCCESS);
     }
@@ -133,8 +150,13 @@ echo local_flwexam_render_hero(
     get_string('manageexamsintro', 'local_flwexam'),
     [
         html_writer::link(
-            new moodle_url('/local/flwexam/take.php'),
-            get_string('takeexam', 'local_flwexam'),
+            new moodle_url('/local/flwexam/index.php', ['view' => 'available']),
+            get_string('examcenter', 'local_flwexam'),
+            ['class' => 'btn btn-secondary flwexam-main-action']
+        ),
+        html_writer::link(
+            new moodle_url('/local/flwexam/sessions.php'),
+            get_string('manageexamsessions', 'local_flwexam'),
             ['class' => 'btn btn-secondary flwexam-main-action']
         ),
     ],
@@ -147,13 +169,14 @@ echo local_flwexam_render_hero(
 echo html_writer::start_tag('form', [
     'method' => 'post',
     'action' => $url->out(false),
-    'class' => 'flwexam-filter-form',
+    'class' => 'flwexam-filter-form flwexam-manage-form',
 ]);
 echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
 if ($editingexam) {
     echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'id', 'value' => (int)$editingexam->id]);
 }
 echo html_writer::tag('h3', $editingexam ? get_string('editexam', 'local_flwexam') : get_string('addexam', 'local_flwexam'));
+echo html_writer::start_div('flwexam-manage-body');
 echo html_writer::start_div('flwexam-filter-grid');
 
 $fields = [
@@ -186,17 +209,6 @@ echo html_writer::select(
 echo html_writer::end_div();
 
 echo html_writer::start_div('form-group');
-echo html_writer::label(get_string('choosetrack', 'local_flwexam'), 'flwexam-track');
-echo html_writer::select(
-    $trackoptions,
-    'track',
-    $selectedtrack,
-    false,
-    ['id' => 'flwexam-track', 'class' => 'form-control', 'required' => 'required']
-);
-echo html_writer::end_div();
-
-echo html_writer::start_div('form-group');
 echo html_writer::label(get_string('choosecefrlevel', 'local_flwexam'), 'flwexam-cefr');
 echo html_writer::select(
     $filteroptions['levels'],
@@ -204,6 +216,33 @@ echo html_writer::select(
     $selectedlevel,
     false,
     ['id' => 'flwexam-cefr', 'class' => 'form-control', 'required' => 'required']
+);
+echo html_writer::end_div();
+
+echo html_writer::start_div('form-group flwexam-quiz-source-group');
+echo html_writer::start_div('flwexam-label-row');
+echo html_writer::label(get_string('moodlequizsource', 'local_flwexam'), 'flwexam-quizid');
+echo html_writer::tag('button', '?', [
+    'type' => 'button',
+    'class' => 'flwexam-help-button',
+    'aria-label' => get_string('quizsourcehelpbutton', 'local_flwexam'),
+    'aria-describedby' => 'flwexam-quiz-source-help',
+    'aria-expanded' => 'false',
+    'aria-controls' => 'flwexam-quiz-source-help',
+    'data-flwexam-help-toggle' => 'flwexam-quiz-source-help',
+]);
+echo html_writer::div(get_string('quizsourcehelp', 'local_flwexam'), 'flwexam-help-popover', [
+    'id' => 'flwexam-quiz-source-help',
+    'role' => 'tooltip',
+    'hidden' => 'hidden',
+]);
+echo html_writer::end_div();
+echo html_writer::select(
+    $quizoptions,
+    'quizid',
+    (int)($editingexam->quizid ?? 0),
+    false,
+    ['id' => 'flwexam-quizid', 'class' => 'form-control']
 );
 echo html_writer::end_div();
 
@@ -241,10 +280,8 @@ echo html_writer::tag('label',
 echo html_writer::end_div();
 if ($editingexam) {
     echo html_writer::start_div('flwexam-action-row');
-    echo html_writer::link(new moodle_url('/local/flwexam/manage.php', [
-        'search' => $search,
+    echo html_writer::link(new moodle_url('/local/flwexam/manage.php', $listfilters + [
         'page' => $page,
-        'perpage' => $perpage,
     ]), get_string('cancel'), ['class' => 'btn btn-secondary']);
     echo html_writer::end_div();
 }
@@ -253,48 +290,70 @@ echo html_writer::empty_tag('input', [
     'class' => 'btn btn-primary flwexam-main-action',
     'value' => $editingexam ? get_string('updateexam', 'local_flwexam') : get_string('addexam', 'local_flwexam'),
 ]);
+echo html_writer::end_div();
 echo html_writer::end_tag('form');
 
 echo html_writer::script(
     '(function() {' .
-    'var tracksByLanguage = ' . json_encode($alltrackoptions) . ';' .
-    'var languageSelect = document.getElementById("flwexam-language");' .
-    'var trackSelect = document.getElementById("flwexam-track");' .
-    'if (!languageSelect || !trackSelect) { return; }' .
-    'function refreshTracks() {' .
-    'var selectedTrack = trackSelect.value;' .
-    'var tracks = tracksByLanguage[languageSelect.value] || {};' .
-    'trackSelect.innerHTML = "";' .
-    'Object.keys(tracks).forEach(function(value) {' .
-    'var option = document.createElement("option");' .
-    'option.value = value;' .
-    'option.textContent = tracks[value];' .
-    'if (value === selectedTrack) { option.selected = true; }' .
-    'trackSelect.appendChild(option);' .
+    'function closeAll(except) {' .
+    'Array.prototype.slice.call(document.querySelectorAll("[data-flwexam-help-toggle]")).forEach(function(button) {' .
+    'if (except && button === except) { return; }' .
+    'var target = document.getElementById(button.getAttribute("data-flwexam-help-toggle"));' .
+    'button.setAttribute("aria-expanded", "false");' .
+    'if (target) { target.hidden = true; }' .
     '});' .
-    'if (!tracks[selectedTrack]) { trackSelect.value = Object.keys(tracks)[0] || ""; }' .
     '}' .
-    'languageSelect.addEventListener("change", refreshTracks);' .
+    'document.addEventListener("click", function(event) {' .
+    'var button = event.target.closest("[data-flwexam-help-toggle]");' .
+    'if (!button) { closeAll(); return; }' .
+    'event.preventDefault();' .
+    'var target = document.getElementById(button.getAttribute("data-flwexam-help-toggle"));' .
+    'if (!target) { return; }' .
+    'var expanded = button.getAttribute("aria-expanded") === "true";' .
+    'closeAll(button);' .
+    'button.setAttribute("aria-expanded", expanded ? "false" : "true");' .
+    'target.hidden = expanded;' .
+    '});' .
+    'document.addEventListener("keydown", function(event) {' .
+    'if (event.key === "Escape") { closeAll(); }' .
+    '});' .
     '})();'
 );
 
+echo html_writer::start_div('flwexam-exam-card flwexam-list-panel');
 echo html_writer::tag('h3', get_string('existingexams', 'local_flwexam'));
-$listurl = new moodle_url('/local/flwexam/manage.php', [
-    'search' => $search,
-    'perpage' => $perpage,
-]);
+$listurl = new moodle_url('/local/flwexam/manage.php', $listfilters);
 $searchparams = [];
-$searchwhere = '';
+$where = [];
 if ($search !== '') {
     $searchparam = '%' . $DB->sql_like_escape($search) . '%';
     $likes = [];
-    foreach (['code', 'name', 'language', 'learningcoursecategory', 'cefrlevel'] as $field) {
+    foreach (['code', 'name', 'language', 'cefrlevel'] as $field) {
         $param = 'search' . $field;
         $likes[] = $DB->sql_like($field, ':' . $param, false);
         $searchparams[$param] = $searchparam;
     }
-    $searchwhere = ' WHERE ' . implode(' OR ', $likes);
+    $where[] = '(' . implode(' OR ', $likes) . ')';
 }
+if ($filterlanguage !== '') {
+    $where[] = 'language = :filterlanguage';
+    $searchparams['filterlanguage'] = $filterlanguage;
+}
+if ($filtercefr !== '') {
+    $where[] = 'cefrlevel = :filtercefr';
+    $searchparams['filtercefr'] = $filtercefr;
+}
+if ($filtersource === 'moodlequiz') {
+    $where[] = 'quizid > 0';
+} else if ($filtersource === 'internal') {
+    $where[] = 'quizid = 0';
+}
+if ($filtervisibility === 'visible') {
+    $where[] = 'visible = 1';
+} else if ($filtervisibility === 'hidden') {
+    $where[] = 'visible = 0';
+}
+$searchwhere = $where ? ' WHERE ' . implode(' AND ', $where) : '';
 $totalrecords = $DB->count_records_sql(
     'SELECT COUNT(1) FROM {local_flwexam_exams}' . $searchwhere,
     $searchparams
@@ -302,7 +361,7 @@ $totalrecords = $DB->count_records_sql(
 $records = $DB->get_records_sql(
     'SELECT *
        FROM {local_flwexam_exams}' . $searchwhere . '
-   ORDER BY language ASC, learningcoursecategory ASC, cefrlevel ASC, name ASC',
+   ORDER BY language ASC, cefrlevel ASC, name ASC',
     $searchparams,
     $page * $perpage,
     $perpage
@@ -323,6 +382,42 @@ echo html_writer::empty_tag('input', [
     'placeholder' => get_string('searchexamsplaceholder', 'local_flwexam'),
 ]);
 echo html_writer::select(
+    ['' => get_string('alllanguages', 'local_flwexam')] + $filteroptions['languages'],
+    'filterlanguage',
+    $filterlanguage,
+    false,
+    ['class' => 'form-control']
+);
+echo html_writer::select(
+    ['' => get_string('alllevels', 'local_flwexam')] + $filteroptions['levels'],
+    'filtercefr',
+    $filtercefr,
+    false,
+    ['class' => 'form-control']
+);
+echo html_writer::select(
+    [
+        '' => get_string('allsources', 'local_flwexam'),
+        'moodlequiz' => get_string('moodlequiz', 'local_flwexam'),
+        'internal' => get_string('flwinternalquestions', 'local_flwexam'),
+    ],
+    'filtersource',
+    $filtersource,
+    false,
+    ['class' => 'form-control']
+);
+echo html_writer::select(
+    [
+        '' => get_string('allstatuses', 'local_flwexam'),
+        'visible' => get_string('visibleexam', 'local_flwexam'),
+        'hidden' => get_string('hiddenexam', 'local_flwexam'),
+    ],
+    'filtervisibility',
+    $filtervisibility,
+    false,
+    ['class' => 'form-control']
+);
+echo html_writer::select(
     [5 => 5, 10 => 10, 12 => 12, 20 => 20, 50 => 50],
     'perpage',
     $perpage,
@@ -334,7 +429,7 @@ echo html_writer::empty_tag('input', [
     'class' => 'btn btn-secondary',
     'value' => get_string('search'),
 ]);
-if ($search !== '') {
+if ($search !== '' || $filterlanguage !== '' || $filtercefr !== '' || $filtersource !== '' || $filtervisibility !== '') {
     echo html_writer::link(new moodle_url('/local/flwexam/manage.php'), get_string('clearsearch', 'local_flwexam'), [
         'class' => 'btn btn-link',
     ]);
@@ -358,23 +453,36 @@ if (!$records) {
         get_string('examcode', 'local_flwexam'),
         get_string('examname', 'local_flwexam'),
         get_string('language', 'local_flwexam'),
-        get_string('track', 'local_flwexam'),
         get_string('cefrlevel', 'local_flwexam'),
         get_string('questions', 'local_flwexam'),
+        get_string('question_source', 'local_flwexam'),
         get_string('status', 'local_flwexam'),
         get_string('actions', 'local_flwexam'),
     ];
     foreach ($records as $record) {
-        $questioncount = $DB->count_records('local_flwexam_questions', [
-            'examid' => (int)$record->id,
-            'visible' => 1,
-        ]);
+        $questioncount = exam_service::get_exam_question_count($record);
+        $source = !empty($record->quizid) ? get_string('moodlequiz', 'local_flwexam') : get_string('flwinternalquestions', 'local_flwexam');
+        $actions = [];
+        if (!empty($record->quizid)) {
+            $quizinfo = exam_service::get_linked_quiz_info((int)$record->quizid);
+            if ($quizinfo) {
+                $actions[] = html_writer::link(
+                    $quizinfo['url'],
+                    get_string('openmoodlequiz', 'local_flwexam'),
+                    ['class' => 'btn btn-secondary btn-sm']
+                );
+            }
+        } else {
+            $actions[] = html_writer::link(
+                new moodle_url('/local/flwexam/questions.php', ['examid' => (int)$record->id]),
+                get_string('editquestions', 'local_flwexam'),
+                ['class' => 'btn btn-secondary btn-sm']
+            );
+        }
         $editurl = new moodle_url('/local/flwexam/manage.php', [
             'edit' => (int)$record->id,
-            'search' => $search,
             'page' => $page,
-            'perpage' => $perpage,
-        ]);
+        ] + $listfilters);
         $table->data[] = [
             html_writer::link(
                 $editurl,
@@ -384,20 +492,17 @@ if (!$records) {
             html_writer::link($editurl, s($record->code)),
             s($record->name),
             s(exam_service::language_label($record->language)),
-            s(exam_service::track_label($record->learningcoursecategory)),
             s($record->cefrlevel),
             $questioncount,
-            $record->visible ? get_string('visible') : get_string('hidden'),
-            html_writer::link(
-                new moodle_url('/local/flwexam/questions.php', ['examid' => (int)$record->id]),
-                get_string('editquestions', 'local_flwexam'),
-                ['class' => 'btn btn-secondary btn-sm']
-            ),
+            $source,
+            $record->visible ? get_string('visibleexam', 'local_flwexam') : get_string('hiddenexam', 'local_flwexam'),
+            implode(' ', $actions),
         ];
     }
-    echo html_writer::table($table);
+    echo html_writer::div(html_writer::table($table), 'flwexam-table-wrap');
     echo $output->paging_bar($totalrecords, $page, $perpage, $listurl);
 }
+echo html_writer::end_div();
 
 echo html_writer::end_div();
 echo $output->footer();

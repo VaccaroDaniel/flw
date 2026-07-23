@@ -34,11 +34,18 @@ use mod_quiz\quiz_settings;
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir.'/gradelib.php');
 require_once($CFG->dirroot.'/mod/quiz/locallib.php');
+if (is_readable($CFG->dirroot . '/local/flwplacement/locallib.php')) {
+    require_once($CFG->dirroot . '/local/flwplacement/locallib.php');
+}
 require_once($CFG->libdir . '/completionlib.php');
 require_once($CFG->dirroot . '/course/format/lib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or ...
 $q = optional_param('q',  0, PARAM_INT);  // Quiz ID.
+$flwplacement = optional_param('flwplacement', false, PARAM_BOOL);
+$flwautostart = optional_param('flwautostart', false, PARAM_BOOL);
+$flwskippreflight = optional_param('flwskippreflight', false, PARAM_BOOL);
+$autostart = optional_param('autostart', false, PARAM_BOOL);
 
 if ($id) {
     $quizobj = quiz_settings::create_for_cmid($id, $USER->id);
@@ -58,6 +65,18 @@ require_capability('mod/quiz:view', $context);
 $canattempt = has_capability('mod/quiz:attempt', $context);
 $canreviewmine = has_capability('mod/quiz:reviewmyattempts', $context);
 $canpreview = has_capability('mod/quiz:preview', $context);
+$isplacementquiz = function_exists('local_flwplacement_get_quiz_language_for_quiz_id')
+    && !empty(local_flwplacement_get_quiz_language_for_quiz_id((int)$quiz->id));
+$isplacementrequest = $flwplacement || $flwautostart || $flwskippreflight || $autostart || $isplacementquiz;
+if ($isplacementrequest && ($canattempt || $canpreview)) {
+    $starturl = $quizobj->start_attempt_url();
+    $starturl->param('sesskey', sesskey());
+    $starturl->param('flwplacement', 1);
+    $starturl->param('flwautostart', 1);
+    $starturl->param('flwskippreflight', 1);
+    $starturl->param('autostart', 1);
+    redirect($starturl);
+}
 
 // Create an object to manage all the other (non-roles) access rules.
 $timenow = time();
@@ -196,6 +215,38 @@ $viewobj->canedit = has_capability('mod/quiz:manage', $context);
 $viewobj->editurl = new moodle_url('/mod/quiz/edit.php', ['cmid' => $cm->id]);
 $viewobj->backtocourseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
 $viewobj->startattempturl = $quizobj->start_attempt_url();
+$viewobj->flwexamresulturl = null;
+$flwexamattempt = null;
+foreach (array_reverse($attempts) as $candidateattempt) {
+    if (empty($candidateattempt->preview) && $candidateattempt->state === quiz_attempt::FINISHED) {
+        $flwexamattempt = $candidateattempt;
+        break;
+    }
+}
+if ($flwexamattempt) {
+    $servicefile = $CFG->dirroot . '/local/flwexam/classes/service/exam_service.php';
+    if (is_readable($servicefile)) {
+        require_once($servicefile);
+        if (class_exists('\\local_flwexam\\service\\exam_service')) {
+            try {
+                $flwexamresulturl = \local_flwexam\service\exam_service::get_quiz_review_result_url(
+                    (int)$quiz->id,
+                    (int)$USER->id,
+                    (int)$flwexamattempt->id
+                );
+                if ($flwexamresulturl instanceof moodle_url) {
+                    $viewobj->flwexamresulturl = $flwexamresulturl;
+                }
+            } catch (Throwable $e) {
+                debugging(
+                    'Could not resolve FLW exam result link for quiz attempt ' .
+                        $flwexamattempt->id . ': ' . $e->getMessage(),
+                    DEBUG_DEVELOPER
+                );
+            }
+        }
+    }
+}
 
 if ($accessmanager->is_preflight_check_required($unfinishedattemptid)) {
     $viewobj->preflightcheckform = $accessmanager->get_preflight_check_form(

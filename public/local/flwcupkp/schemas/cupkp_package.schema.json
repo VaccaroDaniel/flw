@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flw.local/schemas/cupkp_package.schema.json",
+  "title": "FLW C-UP-KP Package",
+  "type": "object",
+  "required": [
+    "cupkp_schema_version",
+    "frameworks",
+    "competencies",
+    "use_points",
+    "knowledge_points"
+  ],
+  "properties": {
+    "cupkp_schema_version": {
+      "type": "string"
+    },
+    "course_code": {
+      "type": "string"
+    },
+    "unit_code": {
+      "type": "string"
+    },
+    "cefr_level": {
+      "type": "string"
+    },
+    "frameworks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/framework"
+      }
+    },
+    "competencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/competency"
+      }
+    },
+    "use_points": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/use_point"
+      }
+    },
+    "knowledge_points": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledge_point"
+      }
+    },
+    "competency_up_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/competency_up_mapping"
+      }
+    },
+    "up_kp_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/up_kp_mapping"
+      }
+    },
+    "kp_prerequisites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/kp_prerequisite"
+      }
+    },
+    "learning_objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/learning_object"
+      }
+    },
+    "activity_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/activity_mapping"
+      }
+    },
+    "assessment_rules": {
+      "type": "array"
+    },
+    "project_evidence": {
+      "type": "array"
+    }
+  },
+  "$defs": {
+    "framework": {
+      "type": "object",
+      "required": ["externalid", "name"],
+      "properties": {
+        "externalid": {"type": "string"},
+        "name": {"type": "string"},
+        "course_code": {"type": "string"},
+        "language": {"type": "string"},
+        "cefr_range": {"type": "string"},
+        "version": {"type": "string"},
+        "status": {"type": "string"},
+        "description": {"type": "string"}
+      }
+    },
+    "competency": {
+      "type": "object",
+      "required": ["externalid", "title"],
+      "properties": {
+        "externalid": {"type": "string"},
+        "title": {"type": "string"},
+        "can_do": {"type": "string"},
+        "description": {"type": "string"},
+        "cefr": {"type": "string"},
+        "domain": {"type": "string"},
+        "scope": {"type": "string"},
+        "evidence_rule": {"type": "object"},
+        "status": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    },
+    "use_point": {
+      "type": "object",
+      "required": ["externalid", "title"],
+      "properties": {
+        "externalid": {"type": "string"},
+        "title": {"type": "string"},
+        "action_statement": {"type": "string"},
+        "intention": {"type": "string"},
+        "context": {"type": "string"},
+        "observable_action": {"type": "string"},
+        "conditions": {"type": "string"},
+        "success_criteria": {"type": "string"},
+        "cefr": {"type": "string"},
+        "language_mode": {"type": "string"},
+        "interaction_type": {"type": "string"},
+        "evidence_requirements": {"type": "array"},
+        "status": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    },
+    "knowledge_point": {
+      "type": "object",
+      "required": ["externalid", "title", "domain"],
+      "properties": {
+        "externalid": {"type": "string"},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "language": {"type": "string"},
+        "cefr": {"type": "string"},
+        "domain": {
+          "type": "string",
+          "enum": ["LEX", "GRAM", "FUNC", "PRON", "ORTH", "SCRIPT", "LISTEN", "SPEAK", "READ", "WRITE", "DISC", "STRAT", "PRAG", "CULT"]
+        },
+        "form": {"type": "string"},
+        "meaning_function": {"type": "string"},
+        "usage_constraints": {"type": "string"},
+        "difficulty": {"type": "number"},
+        "estimated_learning_load": {"type": "number"},
+        "status": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    },
+    "competency_up_mapping": {
+      "type": "object",
+      "required": ["competency_externalid", "up_externalid"],
+      "properties": {
+        "competency_externalid": {"type": "string"},
+        "up_externalid": {"type": "string"},
+        "role": {"type": "string"},
+        "weight": {"type": "number"},
+        "sequence": {"type": "integer"},
+        "minimum_up_mastery": {"type": "number"},
+        "notes": {"type": "string"}
+      }
+    },
+    "up_kp_mapping": {
+      "type": "object",
+      "required": ["up_externalid", "kp_externalid"],
+      "properties": {
+        "up_externalid": {"type": "string"},
+        "kp_externalid": {"type": "string"},
+        "role": {"type": "string"},
+        "weight": {"type": "number"},
+        "minimum_kp_readiness": {"type": "number"},
+        "sequence": {"type": "integer"},
+        "notes": {"type": "string"}
+      }
+    },
+    "kp_prerequisite": {
+      "type": "object",
+      "required": ["kp_externalid", "prereq_kp_externalid"],
+      "properties": {
+        "kp_externalid": {"type": "string"},
+        "prereq_kp_externalid": {"type": "string"},
+        "relationship_type": {"type": "string"},
+        "strength": {"type": "number"},
+        "requirement": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "learning_object": {
+      "type": "object",
+      "required": ["externalid", "title", "object_type"],
+      "properties": {
+        "externalid": {"type": "string"},
+        "title": {"type": "string"},
+        "unit_code": {"type": "string"},
+        "lesson": {"type": "string"},
+        "object_type": {"type": "string"},
+        "source_id": {"type": "string"},
+        "purpose": {"type": "string"},
+        "evidence_strength": {"type": "string"},
+        "difficulty": {"type": "number"},
+        "role": {"type": "string"}
+      }
+    },
+    "activity_mapping": {
+      "type": "object",
+      "required": ["object_externalid", "target_type", "target_externalid"],
+      "properties": {
+        "object_externalid": {"type": "string"},
+        "target_type": {"type": "string", "enum": ["kp", "up", "competency"]},
+        "target_externalid": {"type": "string"},
+        "role": {"type": "string"},
+        "evidence_strength": {"type": "string"}
+      }
+    }
+  }
+}

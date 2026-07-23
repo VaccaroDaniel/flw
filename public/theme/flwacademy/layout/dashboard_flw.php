@@ -28,9 +28,8 @@ $selectedlanguage = theme_flwacademy_get_selected_learning_language($learninglan
 $defaultlanguageurl = $selectedlanguage['categoryurl'] ?? (new moodle_url('/course/index.php'))->out(false);
 $defaultschoolurl = $selectedlanguage['schoolcategoryurl'] ?? $defaultlanguageurl;
 $defaultselfstudyurl = $selectedlanguage['selfstudycategoryurl'] ?? $defaultlanguageurl;
-$defaultplacementtesturl = $selectedlanguage['placementtesturl'] ?? (new moodle_url('/local/flwplacement/index.php', [
-    'language' => $selectedlanguage['code'] ?? 'en',
-]))->out(false);
+$defaultplacementtesturl = $selectedlanguage['placementtesturl']
+    ?? theme_flwacademy_get_placement_quiz_start_url($selectedlanguage['code'] ?? 'en');
 $defaultpracticeurl = $selectedlanguage['practicecategoryurl'] ?? $defaultlanguageurl;
 $defaultexamurl = $selectedlanguage['examcategoryurl'] ?? $defaultlanguageurl;
 $defaultpracticewatchurl = $selectedlanguage['practicewatchurl'] ?? $defaultpracticeurl;
@@ -105,6 +104,7 @@ $templatecontext = [
     'checkpoint' => $dashboarddata['checkpoint'],
     'portfolio' => $dashboarddata['portfolio'],
     'rank' => $dashboarddata['rank'],
+    'streak' => $dashboarddata['streak'],
     'heroimageurl' => $OUTPUT->image_url('dashboard/home', 'theme_flwacademy')->out(false),
     'redesignchinesecresturl' => $flwasset('dash-chinese-crest'),
     'redesigncheckpointcresturl' => $flwasset('dash-checkpoint-crest'),

@@ -31,13 +31,27 @@ use mod_quiz\quiz_settings;
 
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
+if (is_readable($CFG->dirroot . '/local/flwplacement/locallib.php')) {
+    require_once($CFG->dirroot . '/local/flwplacement/locallib.php');
+}
 
 // Get submitted parameters.
 $id = required_param('cmid', PARAM_INT); // Course module id
 $forcenew = optional_param('forcenew', false, PARAM_BOOL); // Used to force a new preview
 $page = optional_param('page', -1, PARAM_INT); // Page to jump to in the attempt.
+$flwautostart = optional_param('flwautostart', false, PARAM_BOOL);
+$flwskippreflight = optional_param('flwskippreflight', false, PARAM_BOOL);
+$flwplacement = optional_param('flwplacement', false, PARAM_BOOL);
+$autostart = optional_param('autostart', false, PARAM_BOOL);
 
 $quizobj = quiz_settings::create_for_cmid($id, $USER->id);
+$quiz = $quizobj->get_quiz();
+$isplacementquiz = false;
+if (function_exists('local_flwplacement_get_quiz_language_for_quiz_id') && !empty($quiz->id)) {
+    $isplacementquiz = !empty(local_flwplacement_get_quiz_language_for_quiz_id((int)$quiz->id));
+}
+$isplacementrequest = $flwplacement || $flwautostart || $autostart || $isplacementquiz;
+$skipPreflight = $flwautostart || $flwskippreflight || $isplacementquiz;
 
 // This script should only ever be posted to, so set page URL to the view page.
 $PAGE->set_url($quizobj->view_url());
@@ -74,30 +88,39 @@ if (!$quizobj->is_preview_user() && $messages) {
 }
 
 if ($accessmanager->is_preflight_check_required($currentattemptid)) {
-    // Need to do some checks before allowing the user to continue.
-    $mform = $accessmanager->get_preflight_check_form(
-            $quizobj->start_attempt_url($page), $currentattemptid);
+    if (!$skipPreflight) {
+        // Need to do some checks before allowing the user to continue.
+        $mform = $accessmanager->get_preflight_check_form(
+                $quizobj->start_attempt_url($page), $currentattemptid);
 
-    if ($mform->is_cancelled()) {
-        $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'));
+        if ($mform->is_cancelled()) {
+            $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'));
 
-    } else if (!$mform->get_data()) {
+        } else if (!$mform->get_data()) {
 
-        // Form not submitted successfully, re-display it and stop.
-        $PAGE->set_url($quizobj->start_attempt_url($page));
-        $PAGE->set_title($quizobj->get_quiz_name());
-        $accessmanager->setup_attempt_page($PAGE);
-        $output = $PAGE->get_renderer('mod_quiz');
-        if (empty($quizobj->get_quiz()->showblocks)) {
-            $PAGE->blocks->show_only_fake_blocks();
+            // Form not submitted successfully, re-display it and stop.
+            $PAGE->set_url($quizobj->start_attempt_url($page));
+            $PAGE->set_title($quizobj->get_quiz_name());
+            $accessmanager->setup_attempt_page($PAGE);
+            $output = $PAGE->get_renderer('mod_quiz');
+            if (empty($quizobj->get_quiz()->showblocks)) {
+                $PAGE->blocks->show_only_fake_blocks();
+            }
+
+            echo $output->start_attempt_page($quizobj, $mform);
+            die();
         }
-
-        echo $output->start_attempt_page($quizobj, $mform);
-        die();
     }
 
     // Pre-flight check passed.
     $accessmanager->notify_preflight_check_passed($currentattemptid);
+}
+
+if ($skipPreflight || $autostart) {
+    $PAGE->add_body_class('flw-exam-quiz-page');
+    if ($isplacementrequest) {
+        $PAGE->add_body_class('flw-placement-quiz-page');
+    }
 }
 
 if (!$currentattemptid || $lastattempt->state == quiz_attempt::NOT_STARTED) {
@@ -108,5 +131,14 @@ if (!$currentattemptid || $lastattempt->state == quiz_attempt::NOT_STARTED) {
 if ($attempt->state === quiz_attempt::OVERDUE) {
     redirect($quizobj->summary_url($attempt->id));
 } else {
-    redirect($quizobj->attempt_url($attempt->id, $page));
+    $attempturl = $quizobj->attempt_url($attempt->id, $page);
+    if ($skipPreflight) {
+        $attempturl->param('flwskippreflight', 1);
+        if ($isplacementrequest) {
+            $attempturl->param('flwplacement', 1);
+            $attempturl->param('flwautostart', 1);
+            $attempturl->param('autostart', 1);
+        }
+    }
+    redirect($attempturl);
 }

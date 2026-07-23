@@ -51,6 +51,70 @@ function xmldb_local_flwexam_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026071001, 'local', 'flwexam');
     }
 
+    if ($oldversion < 2026072000) {
+        $table = new xmldb_table('local_flwexam_exams');
+        $field = new xmldb_field('quizid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'profilejson');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        $index = new xmldb_index('quizid', XMLDB_INDEX_NOTUNIQUE, ['quizid']);
+        if (!$dbman->index_exists($table, $index)) {
+            $dbman->add_index($table, $index);
+        }
+
+        upgrade_plugin_savepoint(true, 2026072000, 'local', 'flwexam');
+    }
+
+    if ($oldversion < 2026072300) {
+        $table = new xmldb_table('local_flwexam_sessions');
+
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
+        $table->add_field('sessiontype', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'self');
+        $table->add_field('examid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('questioncount', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '20');
+        $table->add_field('maxattempts', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '1');
+        $table->add_field('timestart', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timeend', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('accesscode', XMLDB_TYPE_CHAR, '80', null, XMLDB_NOTNULL, null, '');
+        $table->add_field('branchname', XMLDB_TYPE_CHAR, '120', null, XMLDB_NOTNULL, null, '');
+        $table->add_field('proctoruserid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('requireproctor', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('status', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'open');
+        $table->add_field('createdby', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('visible', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        $table->add_index('type-status', XMLDB_INDEX_NOTUNIQUE, ['sessiontype', 'status', 'visible']);
+        $table->add_index('examid', XMLDB_INDEX_NOTUNIQUE, ['examid']);
+        $table->add_index('course-group', XMLDB_INDEX_NOTUNIQUE, ['courseid', 'groupid']);
+        $table->add_index('time-window', XMLDB_INDEX_NOTUNIQUE, ['timestart', 'timeend']);
+        $table->add_index('createdby', XMLDB_INDEX_NOTUNIQUE, ['createdby']);
+
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        $attempttable = new xmldb_table('local_flwexam_attempts');
+        $field = new xmldb_field('sessionid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'examid');
+        if (!$dbman->field_exists($attempttable, $field)) {
+            $dbman->add_field($attempttable, $field);
+        }
+
+        $index = new xmldb_index('sessionid', XMLDB_INDEX_NOTUNIQUE, ['sessionid']);
+        if (!$dbman->index_exists($attempttable, $index)) {
+            $dbman->add_index($attempttable, $index);
+        }
+
+        upgrade_plugin_savepoint(true, 2026072300, 'local', 'flwexam');
+    }
+
     return true;
 }
 

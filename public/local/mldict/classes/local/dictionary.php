@@ -10,6 +10,338 @@ class dictionary {
     public const TABLE_TRANSLATION = 'local_mldict_translation';
     public const TABLE_EXAMPLE = 'local_mldict_example';
     private const DEFAULT_ENABLED_LANGUAGES = 'en,ru,zh,de,ja,fr,es';
+    private const DEFAULT_STARTER_LIMIT = 12;
+    private const DEFAULT_FILTER_LIMIT = 500;
+    private const FILTER_LIMIT_MAX = 800;
+
+    private static function cache_store(): ?\cache {
+        static $store = [];
+        if (array_key_exists('instance', $store)) {
+            return $store['instance'];
+        }
+
+        try {
+            $store['instance'] = \cache::make('local_mldict', 'dictionary_payload');
+            return $store['instance'];
+        } catch (\Throwable $exception) {
+            $store['instance'] = null;
+            return null;
+        }
+    }
+
+    private static function clear_payload_cache(): void {
+        static $invalidated = false;
+        if ($invalidated) {
+            return;
+        }
+
+        $store = self::cache_store();
+        if ($store) {
+            $store->purge();
+            $invalidated = true;
+        }
+    }
+
+    private static function table_exists(string $tablename): bool {
+        static $tablecache = [];
+        if (array_key_exists($tablename, $tablecache)) {
+            return $tablecache[$tablename];
+        }
+
+        global $DB;
+        $tablecache[$tablename] = $DB->get_manager()->table_exists($tablename);
+        return $tablecache[$tablename];
+    }
+
+    private static function normalize_limit(int $value, int $default, int $max): int {
+        if ($value <= 0) {
+            return $default;
+        }
+
+        return max(1, min($value, $max));
+    }
+
+    private static function filter_limit(?int $limit = null): int {
+        if ($limit === null) {
+            $configured = (int)get_config('filter_mldict', 'maxterms');
+            $limit = $configured > 0 ? $configured : self::DEFAULT_FILTER_LIMIT;
+        }
+
+        return self::normalize_limit($limit, self::DEFAULT_FILTER_LIMIT, self::FILTER_LIMIT_MAX);
+    }
+
+    /**
+     * Pre-warms all startup payload caches used by dictionary homepage and filter output.
+     *
+     * This is intentionally lightweight and idempotent by relying on per-request cache keys.
+     */
+    public static function refresh_payload_cache(int $filterlimit = self::DEFAULT_FILTER_LIMIT): void {
+        $filterlimit = self::filter_limit($filterlimit);
+        self::get_payload_stats();
+
+        foreach (array_keys(self::lang_options()) as $code) {
+            self::get_startup_starter_words($code, self::DEFAULT_STARTER_LIMIT);
+        }
+        if (self::normalise_lang_code('zh_cn') === 'zh') {
+            self::get_startup_starter_words('zh_cn', self::DEFAULT_STARTER_LIMIT);
+        }
+
+        self::get_filter_payload_cached($filterlimit, false);
+        self::get_filter_payload_cached($filterlimit, true);
+    }
+
+    public static function get_payload_stats(): array {
+        global $DB;
+
+        $store = self::cache_store();
+        $cachekey = 'payload_stats';
+        if ($store) {
+            $cached = $store->get($cachekey);
+            if ($cached !== false) {
+                return $cached;
+            }
+        }
+
+        $stats = [
+            'counts' => [],
+            'generated' => time(),
+        ];
+        if (!self::table_exists(self::TABLE_ENTRY)) {
+            if ($store) {
+                $store->set($cachekey, $stats);
+            }
+            return $stats;
+        }
+
+        $rows = $DB->get_records_sql(
+            "SELECT sourcelang, COUNT(1) AS total
+               FROM {" . self::TABLE_ENTRY . "}
+              WHERE headword <> :empty
+           GROUP BY sourcelang",
+            ['empty' => '']
+        );
+        foreach ($rows as $row) {
+            $stats['counts'][(string)$row->sourcelang] = (int)$row->total;
+        }
+        if (isset($stats['counts']['zh_cn']) && empty($stats['counts']['zh'])) {
+            $stats['counts']['zh'] = (int)$stats['counts']['zh_cn'];
+        }
+
+        if ($store) {
+            $store->set($cachekey, $stats);
+        }
+        return $stats;
+    }
+
+    public static function get_language_counts(): array {
+        $stats = self::get_payload_stats();
+        return $stats['counts'] ?? [];
+    }
+
+    public static function get_startup_starter_words(string $lang, int $limit = self::DEFAULT_STARTER_LIMIT): array {
+        $limit = self::normalize_limit($limit, self::DEFAULT_STARTER_LIMIT, 120);
+        $store = self::cache_store();
+        $normalized = self::normalise_lang_code($lang);
+        $storekeylang = $normalized !== '' ? $normalized : 'all';
+        $cachekey = 'startup_words_' . $storekeylang . '_' . $limit;
+        if ($store) {
+            $cached = $store->get($cachekey);
+            if ($cached !== false) {
+                $result = [];
+                if (is_array($cached)) {
+                    foreach ($cached as $record) {
+                        $item = (object)$record;
+                        $result[] = $item;
+                    }
+                }
+                return $result;
+            }
+        }
+
+        $params = ['empty' => ''];
+        $where = 'headword <> :empty';
+        if ($normalized !== '') {
+            if ($normalized === 'zh' && $storekeylang !== 'all') {
+                $where .= ' AND sourcelang = :sourcelang';
+                $params['sourcelang'] = 'zh';
+            } else if ($normalized !== '') {
+                $where .= ' AND sourcelang = :sourcelang';
+                $params['sourcelang'] = $normalized;
+            }
+        }
+
+        global $DB;
+        if (!self::table_exists(self::TABLE_ENTRY)) {
+            if ($store) {
+                $store->set($cachekey, []);
+            }
+            return [];
+        }
+
+        $sql = 'SELECT id, headword, sourcelang, partofspeech, cefrlevel
+                  FROM {' . self::TABLE_ENTRY . '}
+                 WHERE ' . $where . '
+              ORDER BY CASE
+                           WHEN cefrlevel = :a1 THEN 0
+                           WHEN cefrlevel = :a2 THEN 1
+                           WHEN cefrlevel = :emptycefr THEN 3
+                           ELSE 2
+                       END ASC,
+                       ' . $DB->sql_length('headword') . ' DESC,
+                       headword ASC';
+        $params['a1'] = 'A1';
+        $params['a2'] = 'A2';
+        $params['emptycefr'] = '';
+
+        $rows = $DB->get_records_sql($sql, $params, 0, $limit);
+        $items = [];
+        foreach ($rows as $row) {
+            $items[] = [
+                'id' => (int)$row->id,
+                'headword' => (string)$row->headword,
+                'sourcelang' => (string)$row->sourcelang,
+                'partofspeech' => (string)$row->partofspeech,
+                'cefrlevel' => (string)$row->cefrlevel,
+            ];
+        }
+
+        if (empty($items) && $normalized === 'zh') {
+            $fallbackwhere = 'headword <> :empty_fallback AND sourcelang = :fallbacklang';
+            $fallbackrows = $DB->get_records_sql(
+                'SELECT id, headword, sourcelang, partofspeech, cefrlevel
+                   FROM {' . self::TABLE_ENTRY . '}
+                  WHERE ' . $fallbackwhere . '
+               ORDER BY CASE
+                            WHEN cefrlevel = :a1b THEN 0
+                            WHEN cefrlevel = :a2b THEN 1
+                            WHEN cefrlevel = :emptycefrob THEN 3
+                            ELSE 2
+                        END ASC,
+                        ' . $DB->sql_length('headword') . ' DESC,
+                        headword ASC',
+                [
+                    'empty_fallback' => '',
+                    'fallbacklang' => 'zh_cn',
+                    'a1b' => 'A1',
+                    'a2b' => 'A2',
+                    'emptycefrob' => '',
+                ],
+                0,
+                $limit
+            );
+            foreach ($fallbackrows as $row) {
+                $items[] = [
+                    'id' => (int)$row->id,
+                    'headword' => (string)$row->headword,
+                    'sourcelang' => (string)$row->sourcelang,
+                    'partofspeech' => (string)$row->partofspeech,
+                    'cefrlevel' => (string)$row->cefrlevel,
+                ];
+            }
+        }
+
+        $payload = array_slice($items, 0, $limit);
+        if ($store) {
+            $store->set($cachekey, $payload);
+        }
+        $result = [];
+        foreach ($payload as $record) {
+            $result[] = (object)$record;
+        }
+        return $result;
+    }
+
+    public static function get_filter_terms_cached(int $limit = 500): array {
+        $limit = self::filter_limit($limit);
+        $store = self::cache_store();
+        $cachekey = 'filter_terms_' . $limit;
+        if ($store) {
+            $cached = $store->get($cachekey);
+            if ($cached !== false) {
+                return array_map(static function($record): \stdClass {
+                    return (object)$record;
+                }, (array)$cached);
+            }
+        }
+
+        $rows = self::get_filter_terms_raw($limit);
+        $payload = [];
+        foreach ($rows as $row) {
+            $payload[] = [
+                'id' => (int)$row->id,
+                'headword' => (string)$row->headword,
+                'sourcelang' => (string)$row->sourcelang,
+                'partofspeech' => (string)$row->partofspeech,
+                'cefrlevel' => (string)$row->cefrlevel,
+            ];
+        }
+        if ($store) {
+            $store->set($cachekey, $payload);
+        }
+        return array_map(static function($record): \stdClass {
+            return (object)$record;
+        }, $payload);
+    }
+
+    /**
+     * Return cached compiled filter payload (regex + URLs + title metadata) to avoid
+     * rebuilding heavy matching tables on each request.
+     *
+     * @param int $limit
+     * @param bool $casesensitive
+     * @return array<int, array<string, string>>
+     */
+    public static function get_filter_payload_cached(int $limit = self::DEFAULT_FILTER_LIMIT, bool $casesensitive = false): array {
+        $limit = self::filter_limit($limit);
+        $store = self::cache_store();
+        $cachekey = 'filter_payload_' . $limit . '_' . ($casesensitive ? 'cs' : 'ic');
+
+        if ($store) {
+            $cached = $store->get($cachekey);
+            if (is_array($cached)) {
+                return $cached;
+            }
+        }
+
+        $terms = self::get_filter_terms_cached($limit);
+        $payload = [];
+        foreach ($terms as $term) {
+            $word = trim((string)($term->headword ?? ''));
+            if ($word === '' || \core_text::strlen($word) < 2) {
+                continue;
+            }
+
+            $payload[] = [
+                'pattern' => '/(?<![\\p{L}\\p{N}_])(' . preg_quote($word, '/') . ')(?![\\p{L}\\p{N}_])/' . ($casesensitive ? 'u' : 'iu'),
+                'url' => (new \moodle_url('/local/mldict/view.php', ['id' => (int)$term->id]))->out(false),
+                'title' => implode(' · ', array_filter([
+                    (string)($term->sourcelang ?? ''),
+                    (string)($term->partofspeech ?? ''),
+                    (string)($term->cefrlevel ?? ''),
+                ])),
+            ];
+        }
+
+        if ($store) {
+            $store->set($cachekey, $payload);
+        }
+
+        return $payload;
+    }
+
+    private static function get_filter_terms_raw(int $limit = 500): array {
+        global $DB;
+
+        if (!self::table_exists(self::TABLE_ENTRY)) {
+            return [];
+        }
+
+        $sql = 'SELECT id, headword, sourcelang, partofspeech, cefrlevel
+                  FROM {' . self::TABLE_ENTRY . '}
+                 WHERE headword <> :empty
+              ORDER BY ' . $DB->sql_length('headword') . ' DESC, headword ASC';
+        return $DB->get_records_sql($sql, ['empty' => ''], 0, $limit);
+    }
 
     public static function lang_options(): array {
         $languages = self::all_lang_options();
@@ -96,42 +428,22 @@ class dictionary {
     }
 
     public static function count_distinct_headwords(string $lang): int {
-        global $DB;
+        $counts = self::get_language_counts();
+        $count = (int)($counts[$lang] ?? 0);
 
-        $sql = 'SELECT COUNT(DISTINCT ' . $DB->sql_compare_text('headword') . ')
-                  FROM {' . self::TABLE_ENTRY . '}
-                 WHERE sourcelang = :lang
-                   AND headword <> :empty';
+        if ($count > 0) {
+            return $count;
+        }
 
-        return $DB->count_records_sql($sql, ['lang' => $lang, 'empty' => '']);
+        if ($lang === 'zh' && isset($counts['zh_cn'])) {
+            return (int)$counts['zh_cn'];
+        }
+
+        return 0;
     }
 
     public static function starter_entries(string $lang, int $limit = 12): array {
-        global $DB;
-
-        $params = ['empty' => ''];
-        $where = 'headword <> :empty';
-        if ($lang !== '') {
-            $where .= ' AND sourcelang = :sourcelang';
-            $params['sourcelang'] = $lang;
-        }
-
-        $sql = 'SELECT *
-                  FROM {' . self::TABLE_ENTRY . '}
-                 WHERE ' . $where . '
-              ORDER BY CASE
-                           WHEN cefrlevel = :a1 THEN 0
-                           WHEN cefrlevel = :a2 THEN 1
-                           WHEN cefrlevel = :emptycefr THEN 3
-                           ELSE 2
-                       END ASC,
-                       ' . $DB->sql_length('headword') . ' ASC,
-                       headword ASC';
-        $params['a1'] = 'A1';
-        $params['a2'] = 'A2';
-        $params['emptycefr'] = '';
-
-        return $DB->get_records_sql($sql, $params, 0, $limit);
+        return self::get_startup_starter_words($lang, $limit);
     }
 
     public static function get_entry(int $id): \stdClass {
@@ -148,12 +460,7 @@ class dictionary {
     }
 
     public static function get_filter_terms(int $limit = 500): array {
-        global $DB;
-        $sql = 'SELECT id, headword, sourcelang, partofspeech, cefrlevel
-                  FROM {' . self::TABLE_ENTRY . '}
-                 WHERE headword <> :empty
-              ORDER BY ' . $DB->sql_length('headword') . ' DESC, headword ASC';
-        return $DB->get_records_sql($sql, ['empty' => ''], 0, $limit);
+        return self::get_filter_terms_cached($limit);
     }
 
     public static function save_form_data(\stdClass $data): int {
@@ -185,6 +492,7 @@ class dictionary {
 
         self::save_translations($entryid, $data->translations ?? '');
         self::save_examples($entryid, $data->examples ?? '');
+        self::clear_payload_cache();
 
         return $entryid;
     }
@@ -214,6 +522,7 @@ class dictionary {
         $DB->delete_records(self::TABLE_EXAMPLE, ['entryid' => $id]);
         $DB->delete_records(self::TABLE_TRANSLATION, ['entryid' => $id]);
         $DB->delete_records(self::TABLE_ENTRY, ['id' => $id]);
+        self::clear_payload_cache();
     }
 
     public static function import_csv_text(string $csv): int {

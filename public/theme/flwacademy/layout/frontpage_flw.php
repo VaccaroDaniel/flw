@@ -3,9 +3,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-global $USER;
+global $CFG, $DB, $USER;
 
 require_once($CFG->dirroot . '/course/lib.php');
+$placementlib = $CFG->dirroot . '/local/flwplacement/locallib.php';
+if (file_exists($placementlib)) {
+    require_once($placementlib);
+}
 
 $extraclasses = ['flw-start-page'];
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
@@ -494,7 +498,7 @@ $languages = [
     ],
 ];
 $learninglanguages = theme_flwacademy_export_learning_languages();
-$currentlanguagecode = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
+$currentlanguagecode = theme_flwacademy_get_active_learning_language_code();
 if ($currentlanguagecode !== '') {
     $learninglanguages = array_map(static function(array $language) use ($currentlanguagecode): array {
         $language['isdefault'] = $language['code'] === $currentlanguagecode;
@@ -504,8 +508,33 @@ if ($currentlanguagecode !== '') {
 $selectedlearninglanguage = theme_flwacademy_get_selected_learning_language($learninglanguages);
 $placementurl = new moodle_url('/local/flwplacement/index.php', [
     'language' => $selectedlearninglanguage['code'] ?? 'en',
+    'flwplacement' => 1,
+    'flwautostart' => 1,
+    'flwskippreflight' => 1,
+    'autostart' => 1,
 ]);
+$dashboardlanguageurl = theme_flwacademy_get_dashboard_url_for_language($selectedlearninglanguage['code'] ?? 'en');
+$placementstartenabled = false;
+$placementstarturl = new moodle_url('/mod/quiz/startattempt.php', [
+    'flwplacement' => 1,
+    'flwautostart' => 1,
+    'flwskippreflight' => 1,
+    'autostart' => 1,
+]);
+$placementcmid = 0;
+$placementsesskey = '';
+if ($isloggedinuser && function_exists('local_flwplacement_get_quiz_id_for_language')
+        && function_exists('local_flwplacement_get_quiz_info')) {
+    $placementquizid = local_flwplacement_get_quiz_id_for_language($selectedlearninglanguage['code'] ?? 'en');
+    $placementquizinfo = $placementquizid > 0 ? local_flwplacement_get_quiz_info($placementquizid) : null;
+    if (!empty($placementquizinfo['cmid'])) {
+        $placementstartenabled = true;
+        $placementcmid = (int)$placementquizinfo['cmid'];
+        $placementsesskey = sesskey();
+    }
+}
 $coursecards = theme_flwacademy_export_home_course_cards($OUTPUT, $learninglanguages);
+$schoolgroups = theme_flwacademy_export_home_school_groups($OUTPUT, $learninglanguages);
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, [
@@ -532,12 +561,18 @@ $templatecontext = [
     'isloggedinuser' => $isloggedinuser,
     'userfullname' => $userfullname,
     'userpicturehtml' => $userpicture,
-    'dashboardurl' => $dashboardurl->out(false),
+    'dashboardurl' => $dashboardlanguageurl,
     'placementurl' => $placementurl->out(false),
+    'placementstartenabled' => $placementstartenabled,
+    'placementstarturl' => $placementstarturl->out(false),
+    'placementcmid' => $placementcmid,
+    'placementsesskey' => $placementsesskey,
     'courseindexurl' => $courseindexurl->out(false),
     'frontpageurl' => $frontpageurl->out(false),
     'maincontent' => $maincontent,
     'coursecards' => $coursecards,
+    'schoolgroups' => $schoolgroups,
+    'hasschoolgroups' => !empty($schoolgroups),
     'languages' => $languages,
     'haslearninglanguages' => !empty($learninglanguages),
     'learninglanguages' => $learninglanguages,

@@ -90,6 +90,18 @@ if (!empty($PAGE->course->id) && (int)$PAGE->course->id !== SITEID && course_for
     }
 }
 
+// Quiz detection is required both for course-index cleanup and for taking-page
+// cleanup rules later in this layout.
+$flwexamquiz = theme_flwacademy_get_current_flw_exam_quiz();
+$flwplacementquiz = theme_flwacademy_get_current_flw_placement_quiz();
+$flwquizqueryplacement = optional_param('flwplacement', false, PARAM_BOOL)
+    || optional_param('autostart', false, PARAM_BOOL)
+    || optional_param('flwautostart', false, PARAM_BOOL)
+    || optional_param('flwskippreflight', false, PARAM_BOOL);
+$flwquizcleanquery = (strpos($PAGE->pagetype, 'mod-quiz-') === 0) &&
+    (optional_param('flwskippreflight', false, PARAM_BOOL) || optional_param('flwautostart', false, PARAM_BOOL) || optional_param('autostart', false, PARAM_BOOL));
+$flwquizcleanpage = $flwexamquiz || $flwplacementquiz || $flwquizqueryplacement || $flwquizcleanquery;
+
 if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
     $flwscormcmid = !empty($PAGE->cm->id) ? (int)$PAGE->cm->id : 0;
     $flwscormcourseid = !empty($PAGE->course->id) ? (int)$PAGE->course->id : 0;
@@ -369,6 +381,177 @@ if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
     ");
 }
 
+if ($flwquizcleanpage) {
+    $PAGE->requires->js_init_code("
+        (function() {
+            function isPlacementQuizPage() {
+                return location.pathname.indexOf('/mod/quiz/') !== -1;
+            }
+
+            function isProtectedNavigation(node) {
+                return !!(node && node.closest && node.closest('header.navbar, .navbar.fixed-top, .flw-topnav, #usernavigation'));
+            }
+
+            function isRequiredQuizAction(node) {
+                if (!node || !node.closest) {
+                    return false;
+                }
+                if (node.closest('.modal, .submitbtns')) {
+                    return true;
+                }
+                if (node.id === 'secureclosebutton') {
+                    return true;
+                }
+
+                var text = ((node.textContent || '') + ' ' + (node.value || '')).replace(/\\s+/g, ' ').trim().toLowerCase();
+                return text === 'finish review' ||
+                    text === 'next page' ||
+                    text === 'previous page' ||
+                    text === 'return to attempt' ||
+                    text === 'submit all and finish' ||
+                    text === 'end test' ||
+                    text === 'cancel' ||
+                    text === 'ok';
+            }
+
+            function hide(node) {
+                if (!node || !node.style) {
+                    return;
+                }
+                if (isProtectedNavigation(node)) {
+                    return;
+                }
+                if (isRequiredQuizAction(node)) {
+                    return;
+                }
+                if (node.dataset && node.dataset.flwPlacementQuizHidden) {
+                    return;
+                }
+                if (node.dataset) {
+                    node.dataset.flwPlacementQuizHidden = '1';
+                }
+                node.style.setProperty('display', 'none', 'important');
+                node.style.setProperty('visibility', 'hidden', 'important');
+                node.setAttribute('aria-hidden', 'true');
+            }
+
+            function isCandidate(node) {
+                if (!node || node.id === 'page-header' || node.classList.contains('main-inner') || isProtectedNavigation(node)) {
+                    return false;
+                }
+                var text = (node.textContent || '').replace(/\\s+/g, ' ').trim().toLowerCase();
+                var label = (node.getAttribute('aria-label') || '').toLowerCase();
+                var role = (node.getAttribute('role') || '').toLowerCase();
+                var title = (node.getAttribute('title') || '').toLowerCase();
+                var name = (node.getAttribute('name') || '').toLowerCase();
+                return text === 'activity' ||
+                    text === 'quiz' ||
+                    text === 'activities' ||
+                    text === 'attempt quiz' ||
+                    text === 'attempt' ||
+                    text.indexOf(' activity') !== -1 ||
+                    text.indexOf('quiz') !== -1 ||
+                    text.indexOf('quiz ') !== -1 ||
+                    label.indexOf('activity') !== -1 ||
+                    label.indexOf('quiz') !== -1 ||
+                    title.indexOf('activity') !== -1 ||
+                    title.indexOf('quiz') !== -1 ||
+                    name === 'activity' ||
+                    name === 'quiz' ||
+                    role === 'menu' ||
+                    role === 'menuitem';
+            }
+
+            function cleanPlacementUi() {
+                if (!isPlacementQuizPage()) {
+                    return;
+                }
+                var selectors = [
+                    '#page-header .singlebutton',
+                    '#page-header .dropdown',
+                    '#page-header .dropdown-toggle',
+                    '#page-header .action-menu',
+                    '#page-header .action-menu-trigger',
+                    '#page-header .activity-actions',
+                    '#page-header .activity-action',
+                    '.activity-actions',
+                    '.activity-action',
+                    '.path-mod-quiz-attempt .activityheader',
+                    '.path-mod-quiz-view .activityheader',
+                    '.mod_quiz-view-page .singlebutton',
+                    '.page-header-headings .btn',
+                    '.path-mod-quiz-attempt .btn[href*=\"/mod/quiz/edit.php\"]',
+                    '.path-mod-quiz-attempt .action-menu',
+                    '.path-mod-quiz-attempt .action-menu-toggle',
+                    '.path-mod-quiz-attempt .dropdown',
+                    '.path-mod-quiz-attempt .dropdown-toggle',
+                    '.path-mod-quiz-attempt .singlebutton',
+                    '.path-mod-quiz-attempt .tertiary-navigation',
+                    '.path-mod-quiz-attempt .activity-actions',
+                    '.path-mod-quiz-attempt .activity-action',
+                    '.path-mod-quiz-attempt .action-menu-trigger',
+                    '.path-mod-quiz-attempt .action-menu-toggle',
+                    '.path-mod-quiz-attempt .context-header-actions',
+                    '.path-mod-quiz-attempt .context-header-settings-menu',
+                    '.path-mod-quiz-view .action-menu',
+                    '.path-mod-quiz-view .action-menu-trigger',
+                    '.path-mod-quiz-view .action-menu-toggle',
+                    '.path-mod-quiz-attempt [data-region=\"activity-actions\"]',
+                    '.path-mod-quiz-attempt [data-region=\"activity-navigation\"]',
+                    '.path-mod-quiz-view [data-region=\"activity-actions\"]',
+                    '.path-mod-quiz-view [data-region=\"activity-navigation\"]',
+                    '[href*=\"/mod/quiz/report.php\"]',
+                    '[href*=\"/mod/quiz/preview.php\"]',
+                    '.path-mod-quiz [aria-label=\"Activity\"]',
+                    '.path-mod-quiz [title=\"Activity\"]',
+                    '.path-mod-quiz [aria-label=\"Quiz\"]',
+                    '.path-mod-quiz [title=\"Quiz\"]',
+                    '.path-mod-quiz [aria-label=\"Activity\"]',
+                    '.path-mod-quiz [aria-label*=\"activity\" i]',
+                    '.path-mod-quiz [title*=\"activity\" i]',
+                    '.path-mod-quiz [aria-label*=\"quiz\" i]',
+                    '.path-mod-quiz [title*=\"quiz\" i]',
+                    '.path-mod-quiz [role=\"menuitem\"][aria-label*=\"activity\" i]',
+                    '.path-mod-quiz [role=\"menuitem\"][title*=\"activity\" i]',
+                    '.path-mod-quiz [role=\"menuitem\"][aria-label*=\"quiz\" i]',
+                    '.path-mod-quiz [role=\"menuitem\"][title*=\"quiz\" i]',
+                    '[data-action=\"toggle-fullscreen\"]',
+                    '.path-mod-quiz [href*=\"/course/view.php\"] [title=\"Activity\" i]',
+                    '[id*=\"action-menu-toggle-\"]'
+                ];
+                selectors.forEach(function(selector) {
+                    Array.prototype.slice.call(document.querySelectorAll(selector)).forEach(hide);
+                });
+
+                var candidates = Array.prototype.slice.call(document.querySelectorAll(
+                    'button, a, [role=\"menuitem\"], [role=\"button\"], .singlebutton button, .singlebutton a, .action-menu-trigger, .dropdown-toggle, .menu-action-text'
+                ));
+                candidates.forEach(function(candidate) {
+                    if (isCandidate(candidate)) {
+                        hide(candidate);
+                    }
+                });
+            }
+
+            function startPlacementCleanup() {
+                cleanPlacementUi();
+                var interval = window.setInterval(function() {
+                    cleanPlacementUi();
+                }, 500);
+                window.setTimeout(function() {
+                    window.clearInterval(interval);
+                }, 4000);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', startPlacementCleanup);
+            } else {
+                startPlacementCleanup();
+            }
+        })();
+    ");
+}
+
 $addblockbutton = $OUTPUT->addblockbutton();
 
 if (isloggedin()) {
@@ -384,6 +567,12 @@ if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_clo
 }
 
 $extraclasses = ['uses-drawers'];
+if ($flwexamquiz || $flwplacementquiz || $flwquizqueryplacement) {
+    $extraclasses[] = 'flw-exam-quiz-page';
+}
+if ($flwplacementquiz || $flwquizqueryplacement) {
+    $extraclasses[] = 'flw-placement-quiz-page';
+}
 if ($courseindexopen) {
     $extraclasses[] = 'drawer-open-index';
 }
@@ -467,6 +656,27 @@ $toolscontext = theme_flwacademy_extend_tools_context([
     'courseindex' => $courseindex,
 ]);
 $pagehtml = $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
+if (($flwexamquiz || $flwplacementquiz) && strpos($pagehtml, '<div id="region-main">') !== false) {
+    $flwquiztitle = format_string(($flwplacementquiz ?: $flwexamquiz)->name, true, [
+        'context' => $PAGE->context,
+        'escape' => true,
+    ]);
+    $flwquizkicker = $flwplacementquiz
+        ? get_string('placementtest', 'local_flwplacement')
+        : get_string('exam', 'local_flwexam');
+    $flwquizheading = html_writer::div(
+        html_writer::div($flwquizkicker, 'flw-exam-quiz-kicker') .
+            html_writer::tag('h1', $flwquiztitle),
+        'flw-exam-quiz-heading'
+    );
+    $regionmainmarker = '<div id="region-main">';
+    $pagehtml = substr_replace(
+        $pagehtml,
+        $regionmainmarker . $flwquizheading,
+        strpos($pagehtml, $regionmainmarker),
+        strlen($regionmainmarker)
+    );
+}
 $toolsgroup = $OUTPUT->render_from_template('theme_flwacademy/flw_tools_group', $toolscontext);
 if ($toolsgroup !== '' && strpos($pagehtml, '</body>') !== false) {
     $pagehtml = str_replace('</body>', $toolsgroup . "\n</body>", $pagehtml);

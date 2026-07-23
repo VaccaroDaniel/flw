@@ -27,7 +27,7 @@ body.path-local-flwexam #page.drawers .main-inner {
     margin: 0 auto 44px;
     max-width: min(1428px, calc(100% - 40px));
     width: 100%;
-    padding-top: 84px;
+    padding-top: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -87,8 +87,10 @@ body.path-local-flwexam #page.drawers .main-inner {
 }
 
 .flwexam-lead {
-    font-size: 1.05rem;
-    margin: .75rem 0 0;
+    color: #405477;
+    font-size: 15px;
+    line-height: 1.35;
+    margin: 10px 0 0;
     max-width: 760px;
 }
 
@@ -98,6 +100,11 @@ body.path-local-flwexam #page.drawers .main-inner {
     display: flex;
     flex-wrap: wrap;
     gap: .65rem;
+}
+
+.flwexam-inline-form {
+    display: inline-flex;
+    margin: 0;
 }
 
 .flwexam-hero-actions {
@@ -129,6 +136,49 @@ body.path-local-flwexam #page.drawers .main-inner {
 
 .flwexam-main-action {
     margin: 0;
+}
+
+.flwexam-center-tabs {
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--flwexam-line);
+    border-radius: 14px;
+    box-shadow: var(--flwexam-shadow);
+    display: inline-flex;
+    gap: .25rem;
+    justify-self: start;
+    padding: .25rem;
+}
+
+.flwexam-center-tab {
+    border-radius: 11px;
+    color: #243354;
+    font-size: .95rem;
+    font-weight: 700;
+    line-height: 1.2;
+    padding: .65rem .95rem;
+    text-decoration: none;
+}
+
+.flwexam-center-tab:hover,
+.flwexam-center-tab:focus {
+    background: #edf4ff;
+    color: var(--flwexam-teal);
+    text-decoration: none;
+}
+
+.flwexam-center-tab.is-active {
+    background: #eaf1ff;
+    color: var(--flwexam-teal);
+    box-shadow: inset 0 0 0 1px rgba(10, 75, 232, .16);
+}
+
+.flwexam-section-title {
+    color: var(--flwexam-ink);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: .25rem 0 0;
 }
 
 .flwexam-hero-stats,
@@ -187,11 +237,6 @@ body.path-local-flwexam #page.drawers .main-inner {
     min-width: 0;
 }
 
-.flwexam-summary-grid .flwexam-mini-card:nth-child(3),
-.flwexam-summary-grid .flwexam-mini-card:nth-child(4) {
-    max-width: 156px;
-}
-
 .flwexam-result-summary,
 .flwexam-filter-form {
     padding: 1rem;
@@ -202,10 +247,26 @@ body.path-local-flwexam #page.drawers .main-inner {
     margin: 0 0 .5rem;
 }
 
+.flwexam-result-card {
+    background: var(--flwexam-surface);
+    border: 1px solid var(--flwexam-line);
+    border-radius: 12px;
+    box-shadow: var(--flwexam-shadow);
+    padding: 1rem;
+}
+
+.flwexam-result-card h4 {
+    color: var(--flwexam-ink);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 .75rem;
+}
+
 .flwexam-filter-form {
     border-top: 1px solid rgba(10, 75, 232, .34);
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 }
 
@@ -216,6 +277,15 @@ body.path-local-flwexam #page.drawers .main-inner {
     height: 76px;
     pointer-events: none;
     position: absolute;
+    z-index: 0;
+}
+
+.flwexam-filter-form > h3,
+.flwexam-filter-form > .flwexam-filter-grid,
+.flwexam-filter-form > .flwexam-action-row,
+.flwexam-filter-form > .flwexam-main-action {
+    position: relative;
+    z-index: 1;
 }
 
 .flwexam-filter-head {
@@ -273,13 +343,29 @@ body.path-local-flwexam #page.drawers .main-inner {
 .flwexam-filter-grid {
     display: grid;
     gap: .85rem;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     position: relative;
     z-index: 1;
 }
 
 .flwexam-filter-form .form-group {
     margin: 0;
+    min-width: 0;
+}
+
+.flwexam-quiz-source-group {
+    grid-column: 1 / -1;
+    position: relative;
+    z-index: 2;
+}
+
+.flwexam-label-row {
+    align-items: center;
+    display: inline-flex;
+    gap: .4rem;
+    margin: 0 0 .35rem;
+    max-width: 100%;
+    position: relative;
 }
 
 .flwexam-filter-form label {
@@ -288,6 +374,77 @@ body.path-local-flwexam #page.drawers .main-inner {
     font-weight: 700;
     margin: 0 0 .35rem;
     text-transform: uppercase;
+}
+
+.flwexam-label-row label {
+    margin: 0;
+    overflow-wrap: normal;
+}
+
+.flwexam-help-button {
+    align-items: center;
+    background: #eaf1ff;
+    border: 1px solid #cbd8f5;
+    border-radius: 999px;
+    color: var(--flwexam-teal);
+    display: inline-flex;
+    font-size: .75rem;
+    font-weight: 800;
+    height: 22px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    width: 22px;
+}
+
+.flwexam-help-button:hover,
+.flwexam-help-button:focus {
+    background: var(--flwexam-teal);
+    border-color: var(--flwexam-teal);
+    color: #fff;
+    outline: none;
+}
+
+.flwexam-help-popover {
+    background: #101a3a;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(16, 26, 58, .18);
+    color: #fff;
+    font-size: .85rem;
+    font-weight: 600;
+    left: 0;
+    line-height: 1.45;
+    margin: 0;
+    max-width: none;
+    padding: .7rem .8rem;
+    position: absolute;
+    text-transform: none;
+    top: calc(100% + .55rem);
+    transform: none;
+    width: min(430px, calc(100vw - 64px));
+    z-index: 30;
+}
+
+.flwexam-quiz-source-group .form-control {
+    max-width: 760px;
+}
+
+.flwexam-help-popover::before {
+    border-color: transparent transparent #101a3a transparent;
+    border-style: solid;
+    border-width: 0 7px 8px;
+    content: "";
+    height: 0;
+    left: 7.5rem;
+    position: absolute;
+    top: -8px;
+    transform: none;
+    width: 0;
+}
+
+.flwexam-help-popover[hidden] {
+    display: none;
 }
 
 .flwexam-filter-form .form-control {
@@ -312,21 +469,264 @@ body.path-local-flwexam #page.drawers .main-inner {
     z-index: 1;
 }
 
+.flwexam-manage-form {
+    display: block;
+    padding: 0;
+}
+
+.flwexam-manage-form::before {
+    display: none;
+}
+
+.flwexam-manage-form > h3 {
+    background: linear-gradient(90deg, rgba(10, 75, 232, .12), rgba(50, 123, 225, .04));
+    border-bottom: 1px solid rgba(10, 75, 232, .12);
+    border-radius: 12px 12px 0 0;
+    font-size: 18px;
+    line-height: 1.2;
+    margin: 0;
+    padding: .65rem .85rem;
+}
+
+.flwexam-manage-body {
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    display: grid;
+    gap: .65rem;
+    padding: .8rem .85rem .85rem;
+    position: relative;
+    z-index: 1;
+}
+
+.flwexam-manage-form .flwexam-filter-grid {
+    gap: .6rem .7rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.flwexam-manage-body label {
+    font-size: .72rem;
+    margin-bottom: .22rem;
+}
+
+.flwexam-manage-body .form-control {
+    border-radius: 8px;
+    font-size: .88rem;
+    min-height: 36px;
+    padding-bottom: .35rem;
+    padding-top: .35rem;
+}
+
+.flwexam-manage-body .flwexam-action-row {
+    gap: .45rem .65rem;
+}
+
+.flwexam-manage-body .form-check-label {
+    font-size: .85rem;
+}
+
+.flwexam-manage-body .flwexam-help-button {
+    font-size: .7rem;
+    height: 20px;
+    width: 20px;
+}
+
+.flwexam-manage-form .flwexam-quiz-source-group {
+    grid-column: 1 / -1;
+}
+
+.flwexam-manage-form .flwexam-quiz-source-group .form-control {
+    max-width: 100%;
+}
+
+.flwexam-manage-body > .flwexam-main-action {
+    border-radius: 8px;
+    min-height: 36px;
+    padding: 0 .95rem;
+    justify-self: start;
+}
+
+.flwexam-session-manage-body {
+    gap: .75rem;
+}
+
+.flwexam-manage-form .flwexam-session-grid {
+    align-items: end;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.flwexam-session-grid > .form-group {
+    grid-column: span 3;
+}
+
+.flwexam-session-grid > .flwexam-session-wide {
+    grid-column: span 6;
+}
+
+.flwexam-session-grid > .flwexam-session-medium {
+    grid-column: span 3;
+}
+
+.flwexam-session-grid > .flwexam-session-short {
+    grid-column: span 2;
+}
+
+.flwexam-session-grid > .flwexam-group-select-group,
+.flwexam-session-grid > .flwexam-proctor-select-group {
+    grid-column: span 4;
+}
+
+.flwexam-session-grid > .flwexam-session-check {
+    align-self: end;
+    display: flex;
+    min-height: 36px;
+}
+
+.flwexam-session-grid .form-control {
+    width: 100%;
+}
+
+.flwexam-session-grid > .form-group:not(.flwexam-session-wide):not(.flwexam-session-medium):not(.flwexam-session-short) .form-control {
+    max-width: 240px;
+}
+
+.flwexam-session-grid > .flwexam-session-wide .form-control {
+    max-width: 460px;
+}
+
+.flwexam-session-grid > .flwexam-session-medium .form-control {
+    max-width: 220px;
+}
+
+.flwexam-session-grid > .flwexam-group-select-group .form-control,
+.flwexam-session-grid > .flwexam-proctor-select-group .form-control {
+    max-width: 320px;
+}
+
+.flwexam-session-grid > .flwexam-session-short .form-control {
+    max-width: 142px;
+}
+
+.flwexam-required-mark {
+    color: #d33b30;
+    font-weight: 800;
+    margin-left: .2rem;
+}
+
+.flwexam-access-code-row {
+    align-items: center;
+    display: flex;
+    gap: .45rem;
+}
+
+.flwexam-access-code-row .form-control {
+    flex: 1 1 136px;
+    min-width: 0;
+}
+
+.flwexam-access-code-row .flwexam-code-generate {
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding-inline: .75rem;
+}
+
+.flwexam-row-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+.flwexam-danger-link {
+    border-color: #f2b8b5 !important;
+    color: #b42318 !important;
+}
+
+.flwexam-danger-link:hover,
+.flwexam-danger-link:focus {
+    background: #fff1f0 !important;
+    border-color: #f08b84 !important;
+    color: #8a1c13 !important;
+}
+
+.flwexam-session-check label {
+    align-items: center;
+    color: var(--flwexam-ink);
+    display: inline-flex;
+    gap: .45rem;
+    margin: 0;
+    min-width: 0;
+    text-transform: none;
+}
+
+.flwexam-session-check input[type="checkbox"] {
+    flex: 0 0 auto;
+}
+
+.flwexam-session-manage-body > .flwexam-action-row {
+    align-items: center;
+    border-top: 1px solid #edf1fa;
+    justify-content: flex-start;
+    margin-top: .1rem;
+    padding-top: .7rem;
+}
+
+.flwexam-session-manage-body > .flwexam-action-row .btn {
+    min-height: 36px;
+}
+
+.flwexam-list-panel {
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.flwexam-list-panel > h3 {
+    margin-bottom: .85rem;
+}
+
 .flwexam-search-form {
     align-items: end;
-    display: grid;
-    gap: .75rem;
-    grid-template-columns: minmax(220px, 1fr) minmax(90px, auto) auto auto;
-    margin: 1rem 0 .5rem;
+    background: #f7f9fd;
+    border: 1px solid #e2e8f6;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin: 0 0 .6rem;
+    padding: .75rem;
 }
 
 .flwexam-search-form label {
-    grid-column: 1 / -1;
-    margin-bottom: -.35rem;
+    flex: 0 0 100%;
+    margin-bottom: -.25rem;
+}
+
+.flwexam-search-form .form-control {
+    min-height: 38px;
+}
+
+.flwexam-search-form input[type="search"] {
+    flex: 1 1 260px;
+    min-width: min(260px, 100%);
+}
+
+.flwexam-search-form select {
+    flex: 0 1 148px;
+    min-width: 132px;
 }
 
 .flwexam-perpage {
-    max-width: 7rem;
+    flex: 0 0 92px;
+    max-width: 92px;
+}
+
+.flwexam-search-form .btn {
+    min-height: 38px;
+    white-space: nowrap;
+}
+
+.flwexam-search-form .btn-link {
+    align-self: center;
+    padding-inline: .5rem;
 }
 
 .flwexam-exam-grid,
@@ -356,6 +756,10 @@ body.path-local-flwexam #page.drawers .main-inner {
     border-top-color: var(--flwexam-blue);
 }
 
+.flwexam-list-panel {
+    border-top: 1px solid var(--flwexam-line);
+}
+
 .flwexam-options-grid {
     display: grid;
     gap: .75rem;
@@ -375,11 +779,24 @@ body.path-local-flwexam #page.drawers .main-inner {
     padding: .85rem .85rem .85rem 1.5rem;
 }
 
+.flwexam-table-wrap {
+    border-radius: 8px;
+    margin: .75rem 0 0;
+    max-width: 100%;
+    overflow-x: auto;
+    width: 100%;
+}
+
 .flwexam-table {
     background: #fff;
     border: 1px solid var(--flwexam-line);
     border-radius: 8px;
+    margin: 0;
+    max-width: 100%;
+    min-width: 760px;
     overflow: hidden;
+    table-layout: auto;
+    width: 100%;
 }
 
 .flwexam-table th {
@@ -387,8 +804,11 @@ body.path-local-flwexam #page.drawers .main-inner {
     color: var(--flwexam-ink);
 }
 
+.flwexam-table th,
 .flwexam-table td {
+    overflow-wrap: break-word;
     vertical-align: middle;
+    word-break: normal;
 }
 
 @media (max-width: 900px) {
@@ -396,9 +816,30 @@ body.path-local-flwexam #page.drawers .main-inner {
         grid-template-columns: 1fr;
     }
 
-    .flwexam-hero-stats,
-    .flwexam-summary-grid .flwexam-mini-card:nth-child(3),
-    .flwexam-summary-grid .flwexam-mini-card:nth-child(4) {
+    .flwexam-manage-form .flwexam-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .flwexam-manage-form .flwexam-session-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .flwexam-session-grid > .form-group,
+    .flwexam-session-grid > .flwexam-session-wide,
+    .flwexam-session-grid > .flwexam-session-medium,
+    .flwexam-session-grid > .flwexam-session-short {
+        grid-column: span 3;
+    }
+
+    .flwexam-session-grid > .flwexam-session-wide {
+        grid-column: 1 / -1;
+    }
+
+    .flwexam-search-form .btn-link {
+        justify-self: start;
+    }
+
+    .flwexam-hero-stats {
         justify-self: stretch;
         max-width: none;
     }
@@ -407,7 +848,11 @@ body.path-local-flwexam #page.drawers .main-inner {
 @media (max-width: 700px) {
     .flwexam-page {
         max-width: min(100% - 22px, 1428px);
-        padding-top: 76px;
+        padding-top: 0;
+    }
+
+    .flwexam-quiz-source-group {
+        grid-column: 1 / -1;
     }
 
     .flwexam-hero,
@@ -422,7 +867,65 @@ body.path-local-flwexam #page.drawers .main-inner {
         font-size: 34px;
     }
 
-    .flwexam-search-form {
+    .flwexam-help-popover {
+        left: 0;
+        max-width: none;
+        top: calc(100% + .55rem);
+        transform: none;
+        width: min(330px, calc(100vw - 32px));
+    }
+
+    .flwexam-help-popover::before {
+        border-color: transparent transparent #101a3a transparent;
+        border-width: 0 7px 8px;
+        left: 7.5rem;
+        top: -8px;
+        transform: none;
+    }
+
+    .flwexam-search-form input[type="search"],
+    .flwexam-search-form select,
+    .flwexam-perpage {
+        flex: 1 1 100%;
+        max-width: none;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .flwexam-manage-form .flwexam-filter-grid {
         grid-template-columns: 1fr;
+    }
+
+    .flwexam-session-grid > .form-group,
+    .flwexam-session-grid > .flwexam-session-wide,
+    .flwexam-session-grid > .flwexam-session-medium,
+    .flwexam-session-grid > .flwexam-session-short {
+        grid-column: 1 / -1;
+    }
+
+    .flwexam-session-grid > .form-group .form-control,
+    .flwexam-session-grid > .flwexam-session-wide .form-control,
+    .flwexam-session-grid > .flwexam-session-medium .form-control,
+    .flwexam-session-grid > .flwexam-session-short .form-control {
+        max-width: none;
+    }
+
+    .flwexam-access-code-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .flwexam-table {
+        min-width: 680px;
+    }
+
+    .flwexam-center-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-self: stretch;
+    }
+
+    .flwexam-center-tab {
+        text-align: center;
     }
 }

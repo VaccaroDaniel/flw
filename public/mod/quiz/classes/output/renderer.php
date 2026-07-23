@@ -266,6 +266,15 @@ class renderer extends plugin_renderer_base {
      */
     public function finish_review_link(quiz_attempt $attemptobj) {
         $url = $attemptobj->view_url();
+        $placementurl = $this->flw_placement_finish_review_url($attemptobj);
+        if ($placementurl !== null) {
+            $url = $placementurl;
+        } else {
+            $examurl = $this->flw_exam_finish_review_url($attemptobj);
+            if ($examurl !== null) {
+                $url = $examurl;
+            }
+        }
 
         if ($attemptobj->get_access_manager(time())->attempt_must_be_in_popup()) {
             $this->page->requires->js_init_call('M.mod_quiz.secure_window.init_close_button',
@@ -279,6 +288,84 @@ class renderer extends plugin_renderer_base {
             return html_writer::link($url, get_string('finishreview', 'quiz'),
                     ['class' => 'mod_quiz-next-nav']);
         }
+    }
+
+    /**
+     * Return an FLW Placement report URL for the review finish action.
+     *
+     * Normal Moodle quizzes must keep Moodle's own finish-review destination.
+     *
+     * @param quiz_attempt $attemptobj instance of quiz_attempt.
+     * @return moodle_url|null
+     */
+    protected function flw_placement_finish_review_url(quiz_attempt $attemptobj): ?moodle_url {
+        global $CFG;
+
+        $libfile = $CFG->dirroot . '/local/flwplacement/locallib.php';
+        if (!is_readable($libfile)) {
+            return null;
+        }
+
+        require_once($libfile);
+        if (!function_exists('local_flwplacement_get_quiz_review_report_url')) {
+            return null;
+        }
+
+        try {
+            $url = \local_flwplacement_get_quiz_review_report_url(
+                (int)$attemptobj->get_quizid(),
+                (int)$attemptobj->get_userid(),
+                (int)$attemptobj->get_attemptid()
+            );
+        } catch (\Throwable $e) {
+            debugging(
+                'Could not resolve FLW placement finish review URL for quiz attempt ' .
+                    $attemptobj->get_attemptid() . ': ' . $e->getMessage(),
+                DEBUG_DEVELOPER
+            );
+            return null;
+        }
+
+        return $url instanceof moodle_url ? $url : null;
+    }
+
+    /**
+     * Return an FLW Exam result URL for the review finish action.
+     *
+     * Normal Moodle quizzes must keep Moodle's own finish-review destination.
+     *
+     * @param quiz_attempt $attemptobj instance of quiz_attempt.
+     * @return moodle_url|null
+     */
+    protected function flw_exam_finish_review_url(quiz_attempt $attemptobj): ?moodle_url {
+        global $CFG;
+
+        $servicefile = $CFG->dirroot . '/local/flwexam/classes/service/exam_service.php';
+        if (!is_readable($servicefile)) {
+            return null;
+        }
+
+        require_once($servicefile);
+        if (!class_exists('\\local_flwexam\\service\\exam_service')) {
+            return null;
+        }
+
+        try {
+            $url = \local_flwexam\service\exam_service::get_quiz_review_result_url(
+                (int)$attemptobj->get_quizid(),
+                (int)$attemptobj->get_userid(),
+                (int)$attemptobj->get_attemptid()
+            );
+        } catch (\Throwable $e) {
+            debugging(
+                'Could not resolve FLW exam finish review URL for quiz attempt ' .
+                    $attemptobj->get_attemptid() . ': ' . $e->getMessage(),
+                DEBUG_DEVELOPER
+            );
+            return null;
+        }
+
+        return $url instanceof moodle_url ? $url : null;
     }
 
     /**
@@ -928,6 +1015,15 @@ class renderer extends plugin_renderer_base {
                     $viewobj->startattempturl, $viewobj->preflightcheckform,
                     $viewobj->popuprequired, $viewobj->popupoptions);
             $content .= html_writer::div($attemptbtn, 'navitem');
+        }
+
+        if ($viewobj->flwexamresulturl instanceof moodle_url) {
+            $label = get_string_manager()->string_exists('viewlatestresult', 'local_flwexam') ?
+                    get_string('viewlatestresult', 'local_flwexam') : 'View result';
+            $resultbtn = html_writer::link($viewobj->flwexamresulturl, $label, [
+                'class' => 'btn btn-primary flw-quiz-flwexam-result-link',
+            ]);
+            $content .= html_writer::div($resultbtn, 'navitem');
         }
 
         if ($viewobj->canedit && !$viewobj->quizhasquestions) {

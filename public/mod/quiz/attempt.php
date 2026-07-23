@@ -28,24 +28,80 @@ use mod_quiz\quiz_attempt;
 
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
+if (is_readable($CFG->dirroot . '/local/flwplacement/locallib.php')) {
+    require_once($CFG->dirroot . '/local/flwplacement/locallib.php');
+}
 
 // Look for old-style URLs, such as may be in the logs, and redirect them to startattemtp.php.
 if ($id = optional_param('id', 0, PARAM_INT)) {
-    redirect($CFG->wwwroot . '/mod/quiz/startattempt.php?cmid=' . $id . '&sesskey=' . sesskey());
+    $isplacementrequest = false;
+    $placementquizids = [];
+    $placementlanguagecodes = ['en', 'ru', 'zh', 'de', 'ja', 'fr', 'es'];
+    foreach ($placementlanguagecodes as $code) {
+        $placementquizid = (int)get_config('local_flwplacement', 'quizid_' . $code);
+        if ($placementquizid > 0) {
+            $placementquizids[] = $placementquizid;
+        }
+    }
+    if (!empty($placementquizids) && $id > 0) {
+        if ($cm = get_coursemodule_from_id('quiz', $id, 0, false, IGNORE_MISSING)) {
+            $isplacementrequest = in_array((int)$cm->instance, $placementquizids, true);
+        }
+    }
+    $starturl = new moodle_url('/mod/quiz/startattempt.php', [
+        'cmid' => $id,
+        'sesskey' => sesskey(),
+        'flwplacement' => (int)$isplacementrequest,
+        'flwautostart' => (int)$isplacementrequest,
+        'flwskippreflight' => (int)$isplacementrequest,
+        'autostart' => (int)$isplacementrequest,
+    ]);
+    if (!$isplacementrequest) {
+        $starturl->param('redirectto', '1');
+    }
+    redirect($starturl);
 } else if ($qid = optional_param('q', 0, PARAM_INT)) {
     if (!$cm = get_coursemodule_from_instance('quiz', $qid)) {
         throw new \moodle_exception('invalidquizid', 'quiz');
     }
-    redirect(new moodle_url('/mod/quiz/startattempt.php',
-            ['cmid' => $cm->id, 'sesskey' => sesskey()]));
+    $isplacementrequest = false;
+    $placementquizids = [];
+    $placementlanguagecodes = ['en', 'ru', 'zh', 'de', 'ja', 'fr', 'es'];
+    foreach ($placementlanguagecodes as $code) {
+        $placementquizid = (int)get_config('local_flwplacement', 'quizid_' . $code);
+        if ($placementquizid > 0) {
+            $placementquizids[] = $placementquizid;
+        }
+    }
+    if (!empty($placementquizids)) {
+        $isplacementrequest = in_array((int)$qid, $placementquizids, true);
+    }
+    redirect(new moodle_url('/mod/quiz/startattempt.php', [
+        'cmid' => (int)$cm->id,
+        'sesskey' => sesskey(),
+        'flwplacement' => (int)$isplacementrequest,
+        'flwautostart' => (int)$isplacementrequest,
+        'flwskippreflight' => (int)$isplacementrequest,
+        'autostart' => (int)$isplacementrequest,
+    ]));
 }
 
 // Get submitted parameters.
 $attemptid = required_param('attempt', PARAM_INT);
 $page = optional_param('page', 0, PARAM_INT);
 $cmid = optional_param('cmid', null, PARAM_INT);
+$flwautostart = optional_param('flwautostart', false, PARAM_BOOL);
+$flwplacement = optional_param('flwplacement', false, PARAM_BOOL);
+$autostart = optional_param('autostart', false, PARAM_BOOL);
+$skippreflight = optional_param('flwskippreflight', false, PARAM_BOOL) || $flwautostart;
 
 $attemptobj = quiz_create_attempt_handling_errors($attemptid, $cmid);
+$quizid = $attemptobj->get_quizid();
+$isplacementbyquiz = !empty($quizid)
+    && function_exists('local_flwplacement_get_quiz_language_for_quiz_id')
+    && !empty(local_flwplacement_get_quiz_language_for_quiz_id((int)$quizid));
+$isplacementquiz = $flwplacement || $autostart || $flwautostart || $isplacementbyquiz;
+$skippreflight = $skippreflight || $isplacementquiz;
 $page = $attemptobj->force_page_number_into_range($page);
 $PAGE->set_url($attemptobj->attempt_url(null, $page));
 // During quiz attempts, the browser back/forwards buttons should force a reload.
@@ -55,6 +111,14 @@ $PAGE->set_secondary_active_tab("modulepage");
 
 // Check login.
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
+
+if ($skippreflight || $isplacementquiz) {
+    $PAGE->add_body_class('flw-exam-quiz-page');
+    if ($isplacementquiz) {
+        $PAGE->add_body_class('flw-placement-quiz-page');
+        $PAGE->activityheader->disable();
+    }
+}
 
 // Check that this attempt belongs to this user.
 if ($attemptobj->get_userid() != $USER->id) {
@@ -94,7 +158,10 @@ if (!$attemptobj->is_preview_user() && $messages) {
             $output->access_messages($messages));
 }
 if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {
-    redirect($attemptobj->start_attempt_url(null, $page));
+    if (!$skippreflight) {
+        redirect($attemptobj->start_attempt_url(null, $page));
+    }
+    $accessmanager->notify_preflight_check_passed($attemptobj->get_attemptid());
 }
 
 // Set up auto-save if required.

@@ -9,11 +9,18 @@ use local_flwplacement\service\result_repository;
 $requestedlanguage = optional_param('language', '', PARAM_ALPHANUMEXT);
 $cookielanguage = clean_param($_COOKIE['flw_learning_language'] ?? '', PARAM_ALPHANUMEXT);
 $language = $requestedlanguage !== '' ? $requestedlanguage : ($cookielanguage !== '' ? $cookielanguage : 'en');
-require_login();
-
 $course = get_site();
 $context = context_system::instance();
+$url = new moodle_url('/local/flwplacement/index.php', [
+    'language' => $language,
+]);
+$PAGE->set_url($url);
 $PAGE->set_context($context);
+$PAGE->set_course($course);
+require_login();
+$PAGE->set_title(get_string('placementtest', 'local_flwplacement'));
+$PAGE->set_heading(get_string('placementtest', 'local_flwplacement'));
+$PAGE->requires->css(new moodle_url('/local/flwplacement/styles.css'));
 local_flwplacement_require_take_access($context);
 
 $languageoptions = [
@@ -54,6 +61,36 @@ if (!$languagecategory) {
         'parent' => 0,
         'name' => $defaultlanguagelabel,
     ], 'id, name', IGNORE_MULTIPLE);
+}
+$placementquizid = local_flwplacement_get_quiz_id_for_language($defaultlanguagecode);
+$placementquizinfo = $placementquizid > 0 ? local_flwplacement_get_quiz_info($placementquizid) : null;
+$usequizplacement = $placementquizid > 0;
+$quizsyncerror = null;
+$placementtablesinstalled = $DB->get_manager()->table_exists('local_flwplacement');
+$forceautostart = optional_param('autostart', 0, PARAM_BOOL)
+    || optional_param('flwautostart', 0, PARAM_BOOL)
+    || optional_param('flwplacement', 0, PARAM_BOOL);
+if ($usequizplacement && $placementquizinfo && isloggedin() && !isguestuser()) {
+    local_flwplacement_cleanup_stale_quiz_attempts($placementquizid, (int)$USER->id);
+    if ($placementtablesinstalled) {
+        try {
+            local_flwplacement_save_quiz_result($placementquizid, (int)$USER->id, $defaultlanguagecode, $defaultlanguagelabel);
+        } catch (moodle_exception $e) {
+            if (($e->errorcode ?? '') !== 'noquizattempttosync') {
+                debugging('local_flwplacement auto-sync failed: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            }
+        }
+    }
+}
+
+if ($forceautostart && $usequizplacement && $placementquizinfo && !empty($placementquizinfo['cmid'])) {
+    redirect(new moodle_url('/mod/quiz/startattempt.php', [
+        'cmid' => (int)$placementquizinfo['cmid'],
+        'sesskey' => sesskey(),
+        'flwplacement' => 1,
+        'flwautostart' => 1,
+        'flwskippreflight' => 1,
+    ]));
 }
 
 $targetworldoptions = [];
@@ -102,15 +139,28 @@ $url = new moodle_url('/local/flwplacement/index.php', [
     'language' => $defaultlanguagecode,
 ]);
 $PAGE->set_url($url);
-$PAGE->set_context($context);
-$PAGE->set_course($course);
-$PAGE->set_title(get_string('placementtest', 'local_flwplacement'));
-$PAGE->set_heading(get_string('placementtest', 'local_flwplacement'));
-$PAGE->requires->css(new moodle_url('/local/flwplacement/styles.css'));
-$PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/questionBank.js'));
-$PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/engine.js'));
-$PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/report.js'));
-$PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/moodlePlacement.js'));
+
+if ($usequizplacement && data_submitted() && confirm_sesskey() && optional_param('syncquiz', 0, PARAM_BOOL)) {
+    try {
+        if (!$placementtablesinstalled) {
+            throw new moodle_exception('pluginnotinstalled', 'local_flwplacement');
+        }
+        if (!$placementquizinfo) {
+            throw new moodle_exception('linkedquiznotavailable', 'local_flwplacement');
+        }
+        $resultid = local_flwplacement_save_quiz_result($placementquizid, (int)$USER->id, $defaultlanguagecode, $defaultlanguagelabel);
+        redirect(new moodle_url('/local/flwplacement/view.php', ['id' => $resultid]), get_string('quizattemptsynced', 'local_flwplacement'));
+    } catch (moodle_exception $e) {
+        $quizsyncerror = $e;
+    }
+}
+
+if (!$usequizplacement) {
+    $PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/questionBank.js'));
+    $PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/engine.js'));
+    $PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/report.js'));
+    $PAGE->requires->js(new moodle_url('/local/flwplacement/assets/js/moodlePlacement.js'));
+}
 
 $config = [
     'userid' => $USER->id,
@@ -126,12 +176,19 @@ $config = [
     'exportUrl' => (new moodle_url('/local/flwplacement/export.php'))->out(false),
     'canViewReports' => has_capability('local/flwplacement:viewreports', $context),
     'latestPlacementProfile' => $latestprofile,
+    'moodleQuizPlacement' => [
+        'enabled' => $usequizplacement,
+        'quizid' => $placementquizid,
+        'name' => $placementquizinfo['name'] ?? '',
+        'url' => $placementquizinfo ? $placementquizinfo['url']->out(false) : '',
+        'questionCount' => $placementquizinfo['questioncount'] ?? 0,
+    ],
 ];
 
 $output = $PAGE->get_renderer('core');
 echo $output->header();
 
-if (!$DB->get_manager()->table_exists('local_flwplacement')) {
+if (!$placementtablesinstalled) {
     echo $output->notification(get_string('pluginnotinstalled', 'local_flwplacement'), 'warning');
     echo $output->footer();
     exit;
@@ -149,12 +206,74 @@ echo html_writer::div('Foreign Language World', 'flw-placement-eyebrow');
 echo html_writer::tag('h2', get_string('placementtest', 'local_flwplacement'));
 echo html_writer::end_div();
 echo html_writer::start_div('flw-placement-status');
-echo html_writer::span('Ready', 'flw-placement-phase', ['id' => 'flw-placement-phase']);
+echo html_writer::span($usequizplacement ? get_string('moodlequiz', 'local_flwplacement') : 'Ready', 'flw-placement-phase', ['id' => 'flw-placement-phase']);
 echo html_writer::tag('strong', '0%', ['id' => 'flw-placement-progress-text']);
 echo html_writer::end_div();
 echo html_writer::div(html_writer::div('', 'flw-placement-progress-bar', ['id' => 'flw-placement-progress-bar']), 'flw-placement-progress-track');
 echo html_writer::end_div();
-echo html_writer::div('', 'flw-placement-workspace', ['id' => 'flw-placement-workspace']);
+if ($usequizplacement) {
+    echo html_writer::start_div('flw-placement-workspace flw-placement-quiz-mode', ['id' => 'flw-placement-workspace']);
+    if ($quizsyncerror) {
+        echo $output->notification($quizsyncerror->getMessage(), 'warning');
+    }
+    echo html_writer::start_div('flw-placement-card flw-placement-quiz-card');
+    echo html_writer::tag('h3', get_string('moodlequizplacement', 'local_flwplacement'));
+    echo html_writer::tag('p', get_string('moodlequizplacementintro', 'local_flwplacement'), ['class' => 'flw-placement-muted']);
+    if ($placementquizinfo) {
+        echo html_writer::start_div('flw-placement-mini-grid');
+        $quizdetails = [
+            get_string('language', 'moodle') => $defaultlanguagelabel,
+            get_string('moodlequiz', 'local_flwplacement') => $placementquizinfo['name'],
+            get_string('questioncount', 'local_flwplacement') => $placementquizinfo['questioncount'],
+        ];
+        foreach ($quizdetails as $label => $value) {
+            echo html_writer::div(
+                html_writer::span(s($label)) .
+                html_writer::tag('strong', s($value)),
+                'flw-placement-mini-card'
+            );
+        }
+        echo html_writer::end_div();
+        echo html_writer::start_div('flw-placement-button-row');
+        echo html_writer::start_tag('form', [
+            'method' => 'post',
+            'action' => (new moodle_url('/mod/quiz/startattempt.php'))->out(false),
+            'class' => 'flw-placement-inline-form',
+        ]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'cmid', 'value' => (int)$placementquizinfo['cmid']]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwautostart', 'value' => 1]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwskippreflight', 'value' => 1]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwplacement', 'value' => 1]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'autostart', 'value' => 1]);
+        echo html_writer::empty_tag('input', [
+            'type' => 'submit',
+            'class' => 'btn btn-primary',
+            'value' => get_string('openmoodlequiz', 'local_flwplacement'),
+        ]);
+        echo html_writer::end_tag('form');
+        echo html_writer::start_tag('form', [
+            'method' => 'post',
+            'action' => $url->out(false),
+            'class' => 'flw-placement-inline-form',
+        ]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'syncquiz', 'value' => 1]);
+        echo html_writer::empty_tag('input', [
+            'type' => 'submit',
+            'class' => 'btn btn-secondary',
+            'value' => get_string('syncquizplacement', 'local_flwplacement'),
+        ]);
+        echo html_writer::end_tag('form');
+        echo html_writer::end_div();
+    } else {
+        echo html_writer::div(get_string('linkedquiznotavailable', 'local_flwplacement'), 'alert alert-warning');
+    }
+    echo html_writer::end_div();
+    echo html_writer::end_div();
+} else {
+    echo html_writer::div('', 'flw-placement-workspace', ['id' => 'flw-placement-workspace']);
+}
 echo html_writer::end_div();
 
 echo $output->footer();
