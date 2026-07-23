@@ -67,7 +67,8 @@ if (has_capability('local/flwexam:manageexams', $context)) {
         ['class' => 'btn btn-secondary flwexam-main-action']
     );
 }
-if (has_capability('local/flwexam:manageselfexams', $context) ||
+if (has_capability('local/flwexam:manageteacherexams', $context) ||
+        has_capability('local/flwexam:manageselfexams', $context) ||
         has_capability('local/flwexam:manageofficialexams', $context)) {
     $heroactions[] = html_writer::link(
         new moodle_url('/local/flwexam/sessions.php'),
@@ -116,6 +117,138 @@ if ($view === 'available') {
         echo html_writer::end_div();
         echo $output->footer();
         exit;
+    }
+
+    $activefilters = [];
+    if ($selectedlanguage !== '') {
+        $activefilters['language'] = $selectedlanguage;
+    }
+    if ($selectedlevel !== '') {
+        $activefilters['cefr_level'] = $selectedlevel;
+    }
+    $sessions = exam_service::get_available_sessions((int)$USER->id, $activefilters);
+    if ($sessions) {
+        echo html_writer::tag('h3', get_string('organizedexamsessions', 'local_flwexam'), ['class' => 'flwexam-section-title']);
+        echo html_writer::start_div('flwexam-exam-grid');
+        foreach ($sessions as $session) {
+            echo html_writer::start_div('flwexam-exam-card');
+            echo html_writer::div(s($session['session_type_label']), 'flwexam-card-label');
+            echo html_writer::tag('h3', s($session['name']));
+            echo html_writer::tag('p', s($session['examname']), ['class' => 'flwexam-muted']);
+            echo html_writer::start_div('flwexam-summary-grid');
+            $details = [
+                get_string('language', 'local_flwexam') => exam_service::language_label($session['language']),
+                get_string('track', 'local_flwexam') => exam_service::track_label($session['learning_course_category']),
+                get_string('cefrlevel', 'local_flwexam') => $session['cefr_level'],
+                get_string('questions', 'local_flwexam') => $session['question_count'],
+                get_string('attemptsremaining', 'local_flwexam') => max(0, $session['max_attempts'] - $session['attempt_count']),
+                get_string('accesscode', 'local_flwexam') => $session['requires_access_code'] ? get_string('required') : get_string('notrequired', 'local_flwexam'),
+                get_string('availability', 'local_flwexam') => get_string($session['availability_status'], 'local_flwexam'),
+            ];
+            if (!empty($session['timestart'])) {
+                $details[get_string('startsat', 'local_flwexam')] = userdate($session['timestart']);
+            }
+            if (!empty($session['timeend'])) {
+                $details[get_string('endsat', 'local_flwexam')] = userdate($session['timeend']);
+            }
+            if ($session['branchname'] !== '') {
+                $details[get_string('branchname', 'local_flwexam')] = $session['branchname'];
+            }
+            foreach ($details as $label => $value) {
+                echo html_writer::div(
+                    html_writer::span(s($label), 'flwexam-card-label') .
+                    html_writer::tag('strong', s((string)$value)),
+                    'flwexam-mini-card'
+                );
+            }
+            echo html_writer::end_div();
+            echo html_writer::start_div('flwexam-action-row');
+            $startlabel = $session['session_type'] === exam_service::SESSION_TYPE_OFFICIAL
+                ? get_string('startofficialexam', 'local_flwexam')
+                : get_string('startteacherexam', 'local_flwexam');
+            $starturl = new moodle_url('/local/flwexam/attempt.php', [
+                'examid' => $session['examid'],
+                'sessionid' => $session['id'],
+            ]);
+            $secondsuntilstart = !empty($session['timestart']) ? (int)$session['timestart'] - time() : 0;
+            $showcountdown = !$session['can_start'] && $secondsuntilstart > 0;
+            if ($session['can_start']) {
+                echo html_writer::link(
+                    $starturl,
+                    $startlabel,
+                    ['class' => 'btn btn-primary']
+                );
+            } else if ($showcountdown) {
+                $countdownbuttonlabel = $secondsuntilstart <= 900
+                    ? get_string('startingsoon', 'local_flwexam')
+                    : get_string('comingsoon', 'local_flwexam');
+                echo html_writer::tag(
+                    'span',
+                    get_string('examcountdownprefix', 'local_flwexam') . ' ' .
+                        html_writer::span('', 'flwexam-countdown-value', [
+                            'data-flwexam-countdown' => '1',
+                            'data-start-time' => (int)$session['timestart'],
+                        ]),
+                    ['class' => 'flwexam-countdown-pill']
+                );
+                echo html_writer::tag(
+                    'button',
+                    $countdownbuttonlabel,
+                    [
+                        'class' => 'btn btn-secondary',
+                        'type' => 'button',
+                        'disabled' => 'disabled',
+                        'data-flwexam-countdown-button' => '1',
+                        'data-start-time' => (int)$session['timestart'],
+                        'data-start-url' => $starturl->out(false),
+                        'data-start-label' => $startlabel,
+                    ]
+                );
+            } else {
+                echo html_writer::tag(
+                    'button',
+                    get_string($session['availability_status'], 'local_flwexam'),
+                    ['class' => 'btn btn-secondary', 'type' => 'button', 'disabled' => 'disabled']
+                );
+            }
+            echo html_writer::end_div();
+            echo html_writer::end_div();
+        }
+        echo html_writer::end_div();
+        $PAGE->requires->js_init_code(
+            '(function() {' .
+            'var countdowns = Array.prototype.slice.call(document.querySelectorAll("[data-flwexam-countdown]"));' .
+            'var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-flwexam-countdown-button]"));' .
+            'if (!countdowns.length && !buttons.length) { return; }' .
+            'function pad(value) { return value < 10 ? "0" + value : String(value); }' .
+            'function format(seconds) {' .
+            'seconds = Math.max(0, seconds);' .
+            'var hours = Math.floor(seconds / 3600);' .
+            'var minutes = Math.floor((seconds % 3600) / 60);' .
+            'if (hours > 0) { return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds % 60); }' .
+            'return pad(minutes) + ":" + pad(seconds % 60);' .
+            '}' .
+            'function tick() {' .
+            'var now = Math.floor(Date.now() / 1000);' .
+            'countdowns.forEach(function(node) {' .
+            'var remaining = parseInt(node.getAttribute("data-start-time"), 10) - now;' .
+            'node.textContent = format(remaining);' .
+            '});' .
+            'buttons.forEach(function(button) {' .
+            'var remaining = parseInt(button.getAttribute("data-start-time"), 10) - now;' .
+            'if (remaining <= 0) {' .
+            'var link = document.createElement("a");' .
+            'link.className = "btn btn-primary";' .
+            'link.href = button.getAttribute("data-start-url");' .
+            'link.textContent = button.getAttribute("data-start-label");' .
+            'button.parentNode.replaceChild(link, button);' .
+            '}' .
+            '});' .
+            '}' .
+            'tick();' .
+            'window.setInterval(tick, 1000);' .
+            '}());'
+        );
     }
 
     echo html_writer::start_tag('form', [
@@ -168,56 +301,6 @@ if ($view === 'available') {
         exit;
     }
 
-    $activefilters = [
-        'language' => $selectedlanguage,
-        'cefr_level' => $selectedlevel,
-    ];
-    $sessions = exam_service::get_available_sessions((int)$USER->id, $activefilters);
-    if ($sessions) {
-        echo html_writer::tag('h3', get_string('availableexamsessions', 'local_flwexam'), ['class' => 'flwexam-section-title']);
-        echo html_writer::start_div('flwexam-exam-grid');
-        foreach ($sessions as $session) {
-            echo html_writer::start_div('flwexam-exam-card');
-            echo html_writer::div(s($session['session_type_label']), 'flwexam-card-label');
-            echo html_writer::tag('h3', s($session['name']));
-            echo html_writer::tag('p', s($session['examname']), ['class' => 'flwexam-muted']);
-            echo html_writer::start_div('flwexam-summary-grid');
-            $details = [
-                get_string('language', 'local_flwexam') => exam_service::language_label($session['language']),
-                get_string('track', 'local_flwexam') => exam_service::track_label($session['learning_course_category']),
-                get_string('cefrlevel', 'local_flwexam') => $session['cefr_level'],
-                get_string('questions', 'local_flwexam') => $session['question_count'],
-                get_string('attemptsremaining', 'local_flwexam') => max(0, $session['max_attempts'] - $session['attempt_count']),
-                get_string('accesscode', 'local_flwexam') => $session['requires_access_code'] ? get_string('required') : get_string('notrequired', 'local_flwexam'),
-            ];
-            if ($session['branchname'] !== '') {
-                $details[get_string('branchname', 'local_flwexam')] = $session['branchname'];
-            }
-            foreach ($details as $label => $value) {
-                echo html_writer::div(
-                    html_writer::span(s($label), 'flwexam-card-label') .
-                    html_writer::tag('strong', s((string)$value)),
-                    'flwexam-mini-card'
-                );
-            }
-            echo html_writer::end_div();
-            echo html_writer::start_div('flwexam-action-row');
-            echo html_writer::link(
-                new moodle_url('/local/flwexam/attempt.php', [
-                    'examid' => $session['examid'],
-                    'sessionid' => $session['id'],
-                ]),
-                $session['session_type'] === exam_service::SESSION_TYPE_OFFICIAL
-                    ? get_string('startofficialexam', 'local_flwexam')
-                    : get_string('startselfexam', 'local_flwexam'),
-                ['class' => 'btn btn-primary']
-            );
-            echo html_writer::end_div();
-            echo html_writer::end_div();
-        }
-        echo html_writer::end_div();
-    }
-
     $exams = exam_service::get_available_exams($activefilters);
     if (!$exams) {
         if (!$sessions) {
@@ -231,7 +314,7 @@ if ($view === 'available') {
         exit;
     }
 
-    echo html_writer::tag('h3', get_string('matchingexams', 'local_flwexam'), ['class' => 'flwexam-section-title']);
+    echo html_writer::tag('h3', get_string('selfexamsessions', 'local_flwexam'), ['class' => 'flwexam-section-title']);
     echo html_writer::start_div('flwexam-exam-grid');
     foreach ($exams as $exam) {
         $latestresult = exam_service::get_latest_result_for_exam((int)$exam['id'], (int)$USER->id);
@@ -267,7 +350,7 @@ if ($view === 'available') {
                             'cmid' => (int)$quizinfo['cmid'],
                             'sesskey' => sesskey(),
                         ]),
-                        get_string('startexam', 'local_flwexam'),
+                        get_string('startselfexam', 'local_flwexam'),
                         'post',
                         [
                             'class' => 'flwexam-inline-form flwexam-quiz-start-form',
@@ -280,7 +363,7 @@ if ($view === 'available') {
             } else {
                 echo html_writer::link(
                     new moodle_url('/local/flwexam/attempt.php', ['examid' => $exam['id']]),
-                    get_string('startexam', 'local_flwexam'),
+                    get_string('startselfexam', 'local_flwexam'),
                     ['class' => 'btn btn-primary']
                 );
             }
@@ -314,6 +397,7 @@ $table = new html_table();
 $table->attributes['class'] = 'generaltable flwexam-table';
 $table->head = [
     get_string('examname', 'local_flwexam'),
+    get_string('examdelivery', 'local_flwexam'),
     get_string('language', 'local_flwexam'),
     get_string('cefrlevel', 'local_flwexam'),
     get_string('date', 'local_flwexam'),
@@ -338,8 +422,38 @@ foreach ($history as $row) {
             ['class' => 'btn btn-primary btn-sm']
         );
     }
+    $sessiondetails = html_writer::tag('strong', s($row['session_type_label']));
+    $hasorganisedsession = !empty($row['session_id']);
+    if ($hasorganisedsession && $row['session_name'] !== $row['session_type_label']) {
+        $sessiondetails .= html_writer::div(s($row['session_name']), 'flwexam-muted');
+    }
+    if ($hasorganisedsession) {
+        $sessioninfo = [];
+        $sessioninfo[] = get_string('sessionname', 'local_flwexam') . ': ' . $row['session_name'];
+        if (!empty($row['branchname'])) {
+            $sessioninfo[] = get_string('branchname', 'local_flwexam') . ': ' . $row['branchname'];
+        }
+        if (!empty($row['session_time_start']) || !empty($row['session_time_end'])) {
+            $start = !empty($row['session_time_start']) ? userdate($row['session_time_start']) : get_string('anytime', 'local_flwexam');
+            $end = !empty($row['session_time_end']) ? userdate($row['session_time_end']) : get_string('anytime', 'local_flwexam');
+            $sessioninfo[] = get_string('sessionwindow', 'local_flwexam') . ': ' . $start . ' - ' . $end;
+        }
+        if (!empty($row['session_question_count'])) {
+            $sessioninfo[] = get_string('questioncountpersession', 'local_flwexam') . ': ' . $row['session_question_count'];
+        }
+        if (!empty($row['session_max_attempts'])) {
+            $sessioninfo[] = get_string('maxattempts', 'local_flwexam') . ': ' . $row['session_max_attempts'];
+        }
+        $sessiondetails .= html_writer::tag(
+            'details',
+            html_writer::tag('summary', get_string('sessioninfo', 'local_flwexam')) .
+                html_writer::alist(array_map('s', $sessioninfo), ['class' => 'flwexam-session-info-list']),
+            ['class' => 'flwexam-session-info']
+        );
+    }
     $table->data[] = [
         s($row['examname']),
+        $sessiondetails,
         s($row['language']),
         s($row['cefr_level']),
         userdate($row['timecreated']),

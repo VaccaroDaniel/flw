@@ -49,9 +49,27 @@ if ($sessionid > 0) {
 
 $quizsyncerror = null;
 if (!empty($exam->quizid)) {
+    global $SESSION;
+
+    if (!isset($SESSION->local_flwexam_pending_quiz_sessions) ||
+            !is_array($SESSION->local_flwexam_pending_quiz_sessions)) {
+        $SESSION->local_flwexam_pending_quiz_sessions = [];
+    }
+    $pendingkey = (int)$exam->quizid . ':' . (int)$exam->id;
+    if ($session) {
+        $SESSION->local_flwexam_pending_quiz_sessions[$pendingkey] = [
+            'examid' => (int)$exam->id,
+            'quizid' => (int)$exam->quizid,
+            'sessionid' => (int)$session->id,
+            'timecreated' => time(),
+        ];
+    } else {
+        unset($SESSION->local_flwexam_pending_quiz_sessions[$pendingkey]);
+    }
+
     if (data_submitted() && confirm_sesskey()) {
         try {
-            $result = exam_service::record_quiz_attempt_result($examid, (int)$USER->id);
+            $result = exam_service::record_quiz_attempt_result($examid, (int)$USER->id, $sessionid);
             redirect(new moodle_url('/local/flwexam/result.php', ['id' => $result['id']]), get_string('quizattemptsynced', 'local_flwexam'));
         } catch (moodle_exception $e) {
             $quizsyncerror = $e;
@@ -204,7 +222,7 @@ echo local_flwexam_render_hero(
     [
         get_string('questions', 'local_flwexam') => (string)count($questions),
         get_string('cefrlevel', 'local_flwexam') => $exam->cefrlevel,
-        get_string('examdelivery', 'local_flwexam') => $session ? exam_service::session_type_label($session->sessiontype) : get_string('directexam', 'local_flwexam'),
+        get_string('examdelivery', 'local_flwexam') => $session ? exam_service::session_type_label($session->sessiontype) : get_string('selfexamsession', 'local_flwexam'),
     ]
 );
 echo html_writer::tag('p', get_string('unansweredquestionswarning', 'local_flwexam'), ['class' => 'flwexam-muted']);

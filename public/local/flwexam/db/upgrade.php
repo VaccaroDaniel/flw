@@ -115,6 +115,14 @@ function xmldb_local_flwexam_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026072300, 'local', 'flwexam');
     }
 
+    if ($oldversion < 2026072301) {
+        if ($dbman->table_exists('local_flwexam_sessions')) {
+            $DB->set_field('local_flwexam_sessions', 'sessiontype', 'teacher', ['sessiontype' => 'self']);
+        }
+
+        upgrade_plugin_savepoint(true, 2026072301, 'local', 'flwexam');
+    }
+
     return true;
 }
 

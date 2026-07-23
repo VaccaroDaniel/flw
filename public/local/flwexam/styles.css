@@ -102,6 +102,26 @@ body.path-local-flwexam #page.drawers .main-inner {
     gap: .65rem;
 }
 
+.flwexam-countdown-pill {
+    align-items: center;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 999px;
+    color: #7c2d12;
+    display: inline-flex;
+    font-size: .92rem;
+    font-weight: 700;
+    line-height: 1.2;
+    min-height: 38px;
+    padding: .5rem .8rem;
+}
+
+.flwexam-countdown-value {
+    color: #9a3412;
+    font-variant-numeric: tabular-nums;
+    margin-left: .35rem;
+}
+
 .flwexam-inline-form {
     display: inline-flex;
     margin: 0;
@@ -809,6 +829,24 @@ body.path-local-flwexam #page.drawers .main-inner {
     overflow-wrap: break-word;
     vertical-align: middle;
     word-break: normal;
+}
+
+.flwexam-session-info {
+    margin-top: .35rem;
+}
+
+.flwexam-session-info summary {
+    color: var(--flwexam-teal);
+    cursor: pointer;
+    font-size: .86rem;
+    font-weight: 700;
+}
+
+.flwexam-session-info-list {
+    color: var(--flwexam-muted);
+    font-size: .86rem;
+    margin: .35rem 0 0;
+    padding-left: 1rem;
 }
 
 @media (max-width: 900px) {

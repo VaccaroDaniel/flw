@@ -48,6 +48,15 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'local/flwexam:manageteacherexams' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
     'local/flwexam:manageofficialexams' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,

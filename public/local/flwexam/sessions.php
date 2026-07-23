@@ -9,9 +9,10 @@ use local_flwexam\service\exam_service;
 require_login();
 
 $context = context_system::instance();
-$canmanageself = has_capability('local/flwexam:manageselfexams', $context);
+$canmanageteacher = has_capability('local/flwexam:manageteacherexams', $context) ||
+    has_capability('local/flwexam:manageselfexams', $context);
 $canmanageofficial = has_capability('local/flwexam:manageofficialexams', $context);
-if (!$canmanageself && !$canmanageofficial) {
+if (!$canmanageteacher && !$canmanageofficial) {
     require_capability('local/flwexam:manageofficialexams', $context);
 }
 
@@ -39,7 +40,7 @@ $deleteid = optional_param('delete', 0, PARAM_INT);
 if ($deleteid > 0) {
     require_sesskey();
     $deletesession = $DB->get_record('local_flwexam_sessions', ['id' => $deleteid], '*', MUST_EXIST);
-    local_flwexam_require_session_manage_capability($deletesession->sessiontype, $canmanageself, $canmanageofficial, $context);
+    local_flwexam_require_session_manage_capability($deletesession->sessiontype, $canmanageteacher, $canmanageofficial, $context);
     $DB->delete_records('local_flwexam_sessions', ['id' => $deleteid]);
     redirect($url, get_string('examsessiondeleted', 'local_flwexam'), null, \core\output\notification::NOTIFY_SUCCESS);
 }
@@ -53,11 +54,11 @@ $formerrors = [];
 if (data_submitted() && confirm_sesskey() && optional_param('action', '', PARAM_ALPHA) === 'save') {
     $submittedid = optional_param('id', 0, PARAM_INT);
     $sessiontype = optional_param('sessiontype', '', PARAM_ALPHA);
-    if (!in_array($sessiontype, [exam_service::SESSION_TYPE_SELF, exam_service::SESSION_TYPE_OFFICIAL], true)) {
+    if (!in_array($sessiontype, [exam_service::SESSION_TYPE_TEACHER, exam_service::SESSION_TYPE_OFFICIAL], true)) {
         $formerrors[] = get_string('invalidsessionsettings', 'local_flwexam');
-        $sessiontype = exam_service::SESSION_TYPE_SELF;
+        $sessiontype = exam_service::SESSION_TYPE_TEACHER;
     }
-    local_flwexam_require_session_manage_capability($sessiontype, $canmanageself, $canmanageofficial, $context);
+    local_flwexam_require_session_manage_capability($sessiontype, $canmanageteacher, $canmanageofficial, $context);
 
     $name = trim(optional_param('name', '', PARAM_TEXT));
     if ($name === '') {
@@ -162,7 +163,7 @@ if (data_submitted() && confirm_sesskey() && optional_param('action', '', PARAM_
 
     if ($submittedid > 0 && !$formerrors) {
         $existing = $DB->get_record('local_flwexam_sessions', ['id' => $submittedid], 'id,timecreated,createdby,sessiontype', MUST_EXIST);
-        local_flwexam_require_session_manage_capability($existing->sessiontype, $canmanageself, $canmanageofficial, $context);
+        local_flwexam_require_session_manage_capability($existing->sessiontype, $canmanageteacher, $canmanageofficial, $context);
         $record->id = (int)$existing->id;
         $record->timecreated = (int)$existing->timecreated;
         $record->createdby = (int)$existing->createdby;
@@ -204,12 +205,15 @@ echo local_flwexam_render_hero(
         ),
     ],
     [
-        get_string('selfexam', 'local_flwexam') => $canmanageself ? get_string('available', 'local_flwexam') : get_string('notavailable', 'local_flwexam'),
+        get_string('teacherexam', 'local_flwexam') => $canmanageteacher ? get_string('available', 'local_flwexam') : get_string('notavailable', 'local_flwexam'),
         get_string('officialexam', 'local_flwexam') => $canmanageofficial ? get_string('available', 'local_flwexam') : get_string('notavailable', 'local_flwexam'),
     ]
 );
 
-$sessiontype = $editing->sessiontype ?? ($canmanageself ? exam_service::SESSION_TYPE_SELF : exam_service::SESSION_TYPE_OFFICIAL);
+$sessiontype = $editing->sessiontype ?? ($canmanageteacher ? exam_service::SESSION_TYPE_TEACHER : exam_service::SESSION_TYPE_OFFICIAL);
+if ($sessiontype === exam_service::SESSION_TYPE_SELF) {
+    $sessiontype = exam_service::SESSION_TYPE_TEACHER;
+}
 $examoptions = local_flwexam_exam_options();
 $courseoptions = local_flwexam_course_options((int)$USER->id, $canmanageofficial);
 $groupoptions = local_flwexam_group_options((int)$USER->id, $canmanageofficial);
@@ -240,7 +244,7 @@ echo html_writer::start_div('flwexam-manage-body flwexam-session-manage-body');
 echo html_writer::start_div('flwexam-filter-grid flwexam-session-grid');
 
 echo local_flwexam_select_field('sessiontype', get_string('sessiontype', 'local_flwexam'), [
-    exam_service::SESSION_TYPE_SELF => get_string('selfexam', 'local_flwexam'),
+    exam_service::SESSION_TYPE_TEACHER => get_string('teacherexam', 'local_flwexam'),
     exam_service::SESSION_TYPE_OFFICIAL => get_string('officialexam', 'local_flwexam'),
 ], $sessiontype, 'flwexam-session-short', true);
 echo local_flwexam_text_field('name', get_string('sessionname', 'local_flwexam'), $editing->name ?? '', 'text', 'flwexam-session-wide', true);
@@ -434,7 +438,7 @@ function local_flwexam_require_session_manage_capability(
         require_capability('local/flwexam:manageofficialexams', $context);
     }
     if ($sessiontype !== exam_service::SESSION_TYPE_OFFICIAL && !$canmanageself) {
-        require_capability('local/flwexam:manageselfexams', $context);
+        require_capability('local/flwexam:manageteacherexams', $context);
     }
 }
 

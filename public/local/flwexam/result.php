@@ -47,6 +47,7 @@ echo html_writer::tag('h3', s($result['examname']));
 echo html_writer::start_div('flwexam-summary-grid');
 $summary = [
     get_string('learner', 'local_flwexam') => $result['learnername'],
+    get_string('examdelivery', 'local_flwexam') => $result['session_type_label'],
     get_string('language', 'local_flwexam') => $result['language'],
     get_string('cefrlevel', 'local_flwexam') => $result['cefr_level'],
     get_string('overallscore', 'local_flwexam') => local_flwexam_format_score($result['overall_score']),
@@ -62,6 +63,37 @@ foreach ($summary as $label => $value) {
     );
 }
 echo html_writer::end_div();
+
+if (!empty($result['session_id'])) {
+    $sessioninfo = [
+        get_string('sessionname', 'local_flwexam') => $result['session_name'],
+    ];
+    if (!empty($result['branchname'])) {
+        $sessioninfo[get_string('branchname', 'local_flwexam')] = $result['branchname'];
+    }
+    if (!empty($result['session_time_start']) || !empty($result['session_time_end'])) {
+        $start = !empty($result['session_time_start']) ? userdate($result['session_time_start']) : get_string('anytime', 'local_flwexam');
+        $end = !empty($result['session_time_end']) ? userdate($result['session_time_end']) : get_string('anytime', 'local_flwexam');
+        $sessioninfo[get_string('sessionwindow', 'local_flwexam')] = $start . ' - ' . $end;
+    }
+    if (!empty($result['session_question_count'])) {
+        $sessioninfo[get_string('questioncountpersession', 'local_flwexam')] = $result['session_question_count'];
+    }
+    if (!empty($result['session_max_attempts'])) {
+        $sessioninfo[get_string('maxattempts', 'local_flwexam')] = $result['session_max_attempts'];
+    }
+
+    echo html_writer::tag('h4', get_string('sessioninfo', 'local_flwexam'));
+    echo html_writer::start_div('flwexam-summary-grid');
+    foreach ($sessioninfo as $label => $value) {
+        echo html_writer::div(
+            html_writer::span(s($label), 'flwexam-card-label') .
+            html_writer::tag('strong', s((string)$value)),
+            'flwexam-mini-card'
+        );
+    }
+    echo html_writer::end_div();
+}
 
 if (!empty($result['verify_code'])) {
     echo html_writer::link(

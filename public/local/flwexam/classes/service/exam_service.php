@@ -27,8 +27,11 @@ class exam_service {
     /** @var string Valid certificate status. */
     public const CERT_STATUS_VALID = 'valid';
 
-    /** @var string Teacher/class self exam session. */
+    /** @var string Learner-started direct exam path. */
     public const SESSION_TYPE_SELF = 'self';
+
+    /** @var string Teacher/class organised exam session. */
+    public const SESSION_TYPE_TEACHER = 'teacher';
 
     /** @var string Branch/government official exam session. */
     public const SESSION_TYPE_OFFICIAL = 'official';
@@ -85,10 +88,16 @@ class exam_service {
     public static function get_history(int $userid, int $limit = 50): array {
         global $DB;
 
-        $sql = "SELECT r.*, e.name AS examname, e.code AS examcode, c.certificatecode,
-                       t.verifycode
+        $sql = "SELECT r.*, e.name AS examname, e.code AS examcode,
+                       a.sessionid, a.metadatajson AS attemptmetadatajson,
+                       s.name AS sessionname, s.sessiontype, s.branchname,
+                       s.timestart AS sessiontimestart, s.timeend AS sessiontimeend,
+                       s.questioncount AS sessionquestioncount, s.maxattempts AS sessionmaxattempts,
+                       c.certificatecode, t.verifycode
                   FROM {local_flwexam_results} r
                   JOIN {local_flwexam_exams} e ON e.id = r.examid
+                  JOIN {local_flwexam_attempts} a ON a.id = r.attemptid
+             LEFT JOIN {local_flwexam_sessions} s ON s.id = a.sessionid
              LEFT JOIN {local_flwexam_certificates} c ON c.id = r.certificateid
              LEFT JOIN {local_flwexam_verify_tokens} t
                     ON t.certificateid = c.id AND t.status = :tokenstatus
@@ -201,6 +210,21 @@ class exam_service {
 
         $exam = $DB->get_record('local_flwexam_exams', ['id' => $result->examid], '*', MUST_EXIST);
         $user = core_user::get_user($result->userid, '*', MUST_EXIST);
+        $attempt = $DB->get_record('local_flwexam_attempts', ['id' => $result->attemptid], '*', IGNORE_MISSING);
+        $attemptmetadata = $attempt ? (json_decode($attempt->metadatajson ?? '[]', true) ?: []) : [];
+        $session = null;
+        if ($attempt && !empty($attempt->sessionid)) {
+            $session = $DB->get_record('local_flwexam_sessions', ['id' => (int)$attempt->sessionid], '*', IGNORE_MISSING);
+        }
+        if (!$session && $attempt && ($attempt->source ?? '') === 'modquiz' &&
+                !empty($attemptmetadata['quiz_attempt_id'])) {
+            $quizattempt = $DB->get_record('quiz_attempts', ['id' => (int)$attemptmetadata['quiz_attempt_id']], '*', IGNORE_MISSING);
+            if ($quizattempt) {
+                $session = self::resolve_quiz_session_record($exam, (int)$result->userid, 0, $quizattempt);
+            }
+        }
+        $sessiontype = $session->sessiontype ?? ($attemptmetadata['session_type'] ?? self::SESSION_TYPE_SELF);
+        $sessionname = $session->name ?? ($attemptmetadata['session_name'] ?? get_string('selfexamsession', 'local_flwexam'));
         $skills = $DB->get_records('local_flwexam_skill_scores', ['resultid' => $resultid], 'skill ASC');
         $kpresults = $DB->get_records('local_flwexam_kp_results', ['resultid' => $resultid], 'critical DESC, kpcode ASC');
         $certificate = null;
@@ -223,6 +247,15 @@ class exam_service {
             'examid' => (int)$result->examid,
             'examname' => self::format_display_name($exam->name),
             'examcode' => $exam->code,
+            'session_id' => $session ? (int)$session->id : (int)($attempt->sessionid ?? 0),
+            'session_name' => self::format_display_name((string)$sessionname),
+            'session_type' => (string)$sessiontype,
+            'session_type_label' => self::session_type_label((string)$sessiontype),
+            'branchname' => (string)($session->branchname ?? ''),
+            'session_time_start' => (int)($session->timestart ?? 0),
+            'session_time_end' => (int)($session->timeend ?? 0),
+            'session_question_count' => (int)($session->questioncount ?? ($attemptmetadata['question_count'] ?? 0)),
+            'session_max_attempts' => (int)($session->maxattempts ?? 0),
             'language' => $result->language,
             'learning_course_category' => $result->learningcoursecategory,
             'cefr_level' => $result->cefrlevel,
@@ -463,10 +496,10 @@ class exam_service {
      * @param int $userid
      * @return array
      */
-    public static function record_quiz_attempt_result(int $examid, int $userid): array {
+    public static function record_quiz_attempt_result(int $examid, int $userid, int $sessionid = 0): array {
         require_capability('local/flwexam:viewown', context_system::instance());
 
-        return self::record_quiz_attempt_result_internal($examid, $userid);
+        return self::record_quiz_attempt_result_internal($examid, $userid, 0, false, $sessionid);
     }
 
     /**
@@ -494,7 +527,8 @@ class exam_service {
         int $examid,
         int $userid,
         int $quizattemptid = 0,
-        bool $trustedreturn = false
+        bool $trustedreturn = false,
+        int $sessionid = 0
     ): array {
         global $CFG, $DB;
 
@@ -527,6 +561,7 @@ class exam_service {
             throw new moodle_exception('noquizattempttosync', 'local_flwexam');
         }
         $externalid = 'quizattempt' . (int)$quizattempt->id;
+        $session = self::resolve_quiz_session_record($exam, $userid, $sessionid, $quizattempt);
 
         $existingresultid = $DB->get_field_sql(
             "SELECT r.id
@@ -546,6 +581,9 @@ class exam_service {
             IGNORE_MULTIPLE
         );
         if ($existingresultid) {
+            if ($session) {
+                self::attach_session_to_existing_quiz_result((int)$existingresultid, $session);
+            }
             if ($trustedreturn) {
                 return self::get_trusted_result_summary((int)$existingresultid);
             }
@@ -557,6 +595,15 @@ class exam_service {
         $overall = self::get_quiz_attempt_percent($quiz, $quizattempt);
         $skills = self::build_quiz_skill_scores($exam, $overall);
         $kpresults = self::build_quiz_kp_results($exam, $overall);
+        $sessionmetadata = $session ? [
+            'session_id' => (int)$session->id,
+            'session_type' => $session->sessiontype,
+            'session_name' => $session->name,
+        ] : [
+            'session_id' => 0,
+            'session_type' => self::SESSION_TYPE_SELF,
+            'session_name' => get_string('selfexamsession', 'local_flwexam'),
+        ];
 
         $result = self::record_result([
             'userid' => $userid,
@@ -569,7 +616,7 @@ class exam_service {
             'kp_results' => $kpresults,
             'integrity_status' => 'clear',
             'moderation_status' => 'approved',
-            'attempt_metadata' => [
+            'attempt_metadata' => $sessionmetadata + [
                 'source' => 'modquiz',
                 'external_attempt_id' => $externalid,
                 'quizid' => (int)$quiz->id,
@@ -593,6 +640,143 @@ class exam_service {
         ]);
 
         return $result;
+    }
+
+    /**
+     * Resolve the FLW session context for a Moodle Quiz-backed attempt.
+     *
+     * @param object $exam
+     * @param int $userid
+     * @param int $sessionid
+     * @param object $quizattempt
+     * @return object|null
+     */
+    protected static function resolve_quiz_session_record(
+        object $exam,
+        int $userid,
+        int $sessionid,
+        object $quizattempt
+    ): ?object {
+        global $DB, $SESSION;
+
+        if (!$DB->get_manager()->table_exists('local_flwexam_sessions')) {
+            return null;
+        }
+
+        if ($sessionid <= 0 && !empty($SESSION->local_flwexam_pending_quiz_sessions) &&
+                is_array($SESSION->local_flwexam_pending_quiz_sessions)) {
+            $pendingkey = (int)$exam->quizid . ':' . (int)$exam->id;
+            $pending = $SESSION->local_flwexam_pending_quiz_sessions[$pendingkey] ?? null;
+            if (is_array($pending) && (int)($pending['sessionid'] ?? 0) > 0) {
+                $created = (int)($pending['timecreated'] ?? 0);
+                $attemptstarted = (int)($quizattempt->timestart ?? 0);
+                if ($created > 0 && $attemptstarted >= $created - 300 && $attemptstarted <= $created + DAYSECS) {
+                    $sessionid = (int)$pending['sessionid'];
+                } else {
+                    unset($SESSION->local_flwexam_pending_quiz_sessions[$pendingkey]);
+                }
+            }
+        }
+
+        if ($sessionid > 0) {
+            $session = $DB->get_record('local_flwexam_sessions', [
+                'id' => $sessionid,
+                'examid' => (int)$exam->id,
+            ], '*', IGNORE_MISSING);
+            if ($session && self::is_session_available_to_user($session, $userid)) {
+                return $session;
+            }
+        }
+
+        $attempttime = (int)($quizattempt->timestart ?: $quizattempt->timefinish);
+        if ($attempttime <= 0) {
+            return null;
+        }
+
+        $candidates = $DB->get_records_sql(
+            "SELECT *
+               FROM {local_flwexam_sessions}
+              WHERE examid = :examid
+                AND visible = 1
+                AND status = :status
+                AND (timestart = 0 OR timestart <= :attemptstart)
+                AND (timeend = 0 OR timeend >= :attemptend)
+           ORDER BY timestart DESC, id DESC",
+            [
+                'examid' => (int)$exam->id,
+                'status' => 'open',
+                'attemptstart' => $attempttime,
+                'attemptend' => $attempttime,
+            ]
+        );
+
+        $available = [];
+        foreach ($candidates as $candidate) {
+            if (self::is_session_available_to_user($candidate, $userid)) {
+                $available[] = $candidate;
+            }
+        }
+
+        return count($available) === 1 ? reset($available) : null;
+    }
+
+    /**
+     * Attach a resolved session to an already-created Moodle Quiz result.
+     *
+     * @param int $resultid
+     * @param object $session
+     */
+    protected static function attach_session_to_existing_quiz_result(int $resultid, object $session): void {
+        global $DB;
+
+        $attempt = $DB->get_record_sql(
+            "SELECT a.*
+               FROM {local_flwexam_attempts} a
+               JOIN {local_flwexam_results} r ON r.attemptid = a.id
+              WHERE r.id = :resultid",
+            ['resultid' => $resultid],
+            IGNORE_MISSING
+        );
+        if (!$attempt || (int)$attempt->sessionid > 0 || $attempt->source !== 'modquiz') {
+            return;
+        }
+
+        $metadata = json_decode($attempt->metadatajson ?? '[]', true) ?: [];
+        $metadata['session_id'] = (int)$session->id;
+        $metadata['session_type'] = $session->sessiontype;
+        $metadata['session_name'] = $session->name;
+
+        $DB->set_field('local_flwexam_attempts', 'sessionid', (int)$session->id, ['id' => (int)$attempt->id]);
+        $DB->set_field('local_flwexam_attempts', 'metadatajson', json_encode($metadata), ['id' => (int)$attempt->id]);
+    }
+
+    /**
+     * Check whether a session is visible to the learner.
+     *
+     * @param object $session
+     * @param int $userid
+     * @return bool
+     */
+    protected static function is_session_available_to_user(object $session, int $userid): bool {
+        global $CFG, $DB;
+
+        if (empty($session->visible) || $session->status !== 'open') {
+            return false;
+        }
+        if ((int)$session->courseid > 0) {
+            require_once($CFG->libdir . '/enrollib.php');
+            $courseids = array_map('intval', array_keys(enrol_get_users_courses($userid, true, 'id')));
+            if (!in_array((int)$session->courseid, $courseids, true)) {
+                return false;
+            }
+        }
+        if ((int)$session->groupid > 0 && !$DB->record_exists('groups_members', [
+            'groupid' => (int)$session->groupid,
+            'userid' => $userid,
+        ])) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -735,7 +919,10 @@ class exam_service {
         if ($type === self::SESSION_TYPE_OFFICIAL) {
             return get_string('officialexam', 'local_flwexam');
         }
-        return get_string('selfexam', 'local_flwexam');
+        if ($type === self::SESSION_TYPE_TEACHER) {
+            return get_string('teacherexam', 'local_flwexam');
+        }
+        return get_string('selfexamsession', 'local_flwexam');
     }
 
     /**
@@ -780,9 +967,7 @@ class exam_service {
         }
 
         $now = time();
-        $where[] = '(s.timestart = 0 OR s.timestart <= :nowstart)';
         $where[] = '(s.timeend = 0 OR s.timeend >= :nowend)';
-        $params['nowstart'] = $now;
         $params['nowend'] = $now;
 
         $sql = "SELECT s.*, e.code AS examcode, e.name AS examname, e.language,
@@ -790,7 +975,7 @@ class exam_service {
                   FROM {local_flwexam_sessions} s
                   JOIN {local_flwexam_exams} e ON e.id = s.examid
                  WHERE " . implode(' AND ', $where) . "
-              ORDER BY s.sessiontype ASC, s.timeend ASC, s.name ASC";
+              ORDER BY s.sessiontype ASC, s.timestart ASC, s.timeend ASC, s.name ASC";
         $records = $DB->get_records_sql($sql, $params);
 
         require_once($CFG->libdir . '/enrollib.php');
@@ -1081,8 +1266,8 @@ class exam_service {
             'attempt_metadata' => [
                 'source' => 'local_flwexam_take',
                 'session_id' => $session ? (int)$session->id : 0,
-                'session_type' => $session ? $session->sessiontype : '',
-                'session_name' => $session ? $session->name : '',
+                'session_type' => $session ? $session->sessiontype : self::SESSION_TYPE_SELF,
+                'session_name' => $session ? $session->name : get_string('selfexamsession', 'local_flwexam'),
                 'question_count' => count($questions),
                 'answer_log' => $answerlog,
             ],
@@ -1135,6 +1320,21 @@ class exam_service {
      * @return array
      */
     private static function export_session_record(object $record, int $attemptcount): array {
+        $now = time();
+        $canstart = $record->status === 'open' &&
+            !empty($record->visible) &&
+            ((int)$record->timestart <= 0 || (int)$record->timestart <= $now) &&
+            ((int)$record->timeend <= 0 || (int)$record->timeend >= $now) &&
+            $attemptcount < max(1, (int)$record->maxattempts);
+        $availability = $canstart ? 'available' : 'comingsoon';
+        if (!empty($record->timeend) && (int)$record->timeend < $now) {
+            $availability = 'closed';
+        } else if (!empty($record->timestart) && (int)$record->timestart > $now) {
+            $availability = 'comingsoon';
+        } else if ($attemptcount >= max(1, (int)$record->maxattempts)) {
+            $availability = 'attemptlimitreached';
+        }
+
         return [
             'id' => (int)$record->id,
             'name' => self::format_display_name($record->name),
@@ -1158,6 +1358,8 @@ class exam_service {
             'requireproctor' => !empty($record->requireproctor),
             'status' => $record->status,
             'visible' => !empty($record->visible),
+            'can_start' => $canstart,
+            'availability_status' => $availability,
         ];
     }
 
@@ -1486,11 +1688,23 @@ class exam_service {
      * @return array
      */
     protected static function export_history_record(object $record): array {
+        $metadata = json_decode($record->attemptmetadatajson ?? '[]', true) ?: [];
+        $sessiontype = $record->sessiontype ?? ($metadata['session_type'] ?? self::SESSION_TYPE_SELF);
+        $sessionname = $record->sessionname ?? ($metadata['session_name'] ?? get_string('selfexamsession', 'local_flwexam'));
         return [
             'id' => (int)$record->id,
             'examid' => (int)$record->examid,
             'examname' => self::format_display_name($record->examname),
             'examcode' => $record->examcode,
+            'session_id' => (int)($record->sessionid ?? 0),
+            'session_name' => self::format_display_name((string)$sessionname),
+            'session_type' => (string)$sessiontype,
+            'session_type_label' => self::session_type_label((string)$sessiontype),
+            'branchname' => (string)($record->branchname ?? ''),
+            'session_time_start' => (int)($record->sessiontimestart ?? 0),
+            'session_time_end' => (int)($record->sessiontimeend ?? 0),
+            'session_question_count' => (int)($record->sessionquestioncount ?? 0),
+            'session_max_attempts' => (int)($record->sessionmaxattempts ?? 0),
             'language' => $record->language,
             'learning_course_category' => $record->learningcoursecategory,
             'cefr_level' => $record->cefrlevel,
