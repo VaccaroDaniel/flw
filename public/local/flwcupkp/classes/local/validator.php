@@ -12,6 +12,9 @@ class validator {
     /** @var array Allowed KP domains. */
     private const KP_DOMAINS = ['LEX', 'GRAM', 'FUNC', 'PRON', 'ORTH', 'SCRIPT', 'LISTEN', 'SPEAK', 'READ', 'WRITE', 'DISC', 'STRAT', 'PRAG', 'CULT'];
 
+    /** @var array Allowed C-UP-KP target types. */
+    private const TARGET_TYPES = ['competency', 'up', 'kp'];
+
     /**
      * Validate decoded package.
      *
@@ -40,6 +43,35 @@ class validator {
                     $errors[] = "Duplicate {$key} externalid: {$externalid}";
                 }
                 $seen[$externalid] = true;
+            }
+        }
+
+        $seenlessonobjects = [];
+        foreach (($package['lesson_mappings'] ?? []) as $row) {
+            $objectid = $row['object_externalid'] ?? ($row['externalid'] ?? '');
+            if ($objectid === '') {
+                $errors[] = 'lesson_mappings row missing object_externalid';
+                continue;
+            }
+            if (isset($seenlessonobjects[$objectid])) {
+                $errors[] = "Duplicate lesson_mappings object externalid: {$objectid}";
+            }
+            $seenlessonobjects[$objectid] = true;
+            if (!empty($row['target_type']) && !in_array((string)$row['target_type'], self::TARGET_TYPES, true)) {
+                $errors[] = 'Invalid lesson_mappings target_type for ' . $objectid . ': ' . $row['target_type'];
+            }
+            if (!empty($row['target_type']) && empty($row['target_externalid'])) {
+                $errors[] = 'lesson_mappings row with target_type must include target_externalid: ' . $objectid;
+            }
+        }
+
+        foreach (($package['project_competency_mappings'] ?? []) as $row) {
+            $objectid = $row['object_externalid'] ?? ($row['externalid'] ?? '');
+            if ($objectid === '') {
+                $errors[] = 'project_competency_mappings row missing object_externalid';
+            }
+            if (empty($row['competency_externalid']) && empty($row['competency_externalids'])) {
+                $errors[] = 'project_competency_mappings row missing competency_externalid';
             }
         }
 

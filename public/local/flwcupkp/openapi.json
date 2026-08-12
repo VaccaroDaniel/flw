@@ -1,0 +1,829 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FLW C-UP-KP Moodle External Service",
+    "version": "0.1.0-alpha",
+    "description": "Logical REST contract for local_flwcupkp. Moodle implements these operations through /webservice/rest/server.php with wsfunction set to the x-moodle-wsfunction value."
+  },
+  "servers": [
+    {
+      "url": "/webservice/rest/server.php",
+      "description": "Moodle REST web-service endpoint"
+    }
+  ],
+  "security": [
+    {
+      "moodleToken": []
+    }
+  ],
+  "paths": {
+    "/frameworks": {
+      "get": {
+        "operationId": "getFrameworks",
+        "x-moodle-wsfunction": "local_flwcupkp_get_frameworks",
+        "summary": "List C-UP-KP frameworks",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveFramework",
+        "x-moodle-wsfunction": "local_flwcupkp_save_framework",
+        "summary": "Create or update a C-UP-KP framework",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/competencies": {
+      "get": {
+        "operationId": "getCompetencies",
+        "x-moodle-wsfunction": "local_flwcupkp_get_competencies",
+        "summary": "List C-UP-KP competencies",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Query"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveCompetency",
+        "x-moodle-wsfunction": "local_flwcupkp_save_competency",
+        "summary": "Create a C-UP-KP competency",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/competencies/{id}": {
+      "put": {
+        "operationId": "updateCompetency",
+        "x-moodle-wsfunction": "local_flwcupkp_save_competency",
+        "summary": "Update a C-UP-KP competency",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/use-points": {
+      "get": {
+        "operationId": "getUsePoints",
+        "x-moodle-wsfunction": "local_flwcupkp_get_use_points",
+        "summary": "List C-UP-KP Use Points",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Query"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveUsePoint",
+        "x-moodle-wsfunction": "local_flwcupkp_save_use_point",
+        "summary": "Create a C-UP-KP Use Point",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/use-points/{id}": {
+      "put": {
+        "operationId": "updateUsePoint",
+        "x-moodle-wsfunction": "local_flwcupkp_save_use_point",
+        "summary": "Update a C-UP-KP Use Point",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/knowledge-points": {
+      "get": {
+        "operationId": "getKnowledgePoints",
+        "x-moodle-wsfunction": "local_flwcupkp_get_knowledge_points",
+        "summary": "List C-UP-KP Knowledge Points",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Query"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveKnowledgePoint",
+        "x-moodle-wsfunction": "local_flwcupkp_save_knowledge_point",
+        "summary": "Create a C-UP-KP Knowledge Point",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/knowledge-points/{id}": {
+      "put": {
+        "operationId": "updateKnowledgePoint",
+        "x-moodle-wsfunction": "local_flwcupkp_save_knowledge_point",
+        "summary": "Update a C-UP-KP Knowledge Point",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/JsonEntity"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/mappings": {
+      "get": {
+        "operationId": "getMappings",
+        "x-moodle-wsfunction": "local_flwcupkp_get_mappings",
+        "summary": "List C-UP-KP mappings",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["comp_up", "up_kp", "kp_prereq", "object_map"]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveMapping",
+        "x-moodle-wsfunction": "local_flwcupkp_save_mapping",
+        "summary": "Create or update a C-UP-KP mapping",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Mapping"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/mappings/{id}": {
+      "delete": {
+        "operationId": "deleteMapping",
+        "x-moodle-wsfunction": "local_flwcupkp_delete_mapping",
+        "summary": "Delete a C-UP-KP mapping",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/evidence": {
+      "post": {
+        "operationId": "recordEvidence",
+        "x-moodle-wsfunction": "local_flwcupkp_record_evidence",
+        "summary": "Record normalized learner evidence",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Evidence"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/EvidenceResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/states": {
+      "get": {
+        "operationId": "getLearnerStates",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_states",
+        "summary": "Get learner C-UP-KP states",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/learning-path": {
+      "get": {
+        "operationId": "getLearnerLearningPath",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_learning_path",
+        "summary": "Get learner states and learning-path recommendations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/recommendations": {
+      "get": {
+        "operationId": "getRecommendations",
+        "x-moodle-wsfunction": "local_flwcupkp_get_recommendations",
+        "summary": "Get learner learning-path recommendations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/imports": {
+      "post": {
+        "operationId": "importPackage",
+        "x-moodle-wsfunction": "local_flwcupkp_import_package",
+        "summary": "Validate and import a canonical JSON C-UP-KP package",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ImportPackage"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ImportResponse"
+          }
+        }
+      }
+    },
+    "/imports/csv": {
+      "post": {
+        "operationId": "importCsv",
+        "x-moodle-wsfunction": "local_flwcupkp_import_csv",
+        "summary": "Validate and import a supported CSV C-UP-KP artifact",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CsvImport"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ImportResponse"
+          }
+        }
+      }
+    },
+    "/imports/validation": {
+      "post": {
+        "operationId": "validateImport",
+        "x-moodle-wsfunction": "local_flwcupkp_validate_import",
+        "summary": "Validate a canonical JSON package without importing it",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ValidateImport"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/imports/csv/validation": {
+      "post": {
+        "operationId": "validateCsvImport",
+        "x-moodle-wsfunction": "local_flwcupkp_validate_csv_import",
+        "summary": "Validate a supported CSV artifact without importing it",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CsvImport"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/imports/{id}/validation": {
+      "get": {
+        "operationId": "getImportValidation",
+        "x-moodle-wsfunction": "local_flwcupkp_get_import_validation",
+        "summary": "Get stored import validation details",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/reports/coverage": {
+      "get": {
+        "operationId": "getCoverageReport",
+        "x-moodle-wsfunction": "local_flwcupkp_get_coverage_report",
+        "summary": "Get curriculum coverage report",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/reports/orphans": {
+      "get": {
+        "operationId": "getOrphansReport",
+        "x-moodle-wsfunction": "local_flwcupkp_get_orphans_report",
+        "summary": "Get orphan curriculum records report",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/reports/evidence-gaps": {
+      "get": {
+        "operationId": "getEvidenceGapsReport",
+        "x-moodle-wsfunction": "local_flwcupkp_get_evidence_gaps_report",
+        "summary": "Get evidence gap report",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/reports/cefr-alignment": {
+      "get": {
+        "operationId": "getCefrAlignmentReport",
+        "x-moodle-wsfunction": "local_flwcupkp_get_cefr_alignment_report",
+        "summary": "Get CEFR alignment report",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/moodle/sync": {
+      "post": {
+        "operationId": "syncMoodleCompetencies",
+        "x-moodle-wsfunction": "local_flwcupkp_sync_moodle_competencies",
+        "summary": "Run Moodle competency sync, dry-run by default",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dryrun": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/moodle/sync/status": {
+      "get": {
+        "operationId": "getSyncStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_sync_status",
+        "summary": "Get Moodle competency sync readiness",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "moodleToken": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "wstoken"
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "FrameworkId": {
+        "name": "frameworkid",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "CourseId": {
+        "name": "courseid",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "Query": {
+        "name": "query",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "default": ""
+        }
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 100,
+          "maximum": 500
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        }
+      }
+    },
+    "requestBodies": {
+      "JsonEntity": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "datajson": {
+                  "type": "string",
+                  "description": "JSON object payload for the entity."
+                }
+              },
+              "required": ["datajson"]
+            }
+          }
+        }
+      },
+      "Mapping": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "datajson": {
+                  "type": "string"
+                }
+              },
+              "required": ["type", "datajson"]
+            }
+          }
+        }
+      },
+      "Evidence": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "required": ["userid", "evidencetype", "targettype", "targetid", "normalizedscore", "evidencestrength"],
+              "properties": {
+                "userid": {
+                  "type": "integer"
+                },
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "unitcode": {
+                  "type": "string"
+                },
+                "evidencetype": {
+                  "type": "string"
+                },
+                "targettype": {
+                  "type": "string",
+                  "enum": ["kp", "up", "competency"]
+                },
+                "targetid": {
+                  "type": "integer"
+                },
+                "rawscore": {
+                  "type": "number",
+                  "default": 0
+                },
+                "normalizedscore": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "confidence": {
+                  "type": "number",
+                  "default": 0.5
+                },
+                "evidencestrength": {
+                  "type": "string"
+                },
+                "provenance": {
+                  "type": "string",
+                  "default": "manual"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ImportPackage": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "json": {
+                  "type": "string"
+                },
+                "sourcefile": {
+                  "type": "string"
+                }
+              },
+              "required": ["json"]
+            }
+          }
+        }
+      },
+      "ValidateImport": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "json": {
+                  "type": "string"
+                }
+              },
+              "required": ["json"]
+            }
+          }
+        }
+      },
+      "CsvImport": {
+        "content": {
+          "text/csv": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "csv": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["activity_mappings", "quiz_kp_mappings"],
+                  "default": "activity_mappings"
+                },
+                "sourcefile": {
+                  "type": "string"
+                }
+              },
+              "required": ["csv"]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "JsonResponse": {
+        "description": "Moodle external-service response. Rich payloads are returned in the json field where noted in API.md.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ImportResponse": {
+        "description": "Import result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "importid": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "entitycount": {
+                  "type": "integer"
+                },
+                "validation": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "EvidenceResponse": {
+        "description": "Evidence and recalculated learner state",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "evidenceid": {
+                  "type": "integer"
+                },
+                "state": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

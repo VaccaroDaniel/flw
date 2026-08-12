@@ -313,6 +313,32 @@
         <INDEX NAME="version_ix" UNIQUE="false" FIELDS="version"/>
       </INDEXES>
     </TABLE>
+    <TABLE NAME="flwcupkp_calrecalc" COMMENT="Controlled calibration recalculation runs">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="proposalid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="queued"/>
+        <FIELD NAME="mode" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="immediate"/>
+        <FIELD NAME="candidate_total" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="changed_or_created" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="applied" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="skipped" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="simulationjson" TYPE="text"/>
+        <FIELD NAME="resultjson" TYPE="text"/>
+        <FIELD NAME="errorsjson" TYPE="text"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timestarted" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecompleted" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="proposal_ix" UNIQUE="false" FIELDS="proposalid"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="time_ix" UNIQUE="false" FIELDS="timecreated"/>
+      </INDEXES>
+    </TABLE>
     <TABLE NAME="flwcupkp_audit" COMMENT="Audit log">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>

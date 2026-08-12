@@ -39,16 +39,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $mode = required_param('mode', PARAM_ALPHANUMEXT);
     $json = optional_param('jsonpackage', '', PARAM_RAW);
+    $csv = optional_param('csvpackage', '', PARAM_RAW);
+    $csvtype = optional_param('csvtype', 'activity_mappings', PARAM_ALPHANUMEXT);
     $sourcefile = optional_param('sourcefile', '', PARAM_PATH);
-    if (trim($json) === '' && $sourcefile !== '') {
+    if (in_array($mode, ['validate', 'import'], true) && trim($json) === '' && $sourcefile !== '') {
         [$json, $sourcefile] = local_flwcupkp_read_import_source($sourcefile);
+    }
+    if (in_array($mode, ['validatecsv', 'importcsv'], true) && trim($csv) === '' && $sourcefile !== '') {
+        [$csv, $sourcefile] = local_flwcupkp_read_import_source($sourcefile);
     }
 
     if ($mode === 'validate') {
         $package = json_decode($json, true);
         $result = \local_flwcupkp\local\validator::validate_package(is_array($package) ? $package : []);
-    } else {
+    } else if ($mode === 'import') {
         $result = \local_flwcupkp\local\import_service::import_json($json, $sourcefile);
+    } else if ($mode === 'validatecsv') {
+        $result = \local_flwcupkp\local\import_service::validate_csv($csv, $csvtype);
+    } else if ($mode === 'importcsv') {
+        $result = \local_flwcupkp\local\import_service::import_csv($csv, $csvtype, $sourcefile);
     }
 }
 
@@ -94,6 +103,19 @@ echo html_writer::label(get_string('jsonpackage', 'local_flwcupkp'), 'id_jsonpac
 echo html_writer::tag('textarea', '', ['name' => 'jsonpackage', 'id' => 'id_jsonpackage', 'rows' => 16]);
 echo html_writer::end_tag('div');
 
+echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-formrow']);
+echo html_writer::label(get_string('csvtype', 'local_flwcupkp'), 'id_csvtype');
+echo html_writer::select([
+    'activity_mappings' => get_string('csvactivitymappings', 'local_flwcupkp'),
+    'quiz_kp_mappings' => get_string('csvquizkpmappings', 'local_flwcupkp'),
+], 'csvtype', 'activity_mappings', false, ['id' => 'id_csvtype']);
+echo html_writer::end_tag('div');
+
+echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-formrow']);
+echo html_writer::label(get_string('csvpackage', 'local_flwcupkp'), 'id_csvpackage');
+echo html_writer::tag('textarea', '', ['name' => 'csvpackage', 'id' => 'id_csvpackage', 'rows' => 8]);
+echo html_writer::end_tag('div');
+
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
 echo html_writer::tag('button', get_string('validatepackage', 'local_flwcupkp'), [
     'type' => 'submit',
@@ -105,6 +127,18 @@ echo html_writer::tag('button', get_string('importpackage', 'local_flwcupkp'), [
     'type' => 'submit',
     'name' => 'mode',
     'value' => 'import',
+    'class' => 'btn btn-primary',
+]);
+echo html_writer::tag('button', get_string('validatecsvpackage', 'local_flwcupkp'), [
+    'type' => 'submit',
+    'name' => 'mode',
+    'value' => 'validatecsv',
+    'class' => 'btn btn-secondary',
+]);
+echo html_writer::tag('button', get_string('importcsvpackage', 'local_flwcupkp'), [
+    'type' => 'submit',
+    'name' => 'mode',
+    'value' => 'importcsv',
     'class' => 'btn btn-primary',
 ]);
 echo html_writer::end_tag('div');
@@ -119,35 +153,5 @@ echo $OUTPUT->footer();
  * @return array
  */
 function local_flwcupkp_read_import_source(string $sourcefile): array {
-    global $CFG;
-
-    $sourcefile = trim(str_replace('\\', '/', $sourcefile));
-    if ($sourcefile === '') {
-        return ['', ''];
-    }
-    if (preg_match('/^[A-Za-z]:|^\//', $sourcefile) || strpos($sourcefile, '..') !== false) {
-        throw new invalid_parameter_exception('Only plugin-relative C-UP-KP import paths are allowed.');
-    }
-
-    $allowedprefixes = [
-        'local/flwcupkp/fixtures/',
-        'local/flwcupkp/imports/',
-    ];
-    $allowed = false;
-    foreach ($allowedprefixes as $prefix) {
-        if (strpos($sourcefile, $prefix) === 0) {
-            $allowed = true;
-            break;
-        }
-    }
-    if (!$allowed) {
-        throw new invalid_parameter_exception('C-UP-KP import path must be under local/flwcupkp/fixtures or local/flwcupkp/imports.');
-    }
-
-    $fullpath = $CFG->dirroot . '/' . $sourcefile;
-    if (!is_readable($fullpath)) {
-        throw new moodle_exception('invalidfile', 'error', '', $sourcefile);
-    }
-
-    return [file_get_contents($fullpath), $sourcefile];
+    return \local_flwcupkp\local\unit_setup_service::read_import_source($sourcefile);
 }

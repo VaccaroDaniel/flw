@@ -37,5 +37,45 @@ function local_flwmedia_render_hub($language = 'en', string $unitcode = '', stri
         'data-courseid' => $courseid,
         'data-unitcode' => $unitcode,
         'data-defaultmode' => $defaultmode,
+        'data-strings' => json_encode(local_flwmedia_get_hub_strings(), JSON_UNESCAPED_SLASHES),
     ]);
+}
+
+/**
+ * Return localized strings used by the JavaScript Practice hub.
+ *
+ * @return array
+ */
+function local_flwmedia_get_hub_strings(): array {
+    return [
+        'all' => get_string('all', 'local_flwmedia'),
+        'audio' => get_string('audio', 'local_flwmedia'),
+        'correct' => get_string('correct', 'local_flwmedia'),
+        'dictate' => get_string('modedictate', 'local_flwmedia'),
+        'flwpractice' => get_string('flwpractice', 'local_flwmedia'),
+        'item' => get_string('item', 'local_flwmedia'),
+        'items' => get_string('items', 'local_flwmedia'),
+        'listen' => get_string('modelisten', 'local_flwmedia'),
+        'loaderror' => get_string('loaderror', 'local_flwmedia'),
+        'loadingpractice' => get_string('loadingpractice', 'local_flwmedia'),
+        'nopracticemedia' => get_string('nopracticemedia', 'local_flwmedia'),
+        'practicepage' => get_string('practicepage', 'local_flwmedia'),
+        'record' => get_string('record', 'local_flwmedia'),
+        'recording' => get_string('recording', 'local_flwmedia'),
+        'recordingnotsupported' => get_string('recordingnotsupported', 'local_flwmedia'),
+        'recordingsaved' => get_string('recordingsaved', 'local_flwmedia'),
+        'read' => get_string('moderead', 'local_flwmedia'),
+        'readingcompleted' => get_string('readingcompleted', 'local_flwmedia'),
+        'searcharia' => get_string('searcharia', 'local_flwmedia'),
+        'searchpractice' => get_string('searchpractice', 'local_flwmedia'),
+        'scoreprefix' => get_string('scoreprefix', 'local_flwmedia'),
+        'speak' => get_string('modespeak', 'local_flwmedia'),
+        'text' => get_string('text', 'local_flwmedia'),
+        'tryanotherfilter' => get_string('tryanotherfilter', 'local_flwmedia'),
+        'type' => get_string('type', 'local_flwmedia'),
+        'video' => get_string('video', 'local_flwmedia'),
+        'watch' => get_string('modewatch', 'local_flwmedia'),
+        'wordoverlapsuffix' => get_string('wordoverlapsuffix', 'local_flwmedia'),
+        'microphonenotgranted' => get_string('microphonenotgranted', 'local_flwmedia'),
+    ];
 }

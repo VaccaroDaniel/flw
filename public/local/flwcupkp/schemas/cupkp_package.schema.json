@@ -71,10 +71,22 @@
         "$ref": "#/$defs/learning_object"
       }
     },
+    "lesson_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lesson_mapping"
+      }
+    },
     "activity_mappings": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/activity_mapping"
+      }
+    },
+    "project_competency_mappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/project_competency_mapping"
       }
     },
     "assessment_rules": {
@@ -220,6 +232,56 @@
         "target_externalid": {"type": "string"},
         "role": {"type": "string"},
         "evidence_strength": {"type": "string"}
+      }
+    },
+    "lesson_mapping": {
+      "type": "object",
+      "required": ["object_externalid", "title"],
+      "properties": {
+        "object_externalid": {"type": "string"},
+        "externalid": {"type": "string"},
+        "title": {"type": "string"},
+        "unit_code": {"type": "string"},
+        "lesson": {"type": "string"},
+        "object_type": {"type": "string"},
+        "source_id": {"type": "string"},
+        "purpose": {"type": "string"},
+        "evidence_strength": {"type": "string"},
+        "difficulty": {"type": "number"},
+        "role": {"type": "string"},
+        "target_type": {"type": "string", "enum": ["kp", "up", "competency"]},
+        "target_externalid": {"type": "string"},
+        "kp_externalid": {"type": "string"},
+        "kp_externalids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "up_externalid": {"type": "string"},
+        "up_externalids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "competency_externalid": {"type": "string"},
+        "competency_externalids": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "project_competency_mapping": {
+      "type": "object",
+      "required": ["object_externalid"],
+      "properties": {
+        "object_externalid": {"type": "string"},
+        "externalid": {"type": "string"},
+        "competency_externalid": {"type": "string"},
+        "competency_externalids": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "role": {"type": "string"},
+        "evidence_strength": {"type": "string"},
+        "notes": {"type": "string"}
       }
     }
   }

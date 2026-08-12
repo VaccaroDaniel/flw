@@ -1,0 +1,21 @@
+{
+  "cupkp_schema_version": "1.0",
+  "frameworks": [],
+  "competencies": [],
+  "use_points": [],
+  "knowledge_points": [],
+  "lesson_mappings": [
+    {
+      "object_externalid": "REW-U037-L1-EXAMPLE",
+      "title": "Lesson 1 example activity",
+      "unit_code": "U037",
+      "lesson": "1",
+      "object_type": "lesson",
+      "kp_externalids": [],
+      "up_externalids": [],
+      "competency_externalids": [],
+      "evidence_strength": "controlled_production"
+    }
+  ],
+  "project_evidence": []
+}

@@ -68,7 +68,7 @@
     </style>
 
     <main id="page" class="flw-school-main flw-stack">
-        <section class="flw-sub-banner" aria-label="Category description">
+        <section class="flw-sub-banner" aria-label="{{#str}}categorydescription, theme_flwacademy{{/str}}">
             <img src="{{heroimageurl}}" alt="">
             <div>
             <p class="flw-page-kicker">{{language}}</p>
@@ -78,16 +78,16 @@
             </div>
         </section>
 
-        <section class="flw-band" aria-label="Primary and secondary school">
+        <section class="flw-band" aria-label="{{#str}}primarysecondaryschool, theme_flwacademy{{/str}}">
             <div class="flw-band-inner">
             <div class="flw-section-lead">
-                <p class="flw-page-kicker">Primary and secondary school</p>
-                <h2>Six-year courses for {{language}}</h2>
+                <p class="flw-page-kicker">{{#str}}primarysecondaryschool, theme_flwacademy{{/str}}</p>
+                <h2>{{#str}}sixyearcoursesfor, theme_flwacademy{{/str}} {{language}}</h2>
             </div>
             {{#hasprimarysecondarycategories}}
             <div class="flw-school-grid">
                 <article class="flw-school-course">
-                    <h3>{{language}} School Course</h3>
+                    <h3>{{language}} {{#str}}schoolcourse, theme_flwacademy{{/str}}</h3>
                     <div class="flw-school-year-list">
                         {{#primarycategories}}
                         <a class="flw-school-year" href="{{url}}">
@@ -105,39 +105,39 @@
                 </article>
             </div>
             {{/hasprimarysecondarycategories}}
-            {{^hasprimarysecondarycategories}}<div class="flw-empty">No primary or secondary subcategories yet.</div>{{/hasprimarysecondarycategories}}
+            {{^hasprimarysecondarycategories}}<div class="flw-empty">{{#str}}noprimarysecondarycategories, theme_flwacademy{{/str}}</div>{{/hasprimarysecondarycategories}}
             </div>
         </section>
 
         <section class="flw-band" aria-labelledby="flw-university-title">
             <div class="flw-band-inner">
             <div class="flw-section-lead">
-                <p class="flw-page-kicker">University</p>
-                <h2 id="flw-university-title">Two-year courses for {{language}}</h2>
+                <p class="flw-page-kicker">{{#str}}university, theme_flwacademy{{/str}}</p>
+                <h2 id="flw-university-title">{{#str}}twoyearcoursesfor, theme_flwacademy{{/str}} {{language}}</h2>
             </div>
             {{#hasuniversitycategories}}
             <div class="flw-school-grid">
                 <article class="flw-school-course accent-blue">
-                    <h3>{{language}} University Course</h3>
+                    <h3>{{language}} {{#str}}universitycourse, theme_flwacademy{{/str}}</h3>
                     <div class="flw-school-year-list">
                         {{#universitycategories}}
                         <a class="flw-school-year" href="{{url}}">
                             <strong>{{name}}</strong>
                             {{#hasdescription}}{{{description}}}{{/hasdescription}}
-                            {{^hasdescription}}<p>{{coursecount}} courses</p>{{/hasdescription}}
+                            {{^hasdescription}}<p>{{coursecount}} {{#str}}courses, theme_flwacademy{{/str}}</p>{{/hasdescription}}
                         </a>
                         {{/universitycategories}}
                     </div>
                 </article>
             </div>
             {{/hasuniversitycategories}}
-            {{^hasuniversitycategories}}<div class="flw-empty">No university subcategories yet.</div>{{/hasuniversitycategories}}
+            {{^hasuniversitycategories}}<div class="flw-empty">{{#str}}nouniversitycategories, theme_flwacademy{{/str}}</div>{{/hasuniversitycategories}}
             </div>
         </section>
         
         <section class="flw-band" aria-labelledby="flw-courses-title">
             <div class="flw-band-inner">
-            <div class="flw-section-head"><h2 id="flw-courses-title">{{language}} Courses</h2></div>
+            <div class="flw-section-head"><h2 id="flw-courses-title">{{language}} {{#str}}courses, theme_flwacademy{{/str}}</h2></div>
             {{#hascourses}}
             <div class="flw-course-grid">
                 {{#courses}}
@@ -149,7 +149,7 @@
                 {{/courses}}
             </div>
             {{/hascourses}}
-            {{^hascourses}}<div class="flw-empty">No {{language}} school courses have been added yet.</div>{{/hascourses}}
+            {{^hascourses}}<div class="flw-empty">{{#str}}no, theme_flwacademy{{/str}} {{language}} {{#str}}schoolcoursesadded, theme_flwacademy{{/str}}</div>{{/hascourses}}
             </div>
         </section>
 

@@ -1,0 +1,11 @@
+{
+  "valid": true,
+  "errors": [],
+  "warnings": [],
+  "coverage": {
+    "competencies_linked_to_up_percent": 0,
+    "use_points_linked_to_kp_percent": 0,
+    "kps_linked_to_learning_objects_percent": 0,
+    "competencies_with_direct_evidence_percent": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "cupkp_schema_version": "1.0",
+  "frameworks": [],
+  "competencies": [],
+  "use_points": [],
+  "knowledge_points": [],
+  "learning_objects": [],
+  "project_competency_mappings": [
+    {
+      "object_externalid": "REW-U037-L7-PROJECT",
+      "competency_externalid": "FLW-REW-B2-C-037",
+      "role": "assessment",
+      "evidence_strength": "independent_performance"
+    }
+  ],
+  "project_evidence": []
+}

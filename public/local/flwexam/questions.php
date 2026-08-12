@@ -358,7 +358,7 @@ if (!$questions) {
             (int)$question->sortorder,
             s(local_flwexam_question_type_options()[$question->qtype] ?? $question->qtype),
             s(shorten_text($question->questiontext, 120)),
-            s(ucfirst($question->skill)),
+            s(exam_service::skill_label($question->skill)),
             s($question->kpcode),
             s(core_text::strtoupper($question->correctanswer)),
             $question->visible ? get_string('visible') : get_string('hidden'),

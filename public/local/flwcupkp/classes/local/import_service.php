@@ -9,6 +9,18 @@ defined('MOODLE_INTERNAL') || die();
  * Imports canonical C-UP-KP JSON packages.
  */
 class import_service {
+    /** @var array CSV import types and required headers. */
+    private const CSV_IMPORT_TYPES = [
+        'activity_mappings' => [
+            'required' => ['object_externalid', 'target_type', 'target_externalid'],
+            'optional' => ['role', 'evidence_strength'],
+        ],
+        'quiz_kp_mappings' => [
+            'required' => ['item_id', 'object_externalid', 'kp_externalid'],
+            'optional' => ['evidence_strength', 'notes'],
+        ],
+    ];
+
     /**
      * Validate and import a JSON package.
      *
@@ -27,7 +39,7 @@ class import_service {
         $validation = validator::validate_package($package);
         $checksum = hash('sha256', $json);
 
-        if ($existing = $DB->get_record('flwcupkp_import', ['checksum' => $checksum], IGNORE_MISSING)) {
+        if ($existing = $DB->get_record('flwcupkp_import', ['checksum' => $checksum], '*', IGNORE_MISSING)) {
             return [
                 'importid' => (int)$existing->id,
                 'status' => 'already_imported',
@@ -59,16 +71,25 @@ class import_service {
         $frameworkids = self::import_frameworks($package['frameworks'] ?? []);
         $frameworkid = reset($frameworkids) ?: null;
 
+        $lessonpackage = self::normalize_lesson_mappings($package['lesson_mappings'] ?? []);
+        $projectmappings = self::normalize_project_competency_mappings($package['project_competency_mappings'] ?? []);
+
         $competencyids = self::import_entities('competencies', $package['competencies'] ?? [], $frameworkid);
         $upids = self::import_entities('use_points', $package['use_points'] ?? [], $frameworkid);
         $kpids = self::import_entities('knowledge_points', $package['knowledge_points'] ?? [], $frameworkid);
-        $objectids = self::import_entities('learning_objects', $package['learning_objects'] ?? [], $frameworkid);
+        $learningobjects = array_merge($package['learning_objects'] ?? [], $lessonpackage['learning_objects']);
+        $objectids = self::import_entities('learning_objects', $learningobjects, $frameworkid);
 
         $entitycount += count($frameworkids) + count($competencyids) + count($upids) + count($kpids) + count($objectids);
         $entitycount += self::import_comp_up($package['competency_up_mappings'] ?? [], $competencyids, $upids);
         $entitycount += self::import_up_kp($package['up_kp_mappings'] ?? [], $upids, $kpids);
         $entitycount += self::import_prereqs($package['kp_prerequisites'] ?? [], $kpids);
-        $entitycount += self::import_object_maps($package['activity_mappings'] ?? [], $objectids, $competencyids, $upids, $kpids);
+        $activitymappings = array_merge(
+            $package['activity_mappings'] ?? [],
+            $lessonpackage['activity_mappings'],
+            $projectmappings
+        );
+        $entitycount += self::import_object_maps($activitymappings, $objectids, $competencyids, $upids, $kpids);
         $entitycount += self::import_rules($package['assessment_rules'] ?? []);
 
         $DB->set_field('flwcupkp_import', 'entitycount', $entitycount, ['id' => $importid]);
@@ -81,6 +102,191 @@ class import_service {
             'entitycount' => $entitycount,
             'validation' => $validation,
         ];
+    }
+
+    /**
+     * Validate a supported C-UP-KP CSV artifact without importing it.
+     *
+     * @param string $csv
+     * @param string $type
+     * @return array
+     */
+    public static function validate_csv(string $csv, string $type = 'activity_mappings'): array {
+        $type = self::normalize_csv_type($type);
+        return self::validate_csv_rows(self::parse_csv($csv), $type);
+    }
+
+    /**
+     * Validate and import a supported C-UP-KP CSV artifact.
+     *
+     * Supported CSV types match the shipped templates:
+     * - activity_mappings: object_externalid,target_type,target_externalid,role,evidence_strength
+     * - quiz_kp_mappings: item_id,object_externalid,kp_externalid,evidence_strength,notes
+     *
+     * @param string $csv
+     * @param string $type
+     * @param string $sourcefile
+     * @return array
+     */
+    public static function import_csv(string $csv, string $type = 'activity_mappings', string $sourcefile = ''): array {
+        global $DB, $USER;
+
+        $type = self::normalize_csv_type($type);
+        $parsed = self::parse_csv($csv);
+        $validation = self::validate_csv_rows($parsed, $type);
+        $checksum = hash('sha256', 'csv:' . $type . "\n" . self::csv_checksum_payload($parsed));
+
+        if ($existing = $DB->get_record('flwcupkp_import', ['checksum' => $checksum], '*', IGNORE_MISSING)) {
+            return [
+                'importid' => (int)$existing->id,
+                'status' => 'already_imported',
+                'validation' => $validation,
+            ];
+        }
+
+        $transaction = $DB->start_delegated_transaction();
+        $importid = $DB->insert_record('flwcupkp_import', (object)[
+            'sourcefile' => $sourcefile,
+            'schemaversion' => 'csv-' . $type,
+            'checksum' => $checksum,
+            'validationstatus' => $validation['valid'] ? 'valid' : 'invalid',
+            'warningsjson' => json_encode($validation['warnings']),
+            'errorsjson' => json_encode($validation['errors']),
+            'entitycount' => 0,
+            'rollbackstatus' => 'not_rolled_back',
+            'userid' => $USER->id ?? 0,
+            'timecreated' => time(),
+        ]);
+
+        if (!$validation['valid']) {
+            $transaction->allow_commit();
+            return ['importid' => (int)$importid, 'status' => 'invalid', 'validation' => $validation];
+        }
+
+        $entitycount = $type === 'quiz_kp_mappings' ?
+            self::import_quiz_kp_csv_rows($parsed['rows']) :
+            self::import_activity_mapping_csv_rows($parsed['rows']);
+
+        $DB->set_field('flwcupkp_import', 'entitycount', $entitycount, ['id' => $importid]);
+        repository::audit('csv_imported', 'import', (int)$importid, [
+            'sourcefile' => $sourcefile,
+            'csvtype' => $type,
+            'entitycount' => $entitycount,
+        ]);
+        $transaction->allow_commit();
+
+        return [
+            'importid' => (int)$importid,
+            'status' => 'imported',
+            'entitycount' => $entitycount,
+            'validation' => $validation,
+        ];
+    }
+
+    /**
+     * Normalize lesson_cupkp_map-style rows into learning objects and activity mappings.
+     *
+     * @param array $rows
+     * @return array
+     */
+    private static function normalize_lesson_mappings(array $rows): array {
+        $objects = [];
+        $mappings = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $objectexternalid = (string)($row['object_externalid'] ?? $row['externalid'] ?? '');
+            if ($objectexternalid === '') {
+                continue;
+            }
+            $objects[] = [
+                'externalid' => $objectexternalid,
+                'title' => $row['title'] ?? $objectexternalid,
+                'unit_code' => $row['unit_code'] ?? ($row['unitcode'] ?? null),
+                'lesson' => $row['lesson'] ?? null,
+                'object_type' => $row['object_type'] ?? ($row['objecttype'] ?? 'lesson'),
+                'source_id' => $row['source_id'] ?? ($row['sourceid'] ?? null),
+                'purpose' => $row['purpose'] ?? 'lesson',
+                'evidence_strength' => $row['evidence_strength'] ?? null,
+                'difficulty' => $row['difficulty'] ?? null,
+                'role' => $row['role'] ?? 'practice',
+                'metadata' => $row['metadata'] ?? ['imported_from' => 'lesson_mappings'],
+            ];
+
+            $role = (string)($row['map_role'] ?? ($row['role'] ?? 'practice'));
+            $strength = isset($row['map_evidence_strength']) ?
+                (string)$row['map_evidence_strength'] :
+                (isset($row['evidence_strength']) ? (string)$row['evidence_strength'] : null);
+
+            if (!empty($row['target_type']) && !empty($row['target_externalid'])) {
+                $mappings[] = [
+                    'object_externalid' => $objectexternalid,
+                    'target_type' => (string)$row['target_type'],
+                    'target_externalid' => (string)$row['target_externalid'],
+                    'role' => $role,
+                    'evidence_strength' => $strength,
+                ];
+            }
+            self::add_lesson_targets($mappings, $objectexternalid, 'kp',
+                $row['kp_externalids'] ?? ($row['kp_externalid'] ?? null), $role, $strength);
+            self::add_lesson_targets($mappings, $objectexternalid, 'up',
+                $row['up_externalids'] ?? ($row['up_externalid'] ?? null), $role, $strength);
+            self::add_lesson_targets($mappings, $objectexternalid, 'competency',
+                $row['competency_externalids'] ?? ($row['competency_externalid'] ?? null), $role, $strength);
+        }
+        return ['learning_objects' => $objects, 'activity_mappings' => $mappings];
+    }
+
+    /**
+     * Normalize project_competency_mapping-style rows into activity mappings.
+     *
+     * @param array $rows
+     * @return array
+     */
+    private static function normalize_project_competency_mappings(array $rows): array {
+        $mappings = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $objectexternalid = (string)($row['object_externalid'] ?? $row['externalid'] ?? '');
+            $competencies = $row['competency_externalids'] ?? ($row['competency_externalid'] ?? null);
+            self::add_lesson_targets($mappings, $objectexternalid, 'competency', $competencies,
+                (string)($row['role'] ?? 'assessment'),
+                isset($row['evidence_strength']) ? (string)$row['evidence_strength'] : 'independent_performance');
+        }
+        return $mappings;
+    }
+
+    /**
+     * Add one or more target mappings from scalar or array external IDs.
+     *
+     * @param array $mappings
+     * @param string $objectexternalid
+     * @param string $targettype
+     * @param mixed $values
+     * @param string $role
+     * @param string|null $strength
+     */
+    private static function add_lesson_targets(array &$mappings, string $objectexternalid, string $targettype,
+            $values, string $role, ?string $strength): void {
+        if ($objectexternalid === '' || $values === null || $values === '') {
+            return;
+        }
+        foreach ((array)$values as $targetexternalid) {
+            $targetexternalid = trim((string)$targetexternalid);
+            if ($targetexternalid === '') {
+                continue;
+            }
+            $mappings[] = [
+                'object_externalid' => $objectexternalid,
+                'target_type' => $targettype,
+                'target_externalid' => $targetexternalid,
+                'role' => $role,
+                'evidence_strength' => $strength,
+            ];
+        }
     }
 
     /**
@@ -197,8 +403,10 @@ class import_service {
     private static function import_comp_up(array $rows, array $competencyids, array $upids): int {
         $count = 0;
         foreach ($rows as $row) {
-            $competencyid = $competencyids[$row['competency_externalid']] ?? null;
-            $upid = $upids[$row['up_externalid']] ?? null;
+            $competencyid = $competencyids[$row['competency_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_comp', (string)$row['competency_externalid']);
+            $upid = $upids[$row['up_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_up', (string)$row['up_externalid']);
             if (!$competencyid || !$upid) {
                 continue;
             }
@@ -223,8 +431,10 @@ class import_service {
     private static function import_up_kp(array $rows, array $upids, array $kpids): int {
         $count = 0;
         foreach ($rows as $row) {
-            $upid = $upids[$row['up_externalid']] ?? null;
-            $kpid = $kpids[$row['kp_externalid']] ?? null;
+            $upid = $upids[$row['up_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_up', (string)$row['up_externalid']);
+            $kpid = $kpids[$row['kp_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_kp', (string)$row['kp_externalid']);
             if (!$upid || !$kpid) {
                 continue;
             }
@@ -248,8 +458,10 @@ class import_service {
     private static function import_prereqs(array $rows, array $kpids): int {
         $count = 0;
         foreach ($rows as $row) {
-            $kpid = $kpids[$row['kp_externalid']] ?? null;
-            $prereq = $kpids[$row['prereq_kp_externalid']] ?? null;
+            $kpid = $kpids[$row['kp_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_kp', (string)$row['kp_externalid']);
+            $prereq = $kpids[$row['prereq_kp_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_kp', (string)$row['prereq_kp_externalid']);
             if (!$kpid || !$prereq) {
                 continue;
             }
@@ -272,10 +484,15 @@ class import_service {
     private static function import_object_maps(array $rows, array $objectids, array $competencyids, array $upids, array $kpids): int {
         $count = 0;
         foreach ($rows as $row) {
-            $objectid = $objectids[$row['object_externalid']] ?? null;
+            $objectid = $objectids[$row['object_externalid']] ??
+                repository::get_id_by_externalid('flwcupkp_object', (string)$row['object_externalid']);
             $targettype = $row['target_type'] ?? '';
             $targetexternal = $row['target_externalid'] ?? '';
-            $targetid = $targettype === 'competency' ? ($competencyids[$targetexternal] ?? null) : ($targettype === 'up' ? ($upids[$targetexternal] ?? null) : ($kpids[$targetexternal] ?? null));
+            $targetid = $targettype === 'competency' ?
+                ($competencyids[$targetexternal] ?? repository::get_id_by_externalid('flwcupkp_comp', (string)$targetexternal)) :
+                ($targettype === 'up' ?
+                    ($upids[$targetexternal] ?? repository::get_id_by_externalid('flwcupkp_up', (string)$targetexternal)) :
+                    ($kpids[$targetexternal] ?? repository::get_id_by_externalid('flwcupkp_kp', (string)$targetexternal)));
             if (!$objectid || !$targetid) {
                 continue;
             }
@@ -289,6 +506,349 @@ class import_service {
             $count++;
         }
         return $count;
+    }
+
+    /**
+     * Import activity mapping CSV rows.
+     *
+     * @param array $rows
+     * @return int
+     */
+    private static function import_activity_mapping_csv_rows(array $rows): int {
+        $count = 0;
+        foreach ($rows as $row) {
+            $object = self::object_by_externalid((string)$row['object_externalid']);
+            $targettype = self::normalize_target_type((string)$row['target_type']);
+            $target = self::target_by_externalid($targettype, (string)$row['target_externalid']);
+            repository::upsert_mapping('flwcupkp_object_map', [
+                'objectid' => (int)$object->id,
+                'targettype' => $targettype,
+                'targetid' => (int)$target->id,
+            ], (object)[
+                'objectid' => (int)$object->id,
+                'targettype' => $targettype,
+                'targetid' => (int)$target->id,
+                'role' => self::csv_value($row, 'role', 'practice'),
+                'evidencestrength' => self::csv_value($row, 'evidence_strength', null),
+            ]);
+            $count++;
+        }
+        return $count;
+    }
+
+    /**
+     * Import quiz-question-to-KP CSV rows.
+     *
+     * The Moodle evidence adapter records quiz attempts at the mapped activity level. The per-item CSV
+     * therefore both ensures an object-to-KP evidence map and preserves the item-level trace in object metadata.
+     *
+     * @param array $rows
+     * @return int
+     */
+    private static function import_quiz_kp_csv_rows(array $rows): int {
+        global $DB;
+
+        $count = 0;
+        $metadataupdates = [];
+        foreach ($rows as $row) {
+            $object = self::object_by_externalid((string)$row['object_externalid']);
+            $kp = self::target_by_externalid('kp', (string)$row['kp_externalid']);
+            $strength = self::csv_value($row, 'evidence_strength', 'recognition');
+
+            repository::upsert_mapping('flwcupkp_object_map', [
+                'objectid' => (int)$object->id,
+                'targettype' => 'kp',
+                'targetid' => (int)$kp->id,
+            ], (object)[
+                'objectid' => (int)$object->id,
+                'targettype' => 'kp',
+                'targetid' => (int)$kp->id,
+                'role' => 'assessment',
+                'evidencestrength' => $strength,
+            ]);
+
+            $metadataupdates[(int)$object->id][] = [
+                'item_id' => (string)$row['item_id'],
+                'kp_externalid' => (string)$row['kp_externalid'],
+                'evidence_strength' => $strength,
+                'notes' => self::csv_value($row, 'notes', ''),
+            ];
+            $count++;
+        }
+
+        foreach ($metadataupdates as $objectid => $items) {
+            $object = $DB->get_record('flwcupkp_object', ['id' => $objectid], '*', MUST_EXIST);
+            $metadata = json_decode((string)($object->metadatajson ?? ''), true);
+            if (!is_array($metadata)) {
+                $metadata = [];
+            }
+            $existing = [];
+            foreach (($metadata['quiz_kp_mappings'] ?? []) as $item) {
+                if (is_array($item) && !empty($item['item_id']) && !empty($item['kp_externalid'])) {
+                    $existing[(string)$item['item_id'] . '|' . (string)$item['kp_externalid']] = $item;
+                }
+            }
+            foreach ($items as $item) {
+                $existing[$item['item_id'] . '|' . $item['kp_externalid']] = $item;
+            }
+            ksort($existing);
+            $metadata['quiz_kp_mappings'] = array_values($existing);
+            $DB->set_field('flwcupkp_object', 'metadatajson',
+                json_encode($metadata, JSON_UNESCAPED_SLASHES), ['id' => $objectid]);
+        }
+
+        return $count;
+    }
+
+    /**
+     * Parse CSV into normalized header/value rows.
+     *
+     * @param string $csv
+     * @return array
+     */
+    private static function parse_csv(string $csv): array {
+        $csv = preg_replace('/^\xEF\xBB\xBF/', '', $csv);
+        if (trim($csv) === '') {
+            return ['headers' => [], 'rows' => [], 'errors' => ['CSV content is empty.']];
+        }
+
+        $errors = [];
+        $handle = fopen('php://temp', 'r+');
+        if ($handle === false) {
+            return ['headers' => [], 'rows' => [], 'errors' => ['Unable to open temporary CSV stream.']];
+        }
+        fwrite($handle, $csv);
+        rewind($handle);
+
+        $headerrow = fgetcsv($handle);
+        if ($headerrow === false) {
+            fclose($handle);
+            return ['headers' => [], 'rows' => [], 'errors' => ['CSV header row is missing.']];
+        }
+        $headers = array_map([self::class, 'normalize_csv_header'], $headerrow);
+        $rows = [];
+        $rownumber = 1;
+        while (($values = fgetcsv($handle)) !== false) {
+            $rownumber++;
+            if (count($values) === 1 && trim((string)$values[0]) === '') {
+                continue;
+            }
+            if (count($values) > count($headers)) {
+                $errors[] = "CSV row {$rownumber} has more values than headers.";
+                continue;
+            }
+            $values = array_pad($values, count($headers), '');
+            $row = [];
+            foreach ($headers as $idx => $header) {
+                if ($header === '') {
+                    continue;
+                }
+                $row[$header] = trim((string)$values[$idx]);
+            }
+            $row['_rownum'] = $rownumber;
+            $rows[] = $row;
+        }
+        fclose($handle);
+
+        return ['headers' => $headers, 'rows' => $rows, 'errors' => $errors];
+    }
+
+    /**
+     * Validate parsed CSV rows.
+     *
+     * @param array $parsed
+     * @param string $type
+     * @return array
+     */
+    private static function validate_csv_rows(array $parsed, string $type): array {
+        $errors = $parsed['errors'] ?? [];
+        $warnings = [];
+        $config = self::CSV_IMPORT_TYPES[$type];
+
+        foreach ($config['required'] as $header) {
+            if (!in_array($header, $parsed['headers'] ?? [], true)) {
+                $errors[] = "Missing required CSV header: {$header}";
+            }
+        }
+        if (empty($parsed['rows'])) {
+            $errors[] = 'CSV contains no data rows.';
+        }
+
+        $seen = [];
+        foreach ($parsed['rows'] ?? [] as $row) {
+            $rownumber = (int)($row['_rownum'] ?? 0);
+            foreach ($config['required'] as $field) {
+                if (!isset($row[$field]) || trim((string)$row[$field]) === '') {
+                    $errors[] = "CSV row {$rownumber} missing required value: {$field}";
+                }
+            }
+            $key = $type === 'quiz_kp_mappings' ?
+                (($row['object_externalid'] ?? '') . '|' . ($row['item_id'] ?? '') . '|' . ($row['kp_externalid'] ?? '')) :
+                (($row['object_externalid'] ?? '') . '|' . ($row['target_type'] ?? '') . '|' . ($row['target_externalid'] ?? ''));
+            if ($key !== '||' && isset($seen[$key])) {
+                $warnings[] = "Duplicate CSV mapping at row {$rownumber}; later values overwrite earlier equivalent mappings.";
+            }
+            $seen[$key] = true;
+        }
+
+        if (empty($errors)) {
+            self::validate_csv_references($parsed['rows'], $type, $errors);
+        }
+
+        return ['valid' => empty($errors), 'errors' => $errors, 'warnings' => $warnings];
+    }
+
+    /**
+     * Validate DB references for parsed CSV rows.
+     *
+     * @param array $rows
+     * @param string $type
+     * @param array $errors
+     */
+    private static function validate_csv_references(array $rows, string $type, array &$errors): void {
+        foreach ($rows as $row) {
+            $rownumber = (int)($row['_rownum'] ?? 0);
+            try {
+                $object = self::object_by_externalid((string)$row['object_externalid']);
+                if ($type === 'quiz_kp_mappings') {
+                    $target = self::target_by_externalid('kp', (string)$row['kp_externalid']);
+                    self::assert_same_framework_for_csv($object, $target);
+                    continue;
+                }
+                $targettype = self::normalize_target_type((string)$row['target_type']);
+                $target = self::target_by_externalid($targettype, (string)$row['target_externalid']);
+                self::assert_same_framework_for_csv($object, $target);
+            } catch (\Exception $e) {
+                $errors[] = "CSV row {$rownumber}: " . $e->getMessage();
+            }
+        }
+    }
+
+    /**
+     * Normalize supported CSV type aliases.
+     *
+     * @param string $type
+     * @return string
+     */
+    private static function normalize_csv_type(string $type): string {
+        $type = strtolower(trim(str_replace('-', '_', $type)));
+        $aliases = [
+            'activity' => 'activity_mappings',
+            'activity_mapping' => 'activity_mappings',
+            'activity_cupkp_mapping' => 'activity_mappings',
+            'quiz' => 'quiz_kp_mappings',
+            'quiz_kp_mapping' => 'quiz_kp_mappings',
+        ];
+        $type = $aliases[$type] ?? $type;
+        if (!isset(self::CSV_IMPORT_TYPES[$type])) {
+            throw new \invalid_parameter_exception('Unsupported C-UP-KP CSV import type.');
+        }
+        return $type;
+    }
+
+    /**
+     * Normalize a CSV header.
+     *
+     * @param string $header
+     * @return string
+     */
+    private static function normalize_csv_header(string $header): string {
+        return strtolower(trim(str_replace([' ', '-'], '_', $header)));
+    }
+
+    /**
+     * Normalize target type aliases.
+     *
+     * @param string $targettype
+     * @return string
+     */
+    private static function normalize_target_type(string $targettype): string {
+        $targettype = strtolower(trim(str_replace('-', '_', $targettype)));
+        $aliases = [
+            'comp' => 'competency',
+            'competencies' => 'competency',
+            'use_point' => 'up',
+            'usepoint' => 'up',
+            'knowledge_point' => 'kp',
+            'knowledgepoint' => 'kp',
+        ];
+        $targettype = $aliases[$targettype] ?? $targettype;
+        evidence_guard::target_table($targettype);
+        return $targettype;
+    }
+
+    /**
+     * Fetch object by external ID.
+     *
+     * @param string $externalid
+     * @return \stdClass
+     */
+    private static function object_by_externalid(string $externalid): \stdClass {
+        global $DB;
+
+        $record = $DB->get_record('flwcupkp_object', ['externalid' => $externalid], '*', IGNORE_MISSING);
+        if (!$record) {
+            throw new \invalid_parameter_exception('Learning object not found: ' . $externalid);
+        }
+        return $record;
+    }
+
+    /**
+     * Fetch C-UP-KP target by external ID.
+     *
+     * @param string $targettype
+     * @param string $externalid
+     * @return \stdClass
+     */
+    private static function target_by_externalid(string $targettype, string $externalid): \stdClass {
+        global $DB;
+
+        $table = evidence_guard::target_table($targettype);
+        $record = $DB->get_record($table, ['externalid' => $externalid], '*', IGNORE_MISSING);
+        if (!$record) {
+            throw new \invalid_parameter_exception('Target not found: ' . $externalid);
+        }
+        return $record;
+    }
+
+    /**
+     * Ensure a CSV object/target pair belongs to the same framework.
+     *
+     * @param \stdClass $object
+     * @param \stdClass $target
+     */
+    private static function assert_same_framework_for_csv(\stdClass $object, \stdClass $target): void {
+        if ((int)$object->frameworkid !== (int)$target->frameworkid) {
+            throw new \invalid_parameter_exception('Object and target frameworks differ.');
+        }
+    }
+
+    /**
+     * Read a non-empty CSV value with fallback.
+     *
+     * @param array $row
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    private static function csv_value(array $row, string $key, $default) {
+        return isset($row[$key]) && trim((string)$row[$key]) !== '' ? trim((string)$row[$key]) : $default;
+    }
+
+    /**
+     * Produce deterministic payload for CSV checksum.
+     *
+     * @param array $parsed
+     * @return string
+     */
+    private static function csv_checksum_payload(array $parsed): string {
+        $rows = $parsed['rows'] ?? [];
+        foreach ($rows as &$row) {
+            unset($row['_rownum']);
+            ksort($row);
+        }
+        unset($row);
+        return json_encode([$parsed['headers'] ?? [], $rows], JSON_UNESCAPED_SLASHES);
     }
 
     /**

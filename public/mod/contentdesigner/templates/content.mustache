@@ -1,0 +1,334 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_contentdesigner/chapter
+
+    Template for the module render view of elements.
+
+    Example context (json):
+    {
+        "cm": {
+          "id": "1377",
+          "course": "12",
+          "module": "25",
+          "instance": "1",
+          "section": "325",
+          "name": "Test designer",
+          "modname": "contentdesigner"
+        },
+        "course": {
+          "id": "12",
+          "category": "1",
+          "fullname": "Demo course",
+          "shortname": "Demo course",
+          "enablecompletion": "1"
+        },
+        "progressbar": "",
+        "chapters": [
+          {
+            "instancedata": {
+              "id": "22",
+              "contentdesignerid": "1",
+              "title": "Heading 1",
+              "visible": "1",
+              "contents": "38,67,35,240,242,243",
+              "position": "5",
+              "timecreated": "1671803153",
+              "timemodified": "1672664392",
+              "hideicon": true
+            },
+            "info": {
+              "elementid": "1",
+              "name": "Chapter",
+              "shortname": "chapter",
+              "icon": "<i class=\"icon fa fa-folder fa-fw \"  title=\"Chapter\" role=\"img\" aria-label=\"Chapter\"></i>",
+              "description": "Add a new chapter to group elements"
+            },
+            "contents": [{
+                "id": "243",
+                "contentdesignerid": "1",
+                "element": "5",
+                "instance": "62",
+                "chapter": "22",
+                "position": "1",
+                "timecreated": "1672664392",
+                "timemodified": "1672664392",
+                "elementid": "5",
+                "elementname": "paragraph",
+                "info": {
+                    "elementid": "5",
+                    "name": "Paragraph",
+                    "shortname": "paragraph",
+                    "icon": "<i class=\"icon fa fa-font fa-fw \"  title=\"Paragraph\" role=\"img\" aria-label=\"Paragraph\"></i>",
+                    "description": "Add text"
+                },
+                "instancedata": {
+                  "id": "62",
+                  "element": "5",
+                  "instance": "62",
+                  "margin": "0",
+                  "padding": "0",
+                  "abovecolorbg": "",
+                  "abovegradientbg": null,
+                  "bgimage": "714232411",
+                  "belowcolorbg": "",
+                  "belowgradientbg": null,
+                  "animation": "fadeIn",
+                  "duration": "slow",
+                  "delay": "0",
+                  "direction": "left",
+                  "speed": "0",
+                  "viewport": "0",
+                  "hidedesktop": "0",
+                  "hidetablet": "0",
+                  "hidemobile": "0",
+                  "timecreated": "1672664392",
+                  "timemodified": "1672664392",
+                  "contentdesignerid": "1",
+                  "title": "<span class=\"inplaceeditable inplaceeditable-text\" data-inplaceeditable=\"1\" data-component=\"mod_contentdesigner\" data-itemtype=\"instance_title[paragraph][62]\" data-itemid=\"562\"\r\n    data-value=\"Test - top\" data-editlabel=\"New value for Test - top\" data-type=\"text\" data-options=\"\">\r\n        \r\n        <a href=\"#\" class=\"quickeditlink aalink\" data-inplaceeditablelink=\"1\" title=\"Edit the title of instance\">\r\n            Test - top\r\n            <span class=\"quickediticon visibleifjs\">\r\n                <i class=\"icon fa fa-pencil fa-fw \"  title=\"Edit the title of instance\" role=\"img\" aria-label=\"Edit the title of instance\"></i>\r\n            </span>\r\n        </a>\r\n</span>",
+                  "visible": "1",
+                  "content": "Test - top",
+                  "horizontal": "left",
+                  "vertical": "top",
+                  "optionid": "176",
+                  "hideicon": false,
+                  "classes": "animated fadeIn slow      hl-left vl-top",
+                  "style": "margin: 0;padding: 0;",
+                  "backimage": ""
+                },
+                "option": {
+                  "id": "176",
+                  "element": "5",
+                  "instance": "62",
+                  "margin": "0",
+                  "padding": "0",
+                  "abovecolorbg": "",
+                  "abovegradientbg": null,
+                  "bgimage": "714232411",
+                  "belowcolorbg": "",
+                  "belowgradientbg": null,
+                  "animation": "fadeIn",
+                  "duration": "slow",
+                  "delay": "0",
+                  "direction": "left",
+                  "speed": "0",
+                  "viewport": "0",
+                  "hidedesktop": "0",
+                  "hidetablet": "0",
+                  "hidemobile": "0",
+                  "timecreated": "1672664392",
+                  "timemodified": "1672664392",
+                  "backimage": ""
+                },
+                "editurl": "",
+                "content": {
+                  "elementcontent": "<p class=\"element-paragraph\">Test - top</p>",
+                  "general": []
+                }
+            }],
+            "count": 5,
+            "prevent": false,
+            "chaptercta": true,
+            "completion": false
+          }
+        ],
+        "outro": {
+          "contents": "",
+          "instancedata": {
+            "id": "38",
+            "contentdesignerid": "1",
+            "title": "finished content",
+            "visible": "0",
+            "image": "565905438",
+            "primarytext": "Primary ",
+            "primaryurl": "http://www.example.com/",
+            "secondarytext": "Secondary",
+            "secondaryurl": "http://www.example.com/",
+            "timecreated": "1672374223",
+            "timemodified": "0"
+          },
+          "element": "4",
+          "info": {
+            "elementid": "4",
+            "name": "Outro",
+            "shortname": "outro",
+            "icon": "<i class=\"icon fa fa-list fa-fw \"  title=\"Plugin\" role=\"img\" aria-label=\"Plugin\"></i>",
+            "description": ""
+          }
+        },
+        "prevent": false
+    }
+}}
+<div class="contentdesigner-content limitedwidth">
+    <div class="contentdesigner-wrapper">
+        {{{cmdetails}}}
+        <div class="content">
+            <div class="contentdesigner-progress">{{{progressbar}}}</div>
+            <ul class="course-content-list">
+                {{#chapters}}
+                    <li id="chapters-list-{{instancedata.id}}" class="chapters-list {{^count}} no-elements {{/count}} {{#completion}} completed {{/completion}}"
+                      data-id="{{instancedata.id}}" data-elementshortname="chapter">
+                        {{#instancedata.titlestatus}}
+                            <div class="chapter-title" data-chapter="{{instancedata.id}}">
+                                <h4>{{instancedata.chaptertitle}}</h4>
+                            </div>
+                        {{/instancedata.titlestatus}}
+                        {{#instancedata.showdescription}}
+                          <div class="chapter-description">
+                              <p> {{{instancedata.description}}} </p>
+                          </div>
+                        {{/instancedata.showdescription}}
+                        <ul class="chapter-elements-list">
+                            {{#contents}}
+                            <li class="element-item">
+                                <div class="element-content general-options {{{instancedata.classes}}}"
+                                  data-elementid="{{{element}}}"
+                                  data-elementshortname="{{info.shortname}}"
+                                  data-instanceid="{{instancedata.id}}"
+                                  data-contentid="{{id}}"
+                                  data-entranceanimation="{{instancedata.entranceanimation}}"
+                                  data-replaceonrefresh="{{instancedata.replaceonrefresh}}"
+                                  style="{{{instancedata.style}}}"
+                                  data-scrolleffect="{{instancedata.scrolleffect}}">
+
+                                    <div class="background-options">
+                                        <div class="bg-color" style="{{{instancedata.belowcolorbg}}}"></div>
+                                        <div class="bg-image" style="{{{instancedata.backimage}}}"></div>
+                                        <div class="bg-overlay" style="{{{instancedata.abovecolorbg}}}"></div>
+                                    </div>
+
+                                    {{#content.general.showdescription}}
+                                    <div class="element-description">
+                                        <p>{{{content.general.description}}}</p>
+                                    </div>
+                                    {{/content.general.showdescription}}
+
+                                    <!-- Contents of chapter -->
+                                    {{{content.elementcontent}}}
+                                </div>
+                            </li>
+                            {{/contents}}
+                        </ul>
+
+                        <div class="toolbar-block">
+                          {{#learningtools.show}}
+                          <div class="content-designer-learningtools-toolbar" data-chapter-id="{{learningtools.chapterid}}">
+                              {{#hasbookmarkcapability}}
+                              <button class="btn {{#learningtools.bookmarked}}btn-link{{/learningtools.bookmarked}} content-designer-learningtool-bookmark {{#learningtools.bookmarked}}active{{/learningtools.bookmarked}}"
+                                      data-action="bookmark"
+                                      data-chapter-id="{{learningtools.chapterid}}"
+                                      data-itemtype="chapter"
+                                      data-itemid="{{learningtools.chapterid}}"
+                                      data-userid="{{learningtools.userid}}"
+                                      data-sesskey="{{learningtools.sesskey}}"
+                                      data-courseid="{{learningtools.course}}"
+                                      data-coursemodule="{{learningtools.coursemodule}}"
+                                      data-contextlevel="{{learningtools.contextlevel}}"
+                                      data-pagetype="{{learningtools.pagetype}}"
+                                      data-pageurl="{{learningtools.pageurl}}"
+
+                                    >
+                                  <i class="fa fa-bookmark"></i>
+                                  {{^learningtools.bookmarked}}
+                                    {{#str}}strbookmark, mod_contentdesigner{{/str}}
+                                  {{/learningtools.bookmarked}}
+                                  {{#learningtools.bookmarked}}
+                                    {{#str}}strbookmarked, mod_contentdesigner{{/str}}
+                                  {{/learningtools.bookmarked}}
+                              </button>
+                              {{/hasbookmarkcapability}}
+
+                              {{#hasnotecapability}}
+                                <button class="btn {{#learningtools.notescount}}btn-link active{{/learningtools.notescount}} content-designer-learningtool-note"
+                                      data-action="note"
+                                      data-chapter-id="{{learningtools.chapterid}}"
+                                      data-itemtype="chapter"
+                                      data-itemid="{{learningtools.chapterid}}"
+                                      data-pageurl="{{learningtools.pageurl}}">
+                                <i class="fa fa-pencil-square-o"></i>
+                                {{#str}}strnotes, mod_contentdesigner{{/str}}
+                                  {{#learningtools.notescount}}
+                                    <span class="badge badge-light">({{learningtools.notescount}})</span>
+                                  {{/learningtools.notescount}}
+                                </button>
+                              {{/hasnotecapability}}
+                          </div>
+                          {{/learningtools.show}}
+
+                        {{^prevent}}
+                        {{#chaptercta}}
+                        {{#count}}
+                            {{#completion}}
+                                <button class="btn btn-success btn-block text-nowrap complete-chapter" data-chapterid="{{instancedata.id}}">
+                                    {{#pix}} e/tick, core {{/pix}}
+                                    {{#str}} completion_manual:done, course {{/str}}
+                                </button>
+                            {{/completion}}
+                            {{^completion}}
+                              <button class="btn btn-outline-secondary btn-block text-nowrap complete-chapter" data-chapterid="{{instancedata.id}}">
+                                  {{#str}} completion_manual:markdone, course {{/str}}
+                              </button>
+                            {{/completion}}
+                        {{/count}}
+                        {{/chaptercta}}
+                        {{/prevent}}
+                        </div>
+                    </li>
+
+                    {{#prevent}}
+                    <div class="label label-warning">
+                        <span>{{#pix}} i/caution, core {{/pix}}</span><label>{{#str}} completeprevelement, mod_contentdesigner {{/str}}</label>
+                    </div>
+                    {{/prevent}}
+                {{/chapters}}
+
+                {{^chapterprevent}}
+                {{^prevent}}
+                <li class="element-item "
+                    data-elementid="{{{outro.element}}}"
+                    data-title="{{outro.instancedata.title}}"
+                    data-elementshortname="{{outro.info.shortname}}"
+                    data-instanceid="{{outro.instancedata.id}}">
+
+                    <div class="element-content general-options {{{outro.instancedata.classes}}}"
+                        data-elementid="{{{element}}}"
+                        data-elementshortname="{{outro.info.shortname}}"
+                        data-instanceid="{{outro.instancedata.id}}"
+                        data-contentid="{{id}}"
+                        data-entranceanimation="{{outro.instancedata.entranceanimation}}"
+                        data-replaceonrefresh="{{outro.instancedata.replaceonrefresh}}"
+                        style="{{{outro.instancedata.style}}}"
+                        data-scrolleffect="{{outro.instancedata.scrolleffect}}">
+
+                        <div class="background-options">
+                            <div class="bg-color" style="{{{outro.instancedata.belowcolorbg}}}"></div>
+                            <div class="bg-image" style="{{{outro.instancedata.backimage}}}"></div>
+                            <div class="bg-overlay" style="{{{outro.instancedata.abovecolorbg}}}"></div>
+                        </div>
+                        <div class="element-outro element-content">
+                            {{{outro.contents}}}
+                        </div>
+                    </div>
+
+                </li>
+                {{/prevent}}
+                {{/chapterprevent}}
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,175 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_contentdesigner/editor
+
+    Template for the content editor view with list of elements in manage mode.
+
+    Example context (json):
+    {
+        "cm": {
+          "id": "1377",
+          "course": "12",
+          "module": "25",
+          "instance": "1",
+          "section": "325",
+          "name": "Test designer",
+          "modname": "contentdesigner"
+        },
+        "course": {
+          "id": "12",
+          "category": "1",
+          "fullname": "Demo course",
+          "shortname": "Demo course",
+          "enablecompletion": "1"
+        },
+        "progressbar": "",
+        "chapters": [{
+            "instancedata": {
+              "id": "22",
+              "contentdesignerid": "1",
+              "title": "Heading 1",
+              "visible": "1",
+              "contents": "38,67,35,240,242,243",
+              "position": "5",
+              "timecreated": "1671803153",
+              "timemodified": "1672664392",
+              "hideicon": true
+            },
+            "info": {
+              "elementid": "1",
+              "name": "Chapter",
+              "shortname": "chapter",
+              "icon": "<i class=\"icon fa fa-folder fa-fw \"  title=\"Chapter\" role=\"img\" aria-label=\"Chapter\"></i>",
+              "description": "Add a new chapter to group elements"
+            },
+            "contents": [{
+                "id": "243",
+                "contentdesignerid": "1",
+                "element": "5",
+                "instance": "62",
+                "chapter": "22",
+                "position": "1",
+                "timecreated": "1672664392",
+                "timemodified": "1672664392",
+                "elementid": "5",
+                "elementname": "paragraph",
+                "info": {
+                    "elementid": "5",
+                    "name": "Paragraph",
+                    "shortname": "paragraph",
+                    "icon": "<i class=\"icon fa fa-font fa-fw \"  title=\"Paragraph\" role=\"img\" aria-label=\"Paragraph\"></i>",
+                    "description": "Add text"
+                },
+                "instancedata": {
+                  "id": "62",
+                  "element": "5",
+                  "instance": "62",
+                  "margin": "0",
+                  "padding": "0",
+                  "abovecolorbg": "",
+                  "abovegradientbg": null,
+                  "bgimage": "714232411",
+                  "belowcolorbg": "",
+                  "belowgradientbg": null,
+                  "animation": "fadeIn",
+                  "duration": "slow",
+                  "delay": "0",
+                  "direction": "left",
+                  "speed": "0",
+                  "viewport": "0",
+                  "hidedesktop": "0",
+                  "hidetablet": "0",
+                  "hidemobile": "0",
+                  "timecreated": "1672664392",
+                  "timemodified": "1672664392",
+                  "contentdesignerid": "1",
+                  "title": "<span class=\"inplaceeditable inplaceeditable-text\" data-inplaceeditable=\"1\" data-component=\"mod_contentdesigner\" data-itemtype=\"instance_title[paragraph][62]\" data-itemid=\"562\"\r\n    data-value=\"Test - top\" data-editlabel=\"New value for Test - top\" data-type=\"text\" data-options=\"\">\r\n        \r\n        <a href=\"#\" class=\"quickeditlink aalink\" data-inplaceeditablelink=\"1\" title=\"Edit the title of instance\">\r\n            Test - top\r\n            <span class=\"quickediticon visibleifjs\">\r\n                <i class=\"icon fa fa-pencil fa-fw \"  title=\"Edit the title of instance\" role=\"img\" aria-label=\"Edit the title of instance\"></i>\r\n            </span>\r\n        </a>\r\n</span>",
+                  "visible": "1",
+                  "content": "Test - top",
+                  "horizontal": "left",
+                  "vertical": "top",
+                  "optionid": "176",
+                  "hideicon": false,
+                  "classes": "animated fadeIn slow      hl-left vl-top",
+                  "style": "margin: 0;padding: 0;",
+                  "backimage": ""
+                },
+                "option": {
+                  "id": "176",
+                  "element": "5",
+                  "instance": "62",
+                  "margin": "0",
+                  "padding": "0",
+                  "abovecolorbg": "",
+                  "abovegradientbg": null,
+                  "bgimage": "714232411",
+                  "belowcolorbg": "",
+                  "belowgradientbg": null,
+                  "animation": "fadeIn",
+                  "duration": "slow",
+                  "delay": "0",
+                  "direction": "left",
+                  "speed": "0",
+                  "viewport": "0",
+                  "hidedesktop": "0",
+                  "hidetablet": "0",
+                  "hidemobile": "0",
+                  "timecreated": "1672664392",
+                  "timemodified": "1672664392",
+                  "backimage": ""
+                },
+                "editurl": "",
+                "content": {
+                  "elementcontent": "<p class=\"element-paragraph\">Test - top</p>",
+                  "general": []
+                }
+            }],
+            "count": 5,
+            "prevent": false,
+            "chaptercta": true,
+            "completion": false
+        }],
+        "outro": "",
+        "prevent": false
+    }
+
+}}
+<div class="contentdesigner-content limitedwidth">
+    <div class="contentdesigner-wrapper">
+        <div class="content">
+            <ul class="course-content-list">
+                {{^chapterscount}}
+                <li>
+                  <div class="contentdesigner-addelement" data-position="bottom">
+                      <span><i class="fa fa-plus"> </i></span>
+                  </div>
+                </li>
+                {{/chapterscount}}
+                {{#chapters}}
+                <li class="chapters-list {{^count}} no-elements {{/count}}">
+                   {{> mod_contentdesigner/chapter}}
+                </li>
+                {{/chapters}}
+                <li class="element-item item-outro">
+                    {{{outro}}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

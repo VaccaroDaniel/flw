@@ -31,7 +31,7 @@ abstract class save_attempt_base extends external_api {
             'courseid' => new external_value(PARAM_INT, 'Optional legacy course id', VALUE_DEFAULT, 0),
             'language' => new external_value(PARAM_ALPHANUMEXT, 'Language code', VALUE_DEFAULT, ''),
             'response' => new external_value(PARAM_RAW, 'Learner response', VALUE_DEFAULT, ''),
-            'transcript' => new external_value(PARAM_RAW, 'Transcript', VALUE_DEFAULT, ''),
+            'transcript' => new external_value(PARAM_RAW, get_string('transcript', 'local_flwmedia'), VALUE_DEFAULT, ''),
             'score' => new external_value(PARAM_FLOAT, 'Optional score', VALUE_DEFAULT, null),
             'feedback' => new external_value(PARAM_RAW, 'Feedback text or JSON', VALUE_DEFAULT, ''),
             'audiofileurl' => new external_value(PARAM_RAW, 'Optional external audio file URL', VALUE_DEFAULT, ''),

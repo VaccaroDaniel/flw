@@ -44,10 +44,10 @@
         <section class="flw-sub-banner">
             <img src="{{heroimageurl}}" alt="">
             <div>
-                <p class="flw-page-kicker">Demo</p>
-                <h1>Try FLW learning experiences.</h1>
+                <p class="flw-page-kicker">{{#str}}demo, theme_flwacademy{{/str}}</p>
+                <h1>{{#str}}tryflwlearningexperiences, theme_flwacademy{{/str}}</h1>
                 {{#hasdescription}}{{{description}}}{{/hasdescription}}
-                {{^hasdescription}}<p>Open a sample course, explore activity flows, and preview how FLW feels before entering a full learning path.</p>{{/hasdescription}}
+                {{^hasdescription}}<p>{{#str}}democategoryintro, theme_flwacademy{{/str}}</p>{{/hasdescription}}
             </div>
         </section>
 
@@ -55,22 +55,22 @@
             <div class="flw-band-inner">
                 <div class="flw-demo-grid">
                     <article class="flw-card accent-teal flw-demo-info">
-                        <p class="flw-page-kicker">Preview</p>
-                        <h2>Course-like browsing</h2>
-                        <p class="flw-muted">Use the same calm reader-style cards and course covers from Self Study.</p>
+                        <p class="flw-page-kicker">{{#str}}preview, theme_flwacademy{{/str}}</p>
+                        <h2>{{#str}}courselikebrowsing, theme_flwacademy{{/str}}</h2>
+                        <p class="flw-muted">{{#str}}courselikebrowsingtext, theme_flwacademy{{/str}}</p>
                     </article>
                     <article class="flw-card accent-yellow flw-demo-info">
-                        <p class="flw-page-kicker">Materials</p>
-                        <h2>Sample activities</h2>
-                        <p class="flw-muted">Open demo content without changing the core Moodle permissions or course structure.</p>
+                        <p class="flw-page-kicker">{{#str}}materials, theme_flwacademy{{/str}}</p>
+                        <h2>{{#str}}sampleactivities, theme_flwacademy{{/str}}</h2>
+                        <p class="flw-muted">{{#str}}sampleactivitiestext, theme_flwacademy{{/str}}</p>
                     </article>
                     <article class="flw-card accent-blue flw-demo-info">
-                        <p class="flw-page-kicker">Available</p>
-                        <h2>{{coursecount}} courses</h2>
+                        <p class="flw-page-kicker">{{#str}}available, theme_flwacademy{{/str}}</p>
+                        <h2>{{coursecount}} {{#str}}courses, theme_flwacademy{{/str}}</h2>
                         <div class="flw-metric-strip">
-                            <div class="flw-metric"><strong>{{coursecount}}</strong><span>Visible</span></div>
-                            <div class="flw-metric"><strong>FLW</strong><span>Theme</span></div>
-                            <div class="flw-metric"><strong>Demo</strong><span>Mode</span></div>
+                            <div class="flw-metric"><strong>{{coursecount}}</strong><span>{{#str}}visible, theme_flwacademy{{/str}}</span></div>
+                            <div class="flw-metric"><strong>FLW</strong><span>{{#str}}theme, theme_flwacademy{{/str}}</span></div>
+                            <div class="flw-metric"><strong>{{#str}}demo, theme_flwacademy{{/str}}</strong><span>{{#str}}mode, theme_flwacademy{{/str}}</span></div>
                         </div>
                     </article>
                 </div>
@@ -79,7 +79,7 @@
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Courses</p><h2>Demo Courses</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}courses, theme_flwacademy{{/str}}</p><h2>{{#str}}democourses, theme_flwacademy{{/str}}</h2></div></div>
                 {{#hascourses}}
                 <div class="flw-course-grid">
                     {{#courses}}
@@ -92,7 +92,7 @@
                     {{/courses}}
                 </div>
                 {{/hascourses}}
-                {{^hascourses}}<div class="flw-empty">No demo courses have been added yet.</div>{{/hascourses}}
+                {{^hascourses}}<div class="flw-empty">{{#str}}nodemocourses, theme_flwacademy{{/str}}</div>{{/hascourses}}
             </div>
         </section>
 

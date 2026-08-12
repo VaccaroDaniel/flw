@@ -10,8 +10,8 @@
                 <source data-src="{{mediaurl}}">
             </audio>
         {{/hasmediaurl}}
-        {{#hasexpectedtext}}<label class="flwmedia-label">Short response<textarea class="flwmedia-read-response"></textarea></label>{{/hasexpectedtext}}
-        <button type="button" class="flwmedia-btn flwmedia-mark-read">Mark as read</button>
+        {{#hasexpectedtext}}<label class="flwmedia-label">{{#str}}shortresponse, local_flwmedia{{/str}}<textarea class="flwmedia-read-response"></textarea></label>{{/hasexpectedtext}}
+        <button type="button" class="flwmedia-btn flwmedia-mark-read">{{#str}}markasread, local_flwmedia{{/str}}</button>
         <div class="flwmedia-status" aria-live="polite"></div>
     </div>
 </article>

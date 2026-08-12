@@ -13,6 +13,9 @@ $renderer = $PAGE->get_renderer('core');
 $primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
 $flwtopnav = theme_flwacademy_export_topnav_context($OUTPUT, $primarymenu, ['activekey' => 'myhome']);
 $dashboardurl = new moodle_url('/my/');
+$addblockbutton = $OUTPUT->addblockbutton();
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
 
 ob_start();
 echo $OUTPUT->main_content();
@@ -77,6 +80,10 @@ $templatecontext = [
     'usermenu' => $primarymenu['user'],
     'langmenu' => $primarymenu['lang'],
     'flwtopnav' => $flwtopnav,
+    'sidepreblocks' => $blockshtml,
+    'addblockbutton' => $addblockbutton,
+    'hasaddblockbutton' => !empty($addblockbutton),
+    'hasblocks' => $hasblocks,
     'haslearninglanguages' => !empty($learninglanguages),
     'learninglanguages' => $learninglanguages,
     'defaultlanguageurl' => $defaultlanguageurl,

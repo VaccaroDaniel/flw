@@ -142,43 +142,12 @@ final class rollup_engine {
      * @return array
      */
     public static function recalculate_up(int $userid, int $upid): array {
-        global $DB;
-
-        $maps = $DB->get_records('flwcupkp_up_kp', ['upid' => $upid], 'sortorder ASC, id ASC');
-        $aggregate = self::aggregate_child_states($userid, $maps, 'kp', 'kpid', 'minreadiness', 0.70);
-        $direct = self::direct_evidence_state($userid, 'up', $upid);
-        $evidencecount = $aggregate['evidencecount'] + ($direct['state']['evidencecount'] ?? 0);
-
-        if ($evidencecount <= 0 && !self::state_exists($userid, 'up', $upid)) {
+        $state = self::calculated_up_state($userid, $upid);
+        if ($state === null) {
             return self::skip_result('up', $upid, 'no_evidence');
         }
 
-        $score = max($aggregate['score'], (float)($direct['state']['masteryscore'] ?? 0));
-        $confidence = max($aggregate['confidence'], (float)($direct['state']['confidence'] ?? 0));
-        $state = self::up_state_name($score);
-        if (empty($direct) && !$aggregate['requiredmet'] && self::state_rank('up', $state) > self::state_rank('up', 'developing')) {
-            $state = 'developing';
-        }
-
-        return self::store_state($userid, 'up', $upid, [
-            'masteryscore' => round($score, 5),
-            'masterystate' => $state,
-            'confidence' => round($confidence, 5),
-            'evidencecount' => $evidencecount,
-            'lastevidence' => self::latest_time($aggregate['lastevidence'], $direct['state']['lastevidence'] ?? null),
-            'lastsuccess' => self::latest_time($aggregate['lastsuccess'], $direct['state']['lastsuccess'] ?? null),
-            'nextreview' => null,
-            'ruleversion' => self::RULEVERSION,
-            'explanation' => [
-                'rollup_type' => 'up_from_kp',
-                'child_score' => $aggregate['score'],
-                'direct_score' => $direct['state']['masteryscore'] ?? null,
-                'required_met' => $aggregate['requiredmet'],
-                'required_met_count' => $aggregate['requiredmetcount'],
-                'required_total' => $aggregate['requiredtotal'],
-                'children' => $aggregate['children'],
-            ],
-        ]);
+        return self::store_state($userid, 'up', $upid, $state);
     }
 
     /**
@@ -190,11 +159,107 @@ final class rollup_engine {
      * @return array
      */
     public static function recalculate_competency(int $userid, int $competencyid, bool $syncmoodle = true): array {
+        $state = self::calculated_competency_state($userid, $competencyid);
+        if ($state === null) {
+            return self::skip_result('competency', $competencyid, 'no_evidence');
+        }
+
+        $result = self::store_state($userid, 'competency', $competencyid, $state);
+
+        if ($syncmoodle && in_array($result['status'], ['created', 'updated', 'unchanged'], true)) {
+            $result['moodle'] = self::sync_moodle_if_ready($userid, $competencyid);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Preview a UP recalculation without writing it.
+     *
+     * @param int $userid
+     * @param int $upid
+     * @return array
+     */
+    public static function preview_up(int $userid, int $upid): array {
+        $state = self::calculated_up_state($userid, $upid);
+        return self::preview_result($userid, 'up', $upid, $state);
+    }
+
+    /**
+     * Preview a competency recalculation without writing it.
+     *
+     * @param int $userid
+     * @param int $competencyid
+     * @return array
+     */
+    public static function preview_competency(int $userid, int $competencyid): array {
+        $state = self::calculated_competency_state($userid, $competencyid);
+        return self::preview_result($userid, 'competency', $competencyid, $state);
+    }
+
+    /**
+     * Calculate one UP state without storing it.
+     *
+     * @param int $userid
+     * @param int $upid
+     * @return array|null
+     */
+    private static function calculated_up_state(int $userid, int $upid): ?array {
+        global $DB;
+
+        $maps = $DB->get_records('flwcupkp_up_kp', ['upid' => $upid], 'sortorder ASC, id ASC');
+        $aggregate = self::aggregate_child_states($userid, $maps, 'kp', 'kpid', 'minreadiness', 0.70);
+        $direct = self::direct_evidence_state($userid, 'up', $upid);
+        $evidencecount = $aggregate['evidencecount'] + ($direct['state']['evidencecount'] ?? 0);
+
+        if ($evidencecount <= 0 && !self::state_exists($userid, 'up', $upid)) {
+            return null;
+        }
+
+        $score = max($aggregate['score'], (float)($direct['state']['masteryscore'] ?? 0));
+        $confidence = max($aggregate['confidence'], (float)($direct['state']['confidence'] ?? 0));
+        $rules = mastery_engine::rules_for('up');
+        $state = self::up_state_name($score, $rules);
+        if (empty($direct) && !$aggregate['requiredmet'] &&
+                self::state_rank('up', $state) > self::state_rank('up', 'developing')) {
+            $state = 'developing';
+        }
+
+        return [
+            'masteryscore' => round($score, 5),
+            'masterystate' => $state,
+            'confidence' => round($confidence, 5),
+            'evidencecount' => $evidencecount,
+            'lastevidence' => self::latest_time($aggregate['lastevidence'], $direct['state']['lastevidence'] ?? null),
+            'lastsuccess' => self::latest_time($aggregate['lastsuccess'], $direct['state']['lastsuccess'] ?? null),
+            'nextreview' => null,
+            'ruleversion' => self::rollup_rule_version($rules),
+            'explanation' => [
+                'rollup_type' => 'up_from_kp',
+                'threshold_ruleversion' => (string)($rules['version'] ?? self::RULEVERSION),
+                'child_score' => $aggregate['score'],
+                'direct_score' => $direct['state']['masteryscore'] ?? null,
+                'required_met' => $aggregate['requiredmet'],
+                'required_met_count' => $aggregate['requiredmetcount'],
+                'required_total' => $aggregate['requiredtotal'],
+                'children' => $aggregate['children'],
+            ],
+        ];
+    }
+
+    /**
+     * Calculate one competency state without storing it.
+     *
+     * @param int $userid
+     * @param int $competencyid
+     * @return array|null
+     */
+    private static function calculated_competency_state(int $userid, int $competencyid): ?array {
         global $DB;
 
         $competency = $DB->get_record('flwcupkp_comp', ['id' => $competencyid], '*', IGNORE_MISSING);
         if (!$competency) {
-            return self::skip_result('competency', $competencyid, 'missing_competency');
+            return null;
         }
 
         $maps = $DB->get_records('flwcupkp_comp_up', ['competencyid' => $competencyid], 'sortorder ASC, id ASC');
@@ -203,7 +268,7 @@ final class rollup_engine {
         $evidencecount = $aggregate['evidencecount'] + ($direct['state']['evidencecount'] ?? 0);
 
         if ($evidencecount <= 0 && !self::state_exists($userid, 'competency', $competencyid)) {
-            return self::skip_result('competency', $competencyid, 'no_evidence');
+            return null;
         }
 
         $rule = self::competency_rule($competency);
@@ -216,9 +281,10 @@ final class rollup_engine {
 
         $score = max($aggregate['score'], (float)($direct['state']['masteryscore'] ?? 0));
         $confidence = max($aggregate['confidence'], (float)($direct['state']['confidence'] ?? 0));
-        $state = self::competency_state_name($score, $topologyready, $hasdirectsignal);
+        $rules = mastery_engine::rules_for('competency');
+        $state = self::competency_state_name($score, $topologyready, $hasdirectsignal, $rules);
 
-        $result = self::store_state($userid, 'competency', $competencyid, [
+        return [
             'masteryscore' => round($score, 5),
             'masterystate' => $state,
             'confidence' => round($confidence, 5),
@@ -226,9 +292,10 @@ final class rollup_engine {
             'lastevidence' => self::latest_time($aggregate['lastevidence'], $direct['state']['lastevidence'] ?? null),
             'lastsuccess' => self::latest_time($aggregate['lastsuccess'], $direct['state']['lastsuccess'] ?? null),
             'nextreview' => null,
-            'ruleversion' => self::RULEVERSION,
+            'ruleversion' => self::rollup_rule_version($rules),
             'explanation' => [
                 'rollup_type' => 'competency_from_up',
+                'threshold_ruleversion' => (string)($rules['version'] ?? self::RULEVERSION),
                 'child_score' => $aggregate['score'],
                 'direct_score' => $direct['state']['masteryscore'] ?? null,
                 'required_met' => $aggregate['requiredmet'],
@@ -240,13 +307,7 @@ final class rollup_engine {
                 'has_direct_signal' => $hasdirectsignal,
                 'children' => $aggregate['children'],
             ],
-        ]);
-
-        if ($syncmoodle && in_array($result['status'], ['created', 'updated', 'unchanged'], true)) {
-            $result['moodle'] = self::sync_moodle_if_ready($userid, $competencyid);
-        }
-
-        return $result;
+        ];
     }
 
     /**
@@ -400,6 +461,62 @@ final class rollup_engine {
             'masterystate' => $state['masterystate'],
             'masteryscore' => $state['masteryscore'],
             'evidencecount' => $state['evidencecount'],
+        ];
+    }
+
+    /**
+     * Build a dry-run comparison between stored and calculated state.
+     *
+     * @param int $userid
+     * @param string $targettype
+     * @param int $targetid
+     * @param array|null $state
+     * @return array
+     */
+    private static function preview_result(int $userid, string $targettype, int $targetid, ?array $state): array {
+        $existing = self::state_for($userid, $targettype, $targetid);
+        if ($state === null) {
+            return [
+                'status' => 'skipped',
+                'reason' => 'no_evidence',
+                'userid' => $userid,
+                'targettype' => $targettype,
+                'targetid' => $targetid,
+                'current_state' => $existing->masterystate ?? '',
+                'current_score' => $existing ? (float)$existing->masteryscore : null,
+                'proposed_state' => '',
+                'proposed_score' => null,
+                'proposed_ruleversion' => '',
+            ];
+        }
+        if ($existing && !empty($existing->manualoverride)) {
+            return [
+                'status' => 'skipped',
+                'reason' => 'manual_override',
+                'userid' => $userid,
+                'targettype' => $targettype,
+                'targetid' => $targetid,
+                'current_state' => (string)$existing->masterystate,
+                'current_score' => (float)$existing->masteryscore,
+                'proposed_state' => (string)$state['masterystate'],
+                'proposed_score' => (float)$state['masteryscore'],
+                'proposed_ruleversion' => (string)$state['ruleversion'],
+            ];
+        }
+
+        $status = $existing ? (self::same_state($existing, $state) ? 'unchanged' : 'changed') : 'created';
+        return [
+            'status' => $status,
+            'userid' => $userid,
+            'targettype' => $targettype,
+            'targetid' => $targetid,
+            'current_state' => $existing ? (string)$existing->masterystate : '',
+            'current_score' => $existing ? (float)$existing->masteryscore : null,
+            'current_ruleversion' => $existing ? (string)$existing->ruleversion : '',
+            'proposed_state' => (string)$state['masterystate'],
+            'proposed_score' => (float)$state['masteryscore'],
+            'proposed_ruleversion' => (string)$state['ruleversion'],
+            'evidencecount' => (int)$state['evidencecount'],
         ];
     }
 
@@ -560,20 +677,21 @@ final class rollup_engine {
      * @param float $score
      * @return string
      */
-    private static function up_state_name(float $score): string {
-        if ($score >= 0.90) {
+    private static function up_state_name(float $score, ?array $rules = null): string {
+        $rules = $rules ?? mastery_engine::rules_for('up');
+        if ($score >= (float)($rules['transfer_ready'] ?? 0.90)) {
             return 'transfer_ready';
         }
-        if ($score >= 0.82) {
+        if ($score >= (float)($rules['stable'] ?? 0.82)) {
             return 'stable';
         }
-        if ($score >= 0.70) {
+        if ($score >= (float)($rules['demonstrated'] ?? 0.70)) {
             return 'demonstrated';
         }
-        if ($score >= 0.45) {
+        if ($score >= (float)($rules['developing'] ?? 0.45)) {
             return 'developing';
         }
-        if ($score >= 0.20) {
+        if ($score >= (float)($rules['emerging'] ?? 0.20)) {
             return 'emerging';
         }
         return 'not_observed';
@@ -587,26 +705,39 @@ final class rollup_engine {
      * @param bool $hasdirectsignal
      * @return string
      */
-    private static function competency_state_name(float $score, bool $topologyready, bool $hasdirectsignal): string {
+    private static function competency_state_name(float $score, bool $topologyready, bool $hasdirectsignal,
+            ?array $rules = null): string {
+        $rules = $rules ?? mastery_engine::rules_for('competency');
         if (!$topologyready) {
-            return $score >= 0.35 ? 'developing' : 'not_started';
+            return $score >= (float)($rules['developing'] ?? 0.35) ? 'developing' : 'not_started';
         }
         if (!$hasdirectsignal) {
-            if ($score >= 0.70) {
+            if ($score >= (float)($rules['provisionally_achieved'] ?? 0.70)) {
                 return 'provisionally_achieved';
             }
-            return $score >= 0.35 ? 'developing' : 'not_started';
+            return $score >= (float)($rules['developing'] ?? 0.35) ? 'developing' : 'not_started';
         }
-        if ($score >= 0.90) {
+        if ($score >= (float)($rules['sustained'] ?? 0.90)) {
             return 'sustained';
         }
-        if ($score >= 0.82) {
+        if ($score >= (float)($rules['achieved'] ?? 0.82)) {
             return 'achieved';
         }
-        if ($score >= 0.70) {
+        if ($score >= (float)($rules['provisionally_achieved'] ?? 0.70)) {
             return 'provisionally_achieved';
         }
-        return $score >= 0.35 ? 'developing' : 'not_started';
+        return $score >= (float)($rules['developing'] ?? 0.35) ? 'developing' : 'not_started';
+    }
+
+    /**
+     * State rule version for roll-up output.
+     *
+     * @param array $rules
+     * @return string
+     */
+    private static function rollup_rule_version(array $rules): string {
+        $version = (string)($rules['version'] ?? '');
+        return $version !== '' ? $version : self::RULEVERSION;
     }
 
     /**

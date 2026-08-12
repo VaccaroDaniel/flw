@@ -112,15 +112,15 @@ $langoptions = ['' => get_string('alllanguages', 'local_mldict')] + dictionary::
 echo html_writer::start_div('local-mldict-page');
 echo html_writer::div(
     html_writer::div(
-        html_writer::span('FLW word lab', 'local-mldict-hero-kicker') .
+        html_writer::span(get_string('wordlab', 'local_mldict'), 'local-mldict-hero-kicker') .
         html_writer::tag('h1', get_string('pluginname', 'local_mldict')) .
-        html_writer::tag('p', 'Search learner-friendly definitions, translations, pronunciation notes, and examples across your FLW learning languages.', ['class' => 'local-mldict-dashboard-subtitle']),
+        html_writer::tag('p', get_string('dictionaryintro', 'local_mldict'), ['class' => 'local-mldict-dashboard-subtitle']),
         'local-mldict-hero-copy'
     ) .
     html_writer::tag('ul',
-        html_writer::tag('li', 'Fast lookup') .
-        html_writer::tag('li', 'Language aware') .
-        html_writer::tag('li', 'Examples first'),
+        html_writer::tag('li', get_string('fastlookup', 'local_mldict')) .
+        html_writer::tag('li', get_string('languageaware', 'local_mldict')) .
+        html_writer::tag('li', get_string('examplesfirst', 'local_mldict')),
         ['class' => 'local-mldict-hero-points']
     ),
     'local-mldict-hero'

@@ -20,11 +20,15 @@ $report = \local_flwcupkp\local\audit_service::coverage();
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-dashboard']);
 echo html_writer::tag('p', 'C-UP-KP framework browser and operational reports.');
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/curriculum.php'), get_string('curriculummanager', 'local_flwcupkp'),
+echo html_writer::link(new moodle_url('/local/flwcupkp/setup.php'), get_string('unitsetupwizard', 'local_flwcupkp'),
     ['class' => 'btn btn-primary']);
+echo html_writer::link(new moodle_url('/local/flwcupkp/curriculum.php'), get_string('curriculummanager', 'local_flwcupkp'),
+    ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/import_export.php'), get_string('importexport', 'local_flwcupkp'),
     ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/mappings.php'), get_string('mappingmanager', 'local_flwcupkp'),
+    ['class' => 'btn btn-secondary']);
+echo html_writer::link(new moodle_url('/local/flwcupkp/trace.php'), get_string('traceabilityreport', 'local_flwcupkp'),
     ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/manual_evidence.php'), get_string('manualevidence', 'local_flwcupkp'),
     ['class' => 'btn btn-secondary']);

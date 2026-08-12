@@ -67,5 +67,36 @@ function xmldb_local_flwcupkp_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026072301, 'local', 'flwcupkp');
     }
 
+    if ($oldversion < 2026080700) {
+        $table = new xmldb_table('flwcupkp_calrecalc');
+        if (!$dbman->table_exists($table)) {
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+            $table->add_field('proposalid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('status', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, 'queued');
+            $table->add_field('mode', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, 'immediate');
+            $table->add_field('candidate_total', XMLDB_TYPE_INTEGER, '10', null, null, null, 0);
+            $table->add_field('changed_or_created', XMLDB_TYPE_INTEGER, '10', null, null, null, 0);
+            $table->add_field('applied', XMLDB_TYPE_INTEGER, '10', null, null, null, 0);
+            $table->add_field('skipped', XMLDB_TYPE_INTEGER, '10', null, null, null, 0);
+            $table->add_field('simulationjson', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('resultjson', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('errorsjson', XMLDB_TYPE_TEXT, null, null, null, null, null);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+            $table->add_field('timestarted', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+            $table->add_field('timecompleted', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+            $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+            $table->add_index('proposal_ix', XMLDB_INDEX_NOTUNIQUE, ['proposalid']);
+            $table->add_index('status_ix', XMLDB_INDEX_NOTUNIQUE, ['status']);
+            $table->add_index('time_ix', XMLDB_INDEX_NOTUNIQUE, ['timecreated']);
+
+            $dbman->create_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2026080700, 'local', 'flwcupkp');
+    }
+
     return true;
 }

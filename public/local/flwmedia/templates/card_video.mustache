@@ -5,12 +5,12 @@
     <div class="flwmedia-media">
         <video controls preload="metadata" {{#hasposterurl}}poster="{{posterurl}}"{{/hasposterurl}}>
             {{#hasmediaurl}}<source data-src="{{mediaurl}}">{{/hasmediaurl}}
-            {{#hassubtitleurl}}<track src="{{subtitleurl}}" kind="subtitles" srclang="{{lang}}" label="Captions">{{/hassubtitleurl}}
+            {{#hassubtitleurl}}<track src="{{subtitleurl}}" kind="subtitles" srclang="{{lang}}" label="{{#str}}captions, local_flwmedia{{/str}}">{{/hassubtitleurl}}
         </video>
     </div>
     <div class="flwmedia-card-body">
         <h4>{{title}}</h4>
         {{#description}}<p>{{description}}</p>{{/description}}
-        {{#hastranscript}}<details><summary>Transcript</summary><p>{{transcript}}</p></details>{{/hastranscript}}
+        {{#hastranscript}}<details><summary>{{#str}}transcript, local_flwmedia{{/str}}</summary><p>{{transcript}}</p></details>{{/hastranscript}}
     </div>
 </article>

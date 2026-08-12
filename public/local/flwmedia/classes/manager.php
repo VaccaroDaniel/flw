@@ -153,7 +153,7 @@ class manager {
             if (!isset($categories[$key])) {
                 $categories[$key] = [
                     'key' => $key,
-                    'label' => $label,
+                    'label' => self::default_category_label($key, $label),
                     'mode' => '',
                 ];
             }
@@ -194,6 +194,20 @@ class manager {
     public static function label_from_key(string $key): string {
         $label = str_replace(['_', '-'], ' ', trim($key));
         return $label === '' ? '' : \core_text::strtotitle($label);
+    }
+
+    /**
+     * Translate a built-in category key.
+     *
+     * @param string $key Category key.
+     * @param string $fallback Fallback label.
+     * @return string
+     */
+    protected static function default_category_label(string $key, string $fallback): string {
+        $stringkey = 'category' . str_replace('_', '', $key);
+        return get_string_manager()->string_exists($stringkey, 'local_flwmedia')
+            ? get_string($stringkey, 'local_flwmedia')
+            : $fallback;
     }
 
     /**
@@ -355,7 +369,7 @@ class manager {
         global $DB;
 
         if (!in_array($mode, self::MODES, true)) {
-            throw new \invalid_parameter_exception('Unsupported FLW media mode.');
+            throw new \invalid_parameter_exception(get_string('unsupportedmode', 'local_flwmedia'));
         }
 
         $conditions = [

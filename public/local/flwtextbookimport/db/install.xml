@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/flwtextbookimport/db" VERSION="2026081102" COMMENT="FLW textbook importer schema">
+  <TABLES>
+    <TABLE NAME="flwtbi_review" COMMENT="Textbook activity review metadata">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="packagehash" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="sectionnum" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="activityindex" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="activityidnumber" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="moodlemodule" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="activitytype" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="sourcepdf" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="sourcerange" TYPE="text"/>
+        <FIELD NAME="reviewstatus" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="approved" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="skill" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="kptags" TYPE="text"/>
+        <FIELD NAME="notes" TYPE="text"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseact_uix" UNIQUE="true" FIELDS="courseid, activityidnumber"/>
+        <INDEX NAME="package_ix" UNIQUE="false" FIELDS="packagehash"/>
+        <INDEX NAME="course_ix" UNIQUE="false" FIELDS="courseid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

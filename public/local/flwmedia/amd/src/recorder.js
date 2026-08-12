@@ -7,7 +7,8 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
      * @param {Element} root Root node.
      * @param {Function} saveAttempt Attempt callback.
      */
-    var init = function(root, saveAttempt) {
+    var init = function(root, saveAttempt, strings) {
+        strings = strings || {};
         Array.prototype.forEach.call(root.querySelectorAll('.flwmedia-card-speak'), function(card) {
             var start = card.querySelector('.flwmedia-record-start');
             var stop = card.querySelector('.flwmedia-record-stop');
@@ -20,7 +21,7 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
 
             if (!navigator.mediaDevices || !window.MediaRecorder) {
                 if (status) {
-                    status.textContent = 'Recording is not supported in this browser.';
+                    status.textContent = strings.recordingnotsupported || 'Recording is not supported in this browser.';
                 }
                 if (start) {
                     start.disabled = true;
@@ -61,7 +62,7 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
                                 duration: duration
                             })
                         }).then(function() {
-                            status.textContent = 'Recording saved.';
+                            status.textContent = strings.recordingsaved || 'Recording saved.';
                             status.classList.add('is-complete');
                         });
                     });
@@ -69,9 +70,9 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
                     recorder.start();
                     start.disabled = true;
                     stop.disabled = false;
-                    status.textContent = 'Recording...';
+                    status.textContent = strings.recording || 'Recording...';
                 }).catch(function(error) {
-                    status.textContent = error.message || 'Microphone permission was not granted.';
+                    status.textContent = error.message || strings.microphonenotgranted || 'Microphone permission was not granted.';
                 });
             });
 

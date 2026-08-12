@@ -1,0 +1,150 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_contentdesigner/chapter
+
+    Template for the elements with edit, delete options for editor page.
+
+    Example context (json):
+    {
+        "id": "36",
+        "contentdesignerid": "1",
+        "element": "3",
+        "instance": "34",
+        "chapter": "21",
+        "position": "1",
+        "timecreated": "1671803199",
+        "timemodified": "1671803199",
+        "elementid": "3",
+        "elementname": "heading",
+        "info": {
+            "elementid": "3",
+            "name": "Heading",
+            "shortname": "heading",
+            "icon": "<i class=\"fa fa-header icon pluginicon\"></i>",
+            "description": "Add a heading"
+        },
+        "instancedata": {
+            "id": "34",
+            "element": "3",
+            "instance": "34",
+            "margin": "0",
+            "padding": "0",
+            "abovecolorbg": "",
+            "abovegradientbg": "",
+            "bgimage": "221871456",
+            "belowcolorbg": "",
+            "belowgradientbg": "",
+            "animation": "fadeIn",
+            "duration": "slow",
+            "delay": "0",
+            "direction": "left",
+            "speed": "0",
+            "viewport": "0",
+            "hidedesktop": "0",
+            "hidetablet": "0",
+            "hidemobile": "0",
+            "timecreated": "1671803199",
+            "timemodified": "0",
+            "contentdesignerid": "0",
+            "title": "<span class=\"inplaceeditable inplaceeditable-text\" data-inplaceeditable=\"1\" data-component=\"mod_contentdesigner\" data-itemtype=\"instance_title[heading][34]\" data-itemid=\"334\"\r\n    data-value=\"second chap heading\" data-editlabel=\"New value for second chap heading\" data-type=\"text\" data-options=\"\">\r\n        \r\n        <a href=\"#\" class=\"quickeditlink aalink\" data-inplaceeditablelink=\"1\" title=\"Edit the title of instance\">\r\n            second chap heading\r\n            <span class=\"quickediticon visibleifjs\">\r\n                <i class=\"icon fa fa-pencil fa-fw \"  title=\"Edit the title of instance\" role=\"img\" aria-label=\"Edit the title of instance\"></i>\r\n            </span>\r\n        </a>\r\n</span>",
+            "visible": "1",
+            "heading": "Welcome to Basics",
+            "headingurl": "https://music.youtube.com/watch?v=fq6egtAzaQM&list=RDAMVMeG5Zx7qq2C4",
+            "headingtype": "h3",
+            "target": "_blank",
+            "horizontal": "left",
+            "vertical": "top",
+            "optionid": "51",
+            "hideicon": false,
+            "classes": "animated fadeIn slow     ",
+            "style": "margin: 0;padding: 0;",
+            "backimage": ""
+        },
+        "option": {
+            "id": "51",
+            "element": "3",
+            "instance": "34",
+            "margin": "0",
+            "padding": "0",
+            "abovecolorbg": "",
+            "abovegradientbg": "",
+            "bgimage": "221871456",
+            "belowcolorbg": "",
+            "belowgradientbg": "",
+            "animation": "fadeIn",
+            "duration": "slow",
+            "delay": "0",
+            "direction": "left",
+            "speed": "0",
+            "viewport": "0",
+            "hidedesktop": "0",
+            "hidetablet": "0",
+            "hidemobile": "0",
+            "timecreated": "1671803199",
+            "timemodified": "0",
+            "backimage": ""
+        },
+        "editurl": "",
+        "content": ""
+    }
+}}
+<div class="element-item {{^instancedata.visible}} text-muted not-visible {{/instancedata.visible}}"
+    data-elementid="{{info.elementid}}"
+    data-elementshortname="{{info.shortname}}"
+    data-instanceid="{{instancedata.id}}"
+    data-contentid="{{id}}"
+    data-visibility="{{instancedata.visible}}"
+>
+    <div class="element-box">
+        <div class="element-icon">
+            <span>{{{info.icon}}}</span>
+        </div>
+        <div class="element-title">
+            {{{instancedata.title}}}
+        </div>
+        <div class="element-actions">
+            <ul class="actions-list">
+                <li data-action="edit" class="action-item">
+                    <a href="{{{editurl}}}"><i class="fa fa-gear"></i></a>
+                </li>
+                {{^hidedelete}}
+                <li data-action="delete" class="action-item"><i class="fa fa-trash"></i></li>
+                {{/hidedelete}}
+                {{^hidemove}}
+                <li data-action="moveup" class="action-item"><i class="fa fa-arrow-up"></i></li>
+                <li data-action="movedown" class="action-item"><i class="fa fa-arrow-down"></i></li>
+                {{/hidemove}}
+                {{^hidevisible}}
+                <li data-action="status" class="action-item">
+                    {{#instancedata.visible}}
+                    <i class="fa fa-eye"></i>
+                    {{/instancedata.visible}}
+                    {{^instancedata.visible}}
+                    <i class="fa fa-eye-slash"></i>
+                    {{/instancedata.visible}}
+                </li>
+                {{/hidevisible}}
+                {{^hideduplicate}}
+                <li data-action="duplicate" class="action-item">
+                    <a href="{{{copyurl}}}"><i class="fa fa-copy" aria-hidden="true"></i></a>
+                </li>
+                {{/hideduplicate}}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -53,6 +53,10 @@ if (!empty($primarymenu['lang']['items']) && is_array($primarymenu['lang']['item
         return $leftorder <=> $rightorder;
     });
 }
+$addblockbutton = $OUTPUT->addblockbutton();
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+
 ob_start();
 echo $OUTPUT->main_content();
 $maincontent = ob_get_clean();
@@ -548,6 +552,10 @@ $templatecontext = [
     'usermenu' => $primarymenu['user'],
     'langmenu' => $flwlangmenu,
     'flwtopnav' => $flwtopnav,
+    'sidepreblocks' => $blockshtml,
+    'addblockbutton' => $addblockbutton,
+    'hasaddblockbutton' => !empty($addblockbutton),
+    'hasblocks' => $hasblocks,
     'heroimageurl' => $OUTPUT->image_url('frontpage/login-main', 'theme_flwacademy')->out(false),
     'redesignheroimageurl' => $flwasset('home-hero'),
     'placementimageurl' => $flwasset('placement-clipboard'),

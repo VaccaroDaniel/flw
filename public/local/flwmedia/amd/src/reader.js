@@ -7,7 +7,8 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
      * @param {Element} root Root node.
      * @param {Function} saveAttempt Attempt callback.
      */
-    var init = function(root, saveAttempt) {
+    var init = function(root, saveAttempt, strings) {
+        strings = strings || {};
         Array.prototype.forEach.call(root.querySelectorAll('.flwmedia-card-read'), function(card) {
             Lazyload.loadElement(card);
 
@@ -25,7 +26,7 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
                     audiofileurl: '',
                     attemptjson: JSON.stringify({markedRead: true})
                 }).then(function() {
-                    status.textContent = 'Reading completed.';
+                    status.textContent = strings.readingcompleted || 'Reading completed.';
                     status.classList.add('is-complete');
                 }).catch(function() {
                     button.disabled = false;

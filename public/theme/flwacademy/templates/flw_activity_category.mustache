@@ -53,28 +53,28 @@
             <section class="flw-sub-banner">
                 <img src="{{practiceheroimageurl}}" alt="">
                 <div>
-                    <p class="flw-page-kicker">Practice</p>
+                    <p class="flw-page-kicker">{{#str}}practice, theme_flwacademy{{/str}}</p>
                     <h1>{{practiceherotitle}}</h1>
                     {{#hasdescription}}{{{description}}}{{/hasdescription}}
                     {{^hasdescription}}<p>{{practiceherotext}}</p>{{/hasdescription}}
                 </div>
             </section>
             <aside class="flw-score-box">
-                <p class="flw-page-kicker">Practice score</p>
+                <p class="flw-page-kicker">{{#str}}practicescore, theme_flwacademy{{/str}}</p>
                 <h2>0%</h2>
-                <p class="flw-muted">{{language}} practice | 0 activities | 0 hours</p>
+                <p class="flw-muted">{{language}} {{#str}}practice, theme_flwacademy{{/str}} | 0 {{#str}}activities, theme_flwacademy{{/str}} | 0 {{#str}}hours, theme_flwacademy{{/str}}</p>
                 <div class="flw-score-grid">
-                    <div><span>Activities</span><strong>0</strong></div>
-                    <div><span>Level range</span><strong>Easy-Hard</strong></div>
-                    <div><span>History</span><strong>Ready</strong></div>
-                    <div><span>Profile</span><strong>Saved</strong></div>
+                    <div><span>{{#str}}activities, theme_flwacademy{{/str}}</span><strong>0</strong></div>
+                    <div><span>{{#str}}levelrange, theme_flwacademy{{/str}}</span><strong>{{#str}}easyhard, theme_flwacademy{{/str}}</strong></div>
+                    <div><span>{{#str}}history, theme_flwacademy{{/str}}</span><strong>{{#str}}ready, theme_flwacademy{{/str}}</strong></div>
+                    <div><span>{{#str}}profile, theme_flwacademy{{/str}}</span><strong>{{#str}}saved, theme_flwacademy{{/str}}</strong></div>
                 </div>
             </aside>
         </section>
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Choose what you want</p><h2>Open a practice category and keep working at your level.</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}choosewhatyouwant, theme_flwacademy{{/str}}</p><h2>{{#str}}openpracticecategory, theme_flwacademy{{/str}}</h2></div></div>
                 <div class="flw-grid five">
                     {{#practiceitems}}
                     <a class="flw-card {{accent}}{{#isactive}} is-active{{/isactive}}" href="{{url}}"{{#isactive}} aria-current="page"{{/isactive}}><p class="flw-page-kicker">{{label}}</p><h3>{{title}}</h3><p class="flw-muted">{{text}}</p></a>
@@ -85,7 +85,7 @@
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Watch categories</p><h2>Prototype image cards for fast practice selection.</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}watchcategories, theme_flwacademy{{/str}}</p><h2>{{#str}}practiceimageselection, theme_flwacademy{{/str}}</h2></div></div>
                 <div class="flw-grid five">
                     {{#watchcards}}
                     <article class="flw-watch-image-card"><img src="{{imageurl}}" alt=""><span>{{title}}</span><p class="flw-muted">{{text}}</p></article>
@@ -99,26 +99,26 @@
         <section class="flw-sub-banner">
             <img src="{{examheroimageurl}}" alt="">
             <div>
-                <p class="flw-page-kicker">Exam</p>
-                <h1>{{language}} exam practice</h1>
+                <p class="flw-page-kicker">{{#str}}exam, theme_flwacademy{{/str}}</p>
+                <h1>{{language}} {{#str}}exampractice, theme_flwacademy{{/str}}</h1>
                 {{#hasdescription}}{{{description}}}{{/hasdescription}}
-                {{^hasdescription}}<p>Choose the target exam level for this language and open sample listening, reading, grammar, speaking, or writing tasks.</p>{{/hasdescription}}
+                {{^hasdescription}}<p>{{#str}}examcategoryintro, theme_flwacademy{{/str}}</p>{{/hasdescription}}
             </div>
         </section>
 
         <section class="flw-band">
             <div class="flw-band-inner">
                 <div class="flw-grid three">
-                    <article class="flw-card accent-teal"><p class="flw-page-kicker">Language</p><h3>{{language}}</h3><p class="flw-muted">Choose categories inside this language only.</p></article>
-                    <article class="flw-card accent-coral"><p class="flw-page-kicker">Exam level</p><h3>{{selectedlevel}}</h3><p class="flw-muted">{{examframework}} framework</p></article>
-                    <article class="flw-card accent-yellow"><p class="flw-page-kicker">{{examframework}}</p><h3>Level path</h3><p class="flw-muted">Open a level below to see matching practice samples.</p></article>
+                    <article class="flw-card accent-teal"><p class="flw-page-kicker">{{#str}}language, theme_flwacademy{{/str}}</p><h3>{{language}}</h3><p class="flw-muted">{{#str}}languageonlycategories, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-card accent-coral"><p class="flw-page-kicker">{{#str}}examlevel, theme_flwacademy{{/str}}</p><h3>{{selectedlevel}}</h3><p class="flw-muted">{{examframework}} {{#str}}framework, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-card accent-yellow"><p class="flw-page-kicker">{{examframework}}</p><h3>{{#str}}levelpath, theme_flwacademy{{/str}}</h3><p class="flw-muted">{{#str}}openlevelsamples, theme_flwacademy{{/str}}</p></article>
                 </div>
             </div>
         </section>
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Exam level</p><h2>Choose the target exam level.</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}examlevel, theme_flwacademy{{/str}}</p><h2>{{#str}}choosetargetexamlevel, theme_flwacademy{{/str}}</h2></div></div>
                 {{#hasexamlevels}}
                 <div class="flw-grid three">
                     {{#examlevels}}
@@ -126,7 +126,7 @@
                     {{/examlevels}}
                 </div>
                 {{/hasexamlevels}}
-                {{^hasexamlevels}}<div class="flw-empty">No exam level categories yet.</div>{{/hasexamlevels}}
+                {{^hasexamlevels}}<div class="flw-empty">{{#str}}noexamlevelcategories, theme_flwacademy{{/str}}</div>{{/hasexamlevels}}
             </div>
         </section>
 
@@ -134,7 +134,7 @@
             <div class="flw-band-inner">
                 <div class="flw-grid four">
                     {{#examsamples}}
-                    <article class="flw-card accent-coral"><p class="flw-page-kicker">Sample {{index}}</p><h3>{{title}}</h3><p class="flw-muted">{{prompt}}</p><p>{{task}}</p></article>
+                    <article class="flw-card accent-coral"><p class="flw-page-kicker">{{#str}}sample, theme_flwacademy{{/str}} {{index}}</p><h3>{{title}}</h3><p class="flw-muted">{{prompt}}</p><p>{{task}}</p></article>
                     {{/examsamples}}
                 </div>
             </div>
@@ -143,7 +143,7 @@
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Courses</p><h2>{{title}} courses</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}courses, theme_flwacademy{{/str}}</p><h2>{{title}} {{#str}}courses, theme_flwacademy{{/str}}</h2></div></div>
                 {{#hascourses}}
                 <div class="flw-course-grid">
                     {{#courses}}
@@ -151,11 +151,11 @@
                     {{/courses}}
                 </div>
                 {{/hascourses}}
-                {{^hascourses}}<div class="flw-empty">No courses have been added to this category yet.</div>{{/hascourses}}
+                {{^hascourses}}<div class="flw-empty">{{#str}}nocoursescategory, theme_flwacademy{{/str}}</div>{{/hascourses}}
             </div>
         </section>
 
-        <div><a class="flw-back-link" href="{{languagecategoryurl}}">Back to {{language}}</a></div>
+        <div><a class="flw-back-link" href="{{languagecategoryurl}}">{{#str}}backto, theme_flwacademy{{/str}} {{language}}</a></div>
         <div class="flw-hidden-maincontent">{{{maincontent}}}</div>
     </main>
 </div>

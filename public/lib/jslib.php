@@ -113,12 +113,18 @@ function js_write_cache_file_content($file, $content) {
     // Prevent serving of incomplete file from concurrent request,
     // the rename() should be more atomic than fwrite().
     ignore_user_abort(true);
-    if ($fp = fopen($file.'.tmp', 'xb')) {
+    $tmpfile = $file . '.' . getmypid() . '.' . str_replace('.', '', uniqid('', true)) . '.tmp';
+    if ($fp = fopen($tmpfile, 'xb')) {
         fwrite($fp, $content);
         fclose($fp);
-        rename($file.'.tmp', $file);
-        @chmod($file, $CFG->filepermissions);
-        @unlink($file.'.tmp'); // just in case anything fails
+        if (!@rename($tmpfile, $file) && !file_exists($file)) {
+            // Windows can briefly lock cache files; keep JS available for Moodle controls.
+            @copy($tmpfile, $file);
+        }
+        if (file_exists($file)) {
+            @chmod($file, $CFG->filepermissions);
+        }
+        @unlink($tmpfile); // just in case anything fails
     }
     ignore_user_abort(false);
     if (connection_aborted()) {

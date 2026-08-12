@@ -49,10 +49,10 @@
         <section class="flw-sub-banner">
             <img src="{{heroimageurl}}" alt="">
             <div>
-                <p class="flw-page-kicker">Do you know?</p>
-                <h1>Choose a language, then choose how to begin.</h1>
+                <p class="flw-page-kicker">{{#str}}doyouknow, theme_flwacademy{{/str}}</p>
+                <h1>{{#str}}chooselanguagebegin, theme_flwacademy{{/str}}</h1>
                 {{#hasdescription}}{{{description}}}{{/hasdescription}}
-                {{^hasdescription}}<p>Self Study joins the fixed full course and placement-based Learning Path. The content is the same; the entry point changes according to the learner.</p>{{/hasdescription}}
+                {{^hasdescription}}<p>{{#str}}selfstudycategoryintro, theme_flwacademy{{/str}}</p>{{/hasdescription}}
             </div>
         </section>
 
@@ -60,35 +60,35 @@
             <div class="flw-band-inner flw-top-grid">
                 <article class="flw-card accent-teal flw-panel-card flw-placement-card">
                     <div>
-                        <p class="flw-page-kicker">Placement Test</p>
-                        <h2>Find the right starting point.</h2>
-                        <p class="flw-muted">Check grammar, vocabulary, reading, listening, speaking, writing, and pronunciation before choosing a learning route.</p>
+                        <p class="flw-page-kicker">{{#str}}placementtest, theme_flwacademy{{/str}}</p>
+                        <h2>{{#str}}findstartingpoint, theme_flwacademy{{/str}}</h2>
+                        <p class="flw-muted">{{#str}}placementtestintro, theme_flwacademy{{/str}}</p>
                     </div>
                     <div class="flw-metric-strip">
-                        <div class="flw-metric"><strong>840</strong><span>Items</span></div>
-                        <div class="flw-metric"><strong>7</strong><span>Skills</span></div>
-                        <div class="flw-metric"><strong>A1</strong><span>Current level</span></div>
+                        <div class="flw-metric"><strong>840</strong><span>{{#str}}items, theme_flwacademy{{/str}}</span></div>
+                        <div class="flw-metric"><strong>7</strong><span>{{#str}}skills, theme_flwacademy{{/str}}</span></div>
+                        <div class="flw-metric"><strong>A1</strong><span>{{#str}}currentlevel, theme_flwacademy{{/str}}</span></div>
                     </div>
-                    <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>Take placement test</a>
+                    <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>{{#str}}takeplacementtestlower, theme_flwacademy{{/str}}</a>
                 </article>
                 <article class="flw-card accent-yellow flw-panel-card flw-profile-card">
                     {{#hasplacementprofile}}
                     {{#placementprofile}}
                     <div>
-                        <p class="flw-page-kicker">User Profile</p>
-                        <h2>{{language}} placement result</h2>
+                        <p class="flw-page-kicker">{{#str}}userprofile, theme_flwacademy{{/str}}</p>
+                        <h2>{{language}} {{#str}}placementresult, theme_flwacademy{{/str}}</h2>
                         <p class="flw-muted">{{studyrecommendation}}</p>
                     </div>
                     <div class="flw-metric-strip">
-                        <div class="flw-metric"><strong>{{overallcefr}}</strong><span>Placement</span></div>
-                        <div class="flw-metric"><strong>{{recommendedstartunit}}</strong><span>Start unit</span>{{#hasstartuniturl}}<a class="flw-checkpoint-button" href="{{startuniturl}}" title="{{startunitbuttonlabel}}" aria-label="{{startunitbuttonlabel}}"><span class="flw-sr-only">{{startunitbuttonlabel}}</span></a>{{/hasstartuniturl}}</div>
-                        <div class="flw-metric"><strong>{{confidencepercent}}</strong><span>Confidence</span></div>
+                        <div class="flw-metric"><strong>{{overallcefr}}</strong><span>{{#str}}placement, theme_flwacademy{{/str}}</span></div>
+                        <div class="flw-metric"><strong>{{recommendedstartunit}}</strong><span>{{#str}}startunit, theme_flwacademy{{/str}}</span>{{#hasstartuniturl}}<a class="flw-checkpoint-button" href="{{startuniturl}}" title="{{startunitbuttonlabel}}" aria-label="{{startunitbuttonlabel}}"><span class="flw-sr-only">{{startunitbuttonlabel}}</span></a>{{/hasstartuniturl}}</div>
+                        <div class="flw-metric"><strong>{{confidencepercent}}</strong><span>{{#str}}confidence, theme_flwacademy{{/str}}</span></div>
                     </div>
                     <div class="flw-profile-status">
-                        <div class="flw-profile-pill"><span>Status</span><strong>{{placementstatus}}</strong></div>
-                        <div class="flw-profile-pill"><span>Path mode</span><strong>{{pathmode}}</strong></div>
-                        <div class="flw-profile-pill"><span>Next checkpoint</span><strong>Unit {{nextcheckpointunit}}</strong>{{#hascheckpointurl}}<a class="flw-checkpoint-button" href="{{checkpointurl}}" title="{{checkpointbuttonlabel}}" aria-label="{{checkpointbuttonlabel}}"><span class="flw-sr-only">{{checkpointbuttonlabel}}</span></a>{{/hascheckpointurl}}</div>
-                        <div class="flw-profile-pill"><span>Updated</span><strong>{{updatedlabel}}</strong></div>
+                        <div class="flw-profile-pill"><span>{{#str}}status, theme_flwacademy{{/str}}</span><strong>{{placementstatus}}</strong></div>
+                        <div class="flw-profile-pill"><span>{{#str}}pathmode, theme_flwacademy{{/str}}</span><strong>{{pathmode}}</strong></div>
+                        <div class="flw-profile-pill"><span>{{#str}}nextcheckpoint, theme_flwacademy{{/str}}</span><strong>{{#str}}unit, theme_flwacademy{{/str}} {{nextcheckpointunit}}</strong>{{#hascheckpointurl}}<a class="flw-checkpoint-button" href="{{checkpointurl}}" title="{{checkpointbuttonlabel}}" aria-label="{{checkpointbuttonlabel}}"><span class="flw-sr-only">{{checkpointbuttonlabel}}</span></a>{{/hascheckpointurl}}</div>
+                        <div class="flw-profile-pill"><span>{{#str}}updated, theme_flwacademy{{/str}}</span><strong>{{updatedlabel}}</strong></div>
                     </div>
                     {{#hasskillitems}}
                     <div class="flw-skill-list">
@@ -99,28 +99,28 @@
                     {{/hasskillitems}}
                     {{#hassupportitems}}
                     <ul class="flw-support-list">
-                        {{#supportitems}}<li>{{label}} repair</li>{{/supportitems}}
+                        {{#supportitems}}<li>{{label}} {{#str}}repair, theme_flwacademy{{/str}}</li>{{/supportitems}}
                     </ul>
                     {{/hassupportitems}}
-                    {{#teacherreview}}<p class="flw-muted">Teacher review is recommended before this placement is confirmed.</p>{{/teacherreview}}
+                    {{#teacherreview}}<p class="flw-muted">{{#str}}teacherreviewrecommended, theme_flwacademy{{/str}}</p>{{/teacherreview}}
                     <div class="flw-profile-actions">
-                        <a class="flw-button" href="{{reporturl}}">Open report</a>
-                        <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>Retake placement test</a>
+                        <a class="flw-button" href="{{reporturl}}">{{#str}}openreport, theme_flwacademy{{/str}}</a>
+                        <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>{{#str}}retakeplacementtest, theme_flwacademy{{/str}}</a>
                     </div>
                     {{/placementprofile}}
                     {{/hasplacementprofile}}
                     {{^hasplacementprofile}}
                     <div>
-                        <p class="flw-page-kicker">User Profile</p>
-                        <h2>No {{language}} placement yet</h2>
-                        <p class="flw-muted">Complete the placement test to show CEFR level, skill profile, starting unit, confidence, and repair recommendations here.</p>
+                        <p class="flw-page-kicker">{{#str}}userprofile, theme_flwacademy{{/str}}</p>
+                        <h2>{{#str}}no, theme_flwacademy{{/str}} {{language}} {{#str}}placementyet, theme_flwacademy{{/str}}</h2>
+                        <p class="flw-muted">{{#str}}completeplacementtest, theme_flwacademy{{/str}}</p>
                     </div>
                     <div class="flw-metric-strip">
-                        <div class="flw-metric"><strong>-</strong><span>Placement</span></div>
-                        <div class="flw-metric"><strong>-</strong><span>Start unit</span></div>
-                        <div class="flw-metric"><strong>-</strong><span>Confidence</span></div>
+                        <div class="flw-metric"><strong>-</strong><span>{{#str}}placement, theme_flwacademy{{/str}}</span></div>
+                        <div class="flw-metric"><strong>-</strong><span>{{#str}}startunit, theme_flwacademy{{/str}}</span></div>
+                        <div class="flw-metric"><strong>-</strong><span>{{#str}}confidence, theme_flwacademy{{/str}}</span></div>
                     </div>
-                    <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>Take placement test</a>
+                    <a class="flw-button primary" href="{{placementtesturl}}" data-flw-placement-link>{{#str}}takeplacementtestlower, theme_flwacademy{{/str}}</a>
                     {{/hasplacementprofile}}
                 </article>
             </div>
@@ -128,7 +128,7 @@
 
         <section class="flw-band">
             <div class="flw-band-inner">
-                <div class="flw-section-heading"><div><p class="flw-page-kicker">Courses</p><h2>{{language}} Self Study Courses</h2></div></div>
+                <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}courses, theme_flwacademy{{/str}}</p><h2>{{language}} {{#str}}selfstudycourses, theme_flwacademy{{/str}}</h2></div></div>
                 {{#hascourses}}
                 <div class="flw-course-grid">
                     {{#courses}}
@@ -140,7 +140,7 @@
                     {{/courses}}
                 </div>
                 {{/hascourses}}
-                {{^hascourses}}<div class="flw-empty">No {{language}} self-study courses have been added yet.</div>{{/hascourses}}
+                {{^hascourses}}<div class="flw-empty">{{#str}}no, theme_flwacademy{{/str}} {{language}} {{#str}}selfstudycoursesadded, theme_flwacademy{{/str}}</div>{{/hascourses}}
             </div>
         </section>
 
@@ -148,14 +148,14 @@
             <div class="flw-band-inner">
                 <div class="flw-section-heading">
                     <div>
-                        <p class="flw-page-kicker">Language References</p>
-                        <h2>Popular books to support full-course design and self-study.</h2>
+                        <p class="flw-page-kicker">{{#str}}languagereferences, theme_flwacademy{{/str}}</p>
+                        <h2>{{#str}}popularbooks, theme_flwacademy{{/str}}</h2>
                     </div>
                 </div>
                 <div class="flw-reference-grid">
-                    <article class="flw-card accent-blue"><h3>Course books</h3><p class="flw-muted">Use a fixed full-course sequence as the main path.</p></article>
-                    <article class="flw-card accent-coral"><h3>Grammar</h3><p class="flw-muted">Repair knowledge-point gaps with clear grammar references.</p></article>
-                    <article class="flw-card accent-green"><h3>Vocabulary</h3><p class="flw-muted">Build words, phrases, examples, and review habits.</p></article>
+                    <article class="flw-card accent-blue"><h3>{{#str}}coursebooks, theme_flwacademy{{/str}}</h3><p class="flw-muted">{{#str}}coursebookstext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-card accent-coral"><h3>{{#str}}grammar, theme_flwacademy{{/str}}</h3><p class="flw-muted">{{#str}}grammartext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-card accent-green"><h3>{{#str}}vocabulary, theme_flwacademy{{/str}}</h3><p class="flw-muted">{{#str}}vocabularytext, theme_flwacademy{{/str}}</p></article>
                 </div>
             </div>
         </section>

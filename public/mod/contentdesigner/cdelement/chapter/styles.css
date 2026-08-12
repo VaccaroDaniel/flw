@@ -1,0 +1,55 @@
+.contentdesigner-content.limitedwidth .contentdesigner-wrapper .content
+.contentdesigner-progress + .course-content-list li.chapters-list {
+    &.completed {
+        border-color: #44ab58;
+    }
+    &:not(.completed):has(.content-designer-learningtool-bookmark.active),
+    &:not(.completed):has(.content-designer-learningtool-note.active) {
+        border-color: #d3d3d3;
+    }
+}
+
+.toolbar-block {
+    border-radius: 5px;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:has(.content-designer-learningtools-toolbar) {
+        background-color: #f7f8f9;
+    }
+    .content-designer-learningtools-toolbar {
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        .content-designer-learningtool-bookmark,
+        .content-designer-learningtool-note {
+            height: auto;
+            text-decoration: none;
+            font-weight: 500;
+            border: 0;
+            padding: 0;
+            &.active {
+                color: var(--primary);
+                text-decoration: none;
+                border: 0;
+                background: none;
+                box-shadow: none;
+            }
+            &:focus,
+            &:active {
+                box-shadow: none;
+            }
+            .badge {
+                padding: 0;
+            }
+        }
+        + .complete-chapter {
+            width: auto;
+            height: auto;
+            line-height: normal;
+            margin-right: 10px;
+        }
+    }
+}

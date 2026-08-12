@@ -183,6 +183,15 @@ class Compiler
         @chmod($tmpFile, 0666);
         $renamed = @rename($tmpFile, $fileName);
         if (!$renamed) {
+            if (!file_exists($fileName) && @copy($tmpFile, $fileName)) {
+                @chmod($fileName, 0666);
+                @unlink($tmpFile);
+                return;
+            }
+            if (file_exists($fileName)) {
+                @unlink($tmpFile);
+                return;
+            }
             @unlink($tmpFile);
 
             throw new InvalidArgumentException(sprintf('Error while renaming %s to %s', $tmpFile, $fileName));

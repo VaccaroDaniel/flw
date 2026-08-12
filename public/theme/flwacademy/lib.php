@@ -405,27 +405,27 @@ function theme_flwacademy_prepare_primary_navigation(array $primarymenu): array 
             'url' => $dashboardurl,
         ],
         'flw-school' => [
-            'text' => 'K-12',
+            'text' => get_string('k12', 'theme_flwacademy'),
             'url' => $languages[0]['schoolcategoryurl'] ?? $defaultlanguageurl,
         ],
         'flw-selfstudy' => [
-            'text' => 'Self Study',
+            'text' => get_string('selfstudy', 'theme_flwacademy'),
             'url' => $languages[0]['selfstudycategoryurl'] ?? $defaultlanguageurl,
         ],
         'flw-practice' => [
-            'text' => 'Practice',
+            'text' => get_string('practice', 'theme_flwacademy'),
             'url' => $languages[0]['practicecategoryurl'] ?? $defaultlanguageurl,
         ],
         'flw-dictionary' => [
-            'text' => 'Dictionary',
+            'text' => get_string('dictionary', 'theme_flwacademy'),
             'url' => $dictionaryurl,
         ],
         'flw-exam' => [
-            'text' => 'Exam',
+            'text' => get_string('exam', 'theme_flwacademy'),
             'url' => $languages[0]['examcategoryurl'] ?? $defaultlanguageurl,
         ],
         'flw-demo' => [
-            'text' => 'Demo',
+            'text' => get_string('demo', 'theme_flwacademy'),
             'url' => $demourl,
         ],
         /*
@@ -512,7 +512,7 @@ function theme_flwacademy_export_topnav_context(core_renderer $output, array $pr
         }
         $text = (string)($item['text'] ?? '');
         if ($key === 'myhome') {
-            $text = 'Dashboard';
+            $text = get_string('dashboard', 'theme_flwacademy');
         }
         $isactive = !empty($item['isactive']);
         if ($activekey !== '') {
@@ -670,40 +670,40 @@ function theme_flwacademy_sort_language_selector_items(array $items): array {
  */
 function theme_flwacademy_get_learning_language_definitions(): array {
     return [
-        ['code' => 'en', 'label' => 'English', 'aliases' => ['English'], 'nav' => [
-            'school' => 'K-12', 'selfstudy' => 'Self Study', 'practice' => 'Practice',
-            'dictionary' => 'Dictionary', 'exam' => 'Exam', 'teacher' => 'Teacher',
-            'collaboration' => 'Collaboration',
+        ['code' => 'en', 'label' => get_string('languageenglish', 'theme_flwacademy'), 'aliases' => ['English'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'ru', 'label' => 'Russian', 'aliases' => ['Russian'], 'nav' => [
-            'school' => 'Школа', 'selfstudy' => 'Самообучение', 'practice' => 'Практика',
-            'dictionary' => 'Словарь', 'exam' => 'Экзамен', 'teacher' => 'Учитель',
-            'collaboration' => 'Сотрудничество',
+        ['code' => 'ru', 'label' => get_string('languagerussian', 'theme_flwacademy'), 'aliases' => ['Russian'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'zh', 'label' => 'Chinese', 'aliases' => ['Chinese', 'Chinese Language', 'Han Chinese', '汉语'], 'nav' => [
-            'school' => '学校', 'selfstudy' => '自学', 'practice' => '练习',
-            'dictionary' => '词典', 'exam' => '考试', 'teacher' => '教师',
-            'collaboration' => '协作',
+        ['code' => 'zh', 'label' => get_string('languagechinese', 'theme_flwacademy'), 'aliases' => ['Chinese', 'Chinese Language', 'Han Chinese', '汉语'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'de', 'label' => 'German', 'aliases' => ['German'], 'nav' => [
-            'school' => 'Schule', 'selfstudy' => 'Selbststudium', 'practice' => 'Übung',
-            'dictionary' => 'Wörterbuch', 'exam' => 'Prüfung', 'teacher' => 'Lehrer',
-            'collaboration' => 'Zusammenarbeit',
+        ['code' => 'de', 'label' => get_string('languagegerman', 'theme_flwacademy'), 'aliases' => ['German'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'ja', 'label' => 'Japanese', 'aliases' => ['Japanese'], 'nav' => [
-            'school' => '学校', 'selfstudy' => '自習', 'practice' => '練習',
-            'dictionary' => '辞書', 'exam' => '試験', 'teacher' => '教師',
-            'collaboration' => 'コラボレーション',
+        ['code' => 'ja', 'label' => get_string('languagejapanese', 'theme_flwacademy'), 'aliases' => ['Japanese'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'fr', 'label' => 'French', 'aliases' => ['French'], 'nav' => [
-            'school' => 'École', 'selfstudy' => 'Auto-apprentissage', 'practice' => 'Pratique',
-            'dictionary' => 'Dictionnaire', 'exam' => 'Examen', 'teacher' => 'Enseignant',
-            'collaboration' => 'Collaboration',
+        ['code' => 'fr', 'label' => get_string('languagefrench', 'theme_flwacademy'), 'aliases' => ['French'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
-        ['code' => 'es', 'label' => 'Spanish', 'aliases' => ['Spanish'], 'nav' => [
-            'school' => 'Escuela', 'selfstudy' => 'Autoestudio', 'practice' => 'Práctica',
-            'dictionary' => 'Diccionario', 'exam' => 'Examen', 'teacher' => 'Profesor',
-            'collaboration' => 'Colaboración',
+        ['code' => 'es', 'label' => get_string('languagespanish', 'theme_flwacademy'), 'aliases' => ['Spanish'], 'nav' => [
+            'school' => get_string('k12', 'theme_flwacademy'), 'selfstudy' => get_string('selfstudy', 'theme_flwacademy'), 'practice' => get_string('practice', 'theme_flwacademy'),
+            'dictionary' => get_string('dictionary', 'theme_flwacademy'), 'exam' => get_string('exam', 'theme_flwacademy'), 'teacher' => get_string('teacher', 'theme_flwacademy'),
+            'collaboration' => get_string('collaboration', 'theme_flwacademy'),
         ]],
     ];
 }
@@ -716,37 +716,37 @@ function theme_flwacademy_get_learning_language_definitions(): array {
 function theme_flwacademy_get_practice_menu_items(): array {
     return [
         'watch' => [
-            'label' => 'Watch',
-            'title' => 'Watch practice',
-            'text' => 'Video practice by language and level: Easy, Medium, or Hard.',
+            'label' => get_string('watch', 'theme_flwacademy'),
+            'title' => get_string('watchpractice', 'theme_flwacademy'),
+            'text' => get_string('watchpracticetext', 'theme_flwacademy'),
             'image' => 'dashboard/watch',
             'accent' => 'accent-teal',
         ],
         'listen' => [
-            'label' => 'Listen',
-            'title' => 'Listen practice',
-            'text' => 'Audio and audio-plus-book materials by CEFR, HSK, JLPT, or TORFL level.',
+            'label' => get_string('listen', 'theme_flwacademy'),
+            'title' => get_string('listenpractice', 'theme_flwacademy'),
+            'text' => get_string('listenpracticetext', 'theme_flwacademy'),
             'image' => 'dashboard/listen-merged',
             'accent' => 'accent-coral',
         ],
         'speak' => [
-            'label' => 'Speak',
-            'title' => 'Speak practice',
-            'text' => 'Choose a language, level, and topic for guided AI speaking practice.',
+            'label' => get_string('speak', 'theme_flwacademy'),
+            'title' => get_string('speakpractice', 'theme_flwacademy'),
+            'text' => get_string('speakpracticetext', 'theme_flwacademy'),
             'image' => 'dashboard/speak-merged',
             'accent' => 'accent-green',
         ],
         'read' => [
-            'label' => 'Read',
-            'title' => 'Read practice',
-            'text' => 'Open books, PDF readers, and HTML reading materials for free reading.',
+            'label' => get_string('read', 'theme_flwacademy'),
+            'title' => get_string('readpractice', 'theme_flwacademy'),
+            'text' => get_string('readpracticetext', 'theme_flwacademy'),
             'image' => 'dashboard/read-merged',
             'accent' => 'accent-yellow',
         ],
         'dictate' => [
-            'label' => 'Dictate',
-            'title' => 'Dictate practice',
-            'text' => 'Listen, type what you hear, and save the dictation score to your profile.',
+            'label' => get_string('dictate', 'theme_flwacademy'),
+            'title' => get_string('dictatepractice', 'theme_flwacademy'),
+            'text' => get_string('dictatepracticetext', 'theme_flwacademy'),
             'image' => 'dashboard/dictate',
             'accent' => 'accent-blue',
         ],
@@ -1482,6 +1482,109 @@ function theme_flwacademy_percent_width($value): string {
 }
 
 /**
+ * Formats a localized course count.
+ *
+ * @param int $count
+ * @return string
+ */
+function theme_flwacademy_course_count_label(int $count): string {
+    return get_string($count === 1 ? 'coursecountone' : 'coursecountmany', 'theme_flwacademy', $count);
+}
+
+/**
+ * Formats a localized available-course count.
+ *
+ * @param int $count
+ * @return string
+ */
+function theme_flwacademy_available_courses_label(int $count): string {
+    return get_string($count === 1 ? 'availablecourseone' : 'availablecoursemany', 'theme_flwacademy', $count);
+}
+
+/**
+ * Formats a localized activity progress count.
+ *
+ * @param int $completed
+ * @param int $total
+ * @return string
+ */
+function theme_flwacademy_activity_progress_label(int $completed, int $total): string {
+    return get_string('activityprogress', 'theme_flwacademy', (object)[
+        'completed' => $completed,
+        'total' => $total,
+    ]);
+}
+
+/**
+ * Formats a localized percent-complete label.
+ *
+ * @param int $percent
+ * @return string
+ */
+function theme_flwacademy_percent_complete_label(int $percent): string {
+    return get_string('percentcomplete', 'theme_flwacademy', $percent);
+}
+
+/**
+ * Returns a localized FLW skill label.
+ *
+ * @param string $skill
+ * @return string
+ */
+function theme_flwacademy_skill_label(string $skill): string {
+    $key = preg_replace('/[^a-z0-9]+/', '', core_text::strtolower($skill));
+    $stringkey = 'skill' . $key;
+    return get_string_manager()->string_exists($stringkey, 'theme_flwacademy')
+        ? get_string($stringkey, 'theme_flwacademy')
+        : ucfirst(str_replace('_', ' ', $skill));
+}
+
+/**
+ * Returns a localized unit-map status label.
+ *
+ * @param bool $complete
+ * @param bool $active
+ * @return string
+ */
+function theme_flwacademy_unit_status_label(bool $complete, bool $active): string {
+    if ($complete) {
+        return get_string('unitstatuscomplete', 'theme_flwacademy');
+    }
+    if ($active) {
+        return get_string('unitstatusinprogress', 'theme_flwacademy');
+    }
+    return get_string('unitstatusnext', 'theme_flwacademy');
+}
+
+/**
+ * Returns a localized day-streak label.
+ *
+ * @param int $days
+ * @return string
+ */
+function theme_flwacademy_day_streak_label(int $days): string {
+    return get_string($days === 1 ? 'daystreakone' : 'daystreakmany', 'theme_flwacademy', $days);
+}
+
+/**
+ * Returns a localized placement study recommendation for known stored messages.
+ *
+ * @param string $recommendation
+ * @return string
+ */
+function theme_flwacademy_study_recommendation_label(string $recommendation): string {
+    $normalised = trim(preg_replace('/\s+/', ' ', $recommendation));
+    $map = [
+        'Begin with foundation review before continuing the main path.' => 'studyrecfoundationreview',
+        'Begin at the recommended unit and continue to the next checkpoint.' => 'studyrecmainpath',
+        'Begin at the recommended unit, then add pronunciation and writing repair practice before the next checkpoint.' => 'studyrecpronwritingrepair',
+        'Continue from the recommended unit and review any weak skill areas first.' => 'studyrecweakskills',
+        'Continue from your next useful learning step.' => 'studyrecnextusefulstep',
+    ];
+    return isset($map[$normalised]) ? get_string($map[$normalised], 'theme_flwacademy') : $recommendation;
+}
+
+/**
  * Normalises FLW learning language codes and language names.
  *
  * @param string $code
@@ -1636,14 +1739,14 @@ function theme_flwacademy_get_category_progress_summary(int $categoryid, int $us
         $coursecount = count($courses);
         $result = [
             'coursecount' => $coursecount,
-            'coursecountlabel' => $coursecount === 1 ? '1 course' : $coursecount . ' courses',
+            'coursecountlabel' => theme_flwacademy_course_count_label($coursecount),
             'completedcourses' => 0,
             'completed' => 0,
             'total' => 0,
             'percent' => 0,
             'progress' => '0%',
-            'label' => $coursecount > 0 ? 'Browse courses' : 'Ready to start',
-            'meta' => $coursecount > 0 ? $coursecount . ' available courses' : 'No courses yet',
+            'label' => $coursecount > 0 ? get_string('browsecourses', 'theme_flwacademy') : get_string('readytostart', 'theme_flwacademy'),
+            'meta' => $coursecount > 0 ? theme_flwacademy_available_courses_label($coursecount) : get_string('nocoursesyet', 'theme_flwacademy'),
         ];
         if ($store) {
             $store->set($cachekey, $result);
@@ -1669,16 +1772,16 @@ function theme_flwacademy_get_category_progress_summary(int $categoryid, int $us
     $coursecount = count($courses);
     $result = [
         'coursecount' => $coursecount,
-        'coursecountlabel' => $coursecount === 1 ? '1 course' : $coursecount . ' courses',
+        'coursecountlabel' => theme_flwacademy_course_count_label($coursecount),
         'completedcourses' => $completedcourses,
         'completed' => $completedactivities,
         'total' => $totalactivities,
         'percent' => $percent,
         'progress' => theme_flwacademy_percent_width($percent),
-        'label' => $totalactivities > 0 ? $percent . '% complete' : 'Ready to start',
+        'label' => $totalactivities > 0 ? theme_flwacademy_percent_complete_label($percent) : get_string('readytostart', 'theme_flwacademy'),
         'meta' => $totalactivities > 0
-            ? $completedactivities . ' / ' . $totalactivities . ' activities'
-            : ($coursecount > 0 ? $coursecount . ' available courses' : 'No courses yet'),
+            ? theme_flwacademy_activity_progress_label($completedactivities, $totalactivities)
+            : ($coursecount > 0 ? theme_flwacademy_available_courses_label($coursecount) : get_string('nocoursesyet', 'theme_flwacademy')),
     ];
     if ($store) {
         $store->set($cachekey, $result);
@@ -1787,9 +1890,15 @@ function theme_flwacademy_get_language_rank_and_streak(int $userid, string $lang
     }
 
     if ($userid <= 0 || isguestuser()) {
+        $worldlabel = theme_flwacademy_get_world_label([
+            'label' => get_string('language' . theme_flwacademy_get_language_profile_value($languagecode), 'theme_flwacademy'),
+        ]);
         $cache[$cachekey] = [
-            'title' => '#1 in ' . ucfirst(theme_flwacademy_get_language_profile_value($languagecode)) . ' World',
-            'text' => '0 day streak · 0 pts',
+            'title' => get_string('ranktitle', 'theme_flwacademy', (object)['rank' => 1, 'world' => $worldlabel]),
+            'text' => get_string('ranktextnoplace', 'theme_flwacademy', (object)[
+                'streak' => theme_flwacademy_day_streak_label(0),
+                'points' => 0,
+            ]),
             'userscount' => 1,
             'score' => 0,
             'streak' => theme_flwacademy_get_language_streak_summary(0, $languagecode, $categoryid),
@@ -1798,7 +1907,9 @@ function theme_flwacademy_get_language_rank_and_streak(int $userid, string $lang
     }
 
     $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
-    $worldlabel = ucfirst(theme_flwacademy_get_language_profile_value($languagecode)) . ' World';
+    $worldlabel = theme_flwacademy_get_world_label([
+        'label' => get_string('language' . theme_flwacademy_get_language_profile_value($languagecode), 'theme_flwacademy'),
+    ]);
     $scores = [];
 
     if (theme_flwacademy_db_table_exists('local_flwplacement_profile')) {
@@ -1895,10 +2006,16 @@ function theme_flwacademy_get_language_rank_and_streak(int $userid, string $lang
     }
 
     $streak = theme_flwacademy_get_language_streak_summary($userid, $languagecode, $categoryid);
+    $ranktextdata = (object)[
+        'level' => $currentlevel,
+        'streak' => theme_flwacademy_day_streak_label((int)$streak['days']),
+        'points' => (int)round($currentscore),
+    ];
     $result = [
-        'title' => '#' . $rank . ' in ' . $worldlabel,
-        'text' => trim(($currentlevel !== '' ? 'Placement ' . $currentlevel . ' · ' : '') .
-            $streak['days'] . ' day streak · ' . (int)round($currentscore) . ' pts'),
+        'title' => get_string('ranktitle', 'theme_flwacademy', (object)['rank' => $rank, 'world' => $worldlabel]),
+        'text' => $currentlevel !== ''
+            ? get_string('ranktextwithplacement', 'theme_flwacademy', $ranktextdata)
+            : get_string('ranktextnoplace', 'theme_flwacademy', $ranktextdata),
         'userscount' => $userscount,
         'score' => (int)round($currentscore),
         'streak' => $streak,
@@ -2012,9 +2129,9 @@ function theme_flwacademy_get_language_streak_summary(int $userid, string $langu
     $result = [
         'days' => $days,
         'displaydays' => (string)$days,
-        'summary' => $days === 1 ? '1 day streak' : $days . ' day streak',
-        'label' => $days === 1 ? 'Day streak' : 'Day streak',
-        'weeklabel' => 'This week',
+        'summary' => theme_flwacademy_day_streak_label($days),
+        'label' => get_string('daystreaklabel', 'theme_flwacademy'),
+        'weeklabel' => get_string('thisweek', 'theme_flwacademy'),
         'week' => $week,
     ];
     if ($store) {
@@ -2188,7 +2305,7 @@ function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid)
             $unitnodes[] = [
                 'class' => $complete ? 'complete' : ($active ? 'active' : ''),
                 'title' => format_string($sco->title),
-                'status' => $complete ? 'Complete' : ($active ? 'In progress' : 'Next'),
+                'status' => theme_flwacademy_unit_status_label($complete, $active),
                 'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
                 'url' => $cm->url ? $cm->url->out(false) : $courseurl,
             ];
@@ -2213,7 +2330,7 @@ function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid)
             $unitnodes[] = [
                 'class' => $complete ? 'complete' : ($active ? 'active' : ''),
                 'title' => get_section_name($course, $section),
-                'status' => $complete ? 'Complete' : ($active ? 'In progress' : 'Next'),
+                'status' => theme_flwacademy_unit_status_label($complete, $active),
                 'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
                 'url' => (new moodle_url('/course/view.php', [
                     'id' => (int)$course->id,
@@ -2314,9 +2431,9 @@ function theme_flwacademy_get_today_learning_items(int $userid, array $courseids
     if (!$items) {
         $items[] = [
             'class' => 'blue',
-            'title' => 'Start learning today',
+            'title' => get_string('startlearningtoday', 'theme_flwacademy'),
             'meta' => $fallbacklabel,
-            'time' => 'Open',
+            'time' => get_string('open', 'theme_flwacademy'),
             'url' => $fallbackurl,
         ];
     }
@@ -2355,8 +2472,8 @@ function theme_flwacademy_get_course_progress_summary(stdClass $course, int $use
             'total' => 0,
             'percent' => 0,
             'progress' => '0%',
-            'meta' => 'Open course',
-            'label' => 'Ready to start',
+            'meta' => get_string('opencourse', 'theme_flwacademy'),
+            'label' => get_string('readytostart', 'theme_flwacademy'),
         ];
         if ($store) {
             $store->set($cachekey, $fallback);
@@ -2399,8 +2516,8 @@ function theme_flwacademy_get_course_progress_summary(stdClass $course, int $use
         'total' => $total,
         'percent' => $percent,
         'progress' => theme_flwacademy_percent_width($percent),
-        'meta' => $total > 0 ? $completed . ' / ' . $total . ' activities' : 'Open course',
-        'label' => $total > 0 ? $percent . '% complete' : 'Ready to start',
+        'meta' => $total > 0 ? theme_flwacademy_activity_progress_label($completed, $total) : get_string('opencourse', 'theme_flwacademy'),
+        'label' => $total > 0 ? theme_flwacademy_percent_complete_label($percent) : get_string('readytostart', 'theme_flwacademy'),
     ];
     if ($store) {
         $store->set($cachekey, $result);
@@ -2677,7 +2794,9 @@ function theme_flwacademy_export_home_course_cards($output, array $learninglangu
             $cards[] = [
                 'name' => $carddef['name'],
                 'range' => $carddef['range'],
-                'status' => $coursecount > 0 ? $coursecount . ' courses' : 'Ready to learn',
+                'status' => $coursecount > 0
+                    ? theme_flwacademy_course_count_label($coursecount)
+                    : get_string('readytolearn', 'theme_flwacademy'),
                 'progresslabel' => $progress && $progress['total'] > 0 ? $progress['label'] : $categoryprogress['label'],
                 'progress' => $progress && $progress['total'] > 0 ? $progress['progress'] : $categoryprogress['progress'],
                 'cresturl' => theme_flwacademy_redesign_asset_url($output, $carddef['asset']),
@@ -2742,10 +2861,10 @@ function theme_flwacademy_export_home_school_groups($output, array $learninglang
                 ? theme_flwacademy_get_category_progress_summary($targetcategoryid, (int)($USER->id ?? 0), 0, true)
                 : [
                     'coursecount' => 0,
-                    'coursecountlabel' => '0 courses',
+                    'coursecountlabel' => theme_flwacademy_course_count_label(0),
                     'progress' => '0%',
-                    'label' => 'Ready to start',
-                    'meta' => 'No courses yet',
+                    'label' => get_string('readytostart', 'theme_flwacademy'),
+                    'meta' => get_string('nocoursesyet', 'theme_flwacademy'),
                 ];
             $cards[] = [
                 'name' => $slotname,
@@ -2836,8 +2955,8 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         'total' => 0,
         'percent' => 0,
         'progress' => '0%',
-        'meta' => 'No activities yet',
-        'label' => 'Ready to start',
+        'meta' => get_string('noactivitiesyet', 'theme_flwacademy'),
+        'label' => get_string('readytostart', 'theme_flwacademy'),
     ];
 
     $courseurl = $course
@@ -2854,7 +2973,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         $unitlabel = 'Unit ' . (int)$placement['recommendedstartunit'];
     }
     if ($unitlabel === '') {
-        $unitlabel = 'Course path';
+        $unitlabel = get_string('coursepath', 'theme_flwacademy');
     }
 
     $learningmap = $course ? theme_flwacademy_get_course_learning_map($course, (int)($USER->id ?? 0)) : [
@@ -2875,7 +2994,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         $unitnodes[] = [
             'class' => 'active',
             'title' => $unitlabel,
-            'status' => 'Ready',
+            'status' => get_string('ready', 'theme_flwacademy'),
             'symbol' => '●',
             'url' => $courseurl,
         ];
@@ -2883,22 +3002,22 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
 
     $skillrows = [];
     $skillclassmap = [
-        'Listening' => ['listen', 'blue'],
-        'Speaking' => ['speak', 'green'],
-        'Reading' => ['read', 'purple'],
-        'Writing' => ['write', 'orange'],
+        'listening' => ['listen', 'blue'],
+        'speaking' => ['speak', 'green'],
+        'reading' => ['read', 'purple'],
+        'writing' => ['write', 'orange'],
     ];
     foreach (($placement['skillitems'] ?? []) as $skillitem) {
         $score = (int)preg_replace('/\D+/', '', (string)($skillitem['score'] ?? '0'));
-        $label = $skillitem['label'] ?? 'Skill';
-        if (!isset($skillclassmap[$label])) {
+        $key = preg_replace('/[^a-z0-9]+/', '', core_text::strtolower((string)($skillitem['key'] ?? $skillitem['label'] ?? '')));
+        if (!isset($skillclassmap[$key])) {
             continue;
         }
-        $classes = $skillclassmap[$label] ?? ['dictate', 'cyan'];
+        $classes = $skillclassmap[$key] ?? ['dictate', 'cyan'];
         $skillrows[] = [
             'class' => $classes[0],
             'iconclass' => $classes[1],
-            'label' => $label,
+            'label' => theme_flwacademy_skill_label($key),
             'percent' => $score > 0 ? $score . '%' : '0%',
             'width' => theme_flwacademy_percent_width($score),
             'islisten' => $classes[0] === 'listen',
@@ -2910,14 +3029,14 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
     }
     if (!$skillrows) {
         $fallbackskills = [
-            ['Listening', 0, 'listen'],
-            ['Speaking', 0, 'speak'],
-            ['Reading', 0, 'read'],
-            ['Writing', 0, 'write'],
+            ['listening', 0, 'listen'],
+            ['speaking', 0, 'speak'],
+            ['reading', 0, 'read'],
+            ['writing', 0, 'write'],
         ];
         foreach ($fallbackskills as $skill) {
             $skillrows[] = [
-                'label' => $skill[0],
+                'label' => theme_flwacademy_skill_label($skill[0]),
                 'percent' => $skill[1] . '%',
                 'width' => theme_flwacademy_percent_width($skill[1]),
                 'class' => $skill[2],
@@ -2958,7 +3077,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
             'subtitle' => $unitlabel,
             'summary' => $course && !empty($course->summary)
                 ? format_string(strip_tags(format_text($course->summary, $course->summaryformat ?? FORMAT_HTML)))
-                : ($placement['studyrecommendation'] ?? 'Continue from your next useful learning step.'),
+                : ($placement['studyrecommendation'] ?? get_string('studyrecnextusefulstep', 'theme_flwacademy')),
             'url' => $courseurl,
             'continueurl' => $learningmap['continueurl'] ?: $courseurl,
             'overviewurl' => $learningmap['overviewurl'] ?: $courseurl,
@@ -2972,8 +3091,10 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         'unitnodes' => $unitnodes,
         'journey' => [
             'level' => $placement['overallcefr'] ?? '-',
-            'small' => $placement ? 'Placement' : 'Not placed',
-            'progresslabel' => $placement ? (($placement['confidencepercent'] ?? '0%') . ' confidence') : 'Take placement test',
+            'small' => $placement ? get_string('placement', 'theme_flwacademy') : get_string('notplaced', 'theme_flwacademy'),
+            'progresslabel' => $placement
+                ? get_string('confidencewithpercent', 'theme_flwacademy', $placement['confidencepercent'] ?? '0%')
+                : get_string('takeplacementtestlower', 'theme_flwacademy'),
             'reporturl' => $placement['reporturl'] ?? ($selectedlanguage['placementtesturl'] ?? theme_flwacademy_get_placement_quiz_start_url($selectedcode)),
             'steps' => $journeycontext['steps'],
             'fillwidth' => $journeycontext['fillwidth'],
@@ -2990,8 +3111,12 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
             'url' => (new moodle_url('/local/mldict/index.php', ['lang' => $selectedcode]))->out(false),
         ],
         'checkpoint' => [
-            'title' => $placement && !empty($placement['nextcheckpointunit']) ? 'Unit ' . (int)$placement['nextcheckpointunit'] . ' Checkpoint' : 'Placement checkpoint',
-            'meta' => $placement ? 'Recommended from your latest placement profile' : 'Take placement to create your path',
+            'title' => $placement && !empty($placement['nextcheckpointunit'])
+                ? get_string('unitcheckpoint', 'theme_flwacademy', (int)$placement['nextcheckpointunit'])
+                : get_string('placementcheckpoint', 'theme_flwacademy'),
+            'meta' => $placement
+                ? get_string('recommendedfromplacement', 'theme_flwacademy')
+                : get_string('takeplacementcreatepath', 'theme_flwacademy'),
             'url' => $placement['checkpointurl'] ?? ($selectedlanguage['placementtesturl'] ?? '#'),
         ],
         'portfolio' => [
@@ -3115,7 +3240,8 @@ function theme_flwacademy_export_selfstudy_placement_profile(int $userid, string
         }
         $score = isset($skillpercentages[$skill]) ? (int)round((float)$skillpercentages[$skill]) : null;
         $skillitems[] = [
-            'label' => ucfirst($skill),
+            'key' => $skill,
+            'label' => theme_flwacademy_skill_label($skill),
             'level' => $skilllevels[$skill] ?? '-',
             'score' => $score === null ? '' : $score . '%',
             'hasscore' => $score !== null,
@@ -3127,20 +3253,20 @@ function theme_flwacademy_export_selfstudy_placement_profile(int $userid, string
         if (!$enabled || $key === 'teacher_review_recommended') {
             continue;
         }
-        $label = ucfirst(str_replace('_', ' ', preg_replace('/^needs_|_support$|_repair$/', '', $key)));
+        $label = theme_flwacademy_skill_label(preg_replace('/^needs_|_support$|_repair$/', '', $key));
         $supportitems[] = ['label' => $label];
     }
 
     $statuslabels = [
-        'confirmed' => 'Confirmed',
-        'provisional' => 'Provisional',
-        'teacher_review_required' => 'Teacher review required',
+        'confirmed' => get_string('placementstatusconfirmed', 'theme_flwacademy'),
+        'provisional' => get_string('placementstatusprovisional', 'theme_flwacademy'),
+        'teacher_review_required' => get_string('placementstatusteacherreviewrequired', 'theme_flwacademy'),
     ];
     $pathlabels = [
-        'teacher_review_first' => 'Teacher review first',
-        'main_path_with_repair' => 'Main path with repair',
-        'review_path' => 'Review path',
-        'main_path' => 'Main path',
+        'teacher_review_first' => get_string('pathmodeteacherreviewfirst', 'theme_flwacademy'),
+        'main_path_with_repair' => get_string('pathmodemainpathwithrepair', 'theme_flwacademy'),
+        'review_path' => get_string('pathmodereviewpath', 'theme_flwacademy'),
+        'main_path' => get_string('pathmodemainpath', 'theme_flwacademy'),
     ];
     $confidence = (int)round(((float)$profile->placementconfidence) * 100);
     $recommendedstartunit = (int)$profile->recommendedstartunit;
@@ -3163,20 +3289,24 @@ function theme_flwacademy_export_selfstudy_placement_profile(int $userid, string
         'recommendedstartunit' => $recommendedstartunit,
         'startuniturl' => $startuniturl,
         'hasstartuniturl' => $startuniturl !== '',
-        'startunitbuttonlabel' => $startuniturl === '' ? '' : ($hasexactstartuniturl ? 'Go to Unit ' . $recommendedstartunit : 'Find Unit ' . $recommendedstartunit),
+        'startunitbuttonlabel' => $startuniturl === '' ? '' : ($hasexactstartuniturl
+            ? get_string('gotounit', 'theme_flwacademy', $recommendedstartunit)
+            : get_string('findunit', 'theme_flwacademy', $recommendedstartunit)),
         'nextcheckpointunit' => $nextcheckpointunit,
         'checkpointurl' => $checkpointurl,
         'hascheckpointurl' => $checkpointurl !== '',
-        'checkpointbuttonlabel' => $checkpointurl === '' ? '' : ($hasexactcheckpointurl ? 'Go to Unit ' . $nextcheckpointunit : 'Find Unit ' . $nextcheckpointunit),
+        'checkpointbuttonlabel' => $checkpointurl === '' ? '' : ($hasexactcheckpointurl
+            ? get_string('gotounit', 'theme_flwacademy', $nextcheckpointunit)
+            : get_string('findunit', 'theme_flwacademy', $nextcheckpointunit)),
         'confidencepercent' => $confidence . '%',
-        'placementstatus' => $statuslabels[$profile->placementstatus] ?? ucfirst(str_replace('_', ' ', $profile->placementstatus ?: 'pending')),
-        'pathmode' => $pathlabels[$learningpath['start_mode'] ?? ''] ?? 'Main path',
+        'placementstatus' => $statuslabels[$profile->placementstatus] ?? get_string('placementstatuspending', 'theme_flwacademy'),
+        'pathmode' => $pathlabels[$learningpath['start_mode'] ?? ''] ?? get_string('pathmodemainpath', 'theme_flwacademy'),
         'skillitems' => $skillitems,
         'hasskillitems' => !empty($skillitems),
         'supportitems' => $supportitems,
         'hassupportitems' => !empty($supportitems),
         'teacherreview' => !empty($supportflags['teacher_review_recommended']),
-        'studyrecommendation' => $profilejson['study_recommendation'] ?? 'Continue from the recommended unit and review any weak skill areas first.',
+        'studyrecommendation' => theme_flwacademy_study_recommendation_label($profilejson['study_recommendation'] ?? 'Continue from the recommended unit and review any weak skill areas first.'),
         'reporturl' => (new moodle_url('/local/flwplacement/view.php', ['id' => (int)$profile->latestresultid]))->out(false),
         'updatedlabel' => $updateddate->format('Y.m.d H:i:s'),
     ];
@@ -3678,18 +3808,42 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
     } else if (strpos($selectedlevel, 'TORFL') === 0) {
         $framework = 'TORFL';
     }
+    $samplecontext = (object)[
+        'language' => $languageLabel,
+        'level' => $selectedlevel,
+    ];
     $samples = [
-        ['index' => 1, 'title' => $framework . ' Listening Sample', 'prompt' => 'Listen for the speaker\'s purpose in a ' . $languageLabel . ' ' . $selectedlevel . ' dialogue.', 'task' => 'Choose the best summary after listening twice.'],
-        ['index' => 2, 'title' => $framework . ' Reading Sample', 'prompt' => 'Read a short ' . $languageLabel . ' text at ' . $selectedlevel . ' and identify the main claim.', 'task' => 'Select the sentence that best matches the writer\'s intention.'],
-        ['index' => 3, 'title' => $framework . ' Use of Language', 'prompt' => 'Complete a ' . $selectedlevel . ' grammar and vocabulary item for ' . $languageLabel . '.', 'task' => 'Choose the answer that fits the context and register.'],
-        ['index' => 4, 'title' => $framework . ' Speaking or Writing', 'prompt' => 'Produce a short response for a ' . $languageLabel . ' ' . $selectedlevel . ' situation.', 'task' => 'Record or draft a response, then compare it with the checklist.'],
+        [
+            'index' => 1,
+            'title' => get_string('practicesamplelisteningtitle', 'theme_flwacademy', $framework),
+            'prompt' => get_string('practicesamplelisteningprompt', 'theme_flwacademy', $samplecontext),
+            'task' => get_string('practicesamplelisteningtask', 'theme_flwacademy'),
+        ],
+        [
+            'index' => 2,
+            'title' => get_string('practicesamplereadingtitle', 'theme_flwacademy', $framework),
+            'prompt' => get_string('practicesamplereadingprompt', 'theme_flwacademy', $samplecontext),
+            'task' => get_string('practicesamplereadingtask', 'theme_flwacademy'),
+        ],
+        [
+            'index' => 3,
+            'title' => get_string('practicesamplelanguagetitle', 'theme_flwacademy', $framework),
+            'prompt' => get_string('practicesamplelanguageprompt', 'theme_flwacademy', $samplecontext),
+            'task' => get_string('practicesamplelanguagetask', 'theme_flwacademy'),
+        ],
+        [
+            'index' => 4,
+            'title' => get_string('practicesamplespeakingwritingtitle', 'theme_flwacademy', $framework),
+            'prompt' => get_string('practicesamplespeakingwritingprompt', 'theme_flwacademy', $samplecontext),
+            'task' => get_string('practicesamplespeakingwritingtask', 'theme_flwacademy'),
+        ],
     ];
     $watchcards = [
-        ['title' => 'Pronunciation', 'text' => 'Breath, stress, rhythm, and clear spoken models.', 'imageurl' => $output->image_url('practice/Pronuciation', 'theme_flwacademy')->out(false)],
-        ['title' => 'Vocabulary', 'text' => 'Words and phrases in short visual lessons.', 'imageurl' => $output->image_url('practice/Vocabulary', 'theme_flwacademy')->out(false)],
-        ['title' => 'Courses', 'text' => 'Course videos connected to lessons and levels.', 'imageurl' => $output->image_url('practice/Courses', 'theme_flwacademy')->out(false)],
-        ['title' => 'Skill', 'text' => 'Focused practice for listening, speaking, reading, and writing.', 'imageurl' => $output->image_url('practice/Skills', 'theme_flwacademy')->out(false)],
-        ['title' => 'Work English', 'text' => 'Workplace language for meetings, email, and interviews.', 'imageurl' => $output->image_url('practice/work-english', 'theme_flwacademy')->out(false)],
+        ['title' => get_string('pronunciation', 'theme_flwacademy'), 'text' => get_string('practicecardpronunciationtext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/Pronuciation', 'theme_flwacademy')->out(false)],
+        ['title' => get_string('vocabulary', 'theme_flwacademy'), 'text' => get_string('practicecardvocabularytext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/Vocabulary', 'theme_flwacademy')->out(false)],
+        ['title' => get_string('courses', 'theme_flwacademy'), 'text' => get_string('practicecardcoursestext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/Courses', 'theme_flwacademy')->out(false)],
+        ['title' => get_string('practicecardskill', 'theme_flwacademy'), 'text' => get_string('practicecardskilltext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/Skills', 'theme_flwacademy')->out(false)],
+        ['title' => get_string('practicecardworkenglish', 'theme_flwacademy'), 'text' => get_string('practicecardworkenglishtext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/work-english', 'theme_flwacademy')->out(false)],
     ];
 
     return [

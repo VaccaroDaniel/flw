@@ -61,7 +61,8 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
      * @param {Element} root Root node.
      * @param {Function} saveAttempt Attempt callback.
      */
-    var init = function(root, saveAttempt) {
+    var init = function(root, saveAttempt, strings) {
+        strings = strings || {};
         Array.prototype.forEach.call(root.querySelectorAll('.flwmedia-card-dictate'), function(card) {
             Lazyload.loadElement(card);
 
@@ -74,7 +75,9 @@ define(['local_flwmedia/lazyload'], function(Lazyload) {
 
             check.addEventListener('click', function() {
                 var result = score(textarea.value, expected);
-                var message = result.normalizedMatch ? 'Correct.' : 'Score: ' + result.score + '% word overlap.';
+                var message = result.normalizedMatch ?
+                    (strings.correct || 'Correct.') :
+                    (strings.scoreprefix || 'Score: ') + result.score + (strings.wordoverlapsuffix || '% word overlap.');
                 status.textContent = message;
                 status.classList.toggle('is-complete', result.score >= 80);
                 if (answer) {

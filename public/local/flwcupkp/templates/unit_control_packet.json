@@ -1,0 +1,19 @@
+{
+  "cupkp_schema_version": "1.0",
+  "course_code": "REW2",
+  "unit_code": "U037",
+  "cefr_level": "B2",
+  "frameworks": [],
+  "competencies": [],
+  "use_points": [],
+  "knowledge_points": [],
+  "competency_up_mappings": [],
+  "up_kp_mappings": [],
+  "kp_prerequisites": [],
+  "learning_objects": [],
+  "lesson_mappings": [],
+  "activity_mappings": [],
+  "project_competency_mappings": [],
+  "assessment_rules": [],
+  "project_evidence": []
+}

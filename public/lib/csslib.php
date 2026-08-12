@@ -70,12 +70,18 @@ function css_store_css(theme_config $theme, $csspath, $csscontent) {
  */
 function css_write_file($filename, $content) {
     global $CFG;
-    if ($fp = fopen($filename.'.tmp', 'xb')) {
+    $tmpfilename = $filename . '.' . getmypid() . '.' . str_replace('.', '', uniqid('', true)) . '.tmp';
+    if ($fp = fopen($tmpfilename, 'xb')) {
         fwrite($fp, $content);
         fclose($fp);
-        rename($filename.'.tmp', $filename);
-        @chmod($filename, $CFG->filepermissions);
-        @unlink($filename.'.tmp'); // Just in case anything fails.
+        if (!@rename($tmpfilename, $filename) && !file_exists($filename)) {
+            // Windows can briefly lock cache files; serving current CSS is better than a broken layout.
+            @copy($tmpfilename, $filename);
+        }
+        if (file_exists($filename)) {
+            @chmod($filename, $CFG->filepermissions);
+        }
+        @unlink($tmpfilename); // Just in case anything fails.
     }
 }
 

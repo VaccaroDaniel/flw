@@ -83,6 +83,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'proposalid' => $activateid,
             'status' => 'proposalactivated',
         ]));
+    } else if ($action === 'applyrecalculation') {
+        require_capability('local/flwcupkp:synccompetencies', $context);
+        $applyid = required_param('proposalid', PARAM_INT);
+        $confirm = optional_param('confirmrecalculation', 0, PARAM_BOOL);
+        if (!$confirm) {
+            redirect(new moodle_url('/local/flwcupkp/calibration_proposal.php', [
+                'snapshotid' => $snapshotid,
+                'targettype' => $targettype,
+                'proposalid' => $applyid,
+                'status' => 'recalculationunchecked',
+            ]));
+        }
+        \local_flwcupkp\local\calibration_proposal::apply_recalculation($applyid);
+        redirect(new moodle_url('/local/flwcupkp/calibration_proposal.php', [
+            'snapshotid' => $snapshotid,
+            'targettype' => $targettype,
+            'proposalid' => $applyid,
+            'status' => 'recalculationapplied',
+        ]));
+    } else if ($action === 'queuerecalculation') {
+        require_capability('local/flwcupkp:synccompetencies', $context);
+        $queueid = required_param('proposalid', PARAM_INT);
+        $confirm = optional_param('confirmrecalculation', 0, PARAM_BOOL);
+        if (!$confirm) {
+            redirect(new moodle_url('/local/flwcupkp/calibration_proposal.php', [
+                'snapshotid' => $snapshotid,
+                'targettype' => $targettype,
+                'proposalid' => $queueid,
+                'status' => 'recalculationunchecked',
+            ]));
+        }
+        \local_flwcupkp\local\calibration_proposal::queue_recalculation($queueid);
+        redirect(new moodle_url('/local/flwcupkp/calibration_proposal.php', [
+            'snapshotid' => $snapshotid,
+            'targettype' => $targettype,
+            'proposalid' => $queueid,
+            'status' => 'recalculationqueued',
+        ]));
     }
 }
 
@@ -112,6 +150,12 @@ if ($status === 'proposalsaved') {
     echo $OUTPUT->notification(get_string('calibrationproposalactivated', 'local_flwcupkp'), 'success');
 } else if ($status === 'activationunchecked') {
     echo $OUTPUT->notification(get_string('calibrationactivationunchecked', 'local_flwcupkp'), 'warning');
+} else if ($status === 'recalculationunchecked') {
+    echo $OUTPUT->notification(get_string('calibrationrecalculationunchecked', 'local_flwcupkp'), 'warning');
+} else if ($status === 'recalculationapplied') {
+    echo $OUTPUT->notification(get_string('calibrationrecalculationapplied', 'local_flwcupkp'), 'success');
+} else if ($status === 'recalculationqueued') {
+    echo $OUTPUT->notification(get_string('calibrationrecalculationqueued', 'local_flwcupkp'), 'success');
 }
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
@@ -133,6 +177,9 @@ echo local_flwcupkp_calproposal_snapshot_summary($snapshot);
 echo local_flwcupkp_calproposal_form($snapshot, $targettype, $thresholds, $preview, $proposal);
 if ($preview) {
     echo local_flwcupkp_calproposal_preview($preview);
+}
+if ($proposal && (string)$proposal->status === 'activated') {
+    echo local_flwcupkp_calproposal_recalculation($proposal);
 }
 echo local_flwcupkp_calproposal_saved_table((int)$snapshot->id, $targettype);
 
@@ -379,6 +426,180 @@ function local_flwcupkp_calproposal_preview(array $preview): string {
     $html .= local_flwcupkp_calproposal_count_table(get_string('statetransitions', 'local_flwcupkp'),
         $preview['transitions'] ?? []);
     return $html;
+}
+
+/**
+ * Render controlled recalculation simulation and apply controls.
+ *
+ * @param \stdClass $proposal
+ * @return string
+ */
+function local_flwcupkp_calproposal_recalculation(\stdClass $proposal): string {
+    $simulation = \local_flwcupkp\local\calibration_proposal::recalculation_simulation((int)$proposal->id);
+    $html = html_writer::tag('h3', get_string('recalculationsimulation', 'local_flwcupkp'));
+    $html .= html_writer::start_tag('div', ['class' => 'local-flwcupkp-course-overview-grid']);
+    foreach ([
+        'total' => get_string('candidatestates', 'local_flwcupkp'),
+        'changed' => get_string('changedstates', 'local_flwcupkp'),
+        'created' => get_string('createdstates', 'local_flwcupkp'),
+        'unchanged' => get_string('unchangedstates', 'local_flwcupkp'),
+        'skipped' => get_string('skippedstates', 'local_flwcupkp'),
+        'manual_overrides' => get_string('manualoverride', 'local_flwcupkp'),
+    ] as $key => $label) {
+        $html .= html_writer::tag('span',
+            html_writer::tag('strong', (string)(int)($simulation[$key] ?? 0)) .
+            html_writer::tag('em', s($label)),
+            ['class' => 'local-flwcupkp-course-overview-stat']
+        );
+    }
+    $html .= html_writer::end_tag('div');
+
+    $html .= html_writer::tag('p', get_string('recalculationsimulationnote', 'local_flwcupkp'),
+        ['class' => 'local-flwcupkp-muted']);
+    $html .= local_flwcupkp_calproposal_recalculation_table($simulation['rows'] ?? []);
+
+    $pending = (int)($simulation['changed'] ?? 0) + (int)($simulation['created'] ?? 0);
+    if ($pending > 0 && has_capability('local/flwcupkp:synccompetencies', context_system::instance())) {
+        $html .= local_flwcupkp_calproposal_recalculation_form($proposal, $pending);
+    } else if ($pending === 0) {
+        $html .= html_writer::tag('p', get_string('norecalculationchanges', 'local_flwcupkp'),
+            ['class' => 'local-flwcupkp-queue-complete']);
+    }
+    $html .= local_flwcupkp_calproposal_recalculation_runs($proposal);
+
+    return $html;
+}
+
+/**
+ * Render affected recalculation rows.
+ *
+ * @param array $rows
+ * @return string
+ */
+function local_flwcupkp_calproposal_recalculation_table(array $rows): string {
+    $table = new html_table();
+    $table->attributes['class'] = 'generaltable local-flwcupkp-table';
+    $table->head = [
+        get_string('state', 'local_flwcupkp'),
+        get_string('learner', 'local_flwcupkp'),
+        get_string('target', 'local_flwcupkp'),
+        get_string('currentvalue', 'local_flwcupkp'),
+        get_string('proposedvalue', 'local_flwcupkp'),
+        get_string('version', 'local_flwcupkp'),
+        get_string('reason', 'local_flwcupkp'),
+    ];
+
+    foreach ($rows as $row) {
+        $target = ($row['targetexternalid'] ?? '') !== '' ?
+            (string)$row['targetexternalid'] :
+            (string)($row['targettype'] ?? '') . ':' . (int)($row['targetid'] ?? 0);
+        $table->data[] = [
+            s($row['status'] ?? ''),
+            (int)($row['userid'] ?? 0),
+            s($target),
+            s(($row['current_state'] ?? '') . ' ' . local_flwcupkp_calproposal_score($row['current_score'] ?? null)),
+            s(($row['proposed_state'] ?? '') . ' ' . local_flwcupkp_calproposal_score($row['proposed_score'] ?? null)),
+            s($row['proposed_ruleversion'] ?? ''),
+            s($row['reason'] ?? ''),
+        ];
+    }
+    if (!$table->data) {
+        $table->data[] = [get_string('noevidenceyet', 'local_flwcupkp'), '', '', '', '', '', ''];
+    }
+
+    return html_writer::table($table);
+}
+
+/**
+ * Render the controlled apply form.
+ *
+ * @param \stdClass $proposal
+ * @param int $pending
+ * @return string
+ */
+function local_flwcupkp_calproposal_recalculation_form(\stdClass $proposal, int $pending): string {
+    $html = html_writer::start_tag('form', [
+        'method' => 'post',
+        'action' => new moodle_url('/local/flwcupkp/calibration_proposal.php', [
+            'snapshotid' => (int)$proposal->snapshotid,
+            'targettype' => (string)$proposal->targettype,
+            'proposalid' => (int)$proposal->id,
+        ]),
+        'class' => 'local-flwcupkp-actionform local-flwcupkp-calibration-activation',
+    ]);
+    $html .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+    $html .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'proposalid', 'value' => (int)$proposal->id]);
+    $html .= html_writer::tag('label',
+        html_writer::empty_tag('input', ['type' => 'checkbox', 'name' => 'confirmrecalculation', 'value' => 1]) . ' ' .
+        get_string('confirmrecalculation', 'local_flwcupkp', $pending));
+    $html .= html_writer::tag('button', get_string('applyrecalculation', 'local_flwcupkp'), [
+        'type' => 'submit',
+        'name' => 'action',
+        'value' => 'applyrecalculation',
+        'class' => 'btn btn-danger',
+    ]);
+    $html .= html_writer::tag('button', get_string('queuerecalculation', 'local_flwcupkp'), [
+        'type' => 'submit',
+        'name' => 'action',
+        'value' => 'queuerecalculation',
+        'class' => 'btn btn-secondary',
+    ]);
+    $html .= html_writer::end_tag('form');
+    return $html;
+}
+
+/**
+ * Render recent recalculation runs.
+ *
+ * @param \stdClass $proposal
+ * @return string
+ */
+function local_flwcupkp_calproposal_recalculation_runs(\stdClass $proposal): string {
+    $runs = \local_flwcupkp\local\calibration_proposal::recalculation_runs((int)$proposal->id, 10);
+    $html = html_writer::tag('h4', get_string('recalculationruns', 'local_flwcupkp'));
+    if (!$runs) {
+        return $html . html_writer::tag('p', get_string('norecalculationruns', 'local_flwcupkp'),
+            ['class' => 'local-flwcupkp-muted']);
+    }
+
+    $table = new html_table();
+    $table->attributes['class'] = 'generaltable local-flwcupkp-table';
+    $table->head = [
+        get_string('status', 'local_flwcupkp'),
+        get_string('mode', 'local_flwcupkp'),
+        get_string('candidatestates', 'local_flwcupkp'),
+        get_string('changedstates', 'local_flwcupkp'),
+        get_string('appliedstates', 'local_flwcupkp'),
+        get_string('errors', 'local_flwcupkp'),
+        get_string('timecreated', 'local_flwcupkp'),
+    ];
+    foreach ($runs as $run) {
+        $errors = json_decode((string)$run->errorsjson, true);
+        $table->data[] = [
+            s($run->status),
+            s($run->mode),
+            (int)$run->candidate_total,
+            (int)$run->changed_or_created,
+            (int)$run->applied,
+            is_array($errors) ? count($errors) : 0,
+            userdate((int)$run->timecreated),
+        ];
+    }
+
+    return $html . html_writer::table($table);
+}
+
+/**
+ * Format a nullable score.
+ *
+ * @param mixed $score
+ * @return string
+ */
+function local_flwcupkp_calproposal_score($score): string {
+    if ($score === null || $score === '') {
+        return '';
+    }
+    return '(' . format_float((float)$score, 3) . ')';
 }
 
 /**

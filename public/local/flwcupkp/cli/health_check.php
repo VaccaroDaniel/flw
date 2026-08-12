@@ -38,6 +38,7 @@ $tables = [
     'flwcupkp_import',
     'flwcupkp_calsnapshot',
     'flwcupkp_calproposal',
+    'flwcupkp_calrecalc',
     'flwcupkp_audit',
 ];
 
@@ -124,9 +125,11 @@ foreach ($coverage['warnings'] ?? [] as $warning) {
 }
 
 $requiredfiles = [
+    'setup_page' => 'local/flwcupkp/setup.php',
     'student_page' => 'local/flwcupkp/student.php',
     'teacher_page' => 'local/flwcupkp/teacher.php',
     'performance_page' => 'local/flwcupkp/performance.php',
+    'traceability_page' => 'local/flwcupkp/trace.php',
     'calibration_page' => 'local/flwcupkp/calibration.php',
     'calibration_proposal_page' => 'local/flwcupkp/calibration_proposal.php',
     'u038_student_page' => 'local/flwcupkp/student_u038.php',
@@ -134,10 +137,13 @@ $requiredfiles = [
     'u038_performance_page' => 'local/flwcupkp/performance_u038.php',
     'quiz_adapter' => 'local/flwcupkp/classes/local/quiz_evidence_adapter.php',
     'activity_adapter' => 'local/flwcupkp/classes/local/activity_evidence_adapter.php',
+    'specialized_evidence_adapter' => 'local/flwcupkp/classes/local/specialized_evidence_adapter.php',
     'performance_service' => 'local/flwcupkp/classes/local/performance_service.php',
     'calibration_report' => 'local/flwcupkp/classes/local/calibration_report.php',
     'calibration_proposal' => 'local/flwcupkp/classes/local/calibration_proposal.php',
+    'calibration_recalculation_task' => 'local/flwcupkp/classes/task/calibration_recalculation.php',
     'u038_performance_service' => 'local/flwcupkp/classes/local/u038_performance_service.php',
+    'unit_setup_service' => 'local/flwcupkp/classes/local/unit_setup_service.php',
     'unit_linker_cli' => 'local/flwcupkp/cli/link_unit.php',
     'guard' => 'local/flwcupkp/classes/local/evidence_guard.php',
     'moodle_writer' => 'local/flwcupkp/classes/local/moodle_competency_writer.php',

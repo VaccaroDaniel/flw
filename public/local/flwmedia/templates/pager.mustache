@@ -1,12 +1,12 @@
 {{!
     @template local_flwmedia/pager
 }}
-<nav class="flwmedia-pager" aria-label="FLW media pages">
-    <button type="button" class="flwmedia-btn flwmedia-page-prev" {{^hasprevious}}disabled{{/hasprevious}}>Previous</button>
+<nav class="flwmedia-pager" aria-label="{{#str}}mediapages, local_flwmedia{{/str}}">
+    <button type="button" class="flwmedia-btn flwmedia-page-prev" {{^hasprevious}}disabled{{/hasprevious}}>{{#str}}previous, local_flwmedia{{/str}}</button>
     <div class="flwmedia-page-numbers">
         {{#pageslist}}
             <button type="button" class="flwmedia-page-number {{#active}}is-active{{/active}}" data-page="{{page}}">{{page}}</button>
         {{/pageslist}}
     </div>
-    <button type="button" class="flwmedia-btn flwmedia-page-next" {{^hasnext}}disabled{{/hasnext}}>Next</button>
+    <button type="button" class="flwmedia-btn flwmedia-page-next" {{^hasnext}}disabled{{/hasnext}}>{{#str}}next, local_flwmedia{{/str}}</button>
 </nav>

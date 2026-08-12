@@ -95,7 +95,7 @@ class get_items extends external_api {
                 'mediaurl' => new external_value(PARAM_RAW, 'Media URL'),
                 'posterurl' => new external_value(PARAM_RAW, 'Poster URL'),
                 'subtitleurl' => new external_value(PARAM_RAW, 'Subtitle URL'),
-                'transcript' => new external_value(PARAM_RAW, 'Transcript'),
+                'transcript' => new external_value(PARAM_RAW, get_string('transcript', 'local_flwmedia')),
                 'readtext' => new external_value(PARAM_RAW, 'Read text'),
                 'expectedtext' => new external_value(PARAM_RAW, 'Expected text'),
                 'duration' => new external_value(PARAM_INT, 'Duration'),

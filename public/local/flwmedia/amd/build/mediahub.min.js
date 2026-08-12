@@ -9,17 +9,29 @@ define([
     'local_flwmedia/dictation',
     'local_flwmedia/lazyload'
 ], function(Ajax, Templates, Player, Recorder, Reader, Dictation, Lazyload) {
-    var modes = [
-        {key: 'watch', label: 'Watch', symbol: 'W', meta: 'Video'},
-        {key: 'listen', label: 'Listen', symbol: 'L', meta: 'Audio'},
-        {key: 'speak', label: 'Speak', symbol: 'S', meta: 'Record'},
-        {key: 'read', label: 'Read', symbol: 'Aa', meta: 'Text'},
-        {key: 'dictate', label: 'Dictate', symbol: 'D', meta: 'Type'}
-    ];
-
-    var categories = [
-        {key: 'all', label: 'All'}
-    ];
+    var defaultStrings = {
+        all: 'All',
+        audio: 'Audio',
+        dictate: 'Dictate',
+        flwpractice: 'FLW Practice',
+        item: 'item',
+        items: 'items',
+        listen: 'Listen',
+        loaderror: 'FLW media could not be loaded.',
+        loadingpractice: 'Loading FLW practice...',
+        nopracticemedia: 'No practice media found',
+        practicepage: 'Practice',
+        record: 'Record',
+        read: 'Read',
+        searcharia: 'Search FLW media',
+        searchpractice: 'Search practice',
+        speak: 'Speak',
+        text: 'Text',
+        tryanotherfilter: 'Try another mode, category, or search.',
+        type: 'Type',
+        video: 'Video',
+        watch: 'Watch'
+    };
 
     var templateForMode = {
         watch: 'local_flwmedia/card_video',
@@ -47,7 +59,9 @@ define([
         this.perpage = parseInt(root.dataset.perpage || '12', 10);
         this.totalPages = 1;
         this.totalItems = 0;
-        this.categories = categories;
+        this.strings = this.getStrings();
+        this.modes = this.getModes();
+        this.categories = [{key: 'all', label: this.t('all')}];
     }
 
     Hub.prototype.init = function() {
@@ -57,7 +71,7 @@ define([
     };
 
     Hub.prototype.renderShell = function() {
-        var modeTiles = modes.map(function(mode) {
+        var modeTiles = this.modes.map(function(mode) {
             return [
                 '<button type="button" class="flwmedia-mode-card" data-mode="' + mode.key + '">',
                 '<span class="flwmedia-mode-symbol">' + mode.symbol + '</span>',
@@ -74,20 +88,21 @@ define([
             '<div class="flwmedia-shell">',
             '<header class="flwmedia-header">',
             '<div>',
-            '<div class="flwmedia-kicker">FLW Practice</div>',
-            '<h3>Practice</h3>',
+            '<div class="flwmedia-kicker">' + this.escapeHtml(this.t('flwpractice')) + '</div>',
+            '<h3>' + this.escapeHtml(this.t('practicepage')) + '</h3>',
             '<div class="flwmedia-unit">' + this.escapeHtml(this.getContextLabel()) + '</div>',
             '</div>',
             '<div class="flwmedia-summary">',
             '<span class="flwmedia-summary-number">0</span>',
-            '<span class="flwmedia-summary-label">items</span>',
+            '<span class="flwmedia-summary-label">' + this.escapeHtml(this.t('items')) + '</span>',
             '</div>',
             '</header>',
             '<div class="flwmedia-mode-grid" role="tablist">' + modeTiles + '</div>',
             '<section class="flwmedia-workspace">',
             '<div class="flwmedia-toolbar">',
             '<div class="flwmedia-current-mode" aria-live="polite"></div>',
-            '<input class="flwmedia-search" type="search" placeholder="Search practice" aria-label="Search FLW media">',
+            '<input class="flwmedia-search" type="search" placeholder="' + this.escapeHtml(this.t('searchpractice')) +
+                '" aria-label="' + this.escapeHtml(this.t('searcharia')) + '">',
             '</div>',
             '<div class="flwmedia-filters"><div class="flwmedia-categories">' + categoryButtons + '</div></div>',
             '<div class="flwmedia-grid" aria-live="polite"></div>',
@@ -141,9 +156,9 @@ define([
     };
 
     Hub.prototype.syncActiveControls = function() {
-        var activeMode = modes.filter(function(mode) {
+        var activeMode = this.modes.filter(function(mode) {
             return mode.key === this.mode;
-        }, this)[0] || modes[0];
+        }, this)[0] || this.modes[0];
 
         Array.prototype.forEach.call(this.root.querySelectorAll('.flwmedia-mode-card'), function(button) {
             button.classList.toggle('is-active', button.dataset.mode === this.mode);
@@ -164,7 +179,7 @@ define([
     Hub.prototype.loadItems = function() {
         var self = this;
         var grid = this.root.querySelector('.flwmedia-grid');
-        grid.innerHTML = '<div class="flwmedia-loading">Loading FLW practice...</div>';
+        grid.innerHTML = '<div class="flwmedia-loading">' + this.escapeHtml(this.t('loadingpractice')) + '</div>';
         this.syncActiveControls();
 
         return Ajax.call([{
@@ -188,14 +203,14 @@ define([
                 return self.renderPager(result);
             });
         }).catch(function(error) {
-            grid.innerHTML = '<div class="flwmedia-error">FLW media could not be loaded.</div>';
+            grid.innerHTML = '<div class="flwmedia-error">' + self.escapeHtml(self.t('loaderror')) + '</div>';
             throw error;
         });
     };
 
     Hub.prototype.updateCategories = function(loadedCategories) {
         var seen = {all: true};
-        this.categories = [{key: 'all', label: 'All'}];
+        this.categories = [{key: 'all', label: this.t('all')}];
         loadedCategories.forEach(function(category) {
             if (!category.key || seen[category.key]) {
                 return;
@@ -232,7 +247,7 @@ define([
             summaryNumber.textContent = result.total || 0;
         }
         if (summaryLabel) {
-            summaryLabel.textContent = (result.total === 1) ? 'item' : 'items';
+            summaryLabel.textContent = (result.total === 1) ? this.t('item') : this.t('items');
         }
     };
 
@@ -243,8 +258,8 @@ define([
         if (!items.length) {
             grid.innerHTML = [
                 '<div class="flwmedia-empty">',
-                '<strong>No practice media found</strong>',
-                '<span>Try another mode, category, or search.</span>',
+                '<strong>' + self.escapeHtml(self.t('nopracticemedia')) + '</strong>',
+                '<span>' + self.escapeHtml(self.t('tryanotherfilter')) + '</span>',
                 '</div>'
             ].join('');
             return Promise.resolve();
@@ -259,11 +274,11 @@ define([
             Lazyload.init(grid);
             Player.init(grid, self.saveProgress.bind(self));
             if (self.mode === 'speak') {
-                Recorder.init(grid, self.saveSpeakingAttempt.bind(self));
+                Recorder.init(grid, self.saveSpeakingAttempt.bind(self), self.strings);
             } else if (self.mode === 'read') {
-                Reader.init(grid, self.saveReadingAttempt.bind(self));
+                Reader.init(grid, self.saveReadingAttempt.bind(self), self.strings);
             } else if (self.mode === 'dictate') {
-                Dictation.init(grid, self.saveDictationAttempt.bind(self));
+                Dictation.init(grid, self.saveDictationAttempt.bind(self), self.strings);
             }
         });
     };
@@ -392,6 +407,35 @@ define([
             label += ' / ' + this.unitcode;
         }
         return label;
+    };
+
+    Hub.prototype.getStrings = function() {
+        var strings = {};
+        try {
+            strings = JSON.parse(this.root.dataset.strings || '{}');
+        } catch (error) {
+            strings = {};
+        }
+        Object.keys(defaultStrings).forEach(function(key) {
+            if (!strings[key]) {
+                strings[key] = defaultStrings[key];
+            }
+        });
+        return strings;
+    };
+
+    Hub.prototype.t = function(key) {
+        return this.strings[key] || defaultStrings[key] || key;
+    };
+
+    Hub.prototype.getModes = function() {
+        return [
+            {key: 'watch', label: this.t('watch'), symbol: 'W', meta: this.t('video')},
+            {key: 'listen', label: this.t('listen'), symbol: 'L', meta: this.t('audio')},
+            {key: 'speak', label: this.t('speak'), symbol: 'S', meta: this.t('record')},
+            {key: 'read', label: this.t('read'), symbol: 'Aa', meta: this.t('text')},
+            {key: 'dictate', label: this.t('dictate'), symbol: 'D', meta: this.t('type')}
+        ];
     };
 
     var init = function(root) {

@@ -8,12 +8,12 @@
         <audio controls preload="metadata">
             {{#hasmediaurl}}<source data-src="{{mediaurl}}">{{/hasmediaurl}}
         </audio>
-        <label class="flwmedia-label">Type what you hear<textarea class="flwmedia-dictation-response"></textarea></label>
+        <label class="flwmedia-label">{{#str}}typewhatyouhear, local_flwmedia{{/str}}<textarea class="flwmedia-dictation-response"></textarea></label>
         <div class="flwmedia-actions">
-            <button type="button" class="flwmedia-btn flwmedia-dictation-check">Check</button>
-            <button type="button" class="flwmedia-btn flwmedia-dictation-reset">Try again</button>
+            <button type="button" class="flwmedia-btn flwmedia-dictation-check">{{#str}}check, local_flwmedia{{/str}}</button>
+            <button type="button" class="flwmedia-btn flwmedia-dictation-reset">{{#str}}tryagain, local_flwmedia{{/str}}</button>
         </div>
         <div class="flwmedia-status" aria-live="polite"></div>
-        <details class="flwmedia-answer"><summary>Correct answer</summary><p>{{expectedtext}}</p></details>
+        <details class="flwmedia-answer"><summary>{{#str}}correctanswer, local_flwmedia{{/str}}</summary><p>{{expectedtext}}</p></details>
     </div>
 </article>

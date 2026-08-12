@@ -43,7 +43,29 @@ class exam_service {
      * @return string
      */
     public static function status_label(string $status): string {
-        return ucfirst(str_replace('_', ' ', $status));
+        $status = clean_param($status, PARAM_ALPHANUMEXT);
+        $labels = [
+            self::PASS_STATUS_PASSED => get_string('statuspassed', 'local_flwexam'),
+            self::PASS_STATUS_FAILED => get_string('statusfailed', 'local_flwexam'),
+            self::CERT_STATUS_VALID => get_string('statusvalid', 'local_flwexam'),
+            'active' => get_string('statusactive', 'local_flwexam'),
+            'already_issued' => get_string('statusalreadyissued', 'local_flwexam'),
+            'approved' => get_string('statusapproved', 'local_flwexam'),
+            'clear' => get_string('statusclear', 'local_flwexam'),
+            'eligible' => get_string('statuseligible', 'local_flwexam'),
+            'expired' => get_string('statusexpired', 'local_flwexam'),
+            'issued' => get_string('statusissued', 'local_flwexam'),
+            'not_issued' => get_string('statusnotissued', 'local_flwexam'),
+            'open' => get_string('sessionstatusopen', 'local_flwexam'),
+            'draft' => get_string('sessionstatusdraft', 'local_flwexam'),
+            'closed' => get_string('sessionstatusclosed', 'local_flwexam'),
+            'pending' => get_string('statuspending', 'local_flwexam'),
+            'rejected' => get_string('statusrejected', 'local_flwexam'),
+            'revoked' => get_string('statusrevoked', 'local_flwexam'),
+            'submitted' => get_string('statussubmitted', 'local_flwexam'),
+        ];
+
+        return $labels[$status] ?? get_string('statusunknown', 'local_flwexam', $status);
     }
 
     /**
@@ -817,13 +839,13 @@ class exam_service {
         }
 
         return [
-            'en' => 'English',
-            'ru' => 'Russian',
-            'zh' => 'Chinese',
-            'ja' => 'Japanese',
-            'de' => 'German',
-            'fr' => 'French',
-            'es' => 'Spanish',
+            'en' => get_string('languageen', 'local_flwexam'),
+            'ru' => get_string('languageru', 'local_flwexam'),
+            'zh' => get_string('languagezh', 'local_flwexam'),
+            'ja' => get_string('languageja', 'local_flwexam'),
+            'de' => get_string('languagede', 'local_flwexam'),
+            'fr' => get_string('languagefr', 'local_flwexam'),
+            'es' => get_string('languagees', 'local_flwexam'),
         ];
     }
 
@@ -856,8 +878,8 @@ class exam_service {
 
         if ($language === 'en') {
             return [
-                'adventure_world' => 'English Adventure World',
-                'real_world' => 'English Real World',
+                'adventure_world' => get_string('trackenglishadventureworld', 'local_flwexam'),
+                'real_world' => get_string('trackenglishrealworld', 'local_flwexam'),
             ];
         }
 
@@ -866,7 +888,7 @@ class exam_service {
         }
 
         return [
-            $language . '_world' => $label . ' World',
+            $language . '_world' => get_string('tracklanguageworld', 'local_flwexam', $label),
         ];
     }
 
@@ -877,16 +899,34 @@ class exam_service {
      * @return string
      */
     public static function language_label(string $language): string {
+        $language = clean_param($language, PARAM_ALPHANUMEXT);
         $labels = [
-            'en' => 'English',
-            'ru' => 'Russian',
-            'zh' => 'Chinese',
-            'ja' => 'Japanese',
-            'de' => 'German',
-            'fr' => 'French',
-            'es' => 'Spanish',
+            'en' => get_string('languageen', 'local_flwexam'),
+            'ru' => get_string('languageru', 'local_flwexam'),
+            'zh' => get_string('languagezh', 'local_flwexam'),
+            'ja' => get_string('languageja', 'local_flwexam'),
+            'de' => get_string('languagede', 'local_flwexam'),
+            'fr' => get_string('languagefr', 'local_flwexam'),
+            'es' => get_string('languagees', 'local_flwexam'),
         ];
         return $labels[$language] ?? strtoupper($language);
+    }
+
+    /**
+     * Human label for an exam skill key.
+     *
+     * @param string $skill
+     * @return string
+     */
+    public static function skill_label(string $skill): string {
+        $skill = clean_param($skill, PARAM_ALPHANUMEXT);
+        $labels = [
+            'listening' => get_string('listening', 'local_flwexam'),
+            'speaking' => get_string('speaking', 'local_flwexam'),
+            'reading' => get_string('reading', 'local_flwexam'),
+            'writing' => get_string('writing', 'local_flwexam'),
+        ];
+        return $labels[$skill] ?? get_string('skillunknown', 'local_flwexam', $skill);
     }
 
     /**
@@ -896,17 +936,18 @@ class exam_service {
      * @return string
      */
     public static function track_label(string $track): string {
+        $track = clean_param($track, PARAM_ALPHANUMEXT);
         $labels = [
-            'adventure_world' => 'English Adventure World',
-            'real_world' => 'English Real World',
+            'adventure_world' => get_string('trackenglishadventureworld', 'local_flwexam'),
+            'real_world' => get_string('trackenglishrealworld', 'local_flwexam'),
         ];
         if (isset($labels[$track])) {
             return $labels[$track];
         }
         if (preg_match('/^([a-z0-9_-]+)_world$/', $track, $matches)) {
-            return self::language_label($matches[1]) . ' World';
+            return get_string('tracklanguageworld', 'local_flwexam', self::language_label($matches[1]));
         }
-        return ucwords(str_replace('_', ' ', $track));
+        return get_string('trackunknown', 'local_flwexam', $track);
     }
 
     /**
@@ -1603,7 +1644,7 @@ class exam_service {
 
         $verifycode = clean_param($verifycode, PARAM_ALPHANUMEXT);
         if ($verifycode === '') {
-            throw new invalid_parameter_exception('Missing verification code.');
+            throw new invalid_parameter_exception(get_string('missingverificationcode', 'local_flwexam'));
         }
 
         $sql = "SELECT c.*, t.verifycode, t.id AS tokenid, t.status AS tokenstatus, t.timeexpires AS tokenexpires
@@ -2172,7 +2213,7 @@ class exam_service {
             $skills[$skill] = $score;
         }
         if (!$skills) {
-            throw new invalid_parameter_exception('At least one skill score is required.');
+            throw new invalid_parameter_exception(get_string('skillscorerequired', 'local_flwexam'));
         }
         return $skills;
     }
@@ -2222,7 +2263,7 @@ class exam_service {
     protected static function clean_key(string $value, string $label): string {
         $clean = clean_param($value, PARAM_ALPHANUMEXT);
         if ($clean !== $value) {
-            throw new invalid_parameter_exception('Invalid ' . $label . '.');
+            throw new invalid_parameter_exception(get_string('invalidfieldvalue', 'local_flwexam', $label));
         }
         return $clean;
     }
@@ -2237,7 +2278,7 @@ class exam_service {
     protected static function clean_status(string $value, string $label): string {
         $clean = clean_param($value, PARAM_ALPHANUMEXT);
         if ($clean === '' || $clean !== $value) {
-            throw new invalid_parameter_exception('Invalid ' . $label . '.');
+            throw new invalid_parameter_exception(get_string('invalidfieldvalue', 'local_flwexam', $label));
         }
         return $clean;
     }

@@ -247,7 +247,7 @@ foreach ($questions as $index => $question) {
     echo html_writer::start_div('flwexam-question-card');
     echo html_writer::div(
         get_string('questionx', 'local_flwexam', $index + 1) . ' · ' .
-        s(ucfirst($question['skill'])) . ' · ' . s($question['kpcode']),
+        s(exam_service::skill_label($question['skill'])) . ' · ' . s($question['kpcode']),
         'flwexam-card-label'
     );
     echo html_writer::tag('h4', format_text($question['questiontext'], FORMAT_PLAIN));

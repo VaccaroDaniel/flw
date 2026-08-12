@@ -311,6 +311,158 @@ final class curriculum_manager {
     }
 
     /**
+     * Apply one status to every entity of a type in a framework scope.
+     *
+     * @param string $type
+     * @param int $frameworkid
+     * @param string $status
+     * @return array
+     */
+    public static function bulk_update_status(string $type, int $frameworkid, string $status): array {
+        global $DB, $USER;
+
+        if (!in_array($type, ['framework', 'competency', 'up', 'kp'], true)) {
+            throw new \invalid_parameter_exception('This entity type does not support bulk status changes.');
+        }
+        if ($status === '') {
+            throw new \invalid_parameter_exception('Status is required.');
+        }
+
+        $config = self::entity_config($type);
+        $params = [];
+        if ($type === 'framework') {
+            $where = $frameworkid > 0 ? 'id = :frameworkid' : '1=1';
+            if ($frameworkid > 0) {
+                $params['frameworkid'] = $frameworkid;
+            }
+        } else {
+            if ($frameworkid <= 0) {
+                throw new \invalid_parameter_exception('Choose a framework before bulk-changing entity status.');
+            }
+            $where = 'frameworkid = :frameworkid';
+            $params['frameworkid'] = $frameworkid;
+        }
+
+        $count = $DB->count_records_select($config['table'], $where, $params);
+        if ($count > 0) {
+            $DB->set_field_select($config['table'], 'status', $status, $where, $params);
+            $DB->set_field_select($config['table'], 'timemodified', time(), $where, $params);
+            $DB->set_field_select($config['table'], 'usermodified', $USER->id ?? 0, $where, $params);
+        }
+
+        repository::audit('curriculum_bulk_status_updated', $type, $frameworkid ?: null, [
+            'table' => $config['table'],
+            'frameworkid' => $frameworkid,
+            'status' => $status,
+            'count' => $count,
+        ]);
+
+        return ['type' => $type, 'frameworkid' => $frameworkid, 'status' => $status, 'count' => $count];
+    }
+
+    /**
+     * Clone a framework and its curriculum graph into a new draft version.
+     *
+     * Learner evidence, learner states, recommendations, import records, and audit rows are intentionally not cloned.
+     *
+     * @param int $frameworkid
+     * @param string $newversion
+     * @param string $suffix
+     * @return array
+     */
+    public static function clone_framework_version(int $frameworkid, string $newversion, string $suffix): array {
+        global $DB, $USER;
+
+        if ($frameworkid <= 0) {
+            throw new \invalid_parameter_exception('Source framework is required.');
+        }
+        $newversion = trim($newversion);
+        $suffix = self::normalize_clone_suffix($suffix);
+        if ($newversion === '') {
+            throw new \invalid_parameter_exception('New version is required.');
+        }
+
+        $source = $DB->get_record('flwcupkp_framework', ['id' => $frameworkid], '*', MUST_EXIST);
+        $newframeworkexternalid = self::clone_externalid((string)$source->externalid, $suffix, 100);
+        if ($DB->record_exists('flwcupkp_framework', ['externalid' => $newframeworkexternalid])) {
+            throw new \invalid_parameter_exception('The cloned framework external ID already exists: ' . $newframeworkexternalid);
+        }
+
+        $transaction = $DB->start_delegated_transaction();
+        $now = time();
+        $frameworkrecord = (object)[
+            'externalid' => $newframeworkexternalid,
+            'name' => $source->name . ' ' . $newversion,
+            'courseid' => $source->courseid,
+            'coursecode' => $source->coursecode,
+            'language' => $source->language,
+            'cefrrange' => $source->cefrrange,
+            'version' => $newversion,
+            'status' => 'draft',
+            'description' => $source->description,
+            'parentid' => $source->id,
+            'moodleframeworkid' => null,
+            'timecreated' => $now,
+            'timemodified' => $now,
+            'usermodified' => $USER->id ?? 0,
+        ];
+        $newframeworkid = (int)$DB->insert_record('flwcupkp_framework', $frameworkrecord);
+
+        $compmap = self::clone_framework_entities('flwcupkp_comp', $frameworkid, $newframeworkid, $newversion, $suffix, [
+            'frameworkid', 'externalid', 'title', 'cando', 'description', 'cefr', 'stage', 'domain', 'scope',
+            'evidencerule', 'status', 'version', 'validfrom', 'validto', 'timecreated', 'timemodified', 'usermodified',
+        ], ['moodlecompetencyid'], 100);
+        $upmap = self::clone_framework_entities('flwcupkp_up', $frameworkid, $newframeworkid, $newversion, $suffix, [
+            'frameworkid', 'externalid', 'title', 'actionstatement', 'intention', 'context', 'observableaction',
+            'conditions', 'successcriteria', 'cefr', 'languagemode', 'interactiontype', 'evidencerequirements',
+            'rubricref', 'status', 'version', 'timecreated', 'timemodified', 'usermodified',
+        ], [], 100);
+        $kpmap = self::clone_framework_entities('flwcupkp_kp', $frameworkid, $newframeworkid, $newversion, $suffix, [
+            'frameworkid', 'externalid', 'title', 'description', 'language', 'cefr', 'domain', 'formtext',
+            'meaningfunction', 'usageconstraints', 'difficulty', 'learningload', 'evidencerequirements',
+            'status', 'version', 'timecreated', 'timemodified', 'usermodified',
+        ], [], 100);
+        $objectmap = self::clone_framework_entities('flwcupkp_object', $frameworkid, $newframeworkid, $newversion, $suffix, [
+            'frameworkid', 'externalid', 'courseid', 'unitcode', 'lesson', 'objecttype', 'title', 'cmid', 'sourceid',
+            'purpose', 'evidencestrength', 'difficulty', 'role', 'metadatajson',
+        ], ['courseid', 'cmid'], 120);
+
+        self::clone_mapping_rows('flwcupkp_comp_up', ['competencyid' => $compmap, 'upid' => $upmap], [
+            'competencyid', 'upid', 'role', 'weight', 'sortorder', 'minmastery', 'evidencerule', 'notes',
+        ]);
+        self::clone_mapping_rows('flwcupkp_up_kp', ['upid' => $upmap, 'kpid' => $kpmap], [
+            'upid', 'kpid', 'role', 'weight', 'minreadiness', 'sortorder', 'notes',
+        ]);
+        self::clone_mapping_rows('flwcupkp_kp_prereq', ['kpid' => $kpmap, 'prereqkpid' => $kpmap], [
+            'kpid', 'prereqkpid', 'relationshiptype', 'strength', 'requirement', 'notes',
+        ]);
+        self::clone_object_map_rows($objectmap, $compmap, $upmap, $kpmap);
+
+        repository::audit('curriculum_framework_version_cloned', 'framework', $newframeworkid, [
+            'sourceframeworkid' => $frameworkid,
+            'sourceexternalid' => $source->externalid,
+            'externalid' => $newframeworkexternalid,
+            'version' => $newversion,
+            'suffix' => $suffix,
+            'competencies' => count($compmap),
+            'use_points' => count($upmap),
+            'knowledge_points' => count($kpmap),
+            'learning_objects' => count($objectmap),
+        ]);
+        $transaction->allow_commit();
+
+        return [
+            'frameworkid' => $newframeworkid,
+            'externalid' => $newframeworkexternalid,
+            'version' => $newversion,
+            'competencies' => count($compmap),
+            'use_points' => count($upmap),
+            'knowledge_points' => count($kpmap),
+            'learning_objects' => count($objectmap),
+        ];
+    }
+
+    /**
      * Build a graph for curriculum browsing.
      *
      * @param int $frameworkid
@@ -693,6 +845,159 @@ final class curriculum_manager {
             return $value === '' ? null : (float)$value;
         }
         return $value === '' ? null : $value;
+    }
+
+    /**
+     * Normalize a suffix for cloned external IDs.
+     *
+     * @param string $suffix
+     * @return string
+     */
+    private static function normalize_clone_suffix(string $suffix): string {
+        $suffix = trim($suffix);
+        $suffix = preg_replace('/[^A-Za-z0-9_.-]+/', '-', $suffix);
+        $suffix = trim((string)$suffix, '-_.');
+        if ($suffix === '') {
+            throw new \invalid_parameter_exception('External ID suffix is required.');
+        }
+        return $suffix;
+    }
+
+    /**
+     * Build a cloned external ID.
+     *
+     * @param string $externalid
+     * @param string $suffix
+     * @param int $maxlength
+     * @return string
+     */
+    private static function clone_externalid(string $externalid, string $suffix, int $maxlength): string {
+        $newid = $externalid . '-' . $suffix;
+        if (strlen($newid) > $maxlength) {
+            $keep = max(1, $maxlength - strlen($suffix) - 1);
+            $newid = substr($externalid, 0, $keep) . '-' . $suffix;
+        }
+        return $newid;
+    }
+
+    /**
+     * Clone rows belonging to one framework and return an old-id to new-id map.
+     *
+     * @param string $table
+     * @param int $sourceframeworkid
+     * @param int $targetframeworkid
+     * @param string $newversion
+     * @param string $suffix
+     * @param array $fields
+     * @param array $forceempty
+     * @param int $externalidmaxlength
+     * @return array
+     */
+    private static function clone_framework_entities(string $table, int $sourceframeworkid, int $targetframeworkid,
+            string $newversion, string $suffix, array $fields, array $forceempty, int $externalidmaxlength): array {
+        global $DB, $USER;
+
+        $now = time();
+        $idmap = [];
+        $records = $DB->get_records($table, ['frameworkid' => $sourceframeworkid], 'id ASC');
+        foreach ($records as $source) {
+            $record = new \stdClass();
+            foreach ($fields as $field) {
+                if (property_exists($source, $field)) {
+                    $record->{$field} = $source->{$field};
+                }
+            }
+            $record->frameworkid = $targetframeworkid;
+            $record->externalid = self::clone_externalid((string)$source->externalid, $suffix, $externalidmaxlength);
+            if (in_array('version', $fields, true)) {
+                $record->version = $newversion;
+            }
+            if (in_array('status', $fields, true)) {
+                $record->status = 'draft';
+            }
+            if (property_exists($source, 'timecreated')) {
+                $record->timecreated = $now;
+            }
+            if (property_exists($source, 'timemodified')) {
+                $record->timemodified = $now;
+            }
+            if (property_exists($source, 'usermodified')) {
+                $record->usermodified = $USER->id ?? 0;
+            }
+            foreach ($forceempty as $field) {
+                $record->{$field} = null;
+            }
+            if ($DB->record_exists($table, ['externalid' => $record->externalid])) {
+                throw new \invalid_parameter_exception('The cloned external ID already exists: ' . $record->externalid);
+            }
+            $idmap[(int)$source->id] = (int)$DB->insert_record($table, $record);
+        }
+        return $idmap;
+    }
+
+    /**
+     * Clone a mapping table where every endpoint has a mapped clone.
+     *
+     * @param string $table
+     * @param array $fieldmaps
+     * @param array $fields
+     */
+    private static function clone_mapping_rows(string $table, array $fieldmaps, array $fields): void {
+        global $DB;
+
+        $records = $DB->get_records($table, null, 'id ASC');
+        foreach ($records as $source) {
+            $record = new \stdClass();
+            foreach ($fieldmaps as $field => $idmap) {
+                $oldid = (int)$source->{$field};
+                if (!isset($idmap[$oldid])) {
+                    continue 2;
+                }
+                $record->{$field} = $idmap[$oldid];
+            }
+            foreach ($fields as $field) {
+                if (!isset($fieldmaps[$field]) && property_exists($source, $field)) {
+                    $record->{$field} = $source->{$field};
+                }
+            }
+            $DB->insert_record($table, $record);
+        }
+    }
+
+    /**
+     * Clone object target mappings for cloned objects and targets.
+     *
+     * @param array $objectmap
+     * @param array $compmap
+     * @param array $upmap
+     * @param array $kpmap
+     */
+    private static function clone_object_map_rows(array $objectmap, array $compmap, array $upmap, array $kpmap): void {
+        global $DB;
+
+        $targetmaps = [
+            'competency' => $compmap,
+            'up' => $upmap,
+            'kp' => $kpmap,
+        ];
+        $records = $DB->get_records('flwcupkp_object_map', null, 'id ASC');
+        foreach ($records as $source) {
+            $oldobjectid = (int)$source->objectid;
+            if (!isset($objectmap[$oldobjectid]) || !isset($targetmaps[$source->targettype])) {
+                continue;
+            }
+            $oldtargetid = (int)$source->targetid;
+            if (!isset($targetmaps[$source->targettype][$oldtargetid])) {
+                continue;
+            }
+            $DB->insert_record('flwcupkp_object_map', (object)[
+                'objectid' => $objectmap[$oldobjectid],
+                'targettype' => $source->targettype,
+                'targetid' => $targetmaps[$source->targettype][$oldtargetid],
+                'role' => $source->role,
+                'evidencestrength' => $source->evidencestrength,
+            ]);
+        }
     }
 
     /**
