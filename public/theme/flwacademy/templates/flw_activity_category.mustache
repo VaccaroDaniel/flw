@@ -51,7 +51,7 @@
         {{#ispractice}}
         <section class="flw-practice-hero-grid">
             <section class="flw-sub-banner">
-                <img src="{{practiceheroimageurl}}" alt="">
+                <img src="{{practiceheroimageurl}}" alt="" decoding="async" fetchpriority="high">
                 <div>
                     <p class="flw-page-kicker">{{#str}}practice, theme_flwacademy{{/str}}</p>
                     <h1>{{practiceherotitle}}</h1>
@@ -88,7 +88,7 @@
                 <div class="flw-section-heading"><div><p class="flw-page-kicker">{{#str}}watchcategories, theme_flwacademy{{/str}}</p><h2>{{#str}}practiceimageselection, theme_flwacademy{{/str}}</h2></div></div>
                 <div class="flw-grid five">
                     {{#watchcards}}
-                    <article class="flw-watch-image-card"><img src="{{imageurl}}" alt=""><span>{{title}}</span><p class="flw-muted">{{text}}</p></article>
+                    <article class="flw-watch-image-card"><img src="{{imageurl}}" alt="" loading="lazy" decoding="async"><span>{{title}}</span><p class="flw-muted">{{text}}</p></article>
                     {{/watchcards}}
                 </div>
             </div>
@@ -97,7 +97,7 @@
 
         {{#isexam}}
         <section class="flw-sub-banner">
-            <img src="{{examheroimageurl}}" alt="">
+            <img src="{{examheroimageurl}}" alt="" decoding="async" fetchpriority="high">
             <div>
                 <p class="flw-page-kicker">{{#str}}exam, theme_flwacademy{{/str}}</p>
                 <h1>{{language}} {{#str}}exampractice, theme_flwacademy{{/str}}</h1>

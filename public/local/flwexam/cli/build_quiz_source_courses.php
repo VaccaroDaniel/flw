@@ -15,7 +15,7 @@ require_once($CFG->dirroot . '/mod/quiz/locallib.php');
     [
         'help' => false,
         'questions' => 1008,
-        'random-slots' => 72,
+        'random-slots' => 20,
         'placement-random-slots' => 30,
         'trim-random-slots' => false,
         'language' => '',
@@ -37,7 +37,7 @@ if (!empty($options['help'])) {
     echo "uses random slots so learners receive a manageable sampled attempt.\n\n";
     echo "Options:\n";
     echo "  --questions=N       Questions to keep in each source bank. Must be > 1000. Default: 1008.\n";
-    echo "  --random-slots=N    Random questions shown in each Exam Quiz attempt. Default: 72.\n";
+    echo "  --random-slots=N    Random questions shown in each Exam Quiz attempt. Default: 20.\n";
     echo "  --placement-random-slots=N Random questions shown in each Placement Test Quiz attempt. Default: 30.\n";
     echo "  --trim-random-slots Remove extra existing random slots beyond the target count.\n";
     echo "  --language=CODE     Limit to one language: en, ru, zh, de, ja, fr, es.\n";

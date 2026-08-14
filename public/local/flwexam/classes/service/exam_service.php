@@ -36,6 +36,9 @@ class exam_service {
     /** @var string Branch/government official exam session. */
     public const SESSION_TYPE_OFFICIAL = 'official';
 
+    /** @var int Moodle Quiz-backed exam attempts should sample 20 questions. */
+    public const QUIZ_EXAM_ATTEMPT_QUESTION_COUNT = 20;
+
     /**
      * Return a named status in a readable form.
      *
@@ -457,6 +460,114 @@ class exam_service {
     }
 
     /**
+     * Count the questions shown in one Moodle Quiz attempt.
+     *
+     * @param int $quizid
+     * @return int
+     */
+    public static function get_quiz_attempt_question_count(int $quizid): int {
+        global $DB;
+
+        if ($quizid <= 0 || !$DB->get_manager()->table_exists('quiz_slots')) {
+            return 0;
+        }
+
+        return (int)$DB->count_records('quiz_slots', ['quizid' => $quizid]);
+    }
+
+    /**
+     * Count the source bank questions available to a Moodle Quiz.
+     *
+     * @param int $quizid
+     * @return int
+     */
+    public static function get_quiz_source_question_count(int $quizid): int {
+        return self::get_quiz_question_count($quizid);
+    }
+
+    /**
+     * Remove unfinished Moodle Quiz attempts whose saved layout no longer matches the quiz slots.
+     *
+     * @param int $quizid
+     * @param int $userid
+     * @return int Number of stale attempts removed.
+     */
+    public static function cleanup_stale_quiz_attempts(int $quizid, int $userid): int {
+        global $CFG, $DB;
+
+        if ($quizid <= 0 || $userid <= 0 ||
+                !$DB->get_manager()->table_exists('quiz_attempts') ||
+                !$DB->get_manager()->table_exists('quiz_slots')) {
+            return 0;
+        }
+
+        $quiz = $DB->get_record('quiz', ['id' => $quizid], '*', IGNORE_MISSING);
+        if (!$quiz) {
+            return 0;
+        }
+
+        $slotrecords = $DB->get_records('quiz_slots', ['quizid' => $quizid], '', 'id, slot');
+        if (!$slotrecords) {
+            return 0;
+        }
+
+        $validslots = [];
+        foreach ($slotrecords as $slotrecord) {
+            $validslots[(int)$slotrecord->slot] = true;
+        }
+
+        [$statesql, $stateparams] = $DB->get_in_or_equal(['inprogress', 'overdue'], SQL_PARAMS_NAMED, 'state');
+        $params = [
+            'quizid' => $quizid,
+            'userid' => $userid,
+        ] + $stateparams;
+
+        $attempts = $DB->get_records_sql(
+            "SELECT *
+               FROM {quiz_attempts}
+              WHERE quiz = :quizid
+                AND userid = :userid
+                AND state {$statesql}
+           ORDER BY id",
+            $params
+        );
+        if (!$attempts) {
+            return 0;
+        }
+
+        require_once($CFG->dirroot . '/mod/quiz/locallib.php');
+        $removed = 0;
+        foreach ($attempts as $attempt) {
+            if (!self::quiz_attempt_layout_is_stale((string)$attempt->layout, $validslots)) {
+                continue;
+            }
+
+            quiz_delete_attempt($attempt, $quiz);
+            $removed++;
+        }
+
+        return $removed;
+    }
+
+    /**
+     * Check whether an attempt layout references slots that the quiz no longer has.
+     *
+     * @param string $layout
+     * @param array $validslots
+     * @return bool
+     */
+    protected static function quiz_attempt_layout_is_stale(string $layout, array $validslots): bool {
+        foreach (preg_split('/,/', $layout, -1, PREG_SPLIT_NO_EMPTY) as $item) {
+            $slot = (int)trim($item);
+            if ($slot > 0 && !isset($validslots[$slot])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Return linked Moodle Quiz display metadata.
      *
      * @param int $quizid
@@ -480,13 +591,21 @@ class exam_service {
             return null;
         }
 
+        $attemptquestioncount = self::get_quiz_attempt_question_count((int)$quiz->id);
+        $sourcequestioncount = self::get_quiz_source_question_count((int)$quiz->id);
+
         return [
             'id' => (int)$quiz->id,
             'name' => self::format_display_name($quiz->name),
             'courseid' => (int)$quiz->course,
             'cmid' => (int)$cm->id,
             'url' => new moodle_url('/mod/quiz/view.php', ['id' => (int)$cm->id]),
-            'questioncount' => self::get_quiz_question_count((int)$quiz->id),
+            'questioncount' => $attemptquestioncount,
+            'attemptquestioncount' => $attemptquestioncount,
+            'sourcequestioncount' => $sourcequestioncount,
+            'requiredquestioncount' => self::QUIZ_EXAM_ATTEMPT_QUESTION_COUNT,
+            'isready' => $attemptquestioncount > 0,
+            'issamplecountok' => $attemptquestioncount === self::QUIZ_EXAM_ATTEMPT_QUESTION_COUNT,
             'grade' => (float)$quiz->grade,
             'sumgrades' => (float)$quiz->sumgrades,
         ];
@@ -502,7 +621,7 @@ class exam_service {
         global $DB;
 
         if (!empty($exam->quizid)) {
-            return self::get_quiz_question_count((int)$exam->quizid);
+            return self::get_quiz_attempt_question_count((int)$exam->quizid);
         }
 
         return (int)$DB->count_records('local_flwexam_questions', [
@@ -647,7 +766,8 @@ class exam_service {
                 'quiz_sumgrades' => (float)$quiz->sumgrades,
                 'quiz_grade' => (float)$quiz->grade,
                 'attempt_sumgrades' => (float)$quizattempt->sumgrades,
-                'question_count' => self::get_quiz_question_count((int)$quiz->id),
+                'question_count' => self::get_quiz_attempt_question_count((int)$quiz->id),
+                'source_question_count' => self::get_quiz_source_question_count((int)$quiz->id),
                 'time_started' => (int)$quizattempt->timestart,
                 'time_finished' => (int)$quizattempt->timefinish,
                 'score_source' => 'moodle_quiz_attempt',

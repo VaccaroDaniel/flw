@@ -87,6 +87,17 @@ function theme_flwacademy_get_cache_store(string $name): ?\cache {
 }
 
 /**
+ * Builds a stable cache key for FLW page exports.
+ *
+ * @param string $scope
+ * @param array $parts
+ * @return string
+ */
+function theme_flwacademy_export_cache_key(string $scope, array $parts): string {
+    return $scope . '|' . sha1(json_encode($parts, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+}
+
+/**
  * Cached DB table existence check to avoid repeated manager metadata queries.
  *
  * @param string $table
@@ -1074,6 +1085,10 @@ function theme_flwacademy_get_placement_quiz_start_url(string $languagecode): st
 
     $cm = get_coursemodule_from_instance('quiz', $quizid, (int)$quiz->course, false, IGNORE_MISSING);
     if (!$cm) {
+        return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
+    }
+
+    if ((int)$DB->count_records('quiz_slots', ['quizid' => $quizid]) !== 30) {
         return theme_flwacademy_get_placement_page_url((object)['languagecode' => $language]);
     }
 
@@ -2946,6 +2961,29 @@ function theme_flwacademy_get_selected_learning_language(array $learninglanguage
 function theme_flwacademy_export_home_course_cards($output, array $learninglanguages): array {
     global $DB, $USER;
 
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('home_course_cards', [
+        'userid' => (int)($USER->id ?? 0),
+        'languages' => array_map(static function(array $language): array {
+            return [
+                'code' => $language['code'] ?? '',
+                'categoryurl' => $language['categoryurl'] ?? '',
+                'schoolcategoryurl' => $language['schoolcategoryurl'] ?? '',
+            ];
+        }, $learninglanguages),
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('home_course_cards');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
     $ranges = [
         'ru' => 'A1 to C1',
         'zh' => 'A1 to C1',
@@ -3016,6 +3054,10 @@ function theme_flwacademy_export_home_course_cards($output, array $learninglangu
         }
     }
 
+    if ($store) {
+        $store->set($cachekey, $cards);
+    }
+    $runtimecache[$cachekey] = $cards;
     return $cards;
 }
 
@@ -3028,6 +3070,28 @@ function theme_flwacademy_export_home_course_cards($output, array $learninglangu
  */
 function theme_flwacademy_export_home_school_groups($output, array $learninglanguages): array {
     global $DB, $USER;
+
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('home_school_groups', [
+        'userid' => (int)($USER->id ?? 0),
+        'languages' => array_map(static function(array $language): array {
+            return [
+                'code' => $language['code'] ?? '',
+                'schoolcategoryurl' => $language['schoolcategoryurl'] ?? '',
+            ];
+        }, $learninglanguages),
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('home_school_groups');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
 
     $targetcodes = ['en', 'ru', 'zh'];
     $slotnames = [
@@ -3098,6 +3162,10 @@ function theme_flwacademy_export_home_school_groups($output, array $learninglang
         ];
     }
 
+    if ($store) {
+        $store->set($cachekey, $groups);
+    }
+    $runtimecache[$cachekey] = $groups;
     return $groups;
 }
 
@@ -3538,6 +3606,23 @@ function theme_flwacademy_export_selfstudy_placement_profile(int $userid, string
 function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_renderer $output): array {
     global $DB, $USER;
 
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('selfstudy_category_page', [
+        'categoryid' => $categoryid,
+        'userid' => (int)($USER->id ?? 0),
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('category_page');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
     $languagecategory = $DB->get_record('course_categories', ['id' => $category->parent], '*', MUST_EXIST);
     $language = theme_flwacademy_match_learning_language_category($languagecategory);
@@ -3633,7 +3718,7 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
     ];
     $placementprofile = theme_flwacademy_export_selfstudy_placement_profile((int)$USER->id, $languageCode, (int)$category->id);
 
-    return [
+    $result = [
         'language' => $languageLabel,
         'languagecode' => $languageCode,
         'title' => theme_flwacademy_get_category_display_name($category, $languageCode),
@@ -3649,6 +3734,11 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
         'courses' => $courseitems,
         'hascourses' => !empty($courseitems),
     ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $runtimecache[$cachekey] = $result;
+    return $result;
 }
 
 /**
@@ -3661,8 +3751,26 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
 function theme_flwacademy_export_demo_category_page(int $categoryid, core_renderer $output): array {
     global $DB;
 
+    $activecode = theme_flwacademy_get_active_learning_language_code() ?: 'en';
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('demo_category_page', [
+        'categoryid' => $categoryid,
+        'languagecode' => $activecode,
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('category_page');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
-    $languageCode = theme_flwacademy_get_active_learning_language_code() ?: 'en';
+    $languageCode = $activecode;
     $description = '';
     if (!empty($category->description)) {
         $description = theme_flwacademy_format_learning_language_text(
@@ -3711,7 +3819,7 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
         ];
     }
 
-    return [
+    $result = [
         'language' => 'Demo',
         'languagecode' => $languageCode,
         'title' => theme_flwacademy_get_category_display_name($category, $languageCode),
@@ -3722,6 +3830,11 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
         'hascourses' => !empty($courseitems),
         'coursecount' => count($courseitems),
     ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $runtimecache[$cachekey] = $result;
+    return $result;
 }
 
 /**
@@ -3733,6 +3846,22 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
  */
 function theme_flwacademy_export_school_category_page(int $categoryid, core_renderer $output): array {
     global $DB;
+
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('school_category_page', [
+        'categoryid' => $categoryid,
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('category_page');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
 
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
     $languagecategory = $DB->get_record('course_categories', ['id' => $category->parent], '*', MUST_EXIST);
@@ -3819,7 +3948,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
         ];
     }
 
-    return [
+    $result = [
         'language' => $languageLabel,
         'languagecode' => $languageCode,
         'title' => $herotitle,
@@ -3837,6 +3966,11 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
         'languagecategoryurl' => (new moodle_url('/course/index.php', ['categoryid' => $languagecategory->id]))->out(false),
         'heroimageurl' => $output->image_url('dashboard/school-fit', 'theme_flwacademy')->out(false),
     ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $runtimecache[$cachekey] = $result;
+    return $result;
 }
 
 /**
@@ -3918,9 +4052,29 @@ function theme_flwacademy_resolve_activity_category(stdClass $category): ?array 
 function theme_flwacademy_export_activity_category_page(int $categoryid, core_renderer $output): array {
     global $DB;
 
+    static $runtimecache = [];
+    $cachekey = theme_flwacademy_export_cache_key('activity_category_page', [
+        'categoryid' => $categoryid,
+    ]);
+    if (array_key_exists($cachekey, $runtimecache)) {
+        return $runtimecache[$cachekey];
+    }
+    $store = theme_flwacademy_get_cache_store('category_page');
+    if ($store) {
+        $stored = $store->get($cachekey);
+        if ($stored !== false) {
+            $runtimecache[$cachekey] = $stored;
+            return $stored;
+        }
+    }
+
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
     $resolved = theme_flwacademy_resolve_activity_category($category);
     if (!$resolved) {
+        if ($store) {
+            $store->set($cachekey, []);
+        }
+        $runtimecache[$cachekey] = [];
         return [];
     }
 
@@ -4093,7 +4247,7 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
         ['title' => get_string('practicecardworkenglish', 'theme_flwacademy'), 'text' => get_string('practicecardworkenglishtext', 'theme_flwacademy'), 'imageurl' => $output->image_url('practice/work-english', 'theme_flwacademy')->out(false)],
     ];
 
-    return [
+    $result = [
         'language' => $languageLabel,
         'languagecode' => $languageCode,
         'area' => $area,
@@ -4119,4 +4273,9 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
         'watchcards' => $watchcards,
         'languagecategoryurl' => (new moodle_url('/course/index.php', ['categoryid' => $resolved['languagecategory']->id]))->out(false),
     ];
+    if ($store) {
+        $store->set($cachekey, $result);
+    }
+    $runtimecache[$cachekey] = $result;
+    return $result;
 }

@@ -132,14 +132,21 @@ function local_flwplacement_get_quiz_info(int $quizid): ?array {
         return null;
     }
 
+    $attemptquestioncount = local_flwplacement_count_quiz_attempt_questions((int)$quiz->id);
+    $sourcequestioncount = local_flwplacement_count_quiz_source_questions((int)$quiz->id);
+
     return [
         'id' => (int)$quiz->id,
         'name' => format_string($quiz->name),
         'courseid' => (int)$quiz->course,
         'cmid' => (int)$cm->id,
         'url' => new moodle_url('/mod/quiz/view.php', ['id' => (int)$cm->id]),
-        'questioncount' => local_flwplacement_count_quiz_attempt_questions((int)$quiz->id),
-        'sourcequestioncount' => local_flwplacement_count_quiz_source_questions((int)$quiz->id),
+        'questioncount' => $attemptquestioncount,
+        'attemptquestioncount' => $attemptquestioncount,
+        'sourcequestioncount' => $sourcequestioncount,
+        'requiredquestioncount' => 30,
+        'isready' => $attemptquestioncount > 0,
+        'issamplecountok' => $attemptquestioncount === 30,
         'grade' => (float)$quiz->grade,
         'sumgrades' => (float)$quiz->sumgrades,
     ];

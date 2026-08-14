@@ -83,7 +83,8 @@ if ($usequizplacement && $placementquizinfo && isloggedin() && !isguestuser()) {
     }
 }
 
-if ($forceautostart && $usequizplacement && $placementquizinfo && !empty($placementquizinfo['cmid'])) {
+if ($forceautostart && $usequizplacement && $placementquizinfo && !empty($placementquizinfo['cmid']) &&
+        !empty($placementquizinfo['issamplecountok'])) {
     redirect(new moodle_url('/mod/quiz/startattempt.php', [
         'cmid' => (int)$placementquizinfo['cmid'],
         'sesskey' => sesskey(),
@@ -182,6 +183,9 @@ $config = [
         'name' => $placementquizinfo['name'] ?? '',
         'url' => $placementquizinfo ? $placementquizinfo['url']->out(false) : '',
         'questionCount' => $placementquizinfo['questioncount'] ?? 0,
+        'sourceQuestionCount' => $placementquizinfo['sourcequestioncount'] ?? 0,
+        'requiredQuestionCount' => $placementquizinfo['requiredquestioncount'] ?? 30,
+        'isReady' => !empty($placementquizinfo['issamplecountok']),
     ],
 ];
 
@@ -224,7 +228,9 @@ if ($usequizplacement) {
         $quizdetails = [
             get_string('language', 'moodle') => $defaultlanguagelabel,
             get_string('moodlequiz', 'local_flwplacement') => $placementquizinfo['name'],
-            get_string('questioncount', 'local_flwplacement') => $placementquizinfo['questioncount'],
+            get_string('questioncount', 'local_flwplacement') => (int)$placementquizinfo['questioncount'] .
+                ' / ' . (int)$placementquizinfo['requiredquestioncount'],
+            'Source-bank questions' => (int)$placementquizinfo['sourcequestioncount'],
         ];
         foreach ($quizdetails as $label => $value) {
             echo html_writer::div(
@@ -235,23 +241,40 @@ if ($usequizplacement) {
         }
         echo html_writer::end_div();
         echo html_writer::start_div('flw-placement-button-row');
-        echo html_writer::start_tag('form', [
-            'method' => 'post',
-            'action' => (new moodle_url('/mod/quiz/startattempt.php'))->out(false),
-            'class' => 'flw-placement-inline-form',
-        ]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'cmid', 'value' => (int)$placementquizinfo['cmid']]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwautostart', 'value' => 1]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwskippreflight', 'value' => 1]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwplacement', 'value' => 1]);
-        echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'autostart', 'value' => 1]);
-        echo html_writer::empty_tag('input', [
-            'type' => 'submit',
-            'class' => 'btn btn-primary',
-            'value' => get_string('openmoodlequiz', 'local_flwplacement'),
-        ]);
-        echo html_writer::end_tag('form');
+        if (!empty($placementquizinfo['issamplecountok'])) {
+            echo html_writer::start_tag('form', [
+                'method' => 'post',
+                'action' => (new moodle_url('/mod/quiz/startattempt.php'))->out(false),
+                'class' => 'flw-placement-inline-form',
+            ]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'cmid', 'value' => (int)$placementquizinfo['cmid']]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwautostart', 'value' => 1]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwskippreflight', 'value' => 1]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'flwplacement', 'value' => 1]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'autostart', 'value' => 1]);
+            echo html_writer::empty_tag('input', [
+                'type' => 'submit',
+                'class' => 'btn btn-primary',
+                'value' => get_string('openmoodlequiz', 'local_flwplacement'),
+            ]);
+            echo html_writer::end_tag('form');
+        } else {
+            echo html_writer::div(
+                'This Moodle Quiz is linked, but FLW Placement needs exactly ' .
+                    (int)$placementquizinfo['requiredquestioncount'] .
+                    ' attempt questions. Add random slots from the correct placement question bank, then open the test again.',
+                'alert alert-warning'
+            );
+            $quizcontext = context_module::instance((int)$placementquizinfo['cmid']);
+            if (has_capability('mod/quiz:manage', $quizcontext)) {
+                echo html_writer::link(
+                    new moodle_url('/mod/quiz/edit.php', ['cmid' => (int)$placementquizinfo['cmid']]),
+                    'Configure quiz questions',
+                    ['class' => 'btn btn-primary']
+                );
+            }
+        }
         echo html_writer::start_tag('form', [
             'method' => 'post',
             'action' => $url->out(false),

@@ -56,7 +56,7 @@
                     {{/placementstartenabled}}
                 </div>
             </div>
-            <img class="flw-hero-reference" src="{{redesignheroimageurl}}" alt="{{#str}}homeheroimagealt, theme_flwacademy{{/str}}">
+            <img class="flw-hero-reference" src="{{redesignheroimageurl}}" alt="{{#str}}homeheroimagealt, theme_flwacademy{{/str}}" decoding="async" fetchpriority="high">
         </section>
 
         <section class="flw-course-section" id="courses" aria-label="{{#str}}flwcourses, theme_flwacademy{{/str}}">
@@ -70,7 +70,7 @@
                 {{#coursecards}}
                     <article class="flw-course-card">
                         <div class="flw-crest-frame">
-                            <img class="flw-crest-image" src="{{cresturl}}" alt="{{alt}}">
+                            <img class="flw-crest-image" src="{{cresturl}}" alt="{{alt}}" loading="lazy" decoding="async">
                         </div>
                         <div class="flw-course-info">
                             <h2>{{name}}</h2>
@@ -95,7 +95,7 @@
                 {{#schoolgroups}}
                 <article class="flw-school-group">
                     <div class="flw-school-group-head">
-                        <img src="{{cresturl}}" alt="{{worldname}} {{#str}}crest, theme_flwacademy{{/str}}">
+                        <img src="{{cresturl}}" alt="{{worldname}} {{#str}}crest, theme_flwacademy{{/str}}" loading="lazy" decoding="async">
                         <h3>{{name}}</h3>
                         <a href="{{url}}">{{#str}}open, theme_flwacademy{{/str}}</a>
                     </div>
@@ -119,10 +119,10 @@
             <div class="flw-how-left">
                 <h2>{{#str}}howflwworks, theme_flwacademy{{/str}}</h2>
                 <div class="flw-method-grid">
-                    <article class="flw-method-card learn"><img src="{{howlearnimageurl}}" alt="{{#str}}learn, theme_flwacademy{{/str}}"><h3>{{#str}}learn, theme_flwacademy{{/str}}</h3><p>{{#str}}learntext, theme_flwacademy{{/str}}</p></article>
-                    <article class="flw-method-card practise"><img src="{{howpractiseimageurl}}" alt="{{#str}}practise, theme_flwacademy{{/str}}"><h3>{{#str}}practise, theme_flwacademy{{/str}}</h3><p>{{#str}}practisetext, theme_flwacademy{{/str}}</p></article>
-                    <article class="flw-method-card communicate"><img src="{{howcommunicateimageurl}}" alt="{{#str}}communicate, theme_flwacademy{{/str}}"><h3>{{#str}}communicate, theme_flwacademy{{/str}}</h3><p>{{#str}}communicatetext, theme_flwacademy{{/str}}</p></article>
-                    <article class="flw-method-card create"><img src="{{howcreateimageurl}}" alt="{{#str}}create, theme_flwacademy{{/str}}"><h3>{{#str}}create, theme_flwacademy{{/str}}</h3><p>{{#str}}createtext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-method-card learn"><img src="{{howlearnimageurl}}" alt="{{#str}}learn, theme_flwacademy{{/str}}" loading="lazy" decoding="async"><h3>{{#str}}learn, theme_flwacademy{{/str}}</h3><p>{{#str}}learntext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-method-card practise"><img src="{{howpractiseimageurl}}" alt="{{#str}}practise, theme_flwacademy{{/str}}" loading="lazy" decoding="async"><h3>{{#str}}practise, theme_flwacademy{{/str}}</h3><p>{{#str}}practisetext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-method-card communicate"><img src="{{howcommunicateimageurl}}" alt="{{#str}}communicate, theme_flwacademy{{/str}}" loading="lazy" decoding="async"><h3>{{#str}}communicate, theme_flwacademy{{/str}}</h3><p>{{#str}}communicatetext, theme_flwacademy{{/str}}</p></article>
+                    <article class="flw-method-card create"><img src="{{howcreateimageurl}}" alt="{{#str}}create, theme_flwacademy{{/str}}" loading="lazy" decoding="async"><h3>{{#str}}create, theme_flwacademy{{/str}}</h3><p>{{#str}}createtext, theme_flwacademy{{/str}}</p></article>
                 </div>
             </div>
 
@@ -146,7 +146,7 @@
                     {{/placementstartenabled}}
                     <button class="flw-outline-button" type="button" data-flw-demo-message="{{#str}}previousplacementtoast, theme_flwacademy{{/str}}">{{#str}}viewpreviousresults, theme_flwacademy{{/str}}</button>
                 </div>
-                <img src="{{placementimageurl}}" alt="{{#str}}placementimagealt, theme_flwacademy{{/str}}">
+                <img src="{{placementimageurl}}" alt="{{#str}}placementimagealt, theme_flwacademy{{/str}}" loading="lazy" decoding="async">
             </article>
         </section>
 

@@ -46,4 +46,22 @@ $definitions = [
         'simpledata' => true,
         'ttl' => 240,
     ],
+    'home_course_cards' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => false,
+        'simpledata' => true,
+        'ttl' => 180,
+    ],
+    'home_school_groups' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => false,
+        'simpledata' => true,
+        'ttl' => 180,
+    ],
+    'category_page' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => false,
+        'simpledata' => true,
+        'ttl' => 180,
+    ],
 ];

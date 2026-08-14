@@ -42,7 +42,7 @@
 
     <main id="page" class="flw-page-shell flw-stack">
         <section class="flw-sub-banner">
-            <img src="{{heroimageurl}}" alt="">
+            <img src="{{heroimageurl}}" alt="" decoding="async" fetchpriority="high">
             <div>
                 <p class="flw-page-kicker">{{#str}}demo, theme_flwacademy{{/str}}</p>
                 <h1>{{#str}}tryflwlearningexperiences, theme_flwacademy{{/str}}</h1>
@@ -84,7 +84,7 @@
                 <div class="flw-course-grid">
                     {{#courses}}
                     <a class="flw-card flw-course-card accent-teal" href="{{url}}">
-                        <img class="flw-course-cover" src="{{imageurl}}" alt="">
+                        <img class="flw-course-cover" src="{{imageurl}}" alt="" loading="lazy" decoding="async">
                         <span class="flw-course-meta">{{categoryname}}</span>
                         <h3>{{name}}</h3>
                         {{#summary}}<p class="flw-muted">{{summary}}</p>{{/summary}}
