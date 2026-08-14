@@ -35,6 +35,8 @@ defined('MOODLE_INTERNAL') || die();
  * @return string A warning message if a private key does not exist and cannot be generated.
  */
 function mod_lti_verify_private_key() {
+    global $CFG;
+
     $key = get_config('mod_lti', 'privatekey');
 
     // If we already generated a valid key, no need to check.
@@ -48,8 +50,16 @@ function mod_lti_verify_private_key() {
             "private_key_bits" => 2048,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
         );
-        $res = openssl_pkey_new($config);
-        openssl_pkey_export($res, $privatekey);
+        if ($opensslconfig = mod_lti_find_openssl_config()) {
+            $config['config'] = $opensslconfig;
+            if (!getenv('OPENSSL_CONF')) {
+                putenv('OPENSSL_CONF=' . $opensslconfig);
+            }
+        }
+        $res = @openssl_pkey_new($config);
+        if ($res !== false) {
+            @openssl_pkey_export($res, $privatekey, null, $config);
+        }
 
         if (!empty($privatekey)) {
             set_config('privatekey', $privatekey, 'mod_lti');
@@ -59,4 +69,32 @@ function mod_lti_verify_private_key() {
     }
 
     return '';
+}
+
+/**
+ * Locate the bundled OpenSSL configuration used by the Windows FLW stack.
+ *
+ * @return string|null
+ */
+function mod_lti_find_openssl_config(): ?string {
+    global $CFG;
+
+    $candidates = [];
+    $default = ini_get('openssl.default_config');
+    if (!empty($default)) {
+        $candidates[] = $default;
+    }
+    if (!empty($CFG->dirroot)) {
+        $serverroot = dirname($CFG->dirroot, 2);
+        $candidates[] = $serverroot . '/apache/conf/openssl.cnf';
+        $candidates[] = $serverroot . '/php/windowsXamppPhp/extras/ssl/openssl.cnf';
+    }
+
+    foreach ($candidates as $candidate) {
+        if ($candidate && is_readable($candidate)) {
+            return $candidate;
+        }
+    }
+
+    return null;
 }

@@ -704,6 +704,359 @@ class importer {
     }
 
     /**
+     * Publish or unpublish a single composed lesson section.
+     *
+     * Publishing keeps all other generated textbook sections and modules hidden.
+     *
+     * @param array $package
+     * @param int $sectionnumber
+     * @param bool $publish
+     * @return array
+     */
+    public static function set_lesson_published(array $package, int $sectionnumber, bool $publish): array {
+        global $CFG, $DB, $PAGE;
+
+        self::validate_package($package);
+
+        require_once($CFG->dirroot . '/course/lib.php');
+
+        \core\session\manager::set_user(get_admin());
+
+        $course = $DB->get_record('course', ['shortname' => $package['course']['shortname']], '*', MUST_EXIST);
+        $PAGE->set_context(\context_course::instance($course->id));
+
+        $section = self::find_package_section($package, $sectionnumber);
+        if (!$section) {
+            throw new \moodle_exception('sectionnotfound', 'local_flwtextbookimport', '', $sectionnumber);
+        }
+
+        if ($publish) {
+            $DB->set_field('course', 'visible', 1, ['id' => $course->id]);
+            set_section_visible((int)$course->id, $sectionnumber, 1);
+        } else {
+            set_section_visible((int)$course->id, $sectionnumber, 0);
+        }
+
+        $visibleids = [];
+        foreach (($section['activities'] ?? []) as $index => $activity) {
+            $idnumber = self::activity_idnumber($package, $sectionnumber, $index, $activity);
+            $cm = self::find_course_module_by_idnumber((int)$course->id, $idnumber);
+            if (!$cm) {
+                continue;
+            }
+            $visible = $publish && self::is_lesson_publishable_activity($activity);
+            $DB->set_field('course_modules', 'visible', $visible ? 1 : 0, ['id' => $cm->id]);
+            $DB->set_field('course_modules', 'visibleold', $visible ? 1 : 0, ['id' => $cm->id]);
+            if ($visible) {
+                $visibleids[] = (int)$cm->id;
+            }
+        }
+
+        foreach ($package['sections'] as $othersection) {
+            $othernumber = (int)($othersection['section_number'] ?? 0);
+            if ($othernumber <= 0 || $othernumber === $sectionnumber) {
+                continue;
+            }
+            set_section_visible((int)$course->id, $othernumber, 0);
+            foreach (($othersection['activities'] ?? []) as $index => $activity) {
+                $idnumber = self::activity_idnumber($package, $othernumber, $index, $activity);
+                $cm = self::find_course_module_by_idnumber((int)$course->id, $idnumber);
+                if (!$cm) {
+                    continue;
+                }
+                $DB->set_field('course_modules', 'visible', 0, ['id' => $cm->id]);
+                $DB->set_field('course_modules', 'visibleold', 0, ['id' => $cm->id]);
+            }
+        }
+
+        if (!$publish && !$DB->record_exists('course_modules', ['course' => (int)$course->id, 'visible' => 1])) {
+            $DB->set_field('course', 'visible', 0, ['id' => $course->id]);
+        }
+
+        rebuild_course_cache((int)$course->id, true);
+
+        $sectionid = $DB->get_field('course_sections', 'id', [
+            'course' => (int)$course->id,
+            'section' => $sectionnumber,
+        ], MUST_EXIST);
+        $visiblecount = $DB->count_records('course_modules', [
+            'course' => (int)$course->id,
+            'section' => $sectionid,
+            'visible' => 1,
+        ]);
+        $hiddencount = $DB->count_records('course_modules', [
+            'course' => (int)$course->id,
+            'section' => $sectionid,
+            'visible' => 0,
+        ]);
+
+        return [
+            'mode' => $publish ? 'publish_lesson' : 'unpublish_lesson',
+            'course' => [
+                'id' => (int)$course->id,
+                'fullname' => $course->fullname,
+                'shortname' => $course->shortname,
+                'visible' => (int)$DB->get_field('course', 'visible', ['id' => $course->id]),
+            ],
+            'section' => [
+                'number' => $sectionnumber,
+                'title' => (string)($section['title'] ?? ''),
+            ],
+            'modulesvisible' => (int)$visiblecount,
+            'moduleshidden' => (int)$hiddencount,
+            'visiblecmids' => $visibleids,
+            'warnings' => [],
+        ];
+    }
+
+    /**
+     * Build learner-ready template payloads for CKLA Grade 2 Unit 2 Lesson 1.
+     *
+     * @param array $package
+     * @param array $section
+     * @return array
+     */
+    private static function lesson_one_templates(array $package, array $section): array {
+        $templates = [];
+
+        foreach (($section['activities'] ?? []) as $index => $activity) {
+            $idnumber = self::activity_idnumber($package, 1, $index, $activity);
+            $name = self::clean_import_text((string)($activity['name'] ?? ''));
+            $module = (string)($activity['moodle_module'] ?? '');
+            $component = (string)($activity['source_component'] ?? '');
+
+            if ($module === 'page' && $component === 'teacher_guide' && strpos($name, 'Teacher Plan') !== false) {
+                $templates[$idnumber] = self::lesson_one_guide_template($activity);
+                continue;
+            }
+
+            if ($module !== 'assign') {
+                continue;
+            }
+
+            if (strpos($name, 'Workbook 1.1') === 0) {
+                $templates[$idnumber] = self::lesson_one_assignment_template($activity, [
+                    'name' => 'Lesson 1.1 Family Spelling Practice',
+                    'skill' => 'spelling',
+                    'kptags' => 'ckla-g2-u2-l1, cefr:a1, skill:spelling, spelling:ed-suffix, tricky-word:you, family-practice',
+                    'overview' => 'Practice this week\'s -ed spelling words and the Tricky Word you.',
+                    'steps' => [
+                        'Read each root word and its -ed spelling word aloud.',
+                        'Choose five spelling words that need more practice.',
+                        'Write one short sentence that uses the word you.',
+                    ],
+                    'submit' => [
+                        'Type five practiced spelling words.',
+                        'Type one sentence with the word you.',
+                        'Optional: add one note from home practice.',
+                    ],
+                    'reviewnote' => 'Learner-ready online text version of Workbook 1.1 family spelling practice.',
+                ]);
+                continue;
+            }
+
+            if (strpos($name, 'Workbook 1.2') === 0) {
+                $templates[$idnumber] = self::lesson_one_assignment_template($activity, [
+                    'name' => 'Lesson 1.2 a_e and i_e Sentence Practice',
+                    'skill' => 'phonics_sentence_practice',
+                    'kptags' => 'ckla-g2-u2-l1, cefr:a1, skill:phonics, phonics:a_e, phonics:i_e, sentence-completion',
+                    'overview' => 'Use the workbook word bank to complete sentences with a_e and i_e words.',
+                    'steps' => [
+                        'Open Workbook 1.2.',
+                        'Read the word bank: gave, drive, smile, like, cake.',
+                        'Choose the word that best completes each sentence.',
+                    ],
+                    'submit' => [
+                        'Type your five answers in order, one per line.',
+                        'After the list, write one new sentence using one of the words.',
+                    ],
+                    'reviewnote' => 'Learner-ready online text version of Workbook 1.2 sentence completion.',
+                ]);
+                continue;
+            }
+
+            if (strpos($name, 'Workbook 1.3') === 0) {
+                $templates[$idnumber] = self::lesson_one_assignment_template($activity, [
+                    'name' => 'Lesson 1.3 Magic e Word Builder',
+                    'skill' => 'phonics_word_building',
+                    'kptags' => 'ckla-g2-u2-l1, cefr:a1, skill:phonics, phonics:magic-e, phonics:a_e, phonics:i_e, word-building',
+                    'overview' => 'Add final e to short words and read the new magic e words.',
+                    'steps' => [
+                        'Open Workbook 1.3.',
+                        'Read each short word first.',
+                        'Add final e where your teacher directs you.',
+                        'Read the new word aloud and listen for the changed vowel sound.',
+                    ],
+                    'submit' => [
+                        'Type eight word pairs, such as mad -> made.',
+                        'Circle back and mark two pairs that were hard.',
+                    ],
+                    'reviewnote' => 'Learner-ready online text version of Workbook 1.3 magic e chaining.',
+                ]);
+                continue;
+            }
+
+            if (strpos($name, 'Workbook 1.4') === 0) {
+                $templates[$idnumber] = self::lesson_one_assignment_template($activity, [
+                    'name' => 'Lesson 1.4 Mike\'s Bedtime Reading Check',
+                    'skill' => 'reading_comprehension',
+                    'kptags' => 'ckla-g2-u2-l1, cefr:a1, skill:reading, reading:decodable-text, story-elements, comprehension:literal',
+                    'overview' => 'Reread "Mike\'s Bedtime" and answer literal comprehension questions in complete sentences.',
+                    'steps' => [
+                        'Read the story "Mike\'s Bedtime" in the Bedtime Tales Reader.',
+                        'Find the page that supports each answer.',
+                        'Answer with a complete sentence.',
+                    ],
+                    'submit' => [
+                        'Answer: How old is Mike?',
+                        'Answer: What object in the story was black?',
+                        'Answer: What did Mike yank back?',
+                        'Add the Reader page number for each answer.',
+                    ],
+                    'reviewnote' => 'Learner-ready online text version of Workbook 1.4 reading check.',
+                ]);
+            }
+        }
+
+        return $templates;
+    }
+
+    /**
+     * Student-facing lesson guide template.
+     *
+     * @param array $activity
+     * @return array
+     */
+    private static function lesson_one_guide_template(array $activity): array {
+        $kptags = 'ckla-g2-u2-l1, cefr:a1, skill:lesson-guide, phonics:a_e, phonics:i_e, phonics:magic-e, ' .
+            'tricky-word:i, tricky-word:you, tricky-word:your, tricky-word:street, reading:story-elements';
+
+        $content = '';
+        $content .= '<h3>Lesson Goals</h3>';
+        $content .= self::html_list([
+            'I can read words with the magic e spellings a_e and i_e.',
+            'I can read the Tricky Words I, you, your, and street.',
+            'I can read "Mike\'s Bedtime" and name the characters, setting, and plot.',
+        ]);
+
+        $content .= '<h3>Warm-Up: Spelling With -ed</h3>';
+        $content .= '<p>Read the spelling words aloud. Listen to the ending sound and notice the root word.</p>';
+        $content .= self::html_list([
+            'yelled, yanked, slumped, limped, plopped',
+            'smiled, shrugged, liked, patted',
+            'Tricky Word: you',
+        ]);
+
+        $content .= '<h3>Learn: Magic e</h3>';
+        $content .= '<p>In this lesson, final e helps the vowel say a new sound. The spelling a_e can stand for /ae/, as in cake. The spelling i_e can stand for /ie/, as in bite.</p>';
+        $content .= self::html_list([
+            'a_e words: ate, late, made, name, safe, sale',
+            'i_e words: time, mine, shine, ride',
+            'Story preview words: plane, take, came, drapes, face, made, tale, Mike, bedtime, smiled, liked',
+        ]);
+
+        $content .= '<h3>Practice Flow</h3>';
+        $content .= self::html_list([
+            'Say the short word first.',
+            'Add final e.',
+            'Read the new word and listen for the changed vowel sound.',
+            'Try examples such as mad -> made, rip -> ripe, tap -> tape, pin -> pine.',
+        ]);
+
+        $content .= '<h3>Tricky Words</h3>';
+        $content .= '<p>Read each Tricky Word, then say which part is expected and which part is tricky.</p>';
+        $content .= self::html_list(['I', 'you', 'your', 'street']);
+
+        $content .= '<h3>Reading Focus</h3>';
+        $content .= '<p>Read "Mike\'s Bedtime" in the Bedtime Tales Reader. Track three story elements as you read.</p>';
+        $content .= self::html_list([
+            'Characters: Who is in the story?',
+            'Setting: Where does the story happen?',
+            'Plot: What problem happens, and what does Dad do?',
+        ]);
+
+        $content .= '<h3>Finish</h3>';
+        $content .= self::html_list([
+            'Complete Lesson 1.1 for spelling practice.',
+            'Complete Lesson 1.2 for a_e and i_e sentence practice.',
+            'Complete Lesson 1.3 for magic e word building.',
+            'Complete Lesson 1.4 after reading "Mike\'s Bedtime."',
+        ]);
+
+        $content .= self::lesson_one_source_html($activity);
+
+        return [
+            'module' => 'page',
+            'name' => 'Lesson 1: Magic e, Tricky Words, and Mike\'s Bedtime',
+            'intro' => '<p>Student lesson guide for CKLA Grade 2 Unit 2 Lesson 1.</p>',
+            'content' => $content,
+            'skill' => 'lesson_guide',
+            'kptags' => $kptags,
+            'reviewnote' => 'Learner-ready guide composed from the Lesson 1 teacher-guide range.',
+        ];
+    }
+
+    /**
+     * Student-facing assignment template.
+     *
+     * @param array $activity
+     * @param array $data
+     * @return array
+     */
+    private static function lesson_one_assignment_template(array $activity, array $data): array {
+        $intro = '';
+        $intro .= '<p><strong>Task:</strong> ' . s((string)$data['overview']) . '</p>';
+        $intro .= '<h4>Steps</h4>';
+        $intro .= self::html_list($data['steps']);
+        $intro .= '<h4>Submit Online Text</h4>';
+        $intro .= self::html_list($data['submit']);
+        $intro .= '<h4>Success Check</h4>';
+        $intro .= self::html_list([
+            'My answer matches the lesson focus.',
+            'I used complete words or complete sentences where requested.',
+            'I checked my spelling before submitting.',
+        ]);
+        $intro .= self::lesson_one_source_html($activity);
+
+        return [
+            'module' => 'assign',
+            'name' => (string)$data['name'],
+            'intro' => $intro,
+            'skill' => (string)$data['skill'],
+            'kptags' => (string)$data['kptags'],
+            'reviewnote' => (string)$data['reviewnote'],
+        ];
+    }
+
+    /**
+     * Source attribution block for learner-ready templates.
+     *
+     * @param array $activity
+     * @return string
+     */
+    private static function lesson_one_source_html(array $activity): string {
+        $items = self::activity_source_items($activity);
+        $items[] = 'Adapted for FLW Moodle from Core Knowledge Language Arts Grade 2 Unit 2: Bedtime Tales.';
+        $items[] = 'Source license: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported.';
+
+        return '<div class="flw-tbi-source"><h4>Source</h4>' . self::html_list($items) . '</div>';
+    }
+
+    /**
+     * Whether a planned activity can be published by the current pilot switch.
+     *
+     * @param array $activity
+     * @return bool
+     */
+    private static function is_lesson_publishable_activity(array $activity): bool {
+        $module = strtolower((string)($activity['moodle_module'] ?? ''));
+        $status = strtolower((string)($activity['review_status'] ?? ''));
+
+        return in_array($module, self::SUPPORTED_ACTIVITY_MODULES, true) &&
+            in_array($status, ['needs_teacher_review', 'needs_activity_review'], true);
+    }
+
+    /**
      * Validate the dry-run package shape.
      *
      * @param array $package

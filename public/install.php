@@ -282,28 +282,33 @@ if ($config->stage == INSTALL_SAVE) {
         $hint_database = install_db_validate($database, $config->dbhost, $config->dbuser, $config->dbpass, $config->dbname, $config->prefix, array('dbpersist'=>0, 'dbport'=>$config->dbport, 'dbsocket'=>$config->dbsocket));
 
         if ($hint_database === '') {
-            $configphp = install_generate_configphp($database, $CFG);
+            if ($database->get_tables()) {
+                $hint_database = 'This database already contains Moodle tables. For a fresh FLW self-install, choose an empty database, use a new table prefix, or restore the existing config.php instead of reinstalling.';
+                $config->stage = INSTALL_DATABASE;
+            } else {
+                $configphp = install_generate_configphp($database, $CFG);
 
-            umask(0137);
-            if (($fh = @fopen($configfile, 'w')) !== false) {
-                fwrite($fh, $configphp);
-                fclose($fh);
+                umask(0137);
+                if (($fh = @fopen($configfile, 'w')) !== false) {
+                    fwrite($fh, $configphp);
+                    fclose($fh);
+                }
+
+                if (file_exists($configfile)) {
+                    // config created, let's continue!
+                    redirect("$CFG->wwwroot/$config->admin/index.php?lang=$config->lang");
+                }
+
+                install_print_header($config, 'config.php',
+                                              get_string('configurationcompletehead', 'install'),
+                                              get_string('configurationcompletesub', 'install').get_string('configfilenotwritten', 'install'), 'alert-error');
+                echo '<div class="configphp"><pre>';
+                echo p($configphp);
+                echo '</pre></div>';
+
+                install_print_footer($config);
+                die;
             }
-
-            if (file_exists($configfile)) {
-                // config created, let's continue!
-                redirect("$CFG->wwwroot/$config->admin/index.php?lang=$config->lang");
-            }
-
-            install_print_header($config, 'config.php',
-                                          get_string('configurationcompletehead', 'install'),
-                                          get_string('configurationcompletesub', 'install').get_string('configfilenotwritten', 'install'), 'alert-error');
-            echo '<div class="configphp"><pre>';
-            echo p($configphp);
-            echo '</pre></div>';
-
-            install_print_footer($config);
-            die;
 
         } else {
             $config->stage = INSTALL_DATABASE;

@@ -46,6 +46,10 @@ class core_hook_output {
     public static function html_attributes() {
         global $CFG;
 
+        if (self::is_initial_install()) {
+            return [];
+        }
+
         if (!get_config("local_boost_dark", "enable")) {
             return [];
         }
@@ -94,6 +98,10 @@ class core_hook_output {
      * @throws dml_exception
      */
     public static function before_html_attributes(before_html_attributes $hook): void {
+        if (self::is_initial_install()) {
+            return;
+        }
+
         if (!get_config("local_boost_dark", "enable")) {
             return;
         }
@@ -110,6 +118,10 @@ class core_hook_output {
      * @throws dml_exception
      */
     public static function before_footer_html_generation(before_footer_html_generation $hook): void {
+        if (self::is_initial_install()) {
+            return;
+        }
+
         if (!get_config("local_boost_dark", "enable")) {
             return;
         }
@@ -171,6 +183,10 @@ class core_hook_output {
      * @throws dml_exception
      */
     private static function get_config($name, $default) {
+        if (self::is_initial_install()) {
+            return $default;
+        }
+
         $configname = str_replace("-rgb", "", $name);
         $configname = str_replace("-", "_", $configname);
         $config = get_config("local_boost_dark", $configname);
@@ -192,5 +208,16 @@ class core_hook_output {
         }
 
         return $config;
+    }
+
+    /**
+     * Check whether Moodle is rendering the installer before core tables exist.
+     *
+     * @return bool
+     */
+    private static function is_initial_install(): bool {
+        global $CFG;
+
+        return empty($CFG->version);
     }
 }

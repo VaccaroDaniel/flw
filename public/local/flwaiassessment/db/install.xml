@@ -9,8 +9,8 @@
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="activitytype" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="activitytype" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sourcecomponent" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="submissionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="skilltype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="writing" SEQUENCE="false"/>
         <FIELD NAME="rawtext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
@@ -18,14 +18,14 @@
         <FIELD NAME="audiopath" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="prompttext" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending" SEQUENCE="false"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="totalscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="rubricjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="weakkpjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="recommendjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="airesponsejson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="error" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="teachercefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="teachercefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="teacherscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="teachernote" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="teacherconfirmed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

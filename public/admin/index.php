@@ -218,8 +218,14 @@ if (!core_tables_exist()) {
 
     $strinstallation = get_string('installation', 'install');
 
-    // Remove current session content completely.
-    \core\session\manager::terminate_current();
+    // Remove current session content completely. During a fresh FLW self-install
+    // the database may not have a sessions table yet, especially when reusing an
+    // existing moodledata directory with a newly emptied database.
+    try {
+        \core\session\manager::terminate_current();
+    } catch (dml_exception $ignored) {
+        \core\session\manager::init_empty_session();
+    }
 
     if (empty($agreelicense)) {
         $strlicense = get_string('license');

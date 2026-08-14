@@ -339,6 +339,109 @@
         <INDEX NAME="time_ix" UNIQUE="false" FIELDS="timecreated"/>
       </INDEXES>
     </TABLE>
+    <TABLE NAME="flwcupkp_eval_period" COMMENT="Learner evaluation periods and checkpoints">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="120" NOTNULL="true"/>
+        <FIELD NAME="periodtype" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="unit"/>
+        <FIELD NAME="datestart" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="dateend" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="configjson" TYPE="text"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="active"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="scope_ix" UNIQUE="false" FIELDS="courseid, frameworkid, unitcode"/>
+        <INDEX NAME="type_ix" UNIQUE="false" FIELDS="periodtype, status"/>
+        <INDEX NAME="date_ix" UNIQUE="false" FIELDS="datestart, dateend"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_eval_snapshot" COMMENT="Immutable learner evaluation snapshots">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="periodid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="evaluationtype" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="unit"/>
+        <FIELD NAME="cefrinterpretation" TYPE="char" LENGTH="120"/>
+        <FIELD NAME="masteryruleversion" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="evaluationruleversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="eval-v1"/>
+        <FIELD NAME="frameworkversion" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="evidencecutoff" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="snapshotversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="current"/>
+        <FIELD NAME="summaryjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="stateidsjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="evidenceidsjson" TYPE="text"/>
+        <FIELD NAME="diagnosticsjson" TYPE="text"/>
+        <FIELD NAME="recommendationsjson" TYPE="text"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="useridcreated" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="period_ix" UNIQUE="false" FIELDS="periodid, evaluationtype"/>
+        <INDEX NAME="cutoff_ix" UNIQUE="false" FIELDS="evidencecutoff"/>
+        <INDEX NAME="checksum_ix" UNIQUE="false" FIELDS="checksum"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_selfeval" COMMENT="Learner self-evaluation entries">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="periodid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="selfrating" TYPE="number" LENGTH="10" DECIMALS="5" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="reflection" TYPE="text"/>
+        <FIELD NAME="provenance" TYPE="char" LENGTH="80" DEFAULT="learner"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/>
+        <INDEX NAME="period_ix" UNIQUE="false" FIELDS="periodid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_diagnostic" COMMENT="Derived learner evaluation diagnostics">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="periodid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="gapcategory" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="diagnosticreason" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="stateidsjson" TYPE="text"/>
+        <FIELD NAME="evidenceidsjson" TYPE="text"/>
+        <FIELD NAME="confidence" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="ruleversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="diagnostic-v1"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" DEFAULT="active"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/>
+        <INDEX NAME="category_ix" UNIQUE="false" FIELDS="gapcategory, status"/>
+        <INDEX NAME="period_ix" UNIQUE="false" FIELDS="periodid"/>
+      </INDEXES>
+    </TABLE>
     <TABLE NAME="flwcupkp_audit" COMMENT="Audit log">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>

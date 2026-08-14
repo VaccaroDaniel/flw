@@ -39,6 +39,10 @@ $tables = [
     'flwcupkp_calsnapshot',
     'flwcupkp_calproposal',
     'flwcupkp_calrecalc',
+    'flwcupkp_eval_period',
+    'flwcupkp_eval_snapshot',
+    'flwcupkp_selfeval',
+    'flwcupkp_diagnostic',
     'flwcupkp_audit',
 ];
 
@@ -99,6 +103,20 @@ $integrity = [
       LEFT JOIN {flwcupkp_kp} prereq ON prereq.id = m.prereqkpid
           WHERE kp.id IS NULL OR prereq.id IS NULL"
     ),
+    'selfeval_invalid_target_type' => $DB->count_records_select(
+        'flwcupkp_selfeval',
+        "targettype NOT IN ('competency', 'up', 'kp')"
+    ),
+    'diagnostic_invalid_target_type' => $DB->count_records_select(
+        'flwcupkp_diagnostic',
+        "targettype NOT IN ('competency', 'up', 'kp')"
+    ),
+    'eval_snapshot_missing_user' => local_flwcupkp_health_count_sql(
+        "SELECT COUNT(1)
+           FROM {flwcupkp_eval_snapshot} s
+      LEFT JOIN {user} u ON u.id = s.userid
+          WHERE u.id IS NULL"
+    ),
 ];
 
 foreach ($integrity as $name => $count) {
@@ -132,6 +150,7 @@ $requiredfiles = [
     'traceability_page' => 'local/flwcupkp/trace.php',
     'calibration_page' => 'local/flwcupkp/calibration.php',
     'calibration_proposal_page' => 'local/flwcupkp/calibration_proposal.php',
+    'evaluation_page' => 'local/flwcupkp/evaluation.php',
     'u038_student_page' => 'local/flwcupkp/student_u038.php',
     'u038_teacher_page' => 'local/flwcupkp/teacher_u038.php',
     'u038_performance_page' => 'local/flwcupkp/performance_u038.php',
@@ -141,6 +160,8 @@ $requiredfiles = [
     'performance_service' => 'local/flwcupkp/classes/local/performance_service.php',
     'calibration_report' => 'local/flwcupkp/classes/local/calibration_report.php',
     'calibration_proposal' => 'local/flwcupkp/classes/local/calibration_proposal.php',
+    'learner_evaluation_service' => 'local/flwcupkp/classes/local/learner_evaluation.php',
+    'visuals_service' => 'local/flwcupkp/classes/local/visuals.php',
     'calibration_recalculation_task' => 'local/flwcupkp/classes/task/calibration_recalculation.php',
     'u038_performance_service' => 'local/flwcupkp/classes/local/u038_performance_service.php',
     'unit_setup_service' => 'local/flwcupkp/classes/local/unit_setup_service.php',

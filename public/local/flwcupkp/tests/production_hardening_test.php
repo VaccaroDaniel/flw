@@ -7,11 +7,10 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Production hardening tests.
- *
- * @covers \local_flwcupkp\local\curriculum_manager
- * @covers \local_flwcupkp\local\evidence_guard
- * @covers \local_flwcupkp\local\mastery_engine
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\curriculum_manager::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\evidence_guard::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\mastery_engine::class)]
 class production_hardening_test extends \advanced_testcase {
     public function test_cross_framework_mapping_is_rejected(): void {
         global $DB;

@@ -848,7 +848,16 @@ try {
     $SITE = get_site();
 } catch (moodle_exception $e) {
     $SITE = null;
-    if (empty($CFG->version)) {
+    $initialinstall = empty($CFG->version);
+    if (!$initialinstall) {
+        try {
+            $tables = $DB->get_tables(false);
+            $initialinstall = !$tables || !in_array('config', $tables) || !in_array('course', $tables);
+        } catch (dml_exception $ignored) {
+            $initialinstall = true;
+        }
+    }
+    if ($initialinstall) {
         $SITE = new stdClass();
         $SITE->id = 1;
         $SITE->shortname = null;

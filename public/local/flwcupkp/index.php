@@ -32,6 +32,8 @@ echo html_writer::link(new moodle_url('/local/flwcupkp/trace.php'), get_string('
     ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/manual_evidence.php'), get_string('manualevidence', 'local_flwcupkp'),
     ['class' => 'btn btn-secondary']);
+echo html_writer::link(new moodle_url('/local/flwcupkp/evaluation.php'), get_string('learnerevaluation', 'local_flwcupkp'),
+    ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/sync.php'), get_string('competencysync', 'local_flwcupkp'),
     ['class' => 'btn btn-secondary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/calibration.php'), get_string('calibrationreport',

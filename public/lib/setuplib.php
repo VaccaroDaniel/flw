@@ -558,6 +558,19 @@ function initialise_cfg() {
     }
 
     try {
+        $tables = $DB->get_tables(false);
+        if (!$tables || !in_array('config', $tables) || !in_array('course', $tables)) {
+            // A fresh FLW self-install may reuse an old moodledata directory.
+            // Do not hydrate $CFG from stale MUC/local cache when the database
+            // itself does not contain Moodle's core tables yet.
+            return;
+        }
+    } catch (dml_exception $e) {
+        // Most probably empty db, going to install soon.
+        return;
+    }
+
+    try {
         $localcfg = get_config('core');
     } catch (dml_exception $e) {
         // Most probably empty db, going to install soon.

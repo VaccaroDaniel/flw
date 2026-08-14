@@ -67,32 +67,11 @@ $PAGE->requires->css('/local/flwcupkp/styles.css');
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 echo html_writer::tag('p', s($course->fullname), ['class' => 'local-flwcupkp-muted']);
+echo \local_flwcupkp\local\visuals::unit_nav($courseid, $unitcode, $userid, true, true);
 
 if ($status !== '') {
     echo $OUTPUT->notification(get_string('performance' . $status, 'local_flwcupkp'), 'success');
 }
-
-echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
-if ($unitcode === 'U038') {
-    echo html_writer::link(new moodle_url('/local/flwcupkp/teacher_u038.php', ['courseid' => $courseid]),
-        get_string('courseverificationlinku038', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-    echo html_writer::link(new moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid,
-            'userid' => $userid]),
-        get_string('courseprogresslinku038', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-} else {
-    echo html_writer::link(new moodle_url('/local/flwcupkp/teacher.php', [
-            'courseid' => $courseid,
-            'unitcode' => $unitcode,
-        ]),
-        get_string('courseteacherlinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-secondary']);
-    echo html_writer::link(new moodle_url('/local/flwcupkp/student.php', [
-            'courseid' => $courseid,
-            'unitcode' => $unitcode,
-            'userid' => $userid,
-        ]),
-        get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-secondary']);
-}
-echo html_writer::end_tag('div');
 
 if (!$tasks || !$learners) {
     echo $OUTPUT->notification(get_string('performancenotready', 'local_flwcupkp', $unitcode), 'info');
@@ -148,13 +127,15 @@ echo html_writer::tag('span', get_string('type', 'local_flwcupkp') . ': ' . s($s
 echo html_writer::tag('span', get_string('evidencestrength', 'local_flwcupkp') . ': ' .
     s($selectedtask->evidencestrength));
 if ($activityurl) {
-    echo html_writer::tag('span', html_writer::link($activityurl, 'CMID ' . (int)$selectedtask->cmid));
+    echo html_writer::tag('span', html_writer::link($activityurl,
+        get_string('activityid', 'local_flwcupkp') . ' ' . (int)$selectedtask->cmid));
 }
 echo html_writer::end_tag('div');
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-performance-status']);
 echo local_flwcupkp_performance_status_card(get_string('state', 'local_flwcupkp'), $state ?
-    s($state->masterystate) . html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
+    \local_flwcupkp\local\visuals::state_badge((string)$state->masterystate) .
+    html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
     format_float((float)$state->masteryscore, 2), ['class' => 'local-flwcupkp-muted']) :
     get_string('noevidenceyet', 'local_flwcupkp'));
 echo local_flwcupkp_performance_status_card(get_string('evidence', 'local_flwcupkp'), $latest ?

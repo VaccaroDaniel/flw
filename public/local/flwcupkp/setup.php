@@ -119,6 +119,8 @@ if ($result !== null) {
         ['class' => 'local-flwcupkp-json-result']);
 }
 
+echo \local_flwcupkp\local\visuals::setup_stepper($setupstatus, $courseid, $unitcode);
+
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-setup-shell']);
 local_flwcupkp_setup_scope_form($courseid, $unitcode);
 local_flwcupkp_setup_status($setupstatus, $courseid, $unitcode);

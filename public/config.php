@@ -24,7 +24,9 @@
 
 $configfile = __DIR__ . '/../config.php';
 if (!file_exists($configfile)) {
-    header("Location: install.php");
+    $installpath = preg_replace('#/(admin|course|local|mod|theme|user)(/.*)?$#', '', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    $installpath = rtrim($installpath, '/\\') . '/install.php';
+    header('Location: ' . $installpath);
     die;
 }
 

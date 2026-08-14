@@ -7,7 +7,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
         <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="tasktype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="topic"/>
@@ -40,7 +40,7 @@
         <FIELD NAME="audiomimetype" TYPE="char" LENGTH="100" NOTNULL="false"/>
         <FIELD NAME="assessmentid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true"/>
         <FIELD NAME="totalscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="rubricjson" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="weakkpjson" TYPE="text" NOTNULL="false"/>

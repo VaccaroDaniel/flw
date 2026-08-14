@@ -24,6 +24,9 @@ class provider implements
         'flwcupkp_evidence',
         'flwcupkp_state',
         'flwcupkp_recommend',
+        'flwcupkp_eval_snapshot',
+        'flwcupkp_selfeval',
+        'flwcupkp_diagnostic',
     ];
 
     /** @var array Operational tables that store only the acting Moodle user ID. */
@@ -57,6 +60,29 @@ class provider implements
             'targetid' => 'privacy:metadata:targetid',
             'timemodified' => 'privacy:metadata:timemodified',
         ], 'privacy:metadata:flwcupkp_recommend');
+        $collection->add_database_table('flwcupkp_eval_period', [
+            'usermodified' => 'privacy:metadata:usermodified',
+            'timemodified' => 'privacy:metadata:timemodified',
+        ], 'privacy:metadata:flwcupkp_eval_period');
+        $collection->add_database_table('flwcupkp_eval_snapshot', [
+            'userid' => 'privacy:metadata:userid',
+            'useridcreated' => 'privacy:metadata:usermodified',
+            'timecreated' => 'privacy:metadata:timemodified',
+        ], 'privacy:metadata:flwcupkp_eval_snapshot');
+        $collection->add_database_table('flwcupkp_selfeval', [
+            'userid' => 'privacy:metadata:userid',
+            'targettype' => 'privacy:metadata:targettype',
+            'targetid' => 'privacy:metadata:targetid',
+            'selfrating' => 'privacy:metadata:score',
+            'timemodified' => 'privacy:metadata:timemodified',
+        ], 'privacy:metadata:flwcupkp_selfeval');
+        $collection->add_database_table('flwcupkp_diagnostic', [
+            'userid' => 'privacy:metadata:userid',
+            'targettype' => 'privacy:metadata:targettype',
+            'targetid' => 'privacy:metadata:targetid',
+            'confidence' => 'privacy:metadata:score',
+            'timemodified' => 'privacy:metadata:timemodified',
+        ], 'privacy:metadata:flwcupkp_diagnostic');
         $collection->add_database_table('flwcupkp_import', [
             'userid' => 'privacy:metadata:userid',
             'timecreated' => 'privacy:metadata:timemodified',
@@ -110,6 +136,10 @@ class provider implements
                     ['usermodified' => $userid])),
                 'states' => array_values($DB->get_records('flwcupkp_state', ['userid' => $userid])),
                 'recommendations' => array_values($DB->get_records('flwcupkp_recommend', ['userid' => $userid])),
+                'evaluation_snapshots' => array_values($DB->get_records('flwcupkp_eval_snapshot',
+                    ['userid' => $userid])),
+                'self_evaluations' => array_values($DB->get_records('flwcupkp_selfeval', ['userid' => $userid])),
+                'diagnostics' => array_values($DB->get_records('flwcupkp_diagnostic', ['userid' => $userid])),
                 'imports' => array_values($DB->get_records('flwcupkp_import', ['userid' => $userid])),
                 'calibration_snapshots' => array_values($DB->get_records('flwcupkp_calsnapshot',
                     ['userid' => $userid])),
@@ -153,6 +183,11 @@ class provider implements
         $userlist->add_from_sql('usermodified', 'SELECT usermodified FROM {flwcupkp_evidence}', []);
         $userlist->add_from_sql('userid', 'SELECT userid FROM {flwcupkp_state}', []);
         $userlist->add_from_sql('userid', 'SELECT userid FROM {flwcupkp_recommend}', []);
+        $userlist->add_from_sql('userid', 'SELECT userid FROM {flwcupkp_eval_snapshot}', []);
+        $userlist->add_from_sql('useridcreated', 'SELECT useridcreated FROM {flwcupkp_eval_snapshot} WHERE useridcreated IS NOT NULL', []);
+        $userlist->add_from_sql('userid', 'SELECT userid FROM {flwcupkp_selfeval}', []);
+        $userlist->add_from_sql('userid', 'SELECT userid FROM {flwcupkp_diagnostic}', []);
+        $userlist->add_from_sql('usermodified', 'SELECT usermodified FROM {flwcupkp_eval_period} WHERE usermodified IS NOT NULL', []);
         foreach (self::OPERATIONAL_USER_TABLES as $table) {
             $userlist->add_from_sql('userid', "SELECT userid FROM {{$table}} WHERE userid IS NOT NULL", []);
         }
@@ -184,6 +219,12 @@ class provider implements
         if ($DB->record_exists('flwcupkp_evidence', ['usermodified' => $userid])) {
             return true;
         }
+        if ($DB->record_exists('flwcupkp_eval_snapshot', ['useridcreated' => $userid])) {
+            return true;
+        }
+        if ($DB->record_exists('flwcupkp_eval_period', ['usermodified' => $userid])) {
+            return true;
+        }
         foreach (self::OPERATIONAL_USER_TABLES as $table) {
             if ($DB->record_exists($table, ['userid' => $userid])) {
                 return true;
@@ -204,6 +245,8 @@ class provider implements
             $DB->delete_records($table, ['userid' => $userid]);
         }
         $DB->set_field('flwcupkp_evidence', 'usermodified', null, ['usermodified' => $userid]);
+        $DB->set_field('flwcupkp_eval_snapshot', 'useridcreated', null, ['useridcreated' => $userid]);
+        $DB->set_field('flwcupkp_eval_period', 'usermodified', null, ['usermodified' => $userid]);
         foreach (self::OPERATIONAL_USER_TABLES as $table) {
             $DB->set_field($table, 'userid', null, ['userid' => $userid]);
         }

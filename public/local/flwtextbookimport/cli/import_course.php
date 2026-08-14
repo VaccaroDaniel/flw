@@ -14,6 +14,8 @@ require_once(__DIR__ . '/../classes/local/importer.php');
         'execute' => false,
         'create-activities' => false,
         'compose-lesson' => false,
+        'publish-lesson' => false,
+        'unpublish-lesson' => false,
         'reuse-course' => false,
         'reuse-modules' => false,
         'visible' => false,
@@ -43,11 +45,14 @@ if (!empty($options['help'])) {
     echo "  php local/flwtextbookimport/cli/import_course.php --input=/path/to/dry_run.json --execute [--reuse-course] [--visible]\n\n";
     echo "  php local/flwtextbookimport/cli/import_course.php --input=/path/to/dry_run.json --create-activities --section=1 [--reuse-modules]\n\n";
     echo "  php local/flwtextbookimport/cli/import_course.php --input=/path/to/dry_run.json --compose-lesson --section=1 [--visible]\n\n";
+    echo "  php local/flwtextbookimport/cli/import_course.php --input=/path/to/dry_run.json --publish-lesson --section=1\n\n";
     echo "Options:\n";
     echo "  --input=PATH      Required dry-run JSON package from the FLW importer pilot.\n";
     echo "  --execute         Write the course shell and section summaries to Moodle.\n";
     echo "  --create-activities Create hidden Page/Assignment modules from approved activity-plan rows.\n";
     echo "  --compose-lesson Update an imported lesson section with learner-ready Page/Assignment templates.\n";
+    echo "  --publish-lesson Publish only the selected composed lesson section.\n";
+    echo "  --unpublish-lesson Hide the selected lesson section again for review.\n";
     echo "  --section=N       Required with --create-activities. Imports only one section.\n";
     echo "  --types=LIST      Comma-separated Moodle modules to create. Default: page,assign.\n";
     echo "  --review-statuses=LIST Comma-separated review statuses. Default: needs_teacher_review,needs_activity_review.\n";
@@ -68,12 +73,23 @@ try {
         !empty($options['execute']),
         !empty($options['create-activities']),
         !empty($options['compose-lesson']),
+        !empty($options['publish-lesson']),
+        !empty($options['unpublish-lesson']),
     ]);
     if (count($modes) > 1) {
-        cli_error('Use only one write mode: --execute, --create-activities, or --compose-lesson.');
+        cli_error('Use only one write mode: --execute, --create-activities, --compose-lesson, --publish-lesson, or --unpublish-lesson.');
     }
 
-    if (!empty($options['compose-lesson'])) {
+    if (!empty($options['publish-lesson']) || !empty($options['unpublish-lesson'])) {
+        if ((string)$options['section'] === '') {
+            cli_error('--section=N is required with --publish-lesson or --unpublish-lesson.');
+        }
+        $result = \local_flwtextbookimport\local\importer::set_lesson_published(
+            $package,
+            (int)$options['section'],
+            !empty($options['publish-lesson'])
+        );
+    } else if (!empty($options['compose-lesson'])) {
         if ((string)$options['section'] === '') {
             cli_error('--section=N is required with --compose-lesson.');
         }
@@ -166,6 +182,8 @@ function local_flwtextbookimport_print_result(array $result): void {
         'modulesupdated',
         'modulesmissing',
         'modulesunsupported',
+        'modulesvisible',
+        'moduleshidden',
     ] as $key) {
         if (array_key_exists($key, $result)) {
             cli_writeln($key . ': ' . $result[$key]);

@@ -8,8 +8,8 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="recommendedcourse" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="recommendedcourse" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="startingunit" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="confidencescore" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="weightedscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -35,13 +35,13 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="coursekey" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="coursekey" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="latestresultid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="overallcefr" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="overallcefr" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="recommendedstartunit" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="nextcheckpointunit" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="placementconfidence" TYPE="number" LENGTH="10" DECIMALS="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="placementstatus" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="placementstatus" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="skilllevelsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="kpmasteryjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="supportflagsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>

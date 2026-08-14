@@ -1614,6 +1614,122 @@ function theme_flwacademy_normalise_learning_language_code(string $code): string
 }
 
 /**
+ * Checks whether a multilingual content entry belongs to the selected FLW learning language.
+ *
+ * @param string $entrylang
+ * @param string $languagecode
+ * @return bool
+ */
+function theme_flwacademy_multilang_entry_matches(string $entrylang, string $languagecode): bool {
+    $wanted = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
+    $entrycodes = preg_split('/[\s,;|]+/', $entrylang, -1, PREG_SPLIT_NO_EMPTY);
+    foreach ($entrycodes as $entrycode) {
+        if (theme_flwacademy_normalise_learning_language_code($entrycode) === $wanted) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Returns a known K-12 hero description when legacy multilingual text has already been flattened.
+ *
+ * @param string $text
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_known_school_description(string $text, string $languagecode): string {
+    $plain = trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($text), ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+    if (stripos($plain, 'School courses by institution level') === false ||
+            stripos($plain, 'Schulkurse nach Bildungsstufe') === false) {
+        return '';
+    }
+
+    $wanted = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
+    $descriptions = [
+        'en' => 'School courses by institution level.',
+        'ru' => 'Школьные курсы по уровню образования.',
+        'zh' => '按教育阶段划分的学校课程。',
+        'de' => 'Schulkurse nach Bildungsstufe.',
+        'ja' => '教育段階別の学校コース。',
+        'fr' => 'Cours scolaires par niveau d\'etablissement.',
+        'es' => 'Cursos escolares por nivel educativo.',
+    ];
+
+    return $descriptions[$wanted] ?? $descriptions['en'];
+}
+
+/**
+ * Extracts the selected FLW learning-language text from Moodle multilingual content.
+ *
+ * @param string $text
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_extract_learning_language_text(string $text, string $languagecode): string {
+    $text = trim($text);
+    if ($text === '') {
+        return '';
+    }
+
+    $entries = [];
+    if (preg_match_all('/\{mlang\s+([^}]+)\}(.*?)\{mlang\}/is', $text, $matches, PREG_SET_ORDER)) {
+        foreach ($matches as $match) {
+            $entries[] = [
+                'lang' => $match[1],
+                'text' => $match[2],
+            ];
+        }
+    }
+
+    if (empty($entries) && preg_match_all('/<span\b(?=[^>]*\bclass=(["\'])(?:(?!\1).)*\bmultilang\b(?:(?!\1).)*\1)(?=[^>]*\blang=(["\'])([^"\']+)\2)[^>]*>(.*?)<\/span>/is', $text, $matches, PREG_SET_ORDER)) {
+        foreach ($matches as $match) {
+            $entries[] = [
+                'lang' => $match[3],
+                'text' => $match[4],
+            ];
+        }
+    }
+
+    if (!empty($entries)) {
+        foreach ($entries as $entry) {
+            if (theme_flwacademy_multilang_entry_matches($entry['lang'], $languagecode)) {
+                return trim($entry['text']);
+            }
+        }
+        foreach ($entries as $entry) {
+            if (theme_flwacademy_multilang_entry_matches($entry['lang'], 'en')) {
+                return trim($entry['text']);
+            }
+        }
+
+        return trim($entries[0]['text']);
+    }
+
+    $knownschooldescription = theme_flwacademy_known_school_description($text, $languagecode);
+    return $knownschooldescription !== '' ? $knownschooldescription : $text;
+}
+
+/**
+ * Formats multilingual text for the selected FLW learning language.
+ *
+ * @param string $text
+ * @param int $format
+ * @param context $context
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_format_learning_language_text(string $text, int $format, context $context, string $languagecode): string {
+    $selectedtext = theme_flwacademy_extract_learning_language_text($text, $languagecode);
+    return format_text($selectedtext, $format, [
+        'context' => $context,
+        'overflowdiv' => true,
+        'filter' => true,
+    ]);
+}
+
+/**
  * Gets the selected learning language from URL first, then the persistent cookie.
  *
  * @return string
@@ -3509,13 +3625,16 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
 
     $description = '';
     if (!empty($category->description)) {
-        $description = format_text($category->description, $category->descriptionformat, [
-            'context' => context_coursecat::instance($category->id),
-            'overflowdiv' => true,
-            'filter' => false,
-        ]);
+        $description = theme_flwacademy_format_learning_language_text($category->description, $category->descriptionformat,
+            context_coursecat::instance($category->id), $languageCode);
     }
     $hasdescription = trim(strip_tags($description)) !== '';
+    $herotitle = 'School courses by institution level.';
+    $descriptiontext = trim(preg_replace('/\s+/', ' ', strip_tags($description)));
+    if ($descriptiontext === $herotitle) {
+        $description = '';
+        $hasdescription = false;
+    }
 
     $children = $DB->get_records('course_categories', ['parent' => $category->id], 'sortorder ASC', 'id,name,description,descriptionformat,coursecount');
     $groups = [
@@ -3534,11 +3653,8 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
             'hasdescription' => false,
         ];
         if (!empty($child->description)) {
-            $item['description'] = format_text($child->description, $child->descriptionformat, [
-                'context' => context_coursecat::instance($child->id),
-                'overflowdiv' => true,
-                'filter' => false,
-            ]);
+            $item['description'] = theme_flwacademy_format_learning_language_text($child->description,
+                $child->descriptionformat, context_coursecat::instance($child->id), $languageCode);
             $item['hasdescription'] = trim(strip_tags($item['description'])) !== '';
         }
         if (strpos($namekey, 'university') !== false) {
@@ -3570,7 +3686,11 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     foreach ($courses as $course) {
         $summary = '';
         if (!empty($course->summary)) {
-            $summary = shorten_text(trim(strip_tags(format_text($course->summary, $course->summaryformat))), 150);
+            $summarytext = theme_flwacademy_extract_learning_language_text($course->summary, $languageCode);
+            $summary = shorten_text(trim(strip_tags(format_text($summarytext, $course->summaryformat, [
+                'context' => context_course::instance($course->id),
+                'filter' => true,
+            ]))), 150);
         }
         $courseitems[] = [
             'name' => format_string($course->fullname),
@@ -3584,7 +3704,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     return [
         'language' => $languageLabel,
         'languagecode' => $languageCode,
-        'title' => format_string($category->name),
+        'title' => $herotitle,
         'description' => $description,
         'hasdescription' => $hasdescription,
         'primarycategories' => $groups['primary'],

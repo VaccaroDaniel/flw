@@ -11,8 +11,9 @@ $course = $courseid > 0 ? $DB->get_record('course', ['id' => $courseid], '*', MU
 require_login($course);
 $context = $course ? context_course::instance($courseid) : context_system::instance();
 require_capability('local/flwcupkp:viewlearnerpath', $context);
+$canviewreports = has_capability('local/flwcupkp:viewreports', $context);
 
-if ($userid <= 0 || !has_capability('local/flwcupkp:viewreports', $context)) {
+if ($userid <= 0 || !$canviewreports) {
     $userid = (int)$USER->id;
 }
 
@@ -34,9 +35,13 @@ $objects = \local_flwcupkp\local\unit_report::objects_by_target($targets, $cours
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('unitprogressgeneric', 'local_flwcupkp') . ': ' . s($unitcode));
+echo \local_flwcupkp\local\visuals::unit_nav($courseid, $unitcode, $userid, $canviewreports,
+    has_capability('local/flwcupkp:override', $context) &&
+        \local_flwcupkp\local\performance_service::has_tasks($courseid, $unitcode));
 
 if ($unitcode === 'U038' && $courseid > 0) {
-    echo html_writer::link(new moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]),
+    echo \local_flwcupkp\local\visuals::nav_link(
+        new moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]),
         get_string('openrichu038progress', 'local_flwcupkp'), ['class' => 'btn btn-primary']);
 }
 
@@ -58,6 +63,17 @@ echo html_writer::tag('span', '', ['style' => 'width: ' . $percent . '%']);
 echo html_writer::end_tag('div');
 echo html_writer::end_tag('section');
 
+echo \local_flwcupkp\local\visuals::progress_rings([
+    [
+        'label' => get_string('targets', 'local_flwcupkp'),
+        'value' => $mastered,
+        'total' => $total,
+    ],
+], get_string('visualprogressrings', 'local_flwcupkp'));
+if ($courseid > 0 && $unitcode !== '') {
+    echo \local_flwcupkp\local\visuals::hierarchy_map($courseid, $unitcode, $userid);
+}
+
 $table = new html_table();
 $table->attributes['class'] = 'generaltable local-flwcupkp-table';
 $table->head = [
@@ -71,8 +87,7 @@ $table->head = [
 foreach ($targets as $target) {
     $key = \local_flwcupkp\local\unit_report::target_key($target->targettype, (int)$target->targetid);
     $state = $states[$key] ?? null;
-    $statehtml = $state ? html_writer::tag('span', s($state->masterystate),
-        ['class' => 'local-flwcupkp-state local-flwcupkp-state-' . clean_param($state->masterystate, PARAM_ALPHANUMEXT)]) :
+    $statehtml = $state ? \local_flwcupkp\local\visuals::state_badge((string)$state->masterystate) :
         html_writer::tag('span', get_string('noevidenceyet', 'local_flwcupkp'), ['class' => 'local-flwcupkp-muted']);
     if ($state && $state->masteryscore !== null) {
         $statehtml .= html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
@@ -91,7 +106,10 @@ foreach ($targets as $target) {
 if (!$table->data) {
     echo $OUTPUT->notification(get_string('nogenericunitrows', 'local_flwcupkp'), 'info');
 } else {
-    echo html_writer::table($table);
+    echo \local_flwcupkp\local\visuals::details_panel(
+        get_string('learningpointevidence', 'local_flwcupkp') . ' (' . count($table->data) . ')',
+        html_writer::table($table)
+    );
 }
 
 echo $OUTPUT->footer();

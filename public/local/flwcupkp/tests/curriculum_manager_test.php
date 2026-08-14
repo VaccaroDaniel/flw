@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Curriculum manager tests.
- *
- * @covers \local_flwcupkp\local\curriculum_manager
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\curriculum_manager::class)]
 class curriculum_manager_test extends \advanced_testcase {
     public function test_save_entity_creates_audited_competency(): void {
         global $DB;

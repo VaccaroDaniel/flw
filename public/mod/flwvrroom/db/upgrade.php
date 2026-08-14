@@ -224,5 +224,132 @@ function xmldb_flwvrroom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026071402, 'flwvrroom');
     }
 
+    if ($oldversion < 2026081400) {
+        $table = new xmldb_table('flwvrroom');
+        if ($dbman->table_exists($table)) {
+            $columns = $DB->get_columns('flwvrroom');
+
+            $kpcodesfield = new xmldb_field('kpcodes', XMLDB_TYPE_TEXT, null, null, null, null, null, 'roommode');
+            if (!$dbman->field_exists($table, $kpcodesfield)) {
+                $dbman->add_field($table, $kpcodesfield);
+                $columns = $DB->get_columns('flwvrroom');
+            }
+
+            if (isset($columns['knowledgepoints']) && isset($columns['kpcodes'])) {
+                $records = $DB->get_records('flwvrroom', null, '', 'id, knowledgepoints, kpcodes');
+                foreach ($records as $record) {
+                    if (trim((string)($record->kpcodes ?? '')) === '' &&
+                            trim((string)($record->knowledgepoints ?? '')) !== '') {
+                        $DB->set_field('flwvrroom', 'kpcodes', $record->knowledgepoints, ['id' => $record->id]);
+                    }
+                }
+            }
+
+            $scenariomap = [
+                'cafe' => 'At the Cafe',
+                'classroom' => 'In the Classroom',
+                'hotel' => 'At the Hotel',
+                'airport' => 'At the Airport',
+                'supermarket' => 'At the Supermarket',
+            ];
+            $validlevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+            $records = $DB->get_records('flwvrroom', null, '', 'id, cefrlevel, scenario');
+            foreach ($records as $record) {
+                $changed = false;
+                $level = strtoupper(trim((string)($record->cefrlevel ?? '')));
+                if ($level === 'PRE-A1' || $level === 'PREA1') {
+                    $level = 'A1';
+                }
+                if (!in_array($level, $validlevels, true)) {
+                    $level = 'A1';
+                }
+                if ($level !== (string)$record->cefrlevel) {
+                    $record->cefrlevel = $level;
+                    $changed = true;
+                }
+
+                $scenario = trim((string)($record->scenario ?? ''));
+                $scenariokey = core_text::strtolower($scenario);
+                if (isset($scenariomap[$scenariokey])) {
+                    $record->scenario = $scenariomap[$scenariokey];
+                    $changed = true;
+                }
+
+                if ($changed) {
+                    $DB->update_record('flwvrroom', $record);
+                }
+            }
+
+            $cefrfield = new xmldb_field('cefrlevel', XMLDB_TYPE_CHAR, '2', null, XMLDB_NOTNULL, null, 'A1', 'introformat');
+            if ($dbman->field_exists($table, $cefrfield)) {
+                $dbman->change_field_precision($table, $cefrfield);
+                $dbman->change_field_default($table, $cefrfield);
+            }
+
+            $scenariofield = new xmldb_field('scenario', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL, null, 'At the Cafe', 'cefrlevel');
+            if ($dbman->field_exists($table, $scenariofield)) {
+                $dbman->change_field_default($table, $scenariofield);
+            }
+
+            $passingfield = new xmldb_field('passinggrade', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '70', 'roleaiturns');
+            if ($dbman->field_exists($table, $passingfield)) {
+                $dbman->change_field_precision($table, $passingfield);
+            }
+
+            $courseandnameindex = new xmldb_index('course_name', XMLDB_INDEX_NOTUNIQUE, ['course', 'name']);
+            if ($dbman->index_exists($table, $courseandnameindex)) {
+                $dbman->drop_index($table, $courseandnameindex);
+            }
+
+            $knowledgepointsfield = new xmldb_field('knowledgepoints', XMLDB_TYPE_TEXT);
+            if ($dbman->field_exists($table, $knowledgepointsfield)) {
+                $dbman->drop_field($table, $knowledgepointsfield);
+            }
+        }
+
+        $attempttable = new xmldb_table('flwvrroom_attempts');
+        if ($dbman->table_exists($attempttable)) {
+            $columns = $DB->get_columns('flwvrroom_attempts');
+            $attempts = $DB->get_records('flwvrroom_attempts');
+            foreach ($attempts as $attempt) {
+                $changed = false;
+                if (isset($columns['completed']) && isset($columns['taskcomplete']) && empty($attempt->taskcomplete)) {
+                    $attempt->taskcomplete = !empty($attempt->completed) ? 1 : 0;
+                    $changed = true;
+                }
+                if (isset($columns['timestarted']) && isset($columns['timefinished']) &&
+                        isset($columns['durationseconds']) && empty($attempt->durationseconds)) {
+                    $start = (int)($attempt->timestarted ?? 0);
+                    $finish = (int)($attempt->timefinished ?? 0);
+                    if ($start > 0 && $finish > $start) {
+                        $attempt->durationseconds = $finish - $start;
+                        $changed = true;
+                    }
+                }
+                if (isset($columns['timecreated']) && empty($attempt->timecreated)) {
+                    foreach (['timemodified', 'timefinished', 'timestarted'] as $fieldname) {
+                        if (isset($columns[$fieldname]) && !empty($attempt->{$fieldname})) {
+                            $attempt->timecreated = (int)$attempt->{$fieldname};
+                            $changed = true;
+                            break;
+                        }
+                    }
+                }
+                if ($changed) {
+                    $DB->update_record('flwvrroom_attempts', $attempt);
+                }
+            }
+
+            foreach (['maxscore', 'completedquiz', 'completed', 'timestarted', 'timefinished', 'timemodified'] as $fieldname) {
+                $field = new xmldb_field($fieldname);
+                if ($dbman->field_exists($attempttable, $field)) {
+                    $dbman->drop_field($attempttable, $field);
+                }
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026081400, 'flwvrroom');
+    }
+
     return true;
 }

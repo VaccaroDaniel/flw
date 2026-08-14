@@ -143,7 +143,6 @@ $string['KI'] = 'Kiribati';
 $string['KM'] = 'Comoros';
 $string['KN'] = 'Saint Kitts and Nevis';
 $string['KP'] = 'Korea (the Democratic People\'s Republic of)';
-$string['KR'] = 'Korea (the Republic of)';
 $string['KW'] = 'Kuwait';
 $string['KY'] = 'Cayman Islands';
 $string['KZ'] = 'Kazakhstan';

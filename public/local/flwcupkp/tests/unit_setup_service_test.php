@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Unit setup service tests.
- *
- * @covers \local_flwcupkp\local\unit_setup_service
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\unit_setup_service::class)]
 class unit_setup_service_test extends \advanced_testcase {
     public function test_link_course_updates_object_and_activation_status(): void {
         global $DB;

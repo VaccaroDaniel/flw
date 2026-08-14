@@ -39,6 +39,10 @@ $parentsummary = $progress['parent_summary'];
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('studentprogressu038', 'local_flwcupkp'));
 echo html_writer::tag('p', s($course->fullname) . ' - ' . fullname($learner), ['class' => 'local-flwcupkp-muted']);
+echo \local_flwcupkp\local\visuals::unit_nav($courseid, 'U038', $userid,
+    has_capability('local/flwcupkp:viewreports', $context),
+    has_capability('local/flwcupkp:override', $context) &&
+        \local_flwcupkp\local\performance_service::has_tasks($courseid, 'U038'));
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-progress-hero']);
 echo html_writer::tag('div', get_string('unitprogress', 'local_flwcupkp') . ': ' . (int)$summary['percent'] . '%', [
@@ -55,6 +59,9 @@ echo html_writer::tag('span', get_string('withevidence', 'local_flwcupkp') . ': 
 echo html_writer::tag('span', get_string('teacherverified', 'local_flwcupkp') . ': ' . (int)$summary['verified']);
 echo html_writer::end_tag('div');
 echo html_writer::end_tag('div');
+
+echo \local_flwcupkp\local\visuals::student_progress_rings($summary, $parentsummary);
+echo \local_flwcupkp\local\visuals::hierarchy_map($courseid, 'U038', $userid);
 
 if ($progress['next_recommendation']) {
     $next = $progress['next_recommendation'];
@@ -87,8 +94,7 @@ $parenttable->head = [
 ];
 
 foreach ($progress['parent_rows'] as $row) {
-    $stateclass = 'local-flwcupkp-state-' . preg_replace('/[^a-z0-9_-]/', '-', strtolower($row['state']));
-    $statehtml = html_writer::tag('span', s($row['state']), ['class' => 'local-flwcupkp-state ' . $stateclass]);
+    $statehtml = \local_flwcupkp\local\visuals::state_badge((string)$row['state']);
     if ($row['mastery_score'] !== null) {
         $statehtml .= html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
             format_float((float)$row['mastery_score'], 2), ['class' => 'local-flwcupkp-muted']);
@@ -123,7 +129,10 @@ foreach ($progress['parent_rows'] as $row) {
 if (empty($parenttable->data)) {
     echo $OUTPUT->notification(get_string('noparentrowsu038', 'local_flwcupkp'), 'info');
 } else {
-    echo html_writer::table($parenttable);
+    echo \local_flwcupkp\local\visuals::details_panel(
+        get_string('parenttargets', 'local_flwcupkp') . ' (' . count($parenttable->data) . ')',
+        html_writer::table($parenttable)
+    );
 }
 echo html_writer::end_tag('section');
 
@@ -138,8 +147,7 @@ $table->head = [
 ];
 
 foreach ($progress['rows'] as $row) {
-    $stateclass = 'local-flwcupkp-state-' . preg_replace('/[^a-z0-9_-]/', '-', strtolower($row['state']));
-    $statehtml = html_writer::tag('span', s($row['state']), ['class' => 'local-flwcupkp-state ' . $stateclass]);
+    $statehtml = \local_flwcupkp\local\visuals::state_badge((string)$row['state']);
     if ($row['mastery_score'] !== null) {
         $statehtml .= html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
             format_float((float)$row['mastery_score'], 2), ['class' => 'local-flwcupkp-muted']);
@@ -190,7 +198,10 @@ foreach ($progress['rows'] as $row) {
 if (empty($table->data)) {
     echo $OUTPUT->notification(get_string('noprogressrows', 'local_flwcupkp'), 'info');
 } else {
-    echo html_writer::table($table);
+    echo \local_flwcupkp\local\visuals::details_panel(
+        get_string('learningpointevidence', 'local_flwcupkp') . ' (' . count($table->data) . ')',
+        html_writer::table($table)
+    );
 }
 
 echo $OUTPUT->footer();

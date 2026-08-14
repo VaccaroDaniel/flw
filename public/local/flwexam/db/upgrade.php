@@ -71,7 +71,7 @@ function xmldb_local_flwexam_upgrade(int $oldversion): bool {
 
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '');
-        $table->add_field('sessiontype', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'self');
+        $table->add_field('sessiontype', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'teacher');
         $table->add_field('examid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
         $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
         $table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
@@ -121,6 +121,28 @@ function xmldb_local_flwexam_upgrade(int $oldversion): bool {
         }
 
         upgrade_plugin_savepoint(true, 2026072301, 'local', 'flwexam');
+    }
+
+    if ($oldversion < 2026081400) {
+        $table = new xmldb_table('local_flwexam_sessions');
+        if ($dbman->table_exists($table)) {
+            $DB->set_field('local_flwexam_sessions', 'sessiontype', 'teacher', ['sessiontype' => 'self']);
+
+            $field = new xmldb_field('sessiontype', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'teacher', 'name');
+            if ($dbman->field_exists($table, $field)) {
+                $index = new xmldb_index('type-status', XMLDB_INDEX_NOTUNIQUE, ['sessiontype', 'status', 'visible']);
+                $hadindex = $dbman->index_exists($table, $index);
+                if ($hadindex) {
+                    $dbman->drop_index($table, $index);
+                }
+                $dbman->change_field_default($table, $field);
+                if ($hadindex && !$dbman->index_exists($table, $index)) {
+                    $dbman->add_index($table, $index);
+                }
+            }
+        }
+
+        upgrade_plugin_savepoint(true, 2026081400, 'local', 'flwexam');
     }
 
     return true;

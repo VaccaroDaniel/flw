@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Specialized evidence adapter tests.
- *
- * @covers \local_flwcupkp\local\specialized_evidence_adapter
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\specialized_evidence_adapter::class)]
 class specialized_evidence_adapter_test extends \advanced_testcase {
     public function test_trusted_stt_result_records_scored_evidence_without_raw_audio(): void {
         global $DB;

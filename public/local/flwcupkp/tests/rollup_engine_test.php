@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Roll-up engine tests.
- *
- * @covers \local_flwcupkp\local\rollup_engine
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\rollup_engine::class)]
 class rollup_engine_test extends \advanced_testcase {
     public function test_kp_mastery_rolls_up_to_provisional_competency(): void {
         global $DB;

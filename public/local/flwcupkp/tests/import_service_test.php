@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Import service tests.
- *
- * @covers \local_flwcupkp\local\import_service
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\import_service::class)]
 class import_service_test extends \advanced_testcase {
     public function test_json_import_supports_lesson_and_project_mapping_aliases(): void {
         global $DB;

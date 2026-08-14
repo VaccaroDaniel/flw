@@ -361,6 +361,144 @@
         }
       }
     },
+    "/evaluation/periods": {
+      "get": {
+        "operationId": "getEvaluationPeriods",
+        "x-moodle-wsfunction": "local_flwcupkp_get_evaluation_periods",
+        "summary": "List C-UP-KP learner evaluation periods",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "active"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveEvaluationPeriod",
+        "x-moodle-wsfunction": "local_flwcupkp_save_evaluation_period",
+        "summary": "Create or update a C-UP-KP learner evaluation period",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/EvaluationPeriod"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/evaluation": {
+      "get": {
+        "operationId": "getLearnerEvaluation",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_evaluation",
+        "summary": "Get a learner C-UP-KP evaluation profile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/PeriodId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/evaluation/snapshot": {
+      "post": {
+        "operationId": "createEvaluationSnapshot",
+        "x-moodle-wsfunction": "local_flwcupkp_create_evaluation_snapshot",
+        "summary": "Create an immutable learner C-UP-KP evaluation snapshot",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/EvaluationSnapshot"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/self-evaluation": {
+      "post": {
+        "operationId": "recordSelfEvaluation",
+        "x-moodle-wsfunction": "local_flwcupkp_record_self_evaluation",
+        "summary": "Record a learner self-evaluation for a C-UP-KP target",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SelfEvaluation"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/evaluation-summary": {
+      "get": {
+        "operationId": "getCourseEvaluationSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_course_evaluation_summary",
+        "summary": "Get class-level C-UP-KP learner evaluation summary metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/PeriodId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
     "/imports": {
       "post": {
         "operationId": "importPackage",
@@ -588,6 +726,22 @@
           "default": 0
         }
       },
+      "PeriodId": {
+        "name": "periodid",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "UnitCode": {
+        "name": "unitcode",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "default": ""
+        }
+      },
       "Query": {
         "name": "query",
         "in": "query",
@@ -705,6 +859,99 @@
                   "default": "manual"
                 }
               }
+            }
+          }
+        }
+      },
+      "EvaluationPeriod": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "datajson": {
+                  "type": "string",
+                  "description": "JSON object with courseid, frameworkid, name, periodtype, unitcode, cefr, datestart, dateend, config, and status."
+                }
+              },
+              "required": ["datajson"]
+            }
+          }
+        }
+      },
+      "EvaluationSnapshot": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userid": {
+                  "type": "integer"
+                },
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "periodid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "evaluationtype": {
+                  "type": "string",
+                  "default": "unit"
+                },
+                "evidencecutoff": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "required": ["userid"]
+            }
+          }
+        }
+      },
+      "SelfEvaluation": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userid": {
+                  "type": "integer"
+                },
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "periodid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "targettype": {
+                  "type": "string",
+                  "enum": ["kp", "up", "competency"]
+                },
+                "targetid": {
+                  "type": "integer"
+                },
+                "selfrating": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reflection": {
+                  "type": "string"
+                }
+              },
+              "required": ["userid", "targettype", "targetid", "selfrating"]
             }
           }
         }

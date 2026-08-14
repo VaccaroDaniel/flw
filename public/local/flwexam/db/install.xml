@@ -6,11 +6,11 @@
     <TABLE NAME="local_flwexam_exams" COMMENT="FLW exam definitions and certificate profiles">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="code" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="code" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="requiredthreshold" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="70" SEQUENCE="false"/>
         <FIELD NAME="requiredskillfloor" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="60" SEQUENCE="false"/>
         <FIELD NAME="moderationrequired" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
@@ -34,7 +34,7 @@
     <TABLE NAME="local_flwexam_sessions" COMMENT="Organised teacher and official FLW exam sessions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="sessiontype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="teacher" SEQUENCE="false"/>
         <FIELD NAME="examid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -43,8 +43,8 @@
         <FIELD NAME="maxattempts" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
         <FIELD NAME="timestart" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timeend" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="accesscode" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="branchname" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="accesscode" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="branchname" TYPE="char" LENGTH="120" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="proctoruserid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="requireproctor" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="open" SEQUENCE="false"/>
@@ -71,8 +71,8 @@
         <FIELD NAME="examid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="sessionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="attemptnumber" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
-        <FIELD NAME="source" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="externalattemptid" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="source" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="externalattemptid" TYPE="char" LENGTH="120" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="submitted" SEQUENCE="false"/>
         <FIELD NAME="metadatajson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -97,9 +97,9 @@
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="examid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="attemptid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="overallscore" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="passstatus" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="failed" SEQUENCE="false"/>
         <FIELD NAME="certificatestatus" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="not_issued" SEQUENCE="false"/>
@@ -127,7 +127,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="resultid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="skill" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="skill" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="score" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="passed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="detailsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
@@ -145,7 +145,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="resultid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="kpcode" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="kpcode" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="score" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="passed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="critical" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -168,9 +168,9 @@
         <FIELD NAME="qtype" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="multichoice" SEQUENCE="false"/>
         <FIELD NAME="questiontext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="optionsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="correctanswer" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="skill" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="kpcode" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="correctanswer" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="skill" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="kpcode" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="weight" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
         <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
@@ -191,13 +191,13 @@
     <TABLE NAME="local_flwexam_certificates" COMMENT="Issued FLW CEFR certificates">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="certificatecode" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="certificatecode" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="examid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="resultid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="learningcoursecategory" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cefrlevel" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="valid" SEQUENCE="false"/>
         <FIELD NAME="timeissued" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timeexpires" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -219,7 +219,7 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="verifycode" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="verifycode" TYPE="char" LENGTH="120" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="active" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timeexpires" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -237,8 +237,8 @@
     <TABLE NAME="local_flwexam_api_clients" COMMENT="External API client policy records">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="clientname" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="clientkey" TYPE="char" LENGTH="120" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="clientname" TYPE="char" LENGTH="120" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="clientkey" TYPE="char" LENGTH="120" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="enabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
         <FIELD NAME="allowedips" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
@@ -258,13 +258,13 @@
     <TABLE NAME="local_flwexam_audit_log" COMMENT="FLW exam security and API audit log">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="eventname" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="eventname" TYPE="char" LENGTH="80" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="targetuserid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="resultid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="certificateid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="ipaddress" TYPE="char" LENGTH="45" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
-        <FIELD NAME="status" TYPE="char" LENGTH="30" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="ipaddress" TYPE="char" LENGTH="45" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="detailsjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>

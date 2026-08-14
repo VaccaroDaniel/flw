@@ -10,9 +10,8 @@ use local_flwcupkp\privacy\provider;
 
 /**
  * Privacy provider tests.
- *
- * @covers \local_flwcupkp\privacy\provider
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\privacy\provider::class)]
 class privacy_provider_test extends \advanced_testcase {
     public function test_delete_data_for_users_removes_learner_data_and_anonymizes_operational_logs(): void {
         global $DB;

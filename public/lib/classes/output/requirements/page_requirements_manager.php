@@ -310,7 +310,9 @@ class page_requirements_manager {
                 $contextid = $page->context->id;
                 $contextinstanceid = $page->context->instanceid;
                 $courseid = $page->course->id;
-                $coursecontext = context_course::instance($courseid);
+                if (!empty($CFG->version)) {
+                    $coursecontext = context_course::instance($courseid);
+                }
             }
 
             $this->M_cfg = [

@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Mastery engine tests.
- *
- * @covers \local_flwcupkp\local\mastery_engine
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\mastery_engine::class)]
 class mastery_engine_test extends \advanced_testcase {
     public function test_competency_requires_direct_evidence(): void {
         $events = [

@@ -119,23 +119,16 @@ $parentqueues = local_flwcupkp_parent_queue_summary($courseid, $userid);
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('teacherverification', 'local_flwcupkp'));
 echo html_writer::tag('p', s($course->fullname), ['class' => 'local-flwcupkp-muted']);
+echo \local_flwcupkp\local\visuals::unit_nav($courseid, 'U038', $userid, true,
+    $canverify && \local_flwcupkp\local\performance_service::has_tasks($courseid, 'U038'));
 
 if ($status !== '') {
     echo $OUTPUT->notification(get_string('verification' . $status, 'local_flwcupkp'), 'success');
 }
 
-if ($canverify) {
-    echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
-    echo html_writer::link(new moodle_url('/local/flwcupkp/performance.php', [
-            'courseid' => $courseid,
-            'unitcode' => 'U038',
-        ]),
-        get_string('performanceu038', 'local_flwcupkp'), ['class' => 'btn btn-primary']);
-    echo html_writer::end_tag('div');
-}
-
 echo local_flwcupkp_parent_queue_dashboard($parentqueues);
 
+ob_start();
 echo html_writer::start_tag('form', [
     'method' => 'get',
     'action' => new moodle_url('/local/flwcupkp/teacher_u038.php'),
@@ -167,6 +160,11 @@ echo html_writer::tag('label', get_string('parentreviewfilter', 'local_flwcupkp'
 echo html_writer::tag('button', get_string('filter'), ['type' => 'submit', 'class' => 'btn btn-primary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/teacher_u038.php', ['courseid' => $courseid]), get_string('reset'), ['class' => 'btn btn-secondary']);
 echo html_writer::end_tag('form');
+$filterhtml = ob_get_clean();
+$filtersopen = $userid || $domain !== '' || $lesson !== '' || $state !== '' || $evidencefilter !== '' ||
+    $targettype !== '' || $parentstate !== '' || $parentreview !== '';
+echo \local_flwcupkp\local\visuals::details_panel(get_string('filters', 'local_flwcupkp'), $filterhtml,
+    $filtersopen, 'local-flwcupkp-filter-panel');
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-summary']);
 echo html_writer::tag('span', get_string('learners', 'local_flwcupkp') . ': ' . count($report['learners']));
@@ -177,6 +175,8 @@ echo html_writer::tag('span', get_string('competenciesachieved', 'local_flwcupkp
 echo html_writer::tag('span', get_string('upsdemonstrated', 'local_flwcupkp') . ': ' .
     (int)$overview['summary']['up_demonstrated'] . '/' . (int)$overview['summary']['up_total']);
 echo html_writer::end_tag('div');
+
+echo \local_flwcupkp\local\visuals::teacher_heatmap($report, $url);
 
 echo html_writer::start_tag('section', [
     'class' => 'local-flwcupkp-overview',
@@ -199,8 +199,7 @@ if ($canverify) {
 
 foreach ($overview['rows'] as $row) {
     $rowanchor = local_flwcupkp_parent_row_anchor($row);
-    $stateclass = 'local-flwcupkp-state-' . preg_replace('/[^a-z0-9_-]/', '-', strtolower($row['state']));
-    $statehtml = html_writer::tag('span', s($row['state']), ['class' => 'local-flwcupkp-state ' . $stateclass]);
+    $statehtml = \local_flwcupkp\local\visuals::state_badge((string)$row['state']);
     if ($row['mastery_score'] !== null) {
         $statehtml .= html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
             format_float((float)$row['mastery_score'], 2), ['class' => 'local-flwcupkp-muted']);
@@ -263,7 +262,12 @@ if (empty($overviewtable->data)) {
     $emptystring = $parentreview === 'review' ? 'allreviewedparentrowsu038' : 'noparentrowsu038';
     echo $OUTPUT->notification(get_string($emptystring, 'local_flwcupkp'), 'info');
 } else {
-    echo html_writer::table($overviewtable);
+    echo \local_flwcupkp\local\visuals::details_panel(
+        get_string('parenttargets', 'local_flwcupkp') . ' (' . count($overviewtable->data) . ')',
+        html_writer::table($overviewtable),
+        $parentreview !== '' || $parentstate !== '' || $targettype !== '' || str_contains($focus, '-comp') ||
+            str_contains($focus, '-up')
+    );
 }
 echo html_writer::end_tag('section');
 
@@ -291,12 +295,14 @@ foreach ($report['rows'] as $row) {
     } else {
         $sourceparts[] = s($row['object_title']);
     }
-    $sourceparts[] = 'CMID ' . (int)$row['cmid'];
+    if (!empty($row['cmid'])) {
+        $sourceparts[] = get_string('activityid', 'local_flwcupkp') . ' ' . (int)$row['cmid'];
+    }
     if ($row['attempt_id']) {
-        $sourceparts[] = 'Attempt ' . (int)$row['attempt_id'];
+        $sourceparts[] = get_string('attempt', 'local_flwcupkp') . ' ' . (int)$row['attempt_id'];
     }
     if ($row['evidence_score'] !== null) {
-        $sourceparts[] = 'Score ' . format_float((float)$row['evidence_score'], 2);
+        $sourceparts[] = get_string('score', 'local_flwcupkp') . ' ' . format_float((float)$row['evidence_score'], 2);
     }
     if ($row['evidence_time']) {
         $sourceparts[] = userdate($row['evidence_time']);
@@ -308,10 +314,10 @@ foreach ($report['rows'] as $row) {
                 ['class' => 'local-flwcupkp-muted']);
     }
 
-    $stateclass = 'local-flwcupkp-state-' . preg_replace('/[^a-z0-9_-]/', '-', strtolower($row['state']));
-    $statehtml = html_writer::tag('span', s($row['state']), ['class' => 'local-flwcupkp-state ' . $stateclass]);
+    $statehtml = \local_flwcupkp\local\visuals::state_badge((string)$row['state']);
     if ($row['mastery_score'] !== null) {
-        $statehtml .= html_writer::tag('div', 'Mastery ' . format_float((float)$row['mastery_score'], 2), ['class' => 'local-flwcupkp-muted']);
+        $statehtml .= html_writer::tag('div', get_string('mastery', 'local_flwcupkp') . ' ' .
+            format_float((float)$row['mastery_score'], 2), ['class' => 'local-flwcupkp-muted']);
     }
     if ($row['manual_override']) {
         $statehtml .= html_writer::tag('div', get_string('manualoverride', 'local_flwcupkp'), ['class' => 'local-flwcupkp-override']);
@@ -346,7 +352,11 @@ if (empty($table->data)) {
     $emptystring = $evidencefilter === 'review' ? 'allreviewedrowsu038' : 'noreportrows';
     echo $OUTPUT->notification(get_string($emptystring, 'local_flwcupkp'), 'info');
 } else {
-    echo html_writer::table($table);
+    echo \local_flwcupkp\local\visuals::details_panel(
+        get_string('learningpointevidence', 'local_flwcupkp') . ' (' . count($table->data) . ')',
+        html_writer::table($table),
+        $evidencefilter !== '' || $domain !== '' || $lesson !== '' || $state !== '' || str_contains($focus, '-kp')
+    );
 }
 
 if ($focus !== '') {

@@ -13,6 +13,7 @@ if ($defaultpath === false || trim((string)$defaultpath) === '') {
 
 $path = optional_param('path', (string)$defaultpath, PARAM_RAW_TRIMMED);
 $courseid = optional_param('courseid', 0, PARAM_INT);
+$action = optional_param('action', '', PARAM_ALPHA);
 
 require_login();
 $context = context_system::instance();
@@ -38,6 +39,22 @@ if ($path !== '') {
         $sync = importer::sync_review_rows($package);
 
         if (data_submitted() && confirm_sesskey()) {
+            if ($action === 'publishlesson' || $action === 'unpublishlesson') {
+                $sectionnumber = required_param('section', PARAM_INT);
+                $result = importer::set_lesson_published($package, $sectionnumber, $action === 'publishlesson');
+                $message = get_string('publishlessonresult', 'local_flwtextbookimport', (object)[
+                    'section' => $sectionnumber,
+                    'visible' => $result['modulesvisible'],
+                    'hidden' => $result['moduleshidden'],
+                ]);
+                redirect(
+                    new moodle_url('/local/flwtextbookimport/index.php', $urlparams),
+                    $message,
+                    null,
+                    \core\output\notification::NOTIFY_SUCCESS
+                );
+            }
+
             $rows = optional_param_array('review', [], PARAM_RAW);
             $updated = importer::save_review_rows($rows);
             redirect(
@@ -98,6 +115,64 @@ if ($model !== null) {
         get_string('flwhandoff', 'local_flwtextbookimport'),
         ['class' => 'btn btn-secondary']
     );
+    echo html_writer::end_div();
+
+    $lesson1rows = array_values(array_filter($model['rows'], static function(array $row): bool {
+        return (int)$row['sectionnum'] === 1 && (int)$row['cmid'] > 0;
+    }));
+    $lesson1visible = array_values(array_filter($lesson1rows, static function(array $row): bool {
+        return !empty($row['cmvisible']);
+    }));
+
+    echo html_writer::start_div('card mb-4');
+    echo html_writer::start_div('card-body');
+    echo $OUTPUT->heading(get_string('previewlesson', 'local_flwtextbookimport', 1), 3);
+    echo html_writer::start_div('mb-3');
+    foreach ($lesson1rows as $row) {
+        echo html_writer::link(
+            new moodle_url('/mod/' . $row['existingmodule'] . '/view.php', ['id' => $row['cmid']]),
+            s($row['name']),
+            ['class' => 'btn btn-outline-secondary btn-sm mr-1 mb-1']
+        );
+    }
+    echo html_writer::end_div();
+
+    echo html_writer::start_tag('form', ['method' => 'post', 'class' => 'd-inline']);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'path', 'value' => $path]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'courseid', 'value' => $model['course']['id']]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'section', 'value' => 1]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'action', 'value' => 'publishlesson']);
+    $publishattrs = [
+        'type' => 'submit',
+        'value' => get_string('publishlessonconfirm', 'local_flwtextbookimport', 1),
+        'class' => 'btn btn-success mr-2',
+    ];
+    if (count($lesson1rows) === 0) {
+        $publishattrs['disabled'] = 'disabled';
+    }
+    echo html_writer::empty_tag('input', $publishattrs);
+    echo html_writer::end_tag('form');
+
+    echo html_writer::start_tag('form', ['method' => 'post', 'class' => 'd-inline']);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'path', 'value' => $path]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'courseid', 'value' => $model['course']['id']]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'section', 'value' => 1]);
+    echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'action', 'value' => 'unpublishlesson']);
+    $unpublishattrs = [
+        'type' => 'submit',
+        'value' => get_string('unpublishlesson', 'local_flwtextbookimport', 1),
+        'class' => 'btn btn-outline-danger',
+    ];
+    if (count($lesson1visible) === 0) {
+        $unpublishattrs['disabled'] = 'disabled';
+    }
+    echo html_writer::empty_tag('input', $unpublishattrs);
+    echo html_writer::end_tag('form');
+    echo html_writer::tag('p', 'Lesson 1 visible modules: ' . count($lesson1visible) . ' / ' . count($lesson1rows),
+        ['class' => 'text-muted mt-3 mb-0']);
+    echo html_writer::end_div();
     echo html_writer::end_div();
 
     $cards = [

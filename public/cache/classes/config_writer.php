@@ -114,7 +114,32 @@ class config_writer extends config {
             fclose($handle);
             $locking->unlock('configwrite', 'config');
             @chmod($tempcachefile, $CFG->filepermissions);
-            rename($tempcachefile, $cachefile);
+
+            // Windows can briefly keep the old generated cache config open in
+            // another PHP/Apache worker. Retry the replacement instead of
+            // failing the whole install or cache purge on a transient lock.
+            $renamed = false;
+            for ($attempt = 0; $attempt < 10 && !$renamed; $attempt++) {
+                clearstatcache(true, $cachefile);
+                if (file_exists($cachefile) && !@unlink($cachefile)) {
+                    usleep(50000 * ($attempt + 1));
+                    continue;
+                }
+                $renamed = @rename($tempcachefile, $cachefile);
+                if (!$renamed) {
+                    usleep(50000 * ($attempt + 1));
+                }
+            }
+            if (!$renamed) {
+                @unlink($tempcachefile);
+                throw new cache_exception(
+                    'ex_configcannotsave',
+                    'cache',
+                    '',
+                    null,
+                    'Unable to replace the cache config file.'
+                );
+            }
             // Tell PHP to recompile the script.
             core_component::invalidate_opcode_php_cache($cachefile);
         } else {

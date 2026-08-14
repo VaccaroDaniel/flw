@@ -14,6 +14,7 @@ use external_value;
 use local_flwcupkp\local\audit_service;
 use local_flwcupkp\local\curriculum_manager;
 use local_flwcupkp\local\import_service;
+use local_flwcupkp\local\learner_evaluation;
 use local_flwcupkp\local\mastery_engine;
 use local_flwcupkp\local\moodle_competency_writer;
 use local_flwcupkp\local\recommendation_engine;
@@ -412,6 +413,173 @@ class api extends external_api {
         return self::json_returns();
     }
 
+    public static function get_evaluation_periods_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_TEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'status' => new external_value(PARAM_ALPHANUMEXT, 'Period status', VALUE_DEFAULT, 'active'),
+        ]);
+    }
+
+    public static function get_evaluation_periods(int $courseid = 0, int $frameworkid = 0, string $unitcode = '',
+            string $status = 'active'): array {
+        $params = self::validate_parameters(self::get_evaluation_periods_parameters(),
+            compact('courseid', 'frameworkid', 'unitcode', 'status'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response([
+            'periods' => learner_evaluation::periods(
+                (int)$params['courseid'],
+                (int)$params['frameworkid'],
+                (string)$params['unitcode'],
+                (string)$params['status']
+            ),
+        ]);
+    }
+
+    public static function get_evaluation_periods_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function save_evaluation_period_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'datajson' => new external_value(PARAM_RAW, 'Evaluation period payload as JSON object'),
+        ]);
+    }
+
+    public static function save_evaluation_period(string $datajson): array {
+        $params = self::validate_parameters(self::save_evaluation_period_parameters(), ['datajson' => $datajson]);
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:manageframeworks', context_system::instance());
+        self::assert_write_rate_limit('save_evaluation_period');
+        $data = self::decode_object_json($params['datajson']);
+        $id = learner_evaluation::save_period($data);
+        return self::json_response(['id' => $id, 'status' => 'saved']);
+    }
+
+    public static function save_evaluation_period_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_evaluation_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'periodid' => new external_value(PARAM_INT, 'Evaluation period ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_TEXT, 'Unit code', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function get_learner_evaluation(int $userid, int $courseid = 0, int $periodid = 0,
+            string $unitcode = ''): array {
+        $params = self::validate_parameters(self::get_learner_evaluation_parameters(),
+            compact('userid', 'courseid', 'periodid', 'unitcode'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(learner_evaluation::profile(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (int)$params['periodid'],
+            (string)$params['unitcode']
+        ));
+    }
+
+    public static function get_learner_evaluation_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function create_evaluation_snapshot_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'periodid' => new external_value(PARAM_INT, 'Evaluation period ID', VALUE_DEFAULT, 0),
+            'evaluationtype' => new external_value(PARAM_ALPHANUMEXT, 'Evaluation type', VALUE_DEFAULT, 'unit'),
+            'evidencecutoff' => new external_value(PARAM_INT, 'Evidence cutoff timestamp', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_TEXT, 'Unit code', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function create_evaluation_snapshot(int $userid, int $courseid = 0, int $frameworkid = 0,
+            int $periodid = 0, string $evaluationtype = 'unit', int $evidencecutoff = 0, string $unitcode = ''): array {
+        $params = self::validate_parameters(self::create_evaluation_snapshot_parameters(),
+            compact('userid', 'courseid', 'frameworkid', 'periodid', 'evaluationtype', 'evidencecutoff', 'unitcode'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], true);
+        self::assert_write_rate_limit('create_evaluation_snapshot');
+        return self::json_response(learner_evaluation::create_snapshot(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (int)$params['frameworkid'],
+            (int)$params['periodid'],
+            (string)$params['evaluationtype'],
+            (int)$params['evidencecutoff'],
+            (string)$params['unitcode']
+        ));
+    }
+
+    public static function create_evaluation_snapshot_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function record_self_evaluation_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'periodid' => new external_value(PARAM_INT, 'Evaluation period ID', VALUE_DEFAULT, 0),
+            'targettype' => new external_value(PARAM_ALPHA, 'Target type'),
+            'targetid' => new external_value(PARAM_INT, 'Target ID'),
+            'selfrating' => new external_value(PARAM_FLOAT, 'Self rating from 0 to 1'),
+            'reflection' => new external_value(PARAM_RAW, 'Learner reflection', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function record_self_evaluation(int $userid, int $courseid, int $periodid, string $targettype,
+            int $targetid, float $selfrating, string $reflection = ''): array {
+        $params = self::validate_parameters(self::record_self_evaluation_parameters(),
+            compact('userid', 'courseid', 'periodid', 'targettype', 'targetid', 'selfrating', 'reflection'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], true);
+        self::assert_write_rate_limit('record_self_evaluation');
+        return self::json_response(learner_evaluation::record_self_evaluation(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (int)$params['periodid'],
+            (string)$params['targettype'],
+            (int)$params['targetid'],
+            (float)$params['selfrating'],
+            (string)$params['reflection']
+        ));
+    }
+
+    public static function record_self_evaluation_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_course_evaluation_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_TEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'periodid' => new external_value(PARAM_INT, 'Evaluation period ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_course_evaluation_summary(int $courseid, string $unitcode = '', int $periodid = 0): array {
+        $params = self::validate_parameters(self::get_course_evaluation_summary_parameters(),
+            compact('courseid', 'unitcode', 'periodid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(learner_evaluation::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['periodid']
+        ));
+    }
+
+    public static function get_course_evaluation_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
     public static function get_coverage_report_parameters(): external_function_parameters {
         return new external_function_parameters(['frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0)]);
     }
@@ -623,6 +791,24 @@ class api extends external_api {
 
     private static function json_response(array $payload): array {
         return ['json' => json_encode($payload, JSON_UNESCAPED_SLASHES)];
+    }
+
+    private static function evaluation_context(int $courseid): \context {
+        return $courseid > 0 ? \context_course::instance($courseid) : context_system::instance();
+    }
+
+    private static function require_learner_evaluation_access(int $userid, int $courseid, bool $write): void {
+        global $USER;
+
+        $context = self::evaluation_context($courseid);
+        self::validate_context($context);
+
+        if ((int)($USER->id ?? 0) === $userid) {
+            require_capability('local/flwcupkp:viewlearnerpath', $context);
+            return;
+        }
+
+        require_capability($write ? 'local/flwcupkp:override' : 'local/flwcupkp:viewreports', $context);
     }
 
     /**

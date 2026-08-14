@@ -243,7 +243,7 @@ final class output_hooks {
             ['class' => 'local-flwcupkp-course-next-meta']
         );
         $html .= \html_writer::tag('div',
-            \html_writer::link($progressurl, get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), [
+            visuals::nav_link($progressurl, get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), [
                 'class' => 'btn btn-secondary btn-sm',
             ]),
             ['class' => 'local-flwcupkp-formactions']
@@ -315,12 +315,12 @@ final class output_hooks {
         $html .= self::overview_stat(get_string('withevidence', 'local_flwcupkp'), $evidence);
         $html .= \html_writer::end_tag('div');
         $html .= \html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
-        $html .= \html_writer::link(self::student_url($courseid, $unitcode),
+        $html .= visuals::nav_link(self::student_url($courseid, $unitcode),
             get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-secondary btn-sm']);
-        $html .= \html_writer::link(self::teacher_url($courseid, $unitcode),
+        $html .= visuals::nav_link(self::teacher_url($courseid, $unitcode),
             get_string('courseteacherlinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-primary btn-sm']);
         if (performance_service::has_tasks($courseid, $unitcode)) {
-            $html .= \html_writer::link(self::performance_url($courseid, $unitcode),
+            $html .= visuals::nav_link(self::performance_url($courseid, $unitcode),
                 get_string('unitperformancenav', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-secondary btn-sm']);
         }
         $html .= \html_writer::end_tag('div');
@@ -363,6 +363,10 @@ final class output_hooks {
      * @return \moodle_url
      */
     private static function performance_url(int $courseid, string $unitcode): \moodle_url {
+        if ($unitcode === 'U038') {
+            return new \moodle_url('/local/flwcupkp/performance_u038.php', ['courseid' => $courseid]);
+        }
+
         return new \moodle_url('/local/flwcupkp/performance.php', [
             'courseid' => $courseid,
             'unitcode' => $unitcode,
@@ -462,7 +466,7 @@ final class output_hooks {
             }
         } else {
             $html .= \html_writer::tag('p', get_string('courseallmasteredu038', 'local_flwcupkp'));
-            $html .= \html_writer::link(new \moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]),
+            $html .= visuals::nav_link(new \moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]),
                 get_string('courseprogresslinku038', 'local_flwcupkp'), ['class' => 'btn btn-primary btn-sm']);
         }
 
@@ -587,11 +591,11 @@ final class output_hooks {
             ['class' => 'local-flwcupkp-course-next-meta']
         );
         $html .= \html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
-        $html .= \html_writer::link($progressurl, get_string('courseprogresslinku038', 'local_flwcupkp'),
+        $html .= visuals::nav_link($progressurl, get_string('courseprogresslinku038', 'local_flwcupkp'),
             ['class' => 'btn btn-secondary btn-sm']);
-        $html .= \html_writer::link($verificationurl, get_string('courseverificationlinku038', 'local_flwcupkp'),
+        $html .= visuals::nav_link($verificationurl, get_string('courseverificationlinku038', 'local_flwcupkp'),
             ['class' => 'btn btn-secondary btn-sm']);
-        $html .= \html_writer::link($performanceurl, get_string('performanceu038', 'local_flwcupkp'),
+        $html .= visuals::nav_link($performanceurl, get_string('performanceu038', 'local_flwcupkp'),
             ['class' => 'btn btn-primary btn-sm']);
         $html .= \html_writer::end_tag('div');
         $html .= \html_writer::end_tag('section');
@@ -611,7 +615,7 @@ final class output_hooks {
         $content = \html_writer::tag('strong', (string)$value) . \html_writer::tag('em', s($label));
         $attributes = ['class' => 'local-flwcupkp-course-overview-stat'];
         if ($url) {
-            return \html_writer::link($url, $content, $attributes);
+            return \html_writer::link($url, $content, visuals::nav_attributes($url, $attributes));
         }
 
         return \html_writer::tag('span', $content, $attributes);
@@ -749,7 +753,7 @@ final class output_hooks {
         $content = \html_writer::tag('strong', $numerator . ' / ' . $denominator) . \html_writer::tag('em', s($label));
         $attributes = ['class' => 'local-flwcupkp-course-overview-stat'];
         if ($url) {
-            return \html_writer::link($url, $content, $attributes);
+            return \html_writer::link($url, $content, visuals::nav_attributes($url, $attributes));
         }
 
         return \html_writer::tag('span', $content, $attributes);

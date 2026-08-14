@@ -72,6 +72,14 @@ local/flwcupkp/trace.php
 
 The traceability report follows CEFR-aligned competencies through Use Points, Knowledge Points, Moodle activities, evidence counts, and learner/class state summaries. The curriculum manager also includes a compact relationship view plus the detailed graph browser.
 
+Learner evaluation:
+
+```text
+local/flwcupkp/evaluation.php?courseid=124&unitcode=U038
+```
+
+The learner evaluation page shows a live V4 profile for a learner, including KP mastery, UP demonstrated, competency achieved, diagnostics, recommendations, self-evaluation, and immutable evaluation snapshots. Teachers can select learners in the course; students see their own profile.
+
 Generic unit Moodle shell/link command:
 
 ```bash
@@ -127,6 +135,7 @@ Admin UI entry points:
 - `local/flwcupkp/mappings.php` - mapping manager.
 - `local/flwcupkp/import_export.php` - JSON and CSV validate/import plus JSON export.
 - `local/flwcupkp/manual_evidence.php` - teacher/admin manual evidence entry.
+- `local/flwcupkp/evaluation.php` - learner evaluation profile, self-evaluation, diagnostics, recommendations, and immutable snapshots.
 - `local/flwcupkp/performance.php` - generic unit performance assessment scoring.
 - `local/flwcupkp/performance_u038.php` - legacy U038 performance assessment scoring.
 - `local/flwcupkp/sync.php` - Moodle competency sync review controls.

@@ -7,9 +7,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Calibration recalculation tests.
- *
- * @covers \local_flwcupkp\local\calibration_proposal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\local_flwcupkp\local\calibration_proposal::class)]
 class calibration_recalculation_test extends \advanced_testcase {
     public function test_queued_recalculation_updates_changed_kp_state(): void {
         global $DB;
