@@ -60,20 +60,9 @@ echo html_writer::tag('span', get_string('teacherverified', 'local_flwcupkp') . 
 echo html_writer::end_tag('div');
 echo html_writer::end_tag('div');
 
+echo local_flwcupkp_student_next_card($progress, $courseid, $userid);
 echo \local_flwcupkp\local\visuals::student_progress_rings($summary, $parentsummary);
 echo \local_flwcupkp\local\visuals::hierarchy_map($courseid, 'U038', $userid);
-
-if ($progress['next_recommendation']) {
-    $next = $progress['next_recommendation'];
-    echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-next']);
-    echo html_writer::tag('h3', get_string('nextactivity', 'local_flwcupkp'));
-    echo html_writer::tag('div', s($next['kp_externalid']) . ' - ' . s($next['kp_title']), ['class' => 'local-flwcupkp-next-title']);
-    echo html_writer::tag('p', s($next['next_activity']['reason']));
-    if ($next['next_activity']['url']) {
-        echo html_writer::link($next['next_activity']['url'], s($next['next_activity']['title']), ['class' => 'btn btn-primary']);
-    }
-    echo html_writer::end_tag('section');
-}
 
 echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-overview']);
 echo html_writer::tag('h3', get_string('masteryoverviewu038', 'local_flwcupkp'));
@@ -205,3 +194,49 @@ if (empty($table->data)) {
 }
 
 echo $OUTPUT->footer();
+
+/**
+ * Render the student's immediate next action.
+ *
+ * @param array $progress
+ * @param int $courseid
+ * @param int $userid
+ * @return string
+ */
+function local_flwcupkp_student_next_card(array $progress, int $courseid, int $userid): string {
+    global $USER;
+
+    $next = $progress['next_recommendation'] ?? null;
+    $classes = 'local-flwcupkp-next';
+    $html = html_writer::start_tag('section', ['class' => $classes]);
+    $html .= html_writer::tag('h3', get_string('nextactivity', 'local_flwcupkp'));
+    if ($next) {
+        $html .= html_writer::tag('div', s($next['kp_externalid']) . ' - ' . s($next['kp_title']), [
+            'class' => 'local-flwcupkp-next-title',
+        ]);
+        $html .= html_writer::tag('p', s($next['next_activity']['reason']));
+        if ($next['next_activity']['url']) {
+            $html .= html_writer::link($next['next_activity']['url'], s($next['next_activity']['title']), [
+                'class' => 'btn btn-primary',
+            ]);
+        }
+        return $html . html_writer::end_tag('section');
+    }
+
+    $html .= html_writer::tag('div', get_string('uxnextreadytitle', 'local_flwcupkp'), [
+        'class' => 'local-flwcupkp-next-title',
+    ]);
+    $html .= html_writer::tag('p', get_string('courseallmasteredu038', 'local_flwcupkp'));
+    $params = [
+        'courseid' => $courseid,
+        'unitcode' => 'U038',
+    ];
+    if ($userid > 0 && (empty($USER->id) || (int)$USER->id !== $userid)) {
+        $params['userid'] = $userid;
+    }
+    $html .= html_writer::link(new moodle_url('/local/flwcupkp/evaluation.php', $params),
+        get_string('openmylearningpath', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+    $html .= html_writer::end_tag('section');
+
+    return $html;
+}

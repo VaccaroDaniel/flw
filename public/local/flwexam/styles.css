@@ -1,5 +1,5 @@
 body.path-local-flwexam {
-    background: #eef0f3;
+    background: var(--flw-color-page, #eef0f3);
 }
 
 body.path-local-flwexam #page.drawers .main-inner {
@@ -9,18 +9,18 @@ body.path-local-flwexam #page.drawers .main-inner {
 }
 
 .flwexam-page {
-    --flwexam-ink: #17242a;
-    --flwexam-muted: #5f6d8d;
-    --flwexam-line: #e5e8ef;
-    --flwexam-surface: #fff;
-    --flwexam-soft: #f7f9fd;
-    --flwexam-teal: #0a4be8;
-    --flwexam-teal-dark: #082a84;
-    --flwexam-coral: #e85d4f;
-    --flwexam-yellow: #f2b84b;
-    --flwexam-green: #327be1;
-    --flwexam-blue: #3278bd;
-    --flwexam-shadow: 0 4px 14px rgba(23, 39, 79, .10);
+    --flwexam-ink: var(--flw-color-ink, #17242a);
+    --flwexam-muted: var(--flw-color-muted, #5f6d8d);
+    --flwexam-line: var(--flw-color-line, #e5e8ef);
+    --flwexam-surface: var(--flw-color-surface, #fff);
+    --flwexam-soft: var(--flw-color-soft, #f7f9fd);
+    --flwexam-teal: var(--flw-color-blue, #0a4be8);
+    --flwexam-teal-dark: var(--flw-color-blue-dark, #082a84);
+    --flwexam-coral: var(--flw-color-coral, #e85d4f);
+    --flwexam-yellow: var(--flw-color-yellow, #f2b84b);
+    --flwexam-green: var(--flw-color-success, #327be1);
+    --flwexam-blue: var(--flw-color-success, #3278bd);
+    --flwexam-shadow: var(--flw-shadow-card, 0 4px 14px rgba(23, 39, 79, .10));
     color: var(--flwexam-ink);
     display: grid;
     gap: 1rem;
@@ -28,7 +28,7 @@ body.path-local-flwexam #page.drawers .main-inner {
     max-width: min(1428px, calc(100% - 40px));
     width: 100%;
     padding-top: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--flw-font-body, Arial, Helvetica, sans-serif);
 }
 
 .flwexam-hero,

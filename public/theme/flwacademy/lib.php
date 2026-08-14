@@ -14,6 +14,11 @@ function theme_flwacademy_get_main_scss_content($theme): string {
         $scss .= file_get_contents($boostdefault);
     }
 
+    $tokens = __DIR__ . '/scss/tokens.scss';
+    if (is_readable($tokens)) {
+        $scss .= "\n\n" . file_get_contents($tokens);
+    }
+
     $post = __DIR__ . '/scss/post.scss';
     if (is_readable($post)) {
         $scss .= "\n\n" . file_get_contents($post);
@@ -1730,6 +1735,83 @@ function theme_flwacademy_format_learning_language_text(string $text, int $forma
 }
 
 /**
+ * Formats a short Moodle string for the selected FLW learning language.
+ *
+ * Use this for names/titles that may contain Moodle multilang markup.
+ *
+ * @param string $text
+ * @param string $languagecode
+ * @param context|null $context
+ * @return string
+ */
+function theme_flwacademy_format_learning_language_string(
+    string $text,
+    string $languagecode,
+    ?context $context = null
+): string {
+    $selectedtext = theme_flwacademy_extract_learning_language_text($text, $languagecode);
+    $options = ['filter' => true];
+    if ($context) {
+        $options['context'] = $context;
+    }
+
+    return format_string($selectedtext, true, $options);
+}
+
+/**
+ * Returns selected-language plain text from Moodle formatted content.
+ *
+ * @param string $text
+ * @param int $format
+ * @param context $context
+ * @param string $languagecode
+ * @param int $limit Optional shorten_text limit.
+ * @return string
+ */
+function theme_flwacademy_learning_language_plain_text(
+    string $text,
+    int $format,
+    context $context,
+    string $languagecode,
+    int $limit = 0
+): string {
+    $html = theme_flwacademy_format_learning_language_text($text, $format, $context, $languagecode);
+    $plain = trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+    return $limit > 0 ? shorten_text($plain, $limit) : $plain;
+}
+
+/**
+ * Returns a selected-language category display name.
+ *
+ * @param stdClass $category
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_get_category_display_name(stdClass $category, string $languagecode): string {
+    return theme_flwacademy_format_learning_language_string(
+        (string)($category->name ?? ''),
+        $languagecode,
+        context_coursecat::instance((int)$category->id)
+    );
+}
+
+/**
+ * Returns a selected-language course display name.
+ *
+ * @param stdClass $course
+ * @param string $languagecode
+ * @return string
+ */
+function theme_flwacademy_get_course_display_name(stdClass $course, string $languagecode): string {
+    $context = context_course::instance((int)$course->id, IGNORE_MISSING);
+    return theme_flwacademy_format_learning_language_string(
+        (string)($course->fullname ?? ''),
+        $languagecode,
+        $context ?: null
+    );
+}
+
+/**
  * Gets the selected learning language from URL first, then the persistent cookie.
  *
  * @return string
@@ -2316,14 +2398,16 @@ function theme_flwacademy_get_latest_course_module_url(stdClass $course, int $us
  *
  * @param stdClass $course
  * @param int $userid
+ * @param string $languagecode
  * @return array
  */
-function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid): array {
+function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid, string $languagecode = 'en'): array {
     global $DB, $CFG;
 
     $store = theme_flwacademy_get_cache_store('learning_map');
     static $cache = [];
-    $cachekey = (int)$course->id . '|' . $userid;
+    $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
+    $cachekey = (int)$course->id . '|' . $userid . '|' . $languagecode;
     if (array_key_exists($cachekey, $cache)) {
         return $cache[$cachekey];
     }
@@ -2420,7 +2504,7 @@ function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid)
             }
             $unitnodes[] = [
                 'class' => $complete ? 'complete' : ($active ? 'active' : ''),
-                'title' => format_string($sco->title),
+                'title' => theme_flwacademy_format_learning_language_string($sco->title, $languagecode),
                 'status' => theme_flwacademy_unit_status_label($complete, $active),
                 'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
                 'url' => $cm->url ? $cm->url->out(false) : $courseurl,
@@ -2445,7 +2529,7 @@ function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid)
             }
             $unitnodes[] = [
                 'class' => $complete ? 'complete' : ($active ? 'active' : ''),
-                'title' => get_section_name($course, $section),
+                'title' => theme_flwacademy_format_learning_language_string(get_section_name($course, $section), $languagecode),
                 'status' => theme_flwacademy_unit_status_label($complete, $active),
                 'symbol' => $complete ? '✓' : ($active ? '●' : '○'),
                 'url' => (new moodle_url('/course/view.php', [
@@ -2480,15 +2564,23 @@ function theme_flwacademy_get_course_learning_map(stdClass $course, int $userid)
  * @param int[] $courseids
  * @param string $fallbacklabel
  * @param string $fallbackurl
+ * @param string $languagecode
  * @return array
  */
-function theme_flwacademy_get_today_learning_items(int $userid, array $courseids, string $fallbacklabel, string $fallbackurl): array {
+function theme_flwacademy_get_today_learning_items(
+    int $userid,
+    array $courseids,
+    string $fallbacklabel,
+    string $fallbackurl,
+    string $languagecode = 'en'
+): array {
     global $DB;
 
     $courseids = array_values(array_unique(array_filter(array_map('intval', $courseids))));
     sort($courseids, SORT_NUMERIC);
+    $languagecode = theme_flwacademy_normalise_learning_language_code($languagecode) ?: 'en';
     static $cache = [];
-    $cachekey = $userid . '|' . implode(',', $courseids) . '|' . $fallbacklabel . '|' . $fallbackurl;
+    $cachekey = $userid . '|' . implode(',', $courseids) . '|' . $fallbacklabel . '|' . $fallbackurl . '|' . $languagecode;
     if (array_key_exists($cachekey, $cache)) {
         return $cache[$cachekey];
     }
@@ -2533,8 +2625,9 @@ function theme_flwacademy_get_today_learning_items(int $userid, array $courseids
                 }
                 $items[] = [
                     'class' => ['blue', 'green', 'purple'][count($items)] ?? 'blue',
-                    'title' => format_string($course->fullname),
-                    'meta' => format_string($cm->name) . ' · ' . get_string('pluginname', 'mod_' . $cm->modname),
+                    'title' => theme_flwacademy_get_course_display_name($course, $languagecode),
+                    'meta' => theme_flwacademy_format_learning_language_string($cm->name, $languagecode, context_module::instance((int)$cm->id)) .
+                        ' · ' . get_string('pluginname', 'mod_' . $cm->modname),
                     'time' => userdate((int)$log->lasttime, get_string('strftimetime')),
                     'url' => $cm->url->out(false),
                 ];
@@ -3078,7 +3171,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
     $courseurl = $course
         ? (new moodle_url('/course/view.php', ['id' => (int)$course->id]))->out(false)
         : ($selectedlanguage['selfstudycategoryurl'] ?? (new moodle_url('/course/index.php'))->out(false));
-    $coursename = $course ? format_string($course->fullname) : $selectedlabel . ' World';
+    $coursename = $course ? theme_flwacademy_get_course_display_name($course, $selectedcode) : $selectedlabel . ' World';
     $worldlabel = theme_flwacademy_get_world_label($selectedlanguage, true);
     $worldcresturl = theme_flwacademy_redesign_asset_url(
         $output,
@@ -3092,7 +3185,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         $unitlabel = get_string('coursepath', 'theme_flwacademy');
     }
 
-    $learningmap = $course ? theme_flwacademy_get_course_learning_map($course, (int)($USER->id ?? 0)) : [
+    $learningmap = $course ? theme_flwacademy_get_course_learning_map($course, (int)($USER->id ?? 0), $selectedcode) : [
         'continueurl' => $courseurl,
         'overviewurl' => $courseurl,
         'restarturl' => $courseurl,
@@ -3103,7 +3196,8 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
         (int)($USER->id ?? 0),
         $languagecourseids,
         $coursename,
-        $learningmap['continueurl'] ?: $courseurl
+        $learningmap['continueurl'] ?: $courseurl,
+        $selectedcode
     );
     $unitnodes = $learningmap['unitnodes'];
     if (!$unitnodes) {
@@ -3192,7 +3286,13 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
             'name' => $coursename,
             'subtitle' => $unitlabel,
             'summary' => $course && !empty($course->summary)
-                ? format_string(strip_tags(format_text($course->summary, $course->summaryformat ?? FORMAT_HTML)))
+                ? theme_flwacademy_learning_language_plain_text(
+                    $course->summary,
+                    $course->summaryformat ?? FORMAT_HTML,
+                    context_course::instance((int)$course->id),
+                    $selectedcode,
+                    180
+                )
                 : ($placement['studyrecommendation'] ?? get_string('studyrecnextusefulstep', 'theme_flwacademy')),
             'url' => $courseurl,
             'continueurl' => $learningmap['continueurl'] ?: $courseurl,
@@ -3441,16 +3541,17 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
     $languagecategory = $DB->get_record('course_categories', ['id' => $category->parent], '*', MUST_EXIST);
     $language = theme_flwacademy_match_learning_language_category($languagecategory);
-    $languageLabel = $language['label'] ?? format_string($languagecategory->name);
+    $languageLabel = $language['label'] ?? theme_flwacademy_get_category_display_name($languagecategory, 'en');
     $languageCode = $language['code'] ?? 'en';
 
     $description = '';
     if (!empty($category->description)) {
-        $description = format_text($category->description, $category->descriptionformat, [
-            'context' => context_coursecat::instance($category->id),
-            'overflowdiv' => true,
-            'filter' => false,
-        ]);
+        $description = theme_flwacademy_format_learning_language_text(
+            $category->description,
+            $category->descriptionformat,
+            context_coursecat::instance($category->id),
+            $languageCode
+        );
     }
 
     $nativeNames = [
@@ -3503,12 +3604,19 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
     foreach ($courses as $course) {
         $summary = '';
         if (!empty($course->summary)) {
-            $summary = shorten_text(trim(strip_tags(format_text($course->summary, $course->summaryformat))), 150);
+            $summary = theme_flwacademy_learning_language_plain_text(
+                $course->summary,
+                $course->summaryformat,
+                context_course::instance((int)$course->id),
+                $languageCode,
+                150
+            );
         }
+        $coursecontext = context_course::instance((int)$course->id);
         $courseitems[] = [
-            'name' => format_string($course->fullname),
-            'shortname' => format_string($course->shortname),
-            'categoryname' => format_string($course->categoryname),
+            'name' => theme_flwacademy_get_course_display_name($course, $languageCode),
+            'shortname' => theme_flwacademy_format_learning_language_string($course->shortname, $languageCode, $coursecontext),
+            'categoryname' => theme_flwacademy_format_learning_language_string($course->categoryname, $languageCode),
             'summary' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
             'imageurl' => theme_flwacademy_get_course_cover_url((int)$course->id, $output),
@@ -3528,7 +3636,7 @@ function theme_flwacademy_export_selfstudy_category_page(int $categoryid, core_r
     return [
         'language' => $languageLabel,
         'languagecode' => $languageCode,
-        'title' => format_string($category->name),
+        'title' => theme_flwacademy_get_category_display_name($category, $languageCode),
         'description' => $description,
         'hasdescription' => trim(strip_tags($description)) !== '',
         'languagecategoryurl' => (new moodle_url('/course/index.php', ['categoryid' => $languagecategory->id]))->out(false),
@@ -3554,13 +3662,15 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
     global $DB;
 
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
+    $languageCode = theme_flwacademy_get_active_learning_language_code() ?: 'en';
     $description = '';
     if (!empty($category->description)) {
-        $description = format_text($category->description, $category->descriptionformat, [
-            'context' => context_coursecat::instance($category->id),
-            'overflowdiv' => true,
-            'filter' => false,
-        ]);
+        $description = theme_flwacademy_format_learning_language_text(
+            $category->description,
+            $category->descriptionformat,
+            context_coursecat::instance($category->id),
+            $languageCode
+        );
     }
 
     $courses = $DB->get_records_sql(
@@ -3582,12 +3692,19 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
     foreach ($courses as $course) {
         $summary = '';
         if (!empty($course->summary)) {
-            $summary = shorten_text(trim(strip_tags(format_text($course->summary, $course->summaryformat))), 150);
+            $summary = theme_flwacademy_learning_language_plain_text(
+                $course->summary,
+                $course->summaryformat,
+                context_course::instance((int)$course->id),
+                $languageCode,
+                150
+            );
         }
+        $coursecontext = context_course::instance((int)$course->id);
         $courseitems[] = [
-            'name' => format_string($course->fullname),
-            'shortname' => format_string($course->shortname),
-            'categoryname' => format_string($course->categoryname),
+            'name' => theme_flwacademy_get_course_display_name($course, $languageCode),
+            'shortname' => theme_flwacademy_format_learning_language_string($course->shortname, $languageCode, $coursecontext),
+            'categoryname' => theme_flwacademy_format_learning_language_string($course->categoryname, $languageCode),
             'summary' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
             'imageurl' => theme_flwacademy_get_course_cover_url((int)$course->id, $output),
@@ -3596,8 +3713,8 @@ function theme_flwacademy_export_demo_category_page(int $categoryid, core_render
 
     return [
         'language' => 'Demo',
-        'languagecode' => '',
-        'title' => format_string($category->name),
+        'languagecode' => $languageCode,
+        'title' => theme_flwacademy_get_category_display_name($category, $languageCode),
         'description' => $description,
         'hasdescription' => trim(strip_tags($description)) !== '',
         'heroimageurl' => $output->image_url('dashboard/self-study', 'theme_flwacademy')->out(false),
@@ -3620,7 +3737,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     $category = $DB->get_record('course_categories', ['id' => $categoryid], '*', MUST_EXIST);
     $languagecategory = $DB->get_record('course_categories', ['id' => $category->parent], '*', MUST_EXIST);
     $language = theme_flwacademy_match_learning_language_category($languagecategory);
-    $languageLabel = $language['label'] ?? format_string($languagecategory->name);
+    $languageLabel = $language['label'] ?? theme_flwacademy_get_category_display_name($languagecategory, 'en');
     $languageCode = $language['code'] ?? 'en';
 
     $description = '';
@@ -3646,7 +3763,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     foreach ($children as $child) {
         $namekey = core_text::strtolower($child->name);
         $item = [
-            'name' => format_string($child->name),
+            'name' => theme_flwacademy_get_category_display_name($child, $languageCode),
             'url' => (new moodle_url('/course/index.php', ['categoryid' => $child->id]))->out(false),
             'coursecount' => (int)$child->coursecount,
             'description' => '',
@@ -3692,10 +3809,11 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
                 'filter' => true,
             ]))), 150);
         }
+        $coursecontext = context_course::instance((int)$course->id);
         $courseitems[] = [
-            'name' => format_string($course->fullname),
-            'shortname' => format_string($course->shortname),
-            'categoryname' => format_string($course->categoryname),
+            'name' => theme_flwacademy_get_course_display_name($course, $languageCode),
+            'shortname' => theme_flwacademy_format_learning_language_string($course->shortname, $languageCode, $coursecontext),
+            'categoryname' => theme_flwacademy_format_learning_language_string($course->categoryname, $languageCode),
             'summary' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
         ];
@@ -3816,11 +3934,12 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
 
     $description = '';
     if (!empty($displaycategory->description)) {
-        $description = format_text($displaycategory->description, $displaycategory->descriptionformat, [
-            'context' => context_coursecat::instance($displaycategory->id),
-            'overflowdiv' => true,
-            'filter' => false,
-        ]);
+        $description = theme_flwacademy_format_learning_language_text(
+            $displaycategory->description,
+            $displaycategory->descriptionformat,
+            context_coursecat::instance($displaycategory->id),
+            $languageCode
+        );
     }
 
     $childrenparent = $itemcategory ? (int)$areacategory->id : (int)$displaycategory->id;
@@ -3829,14 +3948,15 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
     foreach ($children as $child) {
         $childdescription = '';
         if (!empty($child->description)) {
-            $childdescription = format_text($child->description, $child->descriptionformat, [
-                'context' => context_coursecat::instance($child->id),
-                'overflowdiv' => true,
-                'filter' => false,
-            ]);
+            $childdescription = theme_flwacademy_format_learning_language_text(
+                $child->description,
+                $child->descriptionformat,
+                context_coursecat::instance($child->id),
+                $languageCode
+            );
         }
         $childitems[] = [
-            'name' => format_string($child->name),
+            'name' => theme_flwacademy_get_category_display_name($child, $languageCode),
             'url' => (new moodle_url('/course/index.php', ['categoryid' => $child->id]))->out(false),
             'description' => $childdescription,
             'hasdescription' => trim(strip_tags($childdescription)) !== '',
@@ -3864,12 +3984,19 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
     foreach ($courses as $course) {
         $summary = '';
         if (!empty($course->summary)) {
-            $summary = shorten_text(trim(strip_tags(format_text($course->summary, $course->summaryformat))), 150);
+            $summary = theme_flwacademy_learning_language_plain_text(
+                $course->summary,
+                $course->summaryformat,
+                context_course::instance((int)$course->id),
+                $languageCode,
+                150
+            );
         }
+        $coursecontext = context_course::instance((int)$course->id);
         $courseitems[] = [
-            'name' => format_string($course->fullname),
-            'shortname' => format_string($course->shortname),
-            'categoryname' => format_string($course->categoryname),
+            'name' => theme_flwacademy_get_course_display_name($course, $languageCode),
+            'shortname' => theme_flwacademy_format_learning_language_string($course->shortname, $languageCode, $coursecontext),
+            'categoryname' => theme_flwacademy_format_learning_language_string($course->categoryname, $languageCode),
             'summary' => $summary,
             'url' => (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
         ];
@@ -3920,7 +4047,7 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
 
     $examlevels = theme_flwacademy_get_exam_levels_for_language($language['code']);
     $framework = 'CEFR';
-    $selectedlevel = $itemcategory ? format_string($itemcategory->name) : ($examlevels[0] ?? 'A1');
+    $selectedlevel = $itemcategory ? theme_flwacademy_get_category_display_name($itemcategory, $languageCode) : ($examlevels[0] ?? 'A1');
     if (strpos($selectedlevel, 'HSK') === 0) {
         $framework = 'HSK';
     } else if (strpos($selectedlevel, 'JLPT') === 0) {
@@ -3972,7 +4099,7 @@ function theme_flwacademy_export_activity_category_page(int $categoryid, core_re
         'area' => $area,
         'ispractice' => $area === 'practice',
         'isexam' => $area === 'exam',
-        'title' => format_string($displaycategory->name),
+        'title' => theme_flwacademy_get_category_display_name($displaycategory, $languageCode),
         'description' => $description,
         'hasdescription' => trim(strip_tags($description)) !== '',
         'children' => $childitems,

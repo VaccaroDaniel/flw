@@ -1,57 +1,578 @@
 <?php
-// Admin landing page for local_flwcupkp.
+// Role-based home page for local_flwcupkp.
 
 require_once(__DIR__ . '/../../config.php');
 
 require_login();
-$context = context_system::instance();
-require_capability('local/flwcupkp:viewreports', $context);
 
+$systemcontext = context_system::instance();
 $PAGE->set_url(new moodle_url('/local/flwcupkp/index.php'));
-$PAGE->set_context($context);
-$PAGE->set_title(get_string('pluginname', 'local_flwcupkp'));
-$PAGE->set_heading(get_string('pluginname', 'local_flwcupkp'));
+$PAGE->set_context($systemcontext);
+$PAGE->set_title(get_string('cupkphome', 'local_flwcupkp'));
+$PAGE->set_heading(get_string('cupkphome', 'local_flwcupkp'));
+$PAGE->requires->css('/local/flwcupkp/styles.css');
+
+$units = local_flwcupkp_home_units();
+$adminaccess = is_siteadmin() || has_capability('local/flwcupkp:import', $systemcontext) ||
+    has_capability('local/flwcupkp:viewreports', $systemcontext);
+$teacherunits = array_values(array_filter($units, static function(array $unit): bool {
+    return !empty($unit['canreport']);
+}));
+$studentunits = array_values(array_filter($units, static function(array $unit): bool {
+    return !empty($unit['canview']);
+}));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'local_flwcupkp'));
+echo $OUTPUT->heading(get_string('cupkphome', 'local_flwcupkp'));
 
-$report = \local_flwcupkp\local\audit_service::coverage();
+if (!$adminaccess && !$teacherunits && !$studentunits) {
+    echo $OUTPUT->notification(get_string('cupkpnoaccess', 'local_flwcupkp'), 'warning');
+    echo $OUTPUT->footer();
+    exit;
+}
 
-echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-dashboard']);
-echo html_writer::tag('p', 'C-UP-KP framework browser and operational reports.');
-echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/setup.php'), get_string('unitsetupwizard', 'local_flwcupkp'),
-    ['class' => 'btn btn-primary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/curriculum.php'), get_string('curriculummanager', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/import_export.php'), get_string('importexport', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/mappings.php'), get_string('mappingmanager', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/trace.php'), get_string('traceabilityreport', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/manual_evidence.php'), get_string('manualevidence', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/evaluation.php'), get_string('learnerevaluation', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/sync.php'), get_string('competencysync', 'local_flwcupkp'),
-    ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/calibration.php'), get_string('calibrationreport',
-    'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/calibration_proposal.php'), get_string('thresholdproposals',
-    'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-echo html_writer::end_tag('div');
-echo html_writer::start_tag('ul');
-echo html_writer::tag('li', 'Competencies: ' . $report['competencies']);
-echo html_writer::tag('li', 'Use Points: ' . $report['use_points']);
-echo html_writer::tag('li', 'Knowledge Points: ' . $report['knowledge_points']);
-echo html_writer::tag('li', 'Competencies linked to UPs: ' . $report['competencies_linked_to_up_percent'] . '%');
-echo html_writer::tag('li', 'UPs linked to KPs: ' . $report['use_points_linked_to_kp_percent'] . '%');
-echo html_writer::end_tag('ul');
+echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-home']);
+echo html_writer::tag('p', get_string('cupkphomeintro', 'local_flwcupkp'), [
+    'class' => 'local-flwcupkp-muted local-flwcupkp-home-intro',
+]);
 
-if (!empty($report['warnings'])) {
-    echo $OUTPUT->notification(implode('<br>', array_map('s', $report['warnings'])), 'warning');
+if ($adminaccess) {
+    echo local_flwcupkp_home_section(get_string('adminworkspace', 'local_flwcupkp'),
+        local_flwcupkp_home_admin_cards());
+}
+
+if ($teacherunits) {
+    echo local_flwcupkp_home_section(get_string('teacherworkspace', 'local_flwcupkp'),
+        local_flwcupkp_home_teacher_cards($teacherunits));
+}
+
+if ($studentunits) {
+    echo local_flwcupkp_home_section(get_string('studentworkspace', 'local_flwcupkp'),
+        local_flwcupkp_home_student_cards($studentunits));
+}
+
+if ($adminaccess || $teacherunits) {
+    echo local_flwcupkp_home_section(get_string('operationreports', 'local_flwcupkp'),
+        local_flwcupkp_home_report_cards($units, $adminaccess));
 }
 
 echo html_writer::end_tag('div');
 echo $OUTPUT->footer();
+
+/**
+ * Mapped units available to the current user.
+ *
+ * @return array
+ */
+function local_flwcupkp_home_units(): array {
+    global $DB;
+
+    $recordset = $DB->get_recordset_sql(
+        "SELECT DISTINCT o.courseid, o.unitcode, c.fullname, c.shortname
+           FROM {flwcupkp_object} o
+           JOIN {course} c ON c.id = o.courseid
+          WHERE o.courseid IS NOT NULL
+            AND o.courseid > 0
+            AND o.unitcode IS NOT NULL
+            AND o.unitcode <> ''
+       ORDER BY c.fullname ASC, o.unitcode ASC"
+    );
+
+    $units = [];
+    foreach ($recordset as $record) {
+        $courseid = (int)$record->courseid;
+        $context = context_course::instance($courseid, IGNORE_MISSING);
+        if (!$context) {
+            continue;
+        }
+        $canview = has_capability('local/flwcupkp:viewlearnerpath', $context);
+        $canreport = has_capability('local/flwcupkp:viewreports', $context);
+        $canoverride = has_capability('local/flwcupkp:override', $context);
+        if (!$canview && !$canreport) {
+            continue;
+        }
+        $units[] = [
+            'courseid' => $courseid,
+            'unitcode' => (string)$record->unitcode,
+            'coursefullname' => format_string($record->fullname),
+            'courseshortname' => format_string($record->shortname),
+            'canview' => $canview,
+            'canreport' => $canreport,
+            'canoverride' => $canoverride,
+        ];
+    }
+    $recordset->close();
+
+    return $units;
+}
+
+/**
+ * Render a card section.
+ *
+ * @param string $heading
+ * @param array $cards
+ * @return string
+ */
+function local_flwcupkp_home_section(string $heading, array $cards): string {
+    if (!$cards) {
+        return '';
+    }
+
+    $html = html_writer::start_tag('section', ['class' => 'local-flwcupkp-home-section']);
+    $html .= html_writer::tag('h3', s($heading));
+    $html .= html_writer::start_tag('div', ['class' => 'local-flwcupkp-home-grid']);
+    foreach ($cards as $card) {
+        $html .= local_flwcupkp_home_card($card);
+    }
+    $html .= html_writer::end_tag('div');
+    $html .= html_writer::end_tag('section');
+
+    return $html;
+}
+
+/**
+ * Admin cards.
+ *
+ * @return array
+ */
+function local_flwcupkp_home_admin_cards(): array {
+    return [
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('unitsetupwizard', 'local_flwcupkp'),
+            'detail' => get_string('unitsetupwizardhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/setup.php'),
+            'button' => get_string('openunitsetup', 'local_flwcupkp'),
+            'primary' => true,
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('curriculummanager', 'local_flwcupkp'),
+            'detail' => get_string('curriculumhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/curriculum.php'),
+            'button' => get_string('opencurriculum', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('calibrationreport', 'local_flwcupkp'),
+            'detail' => get_string('calibrationhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/calibration.php'),
+            'button' => get_string('opencalibration', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('healthsync', 'local_flwcupkp'),
+            'detail' => get_string('healthsynchome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/sync.php'),
+            'button' => get_string('openhealthsync', 'local_flwcupkp'),
+        ],
+    ];
+}
+
+/**
+ * Teacher cards for mapped units.
+ *
+ * @param array $units
+ * @return array
+ */
+function local_flwcupkp_home_teacher_cards(array $units): array {
+    $cards = [];
+    foreach ($units as $unit) {
+        $summary = local_flwcupkp_home_teacher_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherunitcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => $summary['detail'],
+            'metric' => get_string('teacherunitmetric', 'local_flwcupkp', (object)[
+                'review' => $summary['review'],
+                'parent' => $summary['parent'],
+            ]),
+            'url' => local_flwcupkp_home_teacher_url($unit),
+            'button' => get_string('openteacherreview', 'local_flwcupkp'),
+            'secondaryurl' => local_flwcupkp_home_performance_url($unit),
+            'secondarybutton' => get_string('openspeakingwriting', 'local_flwcupkp'),
+            'primary' => $summary['review'] > 0 || $summary['parent'] > 0,
+        ];
+    }
+    return $cards;
+}
+
+/**
+ * Student cards for mapped units.
+ *
+ * @param array $units
+ * @return array
+ */
+function local_flwcupkp_home_student_cards(array $units): array {
+    global $USER;
+
+    $cards = [];
+    foreach ($units as $unit) {
+        $progress = local_flwcupkp_home_student_progress($unit, (int)$USER->id);
+        $next = $progress['next'] !== '' ? $progress['next'] : get_string('courseallmasteredunit', 'local_flwcupkp',
+            $unit['unitcode']);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentunitcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => $next,
+            'metric' => get_string('studentunitmetric', 'local_flwcupkp', (object)[
+                'percent' => $progress['percent'],
+                'gaps' => $progress['gaps'],
+            ]),
+            'url' => local_flwcupkp_home_student_url($unit),
+            'button' => get_string('openmyprogress', 'local_flwcupkp'),
+            'secondaryurl' => local_flwcupkp_home_evaluation_url($unit),
+            'secondarybutton' => get_string('openmylearningpath', 'local_flwcupkp'),
+            'primary' => $progress['gaps'] > 0,
+        ];
+    }
+    return $cards;
+}
+
+/**
+ * Operational report cards.
+ *
+ * @param array $units
+ * @param bool $adminaccess
+ * @return array
+ */
+function local_flwcupkp_home_report_cards(array $units, bool $adminaccess): array {
+    global $DB;
+
+    $activeunits = 0;
+    $unitcodes = [];
+    $objects = 0;
+    $linkedobjects = 0;
+    $evidence = 0;
+    $sync = [
+        'readyforwrites' => false,
+        'linkedframeworks' => 0,
+        'frameworks' => 0,
+        'linkedcompetencies' => 0,
+        'competencies' => 0,
+    ];
+    if ($adminaccess) {
+        $unitcodes = \local_flwcupkp\local\curriculum_manager::unit_options();
+        foreach (array_keys($unitcodes) as $unitcode) {
+            try {
+                $status = \local_flwcupkp\local\unit_setup_service::status($unitcode);
+                if (!empty($status['activation']['ready'])) {
+                    $activeunits++;
+                }
+            } catch (Throwable $e) {
+                // Keep the home page available even if one imported unit is incomplete.
+            }
+        }
+        $objects = (int)$DB->count_records_select('flwcupkp_object',
+            "unitcode IS NOT NULL AND unitcode <> ''");
+        $linkedobjects = (int)$DB->count_records_select('flwcupkp_object',
+            "unitcode IS NOT NULL AND unitcode <> '' AND cmid IS NOT NULL AND cmid > 0");
+        $evidence = (int)$DB->count_records('flwcupkp_evidence');
+        $sync = \local_flwcupkp\local\curriculum_manager::sync_readiness();
+    }
+
+    $review = 0;
+    $parent = 0;
+    foreach ($units as $unit) {
+        if (empty($unit['canreport'])) {
+            continue;
+        }
+        $summary = local_flwcupkp_home_teacher_summary($unit);
+        $review += $summary['review'];
+        $parent += $summary['parent'];
+    }
+
+    $studentgaps = local_flwcupkp_home_gap_count($units);
+
+    $cards = [];
+    if ($adminaccess) {
+        $cards[] = [
+            'label' => get_string('operationreports', 'local_flwcupkp'),
+            'title' => get_string('unitreadinessreport', 'local_flwcupkp'),
+            'detail' => get_string('unitreadinessdetail', 'local_flwcupkp', (object)[
+                'active' => $activeunits,
+                'total' => count($unitcodes),
+            ]),
+            'url' => new moodle_url('/local/flwcupkp/setup.php'),
+            'button' => get_string('openunitsetup', 'local_flwcupkp'),
+        ];
+    }
+
+    if ($adminaccess || $review > 0 || $parent > 0) {
+        $cards[] = [
+            'label' => get_string('operationreports', 'local_flwcupkp'),
+            'title' => get_string('reviewworkloadreport', 'local_flwcupkp'),
+            'detail' => get_string('reviewworkloaddetail', 'local_flwcupkp', (object)[
+                'review' => $review,
+                'parent' => $parent,
+            ]),
+            'url' => local_flwcupkp_home_first_teacher_review_url($units),
+            'button' => get_string('openreviewqueue', 'local_flwcupkp'),
+            'primary' => $review > 0 || $parent > 0,
+        ];
+    }
+
+    if ($adminaccess) {
+        $cards[] = [
+            'label' => get_string('operationreports', 'local_flwcupkp'),
+            'title' => get_string('studentgapreport', 'local_flwcupkp'),
+            'detail' => get_string('studentgapdetail', 'local_flwcupkp', $studentgaps),
+            'url' => local_flwcupkp_home_first_teacher_review_url($units),
+            'button' => get_string('openreviewqueue', 'local_flwcupkp'),
+            'primary' => $studentgaps > 0,
+        ];
+        $cards[] = [
+            'label' => get_string('operationreports', 'local_flwcupkp'),
+            'title' => get_string('evidencecoveragereport', 'local_flwcupkp'),
+            'detail' => get_string('evidencecoveragedetail', 'local_flwcupkp', (object)[
+                'linked' => $linkedobjects,
+                'objects' => $objects,
+                'evidence' => $evidence,
+            ]),
+            'url' => new moodle_url('/local/flwcupkp/trace.php'),
+            'button' => get_string('opentraceability', 'local_flwcupkp'),
+        ];
+        $cards[] = [
+            'label' => get_string('operationreports', 'local_flwcupkp'),
+            'title' => get_string('syncstatusreport', 'local_flwcupkp'),
+            'detail' => get_string($sync['readyforwrites'] ? 'syncstatusreadydetail' : 'syncstatusblockeddetail',
+                'local_flwcupkp', (object)[
+                    'frameworks' => (int)$sync['linkedframeworks'] . '/' . (int)$sync['frameworks'],
+                    'competencies' => (int)$sync['linkedcompetencies'] . '/' . (int)$sync['competencies'],
+                ]),
+            'url' => new moodle_url('/local/flwcupkp/sync.php'),
+            'button' => get_string('opensyncstatus', 'local_flwcupkp'),
+            'primary' => !$sync['readyforwrites'] && $adminaccess,
+        ];
+    }
+
+    return $cards;
+}
+
+/**
+ * Render one home card.
+ *
+ * @param array $card
+ * @return string
+ */
+function local_flwcupkp_home_card(array $card): string {
+    $classes = 'local-flwcupkp-home-card';
+    if (!empty($card['primary'])) {
+        $classes .= ' local-flwcupkp-home-card-primary';
+    }
+
+    $html = html_writer::start_tag('article', ['class' => $classes]);
+    $html .= html_writer::tag('div', s((string)($card['label'] ?? '')), [
+        'class' => 'local-flwcupkp-course-next-label',
+    ]);
+    $html .= html_writer::tag('h4', s((string)($card['title'] ?? '')));
+    if (!empty($card['metric'])) {
+        $html .= html_writer::tag('strong', s((string)$card['metric']), ['class' => 'local-flwcupkp-home-metric']);
+    }
+    if (!empty($card['detail'])) {
+        $html .= html_writer::tag('p', s((string)$card['detail']));
+    }
+    $actions = '';
+    if (!empty($card['url']) && $card['url'] instanceof moodle_url) {
+        $actions .= html_writer::link($card['url'], s((string)($card['button'] ?? get_string('open'))), [
+            'class' => 'btn ' . (!empty($card['primary']) ? 'btn-primary' : 'btn-secondary') . ' btn-sm',
+        ]);
+    }
+    if (!empty($card['secondaryurl']) && $card['secondaryurl'] instanceof moodle_url) {
+        $actions .= html_writer::link($card['secondaryurl'], s((string)($card['secondarybutton'] ?? get_string('open'))), [
+            'class' => 'btn btn-secondary btn-sm',
+        ]);
+    }
+    if ($actions !== '') {
+        $html .= html_writer::tag('div', $actions, ['class' => 'local-flwcupkp-formactions']);
+    }
+    $html .= html_writer::end_tag('article');
+
+    return $html;
+}
+
+/**
+ * Teacher summary counts for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_teacher_summary(array $unit): array {
+    try {
+        if ($unit['unitcode'] === 'U038') {
+            $report = \local_flwcupkp\local\teacher_report::u038_report((int)$unit['courseid'], ['evidence' => 'review']);
+            $competency = \local_flwcupkp\local\teacher_report::u038_mastery_overview((int)$unit['courseid'], [
+                'targettype' => 'competency',
+                'stategroup' => 'notachieved',
+                'parentreview' => 'review',
+            ]);
+            $up = \local_flwcupkp\local\teacher_report::u038_mastery_overview((int)$unit['courseid'], [
+                'targettype' => 'up',
+                'stategroup' => 'notdemonstrated',
+                'parentreview' => 'review',
+            ]);
+        } else {
+            $report = \local_flwcupkp\local\unit_report::kp_report((int)$unit['courseid'], $unit['unitcode'],
+                ['evidence' => 'review']);
+            $competency = \local_flwcupkp\local\unit_report::mastery_overview((int)$unit['courseid'], $unit['unitcode'], [
+                'targettype' => 'competency',
+                'stategroup' => 'notachieved',
+                'parentreview' => 'review',
+            ]);
+            $up = \local_flwcupkp\local\unit_report::mastery_overview((int)$unit['courseid'], $unit['unitcode'], [
+                'targettype' => 'up',
+                'stategroup' => 'notdemonstrated',
+                'parentreview' => 'review',
+            ]);
+        }
+        $review = count($report['rows']);
+        $parent = count($competency['rows']) + count($up['rows']);
+        $detail = $review > 0 || $parent > 0 ?
+            get_string('teacherunitdetailreview', 'local_flwcupkp') :
+            get_string('teacherunitdetailclear', 'local_flwcupkp');
+        return ['review' => $review, 'parent' => $parent, 'detail' => $detail];
+    } catch (Throwable $e) {
+        return [
+            'review' => 0,
+            'parent' => 0,
+            'detail' => get_string('teacherunitdetailunavailable', 'local_flwcupkp'),
+        ];
+    }
+}
+
+/**
+ * Student progress summary for one unit.
+ *
+ * @param array $unit
+ * @param int $userid
+ * @return array
+ */
+function local_flwcupkp_home_student_progress(array $unit, int $userid): array {
+    try {
+        $progress = $unit['unitcode'] === 'U038' ?
+            \local_flwcupkp\local\student_report::u038_progress((int)$unit['courseid'], $userid) :
+            \local_flwcupkp\local\unit_report::student_progress((int)$unit['courseid'], $unit['unitcode'], $userid);
+        $summary = $progress['summary'];
+        $next = $progress['next_recommendation'] ?? null;
+        $nexttext = '';
+        if ($next) {
+            $externalid = (string)($next['kp_externalid'] ?? $next['externalid'] ?? '');
+            $title = (string)($next['kp_title'] ?? $next['title'] ?? '');
+            $nexttext = trim($externalid . ' - ' . $title, ' -');
+        }
+        return [
+            'percent' => (int)($summary['percent'] ?? 0),
+            'gaps' => (int)($summary['gaps'] ?? 0),
+            'next' => $nexttext,
+        ];
+    } catch (Throwable $e) {
+        return ['percent' => 0, 'gaps' => 0, 'next' => get_string('studentunitdetailunavailable', 'local_flwcupkp')];
+    }
+}
+
+/**
+ * Count non-mastered learner KP rows across visible operational units.
+ *
+ * @param array $units
+ * @return int
+ */
+function local_flwcupkp_home_gap_count(array $units): int {
+    $count = 0;
+    foreach ($units as $unit) {
+        if (empty($unit['canreport'])) {
+            continue;
+        }
+        try {
+            $report = $unit['unitcode'] === 'U038' ?
+                \local_flwcupkp\local\teacher_report::u038_report((int)$unit['courseid']) :
+                \local_flwcupkp\local\unit_report::kp_report((int)$unit['courseid'], $unit['unitcode']);
+            foreach ($report['rows'] as $row) {
+                if ((string)($row['state'] ?? '') !== 'mastered') {
+                    $count++;
+                }
+            }
+        } catch (Throwable $e) {
+            continue;
+        }
+    }
+    return $count;
+}
+
+/**
+ * URL helpers.
+ *
+ * @param array $unit
+ * @return moodle_url
+ */
+function local_flwcupkp_home_student_url(array $unit): moodle_url {
+    return $unit['unitcode'] === 'U038' ?
+        new moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $unit['courseid']]) :
+        new moodle_url('/local/flwcupkp/student.php', [
+            'courseid' => $unit['courseid'],
+            'unitcode' => $unit['unitcode'],
+        ]);
+}
+
+/**
+ * @param array $unit
+ * @return moodle_url
+ */
+function local_flwcupkp_home_teacher_url(array $unit): moodle_url {
+    return $unit['unitcode'] === 'U038' ?
+        new moodle_url('/local/flwcupkp/teacher_u038.php', ['courseid' => $unit['courseid'], 'evidence' => 'review']) :
+        new moodle_url('/local/flwcupkp/teacher.php', [
+            'courseid' => $unit['courseid'],
+            'unitcode' => $unit['unitcode'],
+            'evidence' => 'review',
+        ]);
+}
+
+/**
+ * @param array $unit
+ * @return moodle_url
+ */
+function local_flwcupkp_home_evaluation_url(array $unit): moodle_url {
+    return new moodle_url('/local/flwcupkp/evaluation.php', [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ]);
+}
+
+/**
+ * @param array $unit
+ * @return moodle_url
+ */
+function local_flwcupkp_home_performance_url(array $unit): moodle_url {
+    return $unit['unitcode'] === 'U038' ?
+        new moodle_url('/local/flwcupkp/performance_u038.php', ['courseid' => $unit['courseid']]) :
+        new moodle_url('/local/flwcupkp/performance.php', [
+            'courseid' => $unit['courseid'],
+            'unitcode' => $unit['unitcode'],
+        ]);
+}
+
+/**
+ * @param array $units
+ * @return moodle_url|null
+ */
+function local_flwcupkp_home_first_teacher_review_url(array $units): ?moodle_url {
+    foreach ($units as $unit) {
+        if (!empty($unit['canreport'])) {
+            return local_flwcupkp_home_teacher_url($unit);
+        }
+    }
+    return null;
+}
+
+/**
+ * @param array $units
+ * @return moodle_url|null
+ */
+function local_flwcupkp_home_first_student_url(array $units): ?moodle_url {
+    foreach ($units as $unit) {
+        if (!empty($unit['canview'])) {
+            return local_flwcupkp_home_student_url($unit);
+        }
+    }
+    return null;
+}

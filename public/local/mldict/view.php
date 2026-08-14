@@ -14,7 +14,7 @@ $entry = dictionary::get_full_entry($id);
 $url = new moodle_url('/local/mldict/view.php', ['id' => $id]);
 $PAGE->set_url($url);
 $PAGE->set_context($context);
-$PAGE->set_title(format_string($entry->headword));
+$PAGE->set_title(format_string(dictionary::display_text($entry->headword, $entry->sourcelang ?? null)));
 $PAGE->set_heading(get_string('pluginname', 'local_mldict'));
 $PAGE->requires->css('/local/mldict/styles.css');
 

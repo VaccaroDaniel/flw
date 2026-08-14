@@ -81,7 +81,7 @@ if ($isediting) {
             '',
         ];
         foreach ($entries as $entry) {
-            $definition = trim($entry->definition ?? '');
+            $definition = trim(strip_tags(dictionary::display_plain_text($entry->definition ?? '', $entry->sourcelang ?? $lang)));
             if (core_text::strlen($definition) > 120) {
                 $definition = core_text::substr($definition, 0, 120) . '...';
             }
@@ -89,7 +89,7 @@ if ($isediting) {
             $actions .= ' | ' . html_writer::link(new moodle_url('/local/mldict/edit.php', ['id' => $entry->id]), get_string('edit'));
             $actions .= ' | ' . html_writer::link(new moodle_url('/local/mldict/delete.php', ['id' => $entry->id]), get_string('delete'));
             $table->data[] = [
-                html_writer::link(new moodle_url('/local/mldict/view.php', ['id' => $entry->id]), format_string($entry->headword)),
+                html_writer::link(new moodle_url('/local/mldict/view.php', ['id' => $entry->id]), format_string(dictionary::display_text($entry->headword, $entry->sourcelang ?? $lang))),
                 s(dictionary::lang_label($entry->sourcelang)),
                 s($entry->partofspeech),
                 s($definition),
@@ -186,7 +186,8 @@ foreach (dictionary::get_startup_starter_words($lang, 12) as $entry) {
     $worditems .= html_writer::tag('li',
         html_writer::link(
             new moodle_url('/local/mldict/view.php', ['id' => $entry->id]),
-            s($entry->headword) . html_writer::span(s(dictionary::lang_label($entry->sourcelang)), 'local-mldict-starter-word-lang'),
+            s(dictionary::display_text($entry->headword, $entry->sourcelang ?? $lang)) .
+                html_writer::span(s(dictionary::lang_label($entry->sourcelang)), 'local-mldict-starter-word-lang'),
             ['class' => 'local-mldict-starter-word']
         )
     );

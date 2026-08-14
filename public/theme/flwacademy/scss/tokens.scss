@@ -1,0 +1,96 @@
+/* FLW Academy shared design tokens.
+ *
+ * This is the single source for cross-page colors, spacing, typography,
+ * card surfaces, navigation states, heroes, buttons, and floating tools.
+ */
+
+:root {
+  --flw-font-body: Arial, Helvetica, sans-serif;
+  --flw-font-heading: Georgia, "Times New Roman", serif;
+  --flw-font-nav: "Aptos Display", "Segoe UI Variable Text", Arial, Helvetica, sans-serif;
+
+  --flw-color-page: #eef0f3;
+  --flw-color-surface: #ffffff;
+  --flw-color-soft: #f7f9fd;
+  --flw-color-soft-blue: #f4f7ff;
+  --flw-color-blue: #0a4be8;
+  --flw-color-blue-dark: #082a84;
+  --flw-color-blue-hover: #073fca;
+  --flw-color-ink: #111936;
+  --flw-color-navy: #091438;
+  --flw-color-muted: #5f6d8d;
+  --flw-color-line: #e5e8ef;
+  --flw-color-line-blue: #dbe6ff;
+  --flw-color-focus: #9db8ff;
+  --flw-color-coral: #e85d4f;
+  --flw-color-orange: #f38a00;
+  --flw-color-yellow: #f2b84b;
+  --flw-color-success: #327be1;
+  --flw-color-purple: #7750d9;
+
+  --flw-space-page-x: 20px;
+  --flw-space-page-top: 84px;
+  --flw-space-page-bottom: 44px;
+  --flw-space-block: 20px;
+  --flw-space-card: 24px;
+
+  --flw-radius-sm: 7px;
+  --flw-radius-md: 10px;
+  --flw-radius-card: 12px;
+  --flw-radius-pill: 999px;
+  --flw-radius-circle: 50%;
+
+  --flw-shadow-card: 0 4px 14px rgba(23, 39, 79, .10);
+  --flw-shadow-block: 0 5px 20px rgba(31, 43, 68, .14);
+  --flw-shadow-float: 0 16px 36px rgba(17, 31, 66, .16);
+
+  --flw-card-border: 1px solid var(--flw-color-line);
+  --flw-card-bg: var(--flw-color-surface);
+  --flw-card-radius: var(--flw-radius-card);
+  --flw-card-shadow: var(--flw-shadow-card);
+
+  --flw-button-bg: var(--flw-color-blue);
+  --flw-button-bg-hover: var(--flw-color-blue-hover);
+  --flw-button-color: #ffffff;
+  --flw-button-radius: var(--flw-radius-sm);
+
+  --flw-nav-bg: rgba(255, 255, 255, .96);
+  --flw-nav-text: #24383f;
+  --flw-nav-active-bg: rgba(10, 75, 232, .11);
+  --flw-nav-active-color: var(--flw-color-blue-dark);
+
+  --flw-hero-height: 250px;
+  --flw-hero-title-size: 42px;
+  --flw-hero-title-weight: 700;
+
+  --flw-floating-size: 48px;
+  --flw-floating-radius: var(--flw-radius-circle);
+
+  /* Backward-compatible aliases used by existing templates. */
+  --flw-emerald: var(--flw-color-blue);
+  --flw-emerald-dark: var(--flw-color-blue-dark);
+  --flw-orange: var(--flw-color-yellow);
+  --flw-purple: #3278bd;
+  --flw-pink: var(--flw-color-coral);
+  --flw-cream: var(--flw-color-soft);
+  --flw-paper: var(--flw-color-surface);
+  --flw-ink: var(--flw-color-ink);
+  --flw-muted: var(--flw-color-muted);
+  --flw-line: var(--flw-color-line-blue);
+  --flw-soft: var(--flw-color-soft-blue);
+  --flw-shadow: var(--flw-shadow-card);
+  --flw-shadow-strong: var(--flw-shadow-block);
+  --flw-rd-blue: var(--flw-color-blue);
+  --flw-rd-blue-dark: var(--flw-color-blue-dark);
+  --flw-rd-navy: var(--flw-color-navy);
+  --flw-rd-text: var(--flw-color-ink);
+  --flw-rd-muted: var(--flw-color-muted);
+  --flw-rd-line: var(--flw-color-line);
+  --flw-rd-soft: var(--flw-color-soft);
+  --flw-rd-green: var(--flw-color-success);
+  --flw-rd-purple: var(--flw-color-purple);
+  --flw-rd-orange: var(--flw-color-orange);
+  --flw-rd-cyan: #327be1;
+  --flw-rd-shadow: var(--flw-shadow-card);
+  --flw-rd-shadow-soft: 0 2px 9px rgba(23, 39, 79, .08);
+}

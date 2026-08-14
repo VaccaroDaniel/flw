@@ -1,19 +1,19 @@
 #flw-placement-app {
-  --flw-ink: #17202a;
-  --flw-muted: #667085;
-  --flw-line: #e5e8ef;
-  --flw-panel: #ffffff;
-  --flw-page: #eef0f3;
-  --flw-navy: #101a3a;
-  --flw-blue: #0a4be8;
-  --flw-teal: #0a4be8;
-  --flw-amber: #f38a00;
+  --flw-ink: var(--flw-color-ink, #17202a);
+  --flw-muted: var(--flw-color-muted, #667085);
+  --flw-line: var(--flw-color-line, #e5e8ef);
+  --flw-panel: var(--flw-color-surface, #ffffff);
+  --flw-page: var(--flw-color-page, #eef0f3);
+  --flw-navy: var(--flw-color-navy, #101a3a);
+  --flw-blue: var(--flw-color-blue, #0a4be8);
+  --flw-teal: var(--flw-color-blue, #0a4be8);
+  --flw-amber: var(--flw-color-orange, #f38a00);
   --flw-red: #c84242;
   color: var(--flw-ink);
   width: min(1428px, calc(100% - 40px));
   margin: 0 auto 44px;
   padding-top: 22px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--flw-font-body, Arial, Helvetica, sans-serif);
 }
 
 #flw-placement-app * {

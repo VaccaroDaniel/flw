@@ -165,7 +165,7 @@ final class visuals {
      */
     public static function unit_nav(int $courseid, string $unitcode, int $userid = 0, bool $showteacher = false,
             bool $showperformance = false): string {
-        global $PAGE;
+        global $PAGE, $USER;
 
         if ($courseid <= 0 || $unitcode === '') {
             return '';
@@ -174,7 +174,8 @@ final class visuals {
         $progressurl = $unitcode === 'U038' ?
             new \moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]) :
             new \moodle_url('/local/flwcupkp/student.php', ['courseid' => $courseid, 'unitcode' => $unitcode]);
-        if ($userid > 0) {
+        $includeuserid = $userid > 0 && (empty($USER->id) || (int)$USER->id !== $userid);
+        if ($includeuserid) {
             $progressurl->param('userid', $userid);
         }
 
@@ -182,7 +183,7 @@ final class visuals {
             'courseid' => $courseid,
             'unitcode' => $unitcode,
         ]);
-        if ($userid > 0) {
+        if ($includeuserid) {
             $evaluationurl->param('userid', $userid);
         }
 
@@ -610,14 +611,14 @@ final class visuals {
                     (object)['linked' => $linked, 'total' => $objectcount]),
             ],
             [
+                'label' => get_string('setupstepperevidence', 'local_flwcupkp'),
+                'done' => $evidencecount > 0 || $ready,
+                'detail' => get_string('setupstepperevidencedetail', 'local_flwcupkp', $evidencecount),
+            ],
+            [
                 'label' => get_string('setupstepperactivate', 'local_flwcupkp'),
                 'done' => $ready,
                 'detail' => $ready ? get_string('active', 'local_flwcupkp') : get_string('notready', 'local_flwcupkp'),
-            ],
-            [
-                'label' => get_string('setupstepperevidence', 'local_flwcupkp'),
-                'done' => $evidencecount > 0,
-                'detail' => get_string('setupstepperevidencedetail', 'local_flwcupkp', $evidencecount),
             ],
         ];
 

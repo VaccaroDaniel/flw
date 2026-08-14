@@ -14,6 +14,7 @@ $parentstate = optional_param('parentstate', '', PARAM_ALPHANUMEXT);
 $parentreview = optional_param('parentreview', '', PARAM_ALPHANUMEXT);
 $focus = optional_param('focus', '', PARAM_ALPHANUMEXT);
 $status = optional_param('status', '', PARAM_ALPHANUMEXT);
+$approvedcount = optional_param('approvedcount', 0, PARAM_INT);
 
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 require_login($course);
@@ -64,6 +65,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     require_capability('local/flwcupkp:override', $context);
 
     $action = required_param('action', PARAM_ALPHANUMEXT);
+    if ($action === 'bulkapprove') {
+        $count = local_flwcupkp_bulk_approve_review_evidence($courseid, $reportfilters);
+        $redirect = clone $url;
+        $redirect->remove_params('focus', 'status', 'approvedcount');
+        $redirect->param('evidence', 'review');
+        $redirect->param('status', 'bulkapproved');
+        $redirect->param('approvedcount', $count);
+        redirect($redirect);
+    }
+
     $parenttargettype = optional_param('parenttargettype', '', PARAM_ALPHANUMEXT);
     $actionuserid = optional_param('targetuserid', 0, PARAM_INT);
     $actiontargetid = optional_param('targetid', 0, PARAM_INT);
@@ -115,6 +126,11 @@ $overview = \local_flwcupkp\local\teacher_report::u038_mastery_overview($coursei
     'parentreview' => $parentreview,
 ]);
 $parentqueues = local_flwcupkp_parent_queue_summary($courseid, $userid);
+$reviewfilters = $reportfilters;
+$reviewfilters['evidence'] = 'review';
+$reviewqueue = $evidencefilter === 'review' ? $report :
+    \local_flwcupkp\local\teacher_report::u038_report($courseid, $reviewfilters);
+$reviewevidenceids = local_flwcupkp_review_evidence_ids($reviewqueue);
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('teacherverification', 'local_flwcupkp'));
@@ -122,11 +138,14 @@ echo html_writer::tag('p', s($course->fullname), ['class' => 'local-flwcupkp-mut
 echo \local_flwcupkp\local\visuals::unit_nav($courseid, 'U038', $userid, true,
     $canverify && \local_flwcupkp\local\performance_service::has_tasks($courseid, 'U038'));
 
-if ($status !== '') {
+if ($status === 'bulkapproved') {
+    echo $OUTPUT->notification(get_string('verificationbulkapproved', 'local_flwcupkp', $approvedcount), 'success');
+} else if ($status !== '') {
     echo $OUTPUT->notification(get_string('verification' . $status, 'local_flwcupkp'), 'success');
 }
 
 echo local_flwcupkp_parent_queue_dashboard($parentqueues);
+echo local_flwcupkp_evidence_review_dashboard(count($reviewevidenceids), $canverify, $courseid, $url);
 
 ob_start();
 echo html_writer::start_tag('form', [
@@ -372,6 +391,100 @@ if ($focus !== '') {
 }
 
 echo $OUTPUT->footer();
+
+/**
+ * Approve visible U038 evidence rows that are still in the review queue.
+ *
+ * @param int $courseid
+ * @param array $filters
+ * @return int
+ */
+function local_flwcupkp_bulk_approve_review_evidence(int $courseid, array $filters): int {
+    $filters['evidence'] = 'review';
+    $report = \local_flwcupkp\local\teacher_report::u038_report($courseid, $filters);
+    $evidenceids = local_flwcupkp_review_evidence_ids($report);
+    foreach ($evidenceids as $evidenceid) {
+        \local_flwcupkp\local\teacher_report::record_teacher_action($courseid, 'approve', [
+            'evidenceid' => $evidenceid,
+        ]);
+    }
+    return count($evidenceids);
+}
+
+/**
+ * Unique evidence IDs from a report result.
+ *
+ * @param array $report
+ * @return array
+ */
+function local_flwcupkp_review_evidence_ids(array $report): array {
+    $ids = [];
+    foreach ($report['rows'] ?? [] as $row) {
+        $evidenceid = (int)($row['evidence_id'] ?? 0);
+        if ($evidenceid > 0) {
+            $ids[$evidenceid] = $evidenceid;
+        }
+    }
+    return array_values($ids);
+}
+
+/**
+ * Render the evidence review queue card.
+ *
+ * @param int $reviewcount
+ * @param bool $canverify
+ * @param int $courseid
+ * @param moodle_url $url
+ * @return string
+ */
+function local_flwcupkp_evidence_review_dashboard(int $reviewcount, bool $canverify, int $courseid,
+        moodle_url $url): string {
+    $reviewurl = clone $url;
+    $reviewurl->remove_params('focus', 'status', 'approvedcount');
+    $reviewurl->param('evidence', 'review');
+
+    $html = html_writer::start_tag('section', [
+        'class' => 'local-flwcupkp-queue-dashboard local-flwcupkp-evidence-review',
+    ]);
+    $html .= html_writer::tag('h3', get_string('evidencereviewqueueu038', 'local_flwcupkp'));
+    if ($reviewcount <= 0) {
+        $html .= html_writer::tag('p', get_string('evidencereviewqueueempty', 'local_flwcupkp'), [
+            'class' => 'local-flwcupkp-queue-complete',
+        ]);
+        $html .= html_writer::link($reviewurl, get_string('openreviewqueue', 'local_flwcupkp'), [
+            'class' => 'btn btn-link btn-sm',
+        ]);
+        return $html . html_writer::end_tag('section');
+    }
+
+    $html .= html_writer::tag('p', get_string('evidencereviewqueuedetail', 'local_flwcupkp', $reviewcount));
+    $html .= html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
+    $html .= html_writer::link($reviewurl, get_string('openreviewqueue', 'local_flwcupkp'), [
+        'class' => 'btn btn-secondary btn-sm',
+    ]);
+    if ($canverify) {
+        $html .= html_writer::start_tag('form', [
+            'method' => 'post',
+            'action' => $url,
+            'class' => 'local-flwcupkp-actionform',
+        ]);
+        $html .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
+        $html .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'courseid', 'value' => $courseid]);
+        $html .= html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'action', 'value' => 'bulkapprove']);
+        $html .= html_writer::tag('button', get_string('approvevisiblereviewevidence', 'local_flwcupkp'), [
+            'type' => 'submit',
+            'class' => 'btn btn-primary btn-sm',
+        ]);
+        $html .= html_writer::end_tag('form');
+    }
+    $html .= html_writer::end_tag('div');
+    $html .= html_writer::tag('p', get_string('bulkapprovehint', 'local_flwcupkp'), [
+        'class' => 'local-flwcupkp-muted',
+    ]);
+    $html .= html_writer::end_tag('section');
+
+    return $html;
+}
 
 /**
  * Build a stable teacher-report row anchor.

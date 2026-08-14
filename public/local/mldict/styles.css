@@ -6,7 +6,7 @@
     margin: 0 auto 1rem;
 }
 body.path-local-mldict {
-    background: #eef0f3;
+    background: var(--flw-color-page, #eef0f3);
 }
 body.path-local-mldict #page-header,
 body.path-local-mldict .page-context-header,
@@ -30,8 +30,8 @@ body.path-local-mldict #region-main {
     width: min(1428px, calc(100% - 40px));
     margin: 0 auto;
     padding: 84px 0 44px;
-    color: #111936;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--flw-color-ink, #111936);
+    font-family: var(--flw-font-body, Arial, Helvetica, sans-serif);
 }
 .local-mldict-hero {
     display: grid;

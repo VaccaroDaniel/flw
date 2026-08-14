@@ -446,6 +446,47 @@ class dictionary {
         return self::get_startup_starter_words($lang, $limit);
     }
 
+    public static function display_text(string $text, ?string $language = null): string {
+        $text = trim($text);
+        if ($text === '') {
+            return '';
+        }
+
+        $language = self::normalise_lang_code($language ?? '') ?: (self::preferred_learning_language() ?: 'en');
+        $entries = [];
+        if (preg_match_all('/\{mlang\s+([^}]+)\}(.*?)\{mlang\}/is', $text, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $entries[] = ['lang' => $match[1], 'text' => $match[2]];
+            }
+        }
+        if (empty($entries) && preg_match_all('/<span\b(?=[^>]*\bclass=(["\'])(?:(?!\1).)*\bmultilang\b(?:(?!\1).)*\1)(?=[^>]*\blang=(["\'])([^"\']+)\2)[^>]*>(.*?)<\/span>/is', $text, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $entries[] = ['lang' => $match[3], 'text' => $match[4]];
+            }
+        }
+
+        if (!$entries) {
+            return $text;
+        }
+
+        foreach ([$language, 'en'] as $wanted) {
+            foreach ($entries as $entry) {
+                $entrylangs = preg_split('/[\s,;|]+/', $entry['lang'], -1, PREG_SPLIT_NO_EMPTY);
+                foreach ($entrylangs as $entrylang) {
+                    if (self::normalise_lang_code($entrylang) === $wanted) {
+                        return trim($entry['text']);
+                    }
+                }
+            }
+        }
+
+        return trim($entries[0]['text']);
+    }
+
+    public static function display_plain_text(string $text, ?string $language = null): string {
+        return format_text(self::display_text($text, $language), FORMAT_PLAIN);
+    }
+
     public static function get_entry(int $id): \stdClass {
         global $DB;
         return $DB->get_record(self::TABLE_ENTRY, ['id' => $id], '*', MUST_EXIST);
@@ -578,7 +619,8 @@ class dictionary {
         if (!empty($entry->cefrlevel)) {
             $meta[] = \html_writer::span(s($entry->cefrlevel), 'local-mldict-chip local-mldict-chip-level');
         }
-        $header = \html_writer::tag('h2', format_string($entry->headword), ['class' => 'local-mldict-headword']);
+        $language = self::normalise_lang_code((string)($entry->sourcelang ?? '')) ?: (self::preferred_learning_language() ?: 'en');
+        $header = \html_writer::tag('h2', format_string(self::display_text($entry->headword, $language)), ['class' => 'local-mldict-headword']);
         if ($meta) {
             $header .= \html_writer::div(implode('', $meta), 'local-mldict-meta');
         }
@@ -603,7 +645,7 @@ class dictionary {
         if (!empty($entry->definition)) {
             $out .= \html_writer::div(
                 \html_writer::span(get_string('definition', 'local_mldict'), 'local-mldict-section-label') .
-                \html_writer::div(format_text($entry->definition, FORMAT_PLAIN), 'local-mldict-definition-text'),
+                \html_writer::div(self::display_plain_text($entry->definition, $language), 'local-mldict-definition-text'),
                 'local-mldict-definition'
             );
         }
@@ -613,7 +655,7 @@ class dictionary {
             foreach ($entry->translations as $translation) {
                 $items .= \html_writer::tag('li',
                     \html_writer::span(s(self::lang_label($translation->targetlang)), 'local-mldict-translation-lang') .
-                    \html_writer::span(format_text($translation->translation, FORMAT_PLAIN), 'local-mldict-translation-text')
+                    \html_writer::span(self::display_plain_text($translation->translation, $translation->targetlang), 'local-mldict-translation-text')
                 );
             }
             $out .= \html_writer::div(
@@ -627,9 +669,9 @@ class dictionary {
             $items = '';
             foreach ($entry->examples as $example) {
                 $text = \html_writer::span(s(self::lang_label($example->examplelang)), 'local-mldict-example-lang') .
-                    \html_writer::div(format_text($example->sentence, FORMAT_PLAIN), 'local-mldict-example-sentence');
+                    \html_writer::div(self::display_plain_text($example->sentence, $example->examplelang), 'local-mldict-example-sentence');
                 if (!empty($example->translation)) {
-                    $text .= \html_writer::div(format_text($example->translation, FORMAT_PLAIN), 'local-mldict-example-translation');
+                    $text .= \html_writer::div(self::display_plain_text($example->translation, $language), 'local-mldict-example-translation');
                 }
                 $items .= \html_writer::tag('li', $text);
             }

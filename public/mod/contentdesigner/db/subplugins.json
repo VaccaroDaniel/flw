@@ -1,4 +1,7 @@
 {
+    "subplugintypes": {
+        "cdelement": "cdelement"
+    },
     "plugintypes": {
         "cdelement": "mod\/contentdesigner\/cdelement"
     }

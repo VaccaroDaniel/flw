@@ -123,8 +123,8 @@ echo \local_flwcupkp\local\visuals::setup_stepper($setupstatus, $courseid, $unit
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-setup-shell']);
 local_flwcupkp_setup_scope_form($courseid, $unitcode);
-local_flwcupkp_setup_status($setupstatus, $courseid, $unitcode);
 local_flwcupkp_setup_import_form($courseid, $unitcode);
+local_flwcupkp_setup_status($setupstatus, $courseid, $unitcode);
 local_flwcupkp_setup_activation_form($setupstatus, $courseid, $unitcode);
 echo html_writer::end_tag('div');
 
@@ -137,6 +137,10 @@ echo $OUTPUT->footer();
  * @param string $unitcode
  */
 function local_flwcupkp_setup_scope_form(int $courseid, string $unitcode): void {
+    echo html_writer::start_tag('section', [
+        'class' => 'local-flwcupkp-setup-section',
+        'id' => 'flwcupkp-setup-course',
+    ]);
     echo html_writer::tag('h3', get_string('setupstepselect', 'local_flwcupkp'));
     echo html_writer::start_tag('form', [
         'method' => 'get',
@@ -177,6 +181,7 @@ function local_flwcupkp_setup_scope_form(int $courseid, string $unitcode): void 
     ]);
     echo html_writer::end_tag('div');
     echo html_writer::end_tag('form');
+    echo html_writer::end_tag('section');
 }
 
 /**
@@ -187,17 +192,23 @@ function local_flwcupkp_setup_scope_form(int $courseid, string $unitcode): void 
  * @param string $unitcode
  */
 function local_flwcupkp_setup_status(?array $status, int $courseid, string $unitcode): void {
+    echo html_writer::start_tag('section', [
+        'class' => 'local-flwcupkp-setup-section',
+        'id' => 'flwcupkp-setup-links',
+    ]);
     echo html_writer::tag('h3', get_string('setupstepstatus', 'local_flwcupkp'));
     if ($unitcode === '') {
         echo html_writer::tag('p', get_string('setupnounitselected', 'local_flwcupkp'), [
             'class' => 'local-flwcupkp-muted local-flwcupkp-setup-note',
         ]);
+        echo html_writer::end_tag('section');
         return;
     }
     if ($status === null) {
         echo html_writer::tag('p', get_string('setupstatusunavailable', 'local_flwcupkp'), [
             'class' => 'local-flwcupkp-muted local-flwcupkp-setup-note',
         ]);
+        echo html_writer::end_tag('section');
         return;
     }
 
@@ -222,6 +233,7 @@ function local_flwcupkp_setup_status(?array $status, int $courseid, string $unit
 
     if (!empty($status['activation']['issues'])) {
         echo $GLOBALS['OUTPUT']->notification(implode('<br>', array_map('s', $status['activation']['issues'])), 'warning');
+        echo local_flwcupkp_setup_fix_toolbar($status, $courseid, $unitcode);
     } else {
         echo $GLOBALS['OUTPUT']->notification(get_string('setupactivationready', 'local_flwcupkp'), 'success');
     }
@@ -242,6 +254,7 @@ function local_flwcupkp_setup_status(?array $status, int $courseid, string $unit
     }
 
     if (empty($status['objects'])) {
+        echo html_writer::end_tag('section');
         return;
     }
 
@@ -253,6 +266,7 @@ function local_flwcupkp_setup_status(?array $status, int $courseid, string $unit
         get_string('activity'),
         get_string('status'),
         get_string('field_cmid', 'local_flwcupkp'),
+        get_string('action', 'local_flwcupkp'),
     ];
     foreach ($status['objects'] as $row) {
         $label = html_writer::tag('strong', s($row['externalid'])) . html_writer::tag('div', s($row['title']),
@@ -263,9 +277,11 @@ function local_flwcupkp_setup_status(?array $status, int $courseid, string $unit
             s($row['activity_name']),
             local_flwcupkp_setup_link_status($row['link_status']),
             $row['cmid'] ? (int)$row['cmid'] : ($row['matchedcmid'] ? (int)$row['matchedcmid'] : '-'),
+            local_flwcupkp_setup_fix_action($row, $courseid, $unitcode),
         ];
     }
     echo html_writer::table($table);
+    echo html_writer::end_tag('section');
 }
 
 /**
@@ -275,6 +291,10 @@ function local_flwcupkp_setup_status(?array $status, int $courseid, string $unit
  * @param string $unitcode
  */
 function local_flwcupkp_setup_import_form(int $courseid, string $unitcode): void {
+    echo html_writer::start_tag('section', [
+        'class' => 'local-flwcupkp-setup-section',
+        'id' => 'flwcupkp-setup-import',
+    ]);
     echo html_writer::tag('h3', get_string('setupstepimport', 'local_flwcupkp'));
     echo html_writer::start_tag('form', [
         'method' => 'post',
@@ -321,6 +341,7 @@ function local_flwcupkp_setup_import_form(int $courseid, string $unitcode): void
     ]);
     echo html_writer::end_tag('div');
     echo html_writer::end_tag('form');
+    echo html_writer::end_tag('section');
 }
 
 /**
@@ -331,6 +352,10 @@ function local_flwcupkp_setup_import_form(int $courseid, string $unitcode): void
  * @param string $unitcode
  */
 function local_flwcupkp_setup_activation_form(?array $status, int $courseid, string $unitcode): void {
+    echo html_writer::start_tag('section', [
+        'class' => 'local-flwcupkp-setup-section',
+        'id' => 'flwcupkp-setup-activate',
+    ]);
     echo html_writer::tag('h3', get_string('setupstepactivate', 'local_flwcupkp'));
     echo html_writer::start_tag('form', [
         'method' => 'post',
@@ -395,6 +420,7 @@ function local_flwcupkp_setup_activation_form(?array $status, int $courseid, str
     ]);
     echo html_writer::end_tag('div');
     echo html_writer::end_tag('form');
+    echo html_writer::end_tag('section');
 }
 
 /**
@@ -461,6 +487,100 @@ function local_flwcupkp_setup_card(string $label, $value, string $state = ''): s
         html_writer::tag('strong', s((string)$value)) . html_writer::tag('span', s($label)),
         ['class' => $classes]
     );
+}
+
+/**
+ * Render next-fix links for the selected setup status.
+ *
+ * @param array $status
+ * @param int $courseid
+ * @param string $unitcode
+ * @return string
+ */
+function local_flwcupkp_setup_fix_toolbar(array $status, int $courseid, string $unitcode): string {
+    $links = [];
+    if ((int)($status['objectcount'] ?? 0) === 0) {
+        $links[] = html_writer::link(local_flwcupkp_setup_anchor_url($courseid, $unitcode, 'flwcupkp-setup-import'),
+            get_string('fiximportpackage', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if ($courseid <= 0) {
+        $links[] = html_writer::link(local_flwcupkp_setup_anchor_url($courseid, $unitcode, 'flwcupkp-setup-course'),
+            get_string('fixchoosecourse', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if ((int)($status['objectcount'] ?? 0) > 0 &&
+            (int)($status['counts']['linked'] ?? 0) < (int)($status['objectcount'] ?? 0)) {
+        $links[] = html_writer::link(local_flwcupkp_setup_anchor_url($courseid, $unitcode, 'flwcupkp-setup-activate'),
+            get_string('fixlinkactivities', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if ((int)($status['objectmapcount'] ?? 0) === 0) {
+        $links[] = html_writer::link(new moodle_url('/local/flwcupkp/curriculum.php', ['unitcode' => $unitcode]),
+            get_string('fixmapping', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if (!$links) {
+        return '';
+    }
+
+    return html_writer::tag('div',
+        html_writer::tag('strong', get_string('fixnextsteps', 'local_flwcupkp')) .
+        html_writer::tag('div', implode('', $links), ['class' => 'local-flwcupkp-formactions']),
+        ['class' => 'local-flwcupkp-setup-actions']
+    );
+}
+
+/**
+ * Render a targeted fix link for one object status row.
+ *
+ * @param array $row
+ * @param int $courseid
+ * @param string $unitcode
+ * @return string
+ */
+function local_flwcupkp_setup_fix_action(array $row, int $courseid, string $unitcode): string {
+    $status = (string)($row['link_status'] ?? '');
+    $linkedcourseid = (int)($row['courseid'] ?? 0);
+    if ($linkedcourseid <= 0) {
+        $linkedcourseid = $courseid;
+    }
+
+    if ($status === 'linked' && $linkedcourseid > 0) {
+        return html_writer::link(new moodle_url('/course/view.php', ['id' => $linkedcourseid]),
+            get_string('fixviewcourse', 'local_flwcupkp'), ['class' => 'btn btn-link btn-sm']);
+    }
+    if ($status === 'ready_to_link') {
+        return html_writer::link(local_flwcupkp_setup_anchor_url($courseid, $unitcode, 'flwcupkp-setup-activate'),
+            get_string('fixlinkready', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if ($status === 'missing_activity' && $courseid > 0) {
+        return html_writer::link(new moodle_url('/course/view.php', ['id' => $courseid]),
+            get_string('fixmissingactivity', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    if ($status === 'linked_to_other_course' && $linkedcourseid > 0) {
+        return html_writer::link(new moodle_url('/course/view.php', ['id' => $linkedcourseid]),
+            get_string('fixothercourse', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+    }
+    return html_writer::link(local_flwcupkp_setup_anchor_url($courseid, $unitcode, 'flwcupkp-setup-course'),
+        get_string('fixchoosecourse', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+}
+
+/**
+ * Build a setup URL pointing at a page section.
+ *
+ * @param int $courseid
+ * @param string $unitcode
+ * @param string $anchor
+ * @return moodle_url
+ */
+function local_flwcupkp_setup_anchor_url(int $courseid, string $unitcode, string $anchor): moodle_url {
+    $params = [];
+    if ($courseid > 0) {
+        $params['courseid'] = $courseid;
+    }
+    if ($unitcode !== '') {
+        $params['unitcode'] = $unitcode;
+    }
+    $url = new moodle_url('/local/flwcupkp/setup.php', $params);
+    $url->set_anchor($anchor);
+    return $url;
 }
 
 /**
