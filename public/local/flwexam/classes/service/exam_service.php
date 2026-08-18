@@ -612,6 +612,114 @@ class exam_service {
     }
 
     /**
+     * Return readiness rows for all Moodle Quiz-backed FLW Exam definitions.
+     *
+     * @return array
+     */
+    public static function get_quiz_readiness_overview(): array {
+        global $DB;
+
+        if (!$DB->get_manager()->table_exists('local_flwexam_exams')) {
+            return [];
+        }
+
+        $records = $DB->get_records_select(
+            'local_flwexam_exams',
+            'quizid > 0',
+            [],
+            'language ASC, cefrlevel ASC, name ASC',
+            'id, code, name, language, cefrlevel, quizid, visible'
+        );
+
+        $rows = [];
+        foreach ($records as $record) {
+            $quizinfo = self::get_linked_quiz_info((int)$record->quizid);
+            $lastsync = $quizinfo ? self::get_quiz_last_sync_summary((int)$record->quizid) : null;
+            $required = $quizinfo['requiredquestioncount'] ?? self::QUIZ_EXAM_ATTEMPT_QUESTION_COUNT;
+            $attemptcount = $quizinfo['attemptquestioncount'] ?? 0;
+            $sourcecount = $quizinfo['sourcequestioncount'] ?? 0;
+            $ready = $quizinfo && !empty($quizinfo['issamplecountok']) && $sourcecount >= $required;
+
+            $rows[] = [
+                'examid' => (int)$record->id,
+                'code' => (string)$record->code,
+                'name' => self::format_display_name($record->name),
+                'language' => self::language_label((string)$record->language),
+                'cefrlevel' => (string)$record->cefrlevel,
+                'quizid' => (int)$record->quizid,
+                'quizname' => $quizinfo['name'] ?? get_string('linkedquiznotavailable', 'local_flwexam'),
+                'quizurl' => $quizinfo ? $quizinfo['url']->out(false) : '',
+                'editquizurl' => $quizinfo
+                    ? (new moodle_url('/mod/quiz/edit.php', ['cmid' => (int)$quizinfo['cmid']]))->out(false)
+                    : '',
+                'attemptquestioncount' => $attemptcount,
+                'sourcequestioncount' => $sourcecount,
+                'requiredquestioncount' => $required,
+                'progresswidth' => $required > 0 ? min(100, (int)round(($attemptcount / $required) * 100)) . '%' : '0%',
+                'ready' => $ready,
+                'statuskey' => $ready ? 'ready' : ($quizinfo ? 'needssetup' : 'missing'),
+                'statuslabel' => $ready
+                    ? get_string('quizreadinessready', 'local_flwexam')
+                    : ($quizinfo ? get_string('quizreadinessneedssetup', 'local_flwexam') :
+                        get_string('quizreadinessmissing', 'local_flwexam')),
+                'visible' => !empty($record->visible),
+                'lastsync' => $lastsync,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Return the latest FLW sync created from one Moodle Quiz.
+     *
+     * @param int $quizid
+     * @return array|null
+     */
+    public static function get_quiz_last_sync_summary(int $quizid): ?array {
+        global $DB;
+
+        if ($quizid <= 0 ||
+                !$DB->get_manager()->table_exists('local_flwexam_attempts') ||
+                !$DB->get_manager()->table_exists('local_flwexam_results')) {
+            return null;
+        }
+
+        $needle = '%' . $DB->sql_like_escape('"quizid":' . $quizid) . '%';
+        $record = $DB->get_record_sql(
+            "SELECT r.id AS resultid, r.userid, r.overallscore, r.passstatus,
+                    r.timecreated AS resulttime, a.timefinished, a.timemodified
+               FROM {local_flwexam_results} r
+               JOIN {local_flwexam_attempts} a ON a.id = r.attemptid
+              WHERE a.source = :source
+                AND " . $DB->sql_like('a.metadatajson', ':needle', false) . "
+           ORDER BY a.timefinished DESC, a.timemodified DESC, r.id DESC",
+            [
+                'source' => 'modquiz',
+                'needle' => $needle,
+            ],
+            IGNORE_MULTIPLE
+        );
+        if (!$record) {
+            return null;
+        }
+
+        $user = core_user::get_user((int)$record->userid, 'id, firstname, lastname, firstnamephonetic, lastnamephonetic, middlename, alternatename', IGNORE_MISSING);
+        $time = (int)($record->timefinished ?: $record->timemodified ?: $record->resulttime);
+
+        return [
+            'resultid' => (int)$record->resultid,
+            'userid' => (int)$record->userid,
+            'userfullname' => $user ? fullname($user) : get_string('unknownuser', 'local_flwexam'),
+            'overallscore' => round((float)$record->overallscore, 1),
+            'passstatus' => self::status_label((string)$record->passstatus),
+            'time' => $time,
+            'timelabel' => $time > 0 ? userdate($time) : get_string('never'),
+            'resulturl' => (new moodle_url('/local/flwexam/result.php', ['id' => (int)$record->resultid]))->out(false),
+        ];
+    }
+
+    /**
      * Return the effective question count for an FLW Exam definition.
      *
      * @param object $exam

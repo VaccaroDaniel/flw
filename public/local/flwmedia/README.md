@@ -1,30 +1,65 @@
-# FLW Media local plugin
+# local_flwmedia - FLW Media Practice
 
-`local_flwmedia` provides a Moodle-hosted, language-specific practice hub for FLW Watch, Listen, Speak, Read, and Dictate activities. Moodle stores metadata, permissions, progress, and attempts. The actual video/audio files stay on the external secured FLW media server and are referenced by URL.
+`local_flwmedia` is the FLW media practice hub for Moodle. It stores media practice metadata, learner progress, and learner attempts for watch, listen, speak, read, and dictation practice while the actual audio/video/media files can remain on an external media server.
 
-## Install
+Component: `local_flwmedia`
 
-1. Copy the plugin to `local/flwmedia`.
-2. Run `php admin/cli/upgrade.php`.
-3. Run `php admin/cli/purge_caches.php`.
-4. Visit `Site administration > Plugins > Local plugins > FLW Media`.
-5. Set the media server base URL.
-6. Open the Practice page:
+Release: `0.1.0 alpha`
 
-```text
-/local/flwmedia/index.php?language=en
-```
+Requires: Moodle 4.5 or later
 
-7. Or add a hub to a Moodle Page, Label, Book, or FLW Practice HTML area:
+Status: alpha. Suitable for controlled FLW practice pilots with local review of media URLs and learner attempt storage.
+
+## What This Plugin Does
+
+- Provides learner practice modes: Watch, Listen, Speak, Read, and Dictate.
+- Stores media item metadata by course, unit, lesson, language, category, CEFR, and KP tags.
+- Stores learner progress per item/mode.
+- Stores learner attempts for speaking, reading, and dictation.
+- Provides a management page for teachers/admins.
+- Provides AJAX web services for loading items and saving progress/attempts.
+- Can be embedded into other Moodle content with a small HTML hub placeholder or render helper.
+
+## Main Pages
+
+| Page | Purpose |
+| --- | --- |
+| `/local/flwmedia/index.php?language=en` | Learner media practice hub. |
+| `/local/flwmedia/manage.php?language=en` | Media item management. |
+| `/local/flwmedia/seed_sample_data.php?language=en&unitcode=REW2_U001` | Admin-only sample data seeding for testing. |
+
+## Practice Modes
+
+| Mode | Purpose | Data saved |
+| --- | --- | --- |
+| Watch | Video/media viewing practice | Progress percent, completion, optional score. |
+| Listen | Listening practice | Progress percent, completion, optional score. |
+| Speak | Oral response practice | Transcript/audio URL/score/feedback as available. |
+| Read | Reading aloud or reading response practice | Response/transcript/score/feedback. |
+| Dictate | Dictation practice | Learner response, score, feedback. |
+
+## Settings
+
+Open:
+
+`Site administration > Plugins > Local plugins > FLW Media`
+
+| Setting | Meaning |
+| --- | --- |
+| `mediaserverbase` | Base URL for the external FLW media server. Default: `https://media.example.com/flw`. |
+| `defaultperpage` | Default item count per page. Default: `12`. |
+| `enablespeak` | Enables speaking practice features. |
+| `enableread` | Enables reading practice features. |
+| `enabledictate` | Enables dictation practice features. |
+| `securemedia` | Reserved for stricter media URL/security behavior. |
+
+## Embedding the Hub
+
+You can place a hub placeholder in Moodle HTML content:
 
 ```html
-<div class="flwmedia-hub"
-     data-language="en"
-     data-defaultmode="watch">
-</div>
+<div class="flwmedia-hub" data-language="en" data-defaultmode="watch"></div>
 ```
-
-The plugin queues a lightweight AMD initializer from the `core\hook\output\before_footer_html_generation` hook, so the hub auto-detects `.flwmedia-hub` containers without theme changes.
 
 PHP render helper:
 
@@ -32,69 +67,90 @@ PHP render helper:
 echo local_flwmedia_render_hub('en', '', 'watch');
 ```
 
-## Manage Practice
+Use the direct page for normal learner navigation and embedding when a course page needs a compact media practice block.
 
-Users with `local/flwmedia:manage` can open:
+## Web Services
 
-```text
-/local/flwmedia/manage.php?language=en
-```
+| Function | Type | Purpose |
+| --- | --- | --- |
+| `local_flwmedia_get_items` | Read/AJAX | Load visible practice items by language/filter. |
+| `local_flwmedia_save_progress` | Write/AJAX | Save watch/listen/read progress. |
+| `local_flwmedia_save_speaking_attempt` | Write/AJAX | Save speaking attempt details. |
+| `local_flwmedia_save_reading_attempt` | Write/AJAX | Save reading attempt details. |
+| `local_flwmedia_save_dictation_attempt` | Write/AJAX | Save dictation attempt details. |
 
-The management page supports language-level categories and entries. `unitcode` remains available as optional metadata on entries, but learner Practice links use language only.
-
-## Sample Data
-
-For development/testing only, a manager can seed sample records:
-
-```text
-/local/flwmedia/seed_sample_data.php?language=en&unitcode=REW2_U001
-```
-
-The sample media URLs are for development testing only. Production FLW courses must use the secured FLW media server. Replace all sample media URLs with real media server paths.
-
-Production examples:
-
-```text
-https://media.yourdomain.com/flw/real/unit001/watch/video.mp4
-https://media.yourdomain.com/flw/real/unit001/audio/dialogue_01.mp3
-https://media.yourdomain.com/flw/real/unit001/captions/video.vtt
-```
-
-## Architecture Notes
-
-- Media files are not uploaded to Moodle file storage.
-- `local_flwmedia_items` stores metadata and external media URLs. Practice is selected by `lang`; `courseid` and `unitcode` are not learner URL parameters.
-- `local_flwmedia_progress` stores learner watch/listen/read/practice progress.
-- `local_flwmedia_attempts` stores Speak, Read, and Dictate attempt metadata.
-- Pagination defaults to 12 records and caps web-service page size at 48.
-- Cards use `data-src` and lazy loading so media is not loaded until visible or played.
-- Future signed URL support can store a logical media path, ask a signing service for a short-lived URL after Moodle permission checks, and let the media server stream the file directly.
-
-## Practice Modes
-
-- Watch: video gallery with MP4/HLS-ready external URLs, poster images, optional captions, and 90 percent/ended completion.
-- Listen: audio gallery with optional transcript and 90 percent/ended completion.
-- Speak: prompt card with browser MediaRecorder controls. V1 stores attempt metadata only; audio upload can be added later through a safe Moodle File API or external media-server upload flow.
-- Read: reading card with optional model audio, short response, and mark-as-read completion.
-- Dictate: audio card with typed response, exact/normalized/word-overlap checking, attempt save, and score.
+Keep service access limited to authenticated Moodle sessions or trusted integrations.
 
 ## Capabilities
 
-- `local/flwmedia:view`: student, teacher, editingteacher, manager.
-- `local/flwmedia:manage`: editingteacher, manager.
-- `local/flwmedia:viewreports`: teacher, editingteacher, manager.
-- `local/flwmedia:seedtestdata`: manager.
+| Capability | Purpose | Default roles |
+| --- | --- | --- |
+| `local/flwmedia:view` | View learner media practice | User, student, teacher, editing teacher, manager |
+| `local/flwmedia:manage` | Manage media items | Editing teacher, manager |
+| `local/flwmedia:viewreports` | View progress/attempt reports | Teacher, editing teacher, manager |
+| `local/flwmedia:seedtestdata` | Seed sample test data | Manager |
 
-## Test Checklist
+## Database
 
-- Student can see Watch, Listen, Speak, Read, and Dictate tabs.
-- Student can play video/audio.
-- Speak recording controls work in a browser that supports MediaRecorder.
-- Read can be marked complete.
-- Dictate checks and saves a score.
-- Progress saves through AJAX.
-- Pagination, search, and category filtering work.
-- Teacher/admin functions are not shown in the hub.
-- Manager can seed sample data.
-- Mobile layout uses one column and controls fit the screen.
-- Page loads only the first page of records and lazy loads media.
+| Table | Purpose |
+| --- | --- |
+| `local_flwmedia_items` | Media practice records and metadata. |
+| `local_flwmedia_categories` | Language-level practice category registry. |
+| `local_flwmedia_progress` | Learner progress by item and mode. |
+| `local_flwmedia_attempts` | Learner practice attempts and feedback. |
+
+Important item metadata:
+
+- `courseid`
+- `unitcode`
+- `lessoncode`
+- `mode`
+- `category`
+- `title`
+- `mediaurl`
+- `posterurl`
+- `subtitleurl`
+- `transcript`
+- `readtext`
+- `expectedtext`
+- `lang`
+- `cefr`
+- `kptags`
+- `visible`
+
+## Standard Setup
+
+1. Install or upgrade the plugin.
+2. Configure `mediaserverbase`.
+3. Confirm media URLs are reachable from learner browsers.
+4. Add or import media items for the target language/unit.
+5. Open `/local/flwmedia/index.php?language=en` as a learner.
+6. Complete one item in each enabled mode.
+7. Confirm progress and attempts are saved.
+8. Open the management/report view as teacher/admin.
+
+## C-UP-KP and Learning Path Use
+
+Media practice can contribute to the FLW learning path when item metadata includes:
+
+- Stable `unitcode`.
+- Optional `lessoncode`.
+- CEFR level.
+- KP tags in `kptags`.
+- Practice mode.
+
+For evidence-grade mastery updates, connect media attempt scoring to the C-UP-KP evidence adapter or review workflow before using attempts as confirmed mastery evidence.
+
+## Troubleshooting
+
+| Symptom | Check |
+| --- | --- |
+| No items appear | Language filter, item visibility, category visibility, and course/unit metadata. |
+| Media does not play | `mediaurl`, external media server reachability, HTTPS/CORS, and browser console errors. |
+| Progress does not save | Login state, web service availability, session key, and AJAX errors. |
+| Speaking/read/dictation controls missing | Relevant enable setting and browser microphone permissions. |
+| Teacher cannot manage items | `local/flwmedia:manage` role assignment. |
+
+## Production Notes
+
+This plugin stores learner progress and practice attempts. Actual media files can remain outside Moodle, but any transcripts, responses, scores, and feedback saved in Moodle should be treated as learner records. Confirm storage, retention, and privacy rules before broad deployment.

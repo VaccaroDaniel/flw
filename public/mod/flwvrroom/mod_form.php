@@ -179,6 +179,35 @@ class mod_flwvrroom_mod_form extends moodleform_mod {
         $mform->hideIf('roleaiturns', 'rolecharacterenabled', 'notchecked');
         $mform->hideIf('roleaiturns', 'roleaienabled', 'notchecked');
 
+        $mform->addElement('textarea', 'roleaipersonality', get_string('roleaipersonality', 'flwvrroom'), ['rows' => 3, 'cols' => 80]);
+        $mform->setType('roleaipersonality', PARAM_TEXT);
+        $mform->setDefault('roleaipersonality', 'Friendly, patient, short replies, suitable for beginner English learners.');
+        $mform->hideIf('roleaipersonality', 'rolecharacterenabled', 'notchecked');
+        $mform->hideIf('roleaipersonality', 'roleaienabled', 'notchecked');
+
+        $difficulties = [
+            'friendly' => get_string('roleaidifficulty_friendly', 'flwvrroom'),
+            'standard' => get_string('roleaidifficulty_standard', 'flwvrroom'),
+            'challenge' => get_string('roleaidifficulty_challenge', 'flwvrroom'),
+        ];
+        $mform->addElement('select', 'roleaidifficulty', get_string('roleaidifficulty', 'flwvrroom'), $difficulties);
+        $mform->setDefault('roleaidifficulty', 'friendly');
+        $mform->hideIf('roleaidifficulty', 'rolecharacterenabled', 'notchecked');
+        $mform->hideIf('roleaidifficulty', 'roleaienabled', 'notchecked');
+
+        $mform->addElement('textarea', 'roleaitargetpattern', get_string('roleaitargetpattern', 'flwvrroom'), ['rows' => 3, 'cols' => 80]);
+        $mform->setType('roleaitargetpattern', PARAM_TEXT);
+        $mform->setDefault('roleaitargetpattern', 'Practice polite ordering and short clarification questions.');
+        $mform->hideIf('roleaitargetpattern', 'rolecharacterenabled', 'notchecked');
+        $mform->hideIf('roleaitargetpattern', 'roleaienabled', 'notchecked');
+
+        $mform->addElement('text', 'roleaimaxretries', get_string('roleaimaxretries', 'flwvrroom'), ['size' => '6']);
+        $mform->setType('roleaimaxretries', PARAM_INT);
+        $mform->setDefault('roleaimaxretries', 1);
+        $mform->addRule('roleaimaxretries', null, 'numeric', null, 'client');
+        $mform->hideIf('roleaimaxretries', 'rolecharacterenabled', 'notchecked');
+        $mform->hideIf('roleaimaxretries', 'roleaienabled', 'notchecked');
+
         $mform->addElement(
             'filemanager',
             'rolecharacterfiles',
@@ -193,6 +222,22 @@ class mod_flwvrroom_mod_form extends moodleform_mod {
         $mform->setType('passinggrade', PARAM_INT);
         $mform->setDefault('passinggrade', 70);
         $mform->addRule('passinggrade', null, 'numeric', null, 'client');
+
+        $mform->addElement('header', 'completionrulesettings', get_string('completionrulesettings', 'flwvrroom'));
+        $mform->addElement('advcheckbox', 'completionrequirehotspots', get_string('completionrequirehotspots', 'flwvrroom'));
+        $mform->setDefault('completionrequirehotspots', 1);
+
+        $mform->addElement('advcheckbox', 'completionrequirespeaking', get_string('completionrequirespeaking', 'flwvrroom'));
+        $mform->setDefault('completionrequirespeaking', 1);
+
+        $mform->addElement('advcheckbox', 'completionrequirerole', get_string('completionrequirerole', 'flwvrroom'));
+        $mform->setDefault('completionrequirerole', 0);
+        $mform->hideIf('completionrequirerole', 'rolecharacterenabled', 'notchecked');
+
+        $mform->addElement('text', 'completionminscore', get_string('completionminscore', 'flwvrroom'), ['size' => '6']);
+        $mform->setType('completionminscore', PARAM_INT);
+        $mform->setDefault('completionminscore', 70);
+        $mform->addRule('completionminscore', null, 'numeric', null, 'client');
 
         $mform->addElement('text', 'grade', get_string('maximumgrade', 'flwvrroom'), ['size' => '6']);
         $mform->setType('grade', PARAM_INT);

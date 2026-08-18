@@ -26,6 +26,9 @@ class submit_attempt extends \external_api {
             'kpcodes' => new \external_value(PARAM_TEXT, 'Comma-separated FLW knowledge point codes', VALUE_DEFAULT, ''),
             'speakingtext' => new \external_value(PARAM_TEXT, 'Learner speaking transcript', VALUE_DEFAULT, ''),
             'aifeedback' => new \external_value(PARAM_TEXT, 'Speaking feedback text', VALUE_DEFAULT, ''),
+            'hotspotsjson' => new \external_value(PARAM_RAW, 'Structured hotspot evidence JSON', VALUE_DEFAULT, ''),
+            'roleturnsjson' => new \external_value(PARAM_RAW, 'Structured role-turn evidence JSON', VALUE_DEFAULT, ''),
+            'speakingjson' => new \external_value(PARAM_RAW, 'Structured speaking evidence JSON', VALUE_DEFAULT, ''),
             'taskcomplete' => new \external_value(PARAM_BOOL, 'Whether the mission task is complete', VALUE_DEFAULT, false),
             'durationseconds' => new \external_value(PARAM_INT, 'Attempt duration in seconds', VALUE_DEFAULT, 0),
         ]);
@@ -40,11 +43,15 @@ class submit_attempt extends \external_api {
      * @param string $kpcodes
      * @param string $speakingtext
      * @param string $aifeedback
+     * @param string $hotspotsjson
+     * @param string $roleturnsjson
+     * @param string $speakingjson
      * @param bool $taskcomplete
      * @param int $durationseconds
      * @return array
      */
-    public static function execute($cmid, $score, $completedobjects = '', $kpcodes = '', $speakingtext = '', $aifeedback = '', $taskcomplete = false, $durationseconds = 0) {
+    public static function execute($cmid, $score, $completedobjects = '', $kpcodes = '', $speakingtext = '', $aifeedback = '',
+            $hotspotsjson = '', $roleturnsjson = '', $speakingjson = '', $taskcomplete = false, $durationseconds = 0) {
         global $DB, $USER;
 
         $params = self::validate_parameters(self::execute_parameters(), [
@@ -54,6 +61,9 @@ class submit_attempt extends \external_api {
             'kpcodes' => $kpcodes,
             'speakingtext' => $speakingtext,
             'aifeedback' => $aifeedback,
+            'hotspotsjson' => $hotspotsjson,
+            'roleturnsjson' => $roleturnsjson,
+            'speakingjson' => $speakingjson,
             'taskcomplete' => $taskcomplete,
             'durationseconds' => $durationseconds,
         ]);
@@ -76,11 +86,34 @@ class submit_attempt extends \external_api {
             'kpcodes' => clean_param($params['kpcodes'], PARAM_TEXT),
             'speakingtext' => clean_param($params['speakingtext'], PARAM_TEXT),
             'aifeedback' => clean_param($params['aifeedback'], PARAM_TEXT),
+            'hotspotsjson' => self::clean_json_payload($params['hotspotsjson']),
+            'roleturnsjson' => self::clean_json_payload($params['roleturnsjson']),
+            'speakingjson' => self::clean_json_payload($params['speakingjson']),
             'taskcomplete' => $params['taskcomplete'] ? 1 : 0,
             'durationseconds' => max(0, (int) $params['durationseconds']),
             'timecreated' => time(),
         ];
         $attemptid = $DB->insert_record('flwvrroom_attempts', $record);
+
+        $event = \mod_flwvrroom\event\attempt_submitted::create([
+            'objectid' => $attemptid,
+            'context' => $context,
+            'courseid' => $course->id,
+            'userid' => $USER->id,
+            'relateduserid' => $USER->id,
+            'other' => [
+                'attemptid' => $attemptid,
+                'cmid' => (int) $cm->id,
+                'courseid' => (int) $course->id,
+                'userid' => (int) $USER->id,
+                'score' => $score,
+                'maxscore' => (int) $flwvrroom->grade,
+                'kpcodes' => $record->kpcodes,
+                'xrmode' => (string) ($flwvrroom->roommode ?? 'panorama'),
+                'scenario' => (string) ($flwvrroom->scenario ?? ''),
+            ],
+        ]);
+        $event->trigger();
 
         flwvrroom_grade_item_update($flwvrroom, (object) [
             'userid' => $USER->id,
@@ -89,14 +122,14 @@ class submit_attempt extends \external_api {
 
         $completion = new \completion_info($course);
         if ($completion->is_enabled($cm)) {
-            $completion->update_state($cm, $score >= (int) $flwvrroom->passinggrade ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE, $USER->id);
+            $completion->update_state($cm, $record->taskcomplete ? COMPLETION_COMPLETE : COMPLETION_INCOMPLETE, $USER->id);
         }
 
         return [
             'status' => true,
             'attemptid' => $attemptid,
             'score' => $score,
-            'passed' => $score >= (int) $flwvrroom->passinggrade,
+            'passed' => !empty($record->taskcomplete),
         ];
     }
 
@@ -112,5 +145,43 @@ class submit_attempt extends \external_api {
             'score' => new \external_value(PARAM_INT, 'Saved score'),
             'passed' => new \external_value(PARAM_BOOL, 'Whether the learner passed'),
         ]);
+    }
+
+    /**
+     * Keep structured attempt JSON valid and free from raw audio blobs.
+     *
+     * @param string $json
+     * @return string
+     */
+    private static function clean_json_payload($json) {
+        $json = trim((string) $json);
+        if ($json === '') {
+            return '';
+        }
+
+        $data = json_decode($json, true);
+        if (!is_array($data)) {
+            return '';
+        }
+
+        self::strip_audio_payloads($data);
+        return json_encode($data, JSON_UNESCAPED_SLASHES);
+    }
+
+    /**
+     * Remove raw audio keys before storing evidence JSON.
+     *
+     * @param array $data
+     */
+    private static function strip_audio_payloads(array &$data) {
+        foreach (['audio', 'audiofile', 'audiobase64', 'blob'] as $key) {
+            unset($data[$key]);
+        }
+
+        foreach ($data as &$value) {
+            if (is_array($value)) {
+                self::strip_audio_payloads($value);
+            }
+        }
     }
 }

@@ -578,7 +578,7 @@ function flwvrroom_parse_custom_answers($text) {
 /**
  * Parse teacher-entered hotspot lines.
  *
- * Format: key|label|score|x|y|description|audio URL|objectX|objectY|objectZ.
+ * Format: key|label|score|x|y|description|audio URL|objectX|objectY|objectZ|KP codes|object reference.
  *
  * @param string $text
  * @return array
@@ -608,6 +608,12 @@ function flwvrroom_parse_custom_hotspots($text) {
         $objectx = isset($parts[7]) && is_numeric($parts[7]) ? (float) $parts[7] : null;
         $objecty = isset($parts[8]) && is_numeric($parts[8]) ? (float) $parts[8] : null;
         $objectz = isset($parts[9]) && is_numeric($parts[9]) ? (float) $parts[9] : null;
+        $kpcodes = [];
+        if (!empty($parts[10])) {
+            $kpcodes = preg_split('/\s*,\s*/', $parts[10]);
+            $kpcodes = array_values(array_filter(array_map('trim', $kpcodes)));
+        }
+        $objectref = isset($parts[11]) ? clean_param($parts[11], PARAM_TEXT) : '';
 
         $hotspot = [
             'key' => $key,
@@ -617,6 +623,8 @@ function flwvrroom_parse_custom_hotspots($text) {
             'y' => max(0, min(100, $y)),
             'description' => $description,
             'audiourl' => $audiourl,
+            'kpcodes' => $kpcodes,
+            'objectref' => $objectref,
         ];
 
         if ($objectx !== null && $objecty !== null && $objectz !== null) {

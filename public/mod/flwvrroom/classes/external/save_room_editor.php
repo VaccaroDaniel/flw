@@ -21,6 +21,7 @@ class save_room_editor extends \external_api {
     public static function execute_parameters() {
         return new \external_function_parameters([
             'cmid' => new \external_value(PARAM_INT, 'Course module id'),
+            'kpcodes' => new \external_value(PARAM_RAW, 'Activity-level KP codes', VALUE_DEFAULT, ''),
             'customhotspots' => new \external_value(PARAM_RAW, 'Custom hotspot lines', VALUE_DEFAULT, ''),
             'custommissiontitle' => new \external_value(PARAM_TEXT, 'Mission title', VALUE_DEFAULT, ''),
             'custommissiontext' => new \external_value(PARAM_RAW, 'Mission text', VALUE_DEFAULT, ''),
@@ -34,6 +35,14 @@ class save_room_editor extends \external_api {
             'roleturns' => new \external_value(PARAM_RAW, 'Role-play turns', VALUE_DEFAULT, ''),
             'roleaienabled' => new \external_value(PARAM_BOOL, 'Use AI role character', VALUE_DEFAULT, false),
             'roleaiturns' => new \external_value(PARAM_INT, 'AI role turn count', VALUE_DEFAULT, 3),
+            'roleaipersonality' => new \external_value(PARAM_RAW, 'AI role personality', VALUE_DEFAULT, ''),
+            'roleaidifficulty' => new \external_value(PARAM_TEXT, 'AI role difficulty', VALUE_DEFAULT, 'friendly'),
+            'roleaitargetpattern' => new \external_value(PARAM_RAW, 'AI role target language pattern', VALUE_DEFAULT, ''),
+            'roleaimaxretries' => new \external_value(PARAM_INT, 'AI role max retries', VALUE_DEFAULT, 1),
+            'completionrequirehotspots' => new \external_value(PARAM_BOOL, 'Require hotspots for completion', VALUE_DEFAULT, true),
+            'completionrequirespeaking' => new \external_value(PARAM_BOOL, 'Require speaking for completion', VALUE_DEFAULT, true),
+            'completionrequirerole' => new \external_value(PARAM_BOOL, 'Require role play for completion', VALUE_DEFAULT, false),
+            'completionminscore' => new \external_value(PARAM_INT, 'Minimum score for completion', VALUE_DEFAULT, 70),
         ]);
     }
 
@@ -44,6 +53,7 @@ class save_room_editor extends \external_api {
      */
     public static function execute(
         $cmid,
+        $kpcodes = '',
         $customhotspots = '',
         $custommissiontitle = '',
         $custommissiontext = '',
@@ -56,12 +66,21 @@ class save_room_editor extends \external_api {
         $rolescore = 20,
         $roleturns = '',
         $roleaienabled = false,
-        $roleaiturns = 3
+        $roleaiturns = 3,
+        $roleaipersonality = '',
+        $roleaidifficulty = 'friendly',
+        $roleaitargetpattern = '',
+        $roleaimaxretries = 1,
+        $completionrequirehotspots = true,
+        $completionrequirespeaking = true,
+        $completionrequirerole = false,
+        $completionminscore = 70
     ) {
         global $DB;
 
         $params = self::validate_parameters(self::execute_parameters(), [
             'cmid' => $cmid,
+            'kpcodes' => $kpcodes,
             'customhotspots' => $customhotspots,
             'custommissiontitle' => $custommissiontitle,
             'custommissiontext' => $custommissiontext,
@@ -75,6 +94,14 @@ class save_room_editor extends \external_api {
             'roleturns' => $roleturns,
             'roleaienabled' => $roleaienabled,
             'roleaiturns' => $roleaiturns,
+            'roleaipersonality' => $roleaipersonality,
+            'roleaidifficulty' => $roleaidifficulty,
+            'roleaitargetpattern' => $roleaitargetpattern,
+            'roleaimaxretries' => $roleaimaxretries,
+            'completionrequirehotspots' => $completionrequirehotspots,
+            'completionrequirespeaking' => $completionrequirespeaking,
+            'completionrequirerole' => $completionrequirerole,
+            'completionminscore' => $completionminscore,
         ]);
 
         $cm = get_coursemodule_from_id('flwvrroom', $params['cmid'], 0, false, MUST_EXIST);
@@ -86,6 +113,7 @@ class save_room_editor extends \external_api {
         require_capability('moodle/course:manageactivities', $context);
 
         $flwvrroom->customsceneenabled = 1;
+        $flwvrroom->kpcodes = self::clean_code_list($params['kpcodes']);
         $flwvrroom->customhotspots = self::clean_multiline($params['customhotspots']);
         $flwvrroom->custommissiontitle = clean_param($params['custommissiontitle'], PARAM_TEXT);
         $flwvrroom->custommissiontext = self::clean_multiline($params['custommissiontext']);
@@ -99,6 +127,15 @@ class save_room_editor extends \external_api {
         $flwvrroom->roleturns = self::clean_multiline($params['roleturns']);
         $flwvrroom->roleaienabled = !empty($params['roleaienabled']) ? 1 : 0;
         $flwvrroom->roleaiturns = max(1, min(10, (int) $params['roleaiturns']));
+        $flwvrroom->roleaipersonality = self::clean_multiline($params['roleaipersonality']);
+        $difficulty = clean_param($params['roleaidifficulty'], PARAM_ALPHA);
+        $flwvrroom->roleaidifficulty = in_array($difficulty, ['friendly', 'standard', 'challenge'], true) ? $difficulty : 'friendly';
+        $flwvrroom->roleaitargetpattern = self::clean_multiline($params['roleaitargetpattern']);
+        $flwvrroom->roleaimaxretries = max(0, min(5, (int) $params['roleaimaxretries']));
+        $flwvrroom->completionrequirehotspots = !empty($params['completionrequirehotspots']) ? 1 : 0;
+        $flwvrroom->completionrequirespeaking = !empty($params['completionrequirespeaking']) ? 1 : 0;
+        $flwvrroom->completionrequirerole = !empty($params['completionrequirerole']) ? 1 : 0;
+        $flwvrroom->completionminscore = max(0, min((int)($flwvrroom->grade ?? 100), (int) $params['completionminscore']));
         $flwvrroom->timemodified = time();
 
         $DB->update_record('flwvrroom', $flwvrroom);
@@ -137,5 +174,23 @@ class save_room_editor extends \external_api {
         }, $lines);
 
         return trim(implode("\n", $lines));
+    }
+
+    /**
+     * Clean KP code lists while preserving line breaks and commas.
+     *
+     * @param string $value
+     * @return string
+     */
+    private static function clean_code_list($value) {
+        $parts = preg_split('/[\r\n,]+/', (string) $value);
+        $parts = array_map(static function($part) {
+            return clean_param(trim($part), PARAM_TEXT);
+        }, $parts);
+        $parts = array_values(array_filter($parts, static function($part) {
+            return $part !== '';
+        }));
+
+        return implode("\n", $parts);
     }
 }

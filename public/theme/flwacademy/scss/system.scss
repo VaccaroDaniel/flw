@@ -1,0 +1,167 @@
+/* FLW Academy shared system primitives.
+ *
+ * New FLW pages should compose these before adding page-specific rules.
+ */
+
+.flw-system-shell {
+  width: min(1428px, calc(100% - 40px));
+  margin: var(--flw-space-page-top) auto var(--flw-space-page-bottom);
+  color: var(--flw-color-ink);
+  font-family: var(--flw-font-body);
+}
+
+.flw-system-block,
+.flw-system-card,
+.flw-system-hero,
+.flw-system-readiness {
+  background: var(--flw-card-bg);
+  border: var(--flw-card-border);
+  border-radius: var(--flw-card-radius);
+  box-shadow: var(--flw-card-shadow);
+  color: var(--flw-color-ink);
+}
+
+.flw-system-card,
+.flw-system-readiness {
+  padding: 18px;
+}
+
+.flw-system-hero {
+  min-height: var(--flw-hero-height);
+  padding: 24px;
+  overflow: hidden;
+}
+
+.flw-system-kicker {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--flw-color-blue-dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.flw-system-title {
+  margin: 0;
+  color: var(--flw-color-navy);
+  font-family: var(--flw-font-heading);
+  font-size: var(--flw-hero-title-size);
+  font-weight: var(--flw-hero-title-weight);
+  line-height: 1.08;
+}
+
+.flw-system-lead,
+.flw-system-muted {
+  color: var(--flw-color-muted);
+  line-height: 1.45;
+}
+
+.flw-system-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 10px;
+}
+
+.flw-system-mini-card {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--flw-color-line);
+  border-radius: var(--flw-radius-md);
+  background: var(--flw-color-soft);
+}
+
+.flw-system-mini-card > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--flw-color-muted);
+  font-size: 12px;
+}
+
+.flw-system-mini-card > strong {
+  display: block;
+  color: var(--flw-color-ink);
+  font-size: 16px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.flw-system-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid #c7d6ff;
+  border-radius: var(--flw-radius-pill);
+  background: #eef3ff;
+  color: var(--flw-color-blue-dark);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.flw-system-status-pill.is-ready {
+  border-color: #b7cdfd;
+  background: #eaf1ff;
+  color: var(--flw-color-blue);
+}
+
+.flw-system-status-pill.is-warning {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.flw-system-readiness {
+  display: grid;
+  gap: 14px;
+  border-top: 4px solid var(--flw-color-blue);
+}
+
+.flw-system-readiness-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.flw-system-readiness-header h3 {
+  margin: 0;
+  color: var(--flw-color-navy);
+  font-family: var(--flw-font-heading);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.flw-system-readiness-header p {
+  margin: 5px 0 0;
+  color: var(--flw-color-muted);
+  font-size: 13px;
+}
+
+.flw-system-progress {
+  height: 7px;
+  overflow: hidden;
+  border-radius: var(--flw-radius-pill);
+  background: #e8edf7;
+}
+
+.flw-system-progress > i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--flw-color-blue);
+}
+
+@media (max-width: 760px) {
+  .flw-system-shell {
+    width: calc(100% - 20px);
+  }
+
+  .flw-system-readiness-header {
+    display: grid;
+  }
+}

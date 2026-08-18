@@ -136,7 +136,7 @@ function local_flwcupkp_home_section(string $heading, array $cards): string {
  * @return array
  */
 function local_flwcupkp_home_admin_cards(): array {
-    return [
+    $cards = [
         [
             'label' => get_string('adminworkspace', 'local_flwcupkp'),
             'title' => get_string('unitsetupwizard', 'local_flwcupkp'),
@@ -167,6 +167,18 @@ function local_flwcupkp_home_admin_cards(): array {
             'button' => get_string('openhealthsync', 'local_flwcupkp'),
         ],
     ];
+
+    if (has_capability('local/flwcupkp:synccompetencies', context_system::instance())) {
+        $cards[] = [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('evidencesynchealth', 'local_flwcupkp'),
+            'detail' => get_string('evidencesynchealthhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/evidence_sync.php'),
+            'button' => get_string('openevidencesynchealth', 'local_flwcupkp'),
+        ];
+    }
+
+    return $cards;
 }
 
 /**

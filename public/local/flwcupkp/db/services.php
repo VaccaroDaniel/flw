@@ -132,6 +132,14 @@ $functions = [
         'type' => 'write',
         'capabilities' => 'local/flwcupkp:override',
     ],
+    'local_flwcupkp_record_flwvrroom_attempt' => [
+        'classname' => 'local_flwcupkp\external\api',
+        'methodname' => 'record_flwvrroom_attempt',
+        'classpath' => '',
+        'description' => 'Record structured FLW VR Room attempt evidence.',
+        'type' => 'write',
+        'capabilities' => 'local/flwcupkp:override',
+    ],
     'local_flwcupkp_get_learner_states' => [
         'classname' => 'local_flwcupkp\external\api',
         'methodname' => 'get_learner_states',

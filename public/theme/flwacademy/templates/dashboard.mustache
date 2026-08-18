@@ -12,7 +12,6 @@
     {{> theme_boost/navbar }}
     {{> theme_flwacademy/flw_tools_group }}
     <style>
-        :root{--flw-rd-blue:#0a4be8;--flw-rd-blue-dark:#082a84;--flw-rd-navy:#091438;--flw-rd-text:#111936;--flw-rd-muted:#5f6d8d;--flw-rd-line:#e5e8ef;--flw-rd-soft:#f7f9fd;--flw-rd-green:#327be1;--flw-rd-purple:#7750d9;--flw-rd-orange:#f38a00;--flw-rd-cyan:#327be1;--flw-rd-shadow:0 4px 14px rgba(23,39,79,.10);--flw-rd-shadow-soft:0 2px 9px rgba(23,39,79,.08)}
         html,body.flw-dashboard-page{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}.flw-dashboard-page,.flw-dashboard-page #page-wrapper{margin:0;background:#eef0f3;color:var(--flw-rd-text);font-family:Arial,Helvetica,sans-serif;line-height:1.35}.flw-dashboard-page #page-wrapper.flw-dashboard-wrapper{height:auto!important;min-height:100vh!important;overflow:visible!important}
         .flw-redesign-page *{box-sizing:border-box}.flw-redesign-page a{color:inherit;text-decoration:none}.flw-redesign-page button,.flw-redesign-page input{font:inherit}.flw-redesign-page button{color:inherit}.flw-redesign-page img,.flw-redesign-page svg{display:block;max-width:100%}
         .flw-dashboard-shell{width:min(1428px,calc(100vw - 20px));margin:58px auto 18px;padding:22px 0 22px;background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible;display:grid;gap:20px}
@@ -70,6 +69,9 @@
                     <article class="flw-rank-card"><span class="flw-rank-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8v3a4 4 0 0 1-8 0Z"/><path d="M6 4h12M10 11v3a4 4 0 0 1-4 4h12a4 4 0 0 1-4-4v-3M9 21h6"/></svg></span><div><strong>{{rank.title}}</strong><p>{{rank.text}}</p></div><b>›</b></article>
                     <article class="flw-streak-card flw-dashboard-streak-inline"><div class="flw-streak-top"><svg class="flw-streak-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c3.9 0 7-2.7 7-6.6 0-2.9-1.5-5-3.9-7.1-.4 1.7-1.2 2.9-2.3 3.7.1-3.1-1.2-5.8-4.1-8C8.5 7.3 5 10 5 15.4 5 19.3 8.1 22 12 22Z"></path><path d="M9.2 16.7c0-1.6.9-2.9 2.5-4 .2 1.4.9 2.3 2.1 3 .7.5 1 1.1 1 2 0 1.7-1.3 2.8-2.8 2.8s-2.8-1.1-2.8-3.8Z"></path></svg><div class="flw-streak-copy"><strong>{{streak.summary}}</strong><p>{{streak.weeklabel}}</p></div></div><div class="flw-week-labels">{{#streak.week}}<span>{{label}}</span>{{/streak.week}}</div><div class="flw-week-dots">{{#streak.week}}<i class="{{#active}}is-active{{/active}}">{{#active}}✓{{/active}}</i>{{/streak.week}}</div></article>
                 </section>
+                {{#hascupkpcontrolcenter}}
+                {{{cupkpcontrolcenterhtml}}}
+                {{/hascupkpcontrolcenter}}
 
                 <section class="flw-dashboard-top-grid">
                     <article class="flw-dashboard-card flw-continue-panel" id="continue">

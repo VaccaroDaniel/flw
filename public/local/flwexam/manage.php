@@ -166,6 +166,73 @@ echo local_flwexam_render_hero(
     ]
 );
 
+$readinessrows = exam_service::get_quiz_readiness_overview();
+echo html_writer::start_tag('section', ['class' => 'flw-system-readiness flwexam-readiness-panel']);
+echo html_writer::start_div('flw-system-readiness-header');
+echo html_writer::div(
+    html_writer::tag('h3', get_string('quizreadinesstitle', 'local_flwexam')) .
+    html_writer::tag('p', get_string('quizreadinessintro', 'local_flwexam'))
+);
+echo html_writer::span(
+    get_string('quizrequiredsample', 'local_flwexam', exam_service::QUIZ_EXAM_ATTEMPT_QUESTION_COUNT),
+    'flw-system-status-pill'
+);
+echo html_writer::end_div();
+if (!$readinessrows) {
+    echo html_writer::div(get_string('quizreadinessnolinked', 'local_flwexam'), 'alert alert-info');
+} else {
+    echo html_writer::start_div('flwexam-readiness-grid');
+    foreach ($readinessrows as $row) {
+        $statusclass = $row['ready'] ? 'is-ready' : 'is-warning';
+        echo html_writer::start_div('flwexam-readiness-card');
+        echo html_writer::start_div('flwexam-readiness-card-head');
+        echo html_writer::div(
+            html_writer::tag('strong', s($row['name'])) .
+            html_writer::tag('span', s($row['code'] . ' | ' . $row['language'] . ' | ' . $row['cefrlevel'])),
+            'flwexam-readiness-title'
+        );
+        echo html_writer::span(s($row['statuslabel']), 'flw-system-status-pill ' . $statusclass);
+        echo html_writer::end_div();
+        echo html_writer::div(
+            html_writer::span(get_string('attemptquestions', 'local_flwexam')) .
+            html_writer::tag('strong', (int)$row['attemptquestioncount'] . ' / ' . (int)$row['requiredquestioncount']),
+            'flw-system-mini-card'
+        );
+        echo html_writer::div(
+            html_writer::span(get_string('sourcebankquestions', 'local_flwexam')) .
+            html_writer::tag('strong', (int)$row['sourcequestioncount']),
+            'flw-system-mini-card'
+        );
+        echo html_writer::div(
+            html_writer::span(get_string('linkedquiz', 'local_flwexam')) .
+            html_writer::tag('strong', s($row['quizname'])),
+            'flw-system-mini-card'
+        );
+        $lastsync = $row['lastsync'];
+        echo html_writer::div(
+            html_writer::span(get_string('lastautosync', 'local_flwexam')) .
+            html_writer::tag('strong', $lastsync ? s($lastsync['timelabel']) : get_string('never')) .
+            ($lastsync ? html_writer::tag('small', s($lastsync['userfullname'] . ' | ' . $lastsync['overallscore'] . '%')) : ''),
+            'flw-system-mini-card'
+        );
+        echo html_writer::div(html_writer::tag('i', '', ['style' => 'width:' . s($row['progresswidth'])]), 'flw-system-progress');
+        echo html_writer::start_div('flwexam-action-row');
+        if ($row['quizurl'] !== '') {
+            echo html_writer::link($row['quizurl'], get_string('openmoodlequiz', 'local_flwexam'), ['class' => 'btn btn-secondary btn-sm']);
+        }
+        if ($row['editquizurl'] !== '') {
+            echo html_writer::link($row['editquizurl'], get_string('configurequizquestions', 'local_flwexam'), ['class' => 'btn btn-primary btn-sm']);
+        }
+        if ($lastsync) {
+            echo html_writer::link($lastsync['resulturl'], get_string('viewlastresult', 'local_flwexam'), ['class' => 'btn btn-secondary btn-sm']);
+        }
+        echo html_writer::end_div();
+        echo html_writer::end_div();
+    }
+    echo html_writer::end_div();
+}
+echo html_writer::end_tag('section');
+
 echo html_writer::start_tag('form', [
     'method' => 'post',
     'action' => $url->out(false),

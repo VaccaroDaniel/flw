@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../../config.php');
 require_once(__DIR__ . '/lib.php');
 
 $id = required_param('id', PARAM_INT);
+$attemptid = optional_param('attemptid', 0, PARAM_INT);
 
 $cm = get_coursemodule_from_id('flwvrroom', $id, 0, false, MUST_EXIST);
 $course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
@@ -44,6 +45,169 @@ function flwvrroom_report_text($value) {
         return html_writer::span(get_string('none'), 'text-muted');
     }
     return nl2br(s($value));
+}
+
+/**
+ * Format structured attempt JSON for teacher report details.
+ *
+ * @param string|null $value
+ * @param string $type
+ * @return string
+ */
+function flwvrroom_report_structured_json($value, $type) {
+    $data = json_decode((string) $value, true);
+    if (!is_array($data) || empty($data)) {
+        return html_writer::span(get_string('none'), 'text-muted');
+    }
+
+    $items = [];
+    foreach ($data as $item) {
+        if (!is_array($item)) {
+            continue;
+        }
+        if ($type === 'hotspot') {
+            $label = $item['title'] ?? $item['id'] ?? '';
+            $items[] = trim($label . ' - ' . ($item['score'] ?? 0));
+        } else if ($type === 'role') {
+            $prompt = $item['prompt'] ?? '';
+            $response = $item['learnerresponse'] ?? '';
+            $items[] = trim($prompt . ' -> ' . $response);
+        } else {
+            $prompt = $item['prompt'] ?? '';
+            $response = $item['recognizedresponse'] ?? '';
+            $score = isset($item['normalizedscore']) && $item['normalizedscore'] !== null ?
+                round((float) $item['normalizedscore'] * 100, 1) . '%' : '';
+            $items[] = trim($prompt . ' -> ' . $response . ($score !== '' ? ' (' . $score . ')' : ''));
+        }
+    }
+
+    return !empty($items) ? nl2br(s(implode("\n", $items))) : html_writer::span(get_string('none'), 'text-muted');
+}
+
+/**
+ * Render a compact chronological attempt timeline from structured evidence JSON.
+ *
+ * @param stdClass $attempt
+ * @return string
+ */
+function flwvrroom_report_attempt_timeline(stdClass $attempt) {
+    $rows = [];
+    $hotspots = json_decode((string)($attempt->hotspotsjson ?? ''), true);
+    if (is_array($hotspots)) {
+        foreach ($hotspots as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $rows[] = get_string('hotspotevidence', 'flwvrroom') . ': ' .
+                ($item['title'] ?? $item['id'] ?? '') . ' (' . ($item['score'] ?? 0) . ')';
+        }
+    }
+
+    $speaking = json_decode((string)($attempt->speakingjson ?? ''), true);
+    if (is_array($speaking)) {
+        foreach ($speaking as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $rows[] = get_string('speakingevidence', 'flwvrroom') . ': ' .
+                ($item['recognizedresponse'] ?? '') .
+                (isset($item['normalizedscore']) && $item['normalizedscore'] !== null ?
+                    ' (' . round((float)$item['normalizedscore'] * 100, 1) . '%)' : '');
+        }
+    }
+
+    $roleturns = json_decode((string)($attempt->roleturnsjson ?? ''), true);
+    if (is_array($roleturns)) {
+        foreach ($roleturns as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $rows[] = get_string('roleturnevidence', 'flwvrroom') . ': ' .
+                ($item['prompt'] ?? '') . ' -> ' . ($item['learnerresponse'] ?? '');
+        }
+    }
+
+    if (empty($rows)) {
+        return html_writer::span(get_string('none'), 'text-muted');
+    }
+
+    return html_writer::alist(array_map('s', $rows), ['class' => 'flwvrroom-report-timeline']);
+}
+
+/**
+ * Render the C-UP-KP evidence records linked to this VR attempt.
+ *
+ * @param stdClass $attempt
+ * @return string
+ */
+function flwvrroom_report_evidence_debug(stdClass $attempt) {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+    $table = new xmldb_table('flwcupkp_evidence');
+    if (!$dbman->table_exists($table)) {
+        return html_writer::span(get_string('none'), 'text-muted');
+    }
+
+    $wantedfields = [
+        'id',
+        'evidencetype',
+        'targettype',
+        'targetid',
+        'rawscore',
+        'normalizedscore',
+        'confidence',
+        'evidencestrength',
+        'sourceattempt',
+        'sourceref',
+        'timecreated',
+    ];
+    $fields = [];
+    foreach ($wantedfields as $fieldname) {
+        if ($dbman->field_exists($table, new xmldb_field($fieldname))) {
+            $fields[] = $fieldname;
+        }
+    }
+    if (!in_array('id', $fields, true) || !in_array('sourceref', $fields, true)) {
+        return html_writer::span(get_string('none'), 'text-muted');
+    }
+
+    $sort = in_array('timecreated', $fields, true) ? 'timecreated ASC, id ASC' : 'id ASC';
+    $records = $DB->get_records_sql(
+        'SELECT ' . implode(', ', $fields) . '
+           FROM {flwcupkp_evidence}
+          WHERE sourceref = :sourceref
+       ORDER BY ' . $sort,
+        ['sourceref' => 'flwvrroom_attempt:' . (int)$attempt->id]
+    );
+    if (!$records) {
+        return html_writer::span(get_string('none'), 'text-muted');
+    }
+
+    $debugtable = new html_table();
+    $debugtable->attributes['class'] = 'generaltable flwvrroom-evidence-debug';
+    $debugtable->head = [
+        get_string('evidencetype', 'flwvrroom'),
+        get_string('evidencetarget', 'flwvrroom'),
+        get_string('normalizedscore', 'flwvrroom'),
+        get_string('confidence', 'flwvrroom'),
+        get_string('sourceattempt', 'flwvrroom'),
+    ];
+
+    foreach ($records as $record) {
+        $target = trim((string)($record->targettype ?? '') . ':' . (string)($record->targetid ?? ''), ':');
+        $score = isset($record->normalizedscore) ? format_float((float)$record->normalizedscore, 3) : '-';
+        $confidence = isset($record->confidence) ? format_float((float)$record->confidence, 3) : '-';
+        $debugtable->data[] = [
+            s($record->evidencetype ?? '-'),
+            s($target ?: '-'),
+            s($score),
+            s($confidence),
+            s($record->sourceattempt ?? '-'),
+        ];
+    }
+
+    return html_writer::table($debugtable);
 }
 
 /**
@@ -213,6 +377,63 @@ if ($totalattempts === 0) {
     exit;
 }
 
+if ($attemptid > 0) {
+    $attempt = $attempts[$attemptid] ?? null;
+    if (!$attempt) {
+        echo $OUTPUT->notification(get_string('invalidattemptid', 'flwvrroom'), 'warning');
+        echo html_writer::end_div();
+        echo $OUTPUT->footer();
+        exit;
+    }
+
+    $passed = !empty($attempt->taskcomplete);
+    echo html_writer::div(
+        html_writer::link(new moodle_url('/mod/flwvrroom/report.php', ['id' => $cm->id]),
+            get_string('backtoreport', 'flwvrroom'), ['class' => 'btn btn-secondary']),
+        'flwvrroom-report-actions'
+    );
+    echo $OUTPUT->heading(fullname($attempt) . ' - ' . get_string('attemptdetail', 'flwvrroom'), 3);
+    echo html_writer::start_div('flwvrroom-attempt-detail');
+    echo html_writer::div(
+        html_writer::span(get_string('scorelabel', 'flwvrroom')) .
+        html_writer::tag('strong', (int)$attempt->score) .
+        html_writer::span($passed ? get_string('passed', 'flwvrroom') : get_string('notpassed', 'flwvrroom')),
+        'flwvrroom-report-card'
+    );
+    echo html_writer::div(
+        html_writer::span(get_string('timelabel', 'flwvrroom')) .
+        html_writer::tag('strong', flwvrroom_report_time($attempt->timecreated)) .
+        html_writer::span(flwvrroom_report_duration($attempt->durationseconds)),
+        'flwvrroom-report-card'
+    );
+    echo html_writer::end_div();
+
+    echo $OUTPUT->heading(get_string('attempttimeline', 'flwvrroom'), 4);
+    echo html_writer::div(flwvrroom_report_attempt_timeline($attempt), 'flwvrroom-report-text');
+    echo $OUTPUT->heading(get_string('structuredevidence', 'flwvrroom'), 4);
+    echo html_writer::div(
+        html_writer::tag('em', get_string('hotspotevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+        flwvrroom_report_structured_json($attempt->hotspotsjson ?? '', 'hotspot') . html_writer::empty_tag('br') .
+        html_writer::tag('em', get_string('roleturnevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+        flwvrroom_report_structured_json($attempt->roleturnsjson ?? '', 'role') . html_writer::empty_tag('br') .
+        html_writer::tag('em', get_string('speakingevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+        flwvrroom_report_structured_json($attempt->speakingjson ?? '', 'speaking'),
+        'flwvrroom-report-text'
+    );
+    echo $OUTPUT->heading(get_string('transcript', 'flwvrroom'), 4);
+    echo html_writer::div(flwvrroom_report_text($attempt->speakingtext ?? ''), 'flwvrroom-report-text');
+    echo $OUTPUT->heading(get_string('aifeedback', 'flwvrroom'), 4);
+    echo html_writer::div(flwvrroom_report_text($attempt->aifeedback ?? ''), 'flwvrroom-report-text');
+    echo $OUTPUT->heading(get_string('evidencedebug', 'flwvrroom'), 4);
+    echo html_writer::div(flwvrroom_report_evidence_debug($attempt), 'flwvrroom-report-text');
+    echo $OUTPUT->heading(get_string('recommendedpractice', 'flwvrroom'), 4);
+    echo html_writer::div(s(flwvrroom_report_recommendation($attempt, (int)$flwvrroom->passinggrade)),
+        'flwvrroom-report-recommendation');
+    echo html_writer::end_div();
+    echo $OUTPUT->footer();
+    exit;
+}
+
 echo html_writer::start_div('flwvrroom-report-cards');
 $cards = [
     get_string('reportattempts', 'flwvrroom') => $totalattempts,
@@ -303,10 +524,13 @@ foreach ($attempts as $attempt) {
     }
     $shown++;
 
-    $passed = (int) $attempt->score >= (int) $flwvrroom->passinggrade;
+    $passed = !empty($attempt->taskcomplete);
     $details = html_writer::tag('summary', get_string('viewdetails', 'flwvrroom'));
     $roleplaydialogue = flwvrroom_report_roleplay_dialogue($attempt->speakingtext ?? '');
     $details .= html_writer::tag('div',
+        html_writer::div(html_writer::link(new moodle_url('/mod/flwvrroom/report.php',
+            ['id' => $cm->id, 'attemptid' => $attempt->id]), get_string('fullattemptdetail', 'flwvrroom')),
+            'flwvrroom-report-detail-link') .
         html_writer::tag('strong', get_string('transcript', 'flwvrroom')) .
         html_writer::div(flwvrroom_report_text($attempt->speakingtext ?? ''), 'flwvrroom-report-text') .
         ($roleplaydialogue !== '' ?
@@ -317,6 +541,20 @@ foreach ($attempts as $attempt) {
         html_writer::div(flwvrroom_report_text($attempt->aifeedback ?? ''), 'flwvrroom-report-text') .
         html_writer::tag('strong', get_string('completedobjects', 'flwvrroom')) .
         html_writer::div(flwvrroom_report_text($attempt->completedobjects ?? ''), 'flwvrroom-report-text') .
+        html_writer::tag('strong', get_string('attempttimeline', 'flwvrroom')) .
+        html_writer::div(flwvrroom_report_attempt_timeline($attempt), 'flwvrroom-report-text') .
+        html_writer::tag('strong', get_string('structuredevidence', 'flwvrroom')) .
+        html_writer::div(
+            html_writer::tag('em', get_string('hotspotevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+            flwvrroom_report_structured_json($attempt->hotspotsjson ?? '', 'hotspot') . html_writer::empty_tag('br') .
+            html_writer::tag('em', get_string('roleturnevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+            flwvrroom_report_structured_json($attempt->roleturnsjson ?? '', 'role') . html_writer::empty_tag('br') .
+            html_writer::tag('em', get_string('speakingevidence', 'flwvrroom')) . html_writer::empty_tag('br') .
+            flwvrroom_report_structured_json($attempt->speakingjson ?? '', 'speaking'),
+            'flwvrroom-report-text'
+        ) .
+        html_writer::tag('strong', get_string('evidencedebug', 'flwvrroom')) .
+        html_writer::div(flwvrroom_report_evidence_debug($attempt), 'flwvrroom-report-text') .
         html_writer::tag('strong', get_string('recommendedpractice', 'flwvrroom')) .
         html_writer::div(s(flwvrroom_report_recommendation($attempt, (int) $flwvrroom->passinggrade)), 'flwvrroom-report-recommendation')
     );

@@ -71,11 +71,170 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 return;
             }
             field.value = field.value.trim() ? field.value.trim() + "\n" + line : line;
+            field.dispatchEvent(new Event('input', {bubbles: true}));
+        };
+        var replaceEditorLine = function(name, index, line) {
+            var field = getEditorField(name);
+            if (!field) {
+                return false;
+            }
+            var lines = String(field.value || '').split(/\r?\n/);
+            if (index < 0 || index >= lines.length) {
+                return false;
+            }
+            lines[index] = line;
+            field.value = lines.join("\n");
+            field.dispatchEvent(new Event('input', {bubbles: true}));
+            return true;
         };
         var openRoleCharacter = function() {
             if (roleButton) {
                 roleButton.click();
             }
+        };
+        var setModelStatus = function(message, warning) {
+            var node = root.querySelector('[data-region="model-status"]');
+            if (!node) {
+                return;
+            }
+            node.textContent = message || '';
+            node.hidden = !message;
+            node.classList.toggle('is-warning', !!warning);
+        };
+        var publishObjectRefs = function(refs) {
+            var select = root.querySelector('[data-region="object-browser-select"]');
+            var status = root.querySelector('[data-region="object-browser-status"]');
+            if (!select) {
+                return;
+            }
+            select.innerHTML = '';
+            refs = (refs || []).filter(function(ref, index, list) {
+                return ref && list.indexOf(ref) === index;
+            }).sort();
+            refs.forEach(function(ref) {
+                var option = document.createElement('option');
+                option.value = ref;
+                option.textContent = ref;
+                select.appendChild(option);
+            });
+            if (status) {
+                status.textContent = refs.length ?
+                    (config.strings.objectbrowserready || '{$a} objects').replace('{$a}', refs.length) :
+                    (config.strings.objectbrowserempty || 'No named 3D objects found yet.');
+            }
+        };
+        var hotspotPartsFromLine = function(line) {
+            var parts = String(line || '').split('|');
+            while (parts.length < 12) {
+                parts.push('');
+            }
+            return parts;
+        };
+        var findLiveHotspotButton = function(key) {
+            var found = null;
+            root.querySelectorAll('[data-hotspot]').forEach(function(button) {
+                if (button.getAttribute('data-hotspot') === key) {
+                    found = button;
+                }
+            });
+            return found;
+        };
+        var updateProgressHotspot = function(oldKey, parts) {
+            var item = null;
+            root.querySelectorAll('[data-progress-hotspot]').forEach(function(candidate) {
+                if (candidate.getAttribute('data-progress-hotspot') === oldKey) {
+                    item = candidate;
+                }
+            });
+            if (item) {
+                item.setAttribute('data-progress-hotspot', parts[0] || oldKey);
+                item.textContent = parts[1] || parts[0] || oldKey;
+            }
+        };
+        var applyHotspotPartsToButton = function(button, parts, oldKey) {
+            if (!button) {
+                return;
+            }
+            var key = parts[0] || oldKey || 'hotspot';
+            var label = parts[1] || key;
+            button.setAttribute('data-hotspot', key);
+            button.setAttribute('data-score', parseInt(parts[2], 10) || 0);
+            button.setAttribute('data-world-x', parseFloat(parts[3]) || 50);
+            button.setAttribute('data-world-y', parseFloat(parts[4]) || 50);
+            button.setAttribute('data-hotspot-label', label);
+            button.setAttribute('data-hotspot-description', parts[5] || '');
+            button.setAttribute('data-hotspot-audio', parts[6] || '');
+            button.setAttribute('data-object-x', parts[7] || '');
+            button.setAttribute('data-object-y', parts[8] || '');
+            button.setAttribute('data-object-z', parts[9] || '');
+            button.setAttribute('data-hotspot-kpcodes', parts[10] || '');
+            button.setAttribute('data-hotspot-objectref', parts[11] || '');
+            var labelNode = button.querySelector('span');
+            if (labelNode) {
+                labelNode.textContent = label;
+            } else {
+                button.textContent = label;
+            }
+            updateProgressHotspot(oldKey || key, parts);
+        };
+        var createLiveHotspotFromLine = function(line) {
+            var parts = hotspotPartsFromLine(line);
+            var container = root.querySelector('[data-region="panorama"]');
+            if (!container || !parts[0] || findLiveHotspotButton(parts[0])) {
+                return;
+            }
+            var button = document.createElement('button');
+            button.className = 'flwvrroom-hotspot';
+            button.type = 'button';
+            button.setAttribute('aria-pressed', 'false');
+            button.appendChild(document.createElement('span'));
+            applyHotspotPartsToButton(button, parts, parts[0]);
+            button.addEventListener('click', function() {
+                button.classList.add('is-complete');
+                button.setAttribute('aria-pressed', 'true');
+                if (typeof showHotspotCard === 'function') {
+                    showHotspotCard(button);
+                }
+                updateScore(root, config.passinggrade, config.maxgrade);
+                if (typeof updateMissionProgress === 'function') {
+                    updateMissionProgress();
+                }
+            });
+            container.appendChild(button);
+
+            var progressList = root.querySelector('.flwvrroom-mission-checklist ul');
+            if (progressList && !root.querySelector('[data-progress-hotspot="' + parts[0] + '"]')) {
+                var item = document.createElement('li');
+                item.setAttribute('data-progress-hotspot', parts[0]);
+                item.textContent = parts[1] || parts[0];
+                progressList.insertBefore(item, progressList.firstChild);
+            }
+            if (typeof renderRotation === 'function') {
+                renderRotation();
+            }
+        };
+        var syncLiveHotspotFromLine = function(oldLine, newLine) {
+            var oldParts = hotspotPartsFromLine(oldLine);
+            var parts = hotspotPartsFromLine(newLine);
+            var oldKey = oldParts[0] || parts[0];
+            var button = findLiveHotspotButton(oldKey) || findLiveHotspotButton(parts[0]);
+            if (!button) {
+                createLiveHotspotFromLine(newLine);
+                return;
+            }
+            applyHotspotPartsToButton(button, parts, oldKey);
+        };
+        var removeLiveHotspotForLine = function(line) {
+            var key = hotspotPartsFromLine(line)[0];
+            var button = findLiveHotspotButton(key);
+            if (button && button.parentNode) {
+                button.parentNode.removeChild(button);
+            }
+            root.querySelectorAll('[data-progress-hotspot]').forEach(function(item) {
+                if (item.getAttribute('data-progress-hotspot') === key && item.parentNode) {
+                    item.parentNode.removeChild(item);
+                }
+            });
         };
 
         var stage = root.querySelector('[data-region="panorama-stage"]');
@@ -182,6 +341,9 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 var renderer = new THREE.WebGLRenderer({antialias: true});
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
                 renderer.setSize(width, height);
+                if (renderer.xr) {
+                    renderer.xr.enabled = true;
+                }
                 container.appendChild(renderer.domElement);
 
                 var geometry = new THREE.SphereGeometry(500, 60, 40);
@@ -197,6 +359,10 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     lon: 180,
                     lat: 0,
                     render: function() {
+                        if (renderer.xr && renderer.xr.isPresenting) {
+                            renderer.render(scene, camera);
+                            return;
+                        }
                         var phi = THREE.MathUtils.degToRad(90 - state.lat);
                         var theta = THREE.MathUtils.degToRad(state.lon);
                         camera.lookAt(
@@ -205,6 +371,25 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                             500 * Math.sin(phi) * Math.sin(theta)
                         );
                         renderer.render(scene, camera);
+                    },
+                    enterWebXR: function() {
+                        if (!navigator.xr || !renderer.xr) {
+                            return Promise.reject(new Error('WebXR unavailable'));
+                        }
+                        return navigator.xr.requestSession('immersive-vr', {
+                            optionalFeatures: ['local-floor', 'bounded-floor']
+                        }).then(function(session) {
+                            return Promise.resolve(renderer.xr.setSession(session)).then(function() {
+                                renderer.setAnimationLoop(function() {
+                                    state.render();
+                                });
+                                session.addEventListener('end', function() {
+                                    renderer.setAnimationLoop(null);
+                                    state.render();
+                                });
+                                return session;
+                            });
+                        });
                     }
                 };
                 threeState = state;
@@ -334,6 +519,9 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 var renderer = new THREE.WebGLRenderer({antialias: true});
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
                 renderer.setSize(width, height);
+                if (renderer.xr) {
+                    renderer.xr.enabled = true;
+                }
                 container.appendChild(renderer.domElement);
 
                 scene.add(new THREE.HemisphereLight(0xffffff, 0x7c5c45, 1.8));
@@ -347,6 +535,7 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         new THREE.BoxGeometry(size.x, size.y, size.z),
                         new THREE.MeshStandardMaterial({color: color, roughness: 0.72})
                     );
+                    mesh.name = key;
                     mesh.position.set(position.x, position.y, position.z);
                     mesh.userData.hotspotKey = key;
                     scene.add(mesh);
@@ -391,6 +580,7 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     new THREE.MeshStandardMaterial({color: 0xffffff, roughness: 0.58})
                 );
                 cup.position.set(-0.45, 1.12, -1.05);
+                cup.name = 'cup';
                 cup.userData.hotspotKey = 'cup';
                 scene.add(cup);
                 clickableObjects.push(cup);
@@ -415,9 +605,12 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     waiter.add(body);
                     waiter.add(head);
                     waiter.position.set(-2.2, 0, -2.6);
+                    waiter.name = 'waiter';
                     waiter.userData.hotspotKey = 'waiter';
                     scene.add(waiter);
                     clickableObjects.push(body, head);
+                    body.name = 'waiter-body';
+                    head.name = 'waiter-head';
                     body.userData.hotspotKey = 'waiter';
                     head.userData.hotspotKey = 'waiter';
                 }
@@ -443,15 +636,36 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     });
                     return found;
                 };
-
-                renderer.domElement.addEventListener('click', function(event) {
-                    setPointerFromEvent(event);
-                    var hit = raycaster.intersectObjects(clickableObjects, true)[0];
+                var findHotspotButtonForObject = function(object) {
+                    var current = object;
+                    while (current) {
+                        var reference = current.name || current.userData.hotspotKey || current.uuid || '';
+                        if (reference) {
+                            var found = null;
+                            hotspots.forEach(function(button) {
+                                if ((button.getAttribute('data-hotspot-objectref') || '') === reference) {
+                                    found = button;
+                                }
+                            });
+                            if (found) {
+                                return found;
+                            }
+                        }
+                        current = current.parent;
+                    }
+                    return null;
+                };
+                var activateHit = function(hit) {
                     if (!hit) {
                         return;
                     }
                     if (hit.object.userData.roleCharacter) {
                         openRoleCharacter();
+                        return;
+                    }
+                    var referencedButton = findHotspotButtonForObject(hit.object);
+                    if (referencedButton) {
+                        referencedButton.click();
                         return;
                     }
                     if (!hit.object.userData.hotspotKey) {
@@ -461,7 +675,21 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     if (button) {
                         button.click();
                     }
+                };
+
+                renderer.domElement.addEventListener('click', function(event) {
+                    setPointerFromEvent(event);
+                    activateHit(raycaster.intersectObjects(clickableObjects, true)[0]);
                 });
+
+                var controller = null;
+                var controllerMatrix = new THREE.Matrix4();
+                var pickFromController = function(source) {
+                    controllerMatrix.identity().extractRotation(source.matrixWorld);
+                    raycaster.ray.origin.setFromMatrixPosition(source.matrixWorld);
+                    raycaster.ray.direction.set(0, 0, -1).applyMatrix4(controllerMatrix);
+                    return raycaster.intersectObjects(clickableObjects, true)[0];
+                };
 
                 var state = {
                     lon: 180,
@@ -476,12 +704,40 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                             roleCharacter.userData.animateRole(Date.now());
                         }
                         var yaw = THREE.MathUtils.degToRad(state.lon - 180);
-                        camera.lookAt(
-                            camera.position.x + Math.sin(yaw) * 10,
-                            1.45,
-                            camera.position.z - Math.cos(yaw) * 10
-                        );
+                        if (!(renderer.xr && renderer.xr.isPresenting)) {
+                            camera.lookAt(
+                                camera.position.x + Math.sin(yaw) * 10,
+                                1.45,
+                                camera.position.z - Math.cos(yaw) * 10
+                            );
+                        }
                         renderer.render(scene, camera);
+                    },
+                    enterWebXR: function() {
+                        if (!navigator.xr || !renderer.xr) {
+                            return Promise.reject(new Error('WebXR unavailable'));
+                        }
+                        if (!controller) {
+                            controller = renderer.xr.getController(0);
+                            controller.addEventListener('selectstart', function() {
+                                activateHit(pickFromController(controller));
+                            });
+                            scene.add(controller);
+                        }
+                        return navigator.xr.requestSession('immersive-vr', {
+                            optionalFeatures: ['local-floor', 'bounded-floor']
+                        }).then(function(session) {
+                            return Promise.resolve(renderer.xr.setSession(session)).then(function() {
+                                renderer.setAnimationLoop(function() {
+                                    state.render();
+                                });
+                                session.addEventListener('end', function() {
+                                    renderer.setAnimationLoop(null);
+                                    state.render();
+                                });
+                                return session;
+                            });
+                        });
                     },
                     moveForward: function(amount) {
                         var yaw = THREE.MathUtils.degToRad(state.lon - 180);
@@ -493,6 +749,9 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         setPointerFromEvent(event);
                         var hit = raycaster.intersectObject(floor, false)[0] ||
                             raycaster.intersectObjects(clickableObjects, true)[0];
+                        if (hit && hit.object) {
+                            hit.point.objectref = hit.object.name || hit.object.userData.hotspotKey || hit.object.uuid || '';
+                        }
                         return hit ? hit.point : null;
                     },
                     projectHotspots: function(buttons) {
@@ -534,6 +793,12 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 };
 
                 threeState = state;
+                publishObjectRefs(clickableObjects.map(function(object) {
+                    return object.name || object.userData.hotspotKey || object.uuid || '';
+                }));
+                setModelStatus(config.strings.modelloaded ?
+                    config.strings.modelloaded.replace('{$a}', clickableObjects.length) :
+                    '3D room loaded.');
                 renderRotation();
                 if (roleCharacter) {
                     var animateRole = function() {
@@ -569,6 +834,9 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 var renderer = new THREE.WebGLRenderer({antialias: true});
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
                 renderer.setSize(width, height);
+                if (renderer.xr) {
+                    renderer.xr.enabled = true;
+                }
                 container.appendChild(renderer.domElement);
 
                 scene.add(new THREE.HemisphereLight(0xffffff, 0x68737d, 1.7));
@@ -599,19 +867,48 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
                     raycaster.setFromCamera(pointer, camera);
                 };
-
-                renderer.domElement.addEventListener('click', function(event) {
-                    if (!roleCharacter) {
+                var findHotspotButtonForObject = function(object) {
+                    var current = object;
+                    while (current) {
+                        var reference = current.name || current.uuid || '';
+                        if (reference) {
+                            var found = null;
+                            hotspots.forEach(function(button) {
+                                if ((button.getAttribute('data-hotspot-objectref') || '') === reference) {
+                                    found = button;
+                                }
+                            });
+                            if (found) {
+                                return found;
+                            }
+                        }
+                        current = current.parent;
+                    }
+                    return null;
+                };
+                var activateHit = function(hit) {
+                    if (!hit) {
                         return;
                     }
-                    setPointerFromEvent(event);
-                    var hit = raycaster.intersectObject(roleCharacter, true)[0];
-                    if (hit && hit.object.userData.roleCharacter) {
+                    if (hit.object.userData.roleCharacter) {
                         openRoleCharacter();
+                        return;
                     }
+                    var button = findHotspotButtonForObject(hit.object);
+                    if (button) {
+                        button.click();
+                    }
+                };
+
+                renderer.domElement.addEventListener('click', function(event) {
+                    setPointerFromEvent(event);
+                    var roleHit = roleCharacter ? raycaster.intersectObject(roleCharacter, true)[0] : null;
+                    var modelHit = modelRoot.children.length ? raycaster.intersectObjects(modelRoot.children, true)[0] : null;
+                    activateHit(roleHit || modelHit);
                 });
 
                 var loader = new GLTFLoader();
+                setModelStatus(config.strings.loadingmodel || 'Loading 3D model...');
                 loader.load(config.model3durl, function(gltf) {
                     modelRoot.clear();
                     var model = gltf.scene || gltf.scenes[0];
@@ -628,11 +925,38 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     model.scale.setScalar(scale);
                     model.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
                     modelRoot.add(model);
+                    var refs = [];
+                    var triangleCount = 0;
+                    model.traverse(function(object) {
+                        if (object.name) {
+                            refs.push(object.name);
+                        }
+                        if (object.isMesh && object.geometry) {
+                            var position = object.geometry.getAttribute ? object.geometry.getAttribute('position') : null;
+                            if (position) {
+                                triangleCount += Math.floor(position.count / 3);
+                            }
+                            refs.push(object.name || object.uuid);
+                        }
+                    });
+                    publishObjectRefs(refs);
+                    var loaded = config.strings.modelloaded ?
+                        config.strings.modelloaded.replace('{$a}', refs.length) :
+                        '3D model loaded.';
+                    if (triangleCount > 100000) {
+                        setModelStatus((config.strings.modelbigwarning || 'Large 3D model: {$a} triangles')
+                            .replace('{$a}', triangleCount), true);
+                    } else {
+                        setModelStatus(loaded);
+                    }
                     renderRotation();
                 }, null, function() {
                     // The teacher-facing Moodle file manager keeps the source file visible for correction.
+                    setModelStatus(config.strings.model3dmissing || 'No uploaded 3D model file has been added yet.', true);
                 });
 
+                var controller = null;
+                var controllerMatrix = new THREE.Matrix4();
                 var state = {
                     lon: 180,
                     bounds: {
@@ -646,12 +970,45 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                             roleCharacter.userData.animateRole(Date.now());
                         }
                         var yaw = THREE.MathUtils.degToRad(state.lon - 180);
-                        camera.lookAt(
-                            camera.position.x + Math.sin(yaw) * 10,
-                            1.35,
-                            camera.position.z - Math.cos(yaw) * 10
-                        );
+                        if (!(renderer.xr && renderer.xr.isPresenting)) {
+                            camera.lookAt(
+                                camera.position.x + Math.sin(yaw) * 10,
+                                1.35,
+                                camera.position.z - Math.cos(yaw) * 10
+                            );
+                        }
                         renderer.render(scene, camera);
+                    },
+                    enterWebXR: function() {
+                        if (!navigator.xr || !renderer.xr) {
+                            return Promise.reject(new Error('WebXR unavailable'));
+                        }
+                        if (!controller) {
+                            controller = renderer.xr.getController(0);
+                            controller.addEventListener('selectstart', function() {
+                                controllerMatrix.identity().extractRotation(controller.matrixWorld);
+                                raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);
+                                raycaster.ray.direction.set(0, 0, -1).applyMatrix4(controllerMatrix);
+                                var roleHit = roleCharacter ? raycaster.intersectObject(roleCharacter, true)[0] : null;
+                                var modelHit = modelRoot.children.length ? raycaster.intersectObjects(modelRoot.children, true)[0] : null;
+                                activateHit(roleHit || modelHit);
+                            });
+                            scene.add(controller);
+                        }
+                        return navigator.xr.requestSession('immersive-vr', {
+                            optionalFeatures: ['local-floor', 'bounded-floor']
+                        }).then(function(session) {
+                            return Promise.resolve(renderer.xr.setSession(session)).then(function() {
+                                renderer.setAnimationLoop(function() {
+                                    state.render();
+                                });
+                                session.addEventListener('end', function() {
+                                    renderer.setAnimationLoop(null);
+                                    state.render();
+                                });
+                                return session;
+                            });
+                        });
                     },
                     moveForward: function(amount) {
                         var yaw = THREE.MathUtils.degToRad(state.lon - 180);
@@ -664,6 +1021,9 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         var modelHit = modelRoot.children.length ? raycaster.intersectObjects(modelRoot.children, true)[0] : null;
                         var floorHit = raycaster.intersectObject(floor, false)[0];
                         var hit = modelHit || floorHit;
+                        if (hit && hit.object) {
+                            hit.point.objectref = hit.object.name || hit.object.uuid || '';
+                        }
                         return hit ? hit.point : null;
                     },
                     projectHotspots: function(buttons) {
@@ -839,10 +1199,45 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
             var helperHotspotKey = root.querySelector('[data-region="position-helper-hotspot-key"]');
             var helperHotspotLabel = root.querySelector('[data-region="position-helper-hotspot-label"]');
             var helperHotspotScore = root.querySelector('[data-region="position-helper-hotspot-score"]');
+            var helperVisualPlaceButton = root.querySelector('[data-action="visual-place-hotspot"]');
 
             var cleanHelperPart = function(value, fallback) {
                 value = String(value || fallback || '').replace(/[|\r\n]/g, ' ').trim();
                 return value || fallback || '';
+            };
+            var screenToWorldX = function(screenX) {
+                return wrap(rotation + ((screenX - 50) * (visibleSpan / 2) / 50));
+            };
+            var hotspotLineFromScenePoint = function(event, currentLine) {
+                var parts = hotspotPartsFromLine(currentLine);
+                var rect = stage.getBoundingClientRect();
+                var screenX = clamp(((event.clientX - rect.left) / rect.width) * 100, 0, 100);
+                var screenY = clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100);
+                var point = null;
+
+                if ((roomMode === 'builtin3d' || roomMode === 'uploaded3d') && threeState && threeState.capturePosition) {
+                    point = threeState.capturePosition(event);
+                }
+
+                if (point) {
+                    parts[3] = screenX.toFixed(1);
+                    parts[4] = screenY.toFixed(1);
+                    parts[7] = point.x.toFixed(2);
+                    parts[8] = point.y.toFixed(2);
+                    parts[9] = point.z.toFixed(2);
+                    parts[11] = point.objectref || parts[11] || '';
+                } else {
+                    parts[3] = screenToWorldX(screenX).toFixed(1);
+                    parts[4] = screenY.toFixed(1);
+                }
+
+                return {
+                    line: parts.join('|'),
+                    parts: parts,
+                    raw2d: parts[3] + '|' + parts[4],
+                    raw3d: point ? parts[7] + '|' + parts[8] + '|' + parts[9] : '',
+                    objectref: point ? (point.objectref || '') : ''
+                };
             };
 
             if (helperButton && helperStatus) {
@@ -854,8 +1249,118 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         (config.strings.positionhelperidle || 'Click to capture x/y');
                 });
 
+                if (helperVisualPlaceButton) {
+                    helperVisualPlaceButton.addEventListener('click', function() {
+                        helperActive = true;
+                        visualPlacementPending = true;
+                        root.classList.add('is-position-helper-active');
+                        if (helperTarget) {
+                            helperTarget.value = 'hotspot';
+                        }
+                        helperStatus.textContent = config.strings.visualeditorselect ||
+                            'Select a point in the room for this hotspot.';
+                    });
+                }
+
+                var draggedHotspot = null;
+                var updateDraggedHotspot = function(event) {
+                    if (!draggedHotspot) {
+                        return;
+                    }
+                    var field = getEditorField('customhotspots');
+                    if (field && selectedHotspotIndex >= 0) {
+                        var lines = String(field.value || '').split(/\r?\n/);
+                        if (selectedHotspotIndex < lines.length) {
+                            var result = hotspotLineFromScenePoint(event, lines[selectedHotspotIndex]);
+                            replaceEditorLine('customhotspots', selectedHotspotIndex, result.line);
+                            applyHotspotPartsToButton(draggedHotspot, result.parts, hotspotPartsFromLine(lines[selectedHotspotIndex])[0]);
+                            setHotspotBuilderValue('position2d', result.raw2d);
+                            if (result.raw3d) {
+                                setHotspotBuilderValue('position3d', result.raw3d);
+                            }
+                            if (result.objectref) {
+                                setHotspotBuilderValue('objectref', result.objectref);
+                            }
+                            renderRotation();
+                        }
+                    }
+                };
+
+                stage.addEventListener('pointerdown', function(event) {
+                    if (!helperActive || (helperTarget && helperTarget.value !== 'hotspot')) {
+                        return;
+                    }
+                    var button = event.target.closest('[data-hotspot]');
+                    if (!button) {
+                        return;
+                    }
+                    var key = button.getAttribute('data-hotspot') || '';
+                    var field = getEditorField('customhotspots');
+                    var matched = false;
+                    if (field && key) {
+                        String(field.value || '').split(/\r?\n/).some(function(line, index) {
+                            if ((line.split('|')[0] || '') === key) {
+                                selectedHotspotIndex = index;
+                                loadHotspotLineToBuilder(line);
+                                renderHotspotPreview();
+                                matched = true;
+                                return true;
+                            }
+                            return false;
+                        });
+                        if (!matched) {
+                            var fallbackLine = [
+                                key,
+                                button.getAttribute('data-hotspot-label') || key,
+                                button.getAttribute('data-score') || 10,
+                                button.getAttribute('data-world-x') || 50,
+                                button.getAttribute('data-world-y') || 50,
+                                button.getAttribute('data-hotspot-description') || '',
+                                button.getAttribute('data-hotspot-audio') || '',
+                                button.getAttribute('data-object-x') || '',
+                                button.getAttribute('data-object-y') || '',
+                                button.getAttribute('data-object-z') || '',
+                                button.getAttribute('data-hotspot-kpcodes') || '',
+                                button.getAttribute('data-hotspot-objectref') || ''
+                            ].join('|');
+                            appendEditorLine('customhotspots', fallbackLine);
+                            selectedHotspotIndex = splitLines(field.value).length - 1;
+                            loadHotspotLineToBuilder(fallbackLine);
+                            renderHotspotPreview();
+                        }
+                    }
+                    draggedHotspot = button;
+                    button.setPointerCapture(event.pointerId);
+                    event.preventDefault();
+                    event.stopPropagation();
+                }, true);
+
+                stage.addEventListener('pointermove', function(event) {
+                    if (!draggedHotspot) {
+                        return;
+                    }
+                    updateDraggedHotspot(event);
+                    event.preventDefault();
+                    event.stopPropagation();
+                }, true);
+
+                stage.addEventListener('pointerup', function(event) {
+                    if (!draggedHotspot) {
+                        return;
+                    }
+                    updateDraggedHotspot(event);
+                    draggedHotspot = null;
+                    renderHotspotPreview();
+                    if (helperStatus) {
+                        helperStatus.textContent = config.strings.visualeditorupdated ||
+                            'Selected hotspot updated from the scene.';
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                }, true);
+
                 stage.addEventListener('click', function(event) {
-                    if (!helperActive ||
+                    if ((!helperActive && !visualPlacementPending) ||
                             event.target.closest('button') ||
                             event.target.closest('.flwvrroom-author-tools') ||
                             event.target.closest('.flwvrroom-hotspot-card') ||
@@ -863,30 +1368,16 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         return;
                     }
 
-                    var point = null;
-                    var raw3d = '';
-                    var raw2d = '';
-                    var value = '';
-                    var copied = config.strings.positionhelpercopied || 'Copied x/y: {$a}';
-                    if ((roomMode === 'builtin3d' || roomMode === 'uploaded3d') && threeState && threeState.capturePosition) {
-                        point = threeState.capturePosition(event);
-                        if (point) {
-                            raw3d = point.x.toFixed(2) + '|' + point.y.toFixed(2) + '|' + point.z.toFixed(2);
-                            value = raw3d;
-                            copied = config.strings.positionhelpercopied3d || 'Copied 3D x/y/z: {$a}';
-                        }
-                    }
-
-                    var rect = stage.getBoundingClientRect();
-                    var x = clamp(((event.clientX - rect.left) / rect.width) * 100, 0, 100).toFixed(1);
-                    var y = clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100).toFixed(1);
-                    raw2d = x + '|' + y;
-
-                    if (value === '') {
-                        value = raw2d;
-                    }
-
                     var target = helperTarget ? helperTarget.value : 'raw';
+                    var baseLine = hotspotLineFromBuilder();
+                    var placed = hotspotLineFromScenePoint(event, baseLine);
+                    var raw3d = placed.raw3d;
+                    var raw2d = placed.raw2d;
+                    var objectref = placed.objectref;
+                    var value = raw3d || raw2d;
+                    var copied = raw3d ?
+                        (config.strings.positionhelpercopied3d || 'Copied 3D x/y/z: {$a}') :
+                        (config.strings.positionhelpercopied || 'Copied x/y: {$a}');
                     if (target === 'role') {
                         if (!raw3d) {
                             helperStatus.textContent = config.strings.positionhelperroleneeds3d ||
@@ -906,15 +1397,45 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         var label = cleanHelperPart(helperHotspotLabel ? helperHotspotLabel.value : '', 'New hotspot');
                         var score = parseInt(helperHotspotScore ? helperHotspotScore.value : '10', 10);
                         score = isNaN(score) ? 10 : clamp(score, 0, 100);
-                        value = key + '|' + label + '|' + score + '|' + raw2d;
-                        if (raw3d) {
-                            value += '|||' + raw3d;
+                        placed.parts[0] = key;
+                        placed.parts[1] = label;
+                        placed.parts[2] = score;
+                        value = placed.parts.join('|');
+                        var builderPosition2d = root.querySelector('[data-hotspot-builder="position2d"]');
+                        var builderPosition3d = root.querySelector('[data-hotspot-builder="position3d"]');
+                        var builderObjectRef = root.querySelector('[data-hotspot-builder="objectref"]');
+                        if (builderPosition2d) {
+                            builderPosition2d.value = raw2d;
+                        }
+                        if (builderPosition3d && raw3d) {
+                            builderPosition3d.value = raw3d;
+                        }
+                        if (builderObjectRef && objectref) {
+                            builderObjectRef.value = objectref;
                         }
                         copied = config.strings.positionhelpercopiedhotspot || 'Copied custom hotspot line: {$a}';
-                        appendEditorLine('customhotspots', value);
+                        var oldLineForLive = '';
+                        var liveField = getEditorField('customhotspots');
+                        if (liveField && selectedHotspotIndex >= 0) {
+                            oldLineForLive = String(liveField.value || '').split(/\r?\n/)[selectedHotspotIndex] || '';
+                        }
+                        if (typeof selectedHotspotIndex !== 'undefined' &&
+                                replaceEditorLine('customhotspots', selectedHotspotIndex, value)) {
+                            syncLiveHotspotFromLine(oldLineForLive, value);
+                            copied = config.strings.visualeditorupdated || 'Selected hotspot updated from the scene.';
+                        } else {
+                            appendEditorLine('customhotspots', value);
+                            createLiveHotspotFromLine(value);
+                            copied = config.strings.visualeditorcreated || 'Hotspot created from the scene.';
+                        }
+                        if (typeof renderHotspotPreview === 'function') {
+                            renderHotspotPreview();
+                        }
+                        renderRotation();
                     }
 
                     helperStatus.textContent = copied.replace('{$a}', value);
+                    visualPlacementPending = false;
                     if (helperOutput) {
                         helperOutput.value = value;
                         helperOutput.select();
@@ -936,6 +1457,40 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
         var hotspotDescription = root.querySelector('[data-region="hotspot-description"]');
         var hotspotAudio = root.querySelector('[data-region="hotspot-audio"]');
         var closeHotspotCard = root.querySelector('[data-action="close-hotspot-card"]');
+        var nextStepRegion = root.querySelector('[data-region="next-step"]');
+
+        var updateMissionProgress = function() {
+            var remainingHotspots = 0;
+            root.querySelectorAll('[data-progress-hotspot]').forEach(function(item) {
+                var key = item.getAttribute('data-progress-hotspot');
+                var hotspot = root.querySelector('[data-hotspot="' + key + '"]');
+                var complete = !!(hotspot && hotspot.classList.contains('is-complete'));
+                item.classList.toggle('is-complete', complete);
+                if (!complete) {
+                    remainingHotspots++;
+                }
+            });
+
+            root.querySelectorAll('[data-progress-speaking]').forEach(function(item) {
+                item.classList.toggle('is-complete', root.getAttribute('data-speaking-complete') === '1');
+            });
+            root.querySelectorAll('[data-progress-role]').forEach(function(item) {
+                item.classList.toggle('is-complete', root.getAttribute('data-role-complete') === '1');
+            });
+
+            if (!nextStepRegion) {
+                return;
+            }
+            if (remainingHotspots > 0) {
+                nextStepRegion.textContent = config.strings.nextstephotspot || 'Explore the remaining hotspots.';
+            } else if (root.getAttribute('data-speaking-complete') !== '1') {
+                nextStepRegion.textContent = config.strings.nextstepspeaking || 'Record your speaking answer.';
+            } else if (root.querySelector('[data-progress-role]') && root.getAttribute('data-role-complete') !== '1') {
+                nextStepRegion.textContent = config.strings.nextsteprole || 'Complete the role-play conversation.';
+            } else {
+                nextStepRegion.textContent = config.strings.nextstepsave || 'Save your attempt.';
+            }
+        };
 
         var hideHotspotCard = function() {
             if (!hotspotCard) {
@@ -993,19 +1548,23 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 button.setAttribute('aria-pressed', 'true');
                 showHotspotCard(button);
                 updateScore(root, config.passinggrade, config.maxgrade);
+                updateMissionProgress();
             });
         });
 
         root.querySelectorAll('input[type=radio]').forEach(function(input) {
             input.addEventListener('change', function() {
                 updateScore(root, config.passinggrade, config.maxgrade);
+                updateMissionProgress();
             });
         });
 
         var speakingText = '';
         var aiFeedback = '';
+        var speakingResults = [];
         var roleSpeakingText = '';
         var roleAiFeedback = '';
+        var roleTurnResults = [];
         var roleSpeakingLog = [];
         var roleFeedbackLog = [];
         var roleComplete = false;
@@ -1035,6 +1594,81 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
         var roleFeedbackRegion = root.querySelector('[data-region="role-feedback"]');
         var roleLineRegion = root.querySelector('[data-region="role-line"]');
         var roleTurnProgressRegion = root.querySelector('[data-region="role-turn-progress"]');
+
+        var completionIssues = function(score) {
+            var rules = config.completionrules || {};
+            var issues = [];
+            if (rules.requirehotspots !== false) {
+                var missingHotspots = false;
+                root.querySelectorAll('[data-hotspot]').forEach(function(button) {
+                    if (!button.classList.contains('is-complete')) {
+                        missingHotspots = true;
+                    }
+                });
+                if (missingHotspots) {
+                    issues.push(config.strings.completionmissinghotspots || 'Complete all hotspots.');
+                }
+            }
+            if (rules.requirespeaking !== false && root.getAttribute('data-speaking-complete') !== '1') {
+                issues.push(config.strings.completionmissingspeaking || 'Record your speaking answer.');
+            }
+            if (rules.requirerole && root.getAttribute('data-role-complete') !== '1') {
+                issues.push(config.strings.completionmissingrole || 'Complete the role-play conversation.');
+            }
+            var minscore = parseInt(rules.minscore, 10);
+            if (isNaN(minscore)) {
+                minscore = config.passinggrade || 0;
+            }
+            if (score < minscore) {
+                issues.push((config.strings.completionmissingscore || 'Reach at least {$a} points.').replace('{$a}', minscore));
+            }
+            return issues;
+        };
+
+        var normalizeServiceScore = function(value) {
+            value = parseFloat(value);
+            if (isNaN(value)) {
+                return null;
+            }
+            return clamp(value > 1 ? value / 100 : value, 0, 1);
+        };
+
+        var completedHotspotPayload = function() {
+            var payload = [];
+            root.querySelectorAll('[data-hotspot].is-complete').forEach(function(button) {
+                var key = button.getAttribute('data-hotspot') || '';
+                payload.push({
+                    id: key,
+                    title: button.textContent ? button.textContent.trim() : key,
+                    kind: key === 'rolecharacter' ? 'roleplay' : 'object3d',
+                    completed: true,
+                    score: parseInt(button.getAttribute('data-score'), 10) || 0,
+                    maxscore: config.maxgrade || 100,
+                    position: {
+                        x: parseFloat(button.getAttribute('data-object-x')) || 0,
+                        y: parseFloat(button.getAttribute('data-object-y')) || 0,
+                        z: parseFloat(button.getAttribute('data-object-z')) || 0
+                    },
+                    objectref: button.getAttribute('data-hotspot-objectref') || '',
+                    kpcodes: String(button.getAttribute('data-hotspot-kpcodes') || '').split(',').filter(function(code) {
+                        return code.trim() !== '';
+                    })
+                });
+            });
+            if (roleComplete) {
+                payload.push({
+                    id: 'rolecharacter',
+                    title: config.rolecharacter ? config.rolecharacter.name || 'Role character' : 'Role character',
+                    kind: 'roleplay',
+                    completed: true,
+                    score: roleEarnedScore || (config.rolecharacter ? config.rolecharacter.score || 0 : 0),
+                    maxscore: config.maxgrade || 100,
+                    kpcodes: roleCompletedKpcodes.length ? roleCompletedKpcodes :
+                        (config.rolecharacter && config.rolecharacter.kpcodes ? config.rolecharacter.kpcodes : [])
+                });
+            }
+            return payload;
+        };
         var roleDialogueList = root.querySelector('[data-region="role-dialogue-list"]');
         var roleConversationEntries = [];
         var roleLoggedTurnIndex = -1;
@@ -1042,6 +1676,292 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
         var roomEditorSave = root.querySelector('[data-action="save-room-editor"]');
         var roomEditorStatus = root.querySelector('[data-region="room-editor-status"]');
         var roleTurnAppendButton = root.querySelector('[data-action="append-role-turn"]');
+        var hotspotAppendButton = root.querySelector('[data-action="append-hotspot"]');
+        var hotspotUpdateButton = root.querySelector('[data-action="update-hotspot"]');
+        var hotspotDeleteButton = root.querySelector('[data-action="delete-hotspot"]');
+        var hotspotPreview = root.querySelector('[data-region="hotspot-preview"]');
+        var roleTurnPreview = root.querySelector('[data-region="role-turn-preview"]');
+        var insertKpButton = root.querySelector('[data-action="insert-kp-code"]');
+        var kpHelperSelect = root.querySelector('[data-region="kp-helper-select"]');
+        var kpHelperTarget = root.querySelector('[data-region="kp-helper-target"]');
+        var webxrButton = root.querySelector('[data-action="enter-webxr"]');
+        var xrStatus = root.querySelector('[data-region="xr-status"]');
+        var scenarioTemplateSelect = root.querySelector('[data-region="scenario-template-select"]');
+        var applyScenarioTemplateButton = root.querySelector('[data-action="apply-scenario-template"]');
+        var scenarioJsonField = root.querySelector('[data-region="scenario-json"]');
+        var exportScenarioButton = root.querySelector('[data-action="export-scenario"]');
+        var importScenarioButton = root.querySelector('[data-action="import-scenario"]');
+        var objectBrowserSelect = root.querySelector('[data-region="object-browser-select"]');
+        var bindObjectRefButton = root.querySelector('[data-action="bind-object-ref"]');
+        var visualPlaceHotspotButton = root.querySelector('[data-action="visual-place-hotspot"]');
+        var visualPlacementPending = false;
+        var selectedHotspotIndex = -1;
+
+        var splitLines = function(value) {
+            return String(value || '').split(/\r?\n/).map(function(line) {
+                return line.trim();
+            }).filter(function(line) {
+                return line !== '';
+            });
+        };
+
+        var splitCodes = function(value) {
+            return String(value || '').split(/[,\r\n]+/).map(function(code) {
+                return code.trim();
+            }).filter(function(code) {
+                return code !== '';
+            });
+        };
+        var intOrDefault = function(value, fallback) {
+            value = parseInt(value, 10);
+            return isNaN(value) ? fallback : value;
+        };
+
+        var hotspotBuilderValue = function(name) {
+            var field = root.querySelector('[data-hotspot-builder="' + name + '"]');
+            return field ? String(field.value || '').trim() : '';
+        };
+
+        var setHotspotBuilderValue = function(name, value) {
+            var field = root.querySelector('[data-hotspot-builder="' + name + '"]');
+            if (field) {
+                field.value = value || '';
+            }
+        };
+
+        var hotspotLineFromBuilder = function() {
+            var key = hotspotBuilderValue('key').replace(/[|\r\n]/g, ' ') || 'newhotspot';
+            var label = hotspotBuilderValue('label').replace(/[|\r\n]/g, ' ') || key;
+            var score = parseInt(hotspotBuilderValue('score'), 10);
+            var position2d = hotspotBuilderValue('position2d') || '50|50';
+            var position3d = hotspotBuilderValue('position3d');
+            var pos2 = position2d.split('|');
+            var pos3 = position3d.split('|');
+            var description = hotspotBuilderValue('description').replace(/[|\r\n]/g, ' ');
+            var audio = hotspotBuilderValue('audio').replace(/[|\r\n]/g, ' ');
+            var kpcodes = splitCodes(hotspotBuilderValue('kpcodes')).join(',');
+            var objectref = hotspotBuilderValue('objectref').replace(/[|\r\n]/g, ' ');
+            var pos3x = parseFloat(pos3[0]);
+            var pos3y = parseFloat(pos3[1]);
+            var pos3z = parseFloat(pos3[2]);
+
+            return [
+                key,
+                label,
+                isNaN(score) ? 10 : clamp(score, 0, 100),
+                parseFloat(pos2[0]) || 50,
+                parseFloat(pos2[1]) || 50,
+                description,
+                audio,
+                isNaN(pos3x) ? '' : pos3x,
+                isNaN(pos3y) ? '' : pos3y,
+                isNaN(pos3z) ? '' : pos3z,
+                kpcodes,
+                objectref
+            ].join('|');
+        };
+
+        var loadHotspotLineToBuilder = function(line) {
+            var parts = String(line || '').split('|');
+            setHotspotBuilderValue('key', parts[0] || '');
+            setHotspotBuilderValue('label', parts[1] || '');
+            setHotspotBuilderValue('score', parts[2] || '10');
+            setHotspotBuilderValue('position2d', (parts[3] || '50') + '|' + (parts[4] || '50'));
+            setHotspotBuilderValue('description', parts[5] || '');
+            setHotspotBuilderValue('audio', parts[6] || '');
+            setHotspotBuilderValue('position3d', [parts[7] || '', parts[8] || '', parts[9] || ''].join('|').replace(/^\|+|\|+$/g, ''));
+            setHotspotBuilderValue('kpcodes', parts[10] || '');
+            setHotspotBuilderValue('objectref', parts[11] || '');
+        };
+
+        var renderHotspotPreview = function() {
+            var field = getEditorField('customhotspots');
+            if (!hotspotPreview || !field) {
+                return;
+            }
+            var lines = splitLines(field.value);
+            hotspotPreview.innerHTML = '';
+            if (!lines.length) {
+                hotspotPreview.textContent = config.strings.nohotspots || 'No custom hotspots yet.';
+                return;
+            }
+            lines.forEach(function(line, index) {
+                var parts = line.split('|');
+                var button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'btn btn-secondary btn-sm';
+                button.textContent = (parts[1] || parts[0] || 'Hotspot') + ' / ' + (parts[2] || '0');
+                if (index === selectedHotspotIndex) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', function() {
+                    selectedHotspotIndex = index;
+                    loadHotspotLineToBuilder(line);
+                    if (helperHotspotKey) {
+                        helperHotspotKey.value = parts[0] || 'newhotspot';
+                    }
+                    if (helperHotspotLabel) {
+                        helperHotspotLabel.value = parts[1] || parts[0] || 'New hotspot';
+                    }
+                    if (helperHotspotScore) {
+                        helperHotspotScore.value = parts[2] || '10';
+                    }
+                    renderHotspotPreview();
+                });
+                hotspotPreview.appendChild(button);
+            });
+        };
+
+        var renderRoleTurnPreview = function() {
+            var field = getEditorField('roleturns');
+            if (!roleTurnPreview || !field) {
+                return;
+            }
+            var lines = splitLines(field.value);
+            roleTurnPreview.innerHTML = '';
+            if (!lines.length) {
+                roleTurnPreview.textContent = config.strings.noroleturns || 'No role turns yet.';
+                return;
+            }
+            lines.forEach(function(line, index) {
+                var parts = line.split('|');
+                var item = document.createElement('div');
+                item.className = 'flwvrroom-editor-preview-row';
+                item.textContent = (index + 1) + '. ' + (parts[0] || '') + ' -> ' + (parts[1] || '') +
+                    ' / ' + (parts[2] || '0') + ' / ' + (parts[3] || '');
+                roleTurnPreview.appendChild(item);
+            });
+        };
+
+        var insertKpCode = function() {
+            if (!kpHelperSelect) {
+                return;
+            }
+            var target = kpHelperTarget ? kpHelperTarget.value : 'activity';
+            var code = kpHelperSelect.value;
+            var field = null;
+            if (target === 'activity') {
+                field = getEditorField('kpcodes');
+            } else if (target === 'hotspot') {
+                field = root.querySelector('[data-hotspot-builder="kpcodes"]');
+            } else if (target === 'turn') {
+                field = root.querySelector('[data-builder-field="kpcodes"]');
+            } else {
+                field = getEditorField('rolekpcodes');
+            }
+            if (!field || !code) {
+                return;
+            }
+            var codes = splitCodes(field.value);
+            if (codes.indexOf(code) === -1) {
+                codes.push(code);
+            }
+            field.value = codes.join(target === 'activity' || target === 'role' ? "\n" : ',');
+            field.dispatchEvent(new Event('input', {bubbles: true}));
+        };
+
+        var setEditorValue = function(name, value) {
+            var field = getEditorField(name);
+            if (!field) {
+                return;
+            }
+            if (field.type === 'checkbox') {
+                field.checked = !!value;
+            } else {
+                field.value = value || '';
+            }
+            field.dispatchEvent(new Event('input', {bubbles: true}));
+            field.dispatchEvent(new Event('change', {bubbles: true}));
+        };
+
+        var applyScenarioData = function(data) {
+            setEditorValue('custommissiontitle', data.missiontitle || '');
+            setEditorValue('custommissiontext', data.missiontext || '');
+            setEditorValue('customquizquestion', data.quizquestion || '');
+            setEditorValue('customanswers', data.answers || '');
+            setEditorValue('customhotspots', data.hotspots || '');
+            setEditorValue('kpcodes', data.kpcodes || '');
+            setEditorValue('rolecharacterline', data.rolecharacterline || '');
+            setEditorValue('roleexpectedanswer', data.roleexpectedanswer || '');
+            setEditorValue('rolekpcodes', data.rolekpcodes || data.kpcodes || '');
+            setEditorValue('rolescore', data.rolescore || 20);
+            setEditorValue('roleturns', data.roleturns || '');
+            if (typeof data.roleaienabled !== 'undefined') {
+                setEditorValue('roleaienabled', !!data.roleaienabled);
+            }
+            setEditorValue('roleaiturns', data.roleaiturns || 3);
+            setEditorValue('roleaipersonality', data.roleaipersonality || '');
+            setEditorValue('roleaidifficulty', data.roleaidifficulty || 'friendly');
+            setEditorValue('roleaitargetpattern', data.roleaitargetpattern || '');
+            setEditorValue('roleaimaxretries',
+                typeof data.roleaimaxretries === 'undefined' ? 1 : data.roleaimaxretries);
+            if (data.completionrules) {
+                setEditorValue('completionrequirehotspots', !!data.completionrules.requirehotspots);
+                setEditorValue('completionrequirespeaking', !!data.completionrules.requirespeaking);
+                setEditorValue('completionrequirerole', !!data.completionrules.requirerole);
+                setEditorValue('completionminscore', data.completionrules.minscore || config.passinggrade || 70);
+            }
+            selectedHotspotIndex = -1;
+            renderHotspotPreview();
+            renderRoleTurnPreview();
+        };
+
+        var editorScenarioData = function() {
+            var value = function(name) {
+                var field = getEditorField(name);
+                if (field && field.type === 'checkbox') {
+                    return field.checked;
+                }
+                return field ? field.value : '';
+            };
+            return {
+                missiontitle: value('custommissiontitle'),
+                missiontext: value('custommissiontext'),
+                quizquestion: value('customquizquestion'),
+                answers: value('customanswers'),
+                hotspots: value('customhotspots'),
+                kpcodes: value('kpcodes'),
+                rolecharacterline: value('rolecharacterline'),
+                roleexpectedanswer: value('roleexpectedanswer'),
+                rolekpcodes: value('rolekpcodes'),
+                rolescore: parseInt(value('rolescore'), 10) || 20,
+                roleturns: value('roleturns'),
+                roleaienabled: value('roleaienabled'),
+                roleaiturns: parseInt(value('roleaiturns'), 10) || 3,
+                roleaipersonality: value('roleaipersonality'),
+                roleaidifficulty: value('roleaidifficulty') || 'friendly',
+                roleaitargetpattern: value('roleaitargetpattern'),
+                roleaimaxretries: intOrDefault(value('roleaimaxretries'), 1),
+                completionrules: {
+                    requirehotspots: value('completionrequirehotspots'),
+                    requirespeaking: value('completionrequirespeaking'),
+                    requirerole: value('completionrequirerole'),
+                    minscore: intOrDefault(value('completionminscore'), config.passinggrade || 70)
+                }
+            };
+        };
+
+        var applyScenarioTemplate = function() {
+            if (!scenarioTemplateSelect) {
+                return;
+            }
+            var data = {};
+            try {
+                data = JSON.parse(scenarioTemplateSelect.value || '{}');
+            } catch (error) {
+                if (roomEditorStatus) {
+                    roomEditorStatus.textContent = config.strings.templateapplyfailed ||
+                        'The selected scenario template could not be read.';
+                }
+                return;
+            }
+
+            applyScenarioData(data);
+            if (roomEditorStatus) {
+                roomEditorStatus.textContent = config.strings.templateapplied ||
+                    'Scenario template applied. Save the editor to keep it.';
+            }
+        };
 
         var currentRoleTurn = function() {
             return roleTurns[Math.min(roleTurnIndex, roleTurns.length - 1)] || roleTurns[0] || {};
@@ -1134,7 +2054,11 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     cefrlevel: config.cefrlevel || '',
                     currentline: turn.line || '',
                     learnerreply: learnerReply || '',
-                    history: roleConversationHistory.join("\n")
+                    history: roleConversationHistory.join("\n"),
+                    personality: config.rolecharacter.aipersonality || '',
+                    difficulty: config.rolecharacter.aidifficulty || 'friendly',
+                    targetpattern: config.rolecharacter.aitargetpattern || '',
+                    maxretries: intOrDefault(config.rolecharacter.aimaxretries, 1)
                 }
             }])[0].then(function(response) {
                 if (response.status && response.line) {
@@ -1189,6 +2113,7 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 root.setAttribute('data-role-score', roleEarnedScore || (config.rolecharacter ? config.rolecharacter.score || 0 : 0));
             }
             updateScore(root, config.passinggrade, config.maxgrade);
+            updateMissionProgress();
         };
 
         var sendSpeakingForScore = function(blob) {
@@ -1214,6 +2139,8 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 if (!response.status) {
                     speakingText = '';
                     aiFeedback = '';
+                    speakingResults = [];
+                    root.setAttribute('data-speaking-complete', '0');
                     transcriptRegion.textContent = response.feedback ||
                         (config.strings.nospeechdetected || 'I could not hear enough speech. Please try recording again.');
                     feedbackRegion.textContent = '';
@@ -1222,10 +2149,23 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
 
                 speakingText = response.transcript || '';
                 aiFeedback = response.feedback || response.rawjson || '';
+                root.setAttribute('data-speaking-complete', speakingText !== '' ? '1' : '0');
+                speakingResults = [{
+                    prompt: config.quizquestion || '',
+                    expectedresponse: bestAnswerText(),
+                    recognizedresponse: speakingText,
+                    feedback: aiFeedback,
+                    score: response.totalscore || 0,
+                    normalizedscore: normalizeServiceScore(response.totalscore),
+                    kpcodes: config.kpcodes || [],
+                    rawjson: response.rawjson || ''
+                }];
                 transcriptRegion.textContent = speakingText || (config.strings.speakingempty || 'No speaking reply yet.');
                 feedbackRegion.textContent = aiFeedback;
+                updateMissionProgress();
                 return response;
             }).catch(function(error) {
+                root.setAttribute('data-speaking-complete', '0');
                 transcriptRegion.textContent = config.strings.speakingfailed || 'Speaking scoring failed.';
                 feedbackRegion.textContent = config.strings.nospeechdetected ||
                     'Please try recording again. If this keeps happening, ask your teacher to check the local scoring service.';
@@ -1278,6 +2218,18 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     }
                     roleSpeakingLog.push('Learner turn ' + turnNumber + ': ' + turnTranscript);
                     roleFeedbackLog.push('Turn ' + turnNumber + ': ' + turnFeedback);
+                    roleTurnResults.push({
+                        role: config.rolecharacter.name || 'Character',
+                        character: config.rolecharacter.name || '',
+                        prompt: turn.line || config.rolecharacter.line || '',
+                        expectedresponse: turn.expectedanswer || config.rolecharacter.expectedanswer || '',
+                        learnerresponse: turnTranscript,
+                        feedback: turnFeedback,
+                        score: response.totalscore || turn.score || 0,
+                        maxscore: response.totalscore ? 100 : (config.maxgrade || 100),
+                        normalizedscore: normalizeServiceScore(response.totalscore),
+                        kpcodes: turn.kpcodes || config.rolecharacter.kpcodes || []
+                    });
                     roleSpeakingText = roleSpeakingLog.join("\n");
                     updateRoleSpeakingExport();
                     roleAiFeedback = roleFeedbackLog.join("\n");
@@ -1451,6 +2403,199 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     isNaN(score) ? 20 : clamp(score, 0, 100),
                     kpcodes.replace(/\|/g, '/')
                 ].join('|'));
+                renderRoleTurnPreview();
+            });
+        }
+
+        if (hotspotAppendButton) {
+            hotspotAppendButton.addEventListener('click', function() {
+                var field = getEditorField('customhotspots');
+                if (!field) {
+                    return;
+                }
+                var line = hotspotLineFromBuilder();
+                appendEditorLine('customhotspots', line);
+                createLiveHotspotFromLine(line);
+                selectedHotspotIndex = splitLines(field.value).length - 1;
+                renderHotspotPreview();
+            });
+        }
+
+        if (hotspotUpdateButton) {
+            hotspotUpdateButton.addEventListener('click', function() {
+                var field = getEditorField('customhotspots');
+                if (!field) {
+                    return;
+                }
+                var lines = splitLines(field.value);
+                if (selectedHotspotIndex < 0 || selectedHotspotIndex >= lines.length) {
+                    selectedHotspotIndex = lines.length ? 0 : -1;
+                }
+                if (selectedHotspotIndex >= 0) {
+                    var oldLine = lines[selectedHotspotIndex];
+                    lines[selectedHotspotIndex] = hotspotLineFromBuilder();
+                    field.value = lines.join("\n");
+                    field.dispatchEvent(new Event('input', {bubbles: true}));
+                    syncLiveHotspotFromLine(oldLine, lines[selectedHotspotIndex]);
+                    renderRotation();
+                    updateScore(root, config.passinggrade, config.maxgrade);
+                    updateMissionProgress();
+                    renderHotspotPreview();
+                }
+            });
+        }
+
+        if (hotspotDeleteButton) {
+            hotspotDeleteButton.addEventListener('click', function() {
+                var field = getEditorField('customhotspots');
+                if (!field) {
+                    return;
+                }
+                var lines = splitLines(field.value);
+                if (selectedHotspotIndex >= 0 && selectedHotspotIndex < lines.length) {
+                    var removedLine = lines[selectedHotspotIndex];
+                    lines.splice(selectedHotspotIndex, 1);
+                    field.value = lines.join("\n");
+                    selectedHotspotIndex = Math.min(selectedHotspotIndex, lines.length - 1);
+                    field.dispatchEvent(new Event('input', {bubbles: true}));
+                    removeLiveHotspotForLine(removedLine);
+                    renderRotation();
+                    updateScore(root, config.passinggrade, config.maxgrade);
+                    updateMissionProgress();
+                    renderHotspotPreview();
+                }
+            });
+        }
+
+        if (insertKpButton) {
+            insertKpButton.addEventListener('click', insertKpCode);
+        }
+
+        if (applyScenarioTemplateButton) {
+            applyScenarioTemplateButton.addEventListener('click', applyScenarioTemplate);
+        }
+
+        if (bindObjectRefButton) {
+            bindObjectRefButton.addEventListener('click', function() {
+                if (!objectBrowserSelect || !objectBrowserSelect.value) {
+                    return;
+                }
+                setHotspotBuilderValue('objectref', objectBrowserSelect.value);
+                var field = getEditorField('customhotspots');
+                if (field && selectedHotspotIndex >= 0) {
+                    var lines = splitLines(field.value);
+                    if (selectedHotspotIndex < lines.length) {
+                        var oldLine = lines[selectedHotspotIndex];
+                        lines[selectedHotspotIndex] = hotspotLineFromBuilder();
+                        field.value = lines.join("\n");
+                        field.dispatchEvent(new Event('input', {bubbles: true}));
+                        syncLiveHotspotFromLine(oldLine, lines[selectedHotspotIndex]);
+                        renderRotation();
+                        renderHotspotPreview();
+                    }
+                }
+                if (roomEditorStatus) {
+                    roomEditorStatus.textContent = (config.strings.objectbound || 'Object bound: {$a}')
+                        .replace('{$a}', objectBrowserSelect.value);
+                }
+            });
+        }
+
+        if (exportScenarioButton && scenarioJsonField) {
+            exportScenarioButton.addEventListener('click', function() {
+                scenarioJsonField.value = JSON.stringify(editorScenarioData(), null, 2);
+                scenarioJsonField.select();
+                if (roomEditorStatus) {
+                    roomEditorStatus.textContent = config.strings.scenarioexported || 'Scenario JSON exported.';
+                }
+            });
+        }
+
+        if (importScenarioButton && scenarioJsonField) {
+            importScenarioButton.addEventListener('click', function() {
+                try {
+                    applyScenarioData(JSON.parse(scenarioJsonField.value || '{}'));
+                    if (roomEditorStatus) {
+                        roomEditorStatus.textContent = config.strings.scenarioimported ||
+                            'Scenario JSON imported. Save the editor to keep it.';
+                    }
+                } catch (error) {
+                    if (roomEditorStatus) {
+                        roomEditorStatus.textContent = config.strings.scenarioimportfailed ||
+                            'Scenario JSON could not be imported.';
+                    }
+                }
+            });
+        }
+
+        var customHotspotsField = getEditorField('customhotspots');
+        if (customHotspotsField) {
+            customHotspotsField.addEventListener('input', renderHotspotPreview);
+            renderHotspotPreview();
+        }
+        var roleTurnsField = getEditorField('roleturns');
+        if (roleTurnsField) {
+            roleTurnsField.addEventListener('input', renderRoleTurnPreview);
+            renderRoleTurnPreview();
+        }
+
+        if (xrStatus) {
+            if (navigator.xr && navigator.xr.isSessionSupported) {
+                Promise.all([
+                    navigator.xr.isSessionSupported('immersive-vr').catch(function() {
+                        return false;
+                    }),
+                    navigator.xr.isSessionSupported('immersive-ar').catch(function() {
+                        return false;
+                    })
+                ]).then(function(results) {
+                    var vr = results[0];
+                    var ar = results[1];
+                    if (vr && webxrButton) {
+                        webxrButton.hidden = false;
+                    }
+                    xrStatus.textContent = (config.strings.xravailable || 'XR: {$a}')
+                        .replace('{$a}', [
+                            vr ? 'VR' : '',
+                            ar ? 'AR' : ''
+                        ].filter(function(item) {
+                            return item !== '';
+                        }).join(', ') || (config.strings.xrnotavailable || 'not available'));
+                });
+            } else {
+                xrStatus.textContent = config.strings.desktopfallback ||
+                    (config.strings.xrnotavailable || 'XR not available in this browser.');
+            }
+        }
+
+        if (webxrButton) {
+            webxrButton.addEventListener('click', function() {
+                if (!navigator.xr || !navigator.xr.requestSession || !threeState || !threeState.enterWebXR) {
+                    if (xrStatus) {
+                        xrStatus.textContent = config.strings.desktopfallback ||
+                            (config.strings.xrnotavailable || 'XR not available in this browser.');
+                    }
+                    return;
+                }
+                threeState.enterWebXR()
+                    .then(function(session) {
+                        if (xrStatus) {
+                            xrStatus.textContent = config.strings.xrstarted || 'Immersive VR session started.';
+                        }
+                        if (session && session.addEventListener) {
+                            session.addEventListener('end', function() {
+                                if (xrStatus) {
+                                    xrStatus.textContent = (config.strings.xravailable || 'XR available: {$a}')
+                                        .replace('{$a}', 'VR');
+                                }
+                            });
+                        }
+                    })
+                    .catch(function() {
+                        if (xrStatus) {
+                            xrStatus.textContent = config.strings.xrstartfailed || 'Could not start immersive VR.';
+                        }
+                    });
             });
         }
 
@@ -1472,6 +2617,7 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     methodname: 'mod_flwvrroom_save_room_editor',
                     args: {
                         cmid: config.cmid,
+                        kpcodes: editorValue('kpcodes'),
                         customhotspots: editorValue('customhotspots'),
                         custommissiontitle: editorValue('custommissiontitle'),
                         custommissiontext: editorValue('custommissiontext'),
@@ -1484,7 +2630,15 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                         rolescore: parseInt(editorValue('rolescore'), 10) || 0,
                         roleturns: editorValue('roleturns'),
                         roleaienabled: editorValue('roleaienabled'),
-                        roleaiturns: parseInt(editorValue('roleaiturns'), 10) || 3
+                        roleaiturns: parseInt(editorValue('roleaiturns'), 10) || 3,
+                        roleaipersonality: editorValue('roleaipersonality'),
+                        roleaidifficulty: editorValue('roleaidifficulty') || 'friendly',
+                        roleaitargetpattern: editorValue('roleaitargetpattern'),
+                        roleaimaxretries: intOrDefault(editorValue('roleaimaxretries'), 1),
+                        completionrequirehotspots: editorValue('completionrequirehotspots'),
+                        completionrequirespeaking: editorValue('completionrequirespeaking'),
+                        completionrequirerole: editorValue('completionrequirerole'),
+                        completionminscore: intOrDefault(editorValue('completionminscore'), config.passinggrade || 70)
                     }
                 }])[0].then(function(response) {
                     if (roomEditorStatus) {
@@ -1506,9 +2660,11 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
 
         var save = root.querySelector('[data-action="save-attempt"]');
         var status = root.querySelector('[data-region="status"]');
+        updateMissionProgress();
 
         save.addEventListener('click', function() {
             var result = updateScore(root, config.passinggrade, config.maxgrade);
+            var issues = completionIssues(result.score);
             var submitKpcodes = (config.kpcodes || []).slice();
             if (roleComplete) {
                 var roleKps = roleCompletedKpcodes.length ? roleCompletedKpcodes :
@@ -1537,13 +2693,18 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                     kpcodes: submitKpcodes.join(','),
                     speakingtext: submitSpeakingText,
                     aifeedback: submitAiFeedback,
-                    taskcomplete: result.score >= config.passinggrade,
+                    hotspotsjson: JSON.stringify(completedHotspotPayload()),
+                    roleturnsjson: JSON.stringify(roleTurnResults),
+                    speakingjson: JSON.stringify(speakingResults),
+                    taskcomplete: issues.length === 0,
                     durationseconds: Math.round((Date.now() - started) / 1000)
                 }
             }])[0].then(function(response) {
                 var bestScore = root.querySelector('[data-region="best-score"]');
                 bestScore.textContent = Math.max(parseInt(bestScore.textContent, 10) || 0, response.score);
-                status.textContent = config.strings.saved + ' Score: ' + response.score + (response.passed ? ' / Passed' : ' / Try again');
+                status.textContent = config.strings.saved + ' Score: ' + response.score + (issues.length === 0 ?
+                    ' / ' + (config.strings.completionready || 'Completion ready.') :
+                    ' / ' + issues.join(' '));
                 return response;
             }).catch(function(error) {
                 status.textContent = config.strings.savefailed;

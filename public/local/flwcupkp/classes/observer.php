@@ -7,6 +7,7 @@ defined('MOODLE_INTERNAL') || die();
 
 use local_flwcupkp\local\repository;
 use local_flwcupkp\local\activity_evidence_adapter;
+use local_flwcupkp\local\flwvrroom_evidence_adapter;
 use local_flwcupkp\local\quiz_evidence_adapter;
 use local_flwcupkp\local\specialized_evidence_adapter;
 
@@ -120,6 +121,20 @@ class observer {
         $result = specialized_evidence_adapter::process_scorm_score($event);
         repository::audit('scorm_scoreraw_submitted', 'scorm_score', (int)$event->objectid, [
             'userid' => $event->userid,
+            'courseid' => $event->courseid,
+            'adapter_result' => $result,
+        ]);
+    }
+
+    /**
+     * Convert mapped FLW VR Room attempts into C-UP-KP evidence.
+     *
+     * @param \core\event\base $event
+     */
+    public static function flwvrroom_attempt_submitted(\core\event\base $event): void {
+        $result = flwvrroom_evidence_adapter::process_attempt_submitted($event);
+        repository::audit('flwvrroom_attempt_submitted', 'flwvrroom_attempt', (int)$event->objectid, [
+            'userid' => $event->relateduserid ?: $event->userid,
             'courseid' => $event->courseid,
             'adapter_result' => $result,
         ]);

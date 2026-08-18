@@ -31,7 +31,7 @@
             <div class="flwvrroom-panorama" data-region="panorama" {{^is3d}}data-background-url="{{backgroundurl}}" style="background-image: url('{{backgroundurl}}');"{{/is3d}}>
                 <div class="flwvrroom-three" data-region="three-viewer"></div>
                 {{#hotspots}}
-                    <button class="flwvrroom-hotspot" type="button" data-hotspot="{{key}}" data-score="{{score}}" data-world-x="{{x}}" data-world-y="{{y}}" data-object-x="{{posx}}" data-object-y="{{posy}}" data-object-z="{{posz}}" data-hotspot-label="{{label}}" data-hotspot-description="{{description}}" data-hotspot-audio="{{audiourl}}">
+                    <button class="flwvrroom-hotspot" type="button" data-hotspot="{{key}}" data-score="{{score}}" data-world-x="{{x}}" data-world-y="{{y}}" data-object-x="{{posx}}" data-object-y="{{posy}}" data-object-z="{{posz}}" data-hotspot-label="{{label}}" data-hotspot-description="{{description}}" data-hotspot-audio="{{audiourl}}" data-hotspot-kpcodes="{{kpcodescsv}}" data-hotspot-objectref="{{objectref}}">
                         <span>{{label}}</span>
                     </button>
                 {{/hotspots}}
@@ -51,6 +51,11 @@
                 <button type="button" class="btn btn-secondary" data-action="pan-right" title="{{#str}}panright, flwvrroom{{/str}}">&gt;</button>
                 <button type="button" class="btn btn-secondary" data-action="move-back" title="{{#str}}moveback, flwvrroom{{/str}}">v</button>
             </div>
+            <div class="flwvrroom-xr-panel flwvrroom-xr-stage" data-region="xr-panel">
+                <button type="button" class="btn btn-secondary btn-sm" data-action="enter-webxr" hidden>{{#str}}enterwebxr, flwvrroom{{/str}}</button>
+                <span data-region="xr-status">{{#str}}xrdetecting, flwvrroom{{/str}}</span>
+            </div>
+            <div class="flwvrroom-model-status" data-region="model-status" hidden></div>
             {{#caneditroom}}
                 <div class="flwvrroom-author-tools">
                     <button type="button" class="btn btn-secondary btn-sm" data-action="toggle-position-helper">
@@ -65,6 +70,7 @@
                     <input type="text" data-region="position-helper-hotspot-label" value="New hotspot" aria-label="{{#str}}hotspotlabel, flwvrroom{{/str}}">
                     <input type="number" data-region="position-helper-hotspot-score" value="10" min="0" max="100" aria-label="{{#str}}hotspotscore, flwvrroom{{/str}}">
                     <input type="text" data-region="position-helper-output" readonly aria-label="{{#str}}positionhelperoutput, flwvrroom{{/str}}">
+                    <button type="button" class="btn btn-secondary btn-sm" data-action="visual-place-hotspot">{{#str}}visualplacehotspot, flwvrroom{{/str}}</button>
                     <span data-region="position-helper-status">{{#str}}positionhelperidle, flwvrroom{{/str}}</span>
                 </div>
             {{/caneditroom}}
@@ -103,6 +109,16 @@
                 <strong data-region="score">0</strong>
             </div>
 
+            <div class="flwvrroom-mission-checklist">
+                <h4>{{#str}}missionprogress, flwvrroom{{/str}}</h4>
+                <ul>
+                    {{#hotspots}}<li data-progress-hotspot="{{key}}">{{label}}</li>{{/hotspots}}
+                    <li data-progress-speaking>{{#str}}speakingevidence, flwvrroom{{/str}}</li>
+                    {{#rolecharacterenabled}}<li data-progress-role>{{#str}}roleplay, flwvrroom{{/str}}</li>{{/rolecharacterenabled}}
+                </ul>
+                <p data-region="next-step">{{#str}}nextstephotspot, flwvrroom{{/str}}</p>
+            </div>
+
             <div class="flwvrroom-quiz">
                 <p>{{quizquestion}}</p>
                 {{#answers}}
@@ -134,10 +150,72 @@
             {{#caneditroom}}
                 <div class="flwvrroom-editor-panel" data-region="room-editor">
                     <h4>{{#str}}roomeditor, flwvrroom{{/str}}</h4>
+                    {{#hasscenariotemplates}}
+                        <div class="flwvrroom-template-helper">
+                            <label>{{#str}}scenariotemplate, flwvrroom{{/str}}
+                                <select data-region="scenario-template-select">
+                                    {{#scenariotemplates}}<option value="{{json}}">{{name}}</option>{{/scenariotemplates}}
+                                </select>
+                            </label>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="apply-scenario-template">{{#str}}applytemplate, flwvrroom{{/str}}</button>
+                        </div>
+                    {{/hasscenariotemplates}}
+                    <div class="flwvrroom-scenario-io">
+                        <h5>{{#str}}scenarioimportexport, flwvrroom{{/str}}</h5>
+                        <textarea data-region="scenario-json" rows="5"></textarea>
+                        <div class="flwvrroom-editor-actions">
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="export-scenario">{{#str}}exportscenario, flwvrroom{{/str}}</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="import-scenario">{{#str}}importscenario, flwvrroom{{/str}}</button>
+                        </div>
+                    </div>
+                    {{#haskpoptions}}
+                        <div class="flwvrroom-kp-helper">
+                            <label>{{#str}}kppicker, flwvrroom{{/str}}
+                                <select data-region="kp-helper-select">
+                                    {{#kpoptions}}<option value="{{code}}">{{label}}</option>{{/kpoptions}}
+                                </select>
+                            </label>
+                            <label>{{#str}}kppickertarget, flwvrroom{{/str}}
+                                <select data-region="kp-helper-target">
+                                    <option value="activity">{{#str}}kppickeractivity, flwvrroom{{/str}}</option>
+                                    <option value="hotspot">{{#str}}kppickerhotspot, flwvrroom{{/str}}</option>
+                                    <option value="role">{{#str}}kppickerrole, flwvrroom{{/str}}</option>
+                                    <option value="turn">{{#str}}kppickerturn, flwvrroom{{/str}}</option>
+                                </select>
+                            </label>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="insert-kp-code">{{#str}}insertkpcode, flwvrroom{{/str}}</button>
+                        </div>
+                    {{/haskpoptions}}
+                    <label>{{#str}}kpcodes, flwvrroom{{/str}}<textarea data-editor-field="kpcodes" rows="3">{{editorkpcodes}}</textarea></label>
                     <label>{{#str}}custommissiontitle, flwvrroom{{/str}}<input type="text" data-editor-field="custommissiontitle" value="{{editorcustommissiontitle}}"></label>
                     <label>{{#str}}custommissiontext, flwvrroom{{/str}}<textarea data-editor-field="custommissiontext" rows="3">{{editorcustommissiontext}}</textarea></label>
                     <label>{{#str}}customquizquestion, flwvrroom{{/str}}<textarea data-editor-field="customquizquestion" rows="3">{{editorcustomquizquestion}}</textarea></label>
                     <label>{{#str}}customanswers, flwvrroom{{/str}}<textarea data-editor-field="customanswers" rows="4">{{editorcustomanswers}}</textarea></label>
+                    <div class="flwvrroom-hotspot-builder" data-region="hotspot-builder">
+                        <h5>{{#str}}hotspotbuilder, flwvrroom{{/str}}</h5>
+                        <label>{{#str}}hotspotkey, flwvrroom{{/str}}<input type="text" data-hotspot-builder="key" value="newhotspot"></label>
+                        <label>{{#str}}hotspotlabel, flwvrroom{{/str}}<input type="text" data-hotspot-builder="label" value="New hotspot"></label>
+                        <label>{{#str}}hotspotscore, flwvrroom{{/str}}<input type="number" data-hotspot-builder="score" value="10" min="0" max="100"></label>
+                        <label>{{#str}}hotspotposition2d, flwvrroom{{/str}}<input type="text" data-hotspot-builder="position2d" value="50|50"></label>
+                        <label>{{#str}}hotspotposition3d, flwvrroom{{/str}}<input type="text" data-hotspot-builder="position3d"></label>
+                        <label>{{#str}}hotspotdescription, flwvrroom{{/str}}<textarea data-hotspot-builder="description" rows="2"></textarea></label>
+                        <label>{{#str}}hotspotaudiourl, flwvrroom{{/str}}<input type="text" data-hotspot-builder="audio"></label>
+                        <label>{{#str}}hotspotkpcodes, flwvrroom{{/str}}<textarea data-hotspot-builder="kpcodes" rows="2"></textarea></label>
+                        <label>{{#str}}hotspotobjectref, flwvrroom{{/str}}<input type="text" data-hotspot-builder="objectref"></label>
+                        <div class="flwvrroom-object-browser">
+                            <label>{{#str}}objectbrowser, flwvrroom{{/str}}
+                                <select data-region="object-browser-select"></select>
+                            </label>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="bind-object-ref">{{#str}}bindobjectref, flwvrroom{{/str}}</button>
+                            <span data-region="object-browser-status">{{#str}}objectbrowserempty, flwvrroom{{/str}}</span>
+                        </div>
+                        <div class="flwvrroom-editor-actions">
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="append-hotspot">{{#str}}appendhotspot, flwvrroom{{/str}}</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="update-hotspot">{{#str}}updatehotspot, flwvrroom{{/str}}</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-action="delete-hotspot">{{#str}}deletehotspot, flwvrroom{{/str}}</button>
+                        </div>
+                        <div class="flwvrroom-editor-preview" data-region="hotspot-preview"></div>
+                    </div>
                     <label>{{#str}}customhotspots, flwvrroom{{/str}}<textarea data-editor-field="customhotspots" rows="7">{{editorcustomhotspots}}</textarea></label>
                     <label>{{#str}}rolecharacterposition, flwvrroom{{/str}}<input type="text" data-editor-field="rolecharacterposition" value="{{editorroleposition}}"></label>
                     <label>{{#str}}rolecharacterline, flwvrroom{{/str}}<textarea data-editor-field="rolecharacterline" rows="2">{{editorroleline}}</textarea></label>
@@ -153,8 +231,26 @@
                         <button type="button" class="btn btn-secondary btn-sm" data-action="append-role-turn">{{#str}}appendroleturn, flwvrroom{{/str}}</button>
                     </div>
                     <label>{{#str}}roleturns, flwvrroom{{/str}}<textarea data-editor-field="roleturns" rows="5">{{editorroleturns}}</textarea></label>
+                    <div class="flwvrroom-editor-preview" data-region="role-turn-preview"></div>
                     <label class="flwvrroom-editor-check"><input type="checkbox" data-editor-field="roleaienabled" value="1" {{#editorroleaienabled}}checked{{/editorroleaienabled}}> {{#str}}roleaienabled, flwvrroom{{/str}}</label>
                     <label>{{#str}}roleaiturns, flwvrroom{{/str}}<input type="number" data-editor-field="roleaiturns" value="{{editorroleaiturns}}" min="1" max="10"></label>
+                    <label>{{#str}}roleaipersonality, flwvrroom{{/str}}<textarea data-editor-field="roleaipersonality" rows="3">{{editorroleaipersonality}}</textarea></label>
+                    <label>{{#str}}roleaidifficulty, flwvrroom{{/str}}
+                        <select data-editor-field="roleaidifficulty">
+                            <option value="friendly" {{#editorroleaidifficultyfriendly}}selected{{/editorroleaidifficultyfriendly}}>{{#str}}roleaidifficulty_friendly, flwvrroom{{/str}}</option>
+                            <option value="standard" {{#editorroleaidifficultystandard}}selected{{/editorroleaidifficultystandard}}>{{#str}}roleaidifficulty_standard, flwvrroom{{/str}}</option>
+                            <option value="challenge" {{#editorroleaidifficultychallenge}}selected{{/editorroleaidifficultychallenge}}>{{#str}}roleaidifficulty_challenge, flwvrroom{{/str}}</option>
+                        </select>
+                    </label>
+                    <label>{{#str}}roleaitargetpattern, flwvrroom{{/str}}<textarea data-editor-field="roleaitargetpattern" rows="3">{{editorroleaitargetpattern}}</textarea></label>
+                    <label>{{#str}}roleaimaxretries, flwvrroom{{/str}}<input type="number" data-editor-field="roleaimaxretries" value="{{editorroleaimaxretries}}" min="0" max="5"></label>
+                    <div class="flwvrroom-completion-editor">
+                        <h5>{{#str}}completionrulesettings, flwvrroom{{/str}}</h5>
+                        <label class="flwvrroom-editor-check"><input type="checkbox" data-editor-field="completionrequirehotspots" value="1" {{#editorcompletionrequirehotspots}}checked{{/editorcompletionrequirehotspots}}> {{#str}}completionrequirehotspots, flwvrroom{{/str}}</label>
+                        <label class="flwvrroom-editor-check"><input type="checkbox" data-editor-field="completionrequirespeaking" value="1" {{#editorcompletionrequirespeaking}}checked{{/editorcompletionrequirespeaking}}> {{#str}}completionrequirespeaking, flwvrroom{{/str}}</label>
+                        <label class="flwvrroom-editor-check"><input type="checkbox" data-editor-field="completionrequirerole" value="1" {{#editorcompletionrequirerole}}checked{{/editorcompletionrequirerole}}> {{#str}}completionrequirerole, flwvrroom{{/str}}</label>
+                        <label>{{#str}}completionminscore, flwvrroom{{/str}}<input type="number" data-editor-field="completionminscore" value="{{editorcompletionminscore}}" min="0" max="100"></label>
+                    </div>
                     <button type="button" class="btn btn-secondary" data-action="save-room-editor">{{#str}}saveroomeditor, flwvrroom{{/str}}</button>
                     <p class="flwvrroom-editor-status" data-region="room-editor-status" aria-live="polite"></p>
                 </div>

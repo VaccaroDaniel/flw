@@ -27,6 +27,10 @@ class role_waiter extends \external_api {
             'currentline' => new \external_value(PARAM_RAW, 'Current character line', VALUE_DEFAULT, ''),
             'learnerreply' => new \external_value(PARAM_RAW, 'Learner reply transcript', VALUE_DEFAULT, ''),
             'history' => new \external_value(PARAM_RAW, 'Conversation history', VALUE_DEFAULT, ''),
+            'personality' => new \external_value(PARAM_RAW, 'Character personality guidance', VALUE_DEFAULT, ''),
+            'difficulty' => new \external_value(PARAM_TEXT, 'Conversation difficulty', VALUE_DEFAULT, ''),
+            'targetpattern' => new \external_value(PARAM_RAW, 'Target language pattern', VALUE_DEFAULT, ''),
+            'maxretries' => new \external_value(PARAM_INT, 'Maximum retry count', VALUE_DEFAULT, 1),
         ]);
     }
 
@@ -35,7 +39,9 @@ class role_waiter extends \external_api {
      *
      * @return array
      */
-    public static function execute($cmid, $character = 'Waiter', $role = 'Cafe waiter', $scenario = '', $cefrlevel = 'A1', $currentline = '', $learnerreply = '', $history = '') {
+    public static function execute($cmid, $character = 'Waiter', $role = 'Cafe waiter', $scenario = '', $cefrlevel = 'A1',
+            $currentline = '', $learnerreply = '', $history = '', $personality = '', $difficulty = '',
+            $targetpattern = '', $maxretries = 1) {
         global $DB, $USER;
 
         $params = self::validate_parameters(self::execute_parameters(), [
@@ -47,6 +53,10 @@ class role_waiter extends \external_api {
             'currentline' => $currentline,
             'learnerreply' => $learnerreply,
             'history' => $history,
+            'personality' => $personality,
+            'difficulty' => $difficulty,
+            'targetpattern' => $targetpattern,
+            'maxretries' => $maxretries,
         ]);
 
         $cm = get_coursemodule_from_id('flwvrroom', $params['cmid'], 0, false, MUST_EXIST);
@@ -69,6 +79,10 @@ class role_waiter extends \external_api {
             'current_line' => $params['currentline'],
             'learner_reply' => $params['learnerreply'],
             'history' => $params['history'],
+            'personality' => trim((string)($params['personality'] ?: ($flwvrroom->roleaipersonality ?? ''))),
+            'difficulty' => trim((string)($params['difficulty'] ?: ($flwvrroom->roleaidifficulty ?? 'friendly'))),
+            'target_pattern' => trim((string)($params['targetpattern'] ?: ($flwvrroom->roleaitargetpattern ?? ''))),
+            'max_retries' => max(0, min(5, (int)$params['maxretries'])),
         ];
 
         try {

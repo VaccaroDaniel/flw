@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flw.local/schemas/flwvrroom_attempt.schema.json",
+  "title": "FLW VR Room Attempt Evidence Payload",
+  "type": "object",
+  "required": ["cmid", "userid"],
+  "additionalProperties": true,
+  "properties": {
+    "cmid": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "courseid": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "userid": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "attemptid": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "attemptref": {
+      "type": "string",
+      "description": "Optional stable external attempt reference when the source does not have a Moodle numeric attempt ID."
+    },
+    "scenario": {
+      "type": "string"
+    },
+    "xrmode": {
+      "type": "string",
+      "enum": ["", "panorama", "builtin3d", "uploaded3d", "webxr", "ar"]
+    },
+    "score": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "maxscore": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0
+    },
+    "durationseconds": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "kpcodes": {
+      "$ref": "#/$defs/codeList"
+    },
+    "completedobjects": {
+      "$ref": "#/$defs/codeList"
+    },
+    "hotspots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hotspot"
+      }
+    },
+    "roleturns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/roleTurn"
+      }
+    },
+    "speaking": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/speakingResult"
+      }
+    }
+  },
+  "$defs": {
+    "codeList": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "string",
+          "description": "Comma, semicolon, whitespace separated, or JSON array string."
+        }
+      ]
+    },
+    "scoreFields": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "maxscore": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "normalizedscore": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "confidence": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "kpcodes": {
+          "$ref": "#/$defs/codeList"
+        }
+      }
+    },
+    "hotspot": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/scoreFields"
+        },
+        {
+          "type": "object",
+          "required": ["id"],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "enum": ["info", "choice", "task", "speaking", "roleplay", "object3d"]
+            },
+            "completed": {
+              "type": "boolean",
+              "default": true
+            },
+            "position": {
+              "$ref": "#/$defs/vector3"
+            }
+          }
+        }
+      ]
+    },
+    "roleTurn": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/scoreFields"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string"
+            },
+            "character": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "learnerresponse": {
+              "type": "string"
+            },
+            "feedback": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "speakingResult": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/scoreFields"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "type": "string"
+            },
+            "expectedresponse": {
+              "type": "string"
+            },
+            "recognizedresponse": {
+              "type": "string"
+            },
+            "feedback": {
+              "type": "string"
+            },
+            "similarity": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "taskcompletion": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "intelligibility": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      ]
+    },
+    "vector3": {
+      "type": "object",
+      "required": ["x", "y", "z"],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

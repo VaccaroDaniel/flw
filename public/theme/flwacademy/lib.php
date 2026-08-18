@@ -19,6 +19,11 @@ function theme_flwacademy_get_main_scss_content($theme): string {
         $scss .= "\n\n" . file_get_contents($tokens);
     }
 
+    $system = __DIR__ . '/scss/system.scss';
+    if (is_readable($system)) {
+        $scss .= "\n\n" . file_get_contents($system);
+    }
+
     $post = __DIR__ . '/scss/post.scss';
     if (is_readable($post)) {
         $scss .= "\n\n" . file_get_contents($post);
@@ -1732,6 +1737,24 @@ function theme_flwacademy_extract_learning_language_text(string $text, string $l
 }
 
 /**
+ * Returns selected-language text using the active FLW learning language by default.
+ *
+ * This is the preferred entry point for FLW page output that may contain
+ * Moodle multilang markup, flattened legacy multilang text, or plain text.
+ *
+ * @param string $text
+ * @param string|null $languagecode
+ * @return string
+ */
+function theme_flwacademy_selected_learning_language_text(string $text, ?string $languagecode = null): string {
+    $languagecode = $languagecode !== null && $languagecode !== ''
+        ? $languagecode
+        : (theme_flwacademy_get_active_learning_language_code() ?: 'en');
+
+    return theme_flwacademy_extract_learning_language_text($text, $languagecode);
+}
+
+/**
  * Formats multilingual text for the selected FLW learning language.
  *
  * @param string $text
@@ -1741,7 +1764,7 @@ function theme_flwacademy_extract_learning_language_text(string $text, string $l
  * @return string
  */
 function theme_flwacademy_format_learning_language_text(string $text, int $format, context $context, string $languagecode): string {
-    $selectedtext = theme_flwacademy_extract_learning_language_text($text, $languagecode);
+    $selectedtext = theme_flwacademy_selected_learning_language_text($text, $languagecode);
     return format_text($selectedtext, $format, [
         'context' => $context,
         'overflowdiv' => true,
@@ -1764,7 +1787,7 @@ function theme_flwacademy_format_learning_language_string(
     string $languagecode,
     ?context $context = null
 ): string {
-    $selectedtext = theme_flwacademy_extract_learning_language_text($text, $languagecode);
+    $selectedtext = theme_flwacademy_selected_learning_language_text($text, $languagecode);
     $options = ['filter' => true];
     if ($context) {
         $options['context'] = $context;
@@ -2952,6 +2975,39 @@ function theme_flwacademy_get_selected_learning_language(array $learninglanguage
 }
 
 /**
+ * Adds runtime-only dashboard fragments that should not be stored in MUC.
+ *
+ * @param array $data
+ * @return array
+ */
+function theme_flwacademy_enrich_dashboard_runtime_data(array $data): array {
+    global $USER;
+
+    $data['cupkpcontrolcenterhtml'] = '';
+    $data['hascupkpcontrolcenter'] = false;
+
+    if (!isloggedin() || isguestuser()) {
+        return $data;
+    }
+
+    if (!class_exists('\local_flwcupkp\local\output_hooks')) {
+        return $data;
+    }
+
+    try {
+        $html = \local_flwcupkp\local\output_hooks::dashboard_control_center_html((int)$USER->id);
+        if ($html !== '') {
+            $data['cupkpcontrolcenterhtml'] = $html;
+            $data['hascupkpcontrolcenter'] = true;
+        }
+    } catch (\Throwable $exception) {
+        debugging('theme_flwacademy C-UP-KP dashboard export failed: ' . $exception->getMessage(), DEBUG_DEVELOPER);
+    }
+
+    return $data;
+}
+
+/**
  * Returns home-page course cards using Moodle categories/courses/progress.
  *
  * @param core_renderer $output
@@ -3195,7 +3251,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
     if ($dashboardcache) {
         $cached = $dashboardcache->get($dashboardcachekey);
         if ($cached !== false) {
-            return $cached;
+            return theme_flwacademy_enrich_dashboard_runtime_data($cached);
         }
     }
 
@@ -3420,7 +3476,7 @@ function theme_flwacademy_export_dashboard_data($output, array $learninglanguage
     if ($dashboardcache) {
         $dashboardcache->set($dashboardcachekey, $result);
     }
-    return $result;
+    return theme_flwacademy_enrich_dashboard_runtime_data($result);
 }
 
 /**
@@ -3932,7 +3988,7 @@ function theme_flwacademy_export_school_category_page(int $categoryid, core_rend
     foreach ($courses as $course) {
         $summary = '';
         if (!empty($course->summary)) {
-            $summarytext = theme_flwacademy_extract_learning_language_text($course->summary, $languageCode);
+            $summarytext = theme_flwacademy_selected_learning_language_text($course->summary, $languageCode);
             $summary = shorten_text(trim(strip_tags(format_text($summarytext, $course->summaryformat, [
                 'context' => context_course::instance($course->id),
                 'filter' => true,

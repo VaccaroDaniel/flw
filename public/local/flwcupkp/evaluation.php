@@ -114,7 +114,10 @@ echo html_writer::empty_tag('input', [
 echo html_writer::end_tag('form');
 
 $summary = $profile['summary'];
-echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-evaluation-hero']);
+echo html_writer::start_tag('div', [
+    'class' => 'local-flwcupkp-evaluation-hero',
+    'id' => 'local-flwcupkp-evaluation-summary',
+]);
 echo html_writer::tag('h3', s(fullname($learner)));
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-summary']);
 echo html_writer::tag('span', get_string('learningpoints', 'local_flwcupkp') . ': ' .
@@ -204,6 +207,7 @@ if ($targetoptions) {
 if (empty($profile['diagnostics'])) {
     echo html_writer::tag('p', get_string('nodiagnostics', 'local_flwcupkp'), ['class' => 'local-flwcupkp-muted']);
 } else {
+    echo html_writer::span('', 'local-flwcupkp-anchor', ['id' => 'local-flwcupkp-diagnostics']);
     $table = new html_table();
     $table->attributes['class'] = 'generaltable local-flwcupkp-table';
     $table->head = [
@@ -229,6 +233,7 @@ if (empty($profile['diagnostics'])) {
 if (empty($profile['recommendations'])) {
     echo html_writer::tag('p', get_string('norecommendations', 'local_flwcupkp'), ['class' => 'local-flwcupkp-muted']);
 } else {
+    echo html_writer::span('', 'local-flwcupkp-anchor', ['id' => 'local-flwcupkp-recommendations']);
     $table = new html_table();
     $table->attributes['class'] = 'generaltable local-flwcupkp-table';
     $table->head = [

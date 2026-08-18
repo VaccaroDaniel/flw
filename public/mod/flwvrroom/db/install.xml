@@ -33,6 +33,14 @@
         <FIELD NAME="roleturns" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="roleaienabled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="roleaiturns" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="3"/>
+        <FIELD NAME="roleaipersonality" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="roleaidifficulty" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="friendly"/>
+        <FIELD NAME="roleaitargetpattern" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="roleaimaxretries" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="completionrequirehotspots" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="completionrequirespeaking" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="completionrequirerole" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="completionminscore" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="70"/>
         <FIELD NAME="passinggrade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="70"/>
         <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
@@ -53,6 +61,9 @@
         <FIELD NAME="kpcodes" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="speakingtext" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="aifeedback" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="hotspotsjson" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="roleturnsjson" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="speakingjson" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="taskcomplete" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="durationseconds" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>

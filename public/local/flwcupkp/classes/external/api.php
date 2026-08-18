@@ -13,6 +13,7 @@ use external_single_structure;
 use external_value;
 use local_flwcupkp\local\audit_service;
 use local_flwcupkp\local\curriculum_manager;
+use local_flwcupkp\local\flwvrroom_evidence_adapter;
 use local_flwcupkp\local\import_service;
 use local_flwcupkp\local\learner_evaluation;
 use local_flwcupkp\local\mastery_engine;
@@ -332,6 +333,26 @@ class api extends external_api {
                 'ruleversion' => new external_value(PARAM_TEXT, 'Rule version'),
             ]),
         ]);
+    }
+
+    public static function record_flwvrroom_attempt_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'payloadjson' => new external_value(PARAM_RAW, 'Structured FLW VR Room attempt JSON payload'),
+        ]);
+    }
+
+    public static function record_flwvrroom_attempt(string $payloadjson = ''): array {
+        $params = self::validate_parameters(self::record_flwvrroom_attempt_parameters(), compact('payloadjson'));
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:override', context_system::instance());
+        self::assert_write_rate_limit('record_flwvrroom_attempt');
+
+        $payload = (object)self::decode_object_json($params['payloadjson']);
+        return self::json_response(flwvrroom_evidence_adapter::process_payload($payload));
+    }
+
+    public static function record_flwvrroom_attempt_returns(): external_single_structure {
+        return self::json_returns();
     }
 
     public static function get_learner_states_parameters(): external_function_parameters {

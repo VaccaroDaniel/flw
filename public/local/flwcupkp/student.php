@@ -55,7 +55,10 @@ foreach ($targets as $target) {
 }
 $total = count($targets);
 $percent = $total > 0 ? round(($mastered / $total) * 100) : 0;
-echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-progress-hero']);
+echo html_writer::start_tag('section', [
+    'class' => 'local-flwcupkp-progress-hero',
+    'id' => 'local-flwcupkp-progress-summary',
+]);
 echo html_writer::tag('div', get_string('unitprogress', 'local_flwcupkp') . ': ' . $percent . '%',
     ['class' => 'local-flwcupkp-progress-title']);
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-progressbar', 'aria-hidden' => 'true']);
@@ -106,6 +109,7 @@ foreach ($targets as $target) {
 if (!$table->data) {
     echo $OUTPUT->notification(get_string('nogenericunitrows', 'local_flwcupkp'), 'info');
 } else {
+    echo html_writer::span('', 'local-flwcupkp-anchor', ['id' => 'local-flwcupkp-kp-evidence']);
     echo \local_flwcupkp\local\visuals::details_panel(
         get_string('learningpointevidence', 'local_flwcupkp') . ' (' . count($table->data) . ')',
         html_writer::table($table)

@@ -131,6 +131,54 @@ body.path-local-flwexam #page.drawers .main-inner {
     margin-top: 1rem;
 }
 
+.flwexam-readiness-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .85rem;
+}
+
+.flwexam-readiness-card {
+    display: grid;
+    gap: .7rem;
+    min-width: 0;
+    padding: .85rem;
+    border: 1px solid var(--flwexam-line);
+    border-radius: 12px;
+    background: var(--flwexam-surface);
+}
+
+.flwexam-readiness-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .75rem;
+}
+
+.flwexam-readiness-title {
+    min-width: 0;
+}
+
+.flwexam-readiness-title strong,
+.flwexam-readiness-title span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.flwexam-readiness-title span {
+    color: var(--flwexam-muted);
+    font-size: .78rem;
+    margin-top: .2rem;
+}
+
+.flwexam-readiness-card .flw-system-mini-card small {
+    display: block;
+    color: var(--flwexam-muted);
+    font-size: .76rem;
+    margin-top: .25rem;
+}
+
 .flwexam-page .btn {
     border-radius: 12px;
     font-weight: 700;

@@ -36,4 +36,8 @@ $observers = [
         'eventname' => '\mod_scorm\event\scoreraw_submitted',
         'callback' => '\local_flwcupkp\observer::scorm_scoreraw_submitted',
     ],
+    [
+        'eventname' => '\mod_flwvrroom\event\attempt_submitted',
+        'callback' => '\local_flwcupkp\observer::flwvrroom_attempt_submitted',
+    ],
 ];

@@ -153,6 +153,83 @@ function local_flwplacement_get_quiz_info(int $quizid): ?array {
 }
 
 /**
+ * Return admin readiness metadata for a placement Moodle Quiz.
+ *
+ * @param int $quizid Quiz instance id.
+ * @return array|null
+ */
+function local_flwplacement_get_quiz_readiness_summary(int $quizid): ?array {
+    $quizinfo = local_flwplacement_get_quiz_info($quizid);
+    if (!$quizinfo) {
+        return null;
+    }
+
+    $required = (int)$quizinfo['requiredquestioncount'];
+    $attemptcount = (int)$quizinfo['attemptquestioncount'];
+    $sourcecount = (int)$quizinfo['sourcequestioncount'];
+    $ready = !empty($quizinfo['issamplecountok']) && $sourcecount >= $required;
+
+    return [
+        'quizid' => (int)$quizinfo['id'],
+        'quizname' => $quizinfo['name'],
+        'quizurl' => $quizinfo['url']->out(false),
+        'editquizurl' => (new moodle_url('/mod/quiz/edit.php', ['cmid' => (int)$quizinfo['cmid']]))->out(false),
+        'attemptquestioncount' => $attemptcount,
+        'sourcequestioncount' => $sourcecount,
+        'requiredquestioncount' => $required,
+        'progresswidth' => $required > 0 ? min(100, (int)round(($attemptcount / $required) * 100)) . '%' : '0%',
+        'ready' => $ready,
+        'statuslabel' => $ready
+            ? get_string('quizreadinessready', 'local_flwplacement')
+            : get_string('quizreadinessneedssetup', 'local_flwplacement'),
+        'lastsync' => local_flwplacement_get_quiz_last_sync_summary((int)$quizinfo['id']),
+    ];
+}
+
+/**
+ * Return the latest FLW placement sync created from one Moodle Quiz.
+ *
+ * @param int $quizid Quiz instance id.
+ * @return array|null
+ */
+function local_flwplacement_get_quiz_last_sync_summary(int $quizid): ?array {
+    global $DB;
+
+    if ($quizid <= 0 || !$DB->get_manager()->table_exists('local_flwplacement')) {
+        return null;
+    }
+
+    $needle = '%' . $DB->sql_like_escape('"quizid":' . $quizid) . '%';
+    $records = $DB->get_records_select(
+        'local_flwplacement',
+        $DB->sql_like('attemptjson', ':needle', false),
+        ['needle' => $needle],
+        'timecreated DESC, id DESC',
+        '*',
+        0,
+        1
+    );
+    $record = $records ? reset($records) : false;
+    if (!$record) {
+        return null;
+    }
+
+    $result = json_decode($record->resultjson ?? '[]', true) ?: [];
+    $user = \core_user::get_user((int)$record->userid, 'id, firstname, lastname, firstnamephonetic, lastnamephonetic, middlename, alternatename', IGNORE_MISSING);
+
+    return [
+        'resultid' => (int)$record->id,
+        'userid' => (int)$record->userid,
+        'userfullname' => $user ? fullname($user) : get_string('unknownuser', 'local_flwplacement'),
+        'cefrlevel' => (string)($result['overall_cefr'] ?? $result['cefr_level'] ?? '-'),
+        'score' => isset($result['weighted_score']) ? round((float)$result['weighted_score'], 1) : null,
+        'time' => (int)$record->timecreated,
+        'timelabel' => (int)$record->timecreated > 0 ? userdate((int)$record->timecreated) : get_string('never'),
+        'resulturl' => (new moodle_url('/local/flwplacement/view.php', ['id' => (int)$record->id]))->out(false),
+    ];
+}
+
+/**
  * Remove unfinished Moodle Quiz attempts whose saved layout no longer matches the quiz slots.
  *
  * Placement quizzes can be rebuilt from large question banks. If a learner had

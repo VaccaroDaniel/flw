@@ -351,5 +351,48 @@ function xmldb_flwvrroom_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026081400, 'flwvrroom');
     }
 
+    if ($oldversion < 2026081401) {
+        $table = new xmldb_table('flwvrroom_attempts');
+        if ($dbman->table_exists($table)) {
+            $fields = [
+                new xmldb_field('hotspotsjson', XMLDB_TYPE_TEXT, null, null, null, null, null, 'aifeedback'),
+                new xmldb_field('roleturnsjson', XMLDB_TYPE_TEXT, null, null, null, null, null, 'hotspotsjson'),
+                new xmldb_field('speakingjson', XMLDB_TYPE_TEXT, null, null, null, null, null, 'roleturnsjson'),
+            ];
+
+            foreach ($fields as $field) {
+                if (!$dbman->field_exists($table, $field)) {
+                    $dbman->add_field($table, $field);
+                }
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026081401, 'flwvrroom');
+    }
+
+    if ($oldversion < 2026081501) {
+        $table = new xmldb_table('flwvrroom');
+        if ($dbman->table_exists($table)) {
+            $fields = [
+                new xmldb_field('roleaipersonality', XMLDB_TYPE_TEXT, null, null, null, null, null, 'roleaiturns'),
+                new xmldb_field('roleaidifficulty', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, 'friendly', 'roleaipersonality'),
+                new xmldb_field('roleaitargetpattern', XMLDB_TYPE_TEXT, null, null, null, null, null, 'roleaidifficulty'),
+                new xmldb_field('roleaimaxretries', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '1', 'roleaitargetpattern'),
+                new xmldb_field('completionrequirehotspots', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'roleaimaxretries'),
+                new xmldb_field('completionrequirespeaking', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'completionrequirehotspots'),
+                new xmldb_field('completionrequirerole', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'completionrequirespeaking'),
+                new xmldb_field('completionminscore', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '70', 'completionrequirerole'),
+            ];
+
+            foreach ($fields as $field) {
+                if (!$dbman->field_exists($table, $field)) {
+                    $dbman->add_field($table, $field);
+                }
+            }
+        }
+
+        upgrade_mod_savepoint(true, 2026081501, 'flwvrroom');
+    }
+
     return true;
 }

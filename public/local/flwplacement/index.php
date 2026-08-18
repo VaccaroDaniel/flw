@@ -65,6 +65,7 @@ if (!$languagecategory) {
 $placementquizid = local_flwplacement_get_quiz_id_for_language($defaultlanguagecode);
 $placementquizinfo = $placementquizid > 0 ? local_flwplacement_get_quiz_info($placementquizid) : null;
 $usequizplacement = $placementquizid > 0;
+$placementquizreadiness = $usequizplacement ? local_flwplacement_get_quiz_readiness_summary($placementquizid) : null;
 $quizsyncerror = null;
 $placementtablesinstalled = $DB->get_manager()->table_exists('local_flwplacement');
 $forceautostart = optional_param('autostart', 0, PARAM_BOOL)
@@ -219,6 +220,52 @@ if ($usequizplacement) {
     echo html_writer::start_div('flw-placement-workspace flw-placement-quiz-mode', ['id' => 'flw-placement-workspace']);
     if ($quizsyncerror) {
         echo $output->notification($quizsyncerror->getMessage(), 'warning');
+    }
+    if ($placementquizreadiness && has_capability('local/flwplacement:manage', $context)) {
+        $statusclass = $placementquizreadiness['ready'] ? 'is-ready' : 'is-warning';
+        echo html_writer::start_tag('section', ['class' => 'flw-system-readiness flw-placement-readiness-panel']);
+        echo html_writer::start_div('flw-system-readiness-header');
+        echo html_writer::div(
+            html_writer::tag('h3', get_string('quizreadinesstitle', 'local_flwplacement')) .
+            html_writer::tag('p', get_string('quizreadinessintro', 'local_flwplacement'))
+        );
+        echo html_writer::span(s($placementquizreadiness['statuslabel']), 'flw-system-status-pill ' . $statusclass);
+        echo html_writer::end_div();
+        echo html_writer::start_div('flw-system-mini-grid');
+        echo html_writer::div(
+            html_writer::span(get_string('moodlequiz', 'local_flwplacement')) .
+            html_writer::tag('strong', s($placementquizreadiness['quizname'])),
+            'flw-system-mini-card'
+        );
+        echo html_writer::div(
+            html_writer::span(get_string('attemptquestions', 'local_flwplacement')) .
+            html_writer::tag('strong', (int)$placementquizreadiness['attemptquestioncount'] . ' / ' .
+                (int)$placementquizreadiness['requiredquestioncount']),
+            'flw-system-mini-card'
+        );
+        echo html_writer::div(
+            html_writer::span(get_string('sourcebankquestions', 'local_flwplacement')) .
+            html_writer::tag('strong', (int)$placementquizreadiness['sourcequestioncount']),
+            'flw-system-mini-card'
+        );
+        $lastsync = $placementquizreadiness['lastsync'];
+        echo html_writer::div(
+            html_writer::span(get_string('lastautosync', 'local_flwplacement')) .
+            html_writer::tag('strong', $lastsync ? s($lastsync['timelabel']) : get_string('never')) .
+            ($lastsync ? html_writer::tag('small', s($lastsync['userfullname'] . ' | ' .
+                $lastsync['cefrlevel'] . ($lastsync['score'] !== null ? ' | ' . $lastsync['score'] . '%' : ''))) : ''),
+            'flw-system-mini-card'
+        );
+        echo html_writer::end_div();
+        echo html_writer::div(html_writer::tag('i', '', ['style' => 'width:' . s($placementquizreadiness['progresswidth'])]), 'flw-system-progress');
+        echo html_writer::start_div('flw-placement-button-row');
+        echo html_writer::link($placementquizreadiness['quizurl'], get_string('openmoodlequiz', 'local_flwplacement'), ['class' => 'btn btn-secondary']);
+        echo html_writer::link($placementquizreadiness['editquizurl'], get_string('configurequizquestions', 'local_flwplacement'), ['class' => 'btn btn-primary']);
+        if ($lastsync) {
+            echo html_writer::link($lastsync['resulturl'], get_string('viewlastresult', 'local_flwplacement'), ['class' => 'btn btn-secondary']);
+        }
+        echo html_writer::end_div();
+        echo html_writer::end_tag('section');
     }
     echo html_writer::start_div('flw-placement-card flw-placement-quiz-card');
     echo html_writer::tag('h3', get_string('moodlequizplacement', 'local_flwplacement'));

@@ -44,7 +44,10 @@ echo \local_flwcupkp\local\visuals::unit_nav($courseid, 'U038', $userid,
     has_capability('local/flwcupkp:override', $context) &&
         \local_flwcupkp\local\performance_service::has_tasks($courseid, 'U038'));
 
-echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-progress-hero']);
+echo html_writer::start_tag('div', [
+    'class' => 'local-flwcupkp-progress-hero',
+    'id' => 'local-flwcupkp-progress-summary',
+]);
 echo html_writer::tag('div', get_string('unitprogress', 'local_flwcupkp') . ': ' . (int)$summary['percent'] . '%', [
     'class' => 'local-flwcupkp-progress-title',
 ]);
@@ -64,7 +67,10 @@ echo local_flwcupkp_student_next_card($progress, $courseid, $userid);
 echo \local_flwcupkp\local\visuals::student_progress_rings($summary, $parentsummary);
 echo \local_flwcupkp\local\visuals::hierarchy_map($courseid, 'U038', $userid);
 
-echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-overview']);
+echo html_writer::start_tag('section', [
+    'class' => 'local-flwcupkp-overview',
+    'id' => 'local-flwcupkp-parent-summary',
+]);
 echo html_writer::tag('h3', get_string('masteryoverviewu038', 'local_flwcupkp'));
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-summary']);
 echo html_writer::tag('span', get_string('competenciesachieved', 'local_flwcupkp') . ': ' .
@@ -118,6 +124,7 @@ foreach ($progress['parent_rows'] as $row) {
 if (empty($parenttable->data)) {
     echo $OUTPUT->notification(get_string('noparentrowsu038', 'local_flwcupkp'), 'info');
 } else {
+    echo html_writer::span('', 'local-flwcupkp-anchor', ['id' => 'local-flwcupkp-parent-targets']);
     echo \local_flwcupkp\local\visuals::details_panel(
         get_string('parenttargets', 'local_flwcupkp') . ' (' . count($parenttable->data) . ')',
         html_writer::table($parenttable)
@@ -187,6 +194,7 @@ foreach ($progress['rows'] as $row) {
 if (empty($table->data)) {
     echo $OUTPUT->notification(get_string('noprogressrows', 'local_flwcupkp'), 'info');
 } else {
+    echo html_writer::span('', 'local-flwcupkp-anchor', ['id' => 'local-flwcupkp-kp-evidence']);
     echo \local_flwcupkp\local\visuals::details_panel(
         get_string('learningpointevidence', 'local_flwcupkp') . ' (' . count($table->data) . ')',
         html_writer::table($table)
@@ -208,7 +216,10 @@ function local_flwcupkp_student_next_card(array $progress, int $courseid, int $u
 
     $next = $progress['next_recommendation'] ?? null;
     $classes = 'local-flwcupkp-next';
-    $html = html_writer::start_tag('section', ['class' => $classes]);
+    $html = html_writer::start_tag('section', [
+        'class' => $classes,
+        'id' => 'local-flwcupkp-next-action',
+    ]);
     $html .= html_writer::tag('h3', get_string('nextactivity', 'local_flwcupkp'));
     if ($next) {
         $html .= html_writer::tag('div', s($next['kp_externalid']) . ' - ' . s($next['kp_title']), [

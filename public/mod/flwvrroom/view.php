@@ -104,12 +104,15 @@ foreach ($preset['hotspots'] as $hotspot) {
         ];
     }
 
+    $hotspotkpcodes = array_values(array_filter(array_map('trim', $hotspot['kpcodes'] ?? [])));
     $hotspots[] = [
         'key' => $hotspot['key'],
         'label' => $hotspot['label'],
         'description' => s($hotspot['description'] ?? ''),
         'audiourl' => !empty($hotspot['audiourl']) ? clean_param($hotspot['audiourl'], PARAM_URL) : '',
         'hasaudio' => !empty($hotspot['audiourl']),
+        'kpcodescsv' => implode(',', $hotspotkpcodes),
+        'objectref' => s($hotspot['objectref'] ?? ''),
         'score' => (int) $hotspot['score'],
         'x' => (float) $hotspot['x'],
         'y' => (float) $hotspot['y'],
@@ -117,6 +120,65 @@ foreach ($preset['hotspots'] as $hotspot) {
         'posy' => (float) $position['y'],
         'posz' => (float) $position['z'],
         'style' => 'left: ' . (float) $hotspot['x'] . '%; top: ' . (float) $hotspot['y'] . '%;',
+    ];
+}
+
+$kpoptions = [];
+if ($DB->get_manager()->table_exists('flwcupkp_kp')) {
+    $records = $DB->get_records_sql(
+        "SELECT id, externalid, title
+           FROM {flwcupkp_kp}
+          WHERE status <> :archived
+       ORDER BY externalid ASC",
+        ['archived' => 'archived'],
+        0,
+        500
+    );
+    foreach ($records as $record) {
+        $kpoptions[] = [
+            'code' => s($record->externalid),
+            'label' => s($record->externalid . ' - ' . $record->title),
+        ];
+    }
+}
+
+$scenariotemplates = [];
+foreach (flwvrroom_get_scenario_presets() as $name => $scenario) {
+    $hotspotlines = [];
+    foreach ($scenario['hotspots'] as $hotspot) {
+        $hotspotlines[] = implode('|', [
+            $hotspot['key'] ?? '',
+            $hotspot['label'] ?? '',
+            (int)($hotspot['score'] ?? 10),
+            (float)($hotspot['x'] ?? 50),
+            (float)($hotspot['y'] ?? 50),
+            str_replace('|', '/', $hotspot['description'] ?? ''),
+            $hotspot['audiourl'] ?? '',
+            $hotspot['objectx'] ?? '',
+            $hotspot['objecty'] ?? '',
+            $hotspot['objectz'] ?? '',
+            implode(',', $hotspot['kpcodes'] ?? ($scenario['kpcodes'] ?? [])),
+            $hotspot['objectref'] ?? '',
+        ]);
+    }
+    $role = $scenario['rolecharacter'] ?? [];
+    $scenariotemplates[] = [
+        'name' => s($name),
+        'json' => json_encode([
+            'missiontitle' => $scenario['title'] ?? $name,
+            'missiontext' => $scenario['mission'] ?? '',
+            'quizquestion' => $scenario['prompt'] ?? '',
+            'answers' => implode("\n", array_map(static function($answer) {
+                return ($answer['text'] ?? '') . '|' . (int)($answer['score'] ?? 0);
+            }, $scenario['answers'] ?? [])),
+            'hotspots' => implode("\n", $hotspotlines),
+            'kpcodes' => implode("\n", $scenario['kpcodes'] ?? []),
+            'rolecharacterline' => $role['line'] ?? '',
+            'roleexpectedanswer' => $role['expectedanswer'] ?? '',
+            'rolekpcodes' => implode("\n", $scenario['kpcodes'] ?? []),
+            'rolescore' => (int)($role['score'] ?? 20),
+            'roleturns' => implode("\n", $role['turns'] ?? []),
+        ], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT),
     ];
 }
 
@@ -142,6 +204,7 @@ $templatecontext = [
     'roleposy' => $roleposition['y'],
     'roleposz' => $roleposition['z'],
     'editorcustomhotspots' => (string) ($flwvrroom->customhotspots ?? ''),
+    'editorkpcodes' => (string) ($flwvrroom->kpcodes ?? implode("\n", $kpcodes)),
     'editorcustommissiontitle' => (string) ($flwvrroom->custommissiontitle ?? $preset['title']),
     'editorcustommissiontext' => (string) ($flwvrroom->custommissiontext ?? $preset['mission']),
     'editorcustomquizquestion' => (string) ($flwvrroom->customquizquestion ?? $preset['prompt']),
@@ -154,6 +217,17 @@ $templatecontext = [
     'editorroleturns' => trim((string) ($flwvrroom->roleturns ?? '')) !== '' ? (string) $flwvrroom->roleturns : implode("\n", $presetrole['turns'] ?? []),
     'editorroleaienabled' => !empty($flwvrroom->roleaienabled),
     'editorroleaiturns' => max(1, (int) ($flwvrroom->roleaiturns ?? ($presetrole['aiturns'] ?? 3))),
+    'editorroleaipersonality' => (string) ($flwvrroom->roleaipersonality ?? 'Friendly, patient, short replies, suitable for beginner English learners.'),
+    'editorroleaidifficulty' => (string) ($flwvrroom->roleaidifficulty ?? 'friendly'),
+    'editorroleaidifficultyfriendly' => (string) ($flwvrroom->roleaidifficulty ?? 'friendly') === 'friendly',
+    'editorroleaidifficultystandard' => (string) ($flwvrroom->roleaidifficulty ?? 'friendly') === 'standard',
+    'editorroleaidifficultychallenge' => (string) ($flwvrroom->roleaidifficulty ?? 'friendly') === 'challenge',
+    'editorroleaitargetpattern' => (string) ($flwvrroom->roleaitargetpattern ?? 'Practice polite ordering and short clarification questions.'),
+    'editorroleaimaxretries' => max(0, (int) ($flwvrroom->roleaimaxretries ?? 1)),
+    'editorcompletionrequirehotspots' => !isset($flwvrroom->completionrequirehotspots) || !empty($flwvrroom->completionrequirehotspots),
+    'editorcompletionrequirespeaking' => !isset($flwvrroom->completionrequirespeaking) || !empty($flwvrroom->completionrequirespeaking),
+    'editorcompletionrequirerole' => !empty($flwvrroom->completionrequirerole),
+    'editorcompletionminscore' => max(0, (int) ($flwvrroom->completionminscore ?? $flwvrroom->passinggrade)),
     'rolecharacterspeaklabel' => get_string('speakwithcharacter', 'flwvrroom', s($rolecharactername)),
     'rolecharacterlinelabel' => get_string('characterline', 'flwvrroom', s($rolecharactername)),
     'scenariokey' => $preset['key'],
@@ -169,6 +243,10 @@ $templatecontext = [
     'kpcodes' => array_map(static function($code) {
         return ['code' => s($code)];
     }, $kpcodes),
+    'kpoptions' => $kpoptions,
+    'haskpoptions' => !empty($kpoptions),
+    'scenariotemplates' => $scenariotemplates,
+    'hasscenariotemplates' => !empty($scenariotemplates),
 ];
 
 $config = [
@@ -180,6 +258,7 @@ $config = [
     'scenario' => $flwvrroom->scenario,
     'cefrlevel' => $flwvrroom->cefrlevel,
     'kpcodes' => $kpcodes,
+    'kpoptions' => $kpoptions,
     'quizquestion' => $preset['prompt'],
     'rolecharacter' => [
         'enabled' => $rolecharacterenabled,
@@ -194,6 +273,16 @@ $config = [
         'turns' => $roleturns,
         'aienabled' => !empty($flwvrroom->roleaienabled),
         'aiturns' => max(1, (int) ($flwvrroom->roleaiturns ?? ($presetrole['aiturns'] ?? 3))),
+        'aipersonality' => (string) ($flwvrroom->roleaipersonality ?? ''),
+        'aidifficulty' => (string) ($flwvrroom->roleaidifficulty ?? 'friendly'),
+        'aitargetpattern' => (string) ($flwvrroom->roleaitargetpattern ?? ''),
+        'aimaxretries' => max(0, (int) ($flwvrroom->roleaimaxretries ?? 1)),
+    ],
+    'completionrules' => [
+        'requirehotspots' => !isset($flwvrroom->completionrequirehotspots) || !empty($flwvrroom->completionrequirehotspots),
+        'requirespeaking' => !isset($flwvrroom->completionrequirespeaking) || !empty($flwvrroom->completionrequirespeaking),
+        'requirerole' => !empty($flwvrroom->completionrequirerole),
+        'minscore' => max(0, (int) ($flwvrroom->completionminscore ?? $flwvrroom->passinggrade)),
     ],
     'speakingscoringurl' => trim((string) ($flwvrroom->speakingscoringurl ?? '')) ?: 'http://127.0.0.1:8000',
     'threeurl' => (new moodle_url('/mod/flwvrroom/js/three.module.min.js'))->out(false),
@@ -228,6 +317,36 @@ $config = [
         'nospeechdetected' => get_string('nospeechdetected', 'flwvrroom'),
         'recordingunsupported' => get_string('recordingunsupported', 'flwvrroom'),
         'recordingfailed' => get_string('recordingfailed', 'flwvrroom'),
+        'nohotspots' => get_string('nohotspots', 'flwvrroom'),
+        'noroleturns' => get_string('noroleturns', 'flwvrroom'),
+        'nextstephotspot' => get_string('nextstephotspot', 'flwvrroom'),
+        'nextstepspeaking' => get_string('nextstepspeaking', 'flwvrroom'),
+        'nextsteprole' => get_string('nextsteprole', 'flwvrroom'),
+        'nextstepsave' => get_string('nextstepsave', 'flwvrroom'),
+        'templateapplied' => get_string('templateapplied', 'flwvrroom'),
+        'templateapplyfailed' => get_string('templateapplyfailed', 'flwvrroom'),
+        'scenarioexported' => get_string('scenarioexported', 'flwvrroom'),
+        'scenarioimported' => get_string('scenarioimported', 'flwvrroom'),
+        'scenarioimportfailed' => get_string('scenarioimportfailed', 'flwvrroom'),
+        'objectbrowserempty' => get_string('objectbrowserempty', 'flwvrroom'),
+        'objectbrowserready' => get_string('objectbrowserready', 'flwvrroom', '{$a}'),
+        'objectbound' => get_string('objectbound', 'flwvrroom', '{$a}'),
+        'visualeditorselect' => get_string('visualeditorselect', 'flwvrroom'),
+        'visualeditorupdated' => get_string('visualeditorupdated', 'flwvrroom'),
+        'visualeditorcreated' => get_string('visualeditorcreated', 'flwvrroom'),
+        'completionmissinghotspots' => get_string('completionmissinghotspots', 'flwvrroom'),
+        'completionmissingspeaking' => get_string('completionmissingspeaking', 'flwvrroom'),
+        'completionmissingrole' => get_string('completionmissingrole', 'flwvrroom'),
+        'completionmissingscore' => get_string('completionmissingscore', 'flwvrroom', '{$a}'),
+        'completionready' => get_string('completionready', 'flwvrroom'),
+        'loadingmodel' => get_string('loadingmodel', 'flwvrroom'),
+        'modelloaded' => get_string('modelloaded', 'flwvrroom', '{$a}'),
+        'modelbigwarning' => get_string('modelbigwarning', 'flwvrroom', '{$a}'),
+        'desktopfallback' => get_string('desktopfallback', 'flwvrroom'),
+        'xravailable' => get_string('xravailable', 'flwvrroom', '{$a}'),
+        'xrnotavailable' => get_string('xrnotavailable', 'flwvrroom'),
+        'xrstarted' => get_string('xrstarted', 'flwvrroom'),
+        'xrstartfailed' => get_string('xrstartfailed', 'flwvrroom'),
     ],
 ];
 $templatecontext['configjson'] = json_encode($config, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
