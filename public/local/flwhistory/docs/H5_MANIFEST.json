@@ -1,0 +1,67 @@
+{
+  "program": "Program 2",
+  "gate": "H5",
+  "title": "Learner History and Grade History Dashboard Core",
+  "status": "complete",
+  "completed_on": "2026-08-28",
+  "plugin": {
+    "component": "local_flwhistory",
+    "version": 2026082803,
+    "root": "D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public\\local\\flwhistory"
+  },
+  "route": "/local/flwhistory/dashboard.php?courseid={courseid}",
+  "implemented": [
+    "Learner dashboard page",
+    "Course navigation link",
+    "Responsive dashboard CSS",
+    "Dashboard composition service",
+    "Dashboard renderer",
+    "Present summary panel",
+    "Learning journey panel",
+    "Standard non-adaptive next action",
+    "Grade distinctions panel",
+    "Attempt details table",
+    "Grade history table",
+    "Detailed learning history table",
+    "Recent activity table",
+    "Basic attempt and grade trend panels",
+    "Program 3 unavailable placeholders"
+  ],
+  "trusted_sources": [
+    "H4 PresentSummaryCore",
+    "H4 LearningJourneyCore",
+    "H4 LearningHistoryQuery",
+    "H4 AttemptHistoryQuery",
+    "H4 GradeHistoryQuery",
+    "H4 RecentActivityQuery",
+    "H3 flwhist_grade_summary"
+  ],
+  "excluded": [
+    "C-UP-KP mastery calculation",
+    "adaptive recommendation logic",
+    "goal readiness",
+    "projected future roadmap",
+    "mastery-based skill progress",
+    "teacher analytics"
+  ],
+  "verification": {
+    "focused_phpunit": "OK (5 tests, 57 assertions)",
+    "full_phpunit": "OK (40 tests, 266 assertions)",
+    "php_lint": "passed",
+    "live_upgrade": "passed",
+    "live_plugin_version": 2026082803,
+    "live_service_count": 6,
+    "live_dashboard_classes": "passed",
+    "course124_data_smoke": "skipped: course id 124 not present in CLI-visible Moodle database"
+  },
+  "documents": [
+    "H5_DASHBOARD_CONTRACT.md",
+    "H5_NON_ADAPTIVE_BOUNDARY.md",
+    "H5_REPORT.md"
+  ],
+  "next_gate": {
+    "gate": "H6",
+    "title": "History-Specific Teacher Analytics",
+    "started": false
+  }
+}

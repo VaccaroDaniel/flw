@@ -1,0 +1,118 @@
+{
+  "gate": "H1B",
+  "program": "Program 2 - Learning and Grade History",
+  "status": "PASS",
+  "repository_revision": "workspace:C:\\Users\\com\\Documents\\Estimation Speaking is not a git repository; moodle_public:D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public has pre-existing dirty theme/config/vendor files plus public/local/flwhistory changes; local_flwhistory versiondb=2026082702 versiondisk=2026082702",
+  "generated_at": "2026-08-27T22:03:18.0022987+09:00",
+  "schema_versions": {
+    "moodle_release": "5.1.5 (Build: 20260608)",
+    "moodle_branch": "501",
+    "moodle_version": "2025100605.00",
+    "php": "8.2.4",
+    "manifest_schema": "urn:flw:gate-manifest:v1",
+    "local_flwhistory": "2026082702",
+    "local_flwcupkp": "2026081416"
+  },
+  "contract_versions": {
+    "program1_content_deployment_contract": "1.0",
+    "program2_history_contract": "H1B-coverage-normalization-v1",
+    "history_normalization_policy_version": "H1B-20260827.1",
+    "cross_program_integration_contract": "2.0"
+  },
+  "freshness_states": {
+    "program1": "RELEASE_ACCEPTED_BY_USER",
+    "program2": "H1B_COVERAGE_AND_NORMALIZATION_SEMANTICS_FROZEN",
+    "program3_cupkp": "EXISTING_OWNER_PRESERVED"
+  },
+  "tests": {
+    "passed": 16,
+    "failed": 0,
+    "not_run": 0,
+    "commands": [
+      "PHP lint on all public/local/flwhistory PHP files",
+      "PowerShell XML parse for public/local/flwhistory/db/install.xml",
+      "Moodle admin/cli/upgrade.php --non-interactive",
+      "Live DB version, table, and field existence check for H1B schema",
+      "Moodle public/admin/tool/phpunit/cli/init.php",
+      "vendor/bin/phpunit --testsuite local_flwhistory_testsuite",
+      "Moodle admin/cli/purge_caches.php"
+    ],
+    "phpunit": "OK (16 tests, 58 assertions)"
+  },
+  "blockers": [],
+  "high_issues": [],
+  "outputs": [
+    "public/local/flwhistory/version.php",
+    "public/local/flwhistory/db/install.xml",
+    "public/local/flwhistory/db/upgrade.php",
+    "public/local/flwhistory/classes/local/history_policy.php",
+    "public/local/flwhistory/classes/local/repository.php",
+    "public/local/flwhistory/classes/local/coverage_service.php",
+    "public/local/flwhistory/classes/local/history_service.php",
+    "public/local/flwhistory/classes/local/evidence_source_adapter.php",
+    "public/local/flwhistory/classes/local/source_identity.php",
+    "public/local/flwhistory/classes/local/normalizer.php",
+    "public/local/flwhistory/classes/privacy/provider.php",
+    "public/local/flwhistory/lang/en/local_flwhistory.php",
+    "public/local/flwhistory/tests/coverage_policy_test.php",
+    "docs/flw-history/H1B_HISTORY_COVERAGE.md",
+    "docs/flw-history/H1B_NORMALIZATION_VERSION.md",
+    "docs/flw-history/H1B_REPORT.md",
+    "docs/flw-history/H1B_MANIFEST.json"
+  ],
+  "requirement_ids": {
+    "implemented": [
+      "XPR-OWN-001",
+      "XPR-MAN-001",
+      "XPR-PKT-001",
+      "XPR-PKT-002",
+      "P2-NORM-001",
+      "P2-NORM-002",
+      "P2-COV-001",
+      "P2-COV-002"
+    ],
+    "tested": [
+      "P2-NORM-001",
+      "P2-NORM-002",
+      "P2-COV-001",
+      "P2-COV-002"
+    ],
+    "deferred": [
+      "XPR-CON-002",
+      "P2-HIST-003",
+      "P2-ATT-001",
+      "P2-GRD-001",
+      "P2-GRD-002",
+      "P2-COMP-001",
+      "P2-API-001",
+      "P2-API-002",
+      "P2-API-003",
+      "P2-PRV-001",
+      "P2-SEC-001",
+      "P2-CON-001"
+    ],
+    "failed": []
+  },
+  "coverage_contract": {
+    "statuses": [
+      "COMPLETE",
+      "PARTIAL",
+      "SOURCE_LIMITED",
+      "NOT_BACKFILLED",
+      "UNKNOWN"
+    ],
+    "event_availability": [
+      "EVENT_AVAILABLE",
+      "NO_EVENT_OCCURRED",
+      "NO_EVENT_AVAILABLE"
+    ],
+    "no_event_occurred_requires_complete_coverage": true,
+    "inactivity_requires_sufficient_coverage": true
+  },
+  "next_gate_allowed": true,
+  "notes": [
+    "H1B registered no active production capture observers and no active scheduled capture tasks.",
+    "Program 3 payloads now receive coverage and normalization context, but Program 3 ownership remains unchanged.",
+    "H2 may enable production capture only after all capture paths write the H1B frozen semantics."
+  ]
+}

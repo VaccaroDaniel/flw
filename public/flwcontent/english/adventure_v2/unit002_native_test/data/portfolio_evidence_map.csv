@@ -1,4 +1,0 @@
-evidence,description,required,checker
-mini_poster,Learner color mini-poster with name line and 3–5 colors,yes,teacher/AI
-voice_recording,Hello. I’m ___. It’s red. It’s blue. Goodbye.,yes,speech checker
-practice_completion,108 on-page Practice items attempted,recommended,Moodle/HTML state

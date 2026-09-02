@@ -1,5 +1,0 @@
-error_type,student_feedback,repair_action,retry_path
-wrong color,Try again.,"Show color card again, then choose.",Same 3-item Practice page
-missing It’s,Try again. Say: It’s red.,Model It’s + color.,Repeat sentence
-unclear pronunciation,Listen again.,Repeat one color word slowly.,Retry audio line
-missing greeting/goodbye,Use the project frame.,Hello. I’m ___. / Goodbye.,Retry project recording

@@ -3,7 +3,7 @@
         'name' => 'moodle/moodle',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'dffb5c2b537caef37fdee6c8e2a589be5701f3c0',
+        'reference' => '375e6a0b9b0ef6e701849f330721c06c67c12deb',
         'type' => 'moodle-core',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -121,7 +121,7 @@
         'moodle/moodle' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'dffb5c2b537caef37fdee6c8e2a589be5701f3c0',
+            'reference' => '375e6a0b9b0ef6e701849f330721c06c67c12deb',
             'type' => 'moodle-core',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

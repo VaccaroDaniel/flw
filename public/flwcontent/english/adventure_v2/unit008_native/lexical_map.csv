@@ -1,7 +1,0 @@
-category,items,status,notes
-active_body_words,"head, eyes, ears, nose, mouth, hands, arms, legs, feet",active,Required for recognition and oral output
-active_action_words,"touch, point, clap, wave, step",active,Command actions
-chunks,Touch your …; Point to your …; Clap your hands.; Wave your arms.,active,Formulaic Pre-A1 chunks
-grammar_bound_lexis,"my hand, your hand, my head, your head",active,my/your as fixed chunks only
-receptive,"move, chant, paw prints, try again",receptive,Supported by visuals
-blocked,health problems; should/shouldn’t; can/can’t; restaurant language; prices; paragraph writing,blocked,Not used as productive targets

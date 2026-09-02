@@ -17,19 +17,8 @@ defined('MOODLE_INTERNAL') || die();
 global $DB;
 
 require_once($CFG->libdir . '/behat/lib.php');
+require_once($CFG->libdir . '/completionlib.php');
 require_once($CFG->dirroot . '/course/lib.php');
-
-if (strpos($PAGE->pagetype, 'course-view-section-') === 0 && !$PAGE->user_is_editing()) {
-    $flwsectionid = optional_param('id', 0, PARAM_INT);
-    if ($flwsectionid) {
-        $flwsection = $DB->get_record('course_sections', ['id' => $flwsectionid], 'id, course, section', IGNORE_MISSING);
-        if ($flwsection && (int)$flwsection->course !== SITEID) {
-            $flwcourseurl = new moodle_url('/course/view.php', ['id' => $flwsection->course]);
-            $flwcourseurl->set_anchor('section-' . $flwsection->section);
-            redirect($flwcourseurl, '', 0);
-        }
-    }
-}
 
 $flwmapfile = $CFG->dirroot . '/flwcontent/native_course_assets.json';
 if (!empty($PAGE->course->id) && is_file($flwmapfile)) {
@@ -55,41 +44,6 @@ if (!empty($PAGE->course->id) && is_file($flwmapfile)) {
     }
 }
 
-if (!empty($PAGE->course->id) && (int)$PAGE->course->id !== SITEID && course_format_uses_sections($PAGE->course->format)) {
-    $flwsections = $DB->get_records(
-        'course_sections',
-        ['course' => $PAGE->course->id],
-        'section ASC',
-        'id, section'
-    );
-    $flwsectionmap = [];
-    foreach ($flwsections as $flwsection) {
-        $flwsectionmap[(int)$flwsection->id] = (int)$flwsection->section;
-    }
-    if ($flwsectionmap) {
-        $flwsectionmapjson = json_encode($flwsectionmap);
-        $flwcourseurljson = json_encode((new moodle_url('/course/view.php', ['id' => $PAGE->course->id]))->out(false));
-        $PAGE->requires->js_init_code("
-            (function() {
-                var sectionMap = {$flwsectionmapjson};
-                var courseUrl = {$flwcourseurljson};
-                Array.prototype.slice.call(document.querySelectorAll('a[href*=\"/course/section.php?id=\"]')).forEach(function(link) {
-                    try {
-                        var url = new URL(link.getAttribute('href'), window.location.origin);
-                        var sectionId = url.searchParams.get('id');
-                        var sectionNumber = sectionMap[sectionId];
-                        if (sectionNumber !== undefined) {
-                            link.setAttribute('href', courseUrl + '#section-' + sectionNumber);
-                        }
-                    } catch (error) {
-                        // Leave Moodle's original URL in place if the browser cannot parse it.
-                    }
-                });
-            })();
-        ");
-    }
-}
-
 // Quiz detection is required both for course-index cleanup and for taking-page
 // cleanup rules later in this layout.
 $flwexamquiz = theme_flwacademy_get_current_flw_exam_quiz();
@@ -102,285 +56,47 @@ $flwquizcleanquery = (strpos($PAGE->pagetype, 'mod-quiz-') === 0) &&
     (optional_param('flwskippreflight', false, PARAM_BOOL) || optional_param('flwautostart', false, PARAM_BOOL) || optional_param('autostart', false, PARAM_BOOL));
 $flwquizcleanpage = $flwexamquiz || $flwplacementquiz || $flwquizqueryplacement || $flwquizcleanquery;
 
-if ($PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing()) {
-    $flwscormcmid = !empty($PAGE->cm->id) ? (int)$PAGE->cm->id : 0;
-    $flwscormcourseid = !empty($PAGE->course->id) ? (int)$PAGE->course->id : 0;
-    $flwscormcourseurl = json_encode((new moodle_url('/course/view.php', ['id' => $PAGE->course->id]))->out(false));
-    $flwscormcmidjson = json_encode($flwscormcmid);
-    $flwscormcourseidjson = json_encode($flwscormcourseid);
-    $PAGE->requires->js_init_code("
-        (function() {
-            var courseUrl = {$flwscormcourseurl};
-            var cmid = {$flwscormcmidjson};
-            var courseId = {$flwscormcourseidjson};
-
-            function getExitUrl() {
-                try {
-                    if (document.referrer) {
-                        var referrerUrl = new URL(document.referrer, window.location.origin);
-                        var currentUrl = new URL(window.location.href);
-                        if (referrerUrl.origin === currentUrl.origin && referrerUrl.href !== currentUrl.href) {
-                            return referrerUrl.href;
-                        }
-                    }
-                } catch (error) {
-                    // Fall back to the course page if the browser cannot parse the referrer.
-                }
-                return courseUrl;
-            }
-
-            function addToolbar() {
-                var existingToolbar = document.getElementById('flw-scorm-actions');
-                if (existingToolbar) {
-                    Array.prototype.slice.call(existingToolbar.querySelectorAll('span')).forEach(function(span) {
-                        span.remove();
-                    });
-                    if (existingToolbar.querySelector('.flw-scorm-toggle-toc')) {
-                        return;
-                    }
-                    existingToolbar.remove();
-                }
-                var scormPage = document.getElementById('scormpage');
-                if (!scormPage || !scormPage.parentNode) {
-                    return;
-                }
-
-                var toolbar = document.createElement('nav');
-                toolbar.id = 'flw-scorm-actions';
-                toolbar.className = 'flw-scorm-actions';
-                toolbar.setAttribute('aria-label', 'Course actions');
-                toolbar.innerHTML =
-                    '<button type=\"button\" class=\"flw-scorm-action flw-scorm-toggle-toc\" title=\"Toggle contents\" aria-label=\"Toggle contents\">' +
-                    '<svg class=\"flw-toc-icon-horizontal\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6h16\"></path><path d=\"M4 12h16\"></path><path d=\"M4 18h16\"></path></svg>' +
-                    '<svg class=\"flw-toc-icon-vertical\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 4v16\"></path><path d=\"M12 4v16\"></path><path d=\"M17 4v16\"></path></svg></button>' +
-                    '<button type=\"button\" class=\"flw-scorm-action flw-scorm-done\" title=\"Mark course done\" aria-label=\"Mark course done\">' +
-                    '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"></path></svg></button>' +
-                    '<a class=\"flw-scorm-action flw-scorm-exit\" title=\"Exit activity\" aria-label=\"Exit activity\" href=\"' + getExitUrl() + '\">' +
-                    '<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M10 17l-5-5 5-5\"></path><path d=\"M5 12h14\"></path></svg></a>';
-                scormPage.parentNode.insertBefore(toolbar, scormPage);
-
-                var tocButton = toolbar.querySelector('.flw-scorm-toggle-toc');
-                function updateTocButtonState() {
-                    var toc = document.getElementById('scorm_toc');
-                    tocButton.classList.toggle('is-active', toc && !toc.classList.contains('disabled'));
-                }
-                updateTocButtonState();
-                tocButton.addEventListener('click', function() {
-                    var moodleToggle = document.getElementById('scorm_toc_toggle_btn');
-                    var toc = document.getElementById('scorm_toc');
-                    if (moodleToggle) {
-                        moodleToggle.click();
-                    } else if (toc) {
-                        toc.classList.toggle('disabled');
-                    }
-                    window.setTimeout(updateTocButtonState, 30);
-                });
-
-                var exitButton = toolbar.querySelector('.flw-scorm-exit');
-                exitButton.addEventListener('click', function(event) {
-                    if (window.history.length > 1) {
-                        event.preventDefault();
-                        window.history.back();
-                        return;
-                    }
-                    exitButton.setAttribute('href', getExitUrl());
-                });
-
-                var doneButton = toolbar.querySelector('.flw-scorm-done');
-                doneButton.addEventListener('click', function() {
-                    if (!cmid) {
-                        doneButton.classList.add('is-error');
-                        return;
-                    }
-                    doneButton.disabled = true;
-                    doneButton.classList.add('is-loading');
-                    require(['core/ajax'], function(Ajax) {
-                        Ajax.call([{
-                            methodname: 'core_completion_update_activity_completion_status_manually',
-                            args: {cmid: cmid, completed: true}
-                        }])[0].then(function() {
-                            if (!courseId) {
-                                return true;
-                            }
-                            return Ajax.call([{
-                                methodname: 'core_completion_mark_course_self_completed',
-                                args: {courseid: courseId}
-                            }])[0].catch(function(error) {
-                                if (error && error.errorcode === 'useralreadymarkedcomplete') {
-                                    return true;
-                                }
-                                // The SCORM activity is complete; some courses do not enable self-completion criteria.
-                                return true;
-                            });
-                        }).then(function() {
-                            doneButton.classList.remove('is-loading');
-                            doneButton.classList.add('is-done');
-                        }).catch(function() {
-                            doneButton.disabled = false;
-                            doneButton.classList.remove('is-loading');
-                            doneButton.classList.add('is-error');
-                        });
-                    });
-                });
-            }
-
-            function collapseScormChromeElement(element) {
-                if (!element) {
-                    return;
-                }
-                element.classList.add('flw-scorm-hidden-chrome');
-                element.style.setProperty('display', 'none', 'important');
-                element.style.setProperty('height', '0', 'important');
-                element.style.setProperty('min-height', '0', 'important');
-                element.style.setProperty('max-height', '0', 'important');
-                element.style.setProperty('margin', '0', 'important');
-                element.style.setProperty('padding', '0', 'important');
-                element.style.setProperty('border', '0', 'important');
-                element.style.setProperty('overflow', 'hidden', 'important');
-            }
-
-            function hideScormChrome(root) {
-                if (!root || !root.querySelectorAll) {
-                    return;
-                }
-                Array.prototype.slice.call(root.querySelectorAll('#scorm-topbar, .scorm-topbar')).forEach(function(element) {
-                    collapseScormChromeElement(element);
-                });
-                normalizeScormContentTop(root);
-                Array.prototype.slice.call(root.querySelectorAll([
-                    'h1',
-                    'h2',
-                    'h3',
-                    'h4',
-                    'h5',
-                    'h6',
-                    '.page-header-headings',
-                    '.activitytitle',
-                    '.instancename',
-                    '.unit-title',
-                    '.scorm-title',
-                    '.flw-scorm-title',
-                    '.title',
-                    '[class*=\"title\"]',
-                    '[class*=\"heading\"]',
-                    '#region-main > *'
-                ].join(','))).forEach(function(element) {
-                    if ((element.textContent || '').replace(/\\s+/g, ' ').trim() === 'Real English World Unit 35') {
-                        var target = element.closest('.activity-header, .page-context-header, #page-header, .page-header-headings, .activitytitle') || element;
-                        collapseScormChromeElement(target);
-                    }
-                });
-            }
-
-            function normalizeScormContentTop(root) {
-                if (!root || !root.querySelector || !root.body) {
-                    return;
-                }
-                var packageTopbar = root.querySelector('.scorm-topbar, #scorm-topbar');
-                var packageMain = root.querySelector('main.wrap');
-                if (!packageTopbar && !packageMain) {
-                    return;
-                }
-                if (packageMain) {
-                    packageMain.style.setProperty('padding-top', '.75rem', 'important');
-                    packageMain.style.setProperty('margin-top', '0', 'important');
-                }
-                if (root.documentElement && !root.documentElement.dataset.flwScormTopNormalized) {
-                    root.documentElement.dataset.flwScormTopNormalized = '1';
-                    try {
-                        root.defaultView.scrollTo(0, 0);
-                    } catch (error) {
-                        // Some embedded documents do not expose scrollTo.
-                    }
-                    root.documentElement.scrollTop = 0;
-                    root.body.scrollTop = 0;
-                }
-            }
-
-            function hideReachableScormChrome() {
-                document.documentElement.classList.add('flw-scorm-player-page');
-                hideScormChrome(document);
-                updateTocScrollHeight(document);
-                Array.prototype.slice.call(document.querySelectorAll('iframe')).forEach(function(frame) {
-                    try {
-                        var framedocument = frame.contentDocument || (frame.contentWindow && frame.contentWindow.document);
-                        hideScormChrome(framedocument);
-                    } catch (error) {
-                        // Cross-origin frames are left untouched.
-                    }
-                    if (!frame.dataset.flwScormChromeHooked) {
-                        frame.dataset.flwScormChromeHooked = '1';
-                        frame.addEventListener('load', function() {
-                            window.setTimeout(hideReachableScormChrome, 50);
-                            window.setTimeout(hideReachableScormChrome, 500);
-                        });
-                    }
-                });
-            }
-
-            function updateTocScrollHeight(root) {
-                if (!root || !root.querySelector) {
-                    return;
-                }
-                var toc = root.querySelector('#scorm_toc');
-                var tree = root.querySelector('#scorm_tree');
-                var layout = root.querySelector('#scorm_layout');
-                var scormPage = root.querySelector('#scormpage');
-                if (!toc || !tree || !toc.getBoundingClientRect) {
-                    return;
-                }
-                if (layout && layout.getBoundingClientRect) {
-                    var heightAnchor = scormPage && scormPage.getBoundingClientRect ? scormPage : layout;
-                    var layoutTop = heightAnchor.getBoundingClientRect().top;
-                    var layoutBottomGap = window.matchMedia('(max-width: 680px)').matches ? 10 : 14;
-                    var layoutMinimum = window.matchMedia('(max-width: 680px)').matches ? 420 : 520;
-                    var layoutHeight = Math.max(layoutMinimum, window.innerHeight - layoutTop - layoutBottomGap);
-                    layout.style.setProperty('--flw-scorm-layout-height', layoutHeight + 'px');
-                }
-                var tocTop = toc.getBoundingClientRect().top;
-                var title = root.querySelector('#scorm_toc_title');
-                var titleHeight = title && title.getBoundingClientRect ? title.getBoundingClientRect().height : 0;
-                var bottomGap = window.matchMedia('(max-width: 680px)').matches ? 18 : 20;
-                var tocHeight = Math.max(180, window.innerHeight - tocTop - bottomGap);
-                var treeHeight = Math.max(140, tocHeight - titleHeight - 22);
-                toc.style.setProperty('--flw-scorm-toc-max-height', tocHeight + 'px');
-                tree.style.setProperty('--flw-scorm-tree-max-height', treeHeight + 'px');
-            }
-
-            function startCleanMode() {
-                hideReachableScormChrome();
-                window.addEventListener('resize', hideReachableScormChrome);
-                if (window.MutationObserver && document.body) {
-                    var observer = new MutationObserver(function() {
-                        hideReachableScormChrome();
-                    });
-                    observer.observe(document.body, {childList: true, subtree: true});
-                }
-                window.setTimeout(function() {
-                    hideReachableScormChrome();
-                }, 250);
-                window.setTimeout(function() {
-                    hideReachableScormChrome();
-                }, 1500);
-                var attempts = 0;
-                var interval = window.setInterval(function() {
-                    attempts += 1;
-                    hideReachableScormChrome();
-                    if (attempts >= 20) {
-                        window.clearInterval(interval);
-                    }
-                }, 500);
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', startCleanMode);
-            } else {
-                startCleanMode();
-            }
-        })();
-    ");
+$flwscormcleanpage = $PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing();
+$flwscormscomap = [];
+if ($flwscormcleanpage && !empty($PAGE->cm->id) && !empty($PAGE->cm->instance)) {
+    $flwscormcurrentorg = (string)($PAGE->url->get_param('currentorg') ?? '');
+    $flwscormmode = (string)($PAGE->url->get_param('mode') ?? '');
+    $flwscormscoes = $DB->get_records(
+        'scorm_scoes',
+        ['scorm' => (int)$PAGE->cm->instance],
+        'sortorder ASC, id ASC',
+        'id,identifier,scormtype'
+    );
+    foreach ($flwscormscoes as $flwscormsco) {
+        if ($flwscormsco->scormtype !== 'sco' || $flwscormsco->identifier === '') {
+            continue;
+        }
+        $flwscormparams = [
+            'cm' => (int)$PAGE->cm->id,
+            'scoid' => (int)$flwscormsco->id,
+        ];
+        if ($flwscormcurrentorg !== '') {
+            $flwscormparams['currentorg'] = $flwscormcurrentorg;
+        }
+        if ($flwscormmode !== '' && $flwscormmode !== 'normal') {
+            $flwscormparams['mode'] = $flwscormmode;
+        }
+        $flwscormscomap[$flwscormsco->identifier] = [
+            'scoid' => (int)$flwscormsco->id,
+            'url' => http_build_query($flwscormparams, '', '&', PHP_QUERY_RFC3986),
+        ];
+    }
+    if ($flwscormscomap) {
+        // FLW SCORM packages read this map from their parent player before a lesson change.
+        $PAGE->requires->data_for_js('FLW_MOODLE_SCO_MAP', $flwscormscomap, true);
+    }
 }
-
+$flwscormlaunchurls = theme_flwacademy_get_scorm_direct_launch_urls();
+theme_flwacademy_require_scorm_direct_launch($flwscormlaunchurls);
+$flwscormredirectpage = $PAGE->pagetype === 'mod-scorm-view'
+    && !empty($PAGE->cm->id)
+    && !empty($flwscormlaunchurls['cm'][(string)(int)$PAGE->cm->id]);
+$flwpracticepage = $PAGE->pagetype === 'local-flwmedia-index';
 if ($flwquizcleanpage) {
     $PAGE->requires->js_init_code("
         (function() {
@@ -552,7 +268,7 @@ if ($flwquizcleanpage) {
     ");
 }
 
-$addblockbutton = $OUTPUT->addblockbutton();
+$addblockbutton = $flwpracticepage ? '' : $OUTPUT->addblockbutton();
 
 if (isloggedin()) {
     $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
@@ -567,6 +283,17 @@ if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_clo
 }
 
 $extraclasses = ['uses-drawers'];
+if ($flwpracticepage) {
+    $extraclasses[] = 'flw-practice-page';
+}
+if ($flwscormredirectpage) {
+    $extraclasses[] = 'flw-scorm-launch-redirect';
+}
+if ($flwscormcleanpage) {
+    $extraclasses[] = 'flw-scorm-clean-mode';
+    $courseindexopen = false;
+    $blockdraweropen = false;
+}
 if ($flwexamquiz || $flwplacementquiz || $flwquizqueryplacement) {
     $extraclasses[] = 'flw-exam-quiz-page';
 }
@@ -577,22 +304,23 @@ if ($courseindexopen) {
     $extraclasses[] = 'drawer-open-index';
 }
 
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+$blockshtml = ($flwscormcleanpage || $flwpracticepage) ? '' : $OUTPUT->blocks('side-pre');
+$hasblocks = !$flwscormcleanpage && !$flwpracticepage
+    && (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
 if (!$hasblocks) {
     $blockdraweropen = false;
 }
-$courseindex = core_course_drawer();
+$courseindex = $flwscormcleanpage ? false : core_course_drawer();
 if (!$courseindex) {
     $courseindexopen = false;
 }
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+$forceblockdraweropen = ($flwscormcleanpage || $flwpracticepage) ? false : $OUTPUT->firstview_fakeblocks();
 
 $secondarynavigation = false;
 $overflow = '';
-if ($PAGE->has_secondary_navigation()) {
+if (!$flwscormcleanpage && $PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
@@ -614,11 +342,16 @@ if ($currentlanguagecode !== '') {
         return $language;
     }, $learninglanguages);
 }
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
+$buildregionmainsettings = !$flwscormcleanpage
+    && !$PAGE->include_region_main_settings_in_header_actions()
+    && !$PAGE->has_secondary_navigation();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
-$header = $PAGE->activityheader;
-$headercontent = $header->export_for_template($renderer);
+$headercontent = false;
+if (!$flwscormcleanpage) {
+    $header = $PAGE->activityheader;
+    $headercontent = $header->export_for_template($renderer);
+}
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), 'escape' => false]),
@@ -640,7 +373,7 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'overflow' => $overflow,
     'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton,
+    'addblockbutton' => $flwscormcleanpage ? '' : $addblockbutton,
     'haslearninglanguages' => !empty($learninglanguages),
     'learninglanguages' => $learninglanguages,
     'currentlanguagecode' => $currentlanguagecode,
@@ -656,6 +389,28 @@ $toolscontext = theme_flwacademy_extend_tools_context([
     'courseindex' => $courseindex,
 ]);
 $pagehtml = $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
+if ($flwscormcleanpage && !empty($PAGE->cm->instance) &&
+        strpos($pagehtml, '<div id="region-main">') !== false) {
+    $flwscormname = $DB->get_field('scorm', 'name', ['id' => (int)$PAGE->cm->instance]);
+    if ($flwscormname !== false && trim((string)$flwscormname) !== '') {
+        $flwscormtitle = format_string($flwscormname, true, [
+            'context' => $PAGE->context,
+            'escape' => true,
+        ]);
+        $flwscormheading = html_writer::tag(
+            'header',
+            html_writer::tag('h1', $flwscormtitle, ['title' => trim(strip_tags($flwscormtitle))]),
+            ['class' => 'flw-scorm-player-heading']
+        );
+        $regionmainmarker = '<div id="region-main">';
+        $pagehtml = substr_replace(
+            $pagehtml,
+            $regionmainmarker . $flwscormheading,
+            strpos($pagehtml, $regionmainmarker),
+            strlen($regionmainmarker)
+        );
+    }
+}
 if (($flwexamquiz || $flwplacementquiz) && strpos($pagehtml, '<div id="region-main">') !== false) {
     $flwquiztitle = format_string(($flwplacementquiz ?: $flwexamquiz)->name, true, [
         'context' => $PAGE->context,

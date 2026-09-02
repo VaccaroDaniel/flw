@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/flwcupkp/db" VERSION="2026072301" COMMENT="FLW C-UP-KP schema">
+<XMLDB PATH="local/flwcupkp/db" VERSION="2026083102" COMMENT="FLW C-UP-KP schema">
   <TABLES>
     <TABLE NAME="flwcupkp_framework" COMMENT="C-UP-KP frameworks">
       <FIELDS>
@@ -215,10 +215,24 @@
         <FIELD NAME="manualoverride" TYPE="int" LENGTH="1" DEFAULT="0"/>
         <FIELD NAME="overridereason" TYPE="text"/>
         <FIELD NAME="ruleversion" TYPE="char" LENGTH="40" DEFAULT="default-v1"/>
+        <FIELD NAME="policyversion" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="trend" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="evidencehash" TYPE="char" LENGTH="64"/>
+        <FIELD NAME="evidenceidsjson" TYPE="text"/>
+        <FIELD NAME="calculatedtime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="retentionstate" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="retentionconfidence" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="retentionnextreview" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="retentionlastretrieval" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="retentionretrievalcount" TYPE="int" LENGTH="10" DEFAULT="0"/>
+        <FIELD NAME="retentionpolicyversion" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="retentionevidencehash" TYPE="char" LENGTH="64"/>
+        <FIELD NAME="retentionevidenceidsjson" TYPE="text"/>
+        <FIELD NAME="retentioncalculatedtime" TYPE="int" LENGTH="10"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
       </FIELDS>
       <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
-      <INDEXES><INDEX NAME="state_uix" UNIQUE="true" FIELDS="userid, targettype, targetid"/><INDEX NAME="review_ix" UNIQUE="false" FIELDS="nextreview"/></INDEXES>
+      <INDEXES><INDEX NAME="state_uix" UNIQUE="true" FIELDS="userid, targettype, targetid"/><INDEX NAME="review_ix" UNIQUE="false" FIELDS="nextreview"/><INDEX NAME="retention_ix" UNIQUE="false" FIELDS="retentionstate, retentionnextreview"/></INDEXES>
     </TABLE>
     <TABLE NAME="flwcupkp_rule" COMMENT="Versioned rules">
       <FIELDS>
@@ -238,9 +252,16 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
         <FIELD NAME="objectid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
         <FIELD NAME="targettype" TYPE="char" LENGTH="20"/>
         <FIELD NAME="targetid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="recommendationtype" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="policyversion" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="sourcehash" TYPE="char" LENGTH="64"/>
+        <FIELD NAME="decisioncode" TYPE="char" LENGTH="60"/>
         <FIELD NAME="reason" TYPE="text" NOTNULL="true"/>
         <FIELD NAME="prereqinfo" TYPE="text"/>
         <FIELD NAME="masterygap" TYPE="number" LENGTH="10" DECIMALS="5"/>
@@ -250,7 +271,7 @@
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
       </FIELDS>
       <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
-      <INDEXES><INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/></INDEXES>
+      <INDEXES><INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid"/><INDEX NAME="learner_scope_ix" UNIQUE="false" FIELDS="userid, courseid, unitcode"/><INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/><INDEX NAME="a5_hash_ix" UNIQUE="false" FIELDS="policyversion, sourcehash"/><INDEX NAME="a5_status_ix" UNIQUE="false" FIELDS="status, policyversion"/><INDEX NAME="cm_ix" UNIQUE="false" FIELDS="cmid"/></INDEXES>
     </TABLE>
     <TABLE NAME="flwcupkp_import" COMMENT="Import batches">
       <FIELDS>
@@ -440,6 +461,145 @@
         <INDEX NAME="target_ix" UNIQUE="false" FIELDS="targettype, targetid"/>
         <INDEX NAME="category_ix" UNIQUE="false" FIELDS="gapcategory, status"/>
         <INDEX NAME="period_ix" UNIQUE="false" FIELDS="periodid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_goal" COMMENT="Current competency-centered learner goals">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="desiredprofilejson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="competencyidsjson" TYPE="text"/>
+        <FIELD NAME="upidsjson" TYPE="text"/>
+        <FIELD NAME="kpidsjson" TYPE="text"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="flwstage" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="purpose" TYPE="text"/>
+        <FIELD NAME="priorityskillsjson" TYPE="text"/>
+        <FIELD NAME="targetdate" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="weeklytarget" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="source" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="STUDENT"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="currentversion" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="activeversionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="goalpolicyversion" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="useridcreated" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="learner_scope_ix" UNIQUE="false" FIELDS="userid, courseid, unitcode"/>
+        <INDEX NAME="framework_ix" UNIQUE="false" FIELDS="frameworkid"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status, source"/>
+        <INDEX NAME="targetdate_ix" UNIQUE="false" FIELDS="targetdate"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_goal_version" COMMENT="Immutable competency-centered learner goal versions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="goalid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="version" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true"/>
+        <FIELD NAME="desiredprofilejson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="competencyidsjson" TYPE="text"/>
+        <FIELD NAME="upidsjson" TYPE="text"/>
+        <FIELD NAME="kpidsjson" TYPE="text"/>
+        <FIELD NAME="cefr" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="flwstage" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="purpose" TYPE="text"/>
+        <FIELD NAME="priorityskillsjson" TYPE="text"/>
+        <FIELD NAME="targetdate" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="weeklytarget" TYPE="number" LENGTH="10" DECIMALS="5" DEFAULT="0"/>
+        <FIELD NAME="source" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="STUDENT"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="active"/>
+        <FIELD NAME="goalpolicyversion" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="changecomment" TYPE="text"/>
+        <FIELD NAME="useridcreated" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="goal_version_uix" UNIQUE="true" FIELDS="goalid, version"/>
+        <INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="scope_ix" UNIQUE="false" FIELDS="courseid, frameworkid, unitcode"/>
+        <INDEX NAME="checksum_ix" UNIQUE="false" FIELDS="checksum"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_placement_state" COMMENT="Current A2 placement diagnostic states">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="frameworkid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="placementstatus" TYPE="char" LENGTH="40" DEFAULT=""/>
+        <FIELD NAME="policystate" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="sourcecategory" TYPE="char" LENGTH="60"/>
+        <FIELD NAME="previouslevel" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="currentlevel" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="score" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="confidence" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="placementtime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="staleafter" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="assesseddimensionsjson" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="evidenceidsjson" TYPE="text"/>
+        <FIELD NAME="diagnosticjson" TYPE="text"/>
+        <FIELD NAME="policyversion" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="checksum" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="learner_scope_ix" UNIQUE="false" FIELDS="userid, courseid, unitcode"/>
+        <INDEX NAME="framework_ix" UNIQUE="false" FIELDS="frameworkid"/>
+        <INDEX NAME="state_ix" UNIQUE="false" FIELDS="policystate, sourcecategory"/>
+        <INDEX NAME="placementtime_ix" UNIQUE="false" FIELDS="placementtime"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="flwcupkp_intervention" COMMENT="Immutable versioned teacher and admin learner interventions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="serieskey" TYPE="char" LENGTH="64" NOTNULL="true"/>
+        <FIELD NAME="version" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="supersedesid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="unitcode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="interventiontype" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="targettype" TYPE="char" LENGTH="20"/>
+        <FIELD NAME="targetid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="objectid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="actioncode" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="payloadjson" TYPE="text"/>
+        <FIELD NAME="reason" TYPE="text" NOTNULL="true"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true"/>
+        <FIELD NAME="policyversion" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS><KEY NAME="primary" TYPE="primary" FIELDS="id"/></KEYS>
+      <INDEXES>
+        <INDEX NAME="series_version_uix" UNIQUE="true" FIELDS="serieskey, version"/>
+        <INDEX NAME="learner_scope_ix" UNIQUE="false" FIELDS="userid, courseid, unitcode"/>
+        <INDEX NAME="type_status_ix" UNIQUE="false" FIELDS="interventiontype, status"/>
+        <INDEX NAME="createdby_ix" UNIQUE="false" FIELDS="createdby"/>
       </INDEXES>
     </TABLE>
     <TABLE NAME="flwcupkp_audit" COMMENT="Audit log">

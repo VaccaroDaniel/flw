@@ -6,11 +6,17 @@ require_once(__DIR__ . '/../../config.php');
 $frameworkid = optional_param('frameworkid', 0, PARAM_INT);
 $unitcode = optional_param('unitcode', '', PARAM_ALPHANUMEXT);
 $query = optional_param('q', '', PARAM_TEXT);
+$language = optional_param('language', '', PARAM_TEXT);
+$cefr = optional_param('cefr', '', PARAM_ALPHANUMEXT);
+$stage = optional_param('stage', '', PARAM_TEXT);
+$domain = optional_param('domain', '', PARAM_TEXT);
+$entitytype = optional_param('entitytype', 'competency', PARAM_ALPHANUMEXT);
 $status = optional_param('status', '', PARAM_ALPHANUMEXT);
 
 require_login();
 $context = context_system::instance();
 require_capability('local/flwcupkp:viewreports', $context);
+$canmanage = has_capability('local/flwcupkp:manageframeworks', $context);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_sesskey();
@@ -56,6 +62,17 @@ if ($unitcode !== '') {
 if ($query !== '') {
     $url->param('q', $query);
 }
+foreach ([
+    'language' => $language,
+    'cefr' => $cefr,
+    'stage' => $stage,
+    'domain' => $domain,
+    'entitytype' => $entitytype,
+] as $param => $value) {
+    if ($value !== '') {
+        $url->param($param, $value);
+    }
+}
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
@@ -63,6 +80,17 @@ $PAGE->set_title(get_string('curriculummanager', 'local_flwcupkp'));
 $PAGE->set_heading(get_string('curriculummanager', 'local_flwcupkp'));
 $PAGE->requires->css('/local/flwcupkp/styles.css');
 
+$filters = [
+    'language' => $language,
+    'cefr' => $cefr,
+    'stage' => $stage,
+    'domain' => $domain,
+    'entitytype' => $entitytype,
+    'q' => $query,
+];
+$cm1status = \local_flwcupkp\local\core_curriculum_manager::status(0, $unitcode, $frameworkid, 100);
+$navigation = \local_flwcupkp\local\core_curriculum_manager::navigation_model($frameworkid, $unitcode, $filters, 100);
+$entitytype = $navigation['selected_type'];
 $graph = \local_flwcupkp\local\curriculum_manager::graph($frameworkid, $unitcode, $query);
 $coverage = $graph['coverage'];
 
@@ -74,22 +102,38 @@ if ($status !== '') {
 }
 
 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-toolbar']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/import_export.php', ['frameworkid' => $frameworkid]),
-    get_string('importexport', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-echo html_writer::link(new moodle_url('/local/flwcupkp/mappings.php', ['frameworkid' => $frameworkid]),
-    get_string('mappingmanager', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+if ($canmanage) {
+    echo html_writer::link(new moodle_url('/local/flwcupkp/import_export.php', ['frameworkid' => $frameworkid]),
+        get_string('importexport', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+    echo html_writer::link(new moodle_url('/local/flwcupkp/mappings.php', ['frameworkid' => $frameworkid]),
+        get_string('mappingmanager', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+    echo html_writer::link(new moodle_url('/local/flwcupkp/governance.php', [
+        'frameworkid' => $frameworkid,
+        'unitcode' => $unitcode,
+    ]), get_string('cm3governance', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+}
 echo html_writer::link(new moodle_url('/local/flwcupkp/trace.php', ['frameworkid' => $frameworkid, 'unitcode' => $unitcode]),
     get_string('traceabilityreport', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
-foreach (\local_flwcupkp\local\curriculum_manager::entity_types() as $type => $config) {
-    echo html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', ['type' => $type]),
-        get_string('add' . $config['label'], 'local_flwcupkp'), ['class' => 'btn btn-primary']);
+echo html_writer::link(new moodle_url('/local/flwcupkp/foundation.php', [
+    'frameworkid' => $frameworkid,
+    'unitcode' => $unitcode,
+]), get_string('foundationinspector', 'local_flwcupkp'), ['class' => 'btn btn-secondary']);
+if ($canmanage) {
+    foreach (\local_flwcupkp\local\curriculum_manager::entity_types() as $type => $config) {
+        echo html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', ['type' => $type]),
+            get_string('add' . $config['label'], 'local_flwcupkp'), ['class' => 'btn btn-primary']);
+    }
 }
 echo html_writer::end_tag('div');
+
+echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-cm1-shell']);
+
+local_flwcupkp_render_cm1_status($cm1status);
 
 echo html_writer::start_tag('form', [
     'method' => 'get',
     'action' => new moodle_url('/local/flwcupkp/curriculum.php'),
-    'class' => 'local-flwcupkp-filters',
+    'class' => 'local-flwcupkp-filters local-flwcupkp-cm1-filters',
 ]);
 echo html_writer::tag('label', get_string('framework', 'local_flwcupkp') .
     html_writer::select([0 => get_string('all', 'local_flwcupkp')] +
@@ -102,11 +146,22 @@ echo html_writer::tag('label', get_string('unit', 'local_flwcupkp') .
 echo html_writer::tag('label', get_string('search') .
     html_writer::empty_tag('input', ['type' => 'search', 'name' => 'q', 'value' => s($query)]),
     ['class' => 'local-flwcupkp-filter']);
+echo local_flwcupkp_cm1_select_filter('entitytype', get_string('entitytype', 'local_flwcupkp'),
+    $navigation['facets']['entitytype'], $entitytype);
+echo local_flwcupkp_cm1_select_filter('language', get_string('language'), $navigation['facets']['language'], $language);
+echo local_flwcupkp_cm1_select_filter('cefr', get_string('cefrlevel', 'local_flwcupkp'),
+    $navigation['facets']['cefr'], $cefr);
+echo local_flwcupkp_cm1_select_filter('stage', get_string('flwstage', 'local_flwcupkp'),
+    $navigation['facets']['stage'], $stage);
+echo local_flwcupkp_cm1_select_filter('domain', get_string('domainorskill', 'local_flwcupkp'),
+    $navigation['facets']['domain'], $domain);
 echo html_writer::tag('button', get_string('filter'), ['type' => 'submit', 'class' => 'btn btn-primary']);
 echo html_writer::link(new moodle_url('/local/flwcupkp/curriculum.php'), get_string('reset'), ['class' => 'btn btn-secondary']);
 echo html_writer::end_tag('form');
 
-if (has_capability('local/flwcupkp:manageframeworks', $context)) {
+local_flwcupkp_render_cm1_navigation($navigation, $frameworkid, $unitcode);
+
+if ($canmanage) {
     local_flwcupkp_render_bulk_tools($frameworkid);
 }
 
@@ -130,7 +185,195 @@ local_flwcupkp_render_visual_graph($graph);
 local_flwcupkp_render_frameworks($graph['frameworks']);
 local_flwcupkp_render_graph($graph);
 
+echo html_writer::end_tag('div');
 echo $OUTPUT->footer();
+
+/**
+ * Render CM1 readiness cards.
+ *
+ * @param array $status
+ */
+function local_flwcupkp_render_cm1_status(array $status): void {
+    echo html_writer::tag('p', get_string('cm1statusintro', 'local_flwcupkp'), [
+        'class' => 'local-flwcupkp-muted local-flwcupkp-cm1-intro',
+    ]);
+    echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-foundation-cardgrid local-flwcupkp-cm1-cardgrid']);
+    foreach ([
+        get_string('cm1status', 'local_flwcupkp') => [
+            'value' => local_flwcupkp_cm1_badge($status['status'] ?? 'unknown'),
+            'detail' => $status['contract']['version'] ?? '',
+        ],
+        get_string('foundationstatus', 'local_flwcupkp') => [
+            'value' => local_flwcupkp_cm1_badge($status['foundation']['status'] ?? 'unknown'),
+            'detail' => $status['foundation']['contract'] ?? '',
+        ],
+        get_string('foundationnextgate', 'local_flwcupkp') => [
+            'value' => local_flwcupkp_cm1_badge($status['next_allowed_gate'] ?? 'unknown'),
+            'detail' => get_string('cm1nextgatedetail', 'local_flwcupkp'),
+        ],
+        get_string('foundationblockerhigh', 'local_flwcupkp') => [
+            'value' => (string)($status['foundation']['unresolved_blocker_high_count'] ?? 0),
+            'detail' => get_string('foundationblockerhighdetail', 'local_flwcupkp'),
+        ],
+    ] as $label => $card) {
+        echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-foundation-card']);
+        echo html_writer::tag('span', s($label));
+        echo html_writer::tag('strong', $card['value']);
+        echo html_writer::tag('em', s((string)$card['detail']));
+        echo html_writer::end_tag('div');
+    }
+    echo html_writer::end_tag('div');
+}
+
+/**
+ * Render CM1 graph/tree navigation rows.
+ *
+ * @param array $navigation
+ * @param int $frameworkid
+ * @param string $unitcode
+ */
+function local_flwcupkp_render_cm1_navigation(array $navigation, int $frameworkid, string $unitcode): void {
+    echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-foundation-panel local-flwcupkp-cm1-navpanel']);
+    echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-foundation-panel-head']);
+    echo html_writer::tag('h3', get_string('cm1navigation', 'local_flwcupkp'));
+    echo html_writer::tag('p', get_string('cm1navigationintro', 'local_flwcupkp'));
+    echo html_writer::end_tag('div');
+
+    echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-cm1-counts']);
+    foreach ($navigation['counts'] as $type => $count) {
+        $class = $type === $navigation['selected_type'] ? ' active' : '';
+        echo html_writer::tag('span',
+            s(local_flwcupkp_cm1_entity_label($type)) . ': ' . (int)$count,
+            ['class' => 'local-flwcupkp-chip' . $class]
+        );
+    }
+    echo html_writer::end_tag('div');
+
+    if (empty($navigation['rows'])) {
+        echo html_writer::tag('p', get_string('nofoundationentities', 'local_flwcupkp'),
+            ['class' => 'local-flwcupkp-muted']);
+        echo html_writer::end_tag('section');
+        return;
+    }
+
+    $table = new html_table();
+    $table->attributes['class'] = 'generaltable local-flwcupkp-table local-flwcupkp-cm1-navtable';
+    $table->head = [
+        get_string('entitytype', 'local_flwcupkp'),
+        get_string('stablecode', 'local_flwcupkp'),
+        get_string('definition', 'local_flwcupkp'),
+        get_string('cefrlevel', 'local_flwcupkp'),
+        get_string('flwstage', 'local_flwcupkp'),
+        get_string('domainorskill', 'local_flwcupkp'),
+        get_string('status'),
+        get_string('actions'),
+    ];
+    foreach ($navigation['rows'] as $record) {
+        $type = $navigation['selected_type'];
+        $viewurl = new moodle_url('/local/flwcupkp/entity.php', [
+            'type' => $type,
+            'id' => (int)$record->id,
+            'frameworkid' => $frameworkid,
+            'unitcode' => $unitcode,
+        ]);
+        $table->data[] = [
+            s(local_flwcupkp_cm1_entity_label($type)),
+            html_writer::link($viewurl, s((string)($record->externalid ?? ''))),
+            s(local_flwcupkp_cm1_record_description($type, $record)),
+            s((string)($record->cefr ?? ($record->cefrrange ?? ''))),
+            s((string)($record->stage ?? '')),
+            s((string)($record->domain ?? ($record->scope ?? ($record->languagemode ?? ($record->objecttype ?? ''))))),
+            local_flwcupkp_cm1_badge((string)($record->status ?? 'governed_by_framework')),
+            html_writer::link($viewurl, get_string('cm1viewentity', 'local_flwcupkp')),
+        ];
+    }
+    echo html_writer::table($table);
+    echo html_writer::end_tag('section');
+}
+
+/**
+ * Render a select filter with an All option.
+ *
+ * @param string $name
+ * @param string $label
+ * @param array $options
+ * @param string $selected
+ * @return string
+ */
+function local_flwcupkp_cm1_select_filter(string $name, string $label, array $options, string $selected): string {
+    return html_writer::tag('label',
+        s($label) . html_writer::select(['' => get_string('all', 'local_flwcupkp')] + $options, $name, $selected, false),
+        ['class' => 'local-flwcupkp-filter']
+    );
+}
+
+/**
+ * Human entity label.
+ *
+ * @param string $type
+ * @return string
+ */
+function local_flwcupkp_cm1_entity_label(string $type): string {
+    if ($type === 'competency') {
+        return get_string('competency', 'local_flwcupkp');
+    }
+    if ($type === 'up') {
+        return get_string('usepoint', 'local_flwcupkp');
+    }
+    if ($type === 'kp') {
+        return get_string('knowledgepoint', 'local_flwcupkp');
+    }
+    if ($type === 'object') {
+        return get_string('learningobject', 'local_flwcupkp');
+    }
+    return get_string('framework', 'local_flwcupkp');
+}
+
+/**
+ * Short definition text for a navigation row.
+ *
+ * @param string $type
+ * @param \stdClass $record
+ * @return string
+ */
+function local_flwcupkp_cm1_record_description(string $type, \stdClass $record): string {
+    if ($type === 'framework') {
+        return (string)($record->description ?? $record->name ?? '');
+    }
+    if ($type === 'competency') {
+        return (string)($record->cando ?? $record->description ?? $record->title ?? '');
+    }
+    if ($type === 'up') {
+        return (string)($record->actionstatement ?? $record->successcriteria ?? $record->title ?? '');
+    }
+    if ($type === 'kp') {
+        return (string)($record->description ?? $record->meaningfunction ?? $record->title ?? '');
+    }
+    return (string)($record->title ?? $record->purpose ?? '');
+}
+
+/**
+ * Status badge.
+ *
+ * @param string $status
+ * @return string
+ */
+function local_flwcupkp_cm1_badge(string $status): string {
+    $status = trim($status) !== '' ? $status : 'unknown';
+    $class = 'local-flwcupkp-foundation-badge local-flwcupkp-foundation-badge-' .
+        clean_param(strtolower($status), PARAM_ALPHANUMEXT);
+    return html_writer::tag('span', s(local_flwcupkp_cm1_human($status)), ['class' => $class]);
+}
+
+/**
+ * Human-readable machine label.
+ *
+ * @param string $label
+ * @return string
+ */
+function local_flwcupkp_cm1_human(string $label): string {
+    return ucwords(str_replace(['_', '-'], ' ', strtolower(trim($label))));
+}
 
 /**
  * Render framework records.
@@ -159,11 +402,11 @@ function local_flwcupkp_render_frameworks(array $frameworks): void {
             s($framework->name),
             s($framework->coursecode),
             s($framework->language),
-            s($framework->status),
-            html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', [
+            local_flwcupkp_cm1_badge((string)$framework->status),
+            html_writer::link(new moodle_url('/local/flwcupkp/entity.php', [
                 'type' => 'framework',
                 'id' => $framework->id,
-            ]), get_string('edit')),
+            ]), get_string('cm1viewentity', 'local_flwcupkp')),
         ];
     }
     echo html_writer::table($table);
@@ -202,13 +445,13 @@ function local_flwcupkp_render_bulk_tools(int $frameworkid): void {
         'kp' => get_string('knowledgepoints', 'local_flwcupkp'),
         'framework' => get_string('frameworks', 'local_flwcupkp'),
     ], 'bulkstatustype', 'competency', false));
-    echo html_writer::tag('label', get_string('newstatus', 'local_flwcupkp') . html_writer::select([
-        'draft' => 'draft',
-        'review' => 'review',
-        'validated' => 'validated',
-        'active' => 'active',
-        'archived' => 'archived',
-    ], 'newstatus', 'review', false));
+    echo html_writer::tag('label', get_string('newstatus', 'local_flwcupkp') .
+        html_writer::select(
+            \local_flwcupkp\local\lifecycle_governance_contract::status_options(),
+            'newstatus',
+            'review',
+            false
+        ));
     echo html_writer::tag('button', get_string('applybulkstatus', 'local_flwcupkp'), [
         'type' => 'submit',
         'class' => 'btn btn-secondary',
@@ -353,7 +596,7 @@ function local_flwcupkp_visual_node(string $type, \stdClass $record): string {
     $label = $record->externalid ?? $record->title ?? $record->name ?? '';
     $title = $record->title ?? $record->name ?? '';
     $params = ['type' => $type, 'id' => (int)$record->id];
-    $link = html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', $params), s($label));
+    $link = html_writer::link(new moodle_url('/local/flwcupkp/entity.php', $params), s($label));
     if ($title !== '' && $title !== $label) {
         $link .= html_writer::tag('small', s($title));
     }
@@ -381,7 +624,7 @@ function local_flwcupkp_render_graph(array $graph): void {
     foreach ($graph['competencies'] as $competency) {
         echo html_writer::start_tag('section', ['class' => 'local-flwcupkp-graph-section']);
         echo html_writer::tag('h4',
-            html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', ['type' => 'competency', 'id' => $competency->id]),
+            html_writer::link(new moodle_url('/local/flwcupkp/entity.php', ['type' => 'competency', 'id' => $competency->id]),
                 s($competency->externalid)) . ' ' . s($competency->title));
         echo html_writer::tag('p', s($competency->cando ?: $competency->description), ['class' => 'local-flwcupkp-muted']);
         local_flwcupkp_render_object_chips($objectsbytarget['competency:' . $competency->id] ?? []);
@@ -393,7 +636,7 @@ function local_flwcupkp_render_graph(array $graph): void {
             }
             echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-graph-up']);
             echo html_writer::tag('div',
-                html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', ['type' => 'up', 'id' => $up->id]),
+                html_writer::link(new moodle_url('/local/flwcupkp/entity.php', ['type' => 'up', 'id' => $up->id]),
                     s($up->externalid)) . ' ' . s($up->title) .
                 html_writer::tag('span', s($compup->role) . ' / ' . format_float((float)$compup->weight, 2),
                     ['class' => 'local-flwcupkp-chip']),
@@ -408,7 +651,7 @@ function local_flwcupkp_render_graph(array $graph): void {
                 $details = s($kp->domain) . ' / ' . s($upkp->role) . ' / ' . format_float((float)$upkp->weight, 2);
                 echo html_writer::start_tag('div', ['class' => 'local-flwcupkp-graph-kp']);
                 echo html_writer::tag('div',
-                    html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', ['type' => 'kp', 'id' => $kp->id]),
+                    html_writer::link(new moodle_url('/local/flwcupkp/entity.php', ['type' => 'kp', 'id' => $kp->id]),
                         s($kp->externalid)) . ' ' . s($kp->title) .
                     html_writer::tag('span', $details, ['class' => 'local-flwcupkp-chip']),
                     ['class' => 'local-flwcupkp-graph-title']);
@@ -471,7 +714,7 @@ function local_flwcupkp_render_object_chips(array $objects): void {
         if (!empty($object->cmid)) {
             $label .= ' / CMID ' . (int)$object->cmid;
         }
-        $chips[] = html_writer::link(new moodle_url('/local/flwcupkp/edit_entity.php', [
+        $chips[] = html_writer::link(new moodle_url('/local/flwcupkp/entity.php', [
             'type' => 'object',
             'id' => $object->id,
         ]), s($label), ['class' => 'local-flwcupkp-chip']);

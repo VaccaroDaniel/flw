@@ -181,9 +181,10 @@ foreach ($requiredfiles as $name => $relativepath) {
 }
 
 $status = empty($errors) ? (empty($warnings) ? 'ok' : 'warn') : 'fail';
+$plugininfo = \core_plugin_manager::instance()->get_plugin_info('local_flwcupkp');
 $result = [
     'component' => 'local_flwcupkp',
-    'release' => get_config('local_flwcupkp', 'release') ?: '0.1.0-alpha',
+    'release' => $plugininfo && $plugininfo->release ? (string)$plugininfo->release : 'unknown',
     'status' => $status,
     'writeenabled' => $writeenabled,
     'sync_readiness' => $readiness,

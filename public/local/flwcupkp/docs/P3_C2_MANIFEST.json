@@ -1,0 +1,107 @@
+{
+  "gate": "Program 3 Gate C2",
+  "status": "complete",
+  "date": "2026-08-28",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082805",
+  "relationship_graph_contract": "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+  "depends_on": [
+    "FLW_CUPKP_CANONICAL_DOMAIN_MODEL_V1",
+    "FLW_CUPKP_ONTOLOGY_BOUNDARY_V1"
+  ],
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "relations": [
+    "SUPPORTS",
+    "REQUIRES",
+    "EVIDENCE_FOR",
+    "TRAINS",
+    "EXTENDS",
+    "ALTERNATIVE_TO",
+    "REVIEW_OF",
+    "REPLACED_BY"
+  ],
+  "centralized_apis": [
+    "contract",
+    "relation_types",
+    "semantic_for_mapping",
+    "validate_mapping_row",
+    "assert_mapping_row",
+    "assert_mapping_change",
+    "validate_package_graph",
+    "detect_hard_prerequisite_cycles",
+    "adjacency",
+    "dependencies_for_target",
+    "where_used",
+    "graph_status"
+  ],
+  "does_not_implement": [
+    "adaptive_decision_logic",
+    "mastery_recalculation",
+    "raw_moodle_log_scraping",
+    "content_evidence_mapping_contracts"
+  ],
+  "live_smoke": [
+    {
+      "courseid": 124,
+      "status": "frozen",
+      "edgecount": 50,
+      "relationcounts": {
+        "SUPPORTS": 10,
+        "REQUIRES": 19,
+        "EVIDENCE_FOR": 14,
+        "TRAINS": 7,
+        "EXTENDS": 0,
+        "ALTERNATIVE_TO": 0,
+        "REVIEW_OF": 0,
+        "REPLACED_BY": 0
+      },
+      "findings": []
+    },
+    {
+      "courseid": 126,
+      "status": "frozen",
+      "edgecount": 50,
+      "relationcounts": {
+        "SUPPORTS": 10,
+        "REQUIRES": 19,
+        "EVIDENCE_FOR": 14,
+        "TRAINS": 7,
+        "EXTENDS": 0,
+        "ALTERNATIVE_TO": 0,
+        "REVIEW_OF": 0,
+        "REPLACED_BY": 0
+      },
+      "findings": []
+    }
+  ],
+  "implementation_files": [
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/relationship_graph_contract.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/ontology_boundary.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/validator.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/curriculum_manager.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/import_service.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/program3_repository_audit.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/tests/relationship_graph_contract_test.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/schemas/cupkp_package.schema.json",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/README.md",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/version.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/db/upgrade.php"
+  ],
+  "documentation": [
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C2_RELATIONSHIP_GRAPH_CONTRACT.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C2_VALIDATION_MATRIX.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C2_GATE_REPORT.md"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "json_schema_parse": "pass",
+    "focused_phpunit": "OK (8 tests, 123 assertions)",
+    "focused_c1b_c2_phpunit": "OK (18 tests, 157 assertions)",
+    "local_flwcupkp_testsuite": "OK (53 tests, 421 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass"
+  },
+  "next_gate": "Program 3 Gate C3"
+}

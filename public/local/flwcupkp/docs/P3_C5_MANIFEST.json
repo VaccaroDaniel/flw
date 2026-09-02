@@ -1,0 +1,107 @@
+{
+  "gate": "Program 3 Gate C5",
+  "status": "complete",
+  "date": "2026-08-28",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082809",
+  "foundation_contract_version": "FLW_CUPKP_FOUNDATION_V1",
+  "recorded_versions": {
+    "curriculum_contract_version": "FLW_CUPKP_CURRICULUM_CONTRACT_V1",
+    "relationship_contract_version": "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "evidence_policy_version": "cupkp-evidence-quality-v1",
+    "history_contract_version": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  },
+  "depends_on": [
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+    "FLW_CUPKP_CANONICAL_DOMAIN_MODEL_V1",
+    "FLW_CUPKP_ONTOLOGY_BOUNDARY_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_CUPKP_CONTENT_EVIDENCE_MAPPING_CONTRACT_V1",
+    "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1",
+    "FLW_CUPKP_LIFECYCLE_GOVERNANCE_V1"
+  ],
+  "authoritative_service": "local_flwcupkp\\local\\foundation_v1_contract",
+  "centralized_apis": [
+    "contract",
+    "version_record",
+    "adaptive_api_contract",
+    "authoritative_implementation_status",
+    "foundation_status"
+  ],
+  "severity_policy": {
+    "blocking": [
+      "BLOCKER",
+      "HIGH"
+    ],
+    "nonblocking": [
+      "MEDIUM",
+      "INFO"
+    ]
+  },
+  "does_not_implement": [
+    "adaptive_path_selection",
+    "learning_goal_model",
+    "mastery_policy_change",
+    "history_v1_evidence_reprocessing_writes",
+    "raw_moodle_log_scraping"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "focused_phpunit": "OK (6 tests, 57 assertions)",
+    "program3_repository_audit_phpunit": "OK (3 tests, 111 assertions)",
+    "local_flwcupkp_testsuite": "OK (83 tests, 660 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass",
+    "live_smoke": {
+      "courseid": 124,
+      "unitcode": "U038",
+      "versiondb": "2026082809",
+      "c5_status": "frozen",
+      "dependencies": {
+        "history_v1": "ready",
+        "c1_domain_model": "frozen",
+        "c1b_ontology_boundary": "guarded",
+        "c2_relationship_graph": "frozen",
+        "c3_content_evidence_mapping": "frozen",
+        "c3b_evidence_semantics_quality": "frozen",
+        "c4_lifecycle_governance": "frozen",
+        "repository_audit": "ready_for_c5b",
+        "authoritative_implementations": "valid"
+      },
+      "migration_readiness": {
+        "content_identity_mapping": {
+          "status": "ready",
+          "objects_sampled": 7,
+          "stable_identity_objects": 7
+        },
+        "evidence_semantics_metadata": {
+          "status": "ready",
+          "evidence_rows_sampled": 6,
+          "with_c3b_semantics": 0,
+          "legacy_without_c3b_semantics": 6
+        },
+        "lifecycle_versioning_governance": {
+          "status": "ready",
+          "published_targets_missing_evidence_routes": 2,
+          "invalid_published_states": 0
+        }
+      },
+      "unresolved_blocker_high_count": 0,
+      "nonblocking_findings": [
+        {
+          "severity": "MEDIUM",
+          "code": "missing_evidence_route",
+          "message": "UP FLW-REW-B1-UP-038-01 is published without an object evidence route."
+        },
+        {
+          "severity": "MEDIUM",
+          "code": "missing_evidence_route",
+          "message": "UP FLW-REW-B1-UP-038-02 is published without an object evidence route."
+        }
+      ],
+      "next_allowed_gate": "C5B"
+    }
+  },
+  "next_gate": "Program 3 Gate C5B"
+}

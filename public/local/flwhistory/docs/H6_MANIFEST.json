@@ -1,0 +1,69 @@
+{
+  "program": "Program 2",
+  "gate": "H6",
+  "title": "History-Specific Teacher Analytics",
+  "status": "complete",
+  "completed_on": "2026-08-28",
+  "plugin": {
+    "component": "local_flwhistory",
+    "version": 2026082804,
+    "root": "D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public\\local\\flwhistory"
+  },
+  "route": "/local/flwhistory/teacher.php?courseid={courseid}",
+  "implemented": [
+    "Teacher/admin history analytics page",
+    "Course navigation link for authorized teachers/admins",
+    "Class current completion summary",
+    "Last meaningful activity summary",
+    "Official Moodle grade summary",
+    "Attempt trend summary",
+    "Inactivity attention signal",
+    "Repeated unsuccessful attempts attention signal",
+    "Grade decline with enough comparable data attention signal",
+    "Stalled completion attention signal",
+    "Missing activity evidence attention signal",
+    "Checkpoint and placement history summary",
+    "Grade audit panel behind audit capability",
+    "Individual learner drill-down links to H5 dashboard",
+    "Responsive teacher analytics styling",
+    "Focused teacher analytics PHPUnit coverage"
+  ],
+  "trusted_sources": [
+    "H0-H1 repository and source identity contracts",
+    "H1B frozen coverage and normalization policy version",
+    "H2 source event capture",
+    "H3 grade version and grade summary records",
+    "H4 secure history query services",
+    "H5 learner dashboard route for drill-down"
+  ],
+  "excluded": [
+    "C-UP-KP mastery calculation",
+    "adaptive recommendation logic",
+    "retention or risk scoring",
+    "adaptive priority ranking",
+    "adaptive path override ownership",
+    "Program 3 policy decisions"
+  ],
+  "verification": {
+    "focused_phpunit": "OK (5 tests, 51 assertions)",
+    "full_phpunit": "OK (45 tests, 317 assertions)",
+    "php_lint": "passed",
+    "live_upgrade": "passed",
+    "cache_purge": "passed",
+    "live_plugin_version": 2026082804,
+    "live_teacher_page": "passed",
+    "live_teacher_classes": "passed",
+    "live_dto_smoke_courseid": 230,
+    "course124_data_smoke": "skipped: course id 124 not present in CLI-visible Moodle database"
+  },
+  "documents": [
+    "H6_TEACHER_ANALYTICS_CONTRACT.md",
+    "H6_NON_ADAPTIVE_BOUNDARY.md",
+    "H6_REPORT.md"
+  ],
+  "next_gate": {
+    "gate": "H7",
+    "title": "Migration + Reconciliation + Security/Privacy + Performance + Freeze",
+    "started": false
+  }
+}

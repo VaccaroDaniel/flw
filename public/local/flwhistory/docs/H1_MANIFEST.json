@@ -1,0 +1,118 @@
+{
+  "gate": "H1",
+  "program": "Program 2 - Learning and Grade History",
+  "status": "PASS",
+  "repository_revision": "workspace:C:\\Users\\com\\Documents\\Estimation Speaking is not a git repository; moodle_public:D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public has pre-existing dirty theme/config files plus new public/local/flwhistory; local_flwhistory versiondb=2026082701 versiondisk=2026082701",
+  "generated_at": "2026-08-27T18:50:50.4145249+09:00",
+  "schema_versions": {
+    "moodle_release": "5.1.5 (Build: 20260608)",
+    "moodle_branch": "501",
+    "moodle_version": "2025100605.00",
+    "php": "8.2.4",
+    "manifest_schema": "urn:flw:gate-manifest:v1",
+    "local_flwhistory": "2026082701",
+    "local_flwcupkp": "2026081416"
+  },
+  "contract_versions": {
+    "program1_content_deployment_contract": "1.0",
+    "program2_history_contract": null,
+    "cross_program_integration_contract": "2.0"
+  },
+  "freshness_states": {
+    "program1": "RELEASE_ACCEPTED_BY_USER",
+    "program2": "H1_SCHEMA_AND_SERVICES_INSTALLED",
+    "program3_cupkp": "EXISTING_OWNER_PRESERVED"
+  },
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "not_run": 0,
+    "commands": [
+      "PHP lint on all public/local/flwhistory PHP files",
+      "PowerShell XML parse for public/local/flwhistory/db/install.xml",
+      "Moodle admin/cli/purge_caches.php",
+      "Moodle admin/cli/upgrade.php --non-interactive",
+      "Live DB table existence check for all nine H1 tables",
+      "Moodle plugin metadata check for local_flwhistory",
+      "Capability existence check for all seven local/flwhistory capabilities",
+      "Moodle admin/tool/phpunit/cli/init.php",
+      "vendor/bin/phpunit --testsuite local_flwhistory_testsuite"
+    ],
+    "phpunit": "OK (9 tests, 25 assertions)"
+  },
+  "blockers": [],
+  "high_issues": [],
+  "outputs": [
+    "public/local/flwhistory/version.php",
+    "public/local/flwhistory/db/install.xml",
+    "public/local/flwhistory/db/access.php",
+    "public/local/flwhistory/db/events.php",
+    "public/local/flwhistory/db/tasks.php",
+    "public/local/flwhistory/classes/privacy/provider.php",
+    "public/local/flwhistory/classes/observer.php",
+    "public/local/flwhistory/classes/local/source_identity.php",
+    "public/local/flwhistory/classes/local/repository.php",
+    "public/local/flwhistory/classes/local/normalizer.php",
+    "public/local/flwhistory/classes/local/p1_resolver.php",
+    "public/local/flwhistory/classes/local/history_service.php",
+    "public/local/flwhistory/classes/local/attempt_service.php",
+    "public/local/flwhistory/classes/local/grade_history_service.php",
+    "public/local/flwhistory/classes/local/completion_service.php",
+    "public/local/flwhistory/classes/local/placement_history_service.php",
+    "public/local/flwhistory/classes/local/coverage_service.php",
+    "public/local/flwhistory/classes/local/correction_service.php",
+    "public/local/flwhistory/classes/local/reconciliation_service.php",
+    "public/local/flwhistory/classes/local/evidence_source_adapter.php",
+    "public/local/flwhistory/tests/source_identity_test.php",
+    "public/local/flwhistory/tests/repository_test.php",
+    "docs/flw-history/H1_TECHNICAL_ARCHITECTURE.md",
+    "docs/flw-history/H1_SCHEMA.md",
+    "docs/flw-history/H1_SERVICE_CONTRACTS.md",
+    "docs/flw-history/H1_CAPABILITY_PRIVACY.md",
+    "docs/flw-history/H1_REPORT.md",
+    "docs/flw-history/H1_MANIFEST.json"
+  ],
+  "requirement_ids": {
+    "implemented": [
+      "XPR-OWN-001",
+      "XPR-MAN-001",
+      "XPR-PKT-001",
+      "XPR-PKT-002",
+      "P2-HIST-001",
+      "P2-HIST-002",
+      "P2-ATT-002",
+      "P2-GRD-003"
+    ],
+    "tested": [
+      "P2-HIST-001",
+      "P2-HIST-002",
+      "P2-ATT-002",
+      "P2-GRD-003"
+    ],
+    "deferred": [
+      "XPR-CON-002",
+      "P2-NORM-001",
+      "P2-NORM-002",
+      "P2-COV-001",
+      "P2-COV-002",
+      "P2-ATT-001",
+      "P2-GRD-001",
+      "P2-GRD-002",
+      "P2-COMP-001",
+      "P2-API-001",
+      "P2-API-002",
+      "P2-API-003",
+      "P2-PRV-001",
+      "P2-SEC-001",
+      "P2-CON-001"
+    ],
+    "failed": []
+  },
+  "next_gate_allowed": true,
+  "notes": [
+    "H1 registered no active observers and no active scheduled tasks.",
+    "Program 3 C-UP-KP mastery, recommendation, and Moodle competency ownership remains unchanged.",
+    "H1B must freeze coverage and normalization-version semantics before H2 production capture."
+  ]
+}
+

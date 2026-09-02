@@ -52,6 +52,18 @@ function local_flwcupkp_extend_navigation_course(navigation_node $navigation, st
                 'local_flwcupkp_evaluation_' . clean_param($unitcode, PARAM_ALPHANUMEXT)
             );
             local_flwcupkp_mark_navigation_node_active($evaluationnode, $evaluationurl);
+            $timelineurl = new moodle_url('/local/flwcupkp/learning_timeline.php', [
+                'courseid' => $course->id,
+                'unitcode' => $unitcode,
+            ]);
+            $timelinenode = $navigation->add(
+                get_string('learningtimelinenav', 'local_flwcupkp', $unitcode),
+                $timelineurl,
+                navigation_node::TYPE_SETTING,
+                null,
+                'local_flwcupkp_timeline_' . clean_param($unitcode, PARAM_ALPHANUMEXT)
+            );
+            local_flwcupkp_mark_navigation_node_active($timelinenode, $timelineurl);
         }
 
         if (has_capability('local/flwcupkp:viewreports', $context)) {

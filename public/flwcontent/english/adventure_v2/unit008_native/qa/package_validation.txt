@@ -1,5 +1,0 @@
-practice_count=108
-image_count=24
-missing_asset_refs=0
-video_exists=True
-vtt_exists=True

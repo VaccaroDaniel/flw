@@ -1,5 +1,0 @@
-Generated loader: D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
-
-$ C:\Dev\MoodleWindowsInstaller-latest-501\server\php\php.exe -l D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php
-PHP Fatal error:  Cannot redeclare discover_source_css() (previously declared in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php:425) in D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php on line 437
-Errors parsing D:\WinPro.Delta\Projects\FLW\FLW-V2\adventure-english-world\unit002\load_flw_native_generated_course.php

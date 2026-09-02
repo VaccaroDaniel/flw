@@ -9,6 +9,7 @@ Feature: C-UP-KP admin pages
     Then I should see "FLW C-UP-KP"
     And I should see "Unit Setup Wizard"
     And I should see "Curriculum Manager"
+    And I should see "Foundation Inspector"
     And I should see "Traceability report"
 
   Scenario: Admin opens the unit setup wizard
@@ -21,9 +22,17 @@ Feature: C-UP-KP admin pages
   Scenario: Admin opens the curriculum relationship view
     When I am on the "site" "local_flwcupkp > curriculum" page logged in as "admin"
     Then I should see "Curriculum Manager"
+    And I should see "CM1 navigation"
     And I should see "Relationship view"
     And I should see "Bulk operations"
     And I should see "Curriculum graph"
+
+  Scenario: Admin opens the Foundation Inspector
+    When I am on the "site" "local_flwcupkp > foundation" page logged in as "admin"
+    Then I should see "Foundation Inspector"
+    And I should see "Foundation status"
+    And I should see "Dependency checks"
+    And I should see "Version identifiers"
 
   @javascript @accessibility
   Scenario: Admin curriculum page supports accessibility and keyboard navigation

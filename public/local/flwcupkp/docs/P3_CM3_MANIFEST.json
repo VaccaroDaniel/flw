@@ -1,0 +1,56 @@
+{
+  "gate": "P3_CM3",
+  "name": "Coverage + Bulk Management + Governance UI",
+  "status": "complete",
+  "date": "2026-08-29",
+  "contract": "FLW_CUPKP_COVERAGE_BULK_GOVERNANCE_V1",
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "implemented_files": [
+    "local/flwcupkp/classes/local/coverage_bulk_governance_manager.php",
+    "local/flwcupkp/governance.php",
+    "local/flwcupkp/curriculum.php",
+    "local/flwcupkp/index.php",
+    "local/flwcupkp/classes/local/core_curriculum_manager.php",
+    "local/flwcupkp/classes/local/relationship_where_used_manager.php",
+    "local/flwcupkp/classes/local/foundation_v1_contract.php",
+    "local/flwcupkp/classes/local/program3_repository_audit.php",
+    "local/flwcupkp/lang/en/local_flwcupkp.php",
+    "local/flwcupkp/styles.css",
+    "local/flwcupkp/version.php",
+    "local/flwcupkp/db/upgrade.php",
+    "local/flwcupkp/tests/coverage_bulk_governance_manager_test.php",
+    "local/flwcupkp/tests/core_curriculum_manager_test.php",
+    "local/flwcupkp/tests/relationship_where_used_manager_test.php",
+    "local/flwcupkp/tests/foundation_v1_contract_test.php",
+    "local/flwcupkp/tests/program3_repository_audit_test.php"
+  ],
+  "capabilities": [
+    "six_area_coverage_matrix",
+    "coverage_findings_for_orphans_and_route_gaps",
+    "recognition_only_interaction_evidence_detection",
+    "deprecated_reference_and_evidence_ceiling_detection",
+    "bulk_import_dry_run_validation",
+    "transactional_import_confirmation",
+    "duplicate_checksum_detection",
+    "json_export_with_checksum",
+    "controlled_rollback_request_audit",
+    "lifecycle_governance_dashboard"
+  ],
+  "preserved_boundaries": [
+    "no_adaptive_path_selection",
+    "no_mastery_recalculation",
+    "no_learner_state_mutation",
+    "no_recommendation_policy_change",
+    "no_history_v1_source_capture",
+    "no_raw_moodle_log_scraping"
+  ],
+  "test_summary": {
+    "local_flwcupkp_testsuite": "OK (100 tests, 813 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "passed",
+    "live_cache_purge": "passed",
+    "live_render_smoke": "passed via logged-in PHP render smoke",
+    "browser_visual_smoke": "blocked by Moodle login page"
+  },
+  "next_gate": "CM4"
+}

@@ -1,0 +1,50 @@
+{
+  "gate": "P3_UX3",
+  "contract": "FLW_CUPKP_STAFF_INTELLIGENCE_V1",
+  "intervention_policy_version": "cupkp-staff-intervention-v1",
+  "source_learner_contract": "FLW_CUPKP_LEARNER_EXPERIENCE_V1",
+  "source_history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "history_owner": "local_flwhistory",
+  "adaptive_policy_owner": "A3/A4/A4B/A5",
+  "table": "flwcupkp_intervention",
+  "capability": "local/flwcupkp:override",
+  "append_only": true,
+  "activity_must_remain_a4b_eligible": true,
+  "interventions": [
+    "assign_target_activity",
+    "force_review",
+    "hold_advancement",
+    "override_recommendation",
+    "adjust_goal",
+    "teacher_evidence"
+  ],
+  "next_allowed_gate": "F1",
+  "files": [
+    "classes/local/staff_intelligence_service.php",
+    "classes/local/staff_intelligence_renderer.php",
+    "staff_intelligence.php",
+    "cli/staff_intelligence.php",
+    "tests/staff_intelligence_service_test.php"
+  ],
+  "web_services": [
+    "local_flwcupkp_get_staff_intelligence_status",
+    "local_flwcupkp_get_staff_intelligence",
+    "local_flwcupkp_apply_staff_intervention",
+    "local_flwcupkp_release_staff_intervention"
+  ],
+  "verification": {
+    "plugin_version": 2026083101,
+    "status": "complete",
+    "focused_tests": 6,
+    "focused_assertions": 85,
+    "cross_gate_tests": 51,
+    "cross_gate_assertions": 865,
+    "full_tests": 174,
+    "full_assertions": 2034,
+    "live_criteria": "10/10",
+    "repository_status": "ready_for_f1",
+    "registered_web_services": "4/4",
+    "page_http_check": "303_moodle_access_redirect_on_existing_course",
+    "authenticated_visual_check": "not_available_guest_session"
+  }
+}

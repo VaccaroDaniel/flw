@@ -11,14 +11,29 @@ use external_function_parameters;
 use external_multiple_structure;
 use external_single_structure;
 use external_value;
+use local_flwcupkp\local\adaptive_decision_policy_service;
+use local_flwcupkp\local\adaptive_path_engine_service;
 use local_flwcupkp\local\audit_service;
+use local_flwcupkp\local\candidate_activity_resolution_service;
 use local_flwcupkp\local\curriculum_manager;
 use local_flwcupkp\local\flwvrroom_evidence_adapter;
+use local_flwcupkp\local\goal_gap_path_service;
+use local_flwcupkp\local\history_evidence_adapter;
 use local_flwcupkp\local\import_service;
 use local_flwcupkp\local\learner_evaluation;
+use local_flwcupkp\local\learner_experience_service;
+use local_flwcupkp\local\learning_goal_service;
+use local_flwcupkp\local\management_v1_contract;
 use local_flwcupkp\local\mastery_engine;
+use local_flwcupkp\local\mastery_state_service;
 use local_flwcupkp\local\moodle_competency_writer;
+use local_flwcupkp\local\placement_diagnostic_service;
+use local_flwcupkp\local\progress_goal_readiness_service;
 use local_flwcupkp\local\recommendation_engine;
+use local_flwcupkp\local\retention_review_service;
+use local_flwcupkp\local\student_learning_timeline_view_service;
+use local_flwcupkp\local\staff_intelligence_service;
+use local_flwcupkp\local\trajectory_invariant_service;
 use local_flwcupkp\local\validator;
 
 require_once($CFG->libdir . '/externallib.php');
@@ -748,6 +763,1539 @@ class api extends external_api {
         return self::json_returns();
     }
 
+    public static function get_management_v1_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_management_v1_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_management_v1_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(management_v1_contract::consumer_snapshot(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_management_v1_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_history_evidence_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_history_evidence_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_history_evidence_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(history_evidence_adapter::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_history_evidence_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function preview_history_evidence_reprocess_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'facttypesjson' => new external_value(PARAM_RAW, 'Fact type JSON array', VALUE_DEFAULT, '[]'),
+            'limit' => new external_value(PARAM_INT, 'Record limit', VALUE_DEFAULT, 100),
+            'offset' => new external_value(PARAM_INT, 'Record offset', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function preview_history_evidence_reprocess(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, string $facttypesjson = '[]', int $limit = 100, int $offset = 0): array {
+        $params = self::validate_parameters(self::preview_history_evidence_reprocess_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'facttypesjson', 'limit', 'offset'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(history_evidence_adapter::preview_reprocess(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            self::decode_json_array((string)$params['facttypesjson']),
+            (int)$params['limit'],
+            (int)$params['offset']
+        ));
+    }
+
+    public static function preview_history_evidence_reprocess_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_history_evidence_reprocess_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'facttypesjson' => new external_value(PARAM_RAW, 'Fact type JSON array', VALUE_DEFAULT, '[]'),
+            'limit' => new external_value(PARAM_INT, 'Record limit', VALUE_DEFAULT, 100),
+            'offset' => new external_value(PARAM_INT, 'Record offset', VALUE_DEFAULT, 0),
+            'reason' => new external_value(PARAM_TEXT, 'Operator reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_history_evidence_reprocess(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, string $facttypesjson = '[]', int $limit = 100, int $offset = 0,
+            string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_history_evidence_reprocess_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'facttypesjson', 'limit', 'offset', 'reason'));
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:manageframeworks', context_system::instance());
+        self::assert_write_rate_limit('apply_history_evidence_reprocess');
+        return self::json_response(history_evidence_adapter::apply_reprocess(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            self::decode_json_array((string)$params['facttypesjson']),
+            (int)$params['limit'],
+            (int)$params['offset'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_history_evidence_reprocess_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_mastery_state_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_mastery_state_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_mastery_state_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(mastery_state_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_mastery_state_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_current_learner_state_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_current_learner_state(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_current_learner_state_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(mastery_state_service::current_learner_state(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_current_learner_state_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_current_state_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_current_state_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_current_state_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(mastery_state_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_current_state_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function preview_mastery_state_rebuild_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function preview_mastery_state_rebuild(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::preview_mastery_state_rebuild_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(mastery_state_service::preview_rebuild(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function preview_mastery_state_rebuild_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_mastery_state_rebuild_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+            'reason' => new external_value(PARAM_TEXT, 'Operator reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_mastery_state_rebuild(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100, string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_mastery_state_rebuild_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit', 'reason'));
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:manageframeworks', context_system::instance());
+        self::assert_write_rate_limit('apply_mastery_state_rebuild');
+        return self::json_response(mastery_state_service::apply_rebuild(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_mastery_state_rebuild_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_retention_review_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_retention_review_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_retention_review_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(retention_review_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_retention_review_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_current_retention_state_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_current_retention_state(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_current_retention_state_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(retention_review_service::current_retention_state(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_current_retention_state_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_retention_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_retention_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_retention_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(retention_review_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_retention_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function preview_retention_review_rebuild_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function preview_retention_review_rebuild(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::preview_retention_review_rebuild_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(retention_review_service::preview_rebuild(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function preview_retention_review_rebuild_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_retention_review_rebuild_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+            'reason' => new external_value(PARAM_TEXT, 'Operator reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_retention_review_rebuild(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100, string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_retention_review_rebuild_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit', 'reason'));
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:manageframeworks', context_system::instance());
+        self::assert_write_rate_limit('apply_retention_review_rebuild');
+        return self::json_response(retention_review_service::apply_rebuild(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_retention_review_rebuild_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learning_goal_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Goal sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learning_goal_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learning_goal_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(learning_goal_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learning_goal_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_current_learning_goal_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Version limit', VALUE_DEFAULT, 20),
+        ]);
+    }
+
+    public static function get_current_learning_goal(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 20): array {
+        $params = self::validate_parameters(self::get_current_learning_goal_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(learning_goal_service::current_goal(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_current_learning_goal_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_learning_goal_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner goal limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_learning_goal_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_learning_goal_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(learning_goal_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_learning_goal_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learning_goal_options_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'query' => new external_value(PARAM_TEXT, 'Target search query', VALUE_DEFAULT, ''),
+            'limit' => new external_value(PARAM_INT, 'Option limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learning_goal_options(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, string $query = '', int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learning_goal_options_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'query', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        if (!has_capability('local/flwcupkp:viewreports', $context)) {
+            require_capability('local/flwcupkp:viewlearnerpath', $context);
+        }
+        return self::json_response(learning_goal_service::goal_options(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (string)$params['query'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learning_goal_options_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function save_learning_goal_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'datajson' => new external_value(PARAM_RAW, 'Learning goal JSON payload'),
+            'source' => new external_value(PARAM_ALPHA, 'STUDENT, TEACHER, or INSTITUTION', VALUE_DEFAULT, 'STUDENT'),
+            'reason' => new external_value(PARAM_TEXT, 'Version reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function save_learning_goal(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, string $datajson = '', string $source = 'STUDENT', string $reason = ''): array {
+        $params = self::validate_parameters(self::save_learning_goal_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'datajson', 'source', 'reason'));
+        self::require_learning_goal_write_access((int)$params['userid'], (int)$params['courseid'],
+            (string)$params['source']);
+        self::assert_write_rate_limit('save_learning_goal');
+        $data = self::decode_object_json((string)$params['datajson']);
+        $data['courseid'] = (int)$params['courseid'];
+        $data['unitcode'] = (string)$params['unitcode'];
+        $data['frameworkid'] = (int)$params['frameworkid'];
+        $data['source'] = (string)$params['source'];
+        return self::json_response(learning_goal_service::save_goal(
+            (int)$params['userid'],
+            $data,
+            (string)$params['source'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function save_learning_goal_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_placement_diagnostic_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_placement_diagnostic_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_placement_diagnostic_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(placement_diagnostic_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_placement_diagnostic_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_current_placement_diagnostic_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 20),
+        ]);
+    }
+
+    public static function get_current_placement_diagnostic(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 20): array {
+        $params = self::validate_parameters(self::get_current_placement_diagnostic_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(placement_diagnostic_service::current_placement(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_current_placement_diagnostic_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_placement_diagnostic_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_placement_diagnostic_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_placement_diagnostic_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(placement_diagnostic_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_placement_diagnostic_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function preview_placement_diagnostic_reprocess_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Placement fact limit', VALUE_DEFAULT, 100),
+            'offset' => new external_value(PARAM_INT, 'Placement fact offset', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function preview_placement_diagnostic_reprocess(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100, int $offset = 0): array {
+        $params = self::validate_parameters(self::preview_placement_diagnostic_reprocess_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit', 'offset'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(placement_diagnostic_service::preview_reprocess(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit'],
+            (int)$params['offset']
+        ));
+    }
+
+    public static function preview_placement_diagnostic_reprocess_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_placement_diagnostic_reprocess_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'userid' => new external_value(PARAM_INT, 'Learner ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Placement fact limit', VALUE_DEFAULT, 100),
+            'offset' => new external_value(PARAM_INT, 'Placement fact offset', VALUE_DEFAULT, 0),
+            'reason' => new external_value(PARAM_TEXT, 'Operator reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_placement_diagnostic_reprocess(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $userid = 0, int $limit = 100, int $offset = 0, string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_placement_diagnostic_reprocess_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'userid', 'limit', 'offset', 'reason'));
+        self::validate_context(context_system::instance());
+        require_capability('local/flwcupkp:manageframeworks', context_system::instance());
+        self::assert_write_rate_limit('apply_placement_diagnostic_reprocess');
+        return self::json_response(placement_diagnostic_service::apply_reprocess(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['userid'],
+            (int)$params['limit'],
+            (int)$params['offset'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_placement_diagnostic_reprocess_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_adaptive_decision_policy_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Decision sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_adaptive_decision_policy_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_adaptive_decision_policy_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(adaptive_decision_policy_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_adaptive_decision_policy_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_adaptive_decision_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'State row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learner_adaptive_decision(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learner_adaptive_decision_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(adaptive_decision_policy_service::learner_decision(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learner_adaptive_decision_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_adaptive_decision_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_adaptive_decision_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_adaptive_decision_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(adaptive_decision_policy_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_adaptive_decision_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_goal_gap_path_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Path sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_goal_gap_path_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_goal_gap_path_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(goal_gap_path_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_goal_gap_path_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_initial_path_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Requirement row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learner_initial_path(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learner_initial_path_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(goal_gap_path_service::learner_path(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learner_initial_path_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_initial_path_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_initial_path_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_initial_path_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(goal_gap_path_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_initial_path_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_candidate_activity_resolution_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Resolution sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_candidate_activity_resolution_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_candidate_activity_resolution_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(candidate_activity_resolution_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_candidate_activity_resolution_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_activity_resolution_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Candidate/activity row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learner_activity_resolution(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learner_activity_resolution_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(candidate_activity_resolution_service::learner_resolution(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learner_activity_resolution_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_activity_resolution_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_activity_resolution_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_activity_resolution_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(candidate_activity_resolution_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_activity_resolution_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_adaptive_path_engine_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Status sample limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_adaptive_path_engine_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_adaptive_path_engine_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(adaptive_path_engine_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_adaptive_path_engine_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_adaptive_path_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Candidate/activity row limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learner_adaptive_path(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learner_adaptive_path_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(adaptive_path_engine_service::learner_path(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learner_adaptive_path_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_learner_adaptive_path_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Candidate/activity row limit', VALUE_DEFAULT, 100),
+            'reason' => new external_value(PARAM_TEXT, 'Controlled refresh reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_learner_adaptive_path(int $userid, int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100, string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_learner_adaptive_path_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit', 'reason'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], true);
+        self::assert_write_rate_limit('apply_learner_adaptive_path');
+        return self::json_response(adaptive_path_engine_service::apply_learner_path(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_learner_adaptive_path_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_adaptive_path_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_adaptive_path_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_adaptive_path_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(adaptive_path_engine_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_adaptive_path_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_class_adaptive_paths_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+            'reason' => new external_value(PARAM_TEXT, 'Controlled class refresh reason', VALUE_DEFAULT, ''),
+        ]);
+    }
+
+    public static function apply_class_adaptive_paths(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100, string $reason = ''): array {
+        $params = self::validate_parameters(self::apply_class_adaptive_paths_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit', 'reason'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:override', $context);
+        self::assert_write_rate_limit('apply_class_adaptive_paths');
+        return self::json_response(adaptive_path_engine_service::apply_class_paths(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit'],
+            (string)$params['reason']
+        ));
+    }
+
+    public static function apply_class_adaptive_paths_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_trajectory_simulation_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_trajectory_simulation_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0): array {
+        $params = self::validate_parameters(self::get_trajectory_simulation_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(trajectory_invariant_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid']
+        ));
+    }
+
+    public static function get_trajectory_simulation_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function run_trajectory_simulation_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID for access scope', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code for access scope', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID for access scope', VALUE_DEFAULT, 0),
+            'seed' => new external_value(PARAM_TEXT, 'Deterministic simulation seed', VALUE_DEFAULT,
+                'flw-cupkp-a5b-v1'),
+            'trajectorycount' => new external_value(PARAM_INT, 'Trajectory count, maximum 2000', VALUE_DEFAULT, 512),
+            'steps' => new external_value(PARAM_INT, 'Steps per trajectory, maximum 100', VALUE_DEFAULT, 24),
+            'scenariosjson' => new external_value(PARAM_RAW, 'Scenario names as a JSON list', VALUE_DEFAULT, '[]'),
+            'samplelimit' => new external_value(PARAM_INT, 'Returned sample limit, maximum 20', VALUE_DEFAULT, 8),
+        ]);
+    }
+
+    public static function run_trajectory_simulation(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0, string $seed = 'flw-cupkp-a5b-v1', int $trajectorycount = 512,
+            int $steps = 24, string $scenariosjson = '[]', int $samplelimit = 8): array {
+        $params = self::validate_parameters(self::run_trajectory_simulation_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'seed', 'trajectorycount', 'steps',
+                'scenariosjson', 'samplelimit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        $scenarios = self::decode_json_array((string)$params['scenariosjson']);
+        foreach ($scenarios as $scenario) {
+            if (!is_string($scenario)) {
+                throw new \invalid_parameter_exception('Every simulation scenario must be a string.');
+            }
+        }
+        return self::json_response(trajectory_invariant_service::simulate_suite(
+            (string)$params['seed'],
+            (int)$params['trajectorycount'],
+            (int)$params['steps'],
+            $scenarios,
+            (int)$params['samplelimit']
+        ));
+    }
+
+    public static function run_trajectory_simulation_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_trajectory_projection_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'seed' => new external_value(PARAM_TEXT, 'Deterministic simulation seed', VALUE_DEFAULT,
+                'flw-cupkp-a5b-v1'),
+            'steps' => new external_value(PARAM_INT, 'Projection step count, maximum 100', VALUE_DEFAULT, 24),
+        ]);
+    }
+
+    public static function get_learner_trajectory_projection(int $userid, int $courseid = 0,
+            string $unitcode = '', int $frameworkid = 0, string $seed = 'flw-cupkp-a5b-v1',
+            int $steps = 24): array {
+        $params = self::validate_parameters(self::get_learner_trajectory_projection_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'seed', 'steps'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(trajectory_invariant_service::learner_projection(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (string)$params['seed'],
+            (int)$params['steps']
+        ));
+    }
+
+    public static function get_learner_trajectory_projection_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_progress_readiness_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_progress_readiness_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0): array {
+        $params = self::validate_parameters(self::get_progress_readiness_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(progress_goal_readiness_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid']
+        ));
+    }
+
+    public static function get_progress_readiness_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_progress_readiness_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Requirement limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_learner_progress_readiness(int $userid, int $courseid = 0,
+            string $unitcode = '', int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_learner_progress_readiness_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        return self::json_response(progress_goal_readiness_service::learner_progress(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_learner_progress_readiness_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_class_progress_readiness_summary_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Learner limit', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_class_progress_readiness_summary(int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_class_progress_readiness_summary_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(progress_goal_readiness_service::class_summary(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit']
+        ));
+    }
+
+    public static function get_class_progress_readiness_summary_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learning_timeline_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_learning_timeline_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0): array {
+        $params = self::validate_parameters(self::get_learning_timeline_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(student_learning_timeline_view_service::status(
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid']
+        ));
+    }
+
+    public static function get_learning_timeline_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_student_learning_timeline_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Per-panel limit', VALUE_DEFAULT, 10),
+            'attemptoffset' => new external_value(PARAM_INT, 'Attempt history offset', VALUE_DEFAULT, 0),
+            'gradeoffset' => new external_value(PARAM_INT, 'Grade history offset', VALUE_DEFAULT, 0),
+            'historyoffset' => new external_value(PARAM_INT, 'Learning history offset', VALUE_DEFAULT, 0),
+            'activityoffset' => new external_value(PARAM_INT, 'Recent activity offset', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_student_learning_timeline(int $userid, int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 10, int $attemptoffset = 0, int $gradeoffset = 0,
+            int $historyoffset = 0, int $activityoffset = 0): array {
+        $params = self::validate_parameters(self::get_student_learning_timeline_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit', 'attemptoffset',
+                'gradeoffset', 'historyoffset', 'activityoffset'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        $historyservice = '\\local_flwhistory\\local\\dashboard_service';
+        if (!class_exists($historyservice) || !method_exists($historyservice, 'require_learner_access')) {
+            throw new \moodle_exception('timelinehistoryunavailable', 'local_flwcupkp');
+        }
+        $historyservice::require_learner_access((int)$params['courseid'], (int)$params['userid']);
+        return self::json_response(student_learning_timeline_view_service::learner_timeline(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            (int)$params['limit'],
+            [
+                'attemptoffset' => (int)$params['attemptoffset'],
+                'gradeoffset' => (int)$params['gradeoffset'],
+                'historyoffset' => (int)$params['historyoffset'],
+                'activityoffset' => (int)$params['activityoffset'],
+            ]
+        ));
+    }
+
+    public static function get_student_learning_timeline_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_learner_experience_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_learner_experience_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0): array {
+        $params = self::validate_parameters(self::get_learner_experience_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(learner_experience_service::status(
+            (int)$params['courseid'], (string)$params['unitcode'], (int)$params['frameworkid']
+        ));
+    }
+
+    public static function get_learner_experience_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_simplified_learner_experience_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'History input limit', VALUE_DEFAULT, 20),
+        ]);
+    }
+
+    public static function get_simplified_learner_experience(int $userid, int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 20): array {
+        $params = self::validate_parameters(self::get_simplified_learner_experience_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        self::require_learner_evaluation_access((int)$params['userid'], (int)$params['courseid'], false);
+        $historyservice = '\\local_flwhistory\\local\\dashboard_service';
+        if (!class_exists($historyservice) || !method_exists($historyservice, 'require_learner_access')) {
+            throw new \moodle_exception('timelinehistoryunavailable', 'local_flwcupkp');
+        }
+        $historyservice::require_learner_access((int)$params['courseid'], (int)$params['userid']);
+        return self::json_response(learner_experience_service::learner_experience(
+            (int)$params['userid'],
+            (int)$params['courseid'],
+            (string)$params['unitcode'],
+            (int)$params['frameworkid'],
+            max(1, min(50, (int)$params['limit']))
+        ));
+    }
+
+    public static function get_simplified_learner_experience_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_staff_intelligence_status_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_DEFAULT, 0),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+        ]);
+    }
+
+    public static function get_staff_intelligence_status(int $courseid = 0, string $unitcode = '',
+            int $frameworkid = 0): array {
+        $params = self::validate_parameters(self::get_staff_intelligence_status_parameters(),
+            compact('courseid', 'unitcode', 'frameworkid'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(staff_intelligence_service::status(
+            (int)$params['courseid'], (string)$params['unitcode'], (int)$params['frameworkid']
+        ));
+    }
+
+    public static function get_staff_intelligence_status_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function get_staff_intelligence_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner user ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'limit' => new external_value(PARAM_INT, 'Maximum detail rows', VALUE_DEFAULT, 100),
+        ]);
+    }
+
+    public static function get_staff_intelligence(int $userid, int $courseid, string $unitcode = '',
+            int $frameworkid = 0, int $limit = 100): array {
+        $params = self::validate_parameters(self::get_staff_intelligence_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'limit'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:viewreports', $context);
+        return self::json_response(staff_intelligence_service::learner_intelligence(
+            (int)$params['userid'], (int)$params['courseid'], (string)$params['unitcode'],
+            (int)$params['frameworkid'], (int)$params['limit']
+        ));
+    }
+
+    public static function get_staff_intelligence_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function apply_staff_intervention_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'userid' => new external_value(PARAM_INT, 'Learner user ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'unitcode' => new external_value(PARAM_ALPHANUMEXT, 'Unit code', VALUE_DEFAULT, ''),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'interventiontype' => new external_value(PARAM_ALPHANUMEXT, 'Intervention type'),
+            'datajson' => new external_value(PARAM_RAW, 'Intervention fields as a JSON object', VALUE_DEFAULT, '{}'),
+            'reason' => new external_value(PARAM_TEXT, 'Required staff reason'),
+        ]);
+    }
+
+    public static function apply_staff_intervention(int $userid, int $courseid, string $unitcode,
+            int $frameworkid, string $interventiontype, string $datajson, string $reason): array {
+        $params = self::validate_parameters(self::apply_staff_intervention_parameters(),
+            compact('userid', 'courseid', 'unitcode', 'frameworkid', 'interventiontype', 'datajson', 'reason'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:override', $context);
+        self::assert_write_rate_limit('apply_staff_intervention');
+        return self::json_response(staff_intelligence_service::apply_intervention(
+            (int)$params['userid'], (int)$params['courseid'], (string)$params['unitcode'],
+            (int)$params['frameworkid'], (string)$params['interventiontype'],
+            self::decode_object_json((string)$params['datajson']), (string)$params['reason']
+        ));
+    }
+
+    public static function apply_staff_intervention_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
+    public static function release_staff_intervention_parameters(): external_function_parameters {
+        return new external_function_parameters([
+            'interventionid' => new external_value(PARAM_INT, 'Latest active intervention ID'),
+            'courseid' => new external_value(PARAM_INT, 'Course ID'),
+            'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
+            'reason' => new external_value(PARAM_TEXT, 'Required release reason'),
+        ]);
+    }
+
+    public static function release_staff_intervention(int $interventionid, int $courseid,
+            int $frameworkid, string $reason): array {
+        $params = self::validate_parameters(self::release_staff_intervention_parameters(),
+            compact('interventionid', 'courseid', 'frameworkid', 'reason'));
+        $context = self::evaluation_context((int)$params['courseid']);
+        self::validate_context($context);
+        require_capability('local/flwcupkp:override', $context);
+        self::assert_write_rate_limit('release_staff_intervention');
+        return self::json_response(staff_intelligence_service::release_intervention(
+            (int)$params['interventionid'], (string)$params['reason'], (int)$params['frameworkid']
+        ));
+    }
+
+    public static function release_staff_intervention_returns(): external_single_structure {
+        return self::json_returns();
+    }
+
     private static function list_entity_parameters(): external_function_parameters {
         return new external_function_parameters([
             'frameworkid' => new external_value(PARAM_INT, 'Framework ID', VALUE_DEFAULT, 0),
@@ -804,6 +2352,20 @@ class api extends external_api {
         return $data;
     }
 
+    private static function decode_json_array(string $json): array {
+        $data = json_decode($json, true);
+        if ($json !== '' && !is_array($data)) {
+            throw new \invalid_parameter_exception('JSON array payload is required.');
+        }
+        if (!$data) {
+            return [];
+        }
+        if (array_keys($data) !== range(0, count($data) - 1)) {
+            throw new \invalid_parameter_exception('JSON array payload is required.');
+        }
+        return $data;
+    }
+
     private static function json_returns(): external_single_structure {
         return new external_single_structure([
             'json' => new external_value(PARAM_RAW, 'JSON response payload'),
@@ -815,7 +2377,10 @@ class api extends external_api {
     }
 
     private static function evaluation_context(int $courseid): \context {
-        return $courseid > 0 ? \context_course::instance($courseid) : context_system::instance();
+        if ($courseid <= 0) {
+            return context_system::instance();
+        }
+        return \context_course::instance($courseid, IGNORE_MISSING) ?: context_system::instance();
     }
 
     private static function require_learner_evaluation_access(int $userid, int $courseid, bool $write): void {
@@ -830,6 +2395,30 @@ class api extends external_api {
         }
 
         require_capability($write ? 'local/flwcupkp:override' : 'local/flwcupkp:viewreports', $context);
+    }
+
+    private static function require_learning_goal_write_access(int $userid, int $courseid, string $source): void {
+        global $USER;
+
+        $context = self::evaluation_context($courseid);
+        $systemcontext = context_system::instance();
+        self::validate_context($context);
+        $source = learning_goal_service::normalize_source($source);
+
+        if ($source === 'INSTITUTION') {
+            require_capability('local/flwcupkp:manageframeworks', $systemcontext);
+            return;
+        }
+
+        if ((int)($USER->id ?? 0) !== $userid || $source === 'TEACHER') {
+            if (has_capability('local/flwcupkp:manageframeworks', $systemcontext)) {
+                return;
+            }
+            require_capability('local/flwcupkp:override', $context);
+            return;
+        }
+
+        require_capability('local/flwcupkp:viewlearnerpath', $context);
     }
 
     /**

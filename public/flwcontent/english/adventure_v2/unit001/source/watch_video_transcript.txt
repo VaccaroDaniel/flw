@@ -1,7 +1,0 @@
-The Hello Gate
-Hello! I’m Leo.
-What’s your name? I’m Leo.
-Hi! I’m Mia. Hello, Emma.
-Hello, Toto!
-Goodbye!
-Your turn: Hello. I’m ___. Goodbye.

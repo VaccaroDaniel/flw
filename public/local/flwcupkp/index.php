@@ -154,6 +154,104 @@ function local_flwcupkp_home_admin_cards(): array {
         ],
         [
             'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('cm3governance', 'local_flwcupkp'),
+            'detail' => get_string('cm3home', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/governance.php'),
+            'button' => get_string('opencm3governance', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('cm4management', 'local_flwcupkp'),
+            'detail' => get_string('cm4home', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/management.php'),
+            'button' => get_string('opencm4management', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('historyevidenceadapter', 'local_flwcupkp'),
+            'detail' => get_string('historyevidencehome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/history_evidence.php'),
+            'button' => get_string('openhistoryevidence', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('masterystatee2', 'local_flwcupkp'),
+            'detail' => get_string('masterystatehome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/mastery_state.php'),
+            'button' => get_string('openmasterystate', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('retentionreviewe3', 'local_flwcupkp'),
+            'detail' => get_string('retentionreviewhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/retention_review.php'),
+            'button' => get_string('openretentionreview', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('learninggoala1', 'local_flwcupkp'),
+            'detail' => get_string('learninggoalhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/learning_goal.php'),
+            'button' => get_string('openlearninggoal', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('placementdiagnostica2', 'local_flwcupkp'),
+            'detail' => get_string('placementdiagnostichome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/placement_diagnostic.php'),
+            'button' => get_string('openplacementdiagnostic', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('adaptivedecisiona3', 'local_flwcupkp'),
+            'detail' => get_string('adaptivedecisionhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/adaptive_decision.php'),
+            'button' => get_string('openadaptivedecision', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('initialpatha4', 'local_flwcupkp'),
+            'detail' => get_string('initialpathhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/initial_path.php'),
+            'button' => get_string('openinitialpath', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('activityresolutiona4b', 'local_flwcupkp'),
+            'detail' => get_string('activityresolutionhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/activity_resolution.php'),
+            'button' => get_string('openactivityresolution', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('adaptivepatha5', 'local_flwcupkp'),
+            'detail' => get_string('adaptivepathhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/adaptive_path.php'),
+            'button' => get_string('openadaptivepath', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('trajectorysimulationa5b', 'local_flwcupkp'),
+            'detail' => get_string('trajectorysimulationhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/trajectory_simulation.php'),
+            'button' => get_string('opentrajectorysimulation', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('progressreadinessa5c', 'local_flwcupkp'),
+            'detail' => get_string('progressreadinesshome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/progress_readiness.php'),
+            'button' => get_string('openprogressreadiness', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
+            'title' => get_string('foundationinspector', 'local_flwcupkp'),
+            'detail' => get_string('foundationhome', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/foundation.php'),
+            'button' => get_string('openfoundation', 'local_flwcupkp'),
+        ],
+        [
+            'label' => get_string('adminworkspace', 'local_flwcupkp'),
             'title' => get_string('calibrationreport', 'local_flwcupkp'),
             'detail' => get_string('calibrationhome', 'local_flwcupkp'),
             'url' => new moodle_url('/local/flwcupkp/calibration.php'),
@@ -205,6 +303,117 @@ function local_flwcupkp_home_teacher_cards(array $units): array {
             'secondarybutton' => get_string('openspeakingwriting', 'local_flwcupkp'),
             'primary' => $summary['review'] > 0 || $summary['parent'] > 0,
         ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherlearninggoalcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => get_string('teacherlearninggoaldetail', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/learning_goal.php', [
+                'courseid' => $unit['courseid'],
+                'unitcode' => $unit['unitcode'],
+            ]),
+            'button' => get_string('openlearninggoal', 'local_flwcupkp'),
+        ];
+        $placement = \local_flwcupkp\local\placement_diagnostic_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            100
+        );
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherplacementdiagnosticcard', 'local_flwcupkp',
+                (int)($placement['summary']['records'] ?? 0)),
+            'detail' => get_string('teacherplacementdiagnosticdetail', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/placement_diagnostic.php', [
+                'courseid' => $unit['courseid'],
+                'unitcode' => $unit['unitcode'],
+            ]),
+            'button' => get_string('openplacementdiagnostic', 'local_flwcupkp'),
+            'primary' => (int)($placement['summary']['not_taken_or_unknown'] ?? 0) > 0 ||
+                (int)(($placement['summary']['states']['STALE'] ?? 0) +
+                    ($placement['summary']['states']['LOW_CONFIDENCE'] ?? 0) +
+                    ($placement['summary']['states']['INCOMPLETE'] ?? 0)) > 0,
+        ];
+        $adaptive = local_flwcupkp_home_adaptive_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacheradaptivedecisioncard', 'local_flwcupkp', $adaptive['attention']),
+            'detail' => get_string('teacheradaptivedecisiondetail', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/adaptive_decision.php', [
+                'courseid' => $unit['courseid'],
+                'unitcode' => $unit['unitcode'],
+            ]),
+            'button' => get_string('openadaptivedecision', 'local_flwcupkp'),
+            'primary' => $adaptive['attention'] > 0,
+        ];
+        $initial = local_flwcupkp_home_initial_path_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherinitialpathcard', 'local_flwcupkp', $initial['items']),
+            'detail' => get_string('teacherinitialpathdetail', 'local_flwcupkp'),
+            'url' => local_flwcupkp_home_initial_path_url($unit),
+            'button' => get_string('openinitialpath', 'local_flwcupkp'),
+            'primary' => $initial['items'] > 0,
+        ];
+        $activityresolution = local_flwcupkp_home_activity_resolution_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacheractivityresolutioncard', 'local_flwcupkp',
+                $activityresolution['next']),
+            'detail' => get_string('teacheractivityresolutiondetail', 'local_flwcupkp', (object)[
+                'diagnostic' => $activityresolution['diagnostic'],
+                'fallback' => $activityresolution['fallback'],
+            ]),
+            'url' => local_flwcupkp_home_activity_resolution_url($unit),
+            'button' => get_string('openactivityresolution', 'local_flwcupkp'),
+            'primary' => $activityresolution['diagnostic'] > 0 || $activityresolution['fallback'] > 0,
+        ];
+        $adaptivepath = local_flwcupkp_home_adaptive_path_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacheradaptivepathcard', 'local_flwcupkp',
+                $adaptivepath['ready'] + $adaptivepath['refresh']),
+            'detail' => get_string('teacheradaptivepathdetail', 'local_flwcupkp', (object)$adaptivepath),
+            'url' => local_flwcupkp_home_adaptive_path_url($unit),
+            'button' => get_string('openadaptivepath', 'local_flwcupkp'),
+            'primary' => $adaptivepath['ready'] > 0 || $adaptivepath['refresh'] > 0 ||
+                $adaptivepath['diagnostic'] > 0,
+        ];
+        $trajectory = local_flwcupkp_home_trajectory_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teachertrajectorycard', 'local_flwcupkp', $trajectory['passed']),
+            'detail' => get_string('teachertrajectorydetail', 'local_flwcupkp', (object)$trajectory),
+            'url' => local_flwcupkp_home_trajectory_url($unit),
+            'button' => get_string('opentrajectorysimulation', 'local_flwcupkp'),
+            'primary' => $trajectory['status'] !== 'ready' || !$trajectory['deterministicpass'],
+        ];
+        $readiness = local_flwcupkp_home_progress_readiness_summary($unit);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherprogressreadinesscard', 'local_flwcupkp', $readiness['achieved']),
+            'detail' => get_string('teacherprogressreadinessdetail', 'local_flwcupkp', (object)$readiness),
+            'url' => local_flwcupkp_home_progress_readiness_url($unit),
+            'button' => get_string('openprogressreadiness', 'local_flwcupkp'),
+            'primary' => $readiness['qualitative'] > 0 || $readiness['failed'] > 0,
+        ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('teacherlearningtimelinecard', 'local_flwcupkp'),
+            'detail' => get_string('teacherlearningtimelinedetail', 'local_flwcupkp'),
+            'url' => local_flwcupkp_home_learning_timeline_url($unit),
+            'button' => get_string('openlearningtimeline', 'local_flwcupkp'),
+        ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('staffintelligencecard', 'local_flwcupkp'),
+            'detail' => get_string('staffintelligencecarddetail', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/staff_intelligence.php', [
+                'courseid' => $unit['courseid'],
+                'unitcode' => $unit['unitcode'],
+            ]),
+            'button' => get_string('openstaffintelligence', 'local_flwcupkp'),
+        ];
     }
     return $cards;
 }
@@ -236,6 +445,60 @@ function local_flwcupkp_home_student_cards(array $units): array {
             'secondaryurl' => local_flwcupkp_home_evaluation_url($unit),
             'secondarybutton' => get_string('openmylearningpath', 'local_flwcupkp'),
             'primary' => $progress['gaps'] > 0,
+        ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentlearninggoalcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => get_string('studentlearninggoaldetail', 'local_flwcupkp'),
+            'url' => new moodle_url('/local/flwcupkp/learning_goal.php', [
+                'courseid' => $unit['courseid'],
+                'unitcode' => $unit['unitcode'],
+                'userid' => (int)$USER->id,
+            ]),
+            'button' => get_string('openlearninggoal', 'local_flwcupkp'),
+        ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentinitialpathcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => get_string('studentinitialpathdetail', 'local_flwcupkp'),
+            'url' => local_flwcupkp_home_initial_path_url($unit, (int)$USER->id),
+            'button' => get_string('openinitialpath', 'local_flwcupkp'),
+            'primary' => $progress['gaps'] > 0,
+        ];
+        $activityresolution = local_flwcupkp_home_student_activity_resolution($unit, (int)$USER->id);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentactivityresolutioncard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => $activityresolution['detail'],
+            'url' => local_flwcupkp_home_activity_resolution_url($unit, (int)$USER->id),
+            'button' => get_string('openactivityresolution', 'local_flwcupkp'),
+            'primary' => $activityresolution['ready'],
+        ];
+        $adaptivepath = local_flwcupkp_home_student_adaptive_path($unit, (int)$USER->id);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentadaptivepathcard', 'local_flwcupkp', $unit['unitcode']),
+            'detail' => $adaptivepath['detail'],
+            'url' => local_flwcupkp_home_adaptive_path_url($unit, (int)$USER->id),
+            'button' => get_string('openadaptivepath', 'local_flwcupkp'),
+            'primary' => $adaptivepath['ready'],
+        ];
+        $readiness = local_flwcupkp_home_student_progress_readiness($unit, (int)$USER->id);
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentprogressreadinesscard', 'local_flwcupkp'),
+            'detail' => $readiness['detail'],
+            'url' => local_flwcupkp_home_progress_readiness_url($unit, (int)$USER->id),
+            'button' => get_string('openprogressreadiness', 'local_flwcupkp'),
+            'primary' => !$readiness['achieved'],
+        ];
+        $cards[] = [
+            'label' => $unit['coursefullname'],
+            'title' => get_string('studentlearningtimelinecard', 'local_flwcupkp'),
+            'detail' => get_string('studentlearningtimelinedetail', 'local_flwcupkp'),
+            'url' => local_flwcupkp_home_learning_timeline_url($unit, (int)$USER->id),
+            'button' => get_string('openlearningtimeline', 'local_flwcupkp'),
+            'primary' => true,
         ];
     }
     return $cards;
@@ -453,6 +716,279 @@ function local_flwcupkp_home_teacher_summary(array $unit): array {
 }
 
 /**
+ * Adaptive decision attention count for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_adaptive_summary(array $unit): array {
+    try {
+        $summary = \local_flwcupkp\local\adaptive_decision_policy_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $urgency = $summary['summary']['urgency'] ?? [];
+        $attention = (int)($urgency['urgent'] ?? 0) + (int)($urgency['attention'] ?? 0);
+        return [
+            'attention' => $attention,
+            'urgent' => (int)($urgency['urgent'] ?? 0),
+        ];
+    } catch (Throwable $e) {
+        return [
+            'attention' => 0,
+            'urgent' => 0,
+        ];
+    }
+}
+
+/**
+ * Initial path workload count for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_initial_path_summary(array $unit): array {
+    try {
+        $summary = \local_flwcupkp\local\goal_gap_path_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $data = $summary['summary'] ?? [];
+        $items = (int)($data['ready_to_work'] ?? 0) + (int)($data['blocked_by_prerequisite'] ?? 0) +
+            (int)($data['needs_goal'] ?? 0) + (int)($data['needs_setup'] ?? 0);
+        return ['items' => $items];
+    } catch (Throwable $e) {
+        return ['items' => 0];
+    }
+}
+
+/**
+ * Activity resolution workload count for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_activity_resolution_summary(array $unit): array {
+    try {
+        $summary = \local_flwcupkp\local\candidate_activity_resolution_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $data = $summary['summary'] ?? [];
+        return [
+            'next' => (int)($data['next_activity_ready'] ?? 0),
+            'diagnostic' => (int)($data['diagnostic_required'] ?? 0),
+            'fallback' => (int)($data['fallback_used'] ?? 0),
+        ];
+    } catch (Throwable $e) {
+        return [
+            'next' => 0,
+            'diagnostic' => 0,
+            'fallback' => 0,
+        ];
+    }
+}
+
+/**
+ * Student activity-resolution summary for one unit.
+ *
+ * @param array $unit
+ * @param int $userid
+ * @return array
+ */
+function local_flwcupkp_home_student_activity_resolution(array $unit, int $userid): array {
+    try {
+        $resolution = \local_flwcupkp\local\candidate_activity_resolution_service::learner_resolution(
+            $userid,
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $next = $resolution['next_activity'] ?? null;
+        if ($next) {
+            return [
+                'ready' => true,
+                'detail' => get_string('studentactivityresolutiondetailready', 'local_flwcupkp',
+                    (string)($next['title'] ?? '')),
+            ];
+        }
+        return [
+            'ready' => false,
+            'detail' => get_string('studentactivityresolutiondetailnotready', 'local_flwcupkp',
+                (string)($resolution['diagnostic']['code'] ?? '')),
+        ];
+    } catch (Throwable $e) {
+        return [
+            'ready' => false,
+            'detail' => get_string('studentunitdetailunavailable', 'local_flwcupkp'),
+        ];
+    }
+}
+
+/**
+ * Teacher A5 recommendation refresh metrics for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_adaptive_path_summary(array $unit): array {
+    try {
+        $summary = \local_flwcupkp\local\adaptive_path_engine_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $data = $summary['summary'] ?? [];
+        return [
+            'current' => (int)($data['current'] ?? 0),
+            'ready' => (int)($data['ready_to_apply'] ?? 0),
+            'refresh' => (int)($data['refresh_required'] ?? 0),
+            'diagnostic' => (int)($data['diagnostic_required'] ?? 0),
+        ];
+    } catch (Throwable $e) {
+        return ['current' => 0, 'ready' => 0, 'refresh' => 0, 'diagnostic' => 0];
+    }
+}
+
+/**
+ * Student A5 current next step for one unit.
+ *
+ * @param array $unit
+ * @param int $userid
+ * @return array
+ */
+function local_flwcupkp_home_student_adaptive_path(array $unit, int $userid): array {
+    try {
+        $path = \local_flwcupkp\local\adaptive_path_engine_service::learner_path(
+            $userid,
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $recommendation = $path['recommendation'] ?? [];
+        $activity = $recommendation['selected_activity'] ?? null;
+        if ($activity) {
+            return [
+                'ready' => true,
+                'detail' => get_string('studentadaptivepathdetailready', 'local_flwcupkp', (object)[
+                    'action' => (string)($recommendation['action'] ?? ''),
+                    'activity' => (string)($activity['title'] ?? ''),
+                ]),
+            ];
+        }
+        return [
+            'ready' => false,
+            'detail' => get_string('studentadaptivepathdetaildiagnostic', 'local_flwcupkp',
+                (string)($recommendation['action'] ?? 'REPRIORITIZE')),
+        ];
+    } catch (Throwable $e) {
+        return [
+            'ready' => false,
+            'detail' => get_string('studentunitdetailunavailable', 'local_flwcupkp'),
+        ];
+    }
+}
+
+/**
+ * Teacher A5B invariant health for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_trajectory_summary(array $unit): array {
+    try {
+        $status = \local_flwcupkp\local\trajectory_invariant_service::status(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0
+        );
+        return [
+            'status' => (string)($status['status'] ?? 'blocked'),
+            'passed' => (int)($status['detector_self_test']['passed'] ?? 0),
+            'deterministic' => !empty($status['determinism_smoke']['pass']) ? get_string('yes') : get_string('no'),
+            'deterministicpass' => !empty($status['determinism_smoke']['pass']),
+            'next' => (string)($status['next_allowed_gate'] ?? 'A5C'),
+        ];
+    } catch (Throwable $e) {
+        return [
+            'status' => 'blocked',
+            'passed' => 0,
+            'deterministic' => get_string('no'),
+            'deterministicpass' => false,
+            'next' => 'A5C',
+        ];
+    }
+}
+
+/**
+ * Teacher A5C class metric summary for one unit.
+ *
+ * @param array $unit
+ * @return array
+ */
+function local_flwcupkp_home_progress_readiness_summary(array $unit): array {
+    try {
+        $result = \local_flwcupkp\local\progress_goal_readiness_service::class_summary(
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            40
+        );
+        $summary = $result['summary'] ?? [];
+        return [
+            'available' => (int)($summary['goal_readiness_percentage_available'] ?? 0),
+            'qualitative' => (int)($summary['qualitative_only'] ?? 0),
+            'achieved' => (int)($summary['goal_achieved'] ?? 0),
+            'failed' => (int)($summary['failed'] ?? 0),
+        ];
+    } catch (Throwable $e) {
+        return ['available' => 0, 'qualitative' => 0, 'achieved' => 0, 'failed' => 1];
+    }
+}
+
+/**
+ * Student A5C preferred metric for one unit.
+ *
+ * @param array $unit
+ * @param int $userid
+ * @return array
+ */
+function local_flwcupkp_home_student_progress_readiness(array $unit, int $userid): array {
+    try {
+        $result = \local_flwcupkp\local\progress_goal_readiness_service::learner_progress(
+            $userid,
+            (int)$unit['courseid'],
+            (string)$unit['unitcode'],
+            0,
+            100
+        );
+        $preferred = $result['progress']['preferred_learner_metric'];
+        $achievement = $result['progress']['goal_achievement'];
+        if ($preferred['percentage'] !== null) {
+            $detail = get_string('studentprogressreadinessdetailpercentage', 'local_flwcupkp', (object)[
+                'percentage' => format_float((float)$preferred['percentage'], 1),
+                'milestone' => (string)$preferred['milestone'],
+            ]);
+        } else {
+            $detail = get_string('studentprogressreadinessdetailqualitative', 'local_flwcupkp',
+                (string)$preferred['milestone']);
+        }
+        return ['detail' => $detail, 'achieved' => !empty($achievement['achieved'])];
+    } catch (Throwable $e) {
+        return ['detail' => get_string('studentunitdetailunavailable', 'local_flwcupkp'), 'achieved' => false];
+    }
+}
+
+/**
  * Student progress summary for one unit.
  *
  * @param array $unit
@@ -561,6 +1097,97 @@ function local_flwcupkp_home_performance_url(array $unit): moodle_url {
             'courseid' => $unit['courseid'],
             'unitcode' => $unit['unitcode'],
         ]);
+}
+
+/**
+ * @param array $unit
+ * @param int $userid
+ * @return moodle_url
+ */
+function local_flwcupkp_home_initial_path_url(array $unit, int $userid = 0): moodle_url {
+    $params = [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ];
+    if ($userid > 0) {
+        $params['userid'] = $userid;
+    }
+    return new moodle_url('/local/flwcupkp/initial_path.php', $params);
+}
+
+/**
+ * @param array $unit
+ * @param int $userid
+ * @return moodle_url
+ */
+function local_flwcupkp_home_activity_resolution_url(array $unit, int $userid = 0): moodle_url {
+    $params = [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ];
+    if ($userid > 0) {
+        $params['userid'] = $userid;
+    }
+    return new moodle_url('/local/flwcupkp/activity_resolution.php', $params);
+}
+
+/**
+ * @param array $unit
+ * @param int $userid
+ * @return moodle_url
+ */
+function local_flwcupkp_home_adaptive_path_url(array $unit, int $userid = 0): moodle_url {
+    $params = [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ];
+    if ($userid > 0) {
+        $params['userid'] = $userid;
+    }
+    return new moodle_url('/local/flwcupkp/adaptive_path.php', $params);
+}
+
+/**
+ * @param array $unit
+ * @return moodle_url
+ */
+function local_flwcupkp_home_trajectory_url(array $unit): moodle_url {
+    return new moodle_url('/local/flwcupkp/trajectory_simulation.php', [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ]);
+}
+
+/**
+ * @param array $unit
+ * @param int $userid
+ * @return moodle_url
+ */
+function local_flwcupkp_home_progress_readiness_url(array $unit, int $userid = 0): moodle_url {
+    $params = [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ];
+    if ($userid > 0) {
+        $params['userid'] = $userid;
+    }
+    return new moodle_url('/local/flwcupkp/progress_readiness.php', $params);
+}
+
+/**
+ * @param array $unit
+ * @param int $userid
+ * @return moodle_url
+ */
+function local_flwcupkp_home_learning_timeline_url(array $unit, int $userid = 0): moodle_url {
+    $params = [
+        'courseid' => $unit['courseid'],
+        'unitcode' => $unit['unitcode'],
+    ];
+    if ($userid > 0) {
+        $params['userid'] = $userid;
+    }
+    return new moodle_url('/local/flwcupkp/learning_timeline.php', $params);
 }
 
 /**

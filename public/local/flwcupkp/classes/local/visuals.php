@@ -914,7 +914,7 @@ final class visuals {
           LEFT JOIN {modules} m ON m.id = cm.module
               WHERE o.unitcode = :unitcode
                     {$coursesql}
-           ORDER BY c.externalid ASC, u.externalid ASC, kp.externalid ASC, CAST(o.lesson AS INT), o.externalid ASC",
+           ORDER BY c.externalid ASC, u.externalid ASC, kp.externalid ASC, o.lesson ASC, o.externalid ASC",
             $params
         );
 

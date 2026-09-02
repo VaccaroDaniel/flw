@@ -1,0 +1,28 @@
+{
+  "gate": "P3_A4B",
+  "name": "Candidate Eligibility + Activity Resolution",
+  "contract": "FLW_CUPKP_CANDIDATE_ACTIVITY_RESOLUTION_V1",
+  "policy_version": "cupkp-candidate-activity-resolution-v1",
+  "depends_on": [
+    "FLW_CUPKP_GOAL_GAP_INITIAL_PATH_V1",
+    "FLW_CUPKP_ADAPTIVE_DECISION_POLICY_V1",
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_CUPKP_CONTENT_EVIDENCE_MAPPING_CONTRACT_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "hard_invariant": "inaccessible_activity_can_never_become_next",
+  "read_only": true,
+  "writes": [],
+  "entry_points": {
+    "page": "/local/flwcupkp/activity_resolution.php",
+    "cli": "local/flwcupkp/cli/activity_resolution.php",
+    "web_services": [
+      "local_flwcupkp_get_candidate_activity_resolution_status",
+      "local_flwcupkp_get_learner_activity_resolution",
+      "local_flwcupkp_get_class_activity_resolution_summary"
+    ]
+  },
+  "next_allowed_gate": "A5"
+}

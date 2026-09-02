@@ -1,0 +1,61 @@
+{
+  "gate": "P3_UX2",
+  "contract": "FLW_CUPKP_LEARNER_EXPERIENCE_V1",
+  "ux_policy_version": "cupkp-learner-experience-v1",
+  "source_view_contract": "FLW_CUPKP_STUDENT_LEARNING_TIMELINE_VIEW_V1",
+  "source_history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "read_only": true,
+  "write_boundary": [],
+  "presentation": {
+    "rule": "history_compressed_current_expanded_future_summarized",
+    "level_1": [
+      "history",
+      "current",
+      "next",
+      "coming_up",
+      "milestone",
+      "goal"
+    ],
+    "level_2": [
+      "show_history",
+      "show_roadmap"
+    ],
+    "level_3": [
+      "why_this_activity",
+      "more_details"
+    ],
+    "maximum_coming_up": 3,
+    "primary_action": "guarded_continue_learning"
+  },
+  "next_allowed_gate": "UX3",
+  "files": [
+    "classes/local/learner_experience_service.php",
+    "classes/local/learner_experience_renderer.php",
+    "learning_timeline.php",
+    "cli/learner_experience.php",
+    "tests/learner_experience_service_test.php"
+  ],
+  "web_services": [
+    "local_flwcupkp_get_learner_experience_status",
+    "local_flwcupkp_get_simplified_learner_experience"
+  ],
+  "verification": {
+    "plugin_version": 2026083100,
+    "status": "complete",
+    "focused_tests": 6,
+    "focused_assertions": 101,
+    "cross_gate_tests": 35,
+    "cross_gate_assertions": 698,
+    "full_tests": 168,
+    "full_assertions": 1936,
+    "live_criteria": "10/10",
+    "history_dependency": "ready",
+    "ux1_dependency": "ready",
+    "a5c_dependency": "ready",
+    "registered_web_services": "2/2",
+    "language_strings": "38/38",
+    "page_http_check": "303_moodle_access_redirect_on_existing_course",
+    "authenticated_visual_check": "not_available_guest_session_and_no_enrolled_u038_learner",
+    "course_125_activity_resolution": "existing_a4b_missing_evidence_route_warnings"
+  }
+}

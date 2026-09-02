@@ -1,0 +1,33 @@
+{
+  "gate": "P3_A5B",
+  "contract": "FLW_CUPKP_TRAJECTORY_SIMULATION_INVARIANTS_V1",
+  "simulation_policy_version": "cupkp-trajectory-invariants-v1",
+  "source_adaptive_policy": "cupkp-continuous-adaptive-path-engine-v1",
+  "read_only": true,
+  "write_boundary": [],
+  "scenario_count": 8,
+  "detector_count": 9,
+  "default_trajectory_count": 512,
+  "default_steps": 24,
+  "next_allowed_gate": "A5C",
+  "files": [
+    "classes/local/trajectory_invariant_service.php",
+    "trajectory_simulation.php",
+    "cli/trajectory_simulation.php",
+    "tests/trajectory_invariant_service_test.php"
+  ],
+  "web_services": [
+    "local_flwcupkp_get_trajectory_simulation_status",
+    "local_flwcupkp_run_trajectory_simulation",
+    "local_flwcupkp_get_learner_trajectory_projection"
+  ],
+  "verification": {
+    "plugin_version": 2026083006,
+    "full_tests": 152,
+    "full_assertions": 1649,
+    "live_u038_trajectories": 1000,
+    "live_u038_steps": 24000,
+    "live_u038_failures": 0,
+    "live_u038_replay_hash": "86cf54facfb4ead62a60302f04482d6af26c50cfb9aefe251ec60b0f53a352f6"
+  }
+}

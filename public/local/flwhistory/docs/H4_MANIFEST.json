@@ -1,0 +1,60 @@
+{
+  "program": "Program 2",
+  "gate": "H4",
+  "title": "Secure History APIs and Summary Services",
+  "status": "complete",
+  "completed_on": "2026-08-28",
+  "plugin": {
+    "component": "local_flwhistory",
+    "version": 2026082802,
+    "root": "D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public\\local\\flwhistory"
+  },
+  "scope": {
+    "implemented": [
+      "PresentSummaryCore",
+      "LearningHistoryQuery",
+      "AttemptHistoryQuery",
+      "GradeHistoryQuery",
+      "RecentActivityQuery",
+      "LearningJourneyCore",
+      "Moodle external function registration",
+      "Capability-gated learner and teacher access",
+      "Grade audit redaction by default",
+      "Privacy metadata update for grade summaries"
+    ],
+    "excluded": [
+      "C-UP-KP mastery calculation",
+      "adaptive learning path logic",
+      "learner dashboard UI",
+      "teacher dashboard UI",
+      "native Moodle competency rating writes"
+    ]
+  },
+  "external_functions": [
+    "local_flwhistory_get_present_summary",
+    "local_flwhistory_get_learning_history",
+    "local_flwhistory_get_attempt_history",
+    "local_flwhistory_get_grade_history",
+    "local_flwhistory_get_recent_activity",
+    "local_flwhistory_get_learning_journey"
+  ],
+  "verification": {
+    "focused_phpunit": "OK (5 tests, 35 assertions)",
+    "full_phpunit": "OK (35 tests, 209 assertions)",
+    "php_lint": "passed",
+    "install_xml_parse": "passed",
+    "live_upgrade": "passed",
+    "live_service_count": 6
+  },
+  "documents": [
+    "H4_API_CONTRACT.md",
+    "H4_SECURITY.md",
+    "H4_SUMMARY_SERVICES.md",
+    "H4_REPORT.md"
+  ],
+  "next_gate": {
+    "gate": "H5",
+    "title": "Learner History and Grade History Dashboard Core",
+    "started": false
+  }
+}

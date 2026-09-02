@@ -1,0 +1,32 @@
+{
+  "program": "FLW Learning and Grade History",
+  "gate": "H7",
+  "history_version": "FLW_HISTORY_V1",
+  "downstream_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "plugin": "local_flwhistory",
+  "plugin_version": 2026082805,
+  "implemented_files": [
+    "classes/local/history_v1_service.php",
+    "classes/local/evidence_source_adapter.php",
+    "classes/local/grade_history_service.php",
+    "classes/privacy/provider.php",
+    "cli/history_v1.php",
+    "db/upgrade.php",
+    "version.php",
+    "README.md",
+    "tests/history_v1_service_test.php"
+  ],
+  "documents": [
+    "FLW_HISTORY_V2_FINAL_REPORT.md",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1.md",
+    "H7_MIGRATION_RECONCILIATION_RUNBOOK.md",
+    "H7_SECURITY_PRIVACY_PERFORMANCE_FREEZE.md",
+    "H7_REPORT.md"
+  ],
+  "boundaries": {
+    "cupkp_mastery": "out_of_scope",
+    "adaptive_recommendations": "out_of_scope",
+    "moodle_competency_rating_writes": "out_of_scope",
+    "raw_log_scraping_normal_source": "forbidden"
+  }
+}

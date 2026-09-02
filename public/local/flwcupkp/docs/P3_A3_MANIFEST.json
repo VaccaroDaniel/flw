@@ -1,0 +1,57 @@
+{
+  "gate": "P3_A3",
+  "name": "Adaptive Decision Policy V1",
+  "contract": "FLW_CUPKP_ADAPTIVE_DECISION_POLICY_V1",
+  "policy_version": "cupkp-adaptive-decision-policy-v1",
+  "service": "local_flwcupkp\\local\\adaptive_decision_policy_service",
+  "page": "/local/flwcupkp/adaptive_decision.php",
+  "cli": "local/flwcupkp/cli/adaptive_decision.php",
+  "external_functions": [
+    "local_flwcupkp_get_adaptive_decision_policy_status",
+    "local_flwcupkp_get_learner_adaptive_decision",
+    "local_flwcupkp_get_class_adaptive_decision_summary"
+  ],
+  "inputs": [
+    "FLW_CUPKP_COMPETENCY_CENTERED_LEARNING_GOAL_V1",
+    "FLW_CUPKP_PLACEMENT_DIAGNOSTIC_COLD_START_V1",
+    "FLW_CUPKP_MASTERY_CONFIDENCE_STATE_V1",
+    "FLW_CUPKP_RETENTION_RETRIEVAL_REVIEW_V1",
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "outputs": [
+    "NEXT TARGET",
+    "PROJECTED ROADMAP",
+    "DESTINATION"
+  ],
+  "decision_states": [
+    "GOAL_REQUIRED",
+    "GOAL_REVIEW",
+    "PLACEMENT_REQUIRED",
+    "DIAGNOSTIC_INCOMPLETE",
+    "PLACEMENT_REVIEW",
+    "REASSESSMENT_RECOMMENDED",
+    "RELEARNING_REQUIRED",
+    "REVIEW_REQUIRED",
+    "PREREQUISITE_REQUIRED",
+    "REMEDIATION_REQUIRED",
+    "RETRY_RECOMMENDED",
+    "INTRODUCE_TARGET",
+    "ADVANCE_READY",
+    "FALLBACK_TEACHER_REVIEW"
+  ],
+  "writes_allowed": [],
+  "writes_forbidden": [
+    "raw_moodle_logs",
+    "local_flwhistory_source_tables",
+    "learning_goal_mutation",
+    "placement_state_mutation",
+    "mastery_state_mutation",
+    "retention_state_mutation",
+    "recommendation_row_writes",
+    "persistent_path_generation",
+    "moodle_activity_resolution"
+  ],
+  "next_allowed_gate": "A4"
+}

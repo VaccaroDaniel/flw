@@ -1,0 +1,33 @@
+{
+  "gate": "Program 3 Gate A0",
+  "status": "complete",
+  "date": "2026-08-28",
+  "consumer": "local_flwcupkp",
+  "required_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "raw_moodle_log_access": "diagnostic_only",
+  "plugin_version": "2026082801",
+  "implementation_files": [
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/history_v1_consumer_contract.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/tests/history_v1_consumer_contract_test.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/README.md",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/version.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/db/upgrade.php"
+  ],
+  "documentation": [
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_A0_HISTORY_CONSUMPTION_AUDIT.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_A0_ADAPTIVE_INTELLIGENCE_PLAN.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_A0_GATE_REPORT.md"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "focused_phpunit": "OK (3 tests, 32 assertions)",
+    "local_flwcupkp_testsuite": "OK (24 tests, 128 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass",
+    "live_contract_status_course_126": "ready",
+    "live_findings": []
+  },
+  "next_gate": "Program 3 Gate C0"
+}

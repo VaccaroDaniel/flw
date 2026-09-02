@@ -2108,7 +2108,8 @@ final class output_hooks {
         $html .= \html_writer::tag('div',
             visuals::nav_link($progressurl, get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), [
                 'class' => 'btn btn-secondary btn-sm',
-            ]),
+            ]) . visuals::nav_link(self::learning_timeline_url($courseid, $unitcode),
+                get_string('openlearningtimeline', 'local_flwcupkp'), ['class' => 'btn btn-primary btn-sm']),
             ['class' => 'local-flwcupkp-formactions']
         );
         $html .= \html_writer::end_tag('section');
@@ -2180,6 +2181,10 @@ final class output_hooks {
         $html .= \html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
         $html .= visuals::nav_link(self::student_url($courseid, $unitcode),
             get_string('courseprogresslinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-secondary btn-sm']);
+        $html .= visuals::nav_link(self::learning_timeline_url($courseid, $unitcode),
+            get_string('openlearningtimeline', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+        $html .= visuals::nav_link(self::staff_intelligence_url($courseid, $unitcode),
+            get_string('openstaffintelligence', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
         $html .= visuals::nav_link(self::teacher_url($courseid, $unitcode),
             get_string('courseteacherlinkunit', 'local_flwcupkp', $unitcode), ['class' => 'btn btn-primary btn-sm']);
         if (performance_service::has_tasks($courseid, $unitcode)) {
@@ -2203,6 +2208,28 @@ final class output_hooks {
         return $unitcode === 'U038' ?
             new \moodle_url('/local/flwcupkp/student_u038.php', ['courseid' => $courseid]) :
             new \moodle_url('/local/flwcupkp/student.php', ['courseid' => $courseid, 'unitcode' => $unitcode]);
+    }
+
+    /**
+     * Integrated Past, Present, and Future URL for a unit.
+     *
+     * @param int $courseid
+     * @param string $unitcode
+     * @return \moodle_url
+     */
+    private static function learning_timeline_url(int $courseid, string $unitcode): \moodle_url {
+        return new \moodle_url('/local/flwcupkp/learning_timeline.php', [
+            'courseid' => $courseid,
+            'unitcode' => $unitcode,
+        ]);
+    }
+
+    /** Staff explainability and intervention URL for a unit. */
+    private static function staff_intelligence_url(int $courseid, string $unitcode): \moodle_url {
+        return new \moodle_url('/local/flwcupkp/staff_intelligence.php', [
+            'courseid' => $courseid,
+            'unitcode' => $unitcode,
+        ]);
     }
 
     /**
@@ -2339,6 +2366,11 @@ final class output_hooks {
             (int)$summary['gaps'],
             ['class' => 'local-flwcupkp-course-next-meta']
         );
+        $html .= \html_writer::tag('div',
+            visuals::nav_link(self::learning_timeline_url($courseid, 'U038'),
+                get_string('openlearningtimeline', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']),
+            ['class' => 'local-flwcupkp-formactions']
+        );
         $html .= \html_writer::end_tag('section');
 
         return $html;
@@ -2456,6 +2488,10 @@ final class output_hooks {
         $html .= \html_writer::start_tag('div', ['class' => 'local-flwcupkp-formactions']);
         $html .= visuals::nav_link($progressurl, get_string('courseprogresslinku038', 'local_flwcupkp'),
             ['class' => 'btn btn-secondary btn-sm']);
+        $html .= visuals::nav_link(self::learning_timeline_url($courseid, 'U038'),
+            get_string('openlearningtimeline', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
+        $html .= visuals::nav_link(self::staff_intelligence_url($courseid, 'U038'),
+            get_string('openstaffintelligence', 'local_flwcupkp'), ['class' => 'btn btn-secondary btn-sm']);
         $html .= visuals::nav_link($verificationurl, get_string('courseverificationlinku038', 'local_flwcupkp'),
             ['class' => 'btn btn-secondary btn-sm']);
         $html .= visuals::nav_link($performanceurl, get_string('performanceu038', 'local_flwcupkp'),

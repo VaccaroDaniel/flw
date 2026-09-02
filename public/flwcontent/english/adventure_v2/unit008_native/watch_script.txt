@@ -1,8 +1,0 @@
-00:00:00.000-00:00:06.000 Toto finds paw prints.
-00:00:06.000-00:00:12.000 Leo, Mia, and Emma look.
-00:00:12.000-00:00:19.000 Touch your head.
-00:00:19.000-00:00:26.000 Touch your nose.
-00:00:26.000-00:00:33.000 Clap your hands.
-00:00:33.000-00:00:40.000 Point to your feet.
-00:00:40.000-00:00:47.000 Wave your arms.
-00:00:47.000-00:00:54.000 Great! Body Move Quest!

@@ -151,7 +151,7 @@ class curriculum_manager_test extends \advanced_testcase {
         $result = \local_flwcupkp\local\curriculum_manager::bulk_update_status('competency', $frameworkid, 'validated');
 
         $this->assertSame(1, $result['count']);
-        $this->assertSame('validated', $DB->get_field('flwcupkp_comp', 'status', ['id' => $compid], MUST_EXIST));
+        $this->assertSame('approved', $DB->get_field('flwcupkp_comp', 'status', ['id' => $compid], MUST_EXIST));
         $this->assertSame('draft', $DB->get_field('flwcupkp_comp', 'status', ['id' => $othercompid], MUST_EXIST));
         $this->assertTrue($DB->record_exists('flwcupkp_audit', [
             'action' => 'curriculum_bulk_status_updated',

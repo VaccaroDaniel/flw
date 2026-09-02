@@ -1,4 +1,0 @@
-checker_id,section,skill,target,pass_condition,feedback
-AI-U002-L3,Lesson 3,speaking,It’s + color,Recognizable color phrase,Model missing It’s or color word
-AI-U002-L5,Lesson 5,listening,choose correct clue color,Correct color selected,Replay color clue audio
-AI-U002-PROJ,Final Project,speaking/portfolio,Hello. I’m ___. It’s red. It’s blue. Goodbye.,Greeting + name + two color lines + goodbye,Give short retry script

@@ -29,6 +29,9 @@ class behat_local_flwcupkp extends behat_base {
             case 'setup':
             case 'unit setup':
                 return new moodle_url('/local/flwcupkp/setup.php');
+            case 'foundation':
+            case 'foundation inspector':
+                return new moodle_url('/local/flwcupkp/foundation.php');
             case 'traceability':
             case 'trace':
                 return new moodle_url('/local/flwcupkp/trace.php');

@@ -1,7 +1,0 @@
-check,status,notes
-Practice JS syntax,pass,Final script rewritten; node syntax check performed externally by build script
-Practice pagination,pass,Each practice block initializes with PAGE_SIZE=3
-Wrong answer Try again,pass,Wrong-answer feedback includes per-item Try again button
-Correct Answer repair support,pass,Wrong-answer feedback includes Correct Answer reveal button
-Folding lessons,pass,Lessons 1-7 converted to details/summary sections
-Watch video inserted,pass,Video element inserted with MP4 source

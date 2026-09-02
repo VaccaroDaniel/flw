@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/flwhistory/db" VERSION="2026082801" COMMENT="FLW learning and grade history schema">
+  <TABLES>
+    <TABLE NAME="flwhist_source_event" COMMENT="Normalized immutable source facts from Moodle and FLW systems">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourcesystem" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="unknown"/>
+        <FIELD NAME="sourcetype" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="sourceid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="sourceversion" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="eventtype" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sectionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="gradeitemid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourceattemptid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="attemptid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="worldid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="stageid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="unitid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="lessonid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="componentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="activityid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="assessmentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="questionid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="eventtime" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="recorded"/>
+        <FIELD NAME="normalizer" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="h1"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="payloadhash" TYPE="char" LENGTH="64"/>
+        <FIELD NAME="correctionof" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="supersededby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, eventtime"/>
+        <INDEX NAME="user_course_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="course_time_ix" UNIQUE="false" FIELDS="courseid, eventtime"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="cmid_ix" UNIQUE="false" FIELDS="cmid"/>
+        <INDEX NAME="source_ix" UNIQUE="false" FIELDS="sourcesystem, sourcetype, sourceid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_attempt" COMMENT="Normalized learner attempts across Moodle and FLW sources">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourceeventid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourcesystem" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="unknown"/>
+        <FIELD NAME="sourcetype" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="sourceid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="sourceversion" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="sourceattemptid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sectionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="worldid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="stageid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="unitid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="lessonid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="componentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="activityid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="assessmentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="attemptno" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="attemptstate" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="unknown"/>
+        <FIELD NAME="rawscore" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="maxscore" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="scaledscore" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="timestart" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timefinish" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="lastsourceevent" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, timefinish"/>
+        <INDEX NAME="user_course_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="cmid_ix" UNIQUE="false" FIELDS="cmid"/>
+        <INDEX NAME="activity_ix" UNIQUE="false" FIELDS="activityid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_placement" COMMENT="Placement level and profile source fact history">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourceeventid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourcesystem" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="flwplacement"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="placement"/>
+        <FIELD NAME="sourcetype" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="placement"/>
+        <FIELD NAME="sourceid" TYPE="char" LENGTH="100" NOTNULL="true"/>
+        <FIELD NAME="sourceversion" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="previouslevel" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="currentlevel" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="placementstatus" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="recorded"/>
+        <FIELD NAME="score" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="confidence" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="profilejson" TYPE="text"/>
+        <FIELD NAME="placementtime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, placementtime"/>
+        <INDEX NAME="user_course_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="level_ix" UNIQUE="false" FIELDS="currentlevel"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_question_attempt" COMMENT="Normalized item-level and question-level attempt facts">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="quiz"/>
+        <FIELD NAME="attemptid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourceeventid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="questionusageid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="questionattemptid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="slot" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="questionid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="questionversionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="questionbankentryid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="activityid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="assessmentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="resultstate" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="responsehash" TYPE="char" LENGTH="64"/>
+        <FIELD NAME="rawmark" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="maxmark" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="fraction" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="steptime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="attempt_ix" UNIQUE="false" FIELDS="attemptid"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, steptime"/>
+        <INDEX NAME="question_ix" UNIQUE="false" FIELDS="questionid"/>
+        <INDEX NAME="cmid_ix" UNIQUE="false" FIELDS="cmid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_grade_version" COMMENT="Normalized grade versions and correction history">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="gradebook"/>
+        <FIELD NAME="sourceeventid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="gradeitemid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="gradegradeid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="gradehistoryid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="itemmodule" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="iteminstance" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="itemnumber" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="rawgrade" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="finalgrade" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="previousgrade" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="graderid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="action" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="recorded"/>
+        <FIELD NAME="reason" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="gradetime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="correctionof" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="supersededby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="user_grade_ix" UNIQUE="false" FIELDS="userid, gradeitemid"/>
+        <INDEX NAME="course_grade_ix" UNIQUE="false" FIELDS="courseid, gradeitemid"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, gradetime"/>
+        <INDEX NAME="gradegrade_ix" UNIQUE="false" FIELDS="gradegradeid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_grade_summary" COMMENT="Current derived grade summary separated from source grade versions and attempts">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="gradebook"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="gradeitemid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="gradegradeid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="itemmodule" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="iteminstance" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="itemnumber" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="latestattemptid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="latestattemptsourceid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="latestattemptscore" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="latestattempttime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="bestattemptid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="bestattemptsourceid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="bestattemptscore" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="bestattempttime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="officialgradegradeid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="officialrawgrade" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="officialfinalgrade" TYPE="number" LENGTH="12" DECIMALS="5"/>
+        <FIELD NAME="officialgradetime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="latestgradeversionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="reconciliationstatus" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="current"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="user_grade_ix" UNIQUE="false" FIELDS="userid, gradeitemid"/>
+        <INDEX NAME="course_grade_ix" UNIQUE="false" FIELDS="courseid, gradeitemid"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="reconciliationstatus"/>
+        <INDEX NAME="latest_grade_ix" UNIQUE="false" FIELDS="latestgradeversionid"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_completion" COMMENT="Learner completion transitions for course modules and courses">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="sourcefactkey" TYPE="char" LENGTH="191"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="completion"/>
+        <FIELD NAME="sourceeventid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="completionstate" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="viewed" TYPE="int" LENGTH="1"/>
+        <FIELD NAME="overrideby" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="completiontime" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="detailsjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="sourcefact_ix" UNIQUE="false" FIELDS="sourcefactkey"/>
+        <INDEX NAME="user_course_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="cmid_ix" UNIQUE="false" FIELDS="cmid"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, completiontime"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_coverage" COMMENT="Queryable history coverage and completeness status by source family and scope">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="scopelevel" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="course"/>
+        <FIELD NAME="sourcefamily" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="worldid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="stageid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="unitid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="timerangestart" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timerangeend" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="coveragestatus" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="UNKNOWN"/>
+        <FIELD NAME="eventavailability" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="NO_EVENT_AVAILABLE"/>
+        <FIELD NAME="capturestartedat" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="backfillstartedat" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="backfillcompletedat" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="earliestreliableeventat" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="latestreconciledat" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="sourceavailable" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1"/>
+        <FIELD NAME="eventcount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="reasoncode" TYPE="char" LENGTH="80"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="detailsjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="family_course_ix" UNIQUE="false" FIELDS="sourcefamily, courseid"/>
+        <INDEX NAME="learner_ix" UNIQUE="false" FIELDS="userid, courseid"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="coveragestatus"/>
+        <INDEX NAME="range_ix" UNIQUE="false" FIELDS="timerangestart, timerangeend"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_content_link" COMMENT="Resolved Program 1 content identity cache">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="moodlecourseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="moodlesectionid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="scoidentifier" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="worldid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="stageid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="unitid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="lessonid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="componentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="activityid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="assessmentid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="questionid" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="sourcerevision" TYPE="char" LENGTH="100"/>
+        <FIELD NAME="freshness" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="unknown"/>
+        <FIELD NAME="resolver" TYPE="char" LENGTH="80" NOTNULL="true" DEFAULT="p1_contract"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="unresolved"/>
+        <FIELD NAME="metadatajson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="course_ix" UNIQUE="false" FIELDS="moodlecourseid"/>
+        <INDEX NAME="cmid_ix" UNIQUE="false" FIELDS="cmid"/>
+        <INDEX NAME="unit_ix" UNIQUE="false" FIELDS="unitid"/>
+        <INDEX NAME="activity_ix" UNIQUE="false" FIELDS="activityid"/>
+        <INDEX NAME="freshness_ix" UNIQUE="false" FIELDS="freshness"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_reconcile_run" COMMENT="History reconciliation, repair, and replay run metadata">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="runtype" TYPE="char" LENGTH="80" NOTNULL="true"/>
+        <FIELD NAME="normpolicyversion" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="H1B-20260827.1"/>
+        <FIELD NAME="scopejson" TYPE="text"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="running"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timefinished" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="recordsseen" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recordscreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recordsupdated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recordsskipped" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="recordsfailed" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="errorjson" TYPE="text"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="course_time_ix" UNIQUE="false" FIELDS="courseid, timestarted"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, timestarted"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="flwhist_correction" COMMENT="Explicit correction and supersession links for history records">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sourcekey" TYPE="char" LENGTH="191" NOTNULL="true"/>
+        <FIELD NAME="recordtable" TYPE="char" LENGTH="40" NOTNULL="true"/>
+        <FIELD NAME="recordid" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="correctedtable" TYPE="char" LENGTH="40"/>
+        <FIELD NAME="correctedid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="correctiontype" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="supersession"/>
+        <FIELD NAME="reason" TYPE="char" LENGTH="255"/>
+        <FIELD NAME="summaryjson" TYPE="text"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="sourcekey_uix" UNIQUE="true" FIELDS="sourcekey"/>
+        <INDEX NAME="record_ix" UNIQUE="false" FIELDS="recordtable, recordid"/>
+        <INDEX NAME="corrected_ix" UNIQUE="false" FIELDS="correctedtable, correctedid"/>
+        <INDEX NAME="user_time_ix" UNIQUE="false" FIELDS="userid, timecreated"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

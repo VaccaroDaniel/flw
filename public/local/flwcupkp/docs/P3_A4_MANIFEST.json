@@ -1,0 +1,35 @@
+{
+  "gate": "P3_A4",
+  "name": "Goal-Gap + Initial Personalized Path",
+  "status": "implemented",
+  "contract": "FLW_CUPKP_GOAL_GAP_INITIAL_PATH_V1",
+  "policy_version": "cupkp-goal-gap-initial-path-v1",
+  "next_allowed_gate": "A4B",
+  "runtime": {
+    "service": "classes/local/goal_gap_path_service.php",
+    "page": "initial_path.php",
+    "cli": "cli/initial_path.php",
+    "external_functions": [
+      "local_flwcupkp_get_goal_gap_path_status",
+      "local_flwcupkp_get_learner_initial_path",
+      "local_flwcupkp_get_class_initial_path_summary"
+    ]
+  },
+  "dependencies": [
+    "FLW_CUPKP_ADAPTIVE_DECISION_POLICY_V1",
+    "FLW_CUPKP_COMPETENCY_CENTERED_LEARNING_GOAL_V1",
+    "FLW_CUPKP_PLACEMENT_DIAGNOSTIC_COLD_START_V1",
+    "FLW_CUPKP_MASTERY_CONFIDENCE_STATE_V1",
+    "FLW_CUPKP_RETENTION_RETRIEVAL_REVIEW_V1",
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "invariants": [
+    "Path output is target-level only.",
+    "C2 relationship traversal is the source of requirement/prerequisite expansion.",
+    "History V1 is consumed only through trusted downstream services.",
+    "No Moodle activity resolution is performed before A4B.",
+    "No continuous adaptation is performed before A5."
+  ]
+}

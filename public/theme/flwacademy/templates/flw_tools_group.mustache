@@ -5,10 +5,10 @@
 }}
 {{#hasflwtools}}
 <nav class="flw-course-tools" aria-label="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" data-current-category-type="{{currentcategorytype}}">
-    <button type="button" class="flw-course-tool flw-course-tools-toggle" title="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-label="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-expanded="false">
+    <button type="button" class="flw-course-tool flw-course-tools-toggle" title="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-label="{{#str}}flwreadingactions, theme_flwacademy{{/str}}" aria-controls="flw-course-tool-panel" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
     </button>
-    <div class="flw-course-tool-panel">
+    <div id="flw-course-tool-panel" class="flw-course-tool-panel">
         {{#hasflwdictionary}}
             <button type="button" class="flw-course-tool flw-dictionary-toggle" data-flw-dictionary-url="{{flwdictionaryurl}}" title="{{#str}}flwdictionary, theme_flwacademy{{/str}}" aria-label="{{#str}}flwdictionary, theme_flwacademy{{/str}}">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path><path d="m9 9 2 2 4-4"></path></svg>
@@ -58,26 +58,33 @@
             </div>
         {{/flwtoolsshowlanguage}}
         {{#hasflwreadingtoc}}
-            <button type="button" class="flw-course-tool flw-reading-toggle-toc is-active" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+            <button type="button" class="flw-course-tool flw-reading-toggle-toc is-active" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-controls="flw-reading-toc" aria-expanded="true" aria-pressed="true">
                 <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
                 <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
             </button>
         {{/hasflwreadingtoc}}
         {{#flwtoolsshowcourseindex}}
-            <button type="button" class="flw-course-tool flw-course-index-toggle is-active" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+            <button type="button" class="flw-course-tool flw-course-index-toggle {{#courseindexopen}}is-active{{/courseindexopen}}" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-controls="theme_boost-drawers-courseindex" aria-expanded="{{#courseindexopen}}true{{/courseindexopen}}{{^courseindexopen}}false{{/courseindexopen}}" aria-pressed="{{#courseindexopen}}true{{/courseindexopen}}{{^courseindexopen}}false{{/courseindexopen}}">
                 <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
                 <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
             </button>
         {{/flwtoolsshowcourseindex}}
         {{#flwtoolsshowscormtoc}}
-            <button type="button" class="flw-course-tool flw-scorm-toggle-toc" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}">
+            <button type="button" class="flw-course-tool flw-scorm-toggle-toc" title="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-label="{{#str}}flwtoggletoc, theme_flwacademy{{/str}}" aria-controls="scorm_toc" aria-expanded="false" aria-pressed="false">
                 <svg class="flw-toc-icon-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
                 <svg class="flw-toc-icon-vertical" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16"></path><path d="M12 4v16"></path><path d="M17 4v16"></path></svg>
             </button>
         {{/flwtoolsshowscormtoc}}
+        {{#flwbackdirect}}
+        <a class="flw-course-tool flw-reading-back" href="{{flwbackurl}}" title="{{flwbacklabel}}" aria-label="{{flwbacklabel}}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l-5-5 5-5"></path><path d="M5 12h14"></path></svg>
+        </a>
+        {{/flwbackdirect}}
+        {{^flwbackdirect}}
         <button type="button" class="flw-course-tool flw-reading-back" title="{{flwbacklabel}}" aria-label="{{flwbacklabel}}"{{#flwbackurl}} data-flw-back-url="{{flwbackurl}}"{{/flwbackurl}}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l-5-5 5-5"></path><path d="M5 12h14"></path></svg>
         </button>
+        {{/flwbackdirect}}
         {{#flwtoolsshowscormdone}}
             <button type="button" class="flw-course-tool flw-scorm-done" title="{{#str}}completion_manual:markdone, core_course{{/str}}" aria-label="{{#str}}completion_manual:markdone, core_course{{/str}}" data-flw-scorm-cmid="{{flwscormcmid}}" data-flw-scorm-courseid="{{flwscormcourseid}}">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -179,12 +186,31 @@
         }
         button.classList.toggle('is-active', !hidden);
         button.setAttribute('aria-pressed', hidden ? 'false' : 'true');
+        button.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+        var toc = document.getElementById('flw-reading-toc');
+        if (toc) {
+            toc.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+        }
+    }
+
+    function initReadingToc() {
+        var shell = document.querySelector('.flw-app-shell.has-flw-reading-toc');
+        var button = document.querySelector('.flw-reading-toggle-toc');
+        if (!shell || !button) {
+            return;
+        }
+        var hideInitially = window.matchMedia('(max-width: 720px)').matches;
+        shell.classList.toggle('is-toc-hidden', hideInitially);
+        setTocButtonState(button, hideInitially);
     }
 
     function refreshScormTocButtons() {
         var toc = document.getElementById('scorm_toc');
+        var open = !!(toc && !toc.classList.contains('disabled'));
         Array.prototype.slice.call(document.querySelectorAll('.flw-scorm-toggle-toc')).forEach(function(button) {
-            button.classList.toggle('is-active', toc && !toc.classList.contains('disabled'));
+            button.classList.toggle('is-active', open);
+            button.setAttribute('aria-pressed', open ? 'true' : 'false');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
     }
 
@@ -202,6 +228,7 @@
         Array.prototype.slice.call(document.querySelectorAll('.flw-course-index-toggle')).forEach(function(button) {
             button.classList.toggle('is-active', open);
             button.setAttribute('aria-pressed', open ? 'true' : 'false');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
     }
 
@@ -242,6 +269,16 @@
         window.setTimeout(refreshScormTocButtons, 30);
     }
 
+    function markCurrentScormTocDone() {
+        var selected = document.querySelector(
+            '#scorm_tree .yui3-treeview-selected, #scorm_tree [aria-selected="true"], #scorm_tree .yui3-treeview-row.yui3-treeview-selected'
+        );
+        var item = selected && selected.closest ? selected.closest('li') : null;
+        if (item) {
+            item.classList.add('flw-is-complete');
+        }
+    }
+
     function markScormDone(button) {
         var cmid = parseInt(button.getAttribute('data-flw-scorm-cmid') || '0', 10);
         var courseid = parseInt(button.getAttribute('data-flw-scorm-courseid') || '0', 10);
@@ -271,6 +308,7 @@
             }).then(function() {
                 button.classList.remove('is-loading');
                 button.classList.add('is-done');
+                markCurrentScormTocDone();
             }).catch(function() {
                 button.disabled = false;
                 button.classList.remove('is-loading');
@@ -303,13 +341,187 @@
         });
     }
 
+    function updateScormViewport() {
+        var navbar = document.querySelector('.navbar.fixed-top');
+        var navbarHeight = navbar && navbar.getBoundingClientRect ? navbar.getBoundingClientRect().height : 64;
+        document.documentElement.style.setProperty('--flw-navbar-height', Math.max(0, navbarHeight) + 'px');
+        if (!document.body.classList.contains('flw-scorm-clean-mode')) {
+            return;
+        }
+        var layout = document.getElementById('scorm_layout');
+        if (!layout || !layout.getBoundingClientRect) {
+            return;
+        }
+        var layoutTop = layout.getBoundingClientRect().top;
+        var availableHeight = Math.max(120, window.innerHeight - layoutTop);
+        document.documentElement.style.setProperty('--flw-scorm-layout-height', availableHeight + 'px');
+    }
+
+    function revealScormFrame(frame) {
+        frame.classList.add('flw-scorm-frame-ready');
+        frame.classList.remove('flw-scorm-frame-loading');
+    }
+
+    function resizeScormFrameToDocument(frame, framedocument, resetToMinimum) {
+        if (!frame || !framedocument || !framedocument.body || !framedocument.documentElement) {
+            return;
+        }
+        if (frame._flwResizePending) {
+            return;
+        }
+        frame._flwResizePending = true;
+        var minimumHeight = 120;
+        if (resetToMinimum) {
+            frame.style.setProperty('height', minimumHeight + 'px', 'important');
+            frame.style.setProperty('min-height', minimumHeight + 'px', 'important');
+        }
+        window.requestAnimationFrame(function() {
+            try {
+                var currentdocument = frame.contentDocument || (frame.contentWindow && frame.contentWindow.document);
+                if (currentdocument !== framedocument) {
+                    return;
+                }
+                var contentHeight = Math.max(
+                    framedocument.documentElement.scrollHeight,
+                    framedocument.body.scrollHeight,
+                    minimumHeight
+                );
+                frame.dataset.flwDocumentHeight = String(contentHeight);
+                frame.style.setProperty('height', contentHeight + 'px', 'important');
+                frame.style.setProperty('min-height', contentHeight + 'px', 'important');
+                frame.style.setProperty('max-height', 'none', 'important');
+                revealScormFrame(frame);
+            } finally {
+                frame._flwResizePending = false;
+            }
+        });
+    }
+
+    function enableDocumentScormScrollbar(frame, framedocument) {
+        if (!framedocument.body || !framedocument.documentElement) {
+            return;
+        }
+        document.body.classList.remove('flw-scorm-full-height-scrollbar');
+        document.body.classList.add('flw-scorm-document-scroll');
+        frame.classList.add('flw-scorm-document-frame');
+        frame.setAttribute('scrolling', 'no');
+        var isNewDocument = frame._flwObservedDocument !== framedocument;
+        if (isNewDocument) {
+            frame.dataset.flwDocumentHeight = '';
+            if (frame._flwResizeObserver) {
+                frame._flwResizeObserver.disconnect();
+                frame._flwResizeObserver = null;
+            }
+            if (frame._flwContentObserver) {
+                frame._flwContentObserver.disconnect();
+                frame._flwContentObserver = null;
+            }
+            frame._flwObservedDocument = framedocument;
+            resizeScormFrameToDocument(frame, framedocument, true);
+        } else if (!frame._flwResizePending) {
+            revealScormFrame(frame);
+        }
+    }
+
+    function cleanScormFrame(frame) {
+        try {
+            var framedocument = frame.contentDocument || (frame.contentWindow && frame.contentWindow.document);
+            if (!framedocument || !framedocument.documentElement) {
+                revealScormFrame(frame);
+                return;
+            }
+            var framepath = frame.contentWindow && frame.contentWindow.location
+                ? frame.contentWindow.location.pathname
+                : '';
+            var framehref = frame.contentWindow && frame.contentWindow.location
+                ? frame.contentWindow.location.href
+                : '';
+            if (!framepath && (!framehref || framehref === 'about:blank')) {
+                return;
+            }
+            if (framepath.indexOf('/mod/scorm/loadSCO.php') !== -1) {
+                frame.classList.remove('flw-scorm-frame-ready');
+                frame.classList.add('flw-scorm-frame-loading');
+                return;
+            }
+            if (!framedocument.getElementById('flw-scorm-package-cleanup')) {
+                var style = framedocument.createElement('style');
+                style.id = 'flw-scorm-package-cleanup';
+                style.textContent = '#scorm-topbar,.scorm-topbar{display:none!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}' +
+                    'main.wrap{margin-top:0!important;padding-top:.75rem!important}';
+                (framedocument.head || framedocument.documentElement).appendChild(style);
+            }
+            enableDocumentScormScrollbar(frame, framedocument);
+        } catch (error) {
+            // Cross-origin packages cannot be styled, but must remain usable.
+            revealScormFrame(frame);
+        }
+    }
+
+    function prepareScormFrame(frame) {
+        if (!frame || frame.dataset.flwScormFrameReady) {
+            return;
+        }
+        frame.dataset.flwScormFrameReady = '1';
+        frame.classList.add('flw-scorm-frame-loading');
+        frame.addEventListener('load', function() {
+            window.requestAnimationFrame(function() {
+                cleanScormFrame(frame);
+                updateScormViewport();
+            });
+        });
+        cleanScormFrame(frame);
+        window.setTimeout(function() {
+            if (!frame.classList.contains('flw-scorm-frame-ready')) {
+                revealScormFrame(frame);
+            }
+        }, 12000);
+    }
+
+    function initScormCleanMode() {
+        if (!document.body.classList.contains('flw-scorm-clean-mode')) {
+            return;
+        }
+        var content = document.getElementById('scorm_content');
+        if (content) {
+            Array.prototype.slice.call(content.querySelectorAll('iframe')).forEach(prepareScormFrame);
+            if (window.MutationObserver) {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        Array.prototype.slice.call(mutation.addedNodes || []).forEach(function(node) {
+                            if (node.nodeType !== 1) {
+                                return;
+                            }
+                            if (node.matches && node.matches('iframe')) {
+                                prepareScormFrame(node);
+                            }
+                            if (node.querySelectorAll) {
+                                Array.prototype.slice.call(node.querySelectorAll('iframe')).forEach(prepareScormFrame);
+                            }
+                        });
+                    });
+                });
+                observer.observe(content, {childList: true, subtree: true});
+            }
+        }
+        updateScormViewport();
+        window.setTimeout(updateScormViewport, 250);
+        window.setTimeout(updateScormViewport, 1000);
+    }
+
     window.addEventListener('scroll', refreshDoneTools, {passive: true});
+    window.addEventListener('resize', function() {
+        window.requestAnimationFrame(updateScormViewport);
+    }, {passive: true});
     document.addEventListener('core_course/manualCompletionToggled', function() {
         window.setTimeout(refreshDoneTools, 250);
     });
     window.setTimeout(refreshDoneTools, 0);
     window.setTimeout(refreshScormTocButtons, 0);
     window.setTimeout(refreshCourseIndexButtons, 0);
+    updateScormViewport();
+    initReadingToc();
+    initScormCleanMode();
 
     document.addEventListener('click', function(event) {
         var toolGroup = event.target.closest && event.target.closest('.flw-course-tools');
@@ -424,12 +636,10 @@
         var backButton = event.target.closest && event.target.closest('.flw-reading-back');
         if (backButton) {
             var backUrl = backButton.getAttribute('data-flw-back-url') || '';
-            if (backUrl) {
-                window.location.href = backUrl;
-                return;
-            }
             if (window.history.length > 1) {
                 window.history.back();
+            } else if (backUrl) {
+                window.location.href = backUrl;
             } else {
                 window.location.href = (window.M && M.cfg && M.cfg.wwwroot) || '/';
             }

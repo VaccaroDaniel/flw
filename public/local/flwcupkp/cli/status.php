@@ -27,10 +27,11 @@ foreach ($tables as $table) {
 
 $coverage = \local_flwcupkp\local\audit_service::coverage();
 $readiness = \local_flwcupkp\local\curriculum_manager::sync_readiness();
+$plugininfo = \core_plugin_manager::instance()->get_plugin_info('local_flwcupkp');
 
 echo json_encode([
     'component' => 'local_flwcupkp',
-    'release' => get_config('local_flwcupkp', 'release') ?: '0.1.0-alpha',
+    'release' => $plugininfo && $plugininfo->release ? (string)$plugininfo->release : 'unknown',
     'writeenabled' => (bool)get_config('local_flwcupkp', 'enablesyncwrites'),
     'sync_readiness' => $readiness,
     'counts' => $counts,

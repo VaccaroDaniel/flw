@@ -87,9 +87,9 @@
                 {{/hasblocks}}
             </div>
 
-            {{^flwcleanmode}}
+            {{^flwreadingmode}}
                 {{{ output.full_header }}}
-            {{/flwcleanmode}}
+            {{/flwreadingmode}}
 
             {{#secondarymoremenu}}
                 <div class="secondary-navigation d-print-none">
@@ -126,34 +126,39 @@
                         {{#flwshowcontentshell}}
                             <div class="flw-app-shell {{#hasflwreadingtoc}}has-flw-reading-toc{{/hasflwreadingtoc}}">
                                 {{#hasflwreadingtoc}}
-                                    <aside class="flw-reading-toc" aria-label="{{#str}}flwreadingtoc, theme_flwacademy{{/str}}">
+                                    <aside id="flw-reading-toc" class="flw-reading-toc" aria-label="{{#str}}flwreadingtoc, theme_flwacademy{{/str}}" aria-hidden="false">
                                         <h2 class="flw-reading-toc-title">{{flwreadingtoclabel}}</h2>
-                                        <nav class="flw-reading-toc-tree">
+                                        <nav id="flw-reading-toc-tree" class="flw-reading-toc-tree">
                                             <ol>
                                                 {{#flwreadingtoc}}
-                                                    <li class="{{#current}}current{{/current}}">
-                                                        <a href="{{url}}">
-                                                            <span class="flw-reading-toc-icon" aria-hidden="true"></span>
-                                                            <span class="flw-reading-toc-linktext">{{title}}</span>
-                                                        </a>
-                                                        {{#hasactivities}}
-                                                            <ol class="flw-reading-toc-activities">
-                                                                {{#activities}}
-                                                                    <li class="flw-reading-toc-activity modtype_{{modname}}">
-                                                                        <a href="{{url}}">
-                                                                            <span class="flw-reading-toc-linktext">{{title}}</span>
-                                                                        </a>
-                                                                    </li>
-                                                                {{/activities}}
-                                                            </ol>
-                                                        {{/hasactivities}}
+                                                    {{#hasactivities}}
+                                                    <li class="flw-reading-toc-section">
+                                                        <ol class="flw-reading-toc-activities">
+                                                            {{#activities}}
+                                                                <li class="flw-reading-toc-activity modtype_{{modname}} {{#completiontracked}}is-completion-tracked {{/completiontracked}}{{#completed}}is-complete{{/completed}}" data-cmid="{{cmid}}">
+                                                                    <a href="{{url}}">
+                                                                        <span class="flw-reading-toc-linktext">{{title}}</span>
+                                                                        {{#completiontracked}}
+                                                                            <span class="flw-reading-toc-status" aria-hidden="true"></span>
+                                                                            {{#completed}}<span class="visually-hidden">{{#str}}completed, completion{{/str}}</span>{{/completed}}
+                                                                        {{/completiontracked}}
+                                                                    </a>
+                                                                </li>
+                                                            {{/activities}}
+                                                        </ol>
                                                     </li>
+                                                    {{/hasactivities}}
                                                 {{/flwreadingtoc}}
                                             </ol>
                                         </nav>
                                     </aside>
                                 {{/hasflwreadingtoc}}
                                 <main class="flw-main" id="flw-main-learning">
+                                    {{#flwcoursetitle}}
+                                        <header class="flw-course-reader-heading">
+                                            <h1>{{flwcoursetitle}}</h1>
+                                        </header>
+                                    {{/flwcoursetitle}}
                                     {{{ output.main_content }}}
                                     {{#flwshowactivitynavigation}}
                                         {{{ output.activity_navigation }}}

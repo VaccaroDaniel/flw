@@ -87,6 +87,7 @@ class quiz_evidence_adapter {
         foreach ($maps as $map) {
             try {
                 evidence_guard::assert_object_map($object, $map);
+                content_evidence_mapping_contract::assert_source_can_count('program2_attempt', $object, $map);
             } catch (\invalid_parameter_exception $e) {
                 $rejectedmaps[] = ['mapid' => (int)$map->id, 'reason' => $e->getMessage()];
                 continue;

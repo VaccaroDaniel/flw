@@ -1,0 +1,32 @@
+{
+  "gate": "P3_A1",
+  "name": "Competency-Centered Learning Goal",
+  "contract": "FLW_CUPKP_COMPETENCY_CENTERED_LEARNING_GOAL_V1",
+  "service": "local_flwcupkp\\local\\learning_goal_service",
+  "page": "/local/flwcupkp/learning_goal.php",
+  "cli": "local/flwcupkp/cli/learning_goal.php",
+  "tables": [
+    "flwcupkp_goal",
+    "flwcupkp_goal_version",
+    "flwcupkp_audit"
+  ],
+  "sources": [
+    "STUDENT",
+    "TEACHER",
+    "INSTITUTION"
+  ],
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "writes_allowed": [
+    "flwcupkp_goal",
+    "flwcupkp_goal_version",
+    "flwcupkp_audit"
+  ],
+  "writes_forbidden": [
+    "flwcupkp_evidence",
+    "flwcupkp_state",
+    "flwcupkp_recommend",
+    "placement_policy",
+    "adaptive_path_ranking"
+  ],
+  "next_allowed_gate": "A2"
+}

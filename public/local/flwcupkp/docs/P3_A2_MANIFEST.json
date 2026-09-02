@@ -1,0 +1,51 @@
+{
+  "gate": "P3_A2",
+  "name": "Placement + Diagnostic + Cold Start",
+  "contract": "FLW_CUPKP_PLACEMENT_DIAGNOSTIC_COLD_START_V1",
+  "service": "local_flwcupkp\\local\\placement_diagnostic_service",
+  "page": "/local/flwcupkp/placement_diagnostic.php",
+  "cli": "local/flwcupkp/cli/placement_diagnostic.php",
+  "tables": [
+    "flwcupkp_placement_state",
+    "flwcupkp_evidence",
+    "flwcupkp_state",
+    "flwcupkp_audit"
+  ],
+  "history_source": {
+    "plugin": "local_flwhistory",
+    "contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+    "adapter": "local_flwhistory\\local\\evidence_source_adapter::placements_for_course"
+  },
+  "states": [
+    "NOT_TAKEN",
+    "VALID",
+    "STALE",
+    "INCOMPLETE",
+    "LOW_CONFIDENCE",
+    "TEACHER_OVERRIDE"
+  ],
+  "policy_cases": [
+    "no_placement",
+    "partial",
+    "abandoned",
+    "refused",
+    "imported_history",
+    "institutional_entry",
+    "teacher_override",
+    "stale_placement"
+  ],
+  "writes_allowed": [
+    "flwcupkp_placement_state",
+    "flwcupkp_evidence",
+    "flwcupkp_state",
+    "flwcupkp_audit"
+  ],
+  "writes_forbidden": [
+    "raw_moodle_logs",
+    "local_flwhistory_source_tables",
+    "fabricated_dimension_evidence",
+    "adaptive_path_ranking",
+    "learning_goal_mutation"
+  ],
+  "next_allowed_gate": "A3"
+}

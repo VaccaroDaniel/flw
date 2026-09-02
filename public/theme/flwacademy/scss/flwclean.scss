@@ -5,6 +5,11 @@ body.flw-clean-mode {
   color: #111936;
 }
 
+body.flw-scorm-launch-redirect #region-main {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 body.flw-clean-mode .secondary-navigation,
 body.flw-clean-mode .breadcrumb,
 body.flw-clean-mode .courseindex,
@@ -172,7 +177,12 @@ body.flw-clean-mode .flw-reading-toc-activities {
   display: grid;
   gap: .12rem;
   margin: .08rem 0 .35rem !important;
-  padding-left: .72rem !important;
+  padding-left: 0 !important;
+}
+
+body.flw-reading-course-mode .flw-reading-toc-section {
+  min-height: 0 !important;
+  margin: 0 !important;
 }
 
 body.flw-clean-mode .flw-reading-toc-activity {
@@ -255,6 +265,29 @@ body.flw-reading-course-mode .flw-main {
   width: 100%;
   max-width: 1040px;
   margin: 0 auto;
+}
+
+body.flw-reading-course-mode .flw-course-reader-heading {
+  margin: 0;
+  padding: 1.1rem clamp(1rem, 2.2vw, 1.6rem) .9rem;
+  border-bottom: 1px solid #e5e8ef;
+}
+
+body.flw-reading-course-mode .flw-course-reader-heading h1 {
+  margin: 0 !important;
+  color: #101a3a;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem !important;
+  font-weight: 650 !important;
+  line-height: 1.25;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  body.flw-reading-course-mode .flw-course-reader-heading h1 {
+    font-size: 1.35rem !important;
+  }
 }
 
 body.flw-reading-course-mode .flw-app-shell.has-flw-reading-toc .flw-main {
@@ -777,6 +810,31 @@ body.path-course-view.pagelayout-course:not(.editing).flw-course-index-visible #
   line-height: 1.35 !important;
 }
 
+body.path-course-view.pagelayout-course:not(.editing).flw-course-index-visible
+  #theme_boost-drawers-courseindex .courseindex-section-title {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Keep student activity navigation concise: omit section rows, but retain every activity link. */
+body:not(.editing) #theme_boost-drawers-courseindex .courseindex-section-title {
+  display: none !important;
+}
+
+body:not(.editing) #theme_boost-drawers-courseindex .courseindex-item-content {
+  display: block !important;
+  height: auto !important;
+}
+
+body:not(.editing) #theme_boost-drawers-courseindex .courseindex-sectioncontent {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .flw-course-language-tool {
   position: relative;
 }
@@ -1158,5 +1216,495 @@ body.flw-clean-mode .flw-video-pager button:disabled {
   body.flw-clean-mode .flw-mini-nav a,
   body.flw-clean-mode .flw-video-pager button {
     flex: 1 1 auto;
+  }
+}
+
+/* Focused course reader and SCORM player. Keep these rules page-scoped. */
+body.path-course-view.pagelayout-course.flw-reading-course-mode:not(.editing) #region-main {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.path-course-view.pagelayout-course.flw-reading-course-mode:not(.editing) .flw-app-shell {
+    padding: 0 clamp(.75rem, 2vw, 1.5rem);
+}
+
+body.path-course-view.pagelayout-course.flw-reading-course-mode:not(.editing) #page.drawers .main-inner {
+    margin-bottom: 20px !important;
+    padding-top: 24px !important;
+}
+
+body.path-course-view.pagelayout-course.flw-reading-course-mode:not(.editing) #page-content {
+    padding-bottom: 0 !important;
+}
+
+body.flw-reading-course-mode .flw-reading-toc {
+  top: calc(var(--flw-navbar-height, 64px) + .85rem);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--flw-navbar-height, 64px) - 1.7rem);
+}
+
+body.flw-reading-course-mode .flw-reading-toc-tree {
+  flex: 1 1 auto;
+  max-height: none;
+  min-height: 0;
+}
+
+body.flw-reading-course-mode .flw-reading-toc-linktext {
+  min-width: 0;
+}
+
+body.flw-reading-course-mode .flw-reading-toc-status {
+  position: relative;
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  border: 1px solid #b9c5db;
+  border-radius: 50%;
+  background: #fff;
+}
+
+body.flw-reading-course-mode .is-complete > a > .flw-reading-toc-status {
+  border-color: #0a4be8;
+  background: #0a4be8;
+}
+
+body.flw-reading-course-mode .is-complete > a > .flw-reading-toc-status::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+}
+
+html:has(body.flw-scorm-clean-mode),
+body.flw-scorm-clean-mode {
+  height: 100%;
+  overflow: hidden !important;
+}
+
+body.flw-scorm-clean-mode #page-wrapper {
+  height: calc(100dvh - var(--flw-navbar-height, 64px));
+  min-height: 0;
+  overflow: hidden;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page.drawers {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page-wrapper {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page.drawers {
+  height: calc(100dvh - var(--flw-navbar-height, 64px)) !important;
+  min-height: 0 !important;
+}
+
+body.flw-scorm-clean-mode #page,
+body.flw-scorm-clean-mode #topofscroll,
+body.flw-scorm-clean-mode #page-content,
+body.flw-scorm-clean-mode #region-main-box,
+body.flw-scorm-clean-mode #region-main,
+body.flw-scorm-clean-mode #scormpage,
+body.flw-scorm-clean-mode #tocbox,
+body.flw-scorm-clean-mode #toctree {
+  box-sizing: border-box;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+body.flw-scorm-clean-mode #page.drawers .main-inner {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page.drawers .main-inner {
+  padding: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page-content,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #region-main-box,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #region-main,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scormpage,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #tocbox,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #toctree {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+  body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #page.drawers div[role="main"] {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+body.flw-scorm-clean-mode #page-content,
+body.flw-scorm-clean-mode #region-main-box,
+body.flw-scorm-clean-mode #region-main {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #region-main {
+  display: flex !important;
+  flex-direction: column;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) .flw-scorm-player-heading {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px clamp(16px, 2.2vw, 28px);
+  border-bottom: 1px solid #dde4ee;
+  background: #fff;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) .flw-scorm-player-heading h1 {
+  width: 100%;
+  min-width: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  color: #101a3a;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scormpage {
+  flex: 1 1 auto;
+  height: auto !important;
+}
+
+body.flw-scorm-clean-mode #scorm_layout {
+  display: flex !important;
+  align-items: stretch;
+  gap: .75rem;
+  width: 100% !important;
+  height: var(--flw-scorm-layout-height, calc(100dvh - var(--flw-navbar-height, 64px))) !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  word-spacing: normal !important;
+}
+
+body.flw-scorm-clean-mode #scorm_toc:not(.disabled):not(.loading) {
+  display: flex !important;
+  flex: 0 0 clamp(230px, 22vw, 310px);
+  flex-direction: column;
+  width: clamp(230px, 22vw, 310px) !important;
+  max-width: clamp(230px, 22vw, 310px) !important;
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  padding: .75rem .65rem !important;
+  overflow: hidden !important;
+}
+
+body.flw-scorm-clean-mode #scorm_toc.disabled,
+body.flw-scorm-clean-mode #scorm_toc.loading {
+  display: none !important;
+}
+
+body.flw-scorm-clean-mode #scorm_toc_title {
+  flex: 0 0 auto;
+}
+
+body.flw-scorm-clean-mode #scorm_tree {
+  flex: 1 1 auto;
+  max-height: none !important;
+  min-height: 0 !important;
+  padding-bottom: 2.75rem;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scorm_toc:not(.disabled):not(.loading) {
+  max-height: none !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scorm_tree {
+  flex: 1 1 0;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+}
+
+body.flw-scorm-clean-mode #scorm_content {
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: auto !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.flw-scorm-clean-mode #scorm_object,
+body.flw-scorm-clean-mode iframe.scoframe {
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  border: 0 !important;
+  background: #fff;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scorm_content,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scorm_object,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) iframe.scoframe {
+  border-radius: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scormpage #scorm_object,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scormpage iframe#scorm_object,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) #scormpage iframe.scoframe {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html:has(body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing)) {
+  height: auto !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) {
+  height: auto !important;
+  min-height: 100dvh;
+  overflow: visible !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #page-wrapper,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #page.drawers {
+  height: auto !important;
+  min-height: calc(100dvh - var(--flw-navbar-height, 64px)) !important;
+  overflow: visible !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #page,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #topofscroll,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #page-content,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #region-main-box,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #region-main,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scormpage,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #tocbox,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #toctree,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scorm_layout,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scorm_content,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #page.drawers .main-inner {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scorm_layout {
+  align-items: flex-start;
+  min-height: 0 !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scorm_toc:not(.disabled):not(.loading) {
+  position: sticky;
+  top: var(--flw-navbar-height, 64px);
+  align-self: flex-start;
+  height: calc(100dvh - var(--flw-navbar-height, 64px)) !important;
+  max-height: calc(100dvh - var(--flw-navbar-height, 64px)) !important;
+}
+
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scormpage #scorm_object.flw-scorm-document-frame,
+body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode.flw-scorm-document-scroll:not(.editing) #scormpage iframe.flw-scorm-document-frame {
+  flex: 0 0 auto;
+  min-height: 120px;
+  max-height: none !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+body.flw-scorm-clean-mode #scorm_object:not(.flw-scorm-frame-ready),
+body.flw-scorm-clean-mode iframe.scoframe:not(.flw-scorm-frame-ready) {
+  visibility: hidden;
+}
+
+body.flw-scorm-clean-mode #scorm_navpanel {
+  display: none !important;
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body.pagelayout-incourse:not(.editing) .activity-navigation,
+body.pagelayout-incourse:not(.editing) [data-region="activity-navigation"],
+body#page-mod-scorm-player:not(.editing) .activity-navigation,
+body#page-mod-scorm-player:not(.editing) [data-region="activity-navigation"],
+body.path-course-view:not(.editing) .activity-navigation,
+body.path-course-view:not(.editing) [data-region="activity-navigation"] {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body#page-local-flwmedia-index #theme_boost-drawers-blocks,
+body#page-local-flwmedia-index .drawer-right,
+body#page-local-flwmedia-index .drawer-right-toggle,
+body#page-local-flwmedia-index [data-target="theme_boost-drawers-blocks"],
+body#page-local-flwmedia-index [data-region="blocks-column"] {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body#page-local-flwmedia-index #page.drawers,
+body#page-local-flwmedia-index #page.drawers.show-drawer-right {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.flw-scorm-clean-mode #scorm_toc_toggle {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.flw-scorm-clean-mode #scorm_tree li.flw-is-complete > .yui3-treeview-row::after {
+  content: "";
+  display: inline-block;
+  width: .42rem;
+  height: .7rem;
+  margin: 0 .4rem 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 720px) {
+  body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) .flw-scorm-player-heading {
+    min-height: 52px;
+    padding: 7px 12px;
+  }
+
+  body#page-mod-scorm-player.path-mod-scorm.flw-scorm-clean-mode:not(.editing) .flw-scorm-player-heading h1 {
+    display: -webkit-box;
+    font-size: 16px !important;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  body.flw-reading-course-mode .flw-app-shell.has-flw-reading-toc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.flw-reading-course-mode .flw-reading-toc {
+    position: fixed;
+    z-index: 1050;
+    top: calc(var(--flw-navbar-height, 64px) + .65rem);
+    right: 4.5rem;
+    bottom: .65rem;
+    left: .65rem;
+    width: auto;
+    max-height: none;
+    box-shadow: 0 18px 48px rgba(16, 26, 58, .22);
+  }
+
+  body.flw-reading-course-mode .flw-reading-toc-tree {
+    max-height: none;
+  }
+
+  body.flw-scorm-clean-mode #scorm_layout {
+    display: block !important;
+  }
+
+  body.flw-scorm-clean-mode #scorm_toc:not(.disabled):not(.loading) {
+    position: fixed !important;
+    z-index: 1050;
+    top: calc(var(--flw-navbar-height, 64px) + .65rem);
+    right: 4.5rem;
+    bottom: .65rem;
+    left: .65rem;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    box-shadow: 0 18px 48px rgba(16, 26, 58, .22) !important;
+  }
+
+  body.flw-scorm-clean-mode #scorm_content {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.flw-reading-course-mode .flw-reading-toc-tree a,
+  body.flw-scorm-clean-mode #scorm_tree .yui3-treeview-row,
+  .flw-course-tool {
+    transition: none !important;
   }
 }

@@ -1,0 +1,42 @@
+{
+  "gate": "P3_E1",
+  "status": "implemented",
+  "contract": "FLW_CUPKP_HISTORY_EVIDENCE_ADAPTER_V1",
+  "depends_on": [
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+    "FLW_CUPKP_CONTENT_EVIDENCE_MAPPING_CONTRACT_V1",
+    "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1"
+  ],
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "idempotency_key": "history source key + fact type + object + target + mapping evidence-meaning fingerprint + adapter/evidence policy versions",
+  "entry_points": {
+    "admin_page": "/local/flwcupkp/history_evidence.php",
+    "cli": "local/flwcupkp/cli/history_evidence.php",
+    "web_services": [
+      "local_flwcupkp_get_history_evidence_status",
+      "local_flwcupkp_preview_history_evidence_reprocess",
+      "local_flwcupkp_apply_history_evidence_reprocess"
+    ]
+  },
+  "supported_fact_types": [
+    "attempts",
+    "completion"
+  ],
+  "preserved_read_only_fact_types": [
+    "source_events",
+    "grades",
+    "placement",
+    "content_identities"
+  ],
+  "does_not_do": [
+    "raw_moodle_log_scraping",
+    "adaptive_path_selection",
+    "mastery_threshold_changes",
+    "grade_version_mastery_collapse",
+    "content_title_matching",
+    "history_v1_source_mutation"
+  ],
+  "next_allowed_gate": "E2"
+}

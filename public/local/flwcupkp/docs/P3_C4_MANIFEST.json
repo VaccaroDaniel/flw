@@ -1,0 +1,119 @@
+{
+  "gate": "Program 3 Gate C4",
+  "status": "complete",
+  "date": "2026-08-28",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082808",
+  "lifecycle_governance_contract": "FLW_CUPKP_LIFECYCLE_GOVERNANCE_V1",
+  "depends_on": [
+    "FLW_CUPKP_CANONICAL_DOMAIN_MODEL_V1",
+    "FLW_CUPKP_ONTOLOGY_BOUNDARY_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_CUPKP_CONTENT_EVIDENCE_MAPPING_CONTRACT_V1",
+    "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1"
+  ],
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "canonical_lifecycle_statuses": [
+    "draft",
+    "review",
+    "approved",
+    "published",
+    "deprecated",
+    "archived"
+  ],
+  "legacy_status_aliases": {
+    "validated": "approved",
+    "active": "published",
+    "reference": "published",
+    "pilot": "review",
+    "inactive": "archived",
+    "retired": "archived",
+    "test": "draft"
+  },
+  "validation_detects": [
+    "duplicate_codes",
+    "invalid_relationships",
+    "cycles",
+    "orphans",
+    "missing_evidence_routes",
+    "invalid_replacements",
+    "invalid_published_states",
+    "published_semantic_overwrite"
+  ],
+  "centralized_apis": [
+    "contract",
+    "lifecycle_statuses",
+    "status_options",
+    "canonical_status",
+    "normalize_entity_payload",
+    "validate_entity_write",
+    "assert_entity_write",
+    "validate_mapping_change",
+    "assert_mapping_change",
+    "validate_mapping_delete",
+    "assert_mapping_delete",
+    "assert_framework_clone",
+    "validate_package_governance",
+    "governance_status"
+  ],
+  "does_not_implement": [
+    "foundation_v1_publication",
+    "adaptive_path_selection",
+    "learner_path_generation",
+    "history_v1_source_capture",
+    "history_v1_evidence_reprocessing",
+    "mastery_recalculation",
+    "raw_moodle_log_scraping"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "json_manifest_parse": "pass",
+    "focused_phpunit": "OK (9 tests, 25 assertions)",
+    "neighboring_phpunit": "OK (35 tests, 355 assertions)",
+    "local_flwcupkp_testsuite": "OK (77 tests, 602 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass",
+    "live_smoke": {
+      "courseid": 124,
+      "unitcode": "U038",
+      "versiondb": "2026082808",
+      "c4_status": "frozen",
+      "dependencies": {
+        "c2": "frozen",
+        "c3": "frozen",
+        "c3b": "frozen",
+        "history_v1": "ready"
+      },
+      "sample": {
+        "duplicate_codes": 0,
+        "invalid_relationships": 0,
+        "orphans": {
+          "up_without_competency": 0,
+          "kp_without_up": 0,
+          "object_without_target": 0
+        },
+        "published_targets_missing_evidence_routes": 2,
+        "invalid_replacements": 0,
+        "invalid_published_states": 0
+      },
+      "findings": [
+        {
+          "severity": "warning",
+          "code": "missing_evidence_route",
+          "message": "UP FLW-REW-B1-UP-038-01 is published without an object evidence route."
+        },
+        {
+          "severity": "warning",
+          "code": "missing_evidence_route",
+          "message": "UP FLW-REW-B1-UP-038-02 is published without an object evidence route."
+        }
+      ],
+      "repository_audit_status": "ready_for_c5",
+      "audit_c4_class": true,
+      "next_allowed_gate": "C5"
+    }
+  },
+  "next_gate": "Program 3 Gate C5"
+}

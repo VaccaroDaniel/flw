@@ -1,0 +1,128 @@
+{
+  "gate": "H2",
+  "program": "Program 2 - Learning and Grade History",
+  "status": "PASS",
+  "repository_revision": "moodle:375e6a0b; public/local/flwhistory is untracked in this Moodle checkout; local_flwhistory versiondb=2026082703 versiondisk=2026082703",
+  "generated_at": "2026-08-28T00:56:42.3194029+09:00",
+  "schema_versions": {
+    "moodle_release": "5.1.5 (Build: 20260608)",
+    "moodle_branch": "501",
+    "moodle_version": "2025100605",
+    "php": "8.2.4",
+    "manifest_schema": "urn:flw:gate-manifest:v1",
+    "local_flwhistory": "2026082703",
+    "local_flwcupkp": "2026081416"
+  },
+  "contract_versions": {
+    "program1_content_deployment_contract": "1.0",
+    "program2_history_contract": "H2-core-capture-v1",
+    "history_normalization_policy_version": "H1B-20260827.1",
+    "cross_program_integration_contract": "2.0"
+  },
+  "freshness_states": {
+    "program1": "RELEASE_ACCEPTED_BY_USER",
+    "program2": "H2_PRODUCTION_SAFE_CAPTURE_ENABLED",
+    "program3_cupkp": "EXISTING_OWNER_PRESERVED"
+  },
+  "tests": {
+    "passed": 24,
+    "failed": 0,
+    "not_run": 0,
+    "commands": [
+      "PHP lint on all public/local/flwhistory PHP files",
+      "Moodle public/admin/tool/phpunit/cli/init.php",
+      "vendor/bin/phpunit public/local/flwhistory/tests/capture_service_test.php",
+      "vendor/bin/phpunit --testsuite local_flwhistory_testsuite",
+      "Moodle admin/cli/upgrade.php --non-interactive",
+      "Moodle admin/cli/purge_caches.php",
+      "Live DB plugin version/task registration check",
+      "Direct execution of local_flwhistory task refresh_capture_coverage",
+      "Live h2_capture_coverage_refresh diagnostic readback"
+    ],
+    "phpunit": "OK (24 tests, 102 assertions)",
+    "focused_h2_phpunit": "OK (8 tests, 44 assertions)",
+    "live_upgrade": "PASS",
+    "live_task_registration": {
+      "taskcount": 1,
+      "task": "\\local_flwhistory\\task\\refresh_capture_coverage",
+      "disabled": 0,
+      "minute": "*/15"
+    },
+    "live_observer_definitions": 10,
+    "live_task_execution": "h2_task_execute=ok",
+    "latest_refresh_status": "complete"
+  },
+  "blockers": [],
+  "high_issues": [],
+  "outputs": [
+    "public/local/flwhistory/version.php",
+    "public/local/flwhistory/db/events.php",
+    "public/local/flwhistory/db/tasks.php",
+    "public/local/flwhistory/db/upgrade.php",
+    "public/local/flwhistory/classes/observer.php",
+    "public/local/flwhistory/classes/local/capture_service.php",
+    "public/local/flwhistory/classes/local/normalizer.php",
+    "public/local/flwhistory/classes/task/refresh_capture_coverage.php",
+    "public/local/flwhistory/lang/en/local_flwhistory.php",
+    "public/local/flwhistory/tests/capture_service_test.php",
+    "public/local/flwhistory/README.md",
+    "docs/flw-history/H2_CAPTURE_MATRIX.md",
+    "docs/flw-history/H2_NORMALIZATION_RULES.md",
+    "docs/flw-history/H2_ATTEMPT_SEMANTICS.md",
+    "docs/flw-history/H2_REPORT.md",
+    "docs/flw-history/H2_MANIFEST.json"
+  ],
+  "requirement_ids": {
+    "implemented": [
+      "P2-HIST-001",
+      "P2-HIST-002",
+      "P2-HIST-003",
+      "P2-NORM-001",
+      "P2-ATT-001",
+      "P2-ATT-002"
+    ],
+    "tested": [
+      "P2-HIST-001",
+      "P2-HIST-002",
+      "P2-HIST-003",
+      "P2-NORM-001",
+      "P2-ATT-001",
+      "P2-ATT-002"
+    ],
+    "deferred": [
+      "P2-GRD-001",
+      "P2-GRD-002",
+      "P2-GRD-003",
+      "P2-COMP-001",
+      "P2-COMP-002",
+      "P2-COMP-003",
+      "P2-COMP-004",
+      "P2-COV-003",
+      "P2-COV-004",
+      "P2-API-001",
+      "P2-SEC-001",
+      "P2-CON-001"
+    ],
+    "failed": []
+  },
+  "capture_contract": {
+    "normalized_event_types_enabled": [
+      "ACTIVITY_ATTEMPTED",
+      "ASSESSMENT_COMPLETED",
+      "CHECKPOINT_COMPLETED",
+      "SPEAKING_ATTEMPTED"
+    ],
+    "source_fact_first": true,
+    "missing_mapping_status": "unresolved_mapping",
+    "coverage_for_new_capture": "NOT_BACKFILLED",
+    "observer_count": 10,
+    "active_scheduled_tasks": 1
+  },
+  "next_gate_allowed": true,
+  "notes": [
+    "H2 uses the H1B frozen normalization policy version on source, attempt, question-attempt, completion, and coverage rows.",
+    "H2 completion capture uses Moodle completion rows/events and does not infer completion from page views.",
+    "Program 3 C-UP-KP mastery and recommendation ownership remains unchanged.",
+    "Stop after H2; H3 has not been started."
+  ]
+}

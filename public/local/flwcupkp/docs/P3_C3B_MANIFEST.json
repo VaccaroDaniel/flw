@@ -1,0 +1,99 @@
+{
+  "gate": "Program 3 Gate C3B",
+  "status": "complete",
+  "date": "2026-08-28",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082807",
+  "evidence_semantics_quality_contract": "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1",
+  "evidence_policy_version": "cupkp-evidence-quality-v1",
+  "depends_on": [
+    "FLW_CUPKP_CANONICAL_DOMAIN_MODEL_V1",
+    "FLW_CUPKP_ONTOLOGY_BOUNDARY_V1",
+    "FLW_CUPKP_RELATIONSHIP_GRAPH_V1",
+    "FLW_CUPKP_CONTENT_EVIDENCE_MAPPING_CONTRACT_V1"
+  ],
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "result_states": [
+    "positive",
+    "negative",
+    "partial",
+    "inconclusive"
+  ],
+  "performance_modes": [
+    "passive_exposure",
+    "recognition",
+    "comprehension",
+    "selection",
+    "controlled_recall",
+    "guided_production",
+    "independent_production",
+    "interaction",
+    "transfer"
+  ],
+  "evidence_directions": [
+    "direct",
+    "inferred"
+  ],
+  "quality_dimensions": [
+    "validity",
+    "reliability",
+    "independence",
+    "authenticity",
+    "production_demand",
+    "contextual_transfer",
+    "support_level",
+    "difficulty",
+    "recency",
+    "confidence"
+  ],
+  "centralized_apis": [
+    "contract",
+    "result_states",
+    "performance_modes",
+    "quality_dimensions",
+    "validate_evidence_payload",
+    "assert_evidence_payload",
+    "validate_semantics",
+    "augment_evidence_payload",
+    "semantics_for_evidence",
+    "source_key_from_evidence",
+    "infer_result_state",
+    "infer_performance_mode",
+    "infer_evidence_direction",
+    "quality_profile",
+    "evidence_semantics_status"
+  ],
+  "does_not_implement": [
+    "history_v1_reprocessing",
+    "evidence_quality_mastery_weighting",
+    "adaptive_path_selection",
+    "teacher_override_workflow",
+    "raw_moodle_log_scraping"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "json_manifest_parse": "pass",
+    "focused_phpunit": "OK (7 tests, 103 assertions)",
+    "local_flwcupkp_testsuite": "OK (68 tests, 576 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass",
+    "live_smoke": {
+      "courseid": 124,
+      "unitcode": "U038",
+      "versiondb": "2026082807",
+      "c3b_status": "frozen",
+      "c3": "frozen",
+      "history_v1": "ready",
+      "evidence_rows": 6,
+      "with_c3b_semantics": 0,
+      "legacy_without_c3b_semantics": 6,
+      "findings": [],
+      "repository_audit_status": "ready_for_c4",
+      "audit_c3b_class": true,
+      "next_allowed_gate": "C4"
+    }
+  },
+  "next_gate": "Program 3 Gate C4"
+}

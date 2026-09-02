@@ -120,15 +120,14 @@ function theme_flwacademy_db_table_exists(string $table): bool {
 }
 
 /**
- * Returns whether the current page should use FLW Clean Theme v3 student mode.
+ * Returns whether the current page should use the focused FLW reading layout.
  *
- * Clean mode is intentionally limited to non-editing course pages where the
- * current user cannot update the course, so teacher/admin workflows keep Moodle
- * controls, blocks, reports, settings, and navigation.
+ * Editing mode always keeps Moodle's native course tools. In non-editing mode,
+ * students and teachers share the same reader and use Moodle's Course Index.
  *
  * @return bool
  */
-function theme_flwacademy_is_clean_mode(): bool {
+function theme_flwacademy_is_reading_mode(): bool {
     global $PAGE;
 
     if (empty($PAGE->course->id) || (int)$PAGE->course->id === SITEID) {
@@ -143,12 +142,7 @@ function theme_flwacademy_is_clean_mode(): bool {
         return false;
     }
 
-    $context = context_course::instance((int)$PAGE->course->id, IGNORE_MISSING);
-    if (!$context) {
-        return false;
-    }
-
-    return !has_capability('moodle/course:update', $context);
+    return true;
 }
 
 /**
@@ -433,6 +427,10 @@ function theme_flwacademy_prepare_primary_navigation(array $primarymenu): array 
             'text' => get_string('selfstudy', 'theme_flwacademy'),
             'url' => $languages[0]['selfstudycategoryurl'] ?? $defaultlanguageurl,
         ],
+        'flw-demo' => [
+            'text' => get_string('demo', 'theme_flwacademy'),
+            'url' => $demourl,
+        ],
         'flw-practice' => [
             'text' => get_string('practice', 'theme_flwacademy'),
             'url' => $languages[0]['practicecategoryurl'] ?? $defaultlanguageurl,
@@ -444,10 +442,6 @@ function theme_flwacademy_prepare_primary_navigation(array $primarymenu): array 
         'flw-exam' => [
             'text' => get_string('exam', 'theme_flwacademy'),
             'url' => $languages[0]['examcategoryurl'] ?? $defaultlanguageurl,
-        ],
-        'flw-demo' => [
-            'text' => get_string('demo', 'theme_flwacademy'),
-            'url' => $demourl,
         ],
         /*
         'flw-teacher' => [
@@ -1240,7 +1234,7 @@ function theme_flwacademy_export_learning_languages(): array {
  * @return array
  */
 function theme_flwacademy_extend_tools_context(array $context): array {
-    global $CFG, $PAGE;
+    global $CFG, $DB, $PAGE;
 
     $learninglanguages = $context['learninglanguages'] ?? theme_flwacademy_export_learning_languages();
     $currentlanguagecode = clean_param($context['currentlanguagecode'] ?? ($_COOKIE['flw_learning_language'] ?? ''), PARAM_ALPHANUMEXT);
@@ -1272,6 +1266,15 @@ function theme_flwacademy_extend_tools_context(array $context): array {
     $flwexamquiz = theme_flwacademy_get_current_flw_exam_quiz();
     $flwplacementquiz = theme_flwacademy_get_current_flw_placement_quiz();
     $isflwquizpage = !empty($flwexamquiz) || !empty($flwplacementquiz);
+    $hasscormmanualcompletion = $PAGE->pagetype === 'mod-scorm-player'
+        && !empty($PAGE->cm->completion)
+        && (int)$PAGE->cm->completion === COMPLETION_TRACKING_MANUAL;
+    $hasscormtoc = false;
+    if ($PAGE->pagetype === 'mod-scorm-player' && !empty($PAGE->cm->instance)) {
+        $scormhidetoc = $DB->get_field('scorm', 'hidetoc', ['id' => (int)$PAGE->cm->instance]);
+        $tocdisabled = defined('SCORM_TOC_DISABLED') ? SCORM_TOC_DISABLED : 3;
+        $hasscormtoc = $scormhidetoc !== false && (int)$scormhidetoc !== $tocdisabled;
+    }
 
     $context['hasflwtools'] = true;
     $context['hasflwdictionary'] = $dictionaryurl !== '' && !$isflwexampage && !$isdashboardpage && !$isflwquizpage;
@@ -1283,8 +1286,16 @@ function theme_flwacademy_extend_tools_context(array $context): array {
         $context['flwbackurl'] = theme_flwacademy_get_placement_page_url($flwplacementquiz);
         $context['flwbacklabel'] = get_string('backtoplacementtest', 'local_flwplacement');
     } else {
-        $context['flwbackurl'] = $context['flwbackurl'] ?? '';
+        if (!isset($context['flwbackurl']) && $isscormpage && !empty($PAGE->course->id)) {
+            $context['flwbackurl'] = (new moodle_url('/course/view.php', ['id' => (int)$PAGE->course->id]))->out(false);
+        }
+        $context['flwbackurl'] = $context['flwbackurl'] ?? (new moodle_url('/my/'))->out(false);
         $context['flwbacklabel'] = $context['flwbacklabel'] ?? get_string('back', 'core');
+    }
+    $context['flwbackdirect'] = $PAGE->pagetype === 'mod-scorm-player';
+    if ($context['flwbackdirect'] && !empty($PAGE->course->shortname)) {
+        $context['flwbacklabel'] = get_string('backto', 'theme_flwacademy') . ' ' .
+            format_string($PAGE->course->shortname, true, ['context' => $PAGE->context]);
     }
     $context['haslearninglanguages'] = !empty($learninglanguages);
     $context['learninglanguages'] = $learninglanguages;
@@ -1294,13 +1305,182 @@ function theme_flwacademy_extend_tools_context(array $context): array {
     $context['flwtoolsshowdone'] = !$isscormpage && !$isdashboardpage && !$isadminpage && !$isflwquizpage;
     $context['flwtoolsshowcourseindex'] = $context['flwtoolsshowcourseindex']
         ?? (!empty($context['courseindex']) && !$isscormpage && !$isflwquizpage);
-    $context['flwtoolsshowscormtoc'] = $PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing();
-    $context['flwtoolsshowscormdone'] = $PAGE->pagetype === 'mod-scorm-player' && !$PAGE->user_is_editing();
+    $context['flwtoolsshowscormtoc'] = $hasscormtoc && !$PAGE->user_is_editing();
+    $context['flwtoolsshowscormdone'] = $hasscormmanualcompletion && !$PAGE->user_is_editing();
     $context['flwscormcmid'] = !empty($PAGE->cm->id) ? (int)$PAGE->cm->id : 0;
     $context['flwscormcourseid'] = !empty($PAGE->course->id) ? (int)$PAGE->course->id : 0;
     $context['currentcategorytype'] = $context['currentcategorytype'] ?? '';
 
     return $context;
+}
+
+/**
+ * Builds direct SCORM player URLs for activities in the current course.
+ *
+ * The launch URL resumes the latest incomplete SCO when Moodle can identify
+ * one, and otherwise starts from the first launchable SCO in the package.
+ *
+ * @return array{cm: array<string, string>, instance: array<string, string>}
+ */
+function theme_flwacademy_get_scorm_direct_launch_urls(): array {
+    global $CFG, $DB, $PAGE, $USER;
+
+    $empty = ['cm' => [], 'instance' => []];
+    if (empty($PAGE->course->id) || (int)$PAGE->course->id === SITEID ||
+            $PAGE->user_is_editing() || $PAGE->pagetype === 'mod-scorm-player') {
+        return $empty;
+    }
+
+    static $cache = [];
+    $cachekey = (int)$PAGE->course->id . ':' . (int)$USER->id;
+    if (isset($cache[$cachekey])) {
+        return $cache[$cachekey];
+    }
+
+    require_once($CFG->dirroot . '/mod/scorm/locallib.php');
+
+    $modinfo = get_fast_modinfo($PAGE->course, $USER->id);
+    $instances = $modinfo->instances['scorm'] ?? [];
+    if (!$instances) {
+        $cache[$cachekey] = $empty;
+        return $empty;
+    }
+
+    $result = $empty;
+    foreach ($instances as $cm) {
+        if (empty($cm->uservisible)) {
+            continue;
+        }
+
+        $scorm = $DB->get_record('scorm', ['id' => (int)$cm->instance]);
+        if (!$scorm) {
+            continue;
+        }
+
+        $scoes = $DB->get_records_select(
+            'scorm_scoes',
+            'scorm = :scormid AND ' . $DB->sql_isnotempty('scorm_scoes', 'launch', false, true),
+            ['scormid' => (int)$scorm->id],
+            'sortorder ASC, id ASC',
+            'id'
+        );
+        if (!$scoes) {
+            continue;
+        }
+
+        $organization = '';
+        $configuredsco = scorm_get_sco($scorm->launch, SCO_ONLY);
+        if ($configuredsco) {
+            $organization = ($configuredsco->organization === '' && $configuredsco->launch === '')
+                ? $configuredsco->identifier
+                : $configuredsco->organization;
+        }
+
+        $firstsco = reset($scoes);
+        $scoid = (int)$firstsco->id;
+        $toc = null;
+        try {
+            $toc = scorm_get_toc($USER, $scorm, (int)$cm->id, TOCFULLURL, $organization);
+            if (!empty($toc->sco->id) && (int)$scorm->forcenewattempt !== SCORM_FORCEATTEMPT_ALWAYS) {
+                $scoid = (int)$toc->sco->id;
+            }
+        } catch (Throwable $exception) {
+            // A malformed package should retain a usable first-SCO fallback.
+        }
+
+        $params = [
+            'a' => (int)$scorm->id,
+            'currentorg' => $organization,
+            'scoid' => $scoid,
+        ];
+        if ((int)$scorm->forcenewattempt === SCORM_FORCEATTEMPT_ALWAYS ||
+                (is_object($toc) && $toc->incomplete === false &&
+                    (int)$scorm->forcenewattempt === SCORM_FORCEATTEMPT_ONCOMPLETE)) {
+            $params['newattempt'] = 'on';
+        }
+
+        $launchurl = (new moodle_url('/mod/scorm/player.php', $params))->out(false);
+        $result['cm'][(string)(int)$cm->id] = $launchurl;
+        $result['instance'][(string)(int)$scorm->id] = $launchurl;
+    }
+
+    $cache[$cachekey] = $result;
+    return $result;
+}
+
+/**
+ * Replaces learner-facing SCORM overview links with direct player links.
+ *
+ * @param array{cm: array<string, string>, instance: array<string, string>} $launchurls
+ * @return void
+ */
+function theme_flwacademy_require_scorm_direct_launch(array $launchurls): void {
+    global $PAGE;
+
+    if (empty($launchurls['cm']) && empty($launchurls['instance'])) {
+        return;
+    }
+
+    $json = json_encode($launchurls, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    if ($json === false) {
+        return;
+    }
+
+    $PAGE->requires->js_init_code("
+        (function() {
+            var launchUrls = {$json};
+
+            function directLaunchUrl(value) {
+                try {
+                    var source = new URL(value, window.location.href);
+                    if (!/\\/mod\\/scorm\\/view\\.php$/.test(source.pathname)) {
+                        return '';
+                    }
+                    var cmid = source.searchParams.get('id');
+                    var instanceid = source.searchParams.get('a');
+                    return (cmid && launchUrls.cm[cmid]) ||
+                        (instanceid && launchUrls.instance[instanceid]) || '';
+                } catch (error) {
+                    return '';
+                }
+            }
+
+            function rewriteLinks(root) {
+                Array.prototype.slice.call(root.querySelectorAll('a[href*=\"/mod/scorm/view.php\"]')).forEach(function(link) {
+                    var direct = directLaunchUrl(link.href);
+                    if (direct) {
+                        link.href = direct;
+                    }
+                });
+            }
+
+            function init() {
+                var current = directLaunchUrl(window.location.href);
+                if (current) {
+                    window.location.replace(current);
+                    return;
+                }
+                rewriteLinks(document);
+                window.setTimeout(function() {
+                    rewriteLinks(document);
+                }, 500);
+            }
+
+            document.addEventListener('click', function(event) {
+                var link = event.target.closest && event.target.closest('a[href*=\"/mod/scorm/view.php\"]');
+                var direct = link ? directLaunchUrl(link.href) : '';
+                if (direct) {
+                    link.href = direct;
+                }
+            }, true);
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init, {once: true});
+            } else {
+                init();
+            }
+        })();
+    ");
 }
 
 /**

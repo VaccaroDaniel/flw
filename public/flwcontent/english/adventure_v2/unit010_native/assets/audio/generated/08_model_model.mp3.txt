@@ -1,5 +1,0 @@
-file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit010/assets/audio/generated/08_model_01.mp3'
-file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit010/assets/audio/generated/08_model_02.mp3'
-file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit010/assets/audio/generated/08_model_03.mp3'
-file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit010/assets/audio/generated/08_model_04.mp3'
-file 'C:/Users/com/Documents/FLW/FLW-V2/adventure-english-world/unit010/assets/audio/generated/08_model_05.mp3'

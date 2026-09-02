@@ -1,0 +1,36 @@
+{
+  "gate": "P3_CM1",
+  "name": "Core C-UP-KP Curriculum Manager",
+  "status": "complete",
+  "date": "2026-08-29",
+  "contract_version": "FLW_CUPKP_CORE_CURRICULUM_MANAGER_V1",
+  "depends_on": [
+    "FLW_CUPKP_FOUNDATION_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "implemented_files": [
+    "local/flwcupkp/classes/local/core_curriculum_manager.php",
+    "local/flwcupkp/classes/local/curriculum_manager.php",
+    "local/flwcupkp/classes/local/foundation_v1_contract.php",
+    "local/flwcupkp/classes/local/program3_repository_audit.php",
+    "local/flwcupkp/curriculum.php",
+    "local/flwcupkp/entity.php",
+    "local/flwcupkp/edit_entity.php",
+    "local/flwcupkp/lang/en/local_flwcupkp.php",
+    "local/flwcupkp/styles.css",
+    "local/flwcupkp/version.php",
+    "local/flwcupkp/db/upgrade.php",
+    "local/flwcupkp/tests/core_curriculum_manager_test.php",
+    "local/flwcupkp/tests/foundation_v1_contract_test.php",
+    "local/flwcupkp/tests/program3_repository_audit_test.php",
+    "local/flwcupkp/tests/behat/admin_pages.feature"
+  ],
+  "boundaries": {
+    "history_v1_only_normal_source": true,
+    "foundation_read_only": true,
+    "adaptive_logic_added": false,
+    "mastery_policy_changed": false,
+    "raw_moodle_log_scraping_added": false
+  },
+  "next_allowed_gate": "CM2"
+}

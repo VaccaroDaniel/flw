@@ -13,7 +13,7 @@ class import_service {
     private const CSV_IMPORT_TYPES = [
         'activity_mappings' => [
             'required' => ['object_externalid', 'target_type', 'target_externalid'],
-            'optional' => ['role', 'evidence_strength'],
+            'optional' => ['role', 'evidence_strength', 'completion_counts_as_evidence'],
         ],
         'quiz_kp_mappings' => [
             'required' => ['item_id', 'object_externalid', 'kp_externalid'],
@@ -207,10 +207,18 @@ class import_service {
                 'lesson' => $row['lesson'] ?? null,
                 'object_type' => $row['object_type'] ?? ($row['objecttype'] ?? 'lesson'),
                 'source_id' => $row['source_id'] ?? ($row['sourceid'] ?? null),
+                'program1_sourcekey' => $row['program1_sourcekey'] ?? ($row['sourcekey'] ?? null),
+                'unit_id' => $row['unit_id'] ?? ($row['unitid'] ?? null),
+                'lesson_id' => $row['lesson_id'] ?? ($row['lessonid'] ?? null),
+                'component_id' => $row['component_id'] ?? ($row['componentid'] ?? null),
+                'activity_id' => $row['activity_id'] ?? ($row['activityid'] ?? null),
+                'assessment_id' => $row['assessment_id'] ?? ($row['assessmentid'] ?? null),
+                'question_id' => $row['question_id'] ?? ($row['questionid'] ?? null),
                 'purpose' => $row['purpose'] ?? 'lesson',
                 'evidence_strength' => $row['evidence_strength'] ?? null,
                 'difficulty' => $row['difficulty'] ?? null,
                 'role' => $row['role'] ?? 'practice',
+                'completion_counts_as_evidence' => $row['completion_counts_as_evidence'] ?? null,
                 'metadata' => $row['metadata'] ?? ['imported_from' => 'lesson_mappings'],
             ];
 
@@ -226,14 +234,18 @@ class import_service {
                     'target_externalid' => (string)$row['target_externalid'],
                     'role' => $role,
                     'evidence_strength' => $strength,
+                    'completion_counts_as_evidence' => $row['completion_counts_as_evidence'] ?? null,
                 ];
             }
             self::add_lesson_targets($mappings, $objectexternalid, 'kp',
-                $row['kp_externalids'] ?? ($row['kp_externalid'] ?? null), $role, $strength);
+                $row['kp_externalids'] ?? ($row['kp_externalid'] ?? null), $role, $strength,
+                $row['completion_counts_as_evidence'] ?? null);
             self::add_lesson_targets($mappings, $objectexternalid, 'up',
-                $row['up_externalids'] ?? ($row['up_externalid'] ?? null), $role, $strength);
+                $row['up_externalids'] ?? ($row['up_externalid'] ?? null), $role, $strength,
+                $row['completion_counts_as_evidence'] ?? null);
             self::add_lesson_targets($mappings, $objectexternalid, 'competency',
-                $row['competency_externalids'] ?? ($row['competency_externalid'] ?? null), $role, $strength);
+                $row['competency_externalids'] ?? ($row['competency_externalid'] ?? null), $role, $strength,
+                $row['completion_counts_as_evidence'] ?? null);
         }
         return ['learning_objects' => $objects, 'activity_mappings' => $mappings];
     }
@@ -254,7 +266,8 @@ class import_service {
             $competencies = $row['competency_externalids'] ?? ($row['competency_externalid'] ?? null);
             self::add_lesson_targets($mappings, $objectexternalid, 'competency', $competencies,
                 (string)($row['role'] ?? 'assessment'),
-                isset($row['evidence_strength']) ? (string)$row['evidence_strength'] : 'independent_performance');
+                isset($row['evidence_strength']) ? (string)$row['evidence_strength'] : 'independent_performance',
+                $row['completion_counts_as_evidence'] ?? null);
         }
         return $mappings;
     }
@@ -270,7 +283,7 @@ class import_service {
      * @param string|null $strength
      */
     private static function add_lesson_targets(array &$mappings, string $objectexternalid, string $targettype,
-            $values, string $role, ?string $strength): void {
+            $values, string $role, ?string $strength, $completioncounts = null): void {
         if ($objectexternalid === '' || $values === null || $values === '') {
             return;
         }
@@ -285,6 +298,7 @@ class import_service {
                 'target_externalid' => $targetexternalid,
                 'role' => $role,
                 'evidence_strength' => $strength,
+                'completion_counts_as_evidence' => $completioncounts,
             ];
         }
     }
@@ -296,6 +310,8 @@ class import_service {
      * @return array
      */
     private static function import_frameworks(array $rows): array {
+        global $DB;
+
         $ids = [];
         foreach ($rows as $row) {
             $record = (object)[
@@ -311,6 +327,10 @@ class import_service {
                 'parentid' => null,
                 'moodleframeworkid' => $row['moodle_framework_id'] ?? null,
             ];
+            $record = (object)lifecycle_governance_contract::normalize_entity_payload('framework', (array)$record);
+            $existing = $DB->get_record('flwcupkp_framework', ['externalid' => $record->externalid],
+                '*', IGNORE_MISSING) ?: null;
+            lifecycle_governance_contract::assert_entity_write('framework', (array)$record, $existing);
             $ids[$row['externalid']] = repository::upsert_by_externalid('flwcupkp_framework', $record);
         }
         return $ids;
@@ -325,10 +345,19 @@ class import_service {
      * @return array
      */
     private static function import_entities(string $key, array $rows, ?int $frameworkid): array {
+        global $DB;
+
         $ids = [];
         $table = repository::table_for_entity($key);
+        $entitytype = lifecycle_governance_contract::entity_type_for_table($table);
         foreach ($rows as $row) {
+            if ($table === 'flwcupkp_object') {
+                content_evidence_mapping_contract::assert_learning_object_row($row);
+            }
             $record = self::record_for_table($table, $row, $frameworkid);
+            $record = (object)lifecycle_governance_contract::normalize_entity_payload($entitytype, (array)$record);
+            $existing = $DB->get_record($table, ['externalid' => $record->externalid], '*', IGNORE_MISSING) ?: null;
+            lifecycle_governance_contract::assert_entity_write($entitytype, (array)$record, $existing);
             $ids[$row['externalid']] = repository::upsert_by_externalid($table, $record);
         }
         return $ids;
@@ -364,12 +393,17 @@ class import_service {
             $record->learningload = $row['estimated_learning_load'] ?? null;
             $record->evidencerequirements = json_encode($row['evidence_requirements'] ?? []);
         } else if ($table === 'flwcupkp_object') {
-            $record->courseid = $row['courseid'] ?? null;
-            $record->unitcode = $row['unit_code'] ?? null;
-            $record->objecttype = $row['object_type'] ?? null;
-            $record->sourceid = $row['source_id'] ?? null;
+            $record->courseid = $row['courseid'] ?? ($row['course_id'] ?? null);
+            $record->unitcode = $row['unit_code'] ?? ($row['unitcode'] ?? null);
+            $record->objecttype = $row['object_type'] ?? ($row['objecttype'] ?? null);
+            $record->sourceid = $row['source_id'] ?? ($row['sourceid'] ??
+                ($row['activity_id'] ?? ($row['program1_sourcekey'] ?? ($row['sourcekey'] ?? null))));
             $record->evidencestrength = $row['evidence_strength'] ?? null;
-            $record->metadatajson = json_encode($row['metadata'] ?? []);
+            $metadata = content_evidence_mapping_contract::normalize_object_metadata_from_row(
+                $row,
+                $row['metadata'] ?? ($row['metadatajson'] ?? [])
+            );
+            $record->metadatajson = json_encode($metadata, JSON_UNESCAPED_SLASHES);
         }
         return self::filter_record($record, $table);
     }
@@ -410,7 +444,7 @@ class import_service {
             if (!$competencyid || !$upid) {
                 continue;
             }
-            repository::upsert_mapping('flwcupkp_comp_up', ['competencyid' => $competencyid, 'upid' => $upid], (object)[
+            $record = (object)[
                 'competencyid' => $competencyid,
                 'upid' => $upid,
                 'role' => $row['role'] ?? 'required',
@@ -419,7 +453,10 @@ class import_service {
                 'minmastery' => $row['minimum_up_mastery'] ?? null,
                 'evidencerule' => json_encode($row['evidence_rule'] ?? []),
                 'notes' => $row['notes'] ?? null,
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('comp_up', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('comp_up', (array)$record);
+            repository::upsert_mapping('flwcupkp_comp_up', ['competencyid' => $competencyid, 'upid' => $upid], $record);
             $count++;
         }
         return $count;
@@ -438,7 +475,7 @@ class import_service {
             if (!$upid || !$kpid) {
                 continue;
             }
-            repository::upsert_mapping('flwcupkp_up_kp', ['upid' => $upid, 'kpid' => $kpid], (object)[
+            $record = (object)[
                 'upid' => $upid,
                 'kpid' => $kpid,
                 'role' => $row['role'] ?? 'required',
@@ -446,7 +483,10 @@ class import_service {
                 'minreadiness' => $row['minimum_kp_readiness'] ?? null,
                 'sortorder' => $row['sequence'] ?? 0,
                 'notes' => $row['notes'] ?? null,
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('up_kp', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('up_kp', (array)$record);
+            repository::upsert_mapping('flwcupkp_up_kp', ['upid' => $upid, 'kpid' => $kpid], $record);
             $count++;
         }
         return $count;
@@ -465,14 +505,17 @@ class import_service {
             if (!$kpid || !$prereq) {
                 continue;
             }
-            repository::upsert_mapping('flwcupkp_kp_prereq', ['kpid' => $kpid, 'prereqkpid' => $prereq], (object)[
+            $record = (object)[
                 'kpid' => $kpid,
                 'prereqkpid' => $prereq,
                 'relationshiptype' => $row['relationship_type'] ?? 'prerequisite',
                 'strength' => $row['strength'] ?? 1,
                 'requirement' => $row['requirement'] ?? 'recommended',
                 'notes' => $row['notes'] ?? null,
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('kp_prereq', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('kp_prereq', (array)$record);
+            repository::upsert_mapping('flwcupkp_kp_prereq', ['kpid' => $kpid, 'prereqkpid' => $prereq], $record);
             $count++;
         }
         return $count;
@@ -482,6 +525,8 @@ class import_service {
      * Import object mappings.
      */
     private static function import_object_maps(array $rows, array $objectids, array $competencyids, array $upids, array $kpids): int {
+        global $DB;
+
         $count = 0;
         foreach ($rows as $row) {
             $objectid = $objectids[$row['object_externalid']] ??
@@ -496,13 +541,21 @@ class import_service {
             if (!$objectid || !$targetid) {
                 continue;
             }
-            repository::upsert_mapping('flwcupkp_object_map', ['objectid' => $objectid, 'targettype' => $targettype, 'targetid' => $targetid], (object)[
+            $record = (object)[
                 'objectid' => $objectid,
                 'targettype' => $targettype,
                 'targetid' => $targetid,
                 'role' => $row['role'] ?? 'practice',
                 'evidencestrength' => $row['evidence_strength'] ?? null,
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('object_map', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('object_map', (array)$record);
+            $object = $DB->get_record('flwcupkp_object', ['id' => (int)$objectid], '*', MUST_EXIST);
+            content_evidence_mapping_contract::assert_object_map_contract($object, $record);
+            repository::upsert_mapping('flwcupkp_object_map',
+                ['objectid' => $objectid, 'targettype' => $targettype, 'targetid' => $targetid], $record);
+            self::set_completion_map_override((int)$objectid, (string)$targettype, (int)$targetid,
+                $row['completion_counts_as_evidence'] ?? null);
             $count++;
         }
         return $count;
@@ -520,20 +573,54 @@ class import_service {
             $object = self::object_by_externalid((string)$row['object_externalid']);
             $targettype = self::normalize_target_type((string)$row['target_type']);
             $target = self::target_by_externalid($targettype, (string)$row['target_externalid']);
-            repository::upsert_mapping('flwcupkp_object_map', [
-                'objectid' => (int)$object->id,
-                'targettype' => $targettype,
-                'targetid' => (int)$target->id,
-            ], (object)[
+            $record = (object)[
                 'objectid' => (int)$object->id,
                 'targettype' => $targettype,
                 'targetid' => (int)$target->id,
                 'role' => self::csv_value($row, 'role', 'practice'),
                 'evidencestrength' => self::csv_value($row, 'evidence_strength', null),
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('object_map', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('object_map', (array)$record);
+            content_evidence_mapping_contract::assert_object_map_contract($object, $record);
+            repository::upsert_mapping('flwcupkp_object_map', [
+                'objectid' => (int)$object->id,
+                'targettype' => $targettype,
+                'targetid' => (int)$target->id,
+            ], $record);
+            self::set_completion_map_override((int)$object->id, $targettype, (int)$target->id,
+                $row['completion_counts_as_evidence'] ?? null);
             $count++;
         }
         return $count;
+    }
+
+    /**
+     * Persist map-specific completion evidence intent in object metadata.
+     *
+     * @param int $objectid
+     * @param string $targettype
+     * @param int $targetid
+     * @param mixed $value
+     */
+    private static function set_completion_map_override(int $objectid, string $targettype, int $targetid, $value): void {
+        global $DB;
+
+        if (!self::csv_boolish_true($value)) {
+            return;
+        }
+
+        $object = $DB->get_record('flwcupkp_object', ['id' => $objectid], '*', MUST_EXIST);
+        $metadata = json_decode((string)($object->metadatajson ?? ''), true);
+        if (!is_array($metadata)) {
+            $metadata = [];
+        }
+        $metadata['completion_evidence_map_overrides'][$targettype . ':' . $targetid] = true;
+        $metadata['content_evidence_mapping_contract'] =
+            content_evidence_mapping_contract::CONTRACT_VERSION;
+        $metadata['source_history_contract'] = history_v1_consumer_contract::REQUIRED_CONTRACT;
+        $DB->set_field('flwcupkp_object', 'metadatajson',
+            json_encode($metadata, JSON_UNESCAPED_SLASHES), ['id' => $objectid]);
     }
 
     /**
@@ -555,17 +642,21 @@ class import_service {
             $kp = self::target_by_externalid('kp', (string)$row['kp_externalid']);
             $strength = self::csv_value($row, 'evidence_strength', 'recognition');
 
-            repository::upsert_mapping('flwcupkp_object_map', [
-                'objectid' => (int)$object->id,
-                'targettype' => 'kp',
-                'targetid' => (int)$kp->id,
-            ], (object)[
+            $record = (object)[
                 'objectid' => (int)$object->id,
                 'targettype' => 'kp',
                 'targetid' => (int)$kp->id,
                 'role' => 'assessment',
                 'evidencestrength' => $strength,
-            ]);
+            ];
+            relationship_graph_contract::assert_mapping_change('object_map', (array)$record);
+            lifecycle_governance_contract::assert_mapping_change('object_map', (array)$record);
+            content_evidence_mapping_contract::assert_object_map_contract($object, $record);
+            repository::upsert_mapping('flwcupkp_object_map', [
+                'objectid' => (int)$object->id,
+                'targettype' => 'kp',
+                'targetid' => (int)$kp->id,
+            ], $record);
 
             $metadataupdates[(int)$object->id][] = [
                 'item_id' => (string)$row['item_id'],
@@ -689,6 +780,36 @@ class import_service {
                 $warnings[] = "Duplicate CSV mapping at row {$rownumber}; later values overwrite earlier equivalent mappings.";
             }
             $seen[$key] = true;
+
+            $ontologyrow = $type === 'quiz_kp_mappings' ? [
+                'object_externalid' => $row['object_externalid'] ?? '',
+                'target_type' => 'kp',
+                'target_externalid' => $row['kp_externalid'] ?? '',
+                'role' => 'assessment',
+                'evidence_strength' => $row['evidence_strength'] ?? 'recognition',
+            ] : [
+                'object_externalid' => $row['object_externalid'] ?? '',
+                'target_type' => $row['target_type'] ?? '',
+                'target_externalid' => $row['target_externalid'] ?? '',
+                'role' => $row['role'] ?? '',
+                'evidence_strength' => $row['evidence_strength'] ?? '',
+                'completion_counts_as_evidence' => $row['completion_counts_as_evidence'] ?? null,
+            ];
+            $ontology = ontology_boundary::validate_mapping_row('object_map', $ontologyrow);
+            foreach ($ontology['errors'] as $error) {
+                $errors[] = "CSV row {$rownumber}: " . $error;
+            }
+            $graph = relationship_graph_contract::validate_mapping_row('object_map', $ontologyrow);
+            foreach ($graph['errors'] as $error) {
+                $errors[] = "CSV row {$rownumber}: " . $error;
+            }
+            $contentmap = content_evidence_mapping_contract::validate_object_map_row($ontologyrow);
+            foreach ($contentmap['errors'] as $error) {
+                $errors[] = "CSV row {$rownumber}: " . $error;
+            }
+            foreach ($contentmap['warnings'] as $warning) {
+                $warnings[] = "CSV row {$rownumber}: " . $warning;
+            }
         }
 
         if (empty($errors)) {
@@ -713,11 +834,25 @@ class import_service {
                 if ($type === 'quiz_kp_mappings') {
                     $target = self::target_by_externalid('kp', (string)$row['kp_externalid']);
                     self::assert_same_framework_for_csv($object, $target);
+                    lifecycle_governance_contract::assert_mapping_change('object_map', [
+                        'objectid' => (int)$object->id,
+                        'targettype' => 'kp',
+                        'targetid' => (int)$target->id,
+                        'role' => 'assessment',
+                        'evidencestrength' => $row['evidence_strength'] ?? 'recognition',
+                    ]);
                     continue;
                 }
                 $targettype = self::normalize_target_type((string)$row['target_type']);
                 $target = self::target_by_externalid($targettype, (string)$row['target_externalid']);
                 self::assert_same_framework_for_csv($object, $target);
+                lifecycle_governance_contract::assert_mapping_change('object_map', [
+                    'objectid' => (int)$object->id,
+                    'targettype' => $targettype,
+                    'targetid' => (int)$target->id,
+                    'role' => self::csv_value($row, 'role', 'practice'),
+                    'evidencestrength' => self::csv_value($row, 'evidence_strength', null),
+                ]);
             } catch (\Exception $e) {
                 $errors[] = "CSV row {$rownumber}: " . $e->getMessage();
             }
@@ -833,6 +968,19 @@ class import_service {
      */
     private static function csv_value(array $row, string $key, $default) {
         return isset($row[$key]) && trim((string)$row[$key]) !== '' ? trim((string)$row[$key]) : $default;
+    }
+
+    /**
+     * True-like import value.
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    private static function csv_boolish_true($value): bool {
+        if (is_bool($value)) {
+            return $value;
+        }
+        return in_array(strtolower(trim((string)$value)), ['1', 'true', 'yes', 'y'], true);
     }
 
     /**

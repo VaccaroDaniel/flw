@@ -211,6 +211,23 @@ final class curriculum_manager {
     }
 
     /**
+     * Get one mapping record.
+     *
+     * @param string $type
+     * @param int $id
+     * @return \stdClass|null
+     */
+    public static function get_mapping(string $type, int $id): ?\stdClass {
+        global $DB;
+
+        if ($id <= 0) {
+            return null;
+        }
+        $config = self::mapping_config($type);
+        return $DB->get_record($config['table'], ['id' => $id], '*', IGNORE_MISSING) ?: null;
+    }
+
+    /**
      * Save an entity row.
      *
      * @param string $type
@@ -221,6 +238,18 @@ final class curriculum_manager {
         global $DB;
 
         $config = self::entity_config($type);
+        $data = lifecycle_governance_contract::normalize_entity_payload($type, $data);
+        $existing = null;
+        if (!empty($data['id'])) {
+            $existing = $DB->get_record($config['table'], ['id' => (int)$data['id']], '*', MUST_EXIST);
+        } else if (!empty($data['externalid'])) {
+            $existing = $DB->get_record($config['table'], ['externalid' => (string)$data['externalid']], '*', IGNORE_MISSING) ?: null;
+        }
+        canonical_domain_model::assert_curriculum_row($type, $data);
+        ontology_boundary::assert_curriculum_row($type, $data);
+        if ($type === 'object') {
+            content_evidence_mapping_contract::assert_learning_object_row($data);
+        }
         $record = new \stdClass();
         foreach ($config['fields'] as $field) {
             if (!array_key_exists($field, $data)) {
@@ -235,9 +264,9 @@ final class curriculum_manager {
             }
         }
         self::assert_entity_references($type, $record);
+        lifecycle_governance_contract::assert_entity_write($type, $data, $existing);
 
-        if (!empty($data['id'])) {
-            $existing = $DB->get_record($config['table'], ['id' => (int)$data['id']], '*', MUST_EXIST);
+        if ($existing !== null && !empty($data['id'])) {
             $record->id = (int)$existing->id;
             $record->externalid = $existing->externalid;
             if (isset($existing->timecreated)) {
@@ -261,8 +290,15 @@ final class curriculum_manager {
      * @return int
      */
     public static function save_mapping(string $type, array $data): int {
+        global $DB;
+
         $config = self::mapping_config($type);
         $record = new \stdClass();
+        $existing = null;
+        if (!empty($data['id'])) {
+            $existing = $DB->get_record($config['table'], ['id' => (int)$data['id']], '*', MUST_EXIST);
+            $record->id = (int)$existing->id;
+        }
         foreach ($config['fields'] as $field) {
             if (!array_key_exists($field, $data)) {
                 continue;
@@ -275,7 +311,15 @@ final class curriculum_manager {
                 throw new \invalid_parameter_exception($field . ' is required.');
             }
         }
+        ontology_boundary::assert_mapping_row($type, (array)$record);
+        relationship_graph_contract::assert_mapping_row($type, (array)$record);
         self::assert_mapping_references($type, $record);
+        if ($type === 'object_map') {
+            $object = $DB->get_record('flwcupkp_object', ['id' => (int)$record->objectid], '*', MUST_EXIST);
+            content_evidence_mapping_contract::assert_object_map_contract($object, $record);
+        }
+        relationship_graph_contract::assert_mapping_change($type, (array)$record);
+        lifecycle_governance_contract::assert_mapping_change($type, (array)$record);
 
         $keys = [];
         $keys[$config['left']] = $record->{$config['left']};
@@ -284,10 +328,20 @@ final class curriculum_manager {
         }
         $keys[$config['right']] = $record->{$config['right']};
 
-        $id = repository::upsert_mapping($config['table'], $keys, $record);
+        if ($existing !== null) {
+            $conflict = $DB->get_record($config['table'], $keys, 'id', IGNORE_MISSING);
+            if ($conflict && (int)$conflict->id !== (int)$existing->id) {
+                throw new \invalid_parameter_exception('A C-UP-KP mapping with these endpoints already exists.');
+            }
+            $DB->update_record($config['table'], $record);
+            $id = (int)$existing->id;
+        } else {
+            $id = repository::upsert_mapping($config['table'], $keys, $record);
+        }
         repository::audit('curriculum_mapping_saved', $config['audit_target'], $id, [
             'table' => $config['table'],
             'keys' => $keys,
+            'existingid' => $existing->id ?? null,
         ]);
         return $id;
     }
@@ -303,6 +357,7 @@ final class curriculum_manager {
 
         $config = self::mapping_config($type);
         $record = $DB->get_record($config['table'], ['id' => $id], '*', MUST_EXIST);
+        lifecycle_governance_contract::assert_mapping_delete($type, $record);
         $DB->delete_records($config['table'], ['id' => $id]);
         repository::audit('curriculum_mapping_deleted', $config['audit_target'], $id, [
             'table' => $config['table'],
@@ -327,6 +382,8 @@ final class curriculum_manager {
         if ($status === '') {
             throw new \invalid_parameter_exception('Status is required.');
         }
+        $status = lifecycle_governance_contract::canonical_status($status);
+        ontology_boundary::assert_entity_status($status);
 
         $config = self::entity_config($type);
         $params = [];
@@ -343,11 +400,27 @@ final class curriculum_manager {
             $params['frameworkid'] = $frameworkid;
         }
 
-        $count = $DB->count_records_select($config['table'], $where, $params);
+        $records = $DB->get_records_select($config['table'], $where, $params);
+        foreach ($records as $record) {
+            $proposed = (array)$record;
+            $proposed['status'] = $status;
+            lifecycle_governance_contract::assert_entity_write($type, $proposed, $record);
+        }
+
+        $count = count($records);
         if ($count > 0) {
-            $DB->set_field_select($config['table'], 'status', $status, $where, $params);
-            $DB->set_field_select($config['table'], 'timemodified', time(), $where, $params);
-            $DB->set_field_select($config['table'], 'usermodified', $USER->id ?? 0, $where, $params);
+            $transaction = $DB->start_delegated_transaction();
+            $now = time();
+            foreach ($records as $record) {
+                $update = (object)[
+                    'id' => $record->id,
+                    'status' => $status,
+                    'timemodified' => $now,
+                    'usermodified' => $USER->id ?? 0,
+                ];
+                $DB->update_record($config['table'], $update);
+            }
+            $transaction->allow_commit();
         }
 
         repository::audit('curriculum_bulk_status_updated', $type, $frameworkid ?: null, [
@@ -358,6 +431,55 @@ final class curriculum_manager {
         ]);
 
         return ['type' => $type, 'frameworkid' => $frameworkid, 'status' => $status, 'count' => $count];
+    }
+
+    /**
+     * Apply one governed lifecycle transition to a single curriculum entity.
+     *
+     * @param string $type
+     * @param int $id
+     * @param string $status
+     * @return array
+     */
+    public static function transition_entity_status(string $type, int $id, string $status): array {
+        global $DB, $USER;
+
+        if (!in_array($type, ['framework', 'competency', 'up', 'kp'], true)) {
+            throw new \invalid_parameter_exception('This entity type does not support lifecycle workflow actions.');
+        }
+        if ($id <= 0) {
+            throw new \invalid_parameter_exception('Entity ID is required.');
+        }
+
+        $config = self::entity_config($type);
+        $record = $DB->get_record($config['table'], ['id' => $id], '*', MUST_EXIST);
+        $newstatus = lifecycle_governance_contract::canonical_status($status);
+        ontology_boundary::assert_entity_status($newstatus);
+
+        $proposed = (array)$record;
+        $proposed['status'] = $newstatus;
+        lifecycle_governance_contract::assert_entity_write($type, $proposed, $record);
+
+        $DB->update_record($config['table'], (object)[
+            'id' => $id,
+            'status' => $newstatus,
+            'timemodified' => time(),
+            'usermodified' => $USER->id ?? 0,
+        ]);
+
+        repository::audit('curriculum_entity_status_transitioned', $type, $id, [
+            'table' => $config['table'],
+            'from' => $record->status ?? 'draft',
+            'to' => $newstatus,
+            'externalid' => $record->externalid ?? '',
+        ]);
+
+        return [
+            'type' => $type,
+            'id' => $id,
+            'from' => (string)($record->status ?? 'draft'),
+            'to' => $newstatus,
+        ];
     }
 
     /**
@@ -383,6 +505,7 @@ final class curriculum_manager {
         }
 
         $source = $DB->get_record('flwcupkp_framework', ['id' => $frameworkid], '*', MUST_EXIST);
+        lifecycle_governance_contract::assert_framework_clone($source, $newversion, $suffix);
         $newframeworkexternalid = self::clone_externalid((string)$source->externalid, $suffix, 100);
         if ($DB->record_exists('flwcupkp_framework', ['externalid' => $newframeworkexternalid])) {
             throw new \invalid_parameter_exception('The cloned framework external ID already exists: ' . $newframeworkexternalid);

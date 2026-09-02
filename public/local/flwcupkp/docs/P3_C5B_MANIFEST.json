@@ -1,0 +1,68 @@
+{
+  "gate": "Program 3 Gate C5B",
+  "status": "complete",
+  "date": "2026-08-29",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082900",
+  "page": "/local/flwcupkp/foundation.php",
+  "capability": "local/flwcupkp:manageframeworks",
+  "depends_on": [
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+    "FLW_CUPKP_FOUNDATION_V1"
+  ],
+  "read_only": true,
+  "state_changes_allowed": false,
+  "displays": [
+    "foundation_status",
+    "dependency_contracts",
+    "migration_readiness",
+    "nonblocking_findings",
+    "competency_rows",
+    "use_point_rows",
+    "knowledge_point_rows",
+    "relationship_graph_rows",
+    "content_evidence_mappings",
+    "authoritative_implementations",
+    "adaptive_api_boundary",
+    "foundation_contract_json"
+  ],
+  "does_not_implement": [
+    "adaptive_path_selection",
+    "learning_goal_model",
+    "mastery_policy_change",
+    "history_v1_evidence_reprocessing_writes",
+    "raw_moodle_log_scraping"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "focused_foundation_v1_phpunit": "OK (6 tests, 58 assertions)",
+    "program3_repository_audit_phpunit": "OK (3 tests, 112 assertions)",
+    "local_flwcupkp_testsuite": "OK (83 tests, 662 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass",
+    "server_side_admin_render_smoke": {
+      "rendered": true,
+      "html_length": 77323,
+      "missing_expected_sections": []
+    },
+    "live_smoke": {
+      "courseid": 124,
+      "unitcode": "U038",
+      "plugin_version_db": "2026082900",
+      "foundation_page_exists": true,
+      "foundation_string": "Foundation Inspector",
+      "foundation_status": "frozen",
+      "next_allowed_gate": "CM1",
+      "unresolved_blocker_high_count": 0,
+      "history_v1": "ready",
+      "repository_audit": "ready_for_cm1",
+      "audit_foundation_page_checked": true,
+      "nonblocking_findings": [
+        "UP FLW-REW-B1-UP-038-01 is published without an object evidence route.",
+        "UP FLW-REW-B1-UP-038-02 is published without an object evidence route."
+      ]
+    }
+  },
+  "next_gate": "Program 3 Gate CM1"
+}

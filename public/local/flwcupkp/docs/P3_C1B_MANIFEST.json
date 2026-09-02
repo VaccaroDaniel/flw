@@ -1,0 +1,80 @@
+{
+  "gate": "Program 3 Gate C1B",
+  "status": "complete",
+  "date": "2026-08-28",
+  "plugin": "local_flwcupkp",
+  "plugin_version": "2026082804",
+  "ontology_contract": "FLW_CUPKP_ONTOLOGY_BOUNDARY_V1",
+  "depends_on": "FLW_CUPKP_CANONICAL_DOMAIN_MODEL_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "history_norm_policy": "H1B-20260827.1",
+  "detects": [
+    "overly_narrow_competency",
+    "kp_written_as_task",
+    "up_containing_unmodeled_new_knowledge",
+    "semantic_duplicate_across_types",
+    "unsupported_status_or_role_vocabulary",
+    "lifecycle_incompatible_mapping"
+  ],
+  "does_not_implement": [
+    "adaptive_decision_logic",
+    "mastery_recalculation",
+    "raw_moodle_log_scraping",
+    "C2_graph_semantics_freeze"
+  ],
+  "live_smoke": [
+    {
+      "courseid": 124,
+      "status": "guarded",
+      "checked": {
+        "competency": 2,
+        "up": 8,
+        "kp": 15,
+        "object": 12,
+        "mappings": 50
+      },
+      "findings": []
+    },
+    {
+      "courseid": 126,
+      "status": "guarded",
+      "checked": {
+        "competency": 2,
+        "up": 8,
+        "kp": 15,
+        "object": 12,
+        "mappings": 50
+      },
+      "findings": []
+    }
+  ],
+  "implementation_files": [
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/ontology_boundary.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/validator.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/curriculum_manager.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/import_service.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/classes/local/program3_repository_audit.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/tests/ontology_boundary_test.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/schemas/cupkp_package.schema.json",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/README.md",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/version.php",
+    "D:/Dev/MoodleWindowsInstaller-latest-501/server/moodle/public/local/flwcupkp/db/upgrade.php"
+  ],
+  "documentation": [
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C1B_ONTOLOGY_BOUNDARY.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C1B_VALIDATION_MATRIX.md",
+    "C:/Users/com/Documents/Estimation Speaking/docs/cupkp/P3_C1B_GATE_REPORT.md"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "json_schema_parse": "pass",
+    "focused_phpunit": "OK (10 tests, 34 assertions)",
+    "local_flwcupkp_testsuite": "OK (45 tests, 298 assertions)",
+    "local_flwhistory_testsuite": "OK (51 tests, 384 assertions)",
+    "live_upgrade": "pass",
+    "cache_purge": "pass"
+  },
+  "next_gate": "Program 3 Gate C2"
+}
+

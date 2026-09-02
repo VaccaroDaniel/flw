@@ -1,0 +1,33 @@
+{
+  "gate": "P3_CM2",
+  "name": "Relationship Editor + Where Used",
+  "status": "complete",
+  "date": "2026-08-29",
+  "contract": "FLW_CUPKP_RELATIONSHIP_WHERE_USED_V1",
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "implemented_files": [
+    "local/flwcupkp/classes/local/relationship_where_used_manager.php",
+    "local/flwcupkp/mappings.php",
+    "local/flwcupkp/entity.php",
+    "local/flwcupkp/classes/local/core_curriculum_manager.php",
+    "local/flwcupkp/classes/local/foundation_v1_contract.php",
+    "local/flwcupkp/classes/local/program3_repository_audit.php",
+    "local/flwcupkp/lang/en/local_flwcupkp.php",
+    "local/flwcupkp/styles.css",
+    "local/flwcupkp/tests/relationship_where_used_manager_test.php"
+  ],
+  "capabilities": [
+    "relationship_preview_before_save",
+    "relationship_preview_before_delete",
+    "where_used_impact_counts",
+    "coverage_governance_counts",
+    "audit_logged_confirmed_relationship_writes"
+  ],
+  "preserved_boundaries": [
+    "no_adaptive_path_selection",
+    "no_mastery_recalculation",
+    "no_learner_state_mutation",
+    "no_raw_moodle_log_scraping"
+  ],
+  "next_gate": "CM3"
+}

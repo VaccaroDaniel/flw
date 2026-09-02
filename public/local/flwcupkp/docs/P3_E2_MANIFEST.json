@@ -1,0 +1,48 @@
+{
+  "gate": "P3_E2",
+  "status": "implemented",
+  "contract": "FLW_CUPKP_MASTERY_CONFIDENCE_STATE_V1",
+  "depends_on": [
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_CUPKP_HISTORY_EVIDENCE_ADAPTER_V1",
+    "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "learner_state_types": [
+    "LearnerCompetencyState",
+    "LearnerKPState",
+    "LearnerUPState"
+  ],
+  "snapshot_fields": [
+    "mastery",
+    "confidence",
+    "status",
+    "trend",
+    "policyversion",
+    "ruleversion",
+    "evidenceids",
+    "evidencehash",
+    "calculatedtime"
+  ],
+  "entry_points": {
+    "admin_page": "/local/flwcupkp/mastery_state.php",
+    "cli": "local/flwcupkp/cli/mastery_state.php",
+    "web_services": [
+      "local_flwcupkp_get_mastery_state_status",
+      "local_flwcupkp_get_current_learner_state",
+      "local_flwcupkp_get_class_current_state_summary",
+      "local_flwcupkp_preview_mastery_state_rebuild",
+      "local_flwcupkp_apply_mastery_state_rebuild"
+    ]
+  },
+  "does_not_do": [
+    "raw_moodle_log_scraping",
+    "adaptive_path_selection",
+    "retention_decay",
+    "grade_mastery_collapse",
+    "history_v1_source_mutation"
+  ],
+  "next_allowed_gate": "E3"
+}

@@ -1,0 +1,93 @@
+{
+  "gate": "H0",
+  "program": "Program 2 - Learning and Grade History",
+  "status": "PASS",
+  "repository_revision": "workspace:C:\\Users\\com\\Documents\\Estimation Speaking is not a git repository; moodle_public:D:\\Dev\\MoodleWindowsInstaller-latest-501\\server\\moodle\\public has unrelated dirty worktree changes; program1:release-accepted by user",
+  "generated_at": "2026-08-27T17:46:51.1424088+09:00",
+  "schema_versions": {
+    "moodle_release": "5.1.5 (Build: 20260608)",
+    "moodle_branch": "501",
+    "moodle_version": "2025100605.00",
+    "php": "8.2.4",
+    "manifest_schema": "urn:flw:gate-manifest:v1",
+    "local_flwhistory": null,
+    "local_flwcupkp": "2026081416"
+  },
+  "contract_versions": {
+    "program1_content_deployment_contract": "1.0",
+    "program2_history_contract": null,
+    "cross_program_integration_contract": "2.0"
+  },
+  "freshness_states": {
+    "program1": "RELEASE_ACCEPTED_BY_USER",
+    "program2": "H0_COMPLETE",
+    "program3_cupkp": "EXISTING_OWNER_PRESERVED"
+  },
+  "tests": {
+    "passed": 12,
+    "failed": 0,
+    "not_run": 1,
+    "commands": [
+      "Get-Content package manifest/schema/controller/program docs",
+      "git status in workspace and Moodle public root",
+      "version.php inspection for Moodle and FLW plugins",
+      "Test-Path local/flwhistory",
+      "rg Moodle quiz event classes",
+      "rg Moodle assignment event classes",
+      "rg Moodle SCORM event classes",
+      "rg Moodle completion and grade event classes",
+      "rg question engine tables in lib/db/install.xml",
+      "rg Moodle and FLW source tables in install.xml files",
+      "rg FLW observer registrations",
+      "rg FLW service/task/capability surfaces"
+    ],
+    "notes": "One malformed PowerShell regex inspection was rerun with corrected quoting and is not a gate failure. No runtime tests were run because H0 is documentation-only."
+  },
+  "blockers": [],
+  "high_issues": [
+    "Program 2 must avoid duplicating local_flwcupkp evidence/mastery/adaptive ownership when it later observes the same source events.",
+    "H1 must enforce replay-safe idempotency keys before any repair/backfill/observer writes are added."
+  ],
+  "outputs": [
+    "docs/flw-history/H0_EXECUTION_PACKET.md",
+    "docs/flw-history/H0_REPOSITORY_INVENTORY.md",
+    "docs/flw-history/H0_ASIS_TOBE.md",
+    "docs/flw-history/H0_EVENT_SOURCE_MATRIX.md",
+    "docs/flw-history/H0_ADR.md",
+    "docs/flw-history/H0_REUSE_MAP.md",
+    "docs/flw-history/H0_RISKS.md",
+    "docs/flw-history/H0_H1_BLUEPRINT.md",
+    "docs/flw-history/H0_REPORT.md",
+    "docs/flw-history/H0_MANIFEST.json"
+  ],
+  "requirement_ids": {
+    "implemented": [
+      "XPR-OWN-001",
+      "XPR-PKT-001",
+      "XPR-PKT-002",
+      "XPR-MAN-001"
+    ],
+    "tested": [
+      "XPR-OWN-001",
+      "XPR-PKT-001",
+      "XPR-PKT-002",
+      "XPR-MAN-001"
+    ],
+    "deferred": [
+      "XPR-CON-002",
+      "P2-HIST-001",
+      "P2-COV-001",
+      "P2-COMP-001",
+      "P2-API-001",
+      "P2-CON-001"
+    ],
+    "failed": []
+  },
+  "next_gate_allowed": true,
+  "notes": [
+    "H0 changed documentation only and did not modify Moodle runtime code.",
+    "Program 1 is treated as complete based on explicit user direction.",
+    "H1 should create local_flwhistory schema and backend service contracts before any production observers are registered."
+  ]
+}
+

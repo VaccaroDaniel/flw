@@ -1,0 +1,47 @@
+{
+  "gate": "P3_F1",
+  "contract": "FLW_CUPKP_ADAPTIVE_UX_V3_PRODUCTION_VALIDATION_V1",
+  "final_report": "FLW_CUPKP_ADAPTIVE_UX_V3_FINAL_REPORT.md",
+  "plugin_version": 2026083102,
+  "release": "0.1.3-alpha",
+  "implementation_status": "complete",
+  "repository_status": "f1_validation_available",
+  "isolated_integrated_validation": {
+    "status": "production_ready",
+    "pipeline_passed": 13,
+    "pipeline_total": 13,
+    "blockers": 0,
+    "high": 0
+  },
+  "live_validation": {
+    "courseid": 125,
+    "unitcode": "U038",
+    "status": "not_production_ready",
+    "pipeline_passed": 2,
+    "pipeline_total": 13,
+    "blockers": 16,
+    "high": 6,
+    "orphan_scopes": [
+      {"courseid": 124, "unitcode": "U038", "objects": 7},
+      {"courseid": 174, "unitcode": "U037", "objects": 5}
+    ]
+  },
+  "tests": {
+    "f1_focused": {"tests": 3, "assertions": 37},
+    "repository_foundation": {"tests": 9, "assertions": 263},
+    "cross_gate": {"tests": 60, "assertions": 1003},
+    "local_flwhistory_full": {"tests": 51, "assertions": 384},
+    "local_flwcupkp_full": {"tests": 177, "assertions": 2078}
+  },
+  "invariants": {
+    "detector_passed": 9,
+    "detector_total": 9,
+    "trajectories": 64,
+    "simulated_steps": 1536,
+    "incidents": 0
+  },
+  "validator_read_only": true,
+  "write_boundary": [],
+  "next_allowed_gate": null,
+  "final_gate": true
+}

@@ -1,0 +1,57 @@
+{
+  "gate": "P3_UX1",
+  "contract": "FLW_CUPKP_STUDENT_LEARNING_TIMELINE_VIEW_V1",
+  "view_policy_version": "cupkp-past-present-future-view-v1",
+  "history_dashboard_contract": "LearnerHistoryDashboardCore",
+  "source_history_contract": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "read_only": true,
+  "write_boundary": [],
+  "stages": {
+    "past": {
+      "owner": "local_flwhistory",
+      "panels": [
+        "grade_history",
+        "learning_history",
+        "recent_activity",
+        "attempt_history",
+        "journey"
+      ]
+    },
+    "present": {
+      "owner": "local_flwcupkp",
+      "source": "FLW_CUPKP_PROGRESS_GOAL_READINESS_CONTRACT_V1"
+    },
+    "future": {
+      "owner": "local_flwcupkp",
+      "source": "FLW_CUPKP_CONTINUOUS_ADAPTIVE_PATH_ENGINE_V1"
+    }
+  },
+  "next_allowed_gate": "UX2",
+  "files": [
+    "classes/local/student_learning_timeline_view_service.php",
+    "classes/local/student_learning_timeline_renderer.php",
+    "learning_timeline.php",
+    "cli/learning_timeline.php",
+    "tests/student_learning_timeline_view_service_test.php"
+  ],
+  "web_services": [
+    "local_flwcupkp_get_learning_timeline_status",
+    "local_flwcupkp_get_student_learning_timeline"
+  ],
+  "verification": {
+    "plugin_version": 2026083008,
+    "status": "complete",
+    "focused_tests": 5,
+    "focused_assertions": 74,
+    "cross_gate_tests": 29,
+    "cross_gate_assertions": 590,
+    "full_tests": 162,
+    "full_assertions": 1828,
+    "live_criteria": "9/9",
+    "history_dependency": "ready",
+    "a5c_dependency": "ready",
+    "registered_web_services": "2/2",
+    "page_http_check": "303_moodle_login_redirect_on_existing_course",
+    "u038_course_124": "not_present_in_current_live_database"
+  }
+}

@@ -1,6 +1,0 @@
-﻿gate,status,evidence,notes
-content_kp_alignment,pass,"Unit 6 reviews greetings, colors, numbers, actions, animals.",No new grammar beyond review chunks.
-image_alignment,pass,"IMG16, IMG19, IMG23 replaced/repaired and accepted.",IMG23 uses five stars; content updated to five stars.
-practice_count,pass,108 Practice items in question_bank.csv.,"12 per Lesson 1–7, Watch, Project."
-blocked_content,pass,No Unit 9 snack vocabulary in final project content; no Unit 7–9 KP used as target.,Snack item mismatch removed by IMG23 repair.
-moodle_readiness,pass,index.html and teacher_guide.html created.,Offline assets and local CSS/JS.

@@ -653,6 +653,1250 @@
         }
       }
     },
+    "/management/v1/status": {
+      "get": {
+        "operationId": "getManagementV1Status",
+        "x-moodle-wsfunction": "local_flwcupkp_get_management_v1_status",
+        "summary": "Get the frozen C-UP-KP Management V1 consumer snapshot",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/history-evidence/status": {
+      "get": {
+        "operationId": "getHistoryEvidenceStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_history_evidence_status",
+        "summary": "Get Program 3 E1 History V1 evidence adapter status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/history-evidence/reprocess/preview": {
+      "post": {
+        "operationId": "previewHistoryEvidenceReprocess",
+        "x-moodle-wsfunction": "local_flwcupkp_preview_history_evidence_reprocess",
+        "summary": "Preview History V1 to C-UP-KP evidence reprocessing",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/HistoryEvidenceReprocess"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/history-evidence/reprocess/apply": {
+      "post": {
+        "operationId": "applyHistoryEvidenceReprocess",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_history_evidence_reprocess",
+        "summary": "Apply controlled History V1 to C-UP-KP evidence reprocessing",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/HistoryEvidenceReprocess"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/mastery-state/status": {
+      "get": {
+        "operationId": "getMasteryStateStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_mastery_state_status",
+        "summary": "Get Program 3 E2 mastery, confidence, and current learner-state status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/current-state": {
+      "get": {
+        "operationId": "getCurrentLearnerState",
+        "x-moodle-wsfunction": "local_flwcupkp_get_current_learner_state",
+        "summary": "Get current C-UP-KP learner state with mastery, confidence, and evidence snapshot metadata",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/current-state-summary": {
+      "get": {
+        "operationId": "getClassCurrentStateSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_current_state_summary",
+        "summary": "Get class-level current C-UP-KP mastery/confidence state metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/mastery-state/rebuild/preview": {
+      "post": {
+        "operationId": "previewMasteryStateRebuild",
+        "x-moodle-wsfunction": "local_flwcupkp_preview_mastery_state_rebuild",
+        "summary": "Preview a controlled rebuild of C-UP-KP current mastery/confidence states",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MasteryStateRebuild"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/mastery-state/rebuild/apply": {
+      "post": {
+        "operationId": "applyMasteryStateRebuild",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_mastery_state_rebuild",
+        "summary": "Apply a controlled rebuild of C-UP-KP current mastery/confidence states",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/MasteryStateRebuild"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/retention-review/status": {
+      "get": {
+        "operationId": "getRetentionReviewStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_retention_review_status",
+        "summary": "Get Program 3 E3 retention, retrieval, and review status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/retention-state": {
+      "get": {
+        "operationId": "getCurrentRetentionState",
+        "x-moodle-wsfunction": "local_flwcupkp_get_current_retention_state",
+        "summary": "Get current C-UP-KP learner retention/review state without changing mastery",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/retention-summary": {
+      "get": {
+        "operationId": "getClassRetentionSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_retention_summary",
+        "summary": "Get class-level C-UP-KP retention/review metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/retention-review/rebuild/preview": {
+      "post": {
+        "operationId": "previewRetentionReviewRebuild",
+        "x-moodle-wsfunction": "local_flwcupkp_preview_retention_review_rebuild",
+        "summary": "Preview a controlled rebuild of C-UP-KP retention/review states",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/RetentionReviewRebuild"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/retention-review/rebuild/apply": {
+      "post": {
+        "operationId": "applyRetentionReviewRebuild",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_retention_review_rebuild",
+        "summary": "Apply a controlled rebuild of C-UP-KP retention/review states",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/RetentionReviewRebuild"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learning-goals/status": {
+      "get": {
+        "operationId": "getLearningGoalStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learning_goal_status",
+        "summary": "Get Program 3 A1 competency-centered learning goal status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/learning-goal": {
+      "get": {
+        "operationId": "getCurrentLearningGoal",
+        "x-moodle-wsfunction": "local_flwcupkp_get_current_learning_goal",
+        "summary": "Get the current competency-centered learning goal for a learner",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveLearningGoal",
+        "x-moodle-wsfunction": "local_flwcupkp_save_learning_goal",
+        "summary": "Save a versioned competency-centered learning goal",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/LearningGoal"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/learning-goal-summary": {
+      "get": {
+        "operationId": "getClassLearningGoalSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_learning_goal_summary",
+        "summary": "Get class-level C-UP-KP learning goal metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learning-goals/options": {
+      "get": {
+        "operationId": "getLearningGoalOptions",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learning_goal_options",
+        "summary": "Get C-UP-KP target options for competency-centered learning goals",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Query"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/placement-diagnostic/status": {
+      "get": {
+        "operationId": "getPlacementDiagnosticStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_placement_diagnostic_status",
+        "summary": "Get Program 3 A2 placement diagnostic and cold-start status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/placement-diagnostic": {
+      "get": {
+        "operationId": "getCurrentPlacementDiagnostic",
+        "x-moodle-wsfunction": "local_flwcupkp_get_current_placement_diagnostic",
+        "summary": "Get the current placement diagnostic state for a learner",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/placement-diagnostic-summary": {
+      "get": {
+        "operationId": "getClassPlacementDiagnosticSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_placement_diagnostic_summary",
+        "summary": "Get class-level C-UP-KP placement diagnostic metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/placement-diagnostic/reprocess/preview": {
+      "post": {
+        "operationId": "previewPlacementDiagnosticReprocess",
+        "x-moodle-wsfunction": "local_flwcupkp_preview_placement_diagnostic_reprocess",
+        "summary": "Preview controlled History V1 placement diagnostic reprocessing",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/PlacementDiagnosticReprocess"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/placement-diagnostic/reprocess/apply": {
+      "post": {
+        "operationId": "applyPlacementDiagnosticReprocess",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_placement_diagnostic_reprocess",
+        "summary": "Apply controlled History V1 placement diagnostic reprocessing",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/PlacementDiagnosticReprocess"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/adaptive-decision/status": {
+      "get": {
+        "operationId": "getAdaptiveDecisionPolicyStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_adaptive_decision_policy_status",
+        "summary": "Get Program 3 A3 adaptive decision policy status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/adaptive-decision": {
+      "get": {
+        "operationId": "getLearnerAdaptiveDecision",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_adaptive_decision",
+        "summary": "Get the current explainable C-UP-KP adaptive decision for a learner",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/adaptive-decision-summary": {
+      "get": {
+        "operationId": "getClassAdaptiveDecisionSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_adaptive_decision_summary",
+        "summary": "Get class-level C-UP-KP adaptive decision policy metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/goal-gap-path/status": {
+      "get": {
+        "operationId": "getGoalGapPathStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_goal_gap_path_status",
+        "summary": "Get Program 3 A4 goal-gap and initial personalized path status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/initial-path": {
+      "get": {
+        "operationId": "getLearnerInitialPath",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_initial_path",
+        "summary": "Get an explainable C-UP-KP goal-gap and initial personalized path for a learner",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/initial-path-summary": {
+      "get": {
+        "operationId": "getClassInitialPathSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_initial_path_summary",
+        "summary": "Get class-level C-UP-KP goal-gap and initial path metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/activity-resolution/status": {
+      "get": {
+        "operationId": "getCandidateActivityResolutionStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_candidate_activity_resolution_status",
+        "summary": "Get Program 3 A4B candidate eligibility and activity-resolution status",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/learners/{id}/activity-resolution": {
+      "get": {
+        "operationId": "getLearnerActivityResolution",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_activity_resolution",
+        "summary": "Resolve an explainable C-UP-KP candidate target to eligible Moodle activities for a learner",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Id"
+          },
+          {
+            "$ref": "#/components/parameters/CourseId"
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/courses/{courseid}/activity-resolution-summary": {
+      "get": {
+        "operationId": "getClassActivityResolutionSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_activity_resolution_summary",
+        "summary": "Get class-level C-UP-KP candidate activity-resolution metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/UnitCode"
+          },
+          {
+            "$ref": "#/components/parameters/FrameworkId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/JsonResponse"
+          }
+        }
+      }
+    },
+    "/adaptive-path/status": {
+      "get": {
+        "operationId": "getAdaptivePathEngineStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_adaptive_path_engine_status",
+        "summary": "Get Program 3 A5 continuous adaptive path engine status",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/adaptive-path": {
+      "get": {
+        "operationId": "getLearnerAdaptivePath",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_adaptive_path",
+        "summary": "Preview the current explainable A5 adaptive path for a learner",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/adaptive-path/apply": {
+      "post": {
+        "operationId": "applyLearnerAdaptivePath",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_learner_adaptive_path",
+        "summary": "Apply an idempotent A5 recommendation refresh for one learner",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/courses/{courseid}/adaptive-path-summary": {
+      "get": {
+        "operationId": "getClassAdaptivePathSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_adaptive_path_summary",
+        "summary": "Get class-level A5 adaptive path and refresh metrics",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/courses/{courseid}/adaptive-path/apply": {
+      "post": {
+        "operationId": "applyClassAdaptivePaths",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_class_adaptive_paths",
+        "summary": "Apply idempotent A5 recommendation refreshes for a class scope",
+        "parameters": [
+          {
+            "name": "courseid",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/trajectory-simulation/status": {
+      "get": {
+        "operationId": "getTrajectorySimulationStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_trajectory_simulation_status",
+        "summary": "Get Program 3 A5B trajectory simulation and invariant status",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/trajectory-simulation/run": {
+      "get": {
+        "operationId": "runTrajectorySimulation",
+        "x-moodle-wsfunction": "local_flwcupkp_run_trajectory_simulation",
+        "summary": "Run a bounded deterministic, read-only A5B trajectory suite",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          {
+            "name": "seed",
+            "in": "query",
+            "schema": { "type": "string", "default": "flw-cupkp-a5b-v1" }
+          },
+          {
+            "name": "trajectorycount",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 2000, "default": 512 }
+          },
+          {
+            "name": "steps",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 4, "maximum": 100, "default": 24 }
+          },
+          {
+            "name": "scenariosjson",
+            "in": "query",
+            "schema": { "type": "string", "default": "[]" }
+          },
+          {
+            "name": "samplelimit",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 1, "maximum": 20, "default": 8 }
+          }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/trajectory-projection": {
+      "get": {
+        "operationId": "getLearnerTrajectoryProjection",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_trajectory_projection",
+        "summary": "Get a read-only counterfactual A5B trajectory projection for one learner",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          {
+            "name": "seed",
+            "in": "query",
+            "schema": { "type": "string", "default": "flw-cupkp-a5b-v1" }
+          },
+          {
+            "name": "steps",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 4, "maximum": 100, "default": 24 }
+          }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/progress-readiness/status": {
+      "get": {
+        "operationId": "getProgressReadinessStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_progress_readiness_status",
+        "summary": "Get the read-only Program 3 A5C progress and goal-readiness contract status",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/progress-readiness": {
+      "get": {
+        "operationId": "getLearnerProgressReadiness",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_progress_readiness",
+        "summary": "Get separate completion, mastery, goal-readiness, and path progress for one learner",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/courses/{courseid}/progress-readiness-summary": {
+      "get": {
+        "operationId": "getClassProgressReadinessSummary",
+        "x-moodle-wsfunction": "local_flwcupkp_get_class_progress_readiness_summary",
+        "summary": "Get a teacher/admin class summary of the frozen A5C metrics and qualitative milestones",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learning-timeline/status": {
+      "get": {
+        "operationId": "getLearningTimelineStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learning_timeline_status",
+        "summary": "Get Program 3 UX1 Past, Present, and Future dashboard contract status",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/learning-timeline": {
+      "get": {
+        "operationId": "getStudentLearningTimeline",
+        "x-moodle-wsfunction": "local_flwcupkp_get_student_learning_timeline",
+        "summary": "Get one authorized StudentLearningTimelineView composed from History V1 and Program 3 intelligence",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" },
+          {
+            "name": "attemptoffset",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 }
+          },
+          {
+            "name": "gradeoffset",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 }
+          },
+          {
+            "name": "historyoffset",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 }
+          },
+          {
+            "name": "activityoffset",
+            "in": "query",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 }
+          }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learner-experience/status": {
+      "get": {
+        "operationId": "getLearnerExperienceStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_learner_experience_status",
+        "summary": "Get Program 3 UX2 learner-experience simplification contract status",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/simplified-experience": {
+      "get": {
+        "operationId": "getSimplifiedLearnerExperience",
+        "x-moodle-wsfunction": "local_flwcupkp_get_simplified_learner_experience",
+        "summary": "Get a learner-safe progressive-disclosure view composed from the frozen UX1 timeline",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/staff-intelligence/status": {
+      "get": {
+        "operationId": "getStaffIntelligenceStatus",
+        "x-moodle-wsfunction": "local_flwcupkp_get_staff_intelligence_status",
+        "summary": "Get Program 3 UX3 staff intelligence and intervention readiness",
+        "parameters": [
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/staff-intelligence": {
+      "get": {
+        "operationId": "getStaffIntelligence",
+        "x-moodle-wsfunction": "local_flwcupkp_get_staff_intelligence",
+        "summary": "Get authorized staff-only learner explainability and intervention history",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" },
+          { "$ref": "#/components/parameters/CourseId" },
+          { "$ref": "#/components/parameters/UnitCode" },
+          { "$ref": "#/components/parameters/FrameworkId" },
+          { "$ref": "#/components/parameters/Limit" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/learners/{id}/staff-interventions": {
+      "post": {
+        "operationId": "applyStaffIntervention",
+        "x-moodle-wsfunction": "local_flwcupkp_apply_staff_intervention",
+        "summary": "Apply one permission-controlled, versioned, audited staff intervention",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "courseid": { "type": "integer" },
+                  "unitcode": { "type": "string", "default": "" },
+                  "frameworkid": { "type": "integer", "default": 0 },
+                  "interventiontype": {
+                    "type": "string",
+                    "enum": ["assign_target_activity", "force_review", "hold_advancement", "override_recommendation", "adjust_goal", "teacher_evidence"]
+                  },
+                  "datajson": { "type": "string", "default": "{}" },
+                  "reason": { "type": "string" }
+                },
+                "required": ["courseid", "interventiontype", "reason"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
+    "/staff-interventions/{id}/release": {
+      "post": {
+        "operationId": "releaseStaffIntervention",
+        "x-moodle-wsfunction": "local_flwcupkp_release_staff_intervention",
+        "summary": "Release the latest active intervention with a new immutable version",
+        "parameters": [
+          { "$ref": "#/components/parameters/Id" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "courseid": { "type": "integer" },
+                  "frameworkid": { "type": "integer", "default": 0 },
+                  "reason": { "type": "string" }
+                },
+                "required": ["courseid", "reason"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/JsonResponse" }
+        }
+      }
+    },
     "/moodle/sync": {
       "post": {
         "operationId": "syncMoodleCompetencies",
@@ -875,6 +2119,192 @@
                 }
               },
               "required": ["datajson"]
+            }
+          }
+        }
+      },
+      "HistoryEvidenceReprocess": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseid": {
+                  "type": "integer"
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "facttypesjson": {
+                  "type": "string",
+                  "description": "JSON array. Supported values: attempts, completion.",
+                  "default": "[\"attempts\",\"completion\"]"
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100
+                },
+                "offset": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Operator note for audited apply runs."
+                }
+              },
+              "required": ["courseid"]
+            }
+          }
+        }
+      },
+      "MasteryStateRebuild": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "userid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Operator note for audited apply runs."
+                }
+              }
+            }
+          }
+        }
+      },
+      "RetentionReviewRebuild": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "userid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Operator note for audited apply runs."
+                }
+              }
+            }
+          }
+        }
+      },
+      "LearningGoal": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "datajson": {
+                  "type": "string",
+                  "description": "JSON object with title, desiredprofile, competencyids, upids, kpids, cefr, flwstage, purpose, priorityskills, targetdate, weeklytarget, and status."
+                },
+                "source": {
+                  "type": "string",
+                  "enum": ["STUDENT", "TEACHER", "INSTITUTION"],
+                  "default": "STUDENT"
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Version reason stored with the immutable goal version."
+                }
+              },
+              "required": ["datajson"]
+            }
+          }
+        }
+      },
+      "PlacementDiagnosticReprocess": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "courseid": {
+                  "type": "integer"
+                },
+                "unitcode": {
+                  "type": "string",
+                  "default": ""
+                },
+                "frameworkid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "userid": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "limit": {
+                  "type": "integer",
+                  "default": 100
+                },
+                "offset": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Operator note for audited placement diagnostic apply runs."
+                }
+              },
+              "required": ["courseid"]
             }
           }
         }

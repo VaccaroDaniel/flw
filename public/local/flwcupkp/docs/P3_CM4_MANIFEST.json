@@ -1,0 +1,21 @@
+{
+  "gate": "P3_CM4",
+  "contract": "FLW_CUPKP_MANAGEMENT_V1",
+  "status_surface": "local_flwcupkp\\local\\management_v1_contract::management_status",
+  "consumer_surface": "local_flwcupkp\\local\\management_v1_contract::consumer_snapshot",
+  "admin_page": "/local/flwcupkp/management.php",
+  "webservice": "local_flwcupkp_get_management_v1_status",
+  "openapi_path": "/management/v1/status",
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "state_changes_allowed": false,
+  "next_allowed_gate": "E1",
+  "does_not_do": [
+    "adaptive_path_selection",
+    "history_v1_evidence_reprocessing_writes",
+    "mastery_state_recalculation",
+    "learner_state_mutation",
+    "recommendation_policy_change",
+    "raw_moodle_log_scraping"
+  ]
+}

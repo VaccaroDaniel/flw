@@ -1,5 +1,0 @@
-error_type,detection_source,repair_activity,retry_evidence
-animal word confusion,matching/MCQ,picture-word review,matching item
-missing a in It’s a,sentence building,repeat It’s a + animal frame,sentence order item
-I like singular/plural confusion,gap fill/writing,repeat I like dogs/cats/birds frame,error correction item
-don’t like sentence confusion,Lesson 5 practice,dog/frog contrast model,contrast choice item

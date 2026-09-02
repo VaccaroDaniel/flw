@@ -21,6 +21,10 @@
       "type": "string"
     },
     "cefr_level": {
+      "type": "string",
+      "pattern": "^(PRE-A1|A1|A2|B1|B2|C1|C2)$"
+    },
+    "flw_stage": {
       "type": "string"
     },
     "frameworks": {
@@ -105,9 +109,12 @@
         "name": {"type": "string"},
         "course_code": {"type": "string"},
         "language": {"type": "string"},
-        "cefr_range": {"type": "string"},
+        "cefr_range": {
+          "type": "string",
+          "pattern": "^(PRE-A1|A1|A2|B1|B2|C1|C2)(-(PRE-A1|A1|A2|B1|B2|C1|C2))?$"
+        },
         "version": {"type": "string"},
-        "status": {"type": "string"},
+        "status": {"type": "string", "enum": ["draft", "review", "approved", "published", "validated", "active", "reference", "pilot", "inactive", "archived", "deprecated", "retired", "test"]},
         "description": {"type": "string"}
       }
     },
@@ -119,11 +126,15 @@
         "title": {"type": "string"},
         "can_do": {"type": "string"},
         "description": {"type": "string"},
-        "cefr": {"type": "string"},
+        "cefr": {
+          "type": "string",
+          "pattern": "^(PRE-A1|A1|A2|B1|B2|C1|C2)$"
+        },
+        "stage": {"type": "string"},
         "domain": {"type": "string"},
         "scope": {"type": "string"},
         "evidence_rule": {"type": "object"},
-        "status": {"type": "string"},
+        "status": {"type": "string", "enum": ["draft", "review", "approved", "published", "validated", "active", "reference", "pilot", "inactive", "archived", "deprecated", "retired", "test"]},
         "version": {"type": "string"}
       }
     },
@@ -139,11 +150,14 @@
         "observable_action": {"type": "string"},
         "conditions": {"type": "string"},
         "success_criteria": {"type": "string"},
-        "cefr": {"type": "string"},
+        "cefr": {
+          "type": "string",
+          "pattern": "^(PRE-A1|A1|A2|B1|B2|C1|C2)$"
+        },
         "language_mode": {"type": "string"},
         "interaction_type": {"type": "string"},
         "evidence_requirements": {"type": "array"},
-        "status": {"type": "string"},
+        "status": {"type": "string", "enum": ["draft", "review", "approved", "published", "validated", "active", "reference", "pilot", "inactive", "archived", "deprecated", "retired", "test"]},
         "version": {"type": "string"}
       }
     },
@@ -155,7 +169,10 @@
         "title": {"type": "string"},
         "description": {"type": "string"},
         "language": {"type": "string"},
-        "cefr": {"type": "string"},
+        "cefr": {
+          "type": "string",
+          "pattern": "^(PRE-A1|A1|A2|B1|B2|C1|C2)$"
+        },
         "domain": {
           "type": "string",
           "enum": ["LEX", "GRAM", "FUNC", "PRON", "ORTH", "SCRIPT", "LISTEN", "SPEAK", "READ", "WRITE", "DISC", "STRAT", "PRAG", "CULT"]
@@ -165,7 +182,7 @@
         "usage_constraints": {"type": "string"},
         "difficulty": {"type": "number"},
         "estimated_learning_load": {"type": "number"},
-        "status": {"type": "string"},
+        "status": {"type": "string", "enum": ["draft", "review", "approved", "published", "validated", "active", "reference", "pilot", "inactive", "archived", "deprecated", "retired", "test"]},
         "version": {"type": "string"}
       }
     },
@@ -175,7 +192,7 @@
       "properties": {
         "competency_externalid": {"type": "string"},
         "up_externalid": {"type": "string"},
-        "role": {"type": "string"},
+        "role": {"type": "string", "enum": ["required", "supporting", "support", "optional", "extension", "remediation", "enrichment", "assessment", "evidence"]},
         "weight": {"type": "number"},
         "sequence": {"type": "integer"},
         "minimum_up_mastery": {"type": "number"},
@@ -188,7 +205,7 @@
       "properties": {
         "up_externalid": {"type": "string"},
         "kp_externalid": {"type": "string"},
-        "role": {"type": "string"},
+        "role": {"type": "string", "enum": ["required", "supporting", "support", "optional", "extension", "remediation", "enrichment", "assessment", "evidence"]},
         "weight": {"type": "number"},
         "minimum_kp_readiness": {"type": "number"},
         "sequence": {"type": "integer"},
@@ -201,9 +218,9 @@
       "properties": {
         "kp_externalid": {"type": "string"},
         "prereq_kp_externalid": {"type": "string"},
-        "relationship_type": {"type": "string"},
+        "relationship_type": {"type": "string", "enum": ["prerequisite", "requires", "supports", "extends", "review_of", "alternative_to", "replaced_by", "meaning_support", "production_support", "genre_model", "language_resource", "discourse_support", "genre_support", "SUPPORTS", "REQUIRES", "EXTENDS", "ALTERNATIVE_TO", "REVIEW_OF", "REPLACED_BY"]},
         "strength": {"type": "number"},
-        "requirement": {"type": "string"},
+        "requirement": {"type": "string", "enum": ["mandatory", "recommended", "optional"]},
         "notes": {"type": "string"}
       }
     },
@@ -217,10 +234,19 @@
         "lesson": {"type": "string"},
         "object_type": {"type": "string"},
         "source_id": {"type": "string"},
-        "purpose": {"type": "string"},
-        "evidence_strength": {"type": "string"},
+        "program1_sourcekey": {"type": "string"},
+        "sourcekey": {"type": "string"},
+        "unit_id": {"type": "string"},
+        "lesson_id": {"type": "string"},
+        "component_id": {"type": "string"},
+        "activity_id": {"type": "string"},
+        "assessment_id": {"type": "string"},
+        "question_id": {"type": "string"},
+        "purpose": {"type": "string", "enum": ["lesson", "teach", "practice", "assessment", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "remediation", "extension", "project", "stt_task", "instruction", "practice_evidence", "performance_evidence", "integrated_performance"]},
+        "evidence_strength": {"type": "string", "enum": ["recognition", "guided_performance", "controlled_production", "independent_performance", "direct_performance", "indirect_signal", "diagnostic", "checkpoint", "weak", "medium", "strong"]},
         "difficulty": {"type": "number"},
-        "role": {"type": "string"}
+        "role": {"type": "string", "enum": ["teaches", "trains", "practice", "practices", "assessment", "assesses", "evidence_for", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "review_of", "remediation", "extension", "project", "stt_task"]},
+        "completion_counts_as_evidence": {"type": ["boolean", "string"]}
       }
     },
     "activity_mapping": {
@@ -230,8 +256,9 @@
         "object_externalid": {"type": "string"},
         "target_type": {"type": "string", "enum": ["kp", "up", "competency"]},
         "target_externalid": {"type": "string"},
-        "role": {"type": "string"},
-        "evidence_strength": {"type": "string"}
+        "role": {"type": "string", "enum": ["teaches", "trains", "practice", "practices", "assessment", "assesses", "evidence_for", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "review_of", "remediation", "extension", "project", "stt_task"]},
+        "evidence_strength": {"type": "string", "enum": ["recognition", "guided_performance", "controlled_production", "independent_performance", "direct_performance", "indirect_signal", "diagnostic", "checkpoint", "weak", "medium", "strong"]},
+        "completion_counts_as_evidence": {"type": ["boolean", "string"]}
       }
     },
     "lesson_mapping": {
@@ -245,10 +272,19 @@
         "lesson": {"type": "string"},
         "object_type": {"type": "string"},
         "source_id": {"type": "string"},
-        "purpose": {"type": "string"},
-        "evidence_strength": {"type": "string"},
+        "program1_sourcekey": {"type": "string"},
+        "sourcekey": {"type": "string"},
+        "unit_id": {"type": "string"},
+        "lesson_id": {"type": "string"},
+        "component_id": {"type": "string"},
+        "activity_id": {"type": "string"},
+        "assessment_id": {"type": "string"},
+        "question_id": {"type": "string"},
+        "purpose": {"type": "string", "enum": ["lesson", "teach", "practice", "assessment", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "remediation", "extension", "project", "stt_task", "instruction", "practice_evidence", "performance_evidence", "integrated_performance"]},
+        "evidence_strength": {"type": "string", "enum": ["recognition", "guided_performance", "controlled_production", "independent_performance", "direct_performance", "indirect_signal", "diagnostic", "checkpoint", "weak", "medium", "strong"]},
         "difficulty": {"type": "number"},
-        "role": {"type": "string"},
+        "role": {"type": "string", "enum": ["teaches", "trains", "practice", "practices", "assessment", "assesses", "evidence_for", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "review_of", "remediation", "extension", "project", "stt_task"]},
+        "completion_counts_as_evidence": {"type": ["boolean", "string"]},
         "target_type": {"type": "string", "enum": ["kp", "up", "competency"]},
         "target_externalid": {"type": "string"},
         "kp_externalid": {"type": "string"},
@@ -279,8 +315,9 @@
           "type": "array",
           "items": {"type": "string"}
         },
-        "role": {"type": "string"},
-        "evidence_strength": {"type": "string"},
+        "role": {"type": "string", "enum": ["teaches", "trains", "practice", "practices", "assessment", "assesses", "evidence_for", "diagnostic", "placement", "checkpoint", "teacher_observation", "external_assessment", "review", "review_of", "remediation", "extension", "project", "stt_task"]},
+        "evidence_strength": {"type": "string", "enum": ["recognition", "guided_performance", "controlled_production", "independent_performance", "direct_performance", "indirect_signal", "diagnostic", "checkpoint", "weak", "medium", "strong"]},
+        "completion_counts_as_evidence": {"type": ["boolean", "string"]},
         "notes": {"type": "string"}
       }
     }

@@ -73,6 +73,7 @@ final class evidence_guard {
             throw new \invalid_parameter_exception('C-UP-KP mapping does not belong to the learning object.');
         }
         self::assert_target_exists((string)$map->targettype, (int)$map->targetid);
+        content_evidence_mapping_contract::assert_object_map_contract($object, $map);
     }
 
     /**
@@ -148,13 +149,23 @@ final class evidence_guard {
                 $evidence->unitcode = (string)$object->unitcode;
             }
             self::assert_object_scope($object, $evidence->courseid, (string)($evidence->unitcode ?? ''));
-            if (!$DB->record_exists('flwcupkp_object_map', [
+            $map = $DB->get_record('flwcupkp_object_map', [
                 'objectid' => $evidence->objectid,
                 'targettype' => $evidence->targettype,
                 'targetid' => $evidence->targetid,
-            ])) {
+            ], '*', IGNORE_MISSING);
+            if (!$map) {
                 throw new \invalid_parameter_exception('Learning object is not mapped to the target.');
             }
+            content_evidence_mapping_contract::assert_evidence_payload($evidence, $object, $map);
+            $evidence = content_evidence_mapping_contract::augment_evidence_payload($evidence, $object, $map);
+            evidence_semantics_quality_contract::assert_evidence_payload($evidence, $object, $map);
+            $evidence = evidence_semantics_quality_contract::augment_evidence_payload($evidence, $object, $map);
+        } else {
+            content_evidence_mapping_contract::assert_evidence_payload($evidence);
+            $evidence = content_evidence_mapping_contract::augment_evidence_payload($evidence);
+            evidence_semantics_quality_contract::assert_evidence_payload($evidence);
+            $evidence = evidence_semantics_quality_contract::augment_evidence_payload($evidence);
         }
         self::assert_user_enrolled_for_course($evidence->userid, $evidence->courseid);
 

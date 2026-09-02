@@ -4,8 +4,8 @@
 /**
  * FLW Clean Theme v3 course layout.
  *
- * Keeps Moodle and Boost compatibility while applying the clean student shell
- * only to non-editing course views where the user cannot update the course.
+ * Keeps Moodle and Boost compatibility while applying one shared reader shell
+ * to student and teacher non-editing course views.
  *
  * @package    theme_flwacademy
  * @copyright  2026 Foreign Language World
@@ -14,22 +14,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-global $DB;
-
 require_once($CFG->libdir . '/behat/lib.php');
-require_once($CFG->dirroot . '/course/lib.php');
-
-if (strpos($PAGE->pagetype, 'course-view-section-') === 0 && !$PAGE->user_is_editing()) {
-    $flwsectionid = optional_param('id', 0, PARAM_INT);
-    if ($flwsectionid) {
-        $flwsection = $DB->get_record('course_sections', ['id' => $flwsectionid], 'id, course, section', IGNORE_MISSING);
-        if ($flwsection && (int)$flwsection->course !== SITEID) {
-            $flwcourseurl = new moodle_url('/course/view.php', ['id' => $flwsection->course]);
-            $flwcourseurl->set_anchor('section-' . $flwsection->section);
-            redirect($flwcourseurl, '', 0);
-        }
-    }
-}
 
 $flwmapfile = $CFG->dirroot . '/flwcontent/native_course_assets.json';
 if (!empty($PAGE->course->id) && is_file($flwmapfile)) {
@@ -55,43 +40,10 @@ if (!empty($PAGE->course->id) && is_file($flwmapfile)) {
     }
 }
 
-if (!empty($PAGE->course->id) && (int)$PAGE->course->id !== SITEID && course_format_uses_sections($PAGE->course->format)) {
-    $flwsections = $DB->get_records(
-        'course_sections',
-        ['course' => $PAGE->course->id],
-        'section ASC',
-        'id, section'
-    );
-    $flwsectionmap = [];
-    foreach ($flwsections as $flwsection) {
-        $flwsectionmap[(int)$flwsection->id] = (int)$flwsection->section;
-    }
-    if ($flwsectionmap) {
-        $flwsectionmapjson = json_encode($flwsectionmap);
-        $flwcourseurljson = json_encode((new moodle_url('/course/view.php', ['id' => $PAGE->course->id]))->out(false));
-        $PAGE->requires->js_init_code("
-            (function() {
-                var sectionMap = {$flwsectionmapjson};
-                var courseUrl = {$flwcourseurljson};
-                Array.prototype.slice.call(document.querySelectorAll('a[href*=\"/course/section.php?id=\"]')).forEach(function(link) {
-                    try {
-                        var url = new URL(link.getAttribute('href'), window.location.origin);
-                        var sectionId = url.searchParams.get('id');
-                        var sectionNumber = sectionMap[sectionId];
-                        if (sectionNumber !== undefined) {
-                            link.setAttribute('href', courseUrl + '#section-' + sectionNumber);
-                        }
-                    } catch (error) {
-                        // Leave Moodle's original URL in place if the browser cannot parse it.
-                    }
-                });
-            })();
-        ");
-    }
-}
-
-$flwcleanmode = theme_flwacademy_is_clean_mode();
-if ($flwcleanmode) {
+$flwreadingmode = theme_flwacademy_is_reading_mode();
+$flwscormlaunchurls = theme_flwacademy_get_scorm_direct_launch_urls();
+theme_flwacademy_require_scorm_direct_launch($flwscormlaunchurls);
+if ($flwreadingmode) {
     $PAGE->requires->js_call_amd('theme_flwacademy/flw_video_lazy', 'init');
     $PAGE->requires->js_call_amd('theme_flwacademy/flw_pagination', 'init');
     $PAGE->requires->js_call_amd('theme_flwacademy/flw_accordion', 'init');
@@ -137,77 +89,35 @@ if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_clo
 }
 
 $extraclasses = ['uses-drawers'];
-if ($flwcleanmode) {
-    $extraclasses[] = 'flw-clean-mode';
+if ($flwreadingmode) {
+    $extraclasses[] = 'flw-reading-course-mode';
     $courseindexopen = false;
     $blockdraweropen = false;
 } else if ($courseindexopen) {
     $extraclasses[] = 'drawer-open-index';
 }
 
-$blockshtml = $flwcleanmode ? '' : $OUTPUT->blocks('side-pre');
-$hasblocks = !$flwcleanmode && (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+$blockshtml = $flwreadingmode ? '' : $OUTPUT->blocks('side-pre');
+$hasblocks = !$flwreadingmode && (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
 if (!$hasblocks) {
     $blockdraweropen = false;
 }
 
-$courseindex = $flwcleanmode ? false : core_course_drawer();
+$courseindex = core_course_drawer();
 if (!$courseindex) {
     $courseindexopen = false;
 }
 
 $flwreadingtoc = [];
 $flwreadingtoclabel = '';
-$flwshowreadingtoc = !$PAGE->user_is_editing() && course_format_uses_sections($PAGE->course->format);
-if ($flwshowreadingtoc) {
-    $coursecontext = context_course::instance((int)$PAGE->course->id);
-    $flwreadingtoclabel = format_string($PAGE->course->fullname, true, ['context' => $coursecontext]);
-    $modinfo = get_fast_modinfo($PAGE->course);
-    foreach ($modinfo->get_section_info_all() as $sectionnumber => $sectioninfo) {
-        if ((int)$sectionnumber === 0 || empty($sectioninfo->uservisible)) {
-            continue;
-        }
-        $sectionname = trim(get_section_name($PAGE->course, $sectioninfo));
-        if ($sectionname === '') {
-            $sectionname = 'Section ' . (int)$sectionnumber;
-        }
-        $flwreadingtoc[] = [
-            'number' => (int)$sectionnumber,
-            'title' => format_string($sectionname, true, ['context' => $coursecontext]),
-            'url' => '#section-' . (int)$sectionnumber,
-            'current' => count($flwreadingtoc) === 0,
-            'hasactivities' => false,
-            'activities' => [],
-        ];
-        $flwsectionindex = count($flwreadingtoc) - 1;
-        foreach ($modinfo->sections[$sectionnumber] ?? [] as $cmid) {
-            if (empty($modinfo->cms[$cmid])) {
-                continue;
-            }
-            $cm = $modinfo->cms[$cmid];
-            if (empty($cm->uservisible) || !$cm->is_visible_on_course_page()) {
-                continue;
-            }
-            $flwreadingtoc[$flwsectionindex]['activities'][] = [
-                'title' => format_string($cm->name, true, ['context' => $cm->context]),
-                'url' => $cm->url ? $cm->url->out(false) : '#module-' . (int)$cm->id,
-                'modname' => $cm->modname,
-            ];
-        }
-        $flwreadingtoc[$flwsectionindex]['hasactivities'] = !empty($flwreadingtoc[$flwsectionindex]['activities']);
-    }
-}
-$flwshowcontentshell = $flwcleanmode || !empty($flwreadingtoc);
-if ($flwshowcontentshell) {
-    $extraclasses[] = 'flw-reading-course-mode';
-}
+$flwshowcontentshell = $flwreadingmode;
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$forceblockdraweropen = $flwcleanmode ? false : $OUTPUT->firstview_fakeblocks();
+$forceblockdraweropen = $flwreadingmode ? false : $OUTPUT->firstview_fakeblocks();
 
 $secondarynavigation = false;
 $overflow = '';
-if (!$flwcleanmode && $PAGE->has_secondary_navigation()) {
+if (!$flwreadingmode && $PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
@@ -221,13 +131,13 @@ $primary = new core\navigation\output\primary($PAGE);
 $renderer = $PAGE->get_renderer('core');
 $primarymenu = theme_flwacademy_prepare_primary_navigation($primary->export_for_template($renderer));
 $flwtopnav = theme_flwacademy_export_topnav_context($OUTPUT, $primarymenu);
-$buildregionmainsettings = !$flwcleanmode
+$buildregionmainsettings = !$flwreadingmode
     && !$PAGE->include_region_main_settings_in_header_actions()
     && !$PAGE->has_secondary_navigation();
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 
 $headercontent = false;
-if (!$flwcleanmode) {
+if (!$flwreadingmode) {
     $header = $PAGE->activityheader;
     $headercontent = $header->export_for_template($renderer);
 }
@@ -250,6 +160,12 @@ foreach ($learninglanguages as $language) {
 $flwdictionaryurl = is_readable($CFG->dirroot . '/local/mldict/index.php')
     ? (new moodle_url('/local/mldict/index.php'))->out(false)
     : (new moodle_url('/my/'))->out(false) . '#flw-dictionary';
+$flwcoursetitle = $flwreadingmode
+    ? format_string($PAGE->course->fullname, true, [
+        'context' => context_course::instance((int)$PAGE->course->id),
+        'escape' => true,
+    ])
+    : '';
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), 'escape' => false]),
@@ -271,12 +187,13 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'overflow' => $overflow,
     'headercontent' => $headercontent,
-    'addblockbutton' => $flwcleanmode ? '' : $addblockbutton,
-    'flwcleanmode' => $flwcleanmode,
+    'addblockbutton' => $flwreadingmode ? '' : $addblockbutton,
+    'flwreadingmode' => $flwreadingmode,
     'flwshowcontentshell' => $flwshowcontentshell,
-    'flwshowactivitynavigation' => !$flwcleanmode,
+    'flwcoursetitle' => $flwcoursetitle,
+    'flwshowactivitynavigation' => !$flwreadingmode,
     'hasflwreadingtoc' => !empty($flwreadingtoc),
-    'flwtoolsshowcourseindex' => !$flwshowcontentshell && !empty($courseindex),
+    'flwtoolsshowcourseindex' => false,
     'flwreadingtoc' => $flwreadingtoc,
     'flwreadingtoclabel' => $flwreadingtoclabel,
     'haslearninglanguages' => !empty($learninglanguages),

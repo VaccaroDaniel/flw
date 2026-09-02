@@ -6,6 +6,12 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_flwcupkp', get_string('pluginname', 'local_flwcupkp'));
     $ADMIN->add('localplugins', $settings);
+    $ADMIN->add('localplugins', new admin_externalpage(
+        'local_flwcupkp_foundation',
+        get_string('foundationinspector', 'local_flwcupkp'),
+        new moodle_url('/local/flwcupkp/foundation.php'),
+        'local/flwcupkp:manageframeworks'
+    ));
 
     $settings->add(new admin_setting_configcheckbox(
         'local_flwcupkp/enablesyncwrites',

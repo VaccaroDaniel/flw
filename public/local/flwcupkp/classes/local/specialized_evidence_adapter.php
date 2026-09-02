@@ -301,9 +301,15 @@ final class specialized_evidence_adapter {
 
         $evidenceids = [];
         $rejectedmaps = [];
+        $sourcetype = content_evidence_mapping_contract::source_type_for_evidence_type(
+            $evidencetype,
+            $assessortype,
+            $provenance
+        );
         foreach ($maps as $map) {
             try {
                 evidence_guard::assert_object_map($object, $map);
+                content_evidence_mapping_contract::assert_source_can_count($sourcetype, $object, $map);
             } catch (\invalid_parameter_exception $e) {
                 $rejectedmaps[] = ['mapid' => (int)$map->id, 'reason' => $e->getMessage()];
                 continue;

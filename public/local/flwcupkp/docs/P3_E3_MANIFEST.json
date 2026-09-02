@@ -1,0 +1,55 @@
+{
+  "gate": "P3_E3",
+  "status": "implemented",
+  "contract": "FLW_CUPKP_RETENTION_RETRIEVAL_REVIEW_V1",
+  "depends_on": [
+    "FLW_CUPKP_MANAGEMENT_V1",
+    "FLW_CUPKP_MASTERY_CONFIDENCE_STATE_V1",
+    "FLW_CUPKP_HISTORY_EVIDENCE_ADAPTER_V1",
+    "FLW_CUPKP_EVIDENCE_SEMANTICS_QUALITY_V1",
+    "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1"
+  ],
+  "normal_source_history_input": "FLW_HISTORY_DOWNSTREAM_EVIDENCE_CONTRACT_V1",
+  "normal_source_rule": "use_history_v1_adapter_not_raw_moodle_logs",
+  "retention_policy_version": "cupkp-retention-policy-v1",
+  "retention_states": [
+    "NEW",
+    "LEARNING",
+    "CONSOLIDATING",
+    "RETAINED",
+    "REVIEW_DUE",
+    "RETENTION_UNCERTAIN",
+    "RELEARNING"
+  ],
+  "snapshot_fields": [
+    "retentionstate",
+    "retentionconfidence",
+    "retentionnextreview",
+    "retentionlastretrieval",
+    "retentionretrievalcount",
+    "retentionpolicyversion",
+    "retentionevidencehash",
+    "retentionevidenceidsjson",
+    "retentioncalculatedtime"
+  ],
+  "entry_points": {
+    "admin_page": "/local/flwcupkp/retention_review.php",
+    "cli": "local/flwcupkp/cli/retention_review.php",
+    "web_services": [
+      "local_flwcupkp_get_retention_review_status",
+      "local_flwcupkp_get_current_retention_state",
+      "local_flwcupkp_get_class_retention_summary",
+      "local_flwcupkp_preview_retention_review_rebuild",
+      "local_flwcupkp_apply_retention_review_rebuild"
+    ]
+  },
+  "does_not_do": [
+    "raw_moodle_log_scraping",
+    "adaptive_path_selection",
+    "competency_centered_goal_modeling",
+    "mastery_decay",
+    "grade_mastery_collapse",
+    "history_v1_source_mutation"
+  ],
+  "next_allowed_gate": "A1"
+}
